@@ -37,14 +37,14 @@ export default function Navigation() {
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo-YsxkUMGzk3nZcZJmumGcRLhbwVu9Fq.png"
               alt="Nestor Anyanwu Logo"
-              width={120}
-              height={40}
-              className="h-10 w-auto"
+              width={60}
+              height={20}
+              className="h-6 w-auto"
             />
           </button>
 
           {/* Navigation on the right - desktop only */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
               <button
                 key={item.label}
@@ -52,7 +52,7 @@ export default function Navigation() {
                   setIsOpen(false)
                   router.push(item.href)
                 }}
-                className="text-secondary hover:text-accent transition-colors font-bold text-sm"
+                className="text-secondary hover:text-accent transition-colors font-bold text-sm leading-tight"
               >
                 {item.label}
               </button>
@@ -111,7 +111,7 @@ export default function Navigation() {
                 setIsOpen(false)
                 router.push(item.href)
               }}
-              className={`block w-full text-left px-4 py-3 text-secondary hover:bg-accent/10 transition-colors font-bold text-sm ${
+              className={`block w-full text-left px-4 py-2.5 text-secondary hover:bg-accent/10 transition-colors font-bold text-sm leading-tight ${
                 index < navItems.length - 1 ? "border-b border-secondary/20" : ""
               }`}
             >

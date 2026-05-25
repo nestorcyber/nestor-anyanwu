@@ -2,11 +2,11 @@ import { MessageCircle } from "lucide-react"
 
 export default function HomeContactCTA() {
   return (
-    <section className="py-20 md:py-28 px-4 md:px-8 lg:px-16 bg-background">
+    <section className="py-12 md:py-16 px-4 md:px-8 lg:px-16 bg-background">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="font-sans text-2xl md:text-3xl font-bold text-primary mb-6 uppercase tracking-wide">Let&apos;s Connect</h2>
+        <h2 className="font-sans text-lg md:text-xl font-bold text-primary mb-3 uppercase tracking-wide">Let&apos;s Connect</h2>
 
-        <p className="text-sm md:text-base text-foreground mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
+        <p className="text-sm md:text-base text-foreground mb-6 max-w-2xl mx-auto leading-relaxed font-medium">
           Interested in collaborating or discussing opportunities? Nestor is always open to connecting with like-minded professionals.
         </p>
 
