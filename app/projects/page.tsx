@@ -3,8 +3,8 @@ import { Metadata } from "next"
 import { ExternalLink } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Projects",
-  description: "Explore Nestor's key projects showcasing design, development, and community initiatives.",
+  title: "Projects - Featured Work & Design Portfolio",
+  description: "Explore Nestor Anyanwu's featured projects showcasing design, development, and community initiatives. From DevFest Owerri to AI platforms and tech events.",
 }
 
 const projects = [
@@ -35,7 +35,7 @@ export default function ProjectsPage() {
         <div className="max-w-5xl mx-auto px-4 md:px-8">
           {/* Header */}
           <div className="mb-10">
-            <h1 className="text-lg md:text-xl font-sans font-bold text-primary mb-3 uppercase tracking-wide">
+            <h1 className="text-lg md:text-xl font-sans font-bold text-primary mb-3 tracking-wide">
               Featured Projects
             </h1>
             <p className="text-sm md:text-base text-foreground font-medium max-w-2xl">
@@ -50,7 +50,7 @@ export default function ProjectsPage() {
                 key={idx}
                 className="p-6 md:p-8 border border-border hover:border-accent transition-colors duration-300 flex flex-col bg-background rounded-lg"
               >
-                <h3 className="text-base font-sans font-bold text-primary mb-2 uppercase tracking-wide">{project.title}</h3>
+                <h3 className="text-base font-sans font-bold text-primary mb-2 tracking-wide">{project.title}</h3>
                 <p className="text-sm text-foreground leading-relaxed mb-6 flex-grow font-medium">{project.description}</p>
 
                 {/* Technologies */}
@@ -85,7 +85,7 @@ export default function ProjectsPage() {
 
           {/* Design Portfolio Card */}
           <div className="p-8 md:p-10 border-2 border-primary hover:border-accent transition-colors duration-300 flex flex-col bg-background rounded-lg text-center">
-            <h3 className="text-base font-sans font-bold text-primary mb-3 uppercase tracking-wide">Explore Design Work</h3>
+            <h3 className="text-base font-sans font-bold text-primary mb-3 tracking-wide">Explore Design Work</h3>
             <p className="text-sm text-foreground leading-relaxed mb-6 font-medium max-w-xl mx-auto">
               View my comprehensive design portfolio showcasing branding, digital design, visual identity, and creative projects.
             </p>

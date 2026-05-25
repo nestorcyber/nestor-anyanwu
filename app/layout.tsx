@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: "%s | Nestor Cyber",
   },
   description:
-    "Nestor Anyanwu is a Nigerian tech professional, software developer, and community leader driving digital innovation and impact. Director of ICT at NACOS FUTO, involved in tech advocacy, design, and building inclusive tech ecosystems.",
+    "Nestor Anyanwu is a Nigerian tech professional, software developer, and community leader driving digital innovation and impact. Director of ICT at NACOS FUTO, Data Privacy Ambassador, IEEE member, involved in tech advocacy, design, and building inclusive tech ecosystems.",
   keywords: [
     "Nestor Cyber",
     "Nestor Anyanwu",
@@ -35,7 +35,13 @@ export const metadata: Metadata = {
     "tech advocacy",
     "leadership",
     "innovation",
+    "data privacy",
+    "IEEE",
+    "NIRA",
   ],
+  icons: {
+    icon: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/icon-KYSpcrNz26o3mpB4HWBdr1BqrujpQi.png",
+  },
   authors: [{ name: "Nestor Anyanwu" }],
   creator: "Nestor Anyanwu",
   publisher: "Nestor Anyanwu",
