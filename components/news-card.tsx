@@ -15,31 +15,30 @@ export default function NewsCard({ image, title, description, href }: NewsCardPr
 
   return (
     <div className="group cursor-pointer">
-      {/* Hero Image - Clickable - 4:3 Landscape */}
+      {/* Hero Image - Clickable */}
       <a
         href={href}
-        className="block overflow-hidden rounded-lg mb-3 hover:opacity-90 transition-opacity duration-300"
+        className="block overflow-hidden rounded-lg mb-6 hover:opacity-90 transition-opacity duration-300"
         {...linkProps}
       >
-        <div className="relative w-full aspect-video">
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-        </div>
+        <Image
+          src={image}
+          alt={title}
+          width={600}
+          height={400}
+          className="w-full h-64 md:h-80 object-cover group-hover:scale-105 transition-transform duration-300"
+        />
       </a>
 
       {/* Content */}
-      <div className="space-y-2">
+      <div className="space-y-4">
         {/* Headline - Clickable */}
         <a
           href={href}
           className="block hover:opacity-75 transition-opacity duration-300"
           {...linkProps}
         >
-          <h3 className="text-xl md:text-2xl font-sans font-bold text-primary group-hover:text-accent transition-colors duration-300 cursor-pointer uppercase tracking-wide">
+          <h3 className="text-2xl md:text-3xl font-sans font-bold text-primary group-hover:text-accent transition-colors duration-300 cursor-pointer uppercase tracking-wide">
             {title}
           </h3>
         </a>
@@ -58,7 +57,7 @@ export default function NewsCard({ image, title, description, href }: NewsCardPr
         {/* CTA Link */}
         <a
           href={href}
-          className="inline-flex items-center text-primary hover:text-accent transition-colors duration-300 font-bold text-sm group/link pt-2"
+          className="inline-flex items-center text-primary hover:text-accent transition-colors duration-300 font-bold text-sm group/link"
           {...linkProps}
         >
           Learn More
