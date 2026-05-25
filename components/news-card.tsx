@@ -26,7 +26,7 @@ export default function NewsCard({ image, title, description, href }: NewsCardPr
             src={image}
             alt={title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
           />
         </div>
       </a>
@@ -39,7 +39,7 @@ export default function NewsCard({ image, title, description, href }: NewsCardPr
           className="block hover:opacity-75 transition-opacity duration-300"
           {...linkProps}
         >
-          <h3 className="text-xl md:text-2xl font-sans font-bold text-primary group-hover:text-accent transition-colors duration-300 cursor-pointer uppercase tracking-wide">
+          <h3 className="text-xl md:text-2xl font-sans font-bold text-primary group-hover:text-accent transition-colors duration-300 cursor-pointer capitalize tracking-wide">
             {title}
           </h3>
         </a>

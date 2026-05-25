@@ -4,8 +4,6 @@ export default function HomeVolunteeringPreview() {
   return (
     <section className="py-12 md:py-16 px-4 md:px-8 lg:px-16 bg-background">
       <div className="max-w-6xl mx-auto">
-        <h2 className="font-sans text-lg md:text-xl font-bold text-primary mb-4 uppercase tracking-wide">COMMUNITY & IMPACT</h2>
-        
         <NewsCard
           image="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg"
           title="BUILDING TOGETHER"
