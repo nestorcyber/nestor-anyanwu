@@ -5,26 +5,26 @@ import { Linkedin, Twitter, Github, MessageCircle } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="bg-primary text-secondary border-t border-border py-12 md:py-16 px-4 md:px-8 lg:px-16 mt-20">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-12">
+    <footer className="bg-primary text-secondary border-t border-border py-12 md:py-16 px-6 md:px-20 lg:px-32 mt-20">
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-12 w-full">
           {/* Links Section */}
           <div>
             <h3 className="font-sans text-sm font-bold mb-4 md:mb-6 text-secondary tracking-wide">Navigation</h3>
             <nav className="space-y-2 md:space-y-3">
-              <Link href="/about" className="block text-secondary/80 hover:text-accent transition-colors text-sm font-medium">
+              <Link href="/about" className="block text-secondary/80 hover:text-accent transition-colors text-sm font-medium cursor-pointer">
                 About
               </Link>
-              <Link href="/volunteering" className="block text-secondary/80 hover:text-accent transition-colors text-sm font-medium">
+              <Link href="/volunteering" className="block text-secondary/80 hover:text-accent transition-colors text-sm font-medium cursor-pointer">
                 Volunteering
               </Link>
-              <Link href="/experience" className="block text-secondary/80 hover:text-accent transition-colors text-sm font-medium">
+              <Link href="/experience" className="block text-secondary/80 hover:text-accent transition-colors text-sm font-medium cursor-pointer">
                 Experience
               </Link>
-              <Link href="/projects" className="block text-secondary/80 hover:text-accent transition-colors text-sm font-medium">
+              <Link href="/projects" className="block text-secondary/80 hover:text-accent transition-colors text-sm font-medium cursor-pointer">
                 Projects
               </Link>
-              <Link href="/gallery" className="block text-secondary/80 hover:text-accent transition-colors text-sm font-medium">
+              <Link href="/gallery" className="block text-secondary/80 hover:text-accent transition-colors text-sm font-medium cursor-pointer">
                 Gallery
               </Link>
             </nav>
@@ -38,7 +38,7 @@ export default function Footer() {
                 href="https://wa.me/message/GJIXLHQQPYDIE1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-secondary/80 hover:text-accent transition-colors text-sm font-medium"
+                className="inline-flex items-center gap-2 text-secondary/80 hover:text-accent transition-colors text-sm font-medium cursor-pointer"
               >
                 <MessageCircle size={18} />
                 WhatsApp
@@ -48,7 +48,7 @@ export default function Footer() {
                   href="https://linkedin.com/in/nestoranyanwu"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded hover:bg-accent/20 transition-colors"
+                  className="p-2 rounded hover:bg-accent/20 transition-colors cursor-pointer"
                   aria-label="LinkedIn"
                 >
                   <Linkedin size={18} className="text-secondary hover:text-accent" />
@@ -57,7 +57,7 @@ export default function Footer() {
                   href="https://twitter.com/nestorcyber"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded hover:bg-accent/20 transition-colors"
+                  className="p-2 rounded hover:bg-accent/20 transition-colors cursor-pointer"
                   aria-label="Twitter"
                 >
                   <Twitter size={18} className="text-secondary hover:text-accent" />
@@ -66,7 +66,7 @@ export default function Footer() {
                   href="https://github.com/nestorcyber"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded hover:bg-accent/20 transition-colors"
+                  className="p-2 rounded hover:bg-accent/20 transition-colors cursor-pointer"
                   aria-label="GitHub"
                 >
                   <Github size={18} className="text-secondary hover:text-accent" />
