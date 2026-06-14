@@ -11,8 +11,8 @@ export default function AboutPage() {
   return (
     <>
       <main className="min-h-screen bg-background pt-0 pb-20">
-        {/* Hero Section - Edge to Edge */}
-        <section className="relative h-screen flex items-center justify-start overflow-hidden pt-16 md:pt-0 -mx-4 md:-mx-8">
+        {/* Hero Section */}
+        <section className="relative w-full h-screen flex items-center justify-start overflow-hidden pt-16 md:pt-0">
           {/* Background image - edge to edge, face centered on mobile */}
           <Image
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg"

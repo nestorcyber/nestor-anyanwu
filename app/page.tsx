@@ -11,7 +11,7 @@ export default function Home() {
     <main className="min-h-screen bg-background">
       <HomeHero />
       {/* Divider line */}
-      <div className="w-screen -mx-4 md:-mx-8 h-1 bg-primary"></div>
+      <div className="w-full h-1 bg-primary"></div>
       <HomeAboutPreview />
       <HomeVolunteeringPreview />
       <HomeExperiencePreview />

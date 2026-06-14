@@ -53,8 +53,8 @@ export default function HomeContactCTA() {
           </a>
         </div>
 
-        {/* Image - edge to edge */}
-        <div className="relative w-screen -mx-6 h-64">
+        {/* Image - full width */}
+        <div className="relative w-full h-64">
           <Image
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/techadv2-fJNNNhoTlHZluQRApulqQdtBsdPtCL.jpg"
             alt="Tech community at event"
