@@ -12,29 +12,26 @@ export default function AboutPage() {
     <>
       <main className="min-h-screen bg-background pt-0 pb-20">
         {/* Hero Section - Edge to Edge */}
-        <section className="relative h-96 md:h-screen flex items-center justify-start overflow-hidden pt-16 md:pt-0 -mx-4 md:-mx-8">
+        <section className="relative h-screen flex items-center justify-start overflow-hidden pt-16 md:pt-0 -mx-4 md:-mx-8">
           {/* Background image - edge to edge */}
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg"
             alt="Nestor Anyanwu"
             fill
-            className="object-cover object-center md:object-center"
+            className="object-cover object-center md:object-left"
             priority
           />
 
-          {/* Overlay with opacity where text will be */}
-          <div className="absolute inset-0 bg-black/40"></div>
-          
-          {/* Dark overlay region for text readability */}
-          <div className="absolute left-0 top-1/2 md:top-1/3 w-full md:w-1/2 h-48 bg-gradient-to-r from-black/70 to-black/30 md:from-black/60 md:to-transparent"></div>
+          {/* Overlay gradient for contrast */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent md:bg-gradient-to-r md:from-black/50 md:via-black/30 md:to-transparent"></div>
 
           {/* Content */}
-          <div className="relative z-10 w-full px-4 md:px-16 lg:px-24 pt-20 md:pt-0 flex items-center md:h-full">
+          <div className="relative z-10 w-full px-4 md:px-16 lg:px-24 flex items-center h-full">
             <div className="max-w-2xl">
-              <h1 className="font-sans text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+              <h1 className="font-sans text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
                 Who is Nestor
               </h1>
-              <p className="text-lg md:text-2xl text-white mt-2 font-medium">
+              <p className="text-lg md:text-2xl text-white font-medium">
                 Techie, Designer, Volunteer, Leader
               </p>
             </div>
