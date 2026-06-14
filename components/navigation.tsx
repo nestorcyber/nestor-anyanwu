@@ -32,7 +32,7 @@ export default function Navigation() {
           {/* Logo on the left */}
           <button
             onClick={() => router.push("/")}
-            className="hover:opacity-80 transition-opacity"
+            className="hover:opacity-80 transition-opacity cursor-pointer"
           >
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo-YsxkUMGzk3nZcZJmumGcRLhbwVu9Fq.png"
@@ -52,7 +52,7 @@ export default function Navigation() {
                   setIsOpen(false)
                   router.push(item.href)
                 }}
-                className="text-secondary hover:text-accent transition-colors font-bold text-sm leading-tight"
+                className="text-secondary hover:text-accent transition-colors font-bold text-sm leading-tight cursor-pointer"
               >
                 {item.label}
               </button>
@@ -62,7 +62,7 @@ export default function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-accent/20 transition-colors"
+            className="md:hidden p-2 rounded-lg hover:bg-accent/20 transition-colors cursor-pointer"
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={24} className="text-secondary" /> : <Menu size={24} className="text-secondary" />}
@@ -89,13 +89,13 @@ export default function Navigation() {
         <div className="flex items-center justify-between p-4 border-b border-secondary/20">
           <button
             onClick={() => router.push("/")}
-            className="text-secondary font-sans font-bold text-xl hover:text-accent transition-colors"
+            className="text-secondary font-sans font-bold text-xl hover:text-accent transition-colors cursor-pointer"
           >
             NA
           </button>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-2 rounded-lg hover:bg-accent/20 transition-colors"
+            className="p-2 rounded-lg hover:bg-accent/20 transition-colors cursor-pointer"
             aria-label="Close menu"
           >
             <X size={24} className="text-secondary" />
@@ -111,7 +111,7 @@ export default function Navigation() {
                 setIsOpen(false)
                 router.push(item.href)
               }}
-              className={`block w-full text-left px-4 py-2.5 text-secondary hover:bg-accent/10 transition-colors font-bold text-sm leading-tight ${
+              className={`block w-full text-left px-4 py-2.5 text-secondary hover:bg-accent/10 transition-colors font-bold text-sm leading-tight cursor-pointer ${
                 index < navItems.length - 1 ? "border-b border-secondary/20" : ""
               }`}
             >

@@ -41,7 +41,7 @@ export default function HeroSection() {
           <Button
             onClick={scrollToExperiences}
             size="lg"
-            className="h-12 px-8 rounded-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white shadow-lg shadow-blue-500/25 transition-all hover:scale-105"
+            className="h-12 px-8 rounded-full bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white shadow-lg shadow-blue-500/25 transition-all hover:scale-105 cursor-pointer"
           >
             Explore My Volunteering Moments
           </Button>
@@ -49,7 +49,7 @@ export default function HeroSection() {
             onClick={scrollToContact}
             size="lg"
             variant="outline"
-            className="h-12 px-8 rounded-full border-2 border-slate-200 text-slate-700 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all bg-transparent"
+            className="h-12 px-8 rounded-full border-2 border-slate-200 text-slate-700 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all bg-transparent cursor-pointer"
           >
             Let's Collaborate
           </Button>
