@@ -28,7 +28,7 @@ export default function Navigation() {
     <>
       {/* Header - Fixed at top, never hides */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 lg:px-16 bg-primary border-b border-primary">
-        <div className="max-w-7xl mx-auto flex items-center justify-between py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between py-2 md:py-4">
           {/* Logo on the left */}
           <button
             onClick={() => router.push("/")}
@@ -39,7 +39,7 @@ export default function Navigation() {
               alt="Nestor Anyanwu Logo"
               width={60}
               height={20}
-              className="h-6 w-auto"
+              className="h-5 md:h-6 w-auto"
             />
           </button>
 
