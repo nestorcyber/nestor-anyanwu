@@ -13,9 +13,9 @@ export default function AboutPage() {
       <main className="min-h-screen bg-background pt-0 pb-20">
         {/* Hero Section - Edge to Edge */}
         <section className="relative h-screen flex items-center justify-start overflow-hidden pt-16 md:pt-0 -mx-4 md:-mx-8">
-          {/* Background image - edge to edge */}
+          {/* Background image - edge to edge, face centered on mobile */}
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg"
             alt="Nestor Anyanwu"
             fill
             className="object-cover object-center md:object-left"
@@ -26,9 +26,9 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent md:bg-gradient-to-r md:from-black/50 md:via-black/30 md:to-transparent"></div>
 
           {/* Content */}
-          <div className="relative z-10 w-full px-4 md:px-16 lg:px-24 flex items-center h-full">
+          <div className="relative z-10 w-full px-6 md:px-20 lg:px-32 flex items-center h-full">
             <div className="max-w-2xl">
-              <h1 className="font-sans text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
+              <h1 className="font-sans text-3xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4">
                 Who is Nestor
               </h1>
               <p className="text-lg md:text-2xl text-white font-medium">
@@ -38,10 +38,11 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <article className="max-w-4xl mx-auto px-4 md:px-8 pt-12 md:pt-16">
-          {/* Main Content - Editorial Style */}
-          <div className="space-y-4 text-foreground max-w-none">
-            <p className="text-sm leading-relaxed">
+        <article className="w-full bg-background">
+          {/* Main Content - Editorial Style with better spacing */}
+          <div className="max-w-6xl mx-auto px-6 md:px-20 lg:px-32 py-12 md:py-20">
+            <div className="space-y-6 text-foreground max-w-none">
+              <p className="text-base leading-relaxed text-gray-700">
               Nestor Anyanwu is a Nigerian technology professional, digital innovator, community builder, and emerging leader whose work spans software development, artificial intelligence advocacy, design, digital transformation, and technology education. Widely recognized by his professional brand, "Nestor Cyber," he has built a reputation for combining technical expertise with community impact, helping individuals and organizations leverage technology to solve real-world problems.
             </p>
 
@@ -206,8 +207,7 @@ export default function AboutPage() {
             <p className="text-sm leading-relaxed">
               His core goal steers toward creating an inclusive and collaborative tech ecosystem where everyone has the opportunity to thrive.
             </p>
-
-
+            </div>
           </div>
         </article>
       </main>

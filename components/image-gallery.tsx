@@ -59,7 +59,7 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
           <div className="relative max-w-4xl w-full max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={closeModal}
-              className="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors"
+              className="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors cursor-pointer"
             >
               <X className="w-8 h-8" />
             </button>
@@ -74,13 +74,13 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
               <>
                 <button
                   onClick={goToPrevious}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition-colors"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition-colors cursor-pointer"
                 >
                   ←
                 </button>
                 <button
                   onClick={goToNext}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition-colors cursor-pointer"
                 >
                   →
                 </button>
