@@ -39,7 +39,7 @@ export default function Navigation() {
               alt="Nestor Anyanwu Logo"
               width={60}
               height={20}
-              className="h-5 md:h-6 w-auto dark:invert"
+              className="h-5 md:h-6 w-auto dark:brightness-0 dark:invert"
             />
           </Link>
 

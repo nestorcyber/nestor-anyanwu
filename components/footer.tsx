@@ -114,17 +114,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-border pt-8 mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-border pt-8 mt-8 flex items-center justify-center">
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Nestor Anyanwu. All rights reserved.
           </p>
-          <div className="flex gap-6 text-xs text-muted-foreground">
-            <Link href="/contact" className="hover:text-accent transition-colors">
-              Contact
-            </Link>
-            <span className="cursor-default">|</span>
-            <span className="cursor-default">Tech Leader Portfolio</span>
-          </div>
         </div>
       </div>
     </footer>
