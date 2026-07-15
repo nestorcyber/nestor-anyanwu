@@ -20,7 +20,31 @@ export interface ProjectItem {
 }
 
 export const journeyTimeline: JourneyItem[] = [
-  // Work Experience
+
+  // ── May 2026 ──
+  {
+    id: 26,
+    title: "Event Logistics",
+    organization: "IEEE FUTO Student Branch",
+    role: "Event Logistics",
+    date: "May 2026 - Present",
+    description: "Supporting IEEE FUTO Student Branch events through logistics coordination and on-ground event management.",
+    type: "volunteer",
+    details: ["Event Logistics", "IEEE", "Engineering Community"]
+  },
+
+  // ── Feb 2026 ──
+  {
+    id: 6,
+    title: "Progress Tracking Lead",
+    organization: "The Investment Society FUTO",
+    date: "Feb 2026 - Present",
+    description: "Leading progress tracking initiatives for The Investment Society at FUTO, helping students understand and engage with investment opportunities.",
+    type: "work",
+    details: ["Progress Management", "Student Engagement", "Financial Education"]
+  },
+
+  // ── Dec 2025 ──
   {
     id: 1,
     title: "Director Of Information Communication Technology",
@@ -41,25 +65,6 @@ export const journeyTimeline: JourneyItem[] = [
     details: ["National ICT Strategy", "Technology Leadership", "Community Support"]
   },
   {
-    id: 3,
-    title: "Graphic Designer",
-    organization: "GDG Owerri (Google Developer Group)",
-    date: "Sep 2024 - Present",
-    description: "Creating compelling visual designs and brand assets for Google Developer Group initiatives, helping shape the visual identity of community events and communications.",
-    type: "work",
-    details: ["Visual Design", "Brand Identity", "Event Graphics"],
-    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg"]
-  },
-  {
-    id: 4,
-    title: "Information Technology Consultant",
-    organization: "Nobelton Consults",
-    date: "May 2024 - Present",
-    description: "Providing strategic IT consulting services, helping businesses navigate technology challenges and implement effective technological solutions.",
-    type: "work",
-    details: ["IT Strategy", "System Implementation", "Technical Advisory"]
-  },
-  {
     id: 5,
     title: "Campus Ambassador",
     organization: "Cowrywise",
@@ -69,25 +74,15 @@ export const journeyTimeline: JourneyItem[] = [
     details: ["Financial Literacy", "Community Outreach", "Brand Advocacy"]
   },
   {
-    id: 6,
-    title: "Progress Tracking Lead",
-    organization: "The Investment Society FUTO",
-    date: "Feb 2026 - Present",
-    description: "Leading progress tracking initiatives for The Investment Society at FUTO, helping students understand and engage with investment opportunities.",
-    type: "work",
-    details: ["Progress Management", "Student Engagement", "Financial Education"]
+    id: 25,
+    title: "Media Team",
+    organization: "Federal University of Technology Owerri (FUTO)",
+    role: "Media Team",
+    date: "Dec 2025 - Present",
+    description: "Contributing to FUTO's official media team, supporting documentation, photography, and visual communications for university events.",
+    type: "volunteer",
+    details: ["Photography", "Media", "Documentation"]
   },
-  {
-    id: 7,
-    title: "Graphic Designer",
-    organization: "Nobelton Consults",
-    date: "Jan 2023 - Feb 2024",
-    description: "Designed visual content and branding materials, creating compelling graphics for marketing and communications.",
-    type: "work",
-    details: ["Graphic Design", "Visual Content", "Brand Development"]
-  },
-
-  // Volunteering & Events
   {
     id: 8,
     title: "Emerging Leaders Conference",
@@ -96,10 +91,10 @@ export const journeyTimeline: JourneyItem[] = [
     date: "Dec 2025",
     description: "Served on the Media Team for the Emerging Leaders Conference, capturing impactful moments and supporting the digital documentation of this leadership event.",
     type: "volunteer",
-    images: [
-      "/placeholder.svg?height=600&width=800"
-    ]
+    images: ["/placeholder.svg?height=600&width=800"]
   },
+
+  // ── Nov 2025 ──
   {
     id: 9,
     title: "Edensprime Hospitality Summit",
@@ -113,21 +108,6 @@ export const journeyTimeline: JourneyItem[] = [
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden3%280%29-Md3eT61Brp60MhmfTcGcfxvEaFIHqs.jpg",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden5-LDykBdjx1JiJvGYDIdliITuBi0V8Ke.jpg",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden1-iePEIbrkoW7wba4cbBoCLfkFEsqQTU.jpg"
-    ]
-  },
-  {
-    id: 10,
-    title: "FUTO Alumni Homecoming 2025",
-    organization: "FUTO Alumni Association",
-    role: "Media and Photography",
-    date: "Aug 2025",
-    description: "Captured the memorable moments from FUTO Alumni Homecoming 2025 through professional media and photography, documenting networking panels and reunions.",
-    type: "volunteer",
-    images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f4%280%29-e7Yahcsw3qQbcQLNweaiCS5rzoAVvv.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f3%280%29-0OUNedcByaDnTaTWc7tAWWQQ2E60ff.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f2%280%29-pBS7ttoTwcS5IQq7BxPQga9W14pDXS.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f1%280%29-wdxseBoOzK6wN6TpiXjYnUVh67MS1C.jpg"
     ]
   },
   {
@@ -164,6 +144,23 @@ export const journeyTimeline: JourneyItem[] = [
     description: "Served on both the Media and Welfare teams, capturing key moments of the conference while ensuring the comfort of guests and speakers.",
     type: "volunteer"
   },
+
+  // ── Aug–Sep 2025 ──
+  {
+    id: 10,
+    title: "FUTO Alumni Homecoming 2025",
+    organization: "FUTO Alumni Association",
+    role: "Media and Photography",
+    date: "Aug 2025",
+    description: "Captured the memorable moments from FUTO Alumni Homecoming 2025 through professional media and photography, documenting networking panels and reunions.",
+    type: "volunteer",
+    images: [
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f4%280%29-e7Yahcsw3qQbcQLNweaiCS5rzoAVvv.jpg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f3%280%29-0OUNedcByaDnTaTWc7tAWWQQ2E60ff.jpg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f2%280%29-pBS7ttoTwcS5IQq7BxPQga9W14pDXS.jpg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f1%280%29-wdxseBoOzK6wN6TpiXjYnUVh67MS1C.jpg"
+    ]
+  },
   {
     id: 14,
     title: "Tech Nexus FUTO",
@@ -173,15 +170,106 @@ export const journeyTimeline: JourneyItem[] = [
     description: "Participated in Tech Nexus, a tech community event at FUTO, contributing to event design, setup, and photography.",
     type: "volunteer"
   },
+  {
+    id: 24,
+    title: "Front Desk",
+    organization: "AWS Cloud Club, FUTO",
+    role: "Front Desk",
+    date: "Aug 2025 - Sep 2025",
+    description: "Served at the front desk for AWS Cloud Club FUTO events, managing attendee registration and providing on-site coordination support.",
+    type: "volunteer",
+    details: ["Event Coordination", "Cloud Community", "AWS"]
+  },
+
+  // ── Jul 2025 ──
+  {
+    id: 23,
+    title: "Graphic Designer",
+    organization: "GDG on Campus – Federal University of Technology, Owerri",
+    role: "Graphic Designer",
+    date: "Jul 2025 - Present",
+    description: "Designing visual content and brand communications for GDG on Campus FUTO, supporting student developer community events.",
+    type: "volunteer",
+    details: ["Visual Design", "Campus Community", "GDG"]
+  },
+
+  // ── Jun 2025 ──
+  {
+    id: 28,
+    title: "Graphic Designer",
+    organization: "Hack4Futo",
+    role: "Graphic Designer",
+    date: "Jun 2025 - Present",
+    description: "Creating design assets and visual branding for Hack4Futo, a student-driven hackathon and innovation community at FUTO.",
+    type: "volunteer",
+    details: ["Hackathon Design", "Branding", "Student Innovation"]
+  },
+
+  // ── May 2024 ──
+  {
+    id: 4,
+    title: "Information Technology Consultant",
+    organization: "Nobelton Consults",
+    date: "May 2024 - Present",
+    description: "Providing strategic IT consulting services, helping businesses navigate technology challenges and implement effective technological solutions.",
+    type: "work",
+    details: ["IT Strategy", "System Implementation", "Technical Advisory"]
+  },
+
+  // ── Dec 2024 ──
+  {
+    id: 27,
+    title: "Graphic Designer",
+    organization: "CMX",
+    role: "Graphic Designer",
+    date: "Dec 2024 - Present",
+    description: "Designing visual content and community assets for CMX, a global community management network.",
+    type: "volunteer",
+    details: ["Graphic Design", "Community Management", "CMX"]
+  },
+
+  // ── Sep 2024 ──
+  {
+    id: 3,
+    title: "Graphic Designer",
+    organization: "GDG Owerri (Google Developer Group)",
+    date: "Sep 2024 - Present",
+    description: "Creating compelling visual designs and brand assets for Google Developer Group initiatives, helping shape the visual identity of community events and communications.",
+    type: "work",
+    details: ["Visual Design", "Brand Identity", "Event Graphics"],
+    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg"]
+  },
+  {
+    id: 22,
+    title: "Graphic Designer",
+    organization: "GDG Owerri (Volunteering)",
+    role: "Graphic Designer",
+    date: "Sep 2024 - Present",
+    description: "Creating visual assets, branding materials, and design support for Google Developer Group Owerri events and community initiatives.",
+    type: "volunteer",
+    details: ["Graphic Design", "Branding", "Event Graphics"]
+  },
+
+  // ── Jan 2023 ──
+  {
+    id: 7,
+    title: "Graphic Designer",
+    organization: "Nobelton Consults",
+    date: "Jan 2023 - Feb 2024",
+    description: "Designed visual content and branding materials, creating compelling graphics for marketing and communications.",
+    type: "work",
+    details: ["Graphic Design", "Visual Content", "Brand Development"]
+  },
 
   // Memberships
   {
     id: 15,
     title: "Student Member",
     organization: "AAAI, Nigeria Chapter (Association for the Advancement of Artificial Intelligence)",
-    date: "Feb 2026 - Present",
+    date: "Nov 2024 - Present",
     description: "Active member of Africa's largest AI advocacy organization, contributing to AI advancement and research.",
-    type: "membership"
+    type: "membership",
+    details: ["AI Research", "Technology Advancement", "Community"]
   },
   {
     id: 16,
@@ -196,7 +284,7 @@ export const journeyTimeline: JourneyItem[] = [
     id: 17,
     title: "Student Member",
     organization: "Fintech Association of Nigeria",
-    date: "Nov 2023 - Present",
+    date: "Nov 2024 - Present",
     description: "Engaged in fintech innovation, digital financial services, and the growth of financial technology in Nigeria.",
     type: "membership",
     details: ["Fintech Innovation", "Digital Finance", "Networking"]
@@ -205,7 +293,7 @@ export const journeyTimeline: JourneyItem[] = [
     id: 18,
     title: "Member",
     organization: "Nigeria Computer Society (NCS)",
-    date: "Jun 2024 - Present",
+    date: "Jan 2025 - Present",
     description: "Active member of Nigeria's foremost ICT professional body, contributing to the advancement of computing in Nigeria.",
     type: "membership",
     details: ["ICT Professionalism", "Technology Policy", "Community Engagement"]
@@ -222,11 +310,11 @@ export const journeyTimeline: JourneyItem[] = [
   {
     id: 20,
     title: "Member",
-    organization: "SHE-IFO Student Chapter, FUTO",
-    date: "Feb 2021 - Present",
-    description: "Supporting initiatives that empower and advocate for women in technology and computing disciplines.",
+    organization: "Nigeria Association of Computing Students (NACOS) National",
+    date: "Feb 2025 - Present",
+    description: "Active national member of NACOS, supporting computing students across Nigeria through advocacy, capacity building, and innovation.",
     type: "membership",
-    details: ["Gender Inclusion", "Tech Advocacy", "Community Support"]
+    details: ["Student Advocacy", "Computing Community", "National Network"]
   },
   {
     id: 21,

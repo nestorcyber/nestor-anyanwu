@@ -19,6 +19,7 @@ export default function Navigation() {
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Journey", href: "/journey" },
+    { label: "Community", href: "/community" },
     { label: "Projects", href: "/projects" },
     { label: "Gallery", href: "/gallery" },
     { label: "Contact", href: "/contact" },
@@ -39,7 +40,7 @@ export default function Navigation() {
               alt="Nestor Anyanwu Logo"
               width={60}
               height={20}
-              className="h-5 md:h-6 w-auto dark:brightness-0 dark:invert"
+              className="h-5 md:h-6 w-auto brightness-0 dark:brightness-0 dark:invert"
             />
           </Link>
 

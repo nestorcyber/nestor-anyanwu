@@ -10,10 +10,12 @@ import { cn } from "@/lib/utils"
 import Image from "next/image"
 
 export default function JourneyPage() {
-  const [activeFilter, setActiveFilter] = useState<"all" | "work" | "volunteer" | "membership">("all")
+  const [activeFilter, setActiveFilter] = useState<"all" | "work" | "membership">("all")
 
   const filteredTimeline = journeyTimeline.filter(
-    (item) => activeFilter === "all" || item.type === activeFilter
+    (item) => activeFilter === "all"
+      ? item.type !== "volunteer"
+      : item.type === activeFilter
   )
 
   return (
@@ -40,7 +42,7 @@ export default function JourneyPage() {
               onClick={() => setActiveFilter("all")}
               className="rounded-full text-xs md:text-sm"
             >
-              All Chapters
+              All
             </Button>
             <Button
               variant={activeFilter === "work" ? "default" : "outline"}
@@ -48,13 +50,6 @@ export default function JourneyPage() {
               className="rounded-full text-xs md:text-sm"
             >
               Professional Roles
-            </Button>
-            <Button
-              variant={activeFilter === "volunteer" ? "default" : "outline"}
-              onClick={() => setActiveFilter("volunteer")}
-              className="rounded-full text-xs md:text-sm"
-            >
-              Community & Volunteering
             </Button>
             <Button
               variant={activeFilter === "membership" ? "default" : "outline"}
