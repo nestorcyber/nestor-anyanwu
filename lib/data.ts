@@ -186,18 +186,56 @@ export const journeyTimeline: JourneyItem[] = [
   {
     id: 16,
     title: "Member",
-    organization: "Internet Society Nigeria Chapter",
-    date: "Feb 2026 - Present",
-    description: "Supporting internet accessibility, digital rights, and technological infrastructure development in Nigeria.",
-    type: "membership"
+    organization: "Internet Society, Nigeria Chapter",
+    date: "Feb 2025 - Present",
+    description: "Supporting internet accessibility, digital rights, and technological infrastructure development across Nigeria.",
+    type: "membership",
+    details: ["Internet Governance", "Digital Rights", "Accessibility"]
   },
   {
     id: 17,
     title: "Student Member",
-    organization: "Fintech Association Of Nigeria",
-    date: "Feb 2026 - Present",
-    description: "Engaged in fintech innovation and digital financial services development.",
-    type: "membership"
+    organization: "Fintech Association of Nigeria",
+    date: "Nov 2023 - Present",
+    description: "Engaged in fintech innovation, digital financial services, and the growth of financial technology in Nigeria.",
+    type: "membership",
+    details: ["Fintech Innovation", "Digital Finance", "Networking"]
+  },
+  {
+    id: 18,
+    title: "Member",
+    organization: "Nigeria Computer Society (NCS)",
+    date: "Jun 2024 - Present",
+    description: "Active member of Nigeria's foremost ICT professional body, contributing to the advancement of computing in Nigeria.",
+    type: "membership",
+    details: ["ICT Professionalism", "Technology Policy", "Community Engagement"]
+  },
+  {
+    id: 19,
+    title: "Member",
+    organization: "Nigeria Internet Registration Association (NIRA)",
+    date: "Mar 2025 - Present",
+    description: "Contributing to the governance, management, and development of Nigeria's internet domain infrastructure.",
+    type: "membership",
+    details: ["Domain Governance", "Internet Infrastructure", "Policy"]
+  },
+  {
+    id: 20,
+    title: "Member",
+    organization: "SHE-IFO Student Chapter, FUTO",
+    date: "Feb 2021 - Present",
+    description: "Supporting initiatives that empower and advocate for women in technology and computing disciplines.",
+    type: "membership",
+    details: ["Gender Inclusion", "Tech Advocacy", "Community Support"]
+  },
+  {
+    id: 21,
+    title: "Data Privacy Ambassador",
+    organization: "Nigeria Data Protection Commission (NDPC)",
+    date: "Apr 2025 - Present",
+    description: "Advocating for data privacy awareness, digital rights, and NDPC compliance within tech communities and student groups.",
+    type: "membership",
+    details: ["Data Privacy", "Compliance Advocacy", "Digital Rights"]
   }
 ]
 

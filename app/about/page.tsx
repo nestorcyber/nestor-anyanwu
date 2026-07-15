@@ -225,46 +225,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* 5. Memberships & Affiliations */}
-        <section className="py-20 px-6 md:px-12 lg:px-24 bg-secondary border-t border-border">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-14">
-              <span className="text-xs font-bold uppercase tracking-widest text-accent mb-3 block">Professional Affiliations</span>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight">Memberships</h2>
-              <p className="mt-4 text-sm md:text-base text-foreground/70 max-w-2xl mx-auto font-medium">
-                Active member of professional bodies and associations shaping Nigeria's technology and innovation landscape.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {[
-                { org: "Internet Society", chapter: "Nigeria Chapter", role: "Member", since: "Feb 2025", icon: "🌐" },
-                { org: "Nigeria Computer Society", chapter: "NCS", role: "Member", since: "Jun 2024", icon: "💻" },
-                { org: "Fintech Association of Nigeria", chapter: "FintechNGR", role: "Student Member", since: "Nov 2023", icon: "💳" },
-                { org: "Nigeria Internet Registration Association", chapter: "NIRA", role: "Member", since: "Mar 2025", icon: "🔗" },
-                { org: "Nigeria Association of Computing Students", chapter: "NACOS National", role: "Member", since: "Feb 2025", icon: "🎓" },
-                { org: "SHE-IFO Student Chapter", chapter: "FUTO", role: "Member", since: "Feb 2021", icon: "🤝" },
-                { org: "Association for the Advancement of AI", chapter: "AAAI Nigeria Chapter", role: "Student Member", since: "Nov 2024", icon: "🤖" },
-                { org: "Nigeria Data Protection Commission", chapter: "NDPC", role: "Data Privacy Ambassador", since: "Apr 2025", icon: "🛡️" },
-              ].map((item) => (
-                <div
-                  key={item.org}
-                  className="bg-card border border-border rounded-2xl p-6 flex flex-col gap-3 hover:shadow-md hover:-translate-y-1 transition-all duration-200"
-                >
-                  <span className="text-3xl">{item.icon}</span>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-accent mb-1">{item.chapter}</p>
-                    <h3 className="text-sm font-extrabold text-foreground leading-tight">{item.org}</h3>
-                  </div>
-                  <div className="mt-auto pt-3 border-t border-border/50 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-muted-foreground">{item.role}</span>
-                    <span className="text-xs text-accent font-bold">{item.since}–Present</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
       </main>
       <Footer />
     </>
