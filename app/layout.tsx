@@ -128,10 +128,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`font-sans antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <body className={`font-sans antialiased overflow-x-hidden`}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <Navigation />
-          {children}
+          <div className="pt-14 md:pt-16">
+            {children}
+          </div>
           <Analytics />
         </ThemeProvider>
       </body>

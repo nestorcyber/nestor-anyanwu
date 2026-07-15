@@ -94,7 +94,7 @@ export const journeyTimeline: JourneyItem[] = [
     organization: "Guardians of the Nation International (GOTNI)",
     role: "Media Team",
     date: "Dec 2025",
-    description: "Served on the Media Team for the Emerging Leaders Conference, capturing impactful moments and supporting the digital documentation of this transformative leadership event.",
+    description: "Served on the Media Team for the Emerging Leaders Conference, capturing impactful moments and supporting the digital documentation of this leadership event.",
     type: "volunteer",
     images: [
       "/placeholder.svg?height=600&width=800"
@@ -106,7 +106,7 @@ export const journeyTimeline: JourneyItem[] = [
     organization: "FLE Global",
     role: "Event Setup",
     date: "Nov 2025",
-    description: "Contributed to the success of the Edensprime Hospitality Summit through dedicated event setup and coordination, ensuring a welcoming and professional atmosphere for all attendees.",
+    description: "Contributed to the success of the Edensprime Hospitality Summit through dedicated event setup and coordination.",
     type: "volunteer",
     images: [
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden2-sUzI0wvGmZMjB5UUP911IAB6WvBM5c.jpg",
@@ -121,7 +121,7 @@ export const journeyTimeline: JourneyItem[] = [
     organization: "FUTO Alumni Association",
     role: "Media and Photography",
     date: "Aug 2025",
-    description: "Captured the memorable moments from FUTO Alumni Homecoming 2025 through professional media and photography. Documented the celebration, networking, and community bonding of alumni.",
+    description: "Captured the memorable moments from FUTO Alumni Homecoming 2025 through professional media and photography, documenting networking panels and reunions.",
     type: "volunteer",
     images: [
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f4%280%29-e7Yahcsw3qQbcQLNweaiCS5rzoAVvv.jpg",
@@ -161,7 +161,7 @@ export const journeyTimeline: JourneyItem[] = [
     organization: "Gold In Real Estate",
     role: "Media Team & Welfare Team",
     date: "Nov 2025",
-    description: "Served on both the Media and Welfare teams, capturing key moments of the conference while ensuring the comfort and well-being of guests and speakers.",
+    description: "Served on both the Media and Welfare teams, capturing key moments of the conference while ensuring the comfort of guests and speakers.",
     type: "volunteer"
   },
   {
@@ -170,7 +170,7 @@ export const journeyTimeline: JourneyItem[] = [
     organization: "Google Developer Group on Campus FUTO",
     role: "Design, Event Setup and Photography",
     date: "Aug 2025",
-    description: "Participated in Tech Nexus, a dynamic tech community event at FUTO, contributing to event design, setup, and photography.",
+    description: "Participated in Tech Nexus, a tech community event at FUTO, contributing to event design, setup, and photography.",
     type: "volunteer"
   },
 

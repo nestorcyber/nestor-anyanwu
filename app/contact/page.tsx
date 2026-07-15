@@ -48,7 +48,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <main className="min-h-screen bg-background pt-32 pb-20">
+      <main className="min-h-screen bg-background pt-8 pb-20">
         <div className="max-w-5xl mx-auto px-4 md:px-8">
           {/* Header */}
           <div className="mb-16">

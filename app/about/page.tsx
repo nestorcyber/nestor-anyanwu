@@ -1,8 +1,12 @@
-"use client"
-
+import { Metadata } from "next"
 import Footer from "@/components/footer"
 import Image from "next/image"
 import { Award, Cpu, PenTool, Users } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "About Nestor Anyanwu | Profile & Vision",
+  description: "Biography of Nestor Anyanwu (Nestor Cyber), Tech Leader and Software Engineer. Read about his core pillars in technology advocacy, design, and AI.",
+}
 
 export default function AboutPage() {
   const pillars = [
@@ -62,7 +66,7 @@ export default function AboutPage() {
 
   return (
     <>
-      <main className="min-h-screen bg-background pt-16 md:pt-20 overflow-x-hidden">
+      <main className="min-h-screen bg-background pt-0 overflow-x-hidden">
         {/* 1. Header Profile Intro */}
         <section className="relative py-20 px-6 md:px-12 lg:px-24 bg-secondary border-b border-border flex items-center">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">

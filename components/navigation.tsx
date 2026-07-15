@@ -9,18 +9,10 @@ import { useTheme } from "next-themes"
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     setMounted(true)
-
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   const navItems = [
@@ -34,31 +26,21 @@ export default function Navigation() {
 
   return (
     <>
-      {/* Header - Dynamic Glassmorphic overlay */}
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 px-4 md:px-8 lg:px-16 transition-all duration-300 ${
-          isScrolled
-            ? "bg-background/95 backdrop-blur-md shadow-md shadow-primary/[0.03] border-b border-border/80 py-2.5 md:py-3"
-            : "bg-[var(--nav-bg)] backdrop-blur-md border-b border-border/30 py-3 md:py-4"
-        }`}
-      >
+      {/* Header - Steady/Fixed Glassmorphic overlay */}
+      <nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 lg:px-16 bg-[var(--nav-bg)] border-b border-border/50 transition-all duration-300 py-3 md:py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo on the left */}
           <Link
             href="/"
             className="hover:opacity-80 transition-opacity flex items-center h-8"
           >
-            {mounted && theme === "dark" ? (
-              <span className="text-foreground font-extrabold text-xl tracking-tight">NA</span>
-            ) : (
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo-YsxkUMGzk3nZcZJmumGcRLhbwVu9Fq.png"
-                alt="Nestor Anyanwu Logo"
-                width={60}
-                height={20}
-                className="h-5 md:h-6 w-auto invert dark:invert-0"
-              />
-            )}
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo-YsxkUMGzk3nZcZJmumGcRLhbwVu9Fq.png"
+              alt="Nestor Anyanwu Logo"
+              width={60}
+              height={20}
+              className="h-5 md:h-6 w-auto dark:invert"
+            />
           </Link>
 
           {/* Navigation on the right - desktop only */}

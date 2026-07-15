@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function HomeHero() {
   return (
-    <section className="relative h-screen flex flex-col items-end justify-end md:items-center md:justify-start overflow-hidden pt-16 md:pt-0 -mx-4 md:-mx-8">
+    <section className="relative h-screen flex flex-col items-end justify-end md:items-center md:justify-start overflow-hidden">
       {/* Background image - edge to edge, face centered on mobile */}
       <Image
         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg"

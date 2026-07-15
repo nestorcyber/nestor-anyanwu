@@ -1,5 +1,4 @@
-"use client"
-
+import { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
 import HomeHero from "@/components/home-hero"
@@ -8,6 +7,11 @@ import { journeyTimeline, projects } from "@/lib/data"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Calendar, Briefcase, Award, GraduationCap, ArrowRight, ExternalLink } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "Nestor Cyber – Tech Advocate, Designer & Community Leader",
+  description: "Portfolio of Nestor Anyanwu (Nestor Cyber). Tech Leader, Software Developer, and Community Advocate driving digital innovation, capacity building, and impactful tech ecosystems.",
+}
 
 export default function Home() {
   // Grab the latest 3 items from the journey timeline for the preview
