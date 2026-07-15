@@ -68,32 +68,34 @@ export default function AboutPage() {
     <>
       <main className="min-h-screen bg-background pt-0 overflow-x-hidden">
         {/* 1. Header Profile Intro */}
-        <section className="relative py-20 px-6 md:px-12 lg:px-24 bg-secondary border-b border-border flex items-center">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
-            <div className="lg:col-span-7 space-y-6">
-              <span className="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-bold uppercase tracking-wider rounded-full">
-                Executive Biography
-              </span>
-              <h1 className="text-4xl md:text-6xl font-extrabold text-foreground tracking-tight leading-none">
-                Nestor Anyanwu
-              </h1>
-              <p className="text-lg md:text-xl font-bold text-accent">
-                Tech Leader • Software Engineer • Designer
-              </p>
-              <p className="text-base md:text-lg text-foreground/80 leading-relaxed max-w-2xl font-medium">
-                Known professionally as <strong>"Nestor Cyber"</strong>, Nestor is an emerging technology professional, digital innovator, and community builder. His work spans software engineering, artificial intelligence advocacy, design, and technical education.
-              </p>
-            </div>
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-72 h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-xl border border-border/80">
+        <section className="relative py-16 md:py-20 px-6 md:px-12 lg:px-24 bg-secondary border-b border-border flex items-center">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center w-full">
+            {/* Image — top on mobile, right on desktop */}
+            <div className="lg:col-span-5 flex justify-center order-first lg:order-last">
+              <div className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-xl border border-border/80">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg"
                   alt="Nestor Anyanwu speaking"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                   priority
                 />
               </div>
+            </div>
+            {/* Text */}
+            <div className="lg:col-span-7 space-y-5 order-last lg:order-first">
+              <span className="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-bold uppercase tracking-wider rounded-full">
+                Executive Biography
+              </span>
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-foreground tracking-tight leading-none">
+                Nestor Anyanwu
+              </h1>
+              <p className="text-base md:text-xl font-bold text-accent">
+                Tech Leader • Software Engineer • Designer
+              </p>
+              <p className="text-sm md:text-lg text-foreground/80 leading-relaxed max-w-2xl font-medium">
+                Known professionally as <strong>&ldquo;Nestor Cyber&rdquo;</strong>, Nestor is an emerging technology professional, digital innovator, and community builder. His work spans software engineering, artificial intelligence advocacy, design, and technical education.
+              </p>
             </div>
           </div>
         </section>

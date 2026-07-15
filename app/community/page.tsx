@@ -194,7 +194,7 @@ export default function CommunityPage() {
       <main className="min-h-screen bg-background overflow-x-hidden">
 
         {/* Hero Section - Creative Split */}
-        <section className="relative bg-primary overflow-hidden min-h-[90vh] flex items-center">
+        <section className="relative bg-primary overflow-hidden min-h-[100svh] md:min-h-[90vh] flex items-center">
           {/* Background grid */}
           <div className="absolute inset-0 opacity-[0.04]"
             style={{
@@ -203,74 +203,52 @@ export default function CommunityPage() {
             }}
           />
 
-          {/* Full bleed image — right half, desktop */}
+          {/* Full bleed image — right half desktop / full bleed mobile */}
           <div className="absolute right-0 top-0 bottom-0 w-full lg:w-1/2 overflow-hidden">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg"
               alt="Nestor volunteering at community event"
               fill
-              className="object-cover object-center"
+              className="object-cover object-top md:object-center"
               priority
             />
-            {/* Gradient fade — blends image into bg on left */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/60 to-transparent lg:via-primary/40" />
+            {/* Gradient fade — stronger on mobile */}
+            <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/30 lg:bg-gradient-to-r lg:from-primary lg:via-primary/60 lg:to-transparent" />
             {/* Bottom fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-primary to-transparent" />
           </div>
 
-          {/* Floating stat badges */}
-          <div className="absolute bottom-10 right-6 lg:right-[calc(50%-80px)] flex flex-col gap-3 z-10">
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 flex items-center gap-3">
-              <Heart className="w-4 h-4 text-accent flex-shrink-0" />
-              <div>
-                <p className="text-white font-black text-lg leading-none">{volunteerEvents.length}+</p>
-                <p className="text-white/50 text-[10px] font-medium">Engagements</p>
-              </div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 flex items-center gap-3">
-              <Users className="w-4 h-4 text-accent flex-shrink-0" />
-              <div>
-                <p className="text-white font-black text-lg leading-none">6+</p>
-                <p className="text-white/50 text-[10px] font-medium">Communities</p>
-              </div>
-            </div>
-            <div className="bg-accent/80 backdrop-blur-md border border-accent/50 rounded-2xl px-4 py-3 flex items-center gap-3">
-              <Calendar className="w-4 h-4 text-white flex-shrink-0" />
-              <div>
-                <p className="text-white font-black text-lg leading-none">2021</p>
-                <p className="text-white/70 text-[10px] font-medium">Serving Since</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Text content — left */}
-          <div className="relative z-10 px-6 md:px-12 lg:px-24 py-24 max-w-7xl mx-auto w-full">
+          {/* Text content — left / centered on mobile */}
+          <div className="relative z-10 px-6 md:px-12 lg:px-24 pt-16 pb-40 md:py-24 max-w-7xl mx-auto w-full">
             <div className="max-w-xl">
-              <div className="flex items-center gap-2 mb-6">
+              <div className="flex items-center gap-2 mb-5">
                 <div className="h-px w-8 bg-accent" />
                 <p className="text-accent text-xs font-black tracking-widest uppercase">
                   Giving Back · Making Impact
                 </p>
               </div>
 
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-none tracking-tighter">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white mb-5 leading-none tracking-tighter">
                 Community<br />
                 <span className="text-accent">&</span><br />
                 <span className="italic font-light text-white/60">Volunteering</span>
               </h1>
 
-              <p className="text-white/60 text-sm md:text-base max-w-md leading-relaxed font-medium mb-10 border-l-2 border-accent/40 pl-4">
-                "Service is the rent you pay for room on this earth." — From tech festivals to leadership conferences, 
-                here's a living record of impact, creativity and community across Nigeria.
+              <p className="text-white/60 text-sm md:text-base max-w-md leading-relaxed font-medium mb-8 border-l-2 border-accent/40 pl-4">
+                &ldquo;Service is the rent you pay for room on this earth.&rdquo; — From tech festivals to leadership conferences,
+                here&apos;s a living record of impact, creativity and community across Nigeria.
               </p>
 
-              {/* Inline stat pills */}
-              <div className="flex flex-wrap gap-3">
+              {/* Stat pills — inline on all screens */}
+              <div className="flex flex-wrap gap-3 mb-8">
                 {[
+                  { icon: <Heart className="w-3.5 h-3.5" />, label: `${volunteerEvents.length}+ Engagements` },
+                  { icon: <Users className="w-3.5 h-3.5" />, label: "6+ Communities" },
+                  { icon: <Calendar className="w-3.5 h-3.5" />, label: "Since 2021" },
                   { icon: <MapPin className="w-3.5 h-3.5" />, label: "5+ Institutions" },
                   { icon: <Award className="w-3.5 h-3.5" />, label: "Media · Design · Logistics" },
                 ].map((pill) => (
-                  <div key={pill.label} className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-white/70 text-xs font-semibold">
+                  <div key={pill.label} className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-3 py-1.5 text-white/80 text-xs font-semibold">
                     <span className="text-accent">{pill.icon}</span>
                     {pill.label}
                   </div>

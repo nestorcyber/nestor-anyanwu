@@ -8,7 +8,7 @@ export default function HomeHero() {
         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg"
         alt="Nestor speaking at event"
         fill
-        className="object-cover object-center md:object-center"
+        className="object-cover object-top md:object-center"
         priority
       />
 
