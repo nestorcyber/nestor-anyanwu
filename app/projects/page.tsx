@@ -1,32 +1,12 @@
 import Footer from "@/components/footer"
 import { Metadata } from "next"
 import { ExternalLink } from "lucide-react"
+import { projects } from "@/lib/data"
 
 export const metadata: Metadata = {
   title: "Projects - Featured Work & Design Portfolio",
-  description: "Explore Nestor Anyanwu's featured projects showcasing design, development, and community initiatives. From DevFest Owerri to AI platforms and tech events.",
+  description: "Explore Nestor Anyanwu's featured projects showcasing design, development, and community initiatives.",
 }
-
-const projects = [
-  {
-    title: "DevFest Owerri 2025",
-    description: "Major design contributor for Nigeria's largest developer festival in South-East. Supported design initiatives, managed creative assets, and contributed to event logistics and community coordination.",
-    technologies: ["Graphic Design", "Community Building", "Branding", "Event Support"],
-    links: {},
-  },
-  {
-    title: "Build with AI",
-    description: "Innovative platform designed to empower developers and creators with AI-driven tools and resources. Contributed to strategic design and community-focused features for seamless integration of AI capabilities.",
-    technologies: ["AI Integration", "Platform Design", "Developer Experience", "Innovation"],
-    links: {},
-  },
-  {
-    title: "Tech Nexus FUTO",
-    description: "Designed and coordinated event setup for Tech Nexus at FUTO, bringing together developers for knowledge sharing and networking. Managed photography and visual documentation.",
-    technologies: ["Event Design", "Photography", "Branding", "Coordination"],
-    links: {},
-  },
-]
 
 export default function ProjectsPage() {
   return (
@@ -34,31 +14,34 @@ export default function ProjectsPage() {
       <main className="min-h-screen bg-background pt-32 pb-20">
         <div className="max-w-5xl mx-auto px-4 md:px-8">
           {/* Header */}
-          <div className="mb-10">
-            <h1 className="text-lg md:text-xl font-sans font-bold text-primary mb-3 tracking-wide">
-              Featured Projects
+          <div className="mb-16 text-center md:text-left">
+            <p className="text-accent text-xs md:text-sm font-bold tracking-widest mb-3 uppercase">
+              CREATIVE & TECHNICAL OUTPUT
+            </p>
+            <h1 className="text-3xl md:text-6xl font-serif font-black text-primary mb-6">
+              Projects & Portfolios
             </h1>
-            <p className="text-sm md:text-base text-foreground font-medium max-w-2xl">
+            <p className="text-sm md:text-lg text-foreground/80 font-medium max-w-2xl leading-relaxed">
               A selection of key projects that showcase design, development, and community building across technology and entrepreneurship.
             </p>
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             {projects.map((project, idx) => (
               <div
                 key={idx}
-                className="p-6 md:p-8 border border-border hover:border-accent transition-colors duration-300 flex flex-col bg-background rounded-lg"
+                className="p-8 border border-border hover:border-accent transition-all duration-300 flex flex-col bg-card rounded-xl shadow-sm hover:shadow-md"
               >
-                <h3 className="text-base font-sans font-bold text-primary mb-2 tracking-wide">{project.title}</h3>
-                <p className="text-sm text-foreground leading-relaxed mb-6 flex-grow font-medium">{project.description}</p>
+                <h3 className="text-2xl font-serif font-bold text-primary mb-3">{project.title}</h3>
+                <p className="text-sm text-foreground/80 leading-relaxed mb-6 flex-grow font-medium">{project.description}</p>
 
                 {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-1.5 mb-6">
                   {project.technologies.map((tech, i) => (
                     <span
                       key={i}
-                      className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm rounded-full font-medium"
+                      className="inline-block px-3 py-1 bg-primary/5 text-primary text-xs rounded-full font-semibold border border-primary/10"
                     >
                       {tech}
                     </span>
@@ -66,7 +49,7 @@ export default function ProjectsPage() {
                 </div>
 
                 {/* Links */}
-                <div className="flex gap-3 pt-6 border-t border-border">
+                <div className="flex gap-3 pt-4 border-t border-border">
                   {project.links.demo && project.links.demo !== "#" && (
                     <a
                       href={project.links.demo}
@@ -84,16 +67,16 @@ export default function ProjectsPage() {
           </div>
 
           {/* Design Portfolio Card */}
-          <div className="p-8 md:p-10 border-2 border-primary hover:border-accent transition-colors duration-300 flex flex-col bg-background rounded-lg text-center">
-            <h3 className="text-base font-sans font-bold text-primary mb-3 tracking-wide">Explore Design Work</h3>
-            <p className="text-sm text-foreground leading-relaxed mb-6 font-medium max-w-xl mx-auto">
+          <div className="p-8 md:p-12 border border-accent/30 hover:border-accent bg-secondary transition-all duration-300 flex flex-col items-center justify-center rounded-xl text-center">
+            <h3 className="text-2xl md:text-3xl font-serif font-bold text-primary mb-3">Explore Design Work</h3>
+            <p className="text-sm md:text-base text-foreground/80 leading-relaxed mb-6 font-medium max-w-xl mx-auto">
               View my comprehensive design portfolio showcasing branding, digital design, visual identity, and creative projects.
             </p>
             <a
               href="https://www.behance.net/nestorcyber"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-accent text-secondary hover:text-primary rounded-lg font-bold text-sm transition-colors cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-accent text-secondary hover:text-primary rounded-lg font-bold text-sm transition-all cursor-pointer shadow-md hover:shadow-lg"
             >
               <span>View My Behance Portfolio</span>
               <ExternalLink size={18} />

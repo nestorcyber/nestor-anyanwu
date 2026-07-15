@@ -1,20 +1,20 @@
 import Image from "next/image"
 import Footer from "@/components/footer"
-import { experiences } from "@/lib/data"
+import { journeyTimeline } from "@/lib/data"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Gallery - Volunteering & Community",
-  description: "Visual collection of moments from volunteering experiences, events, and projects.",
+  title: "Gallery - Journey & Community",
+  description: "Visual collection of moments from my personal journey, events, and projects.",
 }
 
 export default function GalleryPage() {
-  // Get all images from all experiences
-  const allImages = experiences.flatMap((exp) =>
-    (exp.images || []).map((img) => ({
+  // Get all images from all journey items
+  const allImages = journeyTimeline.flatMap((item) =>
+    (item.images || []).map((img) => ({
       src: img,
-      title: exp.title,
-      date: exp.date,
+      title: item.title,
+      date: item.date,
     }))
   )
 

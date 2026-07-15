@@ -1,215 +1,225 @@
-import Footer from "@/components/footer"
-import { Metadata } from "next"
-import Image from "next/image"
+"use client"
 
-export const metadata: Metadata = {
-  title: "About Nestor - Tech Advocate, Designer & Community Leader",
-  description: "Meet Nestor Anyanwu, a Nigerian tech professional and community leader. Director of ICT at NACOS FUTO, Data Privacy Ambassador, IEEE member, and tech advocate driving innovation and digital transformation.",
-}
+import Footer from "@/components/footer"
+import Image from "next/image"
+import { Award, Cpu, PenTool, Users } from "lucide-react"
 
 export default function AboutPage() {
+  const pillars = [
+    {
+      id: "advocate",
+      num: "01",
+      title: "Tech Advocate",
+      icon: <Award className="w-6 h-6 text-accent" />,
+      tagline: "SHAPING ADOPTING BEHAVIORS & DIGITAL INCLUSION",
+      description: "Nestor is a strong advocate for technology adoption, digital literacy, and innovation-driven development. He believes that technology should not be reserved for a select few but should be accessible, understandable, and impactful for everyone.",
+      points: [
+        "Promoting cybersecurity and digital ethics awareness.",
+        "Advocating for digital literacy and technology careers among youth.",
+        "Facilitating public workshops and online engagement for emerging tech."
+      ]
+    },
+    {
+      id: "ai",
+      num: "02",
+      title: "AI Enthusiast",
+      icon: <Cpu className="w-6 h-6 text-accent" />,
+      tagline: "UNLOCKING PRODUCTIVITY THROUGH INTELLIGENT SYSTEMS",
+      description: "As an Artificial Intelligence enthusiast, Nestor actively explores the applications of machine learning, automation, and generative platforms. He is passionate about helping others discover how these tools enhance creativity and problem-solving.",
+      points: [
+        "Exploring machine learning and generative workflows.",
+        "Advocating for ethical AI adoption in daily professional workflows.",
+        "Sharing productivity-focused artificial intelligence resources."
+      ]
+    },
+    {
+      id: "designer",
+      num: "03",
+      title: "Ingenious Designer",
+      icon: <PenTool className="w-6 h-6 text-accent" />,
+      tagline: "BRIDGING HUMAN-CENTERED AESTHETICS WITH CLEAN CODE",
+      description: "Creativity remains a defining aspect of Nestor's identity. As a designer, he combines visual storytelling, user experience principles, and strategic thinking to shape functional and beautiful digital interfaces.",
+      points: [
+        "Designing intuitive user experiences and product interfaces.",
+        "Creating corporate branding assets and campaign resources.",
+        "Aligning visual communication with strategic development objectives."
+      ]
+    },
+    {
+      id: "leader",
+      num: "04",
+      title: "Community Leader",
+      icon: <Users className="w-6 h-6 text-accent" />,
+      tagline: "EMPOWERING TECH TALENT AND COLLECTIVE PROGRESS",
+      description: "Serving as the Director of ICT for both NACOS National and FUTO chapters, Nestor drives digital strategy, technical infrastructure, and developer community coordination to support thousands of computing students.",
+      points: [
+        "Leading ICT strategy for student computing ecosystems.",
+        "Coordinating tech conferences, bootcamps, and networking summits.",
+        "Promoting volunteer-led digital mentorship networks."
+      ]
+    }
+  ]
+
   return (
     <>
-      <main className="min-h-screen bg-background pt-0 pb-20">
-        {/* Hero Section - Edge to Edge */}
-        <section className="relative h-screen flex items-center justify-start overflow-hidden pt-16 md:pt-0 -mx-4 md:-mx-8">
-          {/* Background image - edge to edge, face centered on mobile */}
-          <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg"
-            alt="Nestor Anyanwu"
-            fill
-            className="object-cover object-center md:object-left"
-            priority
-          />
-
-          {/* Overlay gradient for contrast */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent md:bg-gradient-to-r md:from-black/50 md:via-black/30 md:to-transparent"></div>
-
-          {/* Content */}
-          <div className="relative z-10 w-full px-6 md:px-20 lg:px-32 flex items-center h-full">
-            <div className="max-w-2xl">
-              <h1 className="font-sans text-3xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4">
-                Who is Nestor
+      <main className="min-h-screen bg-background pt-16 md:pt-20 overflow-x-hidden">
+        {/* 1. Header Profile Intro */}
+        <section className="relative py-20 px-6 md:px-12 lg:px-24 bg-secondary border-b border-border flex items-center">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+            <div className="lg:col-span-7 space-y-6">
+              <span className="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-bold uppercase tracking-wider rounded-full">
+                Executive Biography
+              </span>
+              <h1 className="text-4xl md:text-6xl font-extrabold text-foreground tracking-tight leading-none">
+                Nestor Anyanwu
               </h1>
-              <p className="text-lg md:text-2xl text-white font-medium">
-                Techie, Designer, Volunteer, Leader
+              <p className="text-lg md:text-xl font-bold text-accent">
+                Tech Leader • Software Engineer • Designer
               </p>
+              <p className="text-base md:text-lg text-foreground/80 leading-relaxed max-w-2xl font-medium">
+                Known professionally as <strong>"Nestor Cyber"</strong>, Nestor is an emerging technology professional, digital innovator, and community builder. His work spans software engineering, artificial intelligence advocacy, design, and technical education.
+              </p>
+            </div>
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="relative w-72 h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-xl border border-border/80">
+                <Image
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg"
+                  alt="Nestor Anyanwu speaking"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </section>
 
-        <article className="w-full bg-background">
-          {/* Main Content - Editorial Style with better spacing */}
-          <div className="max-w-6xl mx-auto px-6 md:px-20 lg:px-32 py-12 md:py-20">
-            <div className="space-y-6 text-foreground max-w-none">
-              <p className="text-base leading-relaxed text-gray-700">
-              Nestor Anyanwu is a Nigerian technology professional, digital innovator, community builder, and emerging leader whose work spans software development, artificial intelligence advocacy, design, digital transformation, and technology education. Widely recognized by his professional brand, "Nestor Cyber," he has built a reputation for combining technical expertise with community impact, helping individuals and organizations leverage technology to solve real-world problems.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              Driven by a passion for innovation and lifelong learning, Nestor represents a new generation of African technologists who are not only consuming technology but actively creating solutions, building communities, and shaping conversations around the future of digital transformation on the continent.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              His journey reflects the intersection of technology, leadership, creativity, and service, positioning him as a multifaceted professional committed to advancing technological growth and digital inclusion.
-            </p>
-
-            <h2 className="text-base font-sans font-bold text-primary mt-8 mb-3 tracking-wide">Tech Advocate</h2>
-
-            <p className="text-sm leading-relaxed">
-              Nestor Anyanwu is a strong advocate for technology adoption, digital literacy, and innovation-driven development. He believes that technology should not be reserved for a select few but should be accessible, understandable, and impactful for everyone.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              Through his engagements, online presence, educational initiatives, and community activities, he consistently promotes awareness about emerging technologies, cybersecurity, software development, digital opportunities, and technology careers.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              His advocacy focuses on helping young people understand how technology can be leveraged to create opportunities, solve societal challenges, and drive economic growth. He frequently encourages students and aspiring professionals to build practical skills, embrace innovation, and remain adaptable in a rapidly evolving digital landscape.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              Beyond technical discussions, he advocates for responsible technology use, digital ethics, privacy awareness, and the importance of continuous learning in the age of technological disruption.
-            </p>
-
-            <h2 className="text-base font-sans font-bold text-primary mt-8 mb-3 tracking-wide">Artificial Intelligence Enthusiast</h2>
-
-            <p className="text-sm leading-relaxed">
-              Nestor has demonstrated a growing commitment to the field of Artificial Intelligence, recognizing its transformative role across industries and societies.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              As an AI enthusiast, he actively explores the applications of machine learning, generative AI, automation, and intelligent systems. His interest extends beyond simply understanding AI technologies; he is passionate about helping others discover how these tools can improve productivity, accelerate innovation, and unlock new possibilities.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              He views Artificial Intelligence as one of the defining technologies of the modern era and advocates for responsible adoption that empowers people rather than replaces them.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              His engagements often emphasize practical AI usage, encouraging individuals, students, and professionals to embrace AI as a collaborative tool that enhances creativity, problem-solving, and efficiency.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              By staying informed about emerging AI trends and developments, Nestor continues to position himself at the forefront of conversations shaping the future of technology in Africa and beyond.
-            </p>
-
-            <h2 className="text-base font-sans font-bold text-primary mt-8 mb-3 tracking-wide">Ingenious Designer</h2>
-
-            <p className="text-sm leading-relaxed">
-              Creativity remains a defining aspect of Nestor's professional identity.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              As a designer, he combines visual storytelling, user experience principles, and strategic thinking to create engaging digital experiences. His design philosophy is centered on functionality, clarity, and meaningful communication.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              Whether working on branding materials, promotional campaigns, user interfaces, social media content, or digital products, he approaches design as both an art and a problem-solving discipline.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              His ability to bridge technical implementation with creative execution allows him to develop solutions that are not only visually appealing but also effective in achieving organizational and user goals.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              Through his design work, Nestor demonstrates an understanding that great design extends beyond aesthetics. It involves creating experiences that resonate with audiences, communicate ideas effectively, and deliver measurable value.
-            </p>
-
-            <h2 className="text-base font-sans font-bold text-primary mt-8 mb-3 tracking-wide">Volunteer</h2>
-
-            <p className="text-sm leading-relaxed">
-              Service and contribution have consistently played an important role in Nestor's professional journey.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              He actively participates in volunteer-driven initiatives that promote technology education, knowledge sharing, mentorship, and community development.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              Through volunteering, he contributes his time, skills, and expertise toward initiatives aimed at empowering students, supporting emerging professionals, and strengthening technology ecosystems.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              His willingness to contribute beyond personal gain reflects a belief that true growth occurs when individuals invest in the success of others.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              Whether supporting educational programs, technology communities, events, workshops, or awareness campaigns, Nestor approaches volunteering as an opportunity to create lasting impact and inspire positive change.
-            </p>
-
-            <h2 className="text-base font-sans font-bold text-primary mt-8 mb-3 tracking-wide">Community Builder</h2>
-
-            <p className="text-sm leading-relaxed">
-              Nestor understands that innovation thrives within strong communities.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              Throughout his journey, he has engaged with various technology ecosystems, student organizations, and professional networks where collaboration, learning, and shared growth are prioritized.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              His involvement within technology communities demonstrates his commitment to fostering environments where individuals can connect, exchange ideas, develop skills, and discover opportunities.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              He recognizes the importance of collective progress and actively supports initiatives that bring people together around technology, entrepreneurship, digital transformation, and professional development.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              Through networking, mentorship, collaboration, and community engagement, he contributes to strengthening the technology ecosystem while encouraging others to participate and grow alongside their peers.
-            </p>
-
-            <h2 className="text-base font-sans font-bold text-primary mt-8 mb-3 tracking-wide">Leader</h2>
-
-            <p className="text-sm leading-relaxed">
-              Leadership is one of the defining characteristics of Nestor Anyanwu's professional journey.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              His leadership approach is rooted in service, vision, accountability, and empowerment. Rather than focusing solely on authority, he emphasizes creating opportunities, enabling collaboration, and helping others reach their potential.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              His involvement in student and professional leadership roles has provided opportunities to coordinate initiatives, manage teams, support strategic objectives, and drive meaningful outcomes.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              As a leader, he values innovation, continuous improvement, and collective success. He believes that effective leadership involves listening, learning, adapting, and creating environments where people can thrive.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              His ability to balance technical expertise with people-centered leadership continues to position him as an emerging voice within the technology ecosystem.
-            </p>
-
-            <h2 className="text-base font-sans font-bold text-primary mt-8 mb-3 tracking-wide">The Future</h2>
-
-            <p className="text-sm leading-relaxed">
-              Nestor Anyanwu represents a generation of African innovators committed to leveraging technology for impact.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              As technology continues to redefine industries, economies, and societies, he remains focused on learning, building, leading, and contributing to meaningful transformation.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              His interests in software development, artificial intelligence, digital innovation, design, community building, and leadership suggest a future filled with opportunities to influence technological advancement and inspire the next generation of innovators.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              Through dedication, curiosity, and a commitment to service, Nestor continues to establish himself as a professional whose work extends beyond technology and into the broader mission of empowering people through innovation.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              For Nestor, technology is not merely a profession. It is a platform for impact, a catalyst for growth, and a tool for shaping a better future.
-            </p>
-
-            <p className="text-sm leading-relaxed">
-              His core goal steers toward creating an inclusive and collaborative tech ecosystem where everyone has the opportunity to thrive.
-            </p>
+        {/* 2. Core Philosophy Quote */}
+        <section className="py-16 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
+          <div className="bg-card border border-border p-8 md:p-12 rounded-2xl shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="max-w-4xl space-y-6">
+              <span className="text-accent text-4xl font-serif">“</span>
+              <blockquote className="text-lg md:text-2xl font-semibold text-foreground/90 italic leading-relaxed">
+                Technology is not merely a profession. It is a platform for impact, a catalyst for growth, and a tool for shaping a better future. My core goal is creating an inclusive and collaborative tech ecosystem where everyone has the opportunity to thrive.
+              </blockquote>
+              <div className="flex items-center gap-3">
+                <span className="h-0.5 w-8 bg-accent"></span>
+                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  Nestor Anyanwu, Vision Statement
+                </span>
+              </div>
             </div>
           </div>
-        </article>
+        </section>
+
+        {/* 3. Alternating Scrolling Pillars Section (Forbes/Elumelu style) */}
+        <section className="py-20 px-6 md:px-12 lg:px-24 bg-secondary/30 border-y border-border">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center max-w-3xl mx-auto mb-24 space-y-3">
+              <p className="text-accent text-xs font-bold tracking-widest uppercase">
+                AREAS OF IMPACT
+              </p>
+              <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight">
+                Pillars of Leadership & Service
+              </h2>
+              <p className="text-sm md:text-base text-muted-foreground font-medium">
+                A narrative walk through the key dimensions of Nestor's work and community footprint.
+              </p>
+            </div>
+
+            {/* Alternating layout list */}
+            <div className="space-y-24">
+              {pillars.map((p, index) => {
+                const isEven = index % 2 === 0
+                return (
+                  <div
+                    key={p.id}
+                    className={`grid grid-cols-1 lg:grid-cols-12 gap-12 items-center ${
+                      isEven ? "" : "lg:flex-row-reverse"
+                    }`}
+                  >
+                    {/* Visual Number Card */}
+                    <div
+                      className={`lg:col-span-5 flex flex-col justify-center ${
+                        isEven ? "lg:order-1" : "lg:order-2"
+                      }`}
+                    >
+                      <div className="relative bg-card border border-border p-10 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between aspect-video lg:aspect-square max-w-md mx-auto w-full">
+                        <div className="absolute -top-10 -right-6 text-[150px] font-black text-primary/5 select-none leading-none">
+                          {p.num}
+                        </div>
+                        <div className="p-3 bg-primary/5 rounded-xl w-fit mb-6">
+                          {p.icon}
+                        </div>
+                        <div className="space-y-2 z-10">
+                          <h4 className="text-accent text-xs font-bold tracking-widest uppercase">
+                            PILLAR {p.num}
+                          </h4>
+                          <h3 className="text-2xl font-extrabold text-primary">
+                            {p.title}
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Description & Points Column */}
+                    <div
+                      className={`lg:col-span-7 space-y-6 ${
+                        isEven ? "lg:order-2" : "lg:order-1"
+                      }`}
+                    >
+                      <span className="text-accent text-xs font-bold tracking-wider uppercase block">
+                        {p.tagline}
+                      </span>
+                      <p className="text-base md:text-lg text-foreground/80 leading-relaxed font-medium">
+                        {p.description}
+                      </p>
+                      <div className="space-y-3 pt-2">
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                          Key Initiatives & Competencies
+                        </h4>
+                        <ul className="space-y-3">
+                          {p.points.map((pt, i) => (
+                            <li key={i} className="flex items-start gap-3 text-sm font-medium text-foreground/75">
+                              <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent shrink-0"></span>
+                              <span>{pt}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* 4. Service & Future Commitment */}
+        <section className="py-20 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto space-y-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div className="space-y-6">
+              <h3 className="text-2xl md:text-4xl font-extrabold text-foreground tracking-tight">
+                A Commitment to Voluntary Service & Growth
+              </h3>
+              <p className="text-sm md:text-base text-foreground/80 leading-relaxed font-medium">
+                Nestor actively contributes to volunteer-driven initiatives promoting technical education, mentorship, and network development. He serves in key leadership programs, helping bridge educational resources with aspiring technology professionals in Nigeria.
+              </p>
+              <p className="text-sm md:text-base text-foreground/80 leading-relaxed font-medium">
+                By maintaining a presence in student-led organizations, developer chapters, and professional networks like GOTNI (Guardians of the Nation International), IEEE, and NACOS, he helps secure growth pathways for computing talents.
+              </p>
+            </div>
+            <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg border border-border/80">
+              <Image
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg"
+                alt="Nestor Anyanwu volunteering"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>
