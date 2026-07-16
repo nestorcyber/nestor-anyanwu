@@ -5,7 +5,7 @@ import { journeyTimeline, JourneyItem } from "@/lib/data"
 import Footer from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Calendar, Briefcase, Award, GraduationCap, ChevronLeft, ChevronRight, Filter } from "lucide-react"
+import { Calendar, Briefcase, Award, GraduationCap, ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 
