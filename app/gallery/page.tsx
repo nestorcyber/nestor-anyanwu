@@ -4,19 +4,19 @@ import { journeyTimeline } from "@/lib/data"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Gallery - Journey & Community",
-  description: "Visual collection of moments from my personal journey, events, and projects.",
+  title: "Gallery & Photos | Nestor Anyanwu (Nestor Cyber)",
+  description: "Visual collection of moments and events from Nestor Anyanwu's (Nestor Cyber) journey, community roles, and projects.",
   alternates: {
     canonical: "/gallery",
   },
   openGraph: {
-    title: "Gallery - Journey & Community",
-    description: "Visual collection of moments from my personal journey, events, and projects.",
+    title: "Gallery & Photos | Nestor Anyanwu (Nestor Cyber)",
+    description: "Visual collection of moments and events from Nestor Anyanwu's (Nestor Cyber) journey, community roles, and projects.",
     url: "/gallery",
   },
   twitter: {
-    title: "Gallery - Journey & Community",
-    description: "Visual collection of moments from my personal journey, events, and projects.",
+    title: "Gallery & Photos | Nestor Anyanwu (Nestor Cyber)",
+    description: "Visual collection of moments and events from Nestor Anyanwu's (Nestor Cyber) journey, community roles, and projects.",
   },
 }
 
