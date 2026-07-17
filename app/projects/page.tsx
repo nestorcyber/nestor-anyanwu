@@ -6,6 +6,18 @@ import { projects } from "@/lib/data"
 export const metadata: Metadata = {
   title: "Projects - Featured Work & Design Portfolio",
   description: "Explore Nestor Anyanwu's featured projects showcasing design, development, and community initiatives.",
+  alternates: {
+    canonical: "/projects",
+  },
+  openGraph: {
+    title: "Projects - Featured Work & Design Portfolio",
+    description: "Explore Nestor Anyanwu's featured projects showcasing design, development, and community initiatives.",
+    url: "/projects",
+  },
+  twitter: {
+    title: "Projects - Featured Work & Design Portfolio",
+    description: "Explore Nestor Anyanwu's featured projects showcasing design, development, and community initiatives.",
+  },
 }
 
 export default function ProjectsPage() {

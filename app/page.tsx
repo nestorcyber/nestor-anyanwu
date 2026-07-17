@@ -11,6 +11,18 @@ import { Calendar, Briefcase, Award, GraduationCap, ArrowRight, ExternalLink } f
 export const metadata: Metadata = {
   title: "Nestor Cyber – Tech Advocate, Designer & Community Leader",
   description: "Portfolio of Nestor Anyanwu (Nestor Cyber). Tech Leader, Software Developer, and Community Advocate driving digital innovation, capacity building, and impactful tech ecosystems.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Nestor Cyber – Tech Advocate, Designer & Community Leader",
+    description: "Portfolio of Nestor Anyanwu (Nestor Cyber). Tech Leader, Software Developer, and Community Advocate driving digital innovation, capacity building, and impactful tech ecosystems.",
+    url: "/",
+  },
+  twitter: {
+    title: "Nestor Cyber – Tech Advocate, Designer & Community Leader",
+    description: "Portfolio of Nestor Anyanwu (Nestor Cyber). Tech Leader, Software Developer, and Community Advocate driving digital innovation, capacity building, and impactful tech ecosystems.",
+  },
 }
 
 export default function Home() {

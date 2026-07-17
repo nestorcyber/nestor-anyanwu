@@ -6,6 +6,18 @@ import { Award, Cpu, PenTool, Users } from "lucide-react"
 export const metadata: Metadata = {
   title: "About Nestor Anyanwu | Profile & Vision",
   description: "Biography of Nestor Anyanwu (Nestor Cyber), Tech Leader and Software Engineer. Read about his core pillars in technology advocacy, design, and AI.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About Nestor Anyanwu | Profile & Vision",
+    description: "Biography of Nestor Anyanwu (Nestor Cyber), Tech Leader and Software Engineer. Read about his core pillars in technology advocacy, design, and AI.",
+    url: "/about",
+  },
+  twitter: {
+    title: "About Nestor Anyanwu | Profile & Vision",
+    description: "Biography of Nestor Anyanwu (Nestor Cyber), Tech Leader and Software Engineer. Read about his core pillars in technology advocacy, design, and AI.",
+  },
 }
 
 export default function AboutPage() {

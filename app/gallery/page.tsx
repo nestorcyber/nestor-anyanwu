@@ -6,6 +6,18 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Gallery - Journey & Community",
   description: "Visual collection of moments from my personal journey, events, and projects.",
+  alternates: {
+    canonical: "/gallery",
+  },
+  openGraph: {
+    title: "Gallery - Journey & Community",
+    description: "Visual collection of moments from my personal journey, events, and projects.",
+    url: "/gallery",
+  },
+  twitter: {
+    title: "Gallery - Journey & Community",
+    description: "Visual collection of moments from my personal journey, events, and projects.",
+  },
 }
 
 export default function GalleryPage() {

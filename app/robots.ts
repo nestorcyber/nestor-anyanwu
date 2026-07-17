@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://nestor-anyanwu.vercel.app/sitemap.xml",
+    sitemap: "https://nestor.name.ng/sitemap.xml",
   }
 }

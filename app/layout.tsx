@@ -41,14 +41,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Nestor Anyanwu" }],
   creator: "Nestor Anyanwu",
   publisher: "Nestor Anyanwu",
-  metadataBase: new URL("https://nestor-anyanwu.vercel.app"),
-  alternates: {
-    canonical: "/",
-  },
+  metadataBase: new URL("https://nestor.name.ng"),
   openGraph: {
     type: "website",
     locale: "en_NG",
-    url: "https://nestor-anyanwu.vercel.app",
+    url: "https://nestor.name.ng",
     siteName: "Nestor Cyber - Tech Leader & Designer",
     title: "Nestor Cyber – Tech Advocate, Designer & Community Leader",
     description:
@@ -109,7 +106,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Nestor Anyanwu",
-              url: "https://nestor-anyanwu.vercel.app",
+              url: "https://nestor.name.ng",
               jobTitle: "Tech Professional, Software Developer & Community Leader",
               description:
                 "Nigerian tech professional driving digital innovation through software development, design, and community leadership at NACOS FUTO.",
