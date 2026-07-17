@@ -79,34 +79,29 @@ export default function AboutPage() {
   return (
     <>
       <main className="min-h-screen bg-background pt-0 overflow-x-hidden">
-        {/* 1. Header Profile Intro */}
-        <section className="relative py-16 md:py-20 px-6 md:px-12 lg:px-24 bg-secondary border-b border-border flex items-center">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center w-full">
-            {/* Image — top on mobile, right on desktop */}
-            <div className="lg:col-span-5 flex justify-center order-first lg:order-last">
-              <div className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-xl border border-border/80">
-                <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg"
-                  alt="Nestor Anyanwu speaking"
-                  fill
-                  className="object-cover object-top"
-                  priority
-                />
-              </div>
-            </div>
-            {/* Text */}
-            <div className="lg:col-span-7 space-y-5 order-last lg:order-first">
-              <span className="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-bold uppercase tracking-wider rounded-full">
-                Executive Biography
-              </span>
-              <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-foreground tracking-tight leading-none">
+        {/* 1. About Hero Section */}
+        <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-end justify-end md:items-center md:justify-start overflow-hidden">
+          <Image
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg"
+            alt="Nestor Anyanwu speaking"
+            fill
+            className="object-cover object-[75%_15%] md:object-center"
+            priority
+          />
+          {/* Overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent md:bg-gradient-to-t md:from-black/70 md:via-black/25 md:to-transparent"></div>
+          
+          {/* Content */}
+          <div className="relative z-10 w-full px-6 md:px-20 lg:px-32 pb-12 md:pb-0 md:pt-36 md:flex md:items-center md:justify-start md:h-full">
+            <div className="max-w-3xl">
+              <p className="text-accent text-xs md:text-sm font-bold tracking-widest mb-3 uppercase">
+                EXECUTIVE PROFILE
+              </p>
+              <h1 className="font-sans text-3xl md:text-6xl lg:text-7xl font-bold text-white mb-2 leading-none tracking-tight">
                 Nestor Anyanwu
               </h1>
-              <p className="text-base md:text-xl font-bold text-accent">
+              <p className="text-white/80 text-sm md:text-xl font-medium tracking-wide">
                 Tech Leader • Software Engineer • Designer
-              </p>
-              <p className="text-sm md:text-lg text-foreground/80 leading-relaxed max-w-2xl font-medium">
-                Known professionally as <strong>&ldquo;Nestor Cyber&rdquo;</strong>, Nestor is an emerging technology professional, digital innovator, and community builder. His work spans software engineering, artificial intelligence advocacy, design, and technical education.
               </p>
             </div>
           </div>
