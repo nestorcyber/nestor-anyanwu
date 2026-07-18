@@ -1,30 +1,19 @@
-# Volunteer Showcase Website
+# Nestor Anyanwu (Nestor Cyber) Portfolio
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+This repository hosts the official personal portfolio website for **Nestor Anyanwu (Nestor Cyber)**, Tech Leader, Software Engineer, Designer, and Tech Advocate.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/neorxpro-4432s-projects/v0-volunteer-showcase-website)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/2kEzh1EKDM0)
+## Key Features
 
-## Overview
+* **Highlights Carousel:** A custom, premium 4:3 Dribbble-style motion carousel featuring a peeking layout, dynamic autoplay, and border-overlapping ticking progressive SVGs.
+* **Biography & Core Pillars:** Insights into Nestor's technology leadership, AI enthusiast workflows, and corporate branding initiatives.
+* **Timeline & Legacy:** A comprehensive, filtered timeline tracking professional milestones, student leadership positions, and developer advocacies.
+* **Portfolio Showcase:** Selected tech products and link redirection to creative galleries.
+* **Responsive Styling:** Sleek dark-mode aesthetic with custom mobile crop positioning to display speaking visuals beautifully on all screen boundaries.
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+## Tech Stack
 
-## Deployment
-
-Your project is live at:
-
-**[https://vercel.com/nestor-anyanwu](https://vercel.com/nestor-anyanwu)**
-
-## Build your app
-
-Continue building your app on:
-
-**[https://v0.app/chat/projects/2kEzh1EKDM0](https://v0.app/chat/projects/2kEzh1EKDM0)**
-
-## How It Works
-
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+* **Framework:** Next.js 15 (React Server Components, App Router)
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS & Custom CSS transitions
+* **Icons:** Lucide React & Inline Brand SVGs (X, Behance, WhatsApp, Facebook)
+* **Domain:** Custom domain mapping resolving to `https://nestor.name.ng`

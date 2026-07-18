@@ -82,7 +82,7 @@ export default function ProjectsPage() {
           <div className="p-8 md:p-12 border border-accent/30 hover:border-accent bg-secondary transition-all duration-300 flex flex-col items-center justify-center rounded-xl text-center">
             <h3 className="text-2xl md:text-3xl font-serif font-bold text-primary mb-3">Explore Design Work</h3>
             <p className="text-sm md:text-base text-foreground/80 leading-relaxed mb-6 font-medium max-w-xl mx-auto">
-              View my comprehensive design portfolio showcasing branding, digital design, visual identity, and creative projects.
+              View Nestor's comprehensive design portfolio showcasing branding, digital design, visual identity, and creative projects.
             </p>
             <a
               href="https://www.behance.net/nestorcyber"
@@ -90,7 +90,7 @@ export default function ProjectsPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-accent text-secondary hover:text-primary rounded-lg font-bold text-sm transition-all cursor-pointer shadow-md hover:shadow-lg"
             >
-              <span>View My Behance Portfolio</span>
+              <span>View Nestor's Behance Portfolio</span>
               <ExternalLink size={18} />
             </a>
           </div>

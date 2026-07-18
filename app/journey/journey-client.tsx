@@ -28,7 +28,7 @@ export default function JourneyPage() {
               THE CHRONICLES OF IMPACT
             </p>
             <h1 className="text-3xl md:text-6xl font-sans font-black text-primary mb-6 uppercase tracking-tight">
-              My Journey & Legacy
+              Nestor's Journey & Legacy
             </h1>
             <p className="text-sm md:text-lg text-foreground/80 font-medium max-w-3xl leading-relaxed">
               A comprehensive timeline of leadership roles, professional milestones, community contributions, and academic engagements that define Nestor's path.

@@ -3,8 +3,9 @@ import Link from "next/link"
 import Image from "next/image"
 import HomeHero from "@/components/home-hero"
 import Footer from "@/components/footer"
+import DribbbleCarousel, { CarouselItem } from "@/components/dribbble-carousel"
 import { journeyTimeline, projects } from "@/lib/data"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Calendar, Briefcase, Award, GraduationCap, ArrowRight, ExternalLink } from "lucide-react"
 
@@ -26,6 +27,45 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
+  const carouselItems: CarouselItem[] = [
+    {
+      id: "projects",
+      title: "Featured Projects & Designs",
+      subtitle: "Explore professional software engineering, custom user interfaces, brand design, and technical portfolios.",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
+      link: "/projects",
+      accentColor: "#0ea5e9",
+      badge: "Projects"
+    },
+    {
+      id: "journey",
+      title: "Career Timeline & Legacy",
+      subtitle: "A chronicle of professional milestones, leadership roles, university positions, and engineering growth.",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
+      link: "/journey",
+      accentColor: "#d97706",
+      badge: "Journey"
+    },
+    {
+      id: "community",
+      title: "Community & Volunteering",
+      subtitle: "ICT strategy, developer event logistics, and technical community leadership for NACOS, IEEE, and GDG.",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
+      link: "/community",
+      accentColor: "#7c3aed",
+      badge: "Volunteering"
+    },
+    {
+      id: "gallery",
+      title: "Visual Gallery Highlights",
+      subtitle: "Visual moments captured from tech summits, hackathons, and corporate setup initiatives.",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden2-sUzI0wvGmZMjB5UUP911IAB6WvBM5c.jpg",
+      link: "/gallery",
+      accentColor: "#059669",
+      badge: "Gallery"
+    }
+  ]
+
   // Grab the latest 3 items from the journey timeline for the preview
   const recentJourney = journeyTimeline.slice(0, 3)
 
@@ -46,6 +86,16 @@ export default function Home() {
     <main className="min-h-screen bg-background">
       {/* 1. Hero Section */}
       <HomeHero />
+
+      {/* Highlights Deck Section */}
+      <section className="w-full border-b border-border bg-background">
+        <div className="max-w-7xl mx-auto pt-20 px-6 text-center">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight">
+            Explore Nestor's Chronicles
+          </h2>
+        </div>
+        <DribbbleCarousel items={carouselItems} />
+      </section>
 
       {/* 2. Editorial About Section */}
       <section className="py-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">

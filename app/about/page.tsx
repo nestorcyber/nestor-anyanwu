@@ -85,22 +85,22 @@ export default function AboutPage() {
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg"
             alt="Nestor Anyanwu speaking"
             fill
-            className="object-cover object-[75%_15%] md:object-center"
+            className="object-cover object-[75%_20%]"
             priority
           />
           {/* Overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent md:bg-gradient-to-t md:from-black/70 md:via-black/25 md:to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent md:bg-gradient-to-t md:from-black/85 md:via-black/45 md:to-transparent"></div>
           
           {/* Content */}
           <div className="relative z-10 w-full px-6 md:px-20 lg:px-32 pb-12 md:pb-0 md:pt-36 md:flex md:items-center md:justify-start md:h-full">
             <div className="max-w-3xl">
-              <p className="text-accent text-xs md:text-sm font-bold tracking-widest mb-3 uppercase">
+              <p className="text-accent text-xs md:text-sm font-bold tracking-widest mb-3 uppercase [text-shadow:_0_1px_2px_rgba(0,0,0,0.4)]">
                 EXECUTIVE PROFILE
               </p>
-              <h1 className="font-sans text-3xl md:text-6xl lg:text-7xl font-bold text-white mb-2 leading-none tracking-tight">
+              <h1 className="font-sans text-3xl md:text-6xl lg:text-7xl font-bold text-white mb-2 leading-none tracking-tight [text-shadow:_0_2px_8px_rgba(0,0,0,0.8)]">
                 Nestor Anyanwu
               </h1>
-              <p className="text-white/80 text-sm md:text-xl font-medium tracking-wide">
+              <p className="text-white/80 text-sm md:text-xl font-medium tracking-wide [text-shadow:_0_2px_4px_rgba(0,0,0,0.6)]">
                 Tech Leader • Software Engineer • Designer
               </p>
             </div>
@@ -114,7 +114,7 @@ export default function AboutPage() {
             <div className="max-w-4xl space-y-6">
               <span className="text-accent text-4xl font-serif">“</span>
               <blockquote className="text-lg md:text-2xl font-semibold text-foreground/90 italic leading-relaxed">
-                Technology is not merely a profession. It is a platform for impact, a catalyst for growth, and a tool for shaping a better future. My core goal is creating an inclusive and collaborative tech ecosystem where everyone has the opportunity to thrive.
+                Technology is not merely a profession. It is a platform for impact, a catalyst for growth, and a tool for shaping a better future. His core goal is creating an inclusive and collaborative tech ecosystem where everyone has the opportunity to thrive.
               </blockquote>
               <div className="flex items-center gap-3">
                 <span className="h-0.5 w-8 bg-accent"></span>

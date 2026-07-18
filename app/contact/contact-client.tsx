@@ -107,7 +107,7 @@ export default function ContactPage() {
                   className="p-4 bg-primary/10 rounded-lg hover:bg-primary/20 transition-colors group"
                   title="Message on WhatsApp"
                 >
-                  <WhatsappIcon className="text-primary group-hover:scale-110 transition-transform" />
+                  <WhatsappIcon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
                 </a>
 
                 {/* LinkedIn */}
@@ -129,7 +129,7 @@ export default function ContactPage() {
                   className="p-4 bg-primary/10 rounded-lg hover:bg-primary/20 transition-colors group"
                   title="Follow on X/Twitter"
                 >
-                  <TwitterXIcon className="text-primary group-hover:scale-110 transition-transform" />
+                  <TwitterXIcon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
                 </a>
 
                 {/* GitHub */}
@@ -151,7 +151,7 @@ export default function ContactPage() {
                   className="p-4 bg-primary/10 rounded-lg hover:bg-primary/20 transition-colors group"
                   title="Connect on Facebook"
                 >
-                  <FacebookIcon className="text-primary group-hover:scale-110 transition-transform" />
+                  <FacebookIcon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
                 </a>
 
                 {/* Behance */}
@@ -162,7 +162,7 @@ export default function ContactPage() {
                   className="p-4 bg-primary/10 rounded-lg hover:bg-primary/20 transition-colors group"
                   title="View Behance portfolio"
                 >
-                  <BehanceIcon className="text-primary group-hover:scale-110 transition-transform" />
+                  <BehanceIcon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
                 </a>
               </div>
             </div>
@@ -216,13 +216,13 @@ export default function ContactPage() {
                     required
                     rows={5}
                     className="w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
-                    placeholder="Tell me about your project or inquiry..."
+                    placeholder="Share details about the project or inquiry..."
                   />
                 </div>
 
                 {submitStatus === "success" && (
                   <div className="p-4 bg-primary/10 border border-primary rounded-lg">
-                    <p className="text-primary font-semibold">Message sent successfully! I&apos;ll get back to you soon.</p>
+                    <p className="text-primary font-semibold">Message sent successfully! Nestor will get back to you soon.</p>
                   </div>
                 )}
 
