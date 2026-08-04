@@ -4,9 +4,10 @@ export default config({
   storage: (process.env.KEYSTATIC_GITHUB_CLIENT_ID && process.env.KEYSTATIC_GITHUB_CLIENT_SECRET)
     ? {
         kind: 'github',
-        repo: (process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER && process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG)
-          ? `${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER}/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG}` as `${string}/${string}`
-          : 'nestorcyber/nestor-anyanwu',
+        repo: {
+          owner: process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER || 'nestorcyber',
+          name: process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG || 'nestor-anyanwu',
+        },
       }
     : {
         kind: 'local',
