@@ -58,6 +58,7 @@ export default function Navigation() {
     }
   }, [isOpen])
 
+  // Desktop quick nav bar links
   const desktopNavItems = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
@@ -66,7 +67,20 @@ export default function Navigation() {
     { label: "Journal", href: "/journal" },
   ]
 
-  const drawerNavItems = [
+  // Desktop drawer items (Original 2 items: Gallery & Contact)
+  const desktopDrawerItems = [
+    { label: "Gallery", href: "/gallery" },
+    { label: "Contact", href: "/contact" },
+  ]
+
+  // Mobile drawer items (All site links fit on mobile screen)
+  const mobileDrawerItems = [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Portfolio", href: "/portfolio" },
+    { label: "Community", href: "/community" },
+    { label: "Journal", href: "/journal" },
+    { label: "Journey", href: "/journey" },
     { label: "Gallery", href: "/gallery" },
     { label: "Contact", href: "/contact" },
   ]
@@ -75,14 +89,6 @@ export default function Navigation() {
   const searchResults = useMemo(() => {
     if (!searchQuery.trim()) return []
     return searchContent(searchQuery.trim())
-  }, [searchQuery])
-
-  // Filter default drawer nav links dynamically as user types
-  const filteredDrawerItems = useMemo(() => {
-    if (!searchQuery.trim()) return drawerNavItems
-    return drawerNavItems.filter((item) =>
-      item.label.toLowerCase().includes(searchQuery.trim().toLowerCase())
-    )
   }, [searchQuery])
 
   const isSearching = searchQuery.trim().length > 0
@@ -210,7 +216,7 @@ export default function Navigation() {
         </div>
 
         {/* Drawer Content Area */}
-        <div className="max-w-7xl w-full mx-auto flex-1 overflow-y-auto px-6 md:px-8 py-8 flex flex-col">
+        <div className="max-w-7xl w-full mx-auto flex-1 overflow-y-auto px-6 md:px-8 py-4 md:py-6 flex flex-col justify-center">
           {isSearching ? (
             /* ── Dynamic Live Search Results View ── */
             <div className="space-y-6">
@@ -271,19 +277,35 @@ export default function Navigation() {
               )}
             </div>
           ) : (
-            /* ── Default Drawer Navigation Links ── */
-            <nav className="flex flex-col gap-6">
-              {filteredDrawerItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="text-foreground hover:text-accent transition-all font-light text-2xl md:text-4xl uppercase tracking-[0.2em] py-3 cursor-pointer block border-b border-border/20 focus-visible:outline-none focus-visible:text-accent"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
+            <>
+              {/* ── Mobile Menu (Shows all 8 links on small screens) ── */}
+              <nav className="flex md:hidden flex-col gap-1.5 my-auto">
+                {mobileDrawerItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-foreground hover:text-accent transition-all font-light text-lg uppercase tracking-[0.18em] py-1.5 cursor-pointer block border-b border-border/15 focus-visible:outline-none focus-visible:text-accent"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+
+              {/* ── Desktop Drawer Menu (Shows original 2 links: Gallery & Contact) ── */}
+              <nav className="hidden md:flex flex-col gap-6 my-auto">
+                {desktopDrawerItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-foreground hover:text-accent transition-all font-light text-4xl uppercase tracking-[0.2em] py-3 cursor-pointer block border-b border-border/20 focus-visible:outline-none focus-visible:text-accent"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            </>
           )}
         </div>
       </div>
