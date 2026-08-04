@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
 
 export interface CarouselItem {
@@ -28,6 +29,7 @@ export default function DribbbleCarousel({
   const [isHovered, setIsHovered] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
+  const router = useRouter()
 
   const containerRef = useRef<HTMLDivElement>(null)
   const isDragging = useRef(false)
@@ -64,20 +66,24 @@ export default function DribbbleCarousel({
     targetPosition.current = Math.round(currentTarget - 1)
   }, [scrollPosition])
 
-  // Click handler for peeking slides
-  const handleCardClick = (index: number, dist: number, e: React.MouseEvent) => {
+  // Click handler for peeking slides — navigates if active, snaps center if not
+  const handleCardClick = (index: number, dist: number, item: CarouselItem, e: React.MouseEvent) => {
     if (isDragging.current || dragDistance.current > 5) {
       e.preventDefault()
       e.stopPropagation()
       return
     }
 
-    if (Math.abs(dist) < 0.2) return // Allow link navigation on center active card
+    // If clicking the active (center) card, navigate to its page
+    if (Math.abs(dist) < 0.2) {
+      if (item.link) router.push(item.link)
+      return
+    }
 
     e.preventDefault()
     e.stopPropagation()
 
-    // Smooth glide center on clicked card
+    // Smooth glide center on clicked non-active card
     targetPosition.current = scrollPosition + dist
   }
 
@@ -248,7 +254,7 @@ export default function DribbbleCarousel({
           return (
             <div
               key={item.id}
-              onClick={(e) => handleCardClick(data.index, dist, e)}
+              onClick={(e) => handleCardClick(data.index, dist, item, e)}
               style={{
                 width: `${cardWidth}px`,
                 transform: `translate3d(calc(-50% + ${offsetX}px), -50%, 0)`,
@@ -256,7 +262,7 @@ export default function DribbbleCarousel({
                 filter: `blur(${blurVal}px)`,
                 zIndex: isActive ? 30 : 20,
               }}
-              className="absolute left-1/2 top-1/2 h-[220px] sm:h-[300px] md:h-[380px] rounded-[1.625rem] overflow-hidden border border-border bg-card shadow-2xl transition-shadow duration-[600ms] group pointer-events-auto"
+              className="absolute left-1/2 top-1/2 h-[220px] sm:h-[300px] md:h-[380px] rounded-none overflow-hidden border border-border bg-card shadow-2xl transition-shadow duration-[600ms] group pointer-events-auto"
             >
               {/* Background Image */}
               <div className="absolute inset-0 w-full h-full pointer-events-none">
@@ -275,7 +281,7 @@ export default function DribbbleCarousel({
               {item.badge && isActive && (
                 <div className="absolute top-6 left-6 z-10 pointer-events-none">
                   <span
-                    className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full text-white backdrop-blur-md shadow-sm border border-white/10"
+                    className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-none text-white backdrop-blur-md shadow-sm border border-white/20"
                     style={{ backgroundColor: `${item.accentColor || "#3b82f6"}cc` }}
                   >
                     {item.badge}
@@ -299,15 +305,15 @@ export default function DribbbleCarousel({
                     </p>
                   )}
                   {item.link && isActive && (
-                    <div className="pt-2">
+                    <div className="pt-3">
                       <Link
                         href={item.link}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white hover:text-accent transition-colors"
-                        style={{ "--accent-hover": item.accentColor } as React.CSSProperties}
                         onClick={(e) => e.stopPropagation()}
                       >
-                        Explore More
-                        <ArrowRight className="w-4 h-4" />
+                        <button className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-white border border-white/50 hover:border-white hover:bg-white/10 px-5 py-2.5 rounded-none transition-all cursor-pointer">
+                          <span>Explore More</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
                       </Link>
                     </div>
                   )}

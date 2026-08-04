@@ -327,23 +327,263 @@ export const journeyTimeline: JourneyItem[] = [
   }
 ]
 
+export interface ProjectItem {
+  id?: string
+  title: string
+  category?: "Software" | "Web" | "Design" | "Branding" | "Automation" | "Open Source"
+  description: string
+  technologies: string[]
+  role?: string
+  image?: string
+  status?: string
+  links: {
+    demo?: string
+    caseStudy?: string
+    github?: string
+  }
+}
+
+export interface PortfolioStat {
+  value: string
+  label: string
+  description?: string
+}
+
+export interface ServiceItem {
+  id: string
+  title: string
+  description: string
+  iconName: string
+  ctaText: string
+  ctaHref: string
+}
+
+export interface SkillItem {
+  name: string
+  experienceLevel?: string
+  years?: string
+}
+
+export interface SkillGroup {
+  category: string
+  skills: SkillItem[]
+}
+
+export interface CertificationItem {
+  id: string
+  title: string
+  provider: string
+  date: string
+  credentialUrl?: string
+}
+
+export const portfolioStats: PortfolioStat[] = [
+  { value: "25+", label: "Projects Completed", description: "Production software, web apps & brand design systems." },
+  { value: "12+", label: "Organizations Worked With", description: "National bodies, tech startups, and student councils." },
+  { value: "18+", label: "Technologies & Tools", description: "Modern web frameworks, AI tools, and design stacks." },
+  { value: "3+", label: "Years of Experience", description: "Engineering, ICT leadership, and IT consulting." },
+  { value: "5000+", label: "Communities Supported", description: "Developers and computing students mentored." },
+]
+
 export const projects: ProjectItem[] = [
   {
-    title: "DevFest Owerri 2025",
-    description: "Major design contributor for Nigeria's largest developer festival in South-East. Supported design initiatives, managed creative assets, and contributed to event logistics and community coordination.",
-    technologies: ["Graphic Design", "Community Building", "Branding", "Event Support"],
-    links: { demo: "https://www.behance.net/nestorcyber" },
+    id: "devfest-2025",
+    title: "DevFest Owerri 2025 Visual System",
+    category: "Design",
+    description: "Major design contributor for South-East Nigeria's largest developer festival. Supported visual branding, event creative assets, and logistical design systems.",
+    technologies: ["Visual Design", "Brand Identity", "Event Systems", "Figma"],
+    role: "Lead Graphic Designer",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
+    status: "Completed",
+    links: {
+      demo: "https://www.behance.net/nestorcyber",
+      caseStudy: "https://www.behance.net/nestorcyber",
+    },
   },
   {
-    title: "Build with AI",
-    description: "Innovative platform designed to empower developers and creators with AI-driven tools and resources. Contributed to strategic design and community-focused features for seamless integration of AI capabilities.",
-    technologies: ["AI Integration", "Platform Design", "Developer Experience", "Innovation"],
-    links: {},
+    id: "build-with-ai",
+    title: "Build with AI Platform & Hackathon",
+    category: "Software",
+    description: "Empowering developers and creators with AI-driven workflows and resources. Engineered platform design and community tools for rapid AI integration.",
+    technologies: ["Next.js", "AI Integration", "Tailwind CSS", "Developer Experience"],
+    role: "Software Developer & Designer",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
+    status: "Active",
+    links: {
+      demo: "https://github.com/nestorcyber",
+      github: "https://github.com/nestorcyber",
+    },
   },
   {
-    title: "Tech Nexus FUTO",
-    description: "Designed and coordinated event setup for Tech Nexus at FUTO, bringing together developers for knowledge sharing and networking. Managed photography and visual documentation.",
-    technologies: ["Event Design", "Photography", "Branding", "Coordination"],
-    links: {},
+    id: "nacos-national-ict",
+    title: "NACOS National ICT Portal",
+    category: "Web",
+    description: "Centralized ICT digital infrastructure and student engagement portal for the Nigeria Association of Computing Students across higher institutions.",
+    technologies: ["React", "TypeScript", "Node.js", "ICT Strategy"],
+    role: "Director of ICT",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
+    status: "Production",
+    links: {
+      demo: "https://nacos.org.ng",
+    },
+  },
+  {
+    id: "tech-nexus-futo",
+    title: "Tech Nexus FUTO Platform",
+    category: "Open Source",
+    description: "Designed and coordinated event setup for Tech Nexus at FUTO, connecting student developers with tech leaders and networking resources.",
+    technologies: ["Event Design", "Open Source", "Documentation", "Community"],
+    role: "Lead Organizer & Designer",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden2-sUzI0wvGmZMjB5UUP911IAB6WvBM5c.jpg",
+    status: "Completed",
+    links: {
+      demo: "https://github.com/nestorcyber",
+    },
+  },
+  {
+    id: "cowrywise-campus",
+    title: "Cowrywise Campus Fintech Advocacy",
+    category: "Branding",
+    description: "Digital campaign assets and outreach materials promoting financial literacy and wealth building for university students.",
+    technologies: ["Brand Advocacy", "Graphic Design", "Fintech Outreach"],
+    role: "Campus Ambassador",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg",
+    status: "Active",
+    links: {
+      demo: "https://cowrywise.com",
+    },
+  },
+  {
+    id: "nobelton-consults-it",
+    title: "Nobelton Enterprise IT Automation",
+    category: "Automation",
+    description: "Custom business process automation and IT advisory portal for enterprise consulting engagements.",
+    technologies: ["IT Consulting", "System Automation", "Web Workflows"],
+    role: "IT Consultant",
+    status: "Active",
+    links: {
+      demo: "https://github.com/nestorcyber",
+    },
   },
 ]
+
+export const servicesList: ServiceItem[] = [
+  {
+    id: "software-dev",
+    title: "Software Development",
+    description: "Building production-grade web applications, robust APIs, and custom software systems tailored for performance and scale.",
+    iconName: "Code",
+    ctaText: "Start Software Project ↗",
+    ctaHref: "/contact",
+  },
+  {
+    id: "web-dev",
+    title: "Website Development",
+    description: "Crafting modern, responsive, SEO-optimized web platforms using modern frameworks like Next.js, React, and Tailwind CSS.",
+    iconName: "Globe",
+    ctaText: "Build A Website ↗",
+    ctaHref: "/contact",
+  },
+  {
+    id: "graphic-design",
+    title: "Graphic Design & Branding",
+    description: "Creating brand identities, conference graphics, marketing collateral, and visual communication systems.",
+    iconName: "Palette",
+    ctaText: "Brand Strategy ↗",
+    ctaHref: "/contact",
+  },
+  {
+    id: "business-registration",
+    title: "Business Registration & Digital Support",
+    description: "Guiding emerging tech startups and businesses through formal registration and digital setup workflows.",
+    iconName: "Briefcase",
+    ctaText: "Digital Support ↗",
+    ctaHref: "/contact",
+  },
+  {
+    id: "automation",
+    title: "Business Automation",
+    description: "Automating repetitive operational workflows using modern script integrations, AI workflows, and cloud tools.",
+    iconName: "Zap",
+    ctaText: "Automate Process ↗",
+    ctaHref: "/contact",
+  },
+  {
+    id: "tech-consulting",
+    title: "Technical Consulting",
+    description: "Providing strategic IT advisory, technology architecture reviews, and community digital strategy consulting.",
+    iconName: "Shield",
+    ctaText: "Book Advisory ↗",
+    ctaHref: "/contact",
+  },
+]
+
+export const skillGroups: SkillGroup[] = [
+  {
+    category: "Software Engineering & Web",
+    skills: [
+      { name: "React & Next.js", experienceLevel: "Advanced", years: "3+ yrs" },
+      { name: "TypeScript & JavaScript", experienceLevel: "Advanced", years: "3+ yrs" },
+      { name: "Tailwind CSS & Web UI", experienceLevel: "Advanced", years: "3+ yrs" },
+      { name: "Technical Writing & Docs", experienceLevel: "Advanced", years: "3+ yrs" },
+      { name: "REST APIs & Webhooks", experienceLevel: "Intermediate", years: "2+ yrs" },
+    ],
+  },
+  {
+    category: "Artificial Intelligence & Cloud",
+    skills: [
+      { name: "Prompt Engineering", experienceLevel: "Advanced", years: "2+ yrs" },
+      { name: "AI Ethics & Governance", experienceLevel: "Intermediate", years: "2+ yrs" },
+      { name: "Google AI Studio", experienceLevel: "Advanced", years: "2+ yrs" },
+      { name: "Generative AI Workflows", experienceLevel: "Advanced", years: "2+ yrs" },
+    ],
+  },
+  {
+    category: "Graphic Design & Branding",
+    skills: [
+      { name: "Graphic Design & Branding", experienceLevel: "Advanced", years: "4+ yrs" },
+      { name: "Identity & Event Design", experienceLevel: "Advanced", years: "4+ yrs" },
+      { name: "Figma & CorelDraw", experienceLevel: "Advanced", years: "4+ yrs" },
+      { name: "Photoshop & Illustrator", experienceLevel: "Intermediate", years: "3+ yrs" },
+      { name: "Presentation & Print Design", experienceLevel: "Advanced", years: "3+ yrs" },
+    ],
+  },
+  {
+    category: "Tools & Technical Operations",
+    skills: [
+      { name: "Git & GitHub", experienceLevel: "Advanced", years: "3+ yrs" },
+      { name: "Google Workspace & Office 365", experienceLevel: "Advanced", years: "4+ yrs" },
+      { name: "Database & File Organization", experienceLevel: "Advanced", years: "3+ yrs" },
+      { name: "Project Coordination", experienceLevel: "Intermediate", years: "2+ yrs" },
+    ],
+  },
+]
+
+export const certificationsList: CertificationItem[] = [
+  {
+    id: "ndpc-privacy",
+    title: "Data Privacy Ambassador",
+    provider: "Nigeria Data Protection Commission (NDPC)",
+    date: "April 2025",
+    credentialUrl: "https://ndpc.gov.ng",
+  },
+  {
+    id: "aws-cloud",
+    title: "AWS Cloud Community Practitioner",
+    provider: "AWS Cloud Club FUTO",
+    date: "September 2025",
+  },
+  {
+    id: "ieee-member",
+    title: "IEEE Engineering Leadership Certification",
+    provider: "IEEE FUTO Student Branch",
+    date: "May 2026",
+  },
+  {
+    id: "gotni-leader",
+    title: "Emerging Leaders Credential",
+    provider: "Guardians of the Nation International (GOTNI)",
+    date: "December 2025",
+  },
+]
+

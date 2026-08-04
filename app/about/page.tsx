@@ -112,7 +112,7 @@ export default function AboutPage() {
           <div className="bg-card border border-border p-8 md:p-12 rounded-2xl shadow-sm relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
             <div className="max-w-4xl space-y-6">
-              <span className="text-accent text-4xl font-serif">“</span>
+              <span className="text-accent text-4xl font-sans font-bold">“</span>
               <blockquote className="text-lg md:text-2xl font-semibold text-foreground/90 italic leading-relaxed">
                 Technology is not merely a profession. It is a platform for impact, a catalyst for growth, and a tool for shaping a better future. His core goal is creating an inclusive and collaborative tech ecosystem where everyone has the opportunity to thrive.
               </blockquote>

@@ -97,9 +97,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-background">
+    <html lang="en" className="bg-background" suppressHydrationWarning>
       <head>
         <script
+          id="schema-org-jsonld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -121,7 +122,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`font-sans antialiased overflow-x-hidden`}>
+      <body className={`font-sans antialiased overflow-x-hidden`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <Navigation />
           <div className="pt-14 md:pt-16">

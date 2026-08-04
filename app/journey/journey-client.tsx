@@ -169,7 +169,7 @@ function TimelineCard({ item, idx }: { item: JourneyItem; idx: number }) {
               </span>
             </div>
 
-            <h3 className="text-xl md:text-2xl font-serif font-bold text-primary mb-1">
+            <h3 className="text-xl md:text-2xl font-sans font-bold text-primary mb-1">
               {item.title}
             </h3>
             <p className="text-md text-foreground font-semibold mb-4">
