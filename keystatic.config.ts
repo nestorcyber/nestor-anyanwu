@@ -157,7 +157,7 @@ export default config({
           }),
           {
             label: 'Project Showcase Gallery',
-            itemLabel: (props) => props.value || 'Gallery Image',
+            itemLabel: () => 'Gallery Image',
           }
         ),
         category: fields.select({
@@ -246,7 +246,7 @@ export default config({
           }),
           {
             label: 'Event Gallery',
-            itemLabel: (props) => props.value || 'Gallery Image',
+            itemLabel: () => 'Gallery Image',
           }
         ),
         achievements: fields.array(fields.text({ label: 'Key Achievement / Responsibility' }), {
@@ -260,7 +260,7 @@ export default config({
           }),
           {
             label: 'Impact Numbers',
-            itemLabel: (props) => `${props.fields.value.value} ${props.fields.fields.label.value}`,
+            itemLabel: (props) => `${props.fields.value.value || ''} ${props.fields.label.value || ''}`.trim() || 'Impact Stat',
           }
         ),
         featured: fields.checkbox({

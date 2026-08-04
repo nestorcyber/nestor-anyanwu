@@ -150,7 +150,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" className="bg-background" suppressHydrationWarning>
-      <head>
+      <head suppressHydrationWarning>
         <script
           id="schema-org-person"
           type="application/ld+json"
