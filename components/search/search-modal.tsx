@@ -93,10 +93,11 @@ function ResultItem({
 
 interface SearchModalProps {
   isOpen: boolean
+  initialQuery?: string
   onClose: () => void
 }
 
-export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
+export default function SearchModal({ isOpen, initialQuery = "", onClose }: SearchModalProps) {
   const [query, setQuery] = useState("")
   const [results, setResults] = useState<SearchResult[]>([])
   const [activeIndex, setActiveIndex] = useState(0)
@@ -112,15 +113,15 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     } catch {}
   }, [])
 
-  // Focus input when modal opens
+  // Focus input & populate query when modal opens
   useEffect(() => {
     if (isOpen) {
       trackSearchOpen()
       setTimeout(() => inputRef.current?.focus(), 50)
-      setQuery("")
+      setQuery(initialQuery)
       setActiveIndex(0)
     }
-  }, [isOpen])
+  }, [isOpen, initialQuery])
 
   // Run search on query change
   useEffect(() => {

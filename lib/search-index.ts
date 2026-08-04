@@ -1,246 +1,146 @@
-// Central search index — statically built from all site content
-// Future CMS compatibility: replace static imports with API calls
+// Central universal search index — dynamically indexes all site content & data sources
+import { projects, journeyTimeline, skillGroups, servicesList, certificationsList } from "@/lib/data"
 
 export interface SearchResult {
   id: string
   title: string
   description: string
-  category: "Page" | "Project" | "Service" | "Skill" | "Journal" | "Community"
+  category: "Page" | "Project" | "Service" | "Skill" | "Journal" | "Community" | "Experience" | "Certification"
   href: string
   keywords?: string[]
 }
 
-export const searchIndex: SearchResult[] = [
-  // ─── Pages ───────────────────────────────────────────────────────────────────
+// ─── Pages ───────────────────────────────────────────────────────────────────
+const pageEntries: SearchResult[] = [
   {
     id: "page-home",
-    title: "Home",
-    description: "Nestor Anyanwu's personal website — software engineer, tech leader, and community builder.",
+    title: "Home Page",
+    description: "Nestor Anyanwu's portfolio home page — software engineer, tech leader, and community builder.",
     category: "Page",
     href: "/",
-    keywords: ["nestor", "cyber", "home", "nestor cyber", "nestor anyanwu"],
+    keywords: ["nestor", "cyber", "home", "nestor cyber", "nestor anyanwu", "main", "hero"],
   },
   {
     id: "page-about",
     title: "About Nestor",
-    description: "Profile, vision, academic background, and engineering journey of Nestor Anyanwu.",
+    description: "Profile, vision, background, philosophy, and engineering journey of Nestor Anyanwu.",
     category: "Page",
     href: "/about",
-    keywords: ["about", "profile", "bio", "futo", "computer science", "background"],
+    keywords: ["about", "profile", "bio", "futo", "computer science", "background", "philosophy", "story"],
   },
   {
     id: "page-portfolio",
     title: "Portfolio & Projects",
-    description: "Featured software projects, web apps, brand design systems, and engineering deliverables.",
+    description: "Full directory of software projects, web apps, brand design systems, and engineering deliverables.",
     category: "Page",
     href: "/portfolio",
-    keywords: ["portfolio", "projects", "work", "engineering", "design", "deliverables"],
+    keywords: ["portfolio", "projects", "work", "engineering", "design", "deliverables", "showcase", "library"],
   },
   {
     id: "page-community",
     title: "Community & Leadership",
-    description: "ICT leadership at NACOS, IEEE, GDG Owerri, and other developer community roles.",
+    description: "ICT leadership at NACOS, IEEE, GDG Owerri, Cowrywise, and developer community impact.",
     category: "Page",
     href: "/community",
-    keywords: ["community", "nacos", "ieee", "gdg", "leadership", "volunteer", "owerri"],
+    keywords: ["community", "nacos", "ieee", "gdg", "leadership", "volunteer", "owerri", "impact", "advocacy"],
   },
   {
     id: "page-journal",
-    title: "Journal & Articles",
-    description: "Technical essays, thought leadership, and insights on technology and community advocacy.",
+    title: "Journal & Technical Essays",
+    description: "Technical essays, thought leadership, AI ethics, and insights on technology and design.",
     category: "Page",
     href: "/journal",
-    keywords: ["journal", "articles", "blog", "essays", "writing", "tech writing"],
+    keywords: ["journal", "articles", "blog", "essays", "writing", "tech writing", "thoughts", "publications"],
   },
   {
     id: "page-gallery",
     title: "Photo Gallery",
-    description: "Visual moments from tech summits, DevFest, hackathons, and community events.",
+    description: "Visual documentation of tech summits, DevFest, hackathons, and community moments.",
     category: "Page",
     href: "/gallery",
-    keywords: ["gallery", "photos", "events", "devfest", "summit", "pictures"],
+    keywords: ["gallery", "photos", "events", "devfest", "summit", "pictures", "moments", "photography"],
   },
   {
     id: "page-journey",
-    title: "Career Journey",
-    description: "Professional timeline — milestones, roles, organizations, and engineering achievements.",
+    title: "Career Journey & Timeline",
+    description: "Interactive timeline of milestones, positions, organizations, and career achievements.",
     category: "Page",
     href: "/journey",
-    keywords: ["journey", "career", "timeline", "milestones", "history", "experience"],
+    keywords: ["journey", "career", "timeline", "milestones", "history", "experience", "resume", "cv"],
   },
   {
     id: "page-contact",
     title: "Contact & Collaboration",
-    description: "Start a project, business inquiry, speaking invitation, or partnership discussion.",
+    description: "Start a project, business inquiry, speaking invitation, or community partnership.",
     category: "Page",
     href: "/contact",
-    keywords: ["contact", "collaborate", "hire", "email", "project", "speaking", "work together"],
-  },
-
-  // ─── Services ─────────────────────────────────────────────────────────────────
-  {
-    id: "service-software-dev",
-    title: "Software Development",
-    description: "Building production-grade web applications, robust APIs, and custom software systems.",
-    category: "Service",
-    href: "/contact",
-    keywords: ["software", "development", "web app", "api", "backend", "frontend"],
-  },
-  {
-    id: "service-web-dev",
-    title: "Website Development",
-    description: "Modern, responsive, SEO-optimized web platforms using Next.js, React, and Tailwind CSS.",
-    category: "Service",
-    href: "/contact",
-    keywords: ["website", "nextjs", "react", "web design", "seo", "tailwind"],
-  },
-  {
-    id: "service-graphic-design",
-    title: "Graphic Design & Branding",
-    description: "Brand identities, conference graphics, marketing collateral, and visual systems.",
-    category: "Service",
-    href: "/contact",
-    keywords: ["design", "branding", "logo", "identity", "graphics", "visual", "coreldraw", "figma"],
-  },
-  {
-    id: "service-business-registration",
-    title: "Business Registration & Digital Support",
-    description: "Guiding startups through formal registration and digital setup workflows.",
-    category: "Service",
-    href: "/contact",
-    keywords: ["business", "registration", "startup", "digital", "cac", "setup"],
-  },
-  {
-    id: "service-automation",
-    title: "Business Automation",
-    description: "Automating repetitive workflows using AI integrations and cloud tools.",
-    category: "Service",
-    href: "/contact",
-    keywords: ["automation", "workflow", "ai", "scripts", "process", "efficiency"],
-  },
-  {
-    id: "service-consulting",
-    title: "Technical Consulting",
-    description: "Strategic IT advisory, technology architecture reviews, and digital strategy.",
-    category: "Service",
-    href: "/contact",
-    keywords: ["consulting", "advisory", "it", "strategy", "architecture", "review"],
-  },
-
-  // ─── Skills ───────────────────────────────────────────────────────────────────
-  {
-    id: "skill-react-nextjs",
-    title: "React & Next.js",
-    description: "Advanced proficiency in React and Next.js for production web applications.",
-    category: "Skill",
-    href: "/portfolio",
-    keywords: ["react", "nextjs", "javascript", "frontend", "framework"],
-  },
-  {
-    id: "skill-typescript",
-    title: "TypeScript & JavaScript",
-    description: "Advanced full-stack TypeScript and JavaScript development.",
-    category: "Skill",
-    href: "/portfolio",
-    keywords: ["typescript", "javascript", "ts", "js", "programming"],
-  },
-  {
-    id: "skill-prompt-engineering",
-    title: "Prompt Engineering & AI",
-    description: "Advanced prompt engineering and generative AI workflow development.",
-    category: "Skill",
-    href: "/portfolio",
-    keywords: ["prompt", "ai", "llm", "generative", "chatgpt", "google ai"],
-  },
-  {
-    id: "skill-graphic-design",
-    title: "Graphic Design & Branding",
-    description: "Advanced brand identity, visual communication, and design system creation.",
-    category: "Skill",
-    href: "/portfolio",
-    keywords: ["design", "figma", "coreldraw", "photoshop", "illustrator", "canva", "branding"],
-  },
-  {
-    id: "skill-data-privacy",
-    title: "Data Privacy & Ethics",
-    description: "NDPC-certified Data Privacy Ambassador and AI ethics governance.",
-    category: "Skill",
-    href: "/about",
-    keywords: ["data", "privacy", "ndpc", "ethics", "compliance", "gdpr"],
-  },
-
-  // ─── Community ────────────────────────────────────────────────────────────────
-  {
-    id: "community-nacos",
-    title: "NACOS — Director of ICT",
-    description: "Leading digital strategy for Nigeria Association of Computing Students at FUTO and nationally.",
-    category: "Community",
-    href: "/community",
-    keywords: ["nacos", "ict", "director", "computing", "futo", "national"],
-  },
-  {
-    id: "community-gdg",
-    title: "Google Developer Group Owerri",
-    description: "Graphic designer and event logistics for GDG Owerri developer conferences.",
-    category: "Community",
-    href: "/community",
-    keywords: ["gdg", "google", "developer", "group", "owerri", "devfest"],
-  },
-  {
-    id: "community-ieee",
-    title: "IEEE FUTO Student Branch",
-    description: "Event logistics and engineering leadership support for IEEE FUTO Student Branch.",
-    category: "Community",
-    href: "/community",
-    keywords: ["ieee", "engineering", "student", "branch", "futo"],
-  },
-  {
-    id: "community-cowrywise",
-    title: "Cowrywise Campus Ambassador",
-    description: "Promoting financial literacy and investment habits among university students.",
-    category: "Community",
-    href: "/community",
-    keywords: ["cowrywise", "fintech", "ambassador", "finance", "investment", "students"],
-  },
-
-  // ─── Journal ──────────────────────────────────────────────────────────────────
-  {
-    id: "journal-tech-leadership",
-    title: "Technology Leadership in Nigeria",
-    description: "Thoughts on driving meaningful tech leadership in Nigeria's emerging digital ecosystem.",
-    category: "Journal",
-    href: "/journal",
-    keywords: ["leadership", "nigeria", "tech", "digital", "ecosystem"],
-  },
-  {
-    id: "journal-community-building",
-    title: "Building Developer Communities",
-    description: "How grassroots developer communities create lasting impact and inclusion in Africa.",
-    category: "Journal",
-    href: "/journal",
-    keywords: ["community", "developer", "africa", "inclusion", "open source"],
-  },
-  {
-    id: "journal-ai-ethics",
-    title: "AI Ethics & Data Privacy in Africa",
-    description: "The case for responsible AI adoption and data protection frameworks across Africa.",
-    category: "Journal",
-    href: "/journal",
-    keywords: ["ai", "ethics", "data privacy", "africa", "regulation", "ndpc"],
+    keywords: ["contact", "collaborate", "hire", "email", "project", "speaking", "work together", "whatsapp"],
   },
 ]
 
-// Popular pages for quick navigation (shown when search is empty)
-export const popularPages: SearchResult[] = [
-  searchIndex.find((r) => r.id === "page-portfolio")!,
-  searchIndex.find((r) => r.id === "page-about")!,
-  searchIndex.find((r) => r.id === "page-community")!,
-  searchIndex.find((r) => r.id === "page-contact")!,
-  searchIndex.find((r) => r.id === "page-journal")!,
-  searchIndex.find((r) => r.id === "page-gallery")!,
+// ─── Dynamic Projects Indexing ───────────────────────────────────────────────
+const projectEntries: SearchResult[] = projects.map((p) => ({
+  id: `project-${p.id || p.title.toLowerCase().replace(/\s+/g, "-")}`,
+  title: p.title,
+  description: `${p.description} (Role: ${p.role || "Developer"}, Technologies: ${p.technologies.join(", ")})`,
+  category: "Project",
+  href: p.id ? `/portfolio/${p.id}` : "/portfolio",
+  keywords: [p.title.toLowerCase(), ...(p.technologies || []).map((t) => t.toLowerCase()), p.category?.toLowerCase() || "portfolio"],
+}))
+
+// ─── Dynamic Services Indexing ───────────────────────────────────────────────
+const serviceEntries: SearchResult[] = servicesList.map((s) => ({
+  id: `service-${s.id}`,
+  title: s.title,
+  description: s.description,
+  category: "Service",
+  href: s.ctaHref || "/contact",
+  keywords: [s.title.toLowerCase(), "service", "consulting", "offer", "freelance"],
+}))
+
+// ─── Dynamic Skills Indexing ──────────────────────────────────────────────────
+const skillEntries: SearchResult[] = skillGroups.flatMap((group) =>
+  group.skills.map((skill) => ({
+    id: `skill-${skill.name.toLowerCase().replace(/\s+/g, "-")}`,
+    title: skill.name,
+    description: `${group.category} — ${skill.experienceLevel || "Proficient"} (${skill.years || "Active"})`,
+    category: "Skill",
+    href: "/portfolio",
+    keywords: [skill.name.toLowerCase(), group.category.toLowerCase(), "stack", "tool", "expertise"],
+  }))
+)
+
+// ─── Dynamic Journey & Experience Indexing ───────────────────────────────────
+const journeyEntries: SearchResult[] = journeyTimeline.map((j) => ({
+  id: `journey-${j.id}`,
+  title: `${j.title} — ${j.organization}`,
+  description: `${j.description} (${j.date})`,
+  category: "Experience",
+  href: "/journey",
+  keywords: [j.title.toLowerCase(), j.organization.toLowerCase(), ...(j.details || []).map((d) => d.toLowerCase()), j.type],
+}))
+
+// ─── Dynamic Certifications Indexing ────────────────────────────────────────
+const certEntries: SearchResult[] = certificationsList.map((c) => ({
+  id: `cert-${c.id}`,
+  title: c.title,
+  description: `Issued by ${c.provider} (${c.date})`,
+  category: "Certification",
+  href: "/about",
+  keywords: [c.title.toLowerCase(), c.provider.toLowerCase(), "certification", "credential"],
+}))
+
+// ─── Master Universal Search Index ────────────────────────────────────────────
+export const searchIndex: SearchResult[] = [
+  ...pageEntries,
+  ...projectEntries,
+  ...serviceEntries,
+  ...skillEntries,
+  ...journeyEntries,
+  ...certEntries,
 ]
 
-// Search function — returns results sorted by relevance
+// Search function — returns results sorted by universal relevance
 export function searchContent(query: string): SearchResult[] {
   if (!query.trim()) return []
   const q = query.toLowerCase().trim()
@@ -254,23 +154,12 @@ export function searchContent(query: string): SearchResult[] {
       return titleMatch || descMatch || keywordMatch || categoryMatch
     })
     .sort((a, b) => {
-      // Title matches rank higher than description matches
+      const aTitleExact = a.title.toLowerCase().startsWith(q) ? 4 : 0
+      const bTitleExact = b.title.toLowerCase().startsWith(q) ? 4 : 0
       const aTitleMatch = a.title.toLowerCase().includes(q) ? 2 : 0
       const bTitleMatch = b.title.toLowerCase().includes(q) ? 2 : 0
       const aKeywordMatch = a.keywords?.some((kw) => kw.startsWith(q)) ? 1 : 0
       const bKeywordMatch = b.keywords?.some((kw) => kw.startsWith(q)) ? 1 : 0
-      return bTitleMatch + bKeywordMatch - (aTitleMatch + aKeywordMatch)
+      return bTitleExact + bTitleMatch + bKeywordMatch - (aTitleExact + aTitleMatch + aKeywordMatch)
     })
-}
-
-// Group results by category
-export function groupResults(results: SearchResult[]): Record<string, SearchResult[]> {
-  return results.reduce(
-    (acc, result) => {
-      if (!acc[result.category]) acc[result.category] = []
-      acc[result.category].push(result)
-      return acc
-    },
-    {} as Record<string, SearchResult[]>,
-  )
 }

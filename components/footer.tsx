@@ -47,7 +47,7 @@ export default function Footer() {
                 NESTOR ANYANWU
               </h2>
               <p className="text-accent text-xs font-bold uppercase tracking-widest">
-                SOFTWARE ENGINEER & TECH LEADER
+                TECH . LEADERSHIP . SERVICE
               </p>
             </div>
 

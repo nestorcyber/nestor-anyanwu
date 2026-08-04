@@ -388,7 +388,7 @@ export const portfolioStats: PortfolioStat[] = [
 export const projects: ProjectItem[] = [
   {
     id: "devfest-2025",
-    title: "DevFest Owerri 2025 Visual System",
+    title: "DevFest Owerri 2025 Branding",
     category: "Design",
     description: "Major design contributor for South-East Nigeria's largest developer festival. Supported visual branding, event creative assets, and logistical design systems.",
     technologies: ["Visual Design", "Brand Identity", "Event Systems", "Figma"],
@@ -402,8 +402,8 @@ export const projects: ProjectItem[] = [
   },
   {
     id: "build-with-ai",
-    title: "Build with AI Platform & Hackathon",
-    category: "Software",
+    title: "Build With AI 2025 Branding",
+    category: "Design",
     description: "Empowering developers and creators with AI-driven workflows and resources. Engineered platform design and community tools for rapid AI integration.",
     technologies: ["Next.js", "AI Integration", "Tailwind CSS", "Developer Experience"],
     role: "Software Developer & Designer",
@@ -415,8 +415,8 @@ export const projects: ProjectItem[] = [
     },
   },
   {
-    id: "nacos-national-ict",
-    title: "NACOS National ICT Portal",
+    id: "nacos-futo-web",
+    title: "NACOS FUTO Website Development",
     category: "Web",
     description: "Centralized ICT digital infrastructure and student engagement portal for the Nigeria Association of Computing Students across higher institutions.",
     technologies: ["React", "TypeScript", "Node.js", "ICT Strategy"],

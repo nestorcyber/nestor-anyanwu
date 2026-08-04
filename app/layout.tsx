@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import Navigation from "@/components/navigation"
 import { ThemeProvider } from "@/components/theme-provider"
+import GoogleAnalytics from "@/components/analytics/google-analytics"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -78,10 +79,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
-  },
-    generator: 'v0.app'
 }
 
 export const viewport: Viewport = {
@@ -96,39 +93,83 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const jsonLdPerson = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Nestor Anyanwu",
+    alternateName: "Nestor Cyber",
+    url: "https://nestor.name.ng",
+    jobTitle: "Director of ICT, Software Developer & Community Leader",
+    worksFor: {
+      "@type": "Organization",
+      name: "NACOS FUTO",
+    },
+    alumniOf: {
+      "@type": "EducationalOrganization",
+      name: "Federal University of Technology Owerri (FUTO)",
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Owerri",
+      addressRegion: "Imo State",
+      addressCountry: "Nigeria",
+    },
+    description:
+      "Nigerian tech professional driving digital innovation through software development, design, and community leadership at NACOS FUTO.",
+    sameAs: [
+      "https://twitter.com/nestorcyber",
+      "https://linkedin.com/in/nestoranyanwu",
+      "https://github.com/nestoranyanwu",
+      "https://www.behance.net/nestorcyber",
+    ],
+    knowsAbout: [
+      "Software Engineering",
+      "Web Development",
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Artificial Intelligence",
+      "Graphic Design",
+      "Brand Identity",
+      "Data Privacy",
+      "Tech Community Leadership",
+    ],
+  }
+
+  const jsonLdWebsite = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Nestor Cyber",
+    url: "https://nestor.name.ng",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://nestor.name.ng/?q={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  }
+
   return (
     <html lang="en" className="bg-background" suppressHydrationWarning>
       <head>
         <script
-          id="schema-org-jsonld"
+          id="schema-org-person"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Nestor Anyanwu",
-              url: "https://nestor.name.ng",
-              jobTitle: "Tech Professional, Software Developer & Community Leader",
-              description:
-                "Nigerian tech professional driving digital innovation through software development, design, and community leadership at NACOS FUTO.",
-              sameAs: [
-                "https://twitter.com/nestorcyber",
-                "https://linkedin.com/in/nestoranyanwu",
-                "https://github.com/nestoranyanwu",
-                "https://www.behance.net/nestorcyber",
-              ],
-              knowsAbout: ["Technology", "Software Development", "Web Development", "AI", "Design", "Community Leadership", "Tech Advocacy"],
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson) }}
+        />
+        <script
+          id="schema-org-website"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }}
         />
       </head>
-      <body className={`font-sans antialiased overflow-x-hidden`} suppressHydrationWarning>
+      <body className="font-sans antialiased overflow-x-hidden" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <Navigation />
           <div className="pt-14 md:pt-16">
             {children}
           </div>
           <Analytics />
+          <GoogleAnalytics />
         </ThemeProvider>
       </body>
     </html>
