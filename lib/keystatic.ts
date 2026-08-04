@@ -154,3 +154,28 @@ export async function getCommunityEntryBySlug(slug: string) {
     description,
   }
 }
+
+// ─── SITE SETTINGS READER ───────────────────────────────────────────────────
+export async function getSiteSettings() {
+  const settings = await reader.singletons.siteSettings.read()
+  return settings || {
+    siteName: 'Nestor Cyber',
+    authorName: 'Nestor Anyanwu',
+    tagline: 'Tech Advocate, Designer & Community Leader',
+    heroTitle: 'BUILDING DIGITAL FUTURE WITH PURPOSE',
+    heroSubtitle: 'Director of ICT at NACOS FUTO, Data Privacy Ambassador, Software Engineer, and Community Leader.',
+    contactEmail: 'nestoranyanwu@gmail.com',
+    location: 'Owerri, Imo State, Nigeria',
+    availabilityStatus: 'Available for Work',
+    socialLinks: {
+      github: 'https://github.com/nestorcyber',
+      linkedin: 'https://linkedin.com/in/nestoranyanwu',
+      twitter: 'https://twitter.com/nestorcyber',
+      behance: 'https://behance.net/nestorcyber',
+      whatsapp: 'https://wa.me/message/GJIXLHQQPYDIE1',
+    },
+    analytics: {
+      googleAnalyticsId: '',
+    },
+  }
+}

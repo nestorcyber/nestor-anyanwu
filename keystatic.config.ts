@@ -1,4 +1,4 @@
-import { config, fields, collection } from '@keystatic/core'
+import { config, fields, collection, singleton } from '@keystatic/core'
 
 export default config({
   storage: (process.env.KEYSTATIC_GITHUB_CLIENT_ID && process.env.KEYSTATIC_GITHUB_CLIENT_SECRET)
@@ -18,7 +18,40 @@ export default config({
     },
     navigation: {
       Content: ['journal', 'portfolio', 'community'],
+      Settings: ['siteSettings'],
     },
+  },
+
+  singletons: {
+    // ─── SITE SETTINGS SINGLETON ──────────────────────────────────────────────
+    siteSettings: singleton({
+      label: 'Site Settings & Information',
+      path: 'content/settings/site',
+      schema: {
+        siteName: fields.text({ label: 'Site Name', defaultValue: 'Nestor Cyber' }),
+        authorName: fields.text({ label: 'Author Name', defaultValue: 'Nestor Anyanwu' }),
+        tagline: fields.text({ label: 'Tagline / Headline', defaultValue: 'Tech Advocate, Designer & Community Leader' }),
+        heroTitle: fields.text({ label: 'Homepage Hero Title', defaultValue: 'BUILDING DIGITAL FUTURE WITH PURPOSE' }),
+        heroSubtitle: fields.text({
+          label: 'Homepage Hero Subtitle',
+          multiline: true,
+          defaultValue: 'Director of ICT at NACOS FUTO, Data Privacy Ambassador, Software Engineer, and Community Leader.',
+        }),
+        contactEmail: fields.text({ label: 'Contact Email', defaultValue: 'nestoranyanwu@gmail.com' }),
+        location: fields.text({ label: 'Location', defaultValue: 'Owerri, Imo State, Nigeria' }),
+        availabilityStatus: fields.text({ label: 'Availability Status', defaultValue: 'Available for Work' }),
+        socialLinks: fields.object({
+          github: fields.text({ label: 'GitHub URL', defaultValue: 'https://github.com/nestorcyber' }),
+          linkedin: fields.text({ label: 'LinkedIn URL', defaultValue: 'https://linkedin.com/in/nestoranyanwu' }),
+          twitter: fields.text({ label: 'Twitter / X URL', defaultValue: 'https://twitter.com/nestorcyber' }),
+          behance: fields.text({ label: 'Behance URL', defaultValue: 'https://behance.net/nestorcyber' }),
+          whatsapp: fields.text({ label: 'WhatsApp URL', defaultValue: 'https://wa.me/message/GJIXLHQQPYDIE1' }),
+        }),
+        analytics: fields.object({
+          googleAnalyticsId: fields.text({ label: 'Google Analytics ID (e.g. G-XXXXXXXXXX)' }),
+        }),
+      },
+    }),
   },
 
   collections: {
