@@ -1,19 +1,17 @@
 import { config, fields, collection, singleton } from '@keystatic/core'
 
 export default config({
-  storage: (process.env.NODE_ENV === 'production' && process.env.KEYSTATIC_GITHUB_CLIENT_ID && process.env.KEYSTATIC_GITHUB_CLIENT_SECRET && process.env.KEYSTATIC_SECRET)
+  storage: (process.env.KEYSTATIC_GITHUB_CLIENT_ID && process.env.KEYSTATIC_GITHUB_CLIENT_SECRET)
     ? {
         kind: 'github',
-        repo: (process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER && process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG)
-          ? `${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER}/${process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG}` as `${string}/${string}`
-          : 'nestorcyber/nestor-anyanwu',
+        repo: 'nestorcyber/nestor-anyanwu',
       }
     : {
         kind: 'local',
       },
 
   ui: {
-    brand: {
+    brand: { 
       name: 'Nestor Anyanwu CMS',
     },
     navigation: {
