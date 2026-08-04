@@ -3,10 +3,17 @@ import Link from "next/link"
 import SectionContainer from "@/components/shared/section-container"
 import SectionHeader from "@/components/shared/section-header"
 import ArticleCard from "@/components/shared/article-card"
-import { sampleArticles } from "@/app/journal/page"
+import { getJournalArticles } from "@/lib/keystatic"
 import { ArrowUpRight } from "lucide-react"
 
-export default function LatestJournal() {
+export default async function LatestJournal() {
+  const articles = await getJournalArticles()
+  
+  // Surface top 3 items (pinned/featured prioritized, then reverse chronological)
+  const pinned = articles.filter((a) => a.pinned || a.featured)
+  const regular = articles.filter((a) => !a.pinned && !a.featured)
+  const displayArticles = [...pinned, ...regular].slice(0, 3)
+
   return (
     <SectionContainer id="journal">
       <SectionHeader
@@ -15,19 +22,28 @@ export default function LatestJournal() {
         subtitle="Exploring thoughts on technology leadership, community advocacy, software development, and digital inclusion."
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 border border-border/60 divide-y md:divide-y-0 md:divide-x divide-border/60 bg-card/40 rounded overflow-hidden">
-        {sampleArticles.map((article) => (
-          <ArticleCard
-            key={article.id}
-            title={article.title}
-            category={article.category}
-            readTime={article.readTime}
-            date={article.date}
-            summary={article.summary}
-            slug="/journal"
-          />
-        ))}
-      </div>
+      {displayArticles.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-3 border border-border/60 divide-y md:divide-y-0 md:divide-x divide-border/60 bg-card/40 rounded overflow-hidden">
+          {displayArticles.map((article) => (
+            <ArticleCard
+              key={article.slug}
+              title={article.title}
+              category={article.category}
+              readTime="ARTICLE"
+              date={new Date(article.publishedDate).toLocaleDateString("en-US", {
+                month: "short",
+                year: "numeric",
+              })}
+              summary={article.excerpt}
+              slug={`/journal/${article.slug}`}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-8 text-sm text-muted-foreground">
+          No published journal entries to display.
+        </div>
+      )}
 
       <div className="flex justify-center mt-10">
         <Link href="/journal">

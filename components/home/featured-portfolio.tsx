@@ -3,10 +3,16 @@ import Link from "next/link"
 import SectionContainer from "@/components/shared/section-container"
 import SectionHeader from "@/components/shared/section-header"
 import ProjectCard from "@/components/shared/project-card"
-import { projects } from "@/lib/data"
+import { getPortfolioProjects } from "@/lib/keystatic"
 import { ArrowUpRight } from "lucide-react"
 
-export default function FeaturedPortfolio() {
+export default async function FeaturedPortfolio() {
+  const projects = await getPortfolioProjects()
+
+  // Filter featured projects, or fall back to top 3
+  const featured = projects.filter((p) => p.featured)
+  const displayProjects = featured.length > 0 ? featured.slice(0, 3) : projects.slice(0, 3)
+
   return (
     <SectionContainer id="portfolio">
       <SectionHeader
@@ -15,18 +21,24 @@ export default function FeaturedPortfolio() {
         subtitle="Exploring technical engineering deliverables, design systems, and digital platforms built to empower communities."
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {projects.slice(0, 3).map((project, idx) => (
-          <ProjectCard
-            key={idx}
-            title={project.title}
-            category={project.technologies[0] || "DEVELOPMENT"}
-            description={project.description}
-            technologies={project.technologies}
-            link={project.links.demo}
-          />
-        ))}
-      </div>
+      {displayProjects.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {displayProjects.map((project) => (
+            <ProjectCard
+              key={project.slug}
+              title={project.title}
+              category={project.category || "DEVELOPMENT"}
+              description={project.shortDescription}
+              technologies={project.technologies}
+              link={`/portfolio/${project.slug}`}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-8 text-sm text-muted-foreground">
+          No featured portfolio projects available.
+        </div>
+      )}
 
       <div className="flex justify-center mt-10">
         <Link href="/portfolio">

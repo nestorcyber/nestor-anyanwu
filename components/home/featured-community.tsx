@@ -2,39 +2,15 @@ import React from "react"
 import Link from "next/link"
 import SectionContainer from "@/components/shared/section-container"
 import SectionHeader from "@/components/shared/section-header"
-import { Users, Award, ShieldCheck, Heart, Sparkles, Building, ArrowUpRight } from "lucide-react"
+import { getCommunityEntries } from "@/lib/keystatic"
+import { Users, ArrowUpRight } from "lucide-react"
 
-export default function FeaturedCommunity() {
-  const communityWork = [
-    {
-      organization: "NACOS NATIONAL & NACOS FUTO",
-      role: "DIRECTOR OF ICT",
-      description: "Leading digital strategy and ICT infrastructure supporting thousands of computing students across Nigeria.",
-      icon: <Users className="w-5 h-5 text-accent" />,
-      tag: "COMPUTING ECOSYSTEM",
-    },
-    {
-      organization: "GOOGLE DEVELOPER GROUP (GDG OWERRI)",
-      role: "GRAPHIC DESIGNER & EVENT LOGISTICS",
-      description: "Contributing major visual assets, brand identity, and logistics support for South-East Nigeria's largest developer conferences.",
-      icon: <Sparkles className="w-5 h-5 text-accent" />,
-      tag: "DEVELOPER COMMUNITY",
-    },
-    {
-      organization: "COWRYWISE",
-      role: "CAMPUS AMBASSADOR",
-      description: "Advocating for financial literacy, investment habit adoption, and fintech technology among university students.",
-      icon: <Building className="w-5 h-5 text-accent" />,
-      tag: "FINANCIAL LITERACY",
-    },
-    {
-      organization: "FLE GLOBAL & EDENSPRIME SUMMIT",
-      role: "EVENT LOGISTICS & SETUP",
-      description: "Coordinating behind-the-scenes event setup and logistics for leadership, entrepreneurship, and hospitality summits.",
-      icon: <Award className="w-5 h-5 text-accent" />,
-      tag: "LEADERSHIP SUMMITS",
-    },
-  ]
+export default async function FeaturedCommunity() {
+  const entries = await getCommunityEntries()
+
+  // Filter featured entries or display top 4
+  const featured = entries.filter((e) => e.featured)
+  const displayEntries = featured.length > 0 ? featured.slice(0, 4) : entries.slice(0, 4)
 
   return (
     <SectionContainer id="community-work" className="bg-secondary/30">
@@ -44,34 +20,54 @@ export default function FeaturedCommunity() {
         subtitle="Dedicated to serving developer chapters, national student bodies, and leadership conferences through active contribution and service."
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-collapse">
-        {communityWork.map((item, idx) => (
-          <div
-            key={idx}
-            className="p-6 md:p-8 border border-border/60 hover:border-accent bg-card/80 rounded grid-cell-card space-y-4 flex flex-col justify-between"
-          >
-            <div className="space-y-3">
-              <div className="flex items-center justify-between border-b border-border/30 pb-3">
-                <div className="p-2 bg-accent/10 rounded">{item.icon}</div>
-                <span className="text-xs font-bold text-accent uppercase tracking-widest">
-                  {item.tag}
-                </span>
+      {displayEntries.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-collapse">
+          {displayEntries.map((item) => (
+            <div
+              key={item.slug}
+              className="p-6 md:p-8 border border-border/60 hover:border-accent bg-card/80 rounded space-y-4 flex flex-col justify-between group"
+            >
+              <div className="space-y-3">
+                <div className="flex items-center justify-between border-b border-border/30 pb-3">
+                  <div className="p-2 bg-accent/10 rounded">
+                    <Users className="w-5 h-5 text-accent" />
+                  </div>
+                  <span className="text-xs font-bold text-accent uppercase tracking-widest">
+                    {item.duration}
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-bold text-foreground uppercase tracking-tight group-hover:text-accent transition-colors">
+                  {item.organization}
+                </h3>
+                <p className="text-xs font-mono text-muted-foreground uppercase font-semibold">
+                  {item.role}
+                </p>
+
+                {item.achievements.length > 0 && (
+                  <p className="text-xs text-muted-foreground font-light leading-relaxed line-clamp-2">
+                    {item.achievements.join(" • ")}
+                  </p>
+                )}
               </div>
 
-              <h3 className="text-xl font-bold text-foreground uppercase tracking-tight">
-                {item.organization}
-              </h3>
-              <p className="text-xs font-mono text-muted-foreground uppercase font-semibold">
-                {item.role}
-              </p>
-
-              <p className="text-xs text-muted-foreground font-light leading-relaxed">
-                {item.description}
-              </p>
+              <div className="pt-4 border-t border-border/30 flex justify-end">
+                <Link
+                  href={`/community/${item.slug}`}
+                  className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-foreground group-hover:text-accent transition-colors"
+                >
+                  <span>View Details</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-8 text-sm text-muted-foreground">
+          No featured community initiatives available.
+        </div>
+      )}
 
       <div className="flex justify-center mt-10">
         <Link href="/community">
