@@ -3,21 +3,21 @@ import { config, fields, collection, singleton } from '@keystatic/core'
 const repoOwner = process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER || 'nestorcyber'
 const repoName = process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG || 'nestor-anyanwu'
 
-const isGitHub = process.env.NODE_ENV === 'production' || 
+const isGitHub = process.env.NODE_ENV === 'production' ||
   Boolean(process.env.KEYSTATIC_GITHUB_CLIENT_ID || process.env.NEXT_PUBLIC_KEYSTATIC_GITHUB_CLIENT_ID)
 
 export default config({
   storage: isGitHub
     ? {
-        kind: 'github',
-        repo: `${repoOwner}/${repoName}` as `${string}/${string}`,
-      }
+      kind: 'github',
+      repo: 'nestorcyber/nestor-anyanwu',
+    }
     : {
-        kind: 'local',
-      },
+      kind: 'local',
+    },
 
   ui: {
-    brand: { 
+    brand: {
       name: 'Nestor Anyanwu CMS',
     },
     navigation: {
