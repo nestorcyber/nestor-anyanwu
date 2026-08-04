@@ -7,14 +7,15 @@ const isGitHub = process.env.NODE_ENV === 'production' ||
   Boolean(process.env.KEYSTATIC_GITHUB_CLIENT_ID || process.env.NEXT_PUBLIC_KEYSTATIC_GITHUB_CLIENT_ID)
 
 export default config({
-  storage: isGitHub
-    ? {
-      kind: 'github',
-      repo: 'nestorcyber/nestor-anyanwu',
-    }
-    : {
-      kind: 'local',
-    },
+  storage:
+    process.env.NODE_ENV === 'production'
+      ? {
+          kind: 'github',
+          repo: 'nestorcyber/nestor-anyanwu',
+        }
+      : {
+          kind: 'local',
+        },
 
   ui: {
     brand: {
