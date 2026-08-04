@@ -29,7 +29,7 @@ export default async function FeaturedPortfolio() {
               title={project.title}
               category={project.category || "DEVELOPMENT"}
               description={project.shortDescription}
-              technologies={project.technologies}
+              technologies={[...project.technologies]}
               link={`/portfolio/${project.slug}`}
             />
           ))}

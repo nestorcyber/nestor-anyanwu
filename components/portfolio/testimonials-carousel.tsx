@@ -3,24 +3,27 @@ import SectionHeader from "@/components/shared/section-header"
 import TestimonialCard from "@/components/shared/testimonial-card"
 
 export default function TestimonialsCarousel() {
-  const testimonials = [
+  const testimonials: Array<{ quote: string; author: string; role: string; organization: string; type: "Client" | "Community Leader" | "Peer" | "Partner" }> = [
     {
       quote: "Nestor's leadership as Director of ICT transformed our chapter's digital infrastructure. His attention to design systems and user experience sets a high benchmark for computing student initiatives across Nigeria.",
       author: "Comr. Precious Eke",
-      role: "President, NACOS FUTO",
-      type: "COMPUTING COMMUNITY LEADERSHIP",
+      role: "President",
+      organization: "NACOS FUTO",
+      type: "Community Leader",
     },
     {
       quote: "Working with Nestor on DevFest Owerri was flawless. He took complete ownership of major event graphic assets and technical branding, delivering world-class visuals under tight deadlines.",
       author: "Chisom Osuji",
-      role: "Lead Organizer, GDG Owerri",
-      type: "DEV COMMUNITY PARTNER",
+      role: "Lead Organizer",
+      organization: "GDG Owerri",
+      type: "Partner",
     },
     {
       quote: "Nestor brings rare technical versatility—combining software engineering precision with deep visual design intuition. He delivered beyond expectations on our enterprise IT consultation.",
       author: "Dr. K. Nobel",
-      role: "Principal Partner, Nobelton Consults",
-      type: "CLIENT / ADVISORY",
+      role: "Principal Partner",
+      organization: "Nobelton Consults",
+      type: "Client",
     },
   ]
 
@@ -40,6 +43,7 @@ export default function TestimonialsCarousel() {
               quote={t.quote}
               author={t.author}
               role={t.role}
+              organization={t.organization}
               type={t.type}
             />
           ))}

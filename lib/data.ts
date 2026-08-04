@@ -11,11 +11,18 @@ export interface JourneyItem {
 }
 
 export interface ProjectItem {
+  id?: string
   title: string
+  category?: "Software" | "Web" | "Design" | "Branding" | "Automation" | "Open Source"
   description: string
   technologies: string[]
+  role?: string
+  image?: string
+  status?: string
   links: {
     demo?: string
+    caseStudy?: string
+    github?: string
   }
 }
 

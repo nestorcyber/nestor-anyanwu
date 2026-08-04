@@ -30,7 +30,7 @@ export default async function LatestJournal() {
               title={article.title}
               category={article.category}
               readTime="ARTICLE"
-              date={new Date(article.publishedDate).toLocaleDateString("en-US", {
+              date={new Date(article.publishedDate || Date.now()).toLocaleDateString("en-US", {
                 month: "short",
                 year: "numeric",
               })}

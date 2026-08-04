@@ -163,3 +163,18 @@ export function searchContent(query: string): SearchResult[] {
       return bTitleExact + bTitleMatch + bKeywordMatch - (aTitleExact + aTitleMatch + aKeywordMatch)
     })
 }
+
+export const popularPages: SearchResult[] = pageEntries.slice(0, 5)
+
+export function groupResults(results: SearchResult[]): Record<string, SearchResult[]> {
+  const groups: Record<string, SearchResult[]> = {}
+  for (const item of results) {
+    const cat = item.category
+    if (!groups[cat]) {
+      groups[cat] = []
+    }
+    groups[cat].push(item)
+  }
+  return groups
+}
+
