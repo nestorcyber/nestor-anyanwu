@@ -1,7 +1,7 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/next"
-import Navigation from "@/components/navigation"
+import SiteShell from "@/components/site-shell"
 import { ThemeProvider } from "@/components/theme-provider"
 import GoogleAnalytics from "@/components/analytics/google-analytics"
 import "./globals.css"
@@ -164,10 +164,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased overflow-x-hidden" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <Navigation />
-          <div className="pt-14 md:pt-16">
-            {children}
-          </div>
+          <SiteShell>{children}</SiteShell>
           <Analytics />
           <GoogleAnalytics />
         </ThemeProvider>
