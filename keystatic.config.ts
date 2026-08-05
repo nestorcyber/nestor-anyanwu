@@ -5,13 +5,10 @@ const repoName = process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG || 'nestor-anyanwu
 
 export default config({
   storage:
-    process.env.NODE_ENV === 'production' && process.env.KEYSTATIC_GITHUB_CLIENT_ID
+    process.env.NODE_ENV === 'production'
       ? {
           kind: 'github',
           repo: 'nestorcyber/nestor-anyanwu',
-          clientId: process.env.KEYSTATIC_GITHUB_CLIENT_ID,
-          clientSecret: process.env.KEYSTATIC_GITHUB_CLIENT_SECRET,
-          secret: process.env.KEYSTATIC_SECRET,
         }
       : {
           kind: 'local',
