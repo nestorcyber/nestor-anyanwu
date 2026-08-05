@@ -143,8 +143,48 @@
     @apply border-border outline-ring/50;
   }
 
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     @apply bg-background text-foreground transition-colors duration-350 font-sans;
+    font-size: 1.0625rem; /* 17px default base size */
+    line-height: 1.7;
+  }
+
+  p {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+
+  /* Mobile typographic enhancement */
+  @media (max-width: 640px) {
+    html {
+      font-size: 17px; /* Scales rem-based utilities up on mobile */
+    }
+
+    body {
+      font-size: 1.0625rem; /* Effective 18px on mobile screen */
+      line-height: 1.75;
+    }
+
+    p {
+      font-size: 1.0625rem;
+      line-height: 1.8;
+    }
+
+    /* Prevent tiny text classes on mobile */
+    .text-xs {
+      font-size: 0.875rem !important; /* 14px instead of 12px */
+      line-height: 1.4 !important;
+    }
+
+    .text-sm {
+      font-size: 0.9375rem !important; /* 15px instead of 14px */
+      line-height: 1.5 !important;
+    }
   }
 }
 
