@@ -18,6 +18,10 @@ export default function AdminLoginPage() {
     setError('')
     setLoading(true)
     try {
+      if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+        setError('Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY. Restart the dev server after updating .env.')
+        return
+      }
       const supabase = createClient()
       const { error: signInError } = await supabase.auth.signInWithPassword({
         email: ADMIN_EMAIL,
@@ -29,8 +33,8 @@ export default function AdminLoginPage() {
       }
       router.replace(next.startsWith('/admin') ? next : '/admin')
       router.refresh()
-    } catch {
-      setError('Unable to sign in. Check your Supabase env vars.')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to sign in. Check your Supabase env vars.')
     } finally {
       setLoading(false)
     }
