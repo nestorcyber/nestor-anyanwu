@@ -78,9 +78,9 @@ export function PageHeader({
   action?: React.ReactNode
 }) {
   return (
-    <div className="mb-8 flex items-center justify-between gap-4">
-      <h1 className="text-2xl font-semibold">{title}</h1>
-      {action}
+    <div className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+      <h1 className="text-xl font-semibold sm:text-2xl">{title}</h1>
+      {action ? <div className="w-full sm:w-auto [&>a]:block [&>a>button]:w-full sm:[&>a>button]:w-auto">{action}</div> : null}
     </div>
   )
 }

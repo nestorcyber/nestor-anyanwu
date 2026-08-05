@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { createPublicClient } from '@/lib/supabase/public'
 import type { ImpactStat, Tables } from '@/lib/supabase/types'
 
 const PLACEHOLDER = '/placeholder.svg'
@@ -207,15 +207,12 @@ function mapCommunity(row: Tables<'community_entries'>): CommunityEntry {
   }
 }
 
-async function db() {
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    return null
-  }
-  return createClient()
+function db() {
+  return createPublicClient()
 }
 
 export async function getJournalArticles(): Promise<JournalArticle[]> {
-  const supabase = await db()
+  const supabase = db()
   if (!supabase) return []
   const { data, error } = await supabase
     .from('journal_articles')
@@ -229,7 +226,7 @@ export async function getJournalArticles(): Promise<JournalArticle[]> {
 }
 
 export async function getJournalArticleBySlug(slug: string): Promise<JournalArticle | null> {
-  const supabase = await db()
+  const supabase = db()
   if (!supabase) return null
   const { data, error } = await supabase
     .from('journal_articles')
@@ -243,7 +240,7 @@ export async function getJournalArticleBySlug(slug: string): Promise<JournalArti
 }
 
 export async function getPortfolioProjects(): Promise<PortfolioProject[]> {
-  const supabase = await db()
+  const supabase = db()
   if (!supabase) return []
   const { data, error } = await supabase
     .from('portfolio_projects')
@@ -257,7 +254,7 @@ export async function getPortfolioProjects(): Promise<PortfolioProject[]> {
 }
 
 export async function getPortfolioProjectBySlug(slug: string): Promise<PortfolioProject | null> {
-  const supabase = await db()
+  const supabase = db()
   if (!supabase) return null
   const { data, error } = await supabase
     .from('portfolio_projects')
@@ -292,7 +289,7 @@ export async function getProjectItems(): Promise<ProjectItem[]> {
 }
 
 export async function getCommunityEntries(): Promise<CommunityEntry[]> {
-  const supabase = await db()
+  const supabase = db()
   if (!supabase) return []
   const { data, error } = await supabase
     .from('community_entries')
@@ -306,7 +303,7 @@ export async function getCommunityEntries(): Promise<CommunityEntry[]> {
 }
 
 export async function getCommunityEntryBySlug(slug: string): Promise<CommunityEntry | null> {
-  const supabase = await db()
+  const supabase = db()
   if (!supabase) return null
   const { data, error } = await supabase
     .from('community_entries')
@@ -320,7 +317,7 @@ export async function getCommunityEntryBySlug(slug: string): Promise<CommunityEn
 }
 
 export async function getJourneyItems(): Promise<JourneyItem[]> {
-  const supabase = await db()
+  const supabase = db()
   if (!supabase) return []
   const { data, error } = await supabase
     .from('journey_items')
@@ -343,7 +340,7 @@ export async function getJourneyItems(): Promise<JourneyItem[]> {
 }
 
 export async function getPortfolioStats(): Promise<PortfolioStat[]> {
-  const supabase = await db()
+  const supabase = db()
   if (!supabase) return []
   const { data, error } = await supabase
     .from('portfolio_stats')
@@ -359,7 +356,7 @@ export async function getPortfolioStats(): Promise<PortfolioStat[]> {
 }
 
 export async function getServices(): Promise<ServiceItem[]> {
-  const supabase = await db()
+  const supabase = db()
   if (!supabase) return []
   const { data, error } = await supabase
     .from('services')
@@ -378,7 +375,7 @@ export async function getServices(): Promise<ServiceItem[]> {
 }
 
 export async function getSkillGroups(): Promise<SkillGroup[]> {
-  const supabase = await db()
+  const supabase = db()
   if (!supabase) return []
   const { data: groups, error } = await supabase
     .from('skill_groups')
@@ -405,7 +402,7 @@ export async function getSkillGroups(): Promise<SkillGroup[]> {
 }
 
 export async function getCertifications(): Promise<CertificationItem[]> {
-  const supabase = await db()
+  const supabase = db()
   if (!supabase) return []
   const { data, error } = await supabase
     .from('certifications')
@@ -425,7 +422,7 @@ export async function getCertifications(): Promise<CertificationItem[]> {
 export async function getStandaloneGalleryImages(): Promise<
   { id: string; url: string; title?: string; alt?: string }[]
 > {
-  const supabase = await db()
+  const supabase = db()
   if (!supabase) return []
   const { data } = await supabase
     .from('gallery_images')
@@ -441,7 +438,7 @@ export async function getStandaloneGalleryImages(): Promise<
 }
 
 export async function getGalleryImages(): Promise<{ id: string; url: string; title?: string; alt?: string }[]> {
-  const supabase = await db()
+  const supabase = db()
   if (!supabase) return []
   const [standalone, journeyItems] = await Promise.all([
     getStandaloneGalleryImages(),
@@ -463,7 +460,7 @@ export async function getGalleryImages(): Promise<{ id: string; url: string; tit
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
-  const supabase = await db()
+  const supabase = db()
   if (!supabase) return defaultSettings
   const { data, error } = await supabase.from('site_settings').select('*').limit(1).maybeSingle()
 

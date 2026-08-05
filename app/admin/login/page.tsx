@@ -41,10 +41,10 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-neutral-950 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-neutral-950 px-4 py-8">
       <form
         onSubmit={onSubmit}
-        className="w-full max-w-md border border-neutral-800 bg-neutral-900 p-8 space-y-6"
+        className="w-full max-w-md border border-neutral-800 bg-neutral-900 p-6 sm:p-8 space-y-6"
       >
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">Admin</p>

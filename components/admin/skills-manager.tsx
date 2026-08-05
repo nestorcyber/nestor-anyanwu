@@ -88,9 +88,9 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
       <div className="space-y-4">
         {groups.map((group) => (
           <div key={group.id} className="border border-neutral-800 p-4">
-            <div className="flex items-center justify-between gap-3 mb-3">
-              <h2 className="font-medium">{group.category}</h2>
-              <DangerButton type="button" onClick={() => deleteGroup(group.id)}>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-3">
+              <h2 className="font-medium break-words">{group.category}</h2>
+              <DangerButton type="button" onClick={() => deleteGroup(group.id)} className="w-full sm:w-auto">
                 Delete group
               </DangerButton>
             </div>

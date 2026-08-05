@@ -33,15 +33,15 @@ export default async function AdminOverviewPage() {
   return (
     <div>
       <PageHeader title="Overview" />
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
         {cards.map((card) => (
           <Link
             key={card.href}
             href={card.href}
-            className="border border-neutral-800 bg-neutral-900 p-5 hover:border-neutral-600 transition-colors"
+            className="border border-neutral-800 bg-neutral-900 p-4 sm:p-5 hover:border-neutral-600 transition-colors"
           >
-            <p className="text-sm text-neutral-400">{card.label}</p>
-            <p className="mt-2 text-3xl font-semibold">{card.count}</p>
+            <p className="text-xs sm:text-sm text-neutral-400">{card.label}</p>
+            <p className="mt-2 text-2xl sm:text-3xl font-semibold">{card.count}</p>
           </Link>
         ))}
       </div>

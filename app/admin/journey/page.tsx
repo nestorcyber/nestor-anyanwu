@@ -24,7 +24,7 @@ export default async function AdminJourneyPage() {
           <Link
             key={row.id}
             href={`/admin/journey/${row.id}`}
-            className="flex items-center justify-between gap-4 px-4 py-3 hover:bg-neutral-900"
+            className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 px-3 sm:px-4 py-3 hover:bg-neutral-900"
           >
             <div>
               <p className="font-medium">{row.title}</p>
