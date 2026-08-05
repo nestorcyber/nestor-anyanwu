@@ -8,7 +8,6 @@ import { Users, ArrowUpRight } from "lucide-react"
 export default async function FeaturedCommunity() {
   const entries = await getCommunityEntries()
 
-  // Filter featured entries or display top 4
   const featured = entries.filter((e) => e.featured)
   const displayEntries = featured.length > 0 ? featured.slice(0, 4) : entries.slice(0, 4)
 
