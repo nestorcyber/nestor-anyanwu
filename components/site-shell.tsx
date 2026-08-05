@@ -5,9 +5,7 @@ import Navigation from "@/components/navigation"
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const isKeystatic = pathname?.startsWith("/keystatic")
-
-  if (isKeystatic) {
+  if (pathname?.startsWith("/admin")) {
     return <>{children}</>
   }
 

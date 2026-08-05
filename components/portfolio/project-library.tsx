@@ -3,9 +3,9 @@
 import React, { useState } from "react"
 import SectionHeader from "@/components/shared/section-header"
 import ProjectCard from "@/components/shared/project-card"
-import { projects, ProjectItem } from "@/lib/data"
+import type { ProjectItem } from "@/lib/content"
 
-export default function ProjectLibrary() {
+export default function ProjectLibrary({ projects }: { projects: ProjectItem[] }) {
   const [activeCategory, setActiveCategory] = useState<string>("All")
 
   const categories = ["All", "Software", "Web", "Design", "Branding", "Automation", "Open Source"]
@@ -50,7 +50,7 @@ export default function ProjectLibrary() {
                 category={project.category || "DEVELOPMENT"}
                 description={project.description}
                 technologies={project.technologies}
-                link={project.links.demo}
+                link={project.slug ? `/portfolio/${project.slug}` : project.links.caseStudy || project.links.demo}
                 image={project.image}
               />
             ))}

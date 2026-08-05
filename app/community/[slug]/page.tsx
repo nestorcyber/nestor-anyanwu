@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { getCommunityEntryBySlug, getCommunityEntries } from '@/lib/keystatic'
+import { getCommunityEntryBySlug, getCommunityEntries } from '@/lib/content'
+import { Markdown } from '@/lib/content/markdown'
 import Footer from '@/components/footer'
 import SectionContainer from '@/components/shared/section-container'
 import { ArrowLeft, Users, Calendar, Award, CheckCircle2 } from 'lucide-react'
@@ -90,8 +91,8 @@ export default async function CommunityDetailPage({ params }: Props) {
             <h2 className="text-xl font-bold uppercase tracking-wide text-foreground border-b border-border/40 pb-3">
               Overview & Leadership Story
             </h2>
-            <div className="prose dark:prose-invert max-w-none text-muted-foreground space-y-4 text-base">
-              {entry.description}
+            <div className="text-muted-foreground text-base">
+              <Markdown content={entry.description} />
             </div>
 
             {/* Achievements */}

@@ -1,5 +1,11 @@
-// Central universal search index — dynamically indexes all site content & data sources
-import { projects, journeyTimeline, skillGroups, servicesList, certificationsList } from "@/lib/data"
+import {
+  getCertifications,
+  getJournalArticles,
+  getJourneyItems,
+  getProjectItems,
+  getServices,
+  getSkillGroups,
+} from "@/lib/content"
 
 export interface SearchResult {
   id: string
@@ -10,7 +16,6 @@ export interface SearchResult {
   keywords?: string[]
 }
 
-// ─── Pages ───────────────────────────────────────────────────────────────────
 const pageEntries: SearchResult[] = [
   {
     id: "page-home",
@@ -78,74 +83,98 @@ const pageEntries: SearchResult[] = [
   },
 ]
 
-// ─── Dynamic Projects Indexing ───────────────────────────────────────────────
-const projectEntries: SearchResult[] = projects.map((p) => ({
-  id: `project-${p.id || p.title.toLowerCase().replace(/\s+/g, "-")}`,
-  title: p.title,
-  description: `${p.description} (Role: ${p.role || "Developer"}, Technologies: ${p.technologies.join(", ")})`,
-  category: "Project",
-  href: p.id ? `/portfolio/${p.id}` : "/portfolio",
-  keywords: [p.title.toLowerCase(), ...(p.technologies || []).map((t) => t.toLowerCase()), p.category?.toLowerCase() || "portfolio"],
-}))
+export async function buildSearchIndex(): Promise<SearchResult[]> {
+  const [projects, services, skillGroups, journeyTimeline, certifications, articles] =
+    await Promise.all([
+      getProjectItems(),
+      getServices(),
+      getSkillGroups(),
+      getJourneyItems(),
+      getCertifications(),
+      getJournalArticles(),
+    ])
 
-// ─── Dynamic Services Indexing ───────────────────────────────────────────────
-const serviceEntries: SearchResult[] = servicesList.map((s) => ({
-  id: `service-${s.id}`,
-  title: s.title,
-  description: s.description,
-  category: "Service",
-  href: s.ctaHref || "/contact",
-  keywords: [s.title.toLowerCase(), "service", "consulting", "offer", "freelance"],
-}))
-
-// ─── Dynamic Skills Indexing ──────────────────────────────────────────────────
-const skillEntries: SearchResult[] = skillGroups.flatMap((group) =>
-  group.skills.map((skill) => ({
-    id: `skill-${skill.name.toLowerCase().replace(/\s+/g, "-")}`,
-    title: skill.name,
-    description: `${group.category} — ${skill.experienceLevel || "Proficient"} (${skill.years || "Active"})`,
-    category: "Skill",
-    href: "/portfolio",
-    keywords: [skill.name.toLowerCase(), group.category.toLowerCase(), "stack", "tool", "expertise"],
+  const projectEntries: SearchResult[] = projects.map((p) => ({
+    id: `project-${p.id || p.title.toLowerCase().replace(/\s+/g, "-")}`,
+    title: p.title,
+    description: `${p.description} (Role: ${p.role || "Developer"}, Technologies: ${p.technologies.join(", ")})`,
+    category: "Project",
+    href: p.slug ? `/portfolio/${p.slug}` : "/portfolio",
+    keywords: [
+      p.title.toLowerCase(),
+      ...(p.technologies || []).map((t) => t.toLowerCase()),
+      p.category?.toLowerCase() || "portfolio",
+    ],
   }))
-)
 
-// ─── Dynamic Journey & Experience Indexing ───────────────────────────────────
-const journeyEntries: SearchResult[] = journeyTimeline.map((j) => ({
-  id: `journey-${j.id}`,
-  title: `${j.title} — ${j.organization}`,
-  description: `${j.description} (${j.date})`,
-  category: "Experience",
-  href: "/journey",
-  keywords: [j.title.toLowerCase(), j.organization.toLowerCase(), ...(j.details || []).map((d) => d.toLowerCase()), j.type],
-}))
+  const serviceEntries: SearchResult[] = services.map((s) => ({
+    id: `service-${s.id}`,
+    title: s.title,
+    description: s.description,
+    category: "Service",
+    href: s.ctaHref || "/contact",
+    keywords: [s.title.toLowerCase(), "service", "consulting", "offer", "freelance"],
+  }))
 
-// ─── Dynamic Certifications Indexing ────────────────────────────────────────
-const certEntries: SearchResult[] = certificationsList.map((c) => ({
-  id: `cert-${c.id}`,
-  title: c.title,
-  description: `Issued by ${c.provider} (${c.date})`,
-  category: "Certification",
-  href: "/about",
-  keywords: [c.title.toLowerCase(), c.provider.toLowerCase(), "certification", "credential"],
-}))
+  const skillEntries: SearchResult[] = skillGroups.flatMap((group) =>
+    group.skills.map((skill) => ({
+      id: `skill-${skill.name.toLowerCase().replace(/\s+/g, "-")}`,
+      title: skill.name,
+      description: `${group.category} — ${skill.experienceLevel || "Proficient"} (${skill.years || "Active"})`,
+      category: "Skill" as const,
+      href: "/portfolio",
+      keywords: [skill.name.toLowerCase(), group.category.toLowerCase(), "stack", "tool", "expertise"],
+    }))
+  )
 
-// ─── Master Universal Search Index ────────────────────────────────────────────
-export const searchIndex: SearchResult[] = [
-  ...pageEntries,
-  ...projectEntries,
-  ...serviceEntries,
-  ...skillEntries,
-  ...journeyEntries,
-  ...certEntries,
-]
+  const journeyEntries: SearchResult[] = journeyTimeline.map((j) => ({
+    id: `journey-${j.id}`,
+    title: `${j.title} — ${j.organization}`,
+    description: `${j.description} (${j.date})`,
+    category: "Experience" as const,
+    href: "/journey",
+    keywords: [
+      j.title.toLowerCase(),
+      j.organization.toLowerCase(),
+      ...(j.details || []).map((d) => d.toLowerCase()),
+      j.type,
+    ],
+  }))
 
-// Search function — returns results sorted by universal relevance
-export function searchContent(query: string): SearchResult[] {
+  const certEntries: SearchResult[] = certifications.map((c) => ({
+    id: `cert-${c.id}`,
+    title: c.title,
+    description: `Issued by ${c.provider} (${c.date})`,
+    category: "Certification" as const,
+    href: "/about",
+    keywords: [c.title.toLowerCase(), c.provider.toLowerCase(), "certification", "credential"],
+  }))
+
+  const journalEntries: SearchResult[] = articles.map((a) => ({
+    id: `journal-${a.slug}`,
+    title: a.title,
+    description: a.excerpt,
+    category: "Journal" as const,
+    href: `/journal/${a.slug}`,
+    keywords: [a.title.toLowerCase(), a.category.toLowerCase(), ...a.tags.map((t) => t.toLowerCase())],
+  }))
+
+  return [
+    ...pageEntries,
+    ...projectEntries,
+    ...serviceEntries,
+    ...skillEntries,
+    ...journeyEntries,
+    ...certEntries,
+    ...journalEntries,
+  ]
+}
+
+export function searchInIndex(index: SearchResult[], query: string): SearchResult[] {
   if (!query.trim()) return []
   const q = query.toLowerCase().trim()
 
-  return searchIndex
+  return index
     .filter((item) => {
       const titleMatch = item.title.toLowerCase().includes(q)
       const descMatch = item.description.toLowerCase().includes(q)
@@ -164,17 +193,21 @@ export function searchContent(query: string): SearchResult[] {
     })
 }
 
+/** Client-safe fallback: pages only until API loads */
+export const searchIndex: SearchResult[] = pageEntries
+
+export function searchContent(query: string): SearchResult[] {
+  return searchInIndex(searchIndex, query)
+}
+
 export const popularPages: SearchResult[] = pageEntries.slice(0, 5)
 
 export function groupResults(results: SearchResult[]): Record<string, SearchResult[]> {
   const groups: Record<string, SearchResult[]> = {}
   for (const item of results) {
     const cat = item.category
-    if (!groups[cat]) {
-      groups[cat] = []
-    }
+    if (!groups[cat]) groups[cat] = []
     groups[cat].push(item)
   }
   return groups
 }
-

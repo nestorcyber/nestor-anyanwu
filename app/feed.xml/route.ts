@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getJournalArticles } from '@/lib/keystatic'
+import { getJournalArticles } from '@/lib/content'
 
 export async function GET() {
   const articles = await getJournalArticles()

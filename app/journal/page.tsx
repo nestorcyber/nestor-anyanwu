@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 import Footer from "@/components/footer"
-import { getJournalArticles } from "@/lib/keystatic"
+import { getJournalArticles } from "@/lib/content"
 import JournalClient, { JournalArticleItem } from "@/components/journal/journal-client"
 
 export const metadata: Metadata = {

@@ -1,11 +1,11 @@
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect } from "react"
 import { X, Sun, Moon, Search, Layers, Briefcase, Zap, Star, BookOpen, Users, FileText, ArrowUpRight, Award, History } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { useTheme } from "next-themes"
-import { searchContent, searchIndex, type SearchResult } from "@/lib/search-index"
+import type { SearchResult } from "@/lib/search-index"
 
 const categoryIcons: Record<string, React.ReactNode> = {
   Page: <Layers className="w-3.5 h-3.5" />,
@@ -33,11 +33,29 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([])
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setSearchResults([])
+      return
+    }
+    const handle = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/search?q=${encodeURIComponent(searchQuery.trim())}`)
+        const data = await res.json()
+        setSearchResults(data.results || [])
+      } catch {
+        setSearchResults([])
+      }
+    }, 200)
+    return () => clearTimeout(handle)
+  }, [searchQuery])
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -84,12 +102,6 @@ export default function Navigation() {
     { label: "Gallery", href: "/gallery" },
     { label: "Contact", href: "/contact" },
   ]
-
-  // Dynamic live search results computed immediately as user types
-  const searchResults = useMemo(() => {
-    if (!searchQuery.trim()) return []
-    return searchContent(searchQuery.trim())
-  }, [searchQuery])
 
   const isSearching = searchQuery.trim().length > 0
 

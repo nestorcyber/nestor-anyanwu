@@ -1,10 +1,10 @@
 import React from "react"
 import Image from "next/image"
 import SectionHeader from "@/components/shared/section-header"
-import { projects } from "@/lib/data"
+import type { ProjectItem } from "@/lib/content"
 import { ArrowUpRight, Github, ExternalLink } from "lucide-react"
 
-export default function FeaturedProjectsShowcase() {
+export default function FeaturedProjectsShowcase({ projects }: { projects: ProjectItem[] }) {
   const featuredList = projects.slice(0, 3)
 
   return (

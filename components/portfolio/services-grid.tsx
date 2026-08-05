@@ -1,10 +1,10 @@
 import React from "react"
 import Link from "next/link"
 import SectionHeader from "@/components/shared/section-header"
-import { servicesList } from "@/lib/data"
+import type { ServiceItem } from "@/lib/content"
 import { Code, Globe, Layout, Palette, Briefcase, Zap, Shield, ArrowUpRight } from "lucide-react"
 
-export default function ServicesGrid() {
+export default function ServicesGrid({ services }: { services: ServiceItem[] }) {
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case "Code":
@@ -36,7 +36,7 @@ export default function ServicesGrid() {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {servicesList.map((service) => (
+          {services.map((service) => (
             <div
               key={service.id}
               className="p-8 bg-card border border-border/60 hover:border-accent rounded-none transition-all duration-300 grid-cell-card flex flex-col justify-between space-y-6"

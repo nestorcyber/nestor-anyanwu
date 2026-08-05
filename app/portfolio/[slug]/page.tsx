@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { getPortfolioProjectBySlug, getPortfolioProjects } from '@/lib/keystatic'
+import { getPortfolioProjectBySlug, getPortfolioProjects } from '@/lib/content'
+import { Markdown } from '@/lib/content/markdown'
 import Footer from '@/components/footer'
 import SectionContainer from '@/components/shared/section-container'
 import { ArrowLeft, ExternalLink, Github, Calendar, Tag, CheckCircle2 } from 'lucide-react'
@@ -91,8 +92,8 @@ export default async function PortfolioDetailPage({ params }: Props) {
             <h2 className="text-xl font-bold uppercase tracking-wide text-foreground border-b border-border/40 pb-3">
               Case Study & Overview
             </h2>
-            <div className="prose dark:prose-invert max-w-none text-muted-foreground space-y-4 text-base">
-              {project.fullDescription}
+            <div className="text-muted-foreground text-base">
+              <Markdown content={project.fullDescription} />
             </div>
           </div>
 

@@ -1,3 +1,7 @@
+/**
+ * Seed-source snapshot used by `pnpm seed`.
+ * Runtime pages read from Supabase via `@/lib/content`.
+ */
 export interface JourneyItem {
   id: number
   title: string

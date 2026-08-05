@@ -1,0 +1,273 @@
+/**
+ * Seed Supabase from existing Keystatic MDX + lib/data.ts
+ *
+ * Prerequisites:
+ * 1. Run supabase/migrations/001_init.sql in the Supabase SQL Editor
+ * 2. Fill NEXT_PUBLIC_SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY in .env
+ *
+ * Usage: pnpm seed
+ */
+import { config } from 'dotenv'
+import { createClient } from '@supabase/supabase-js'
+import fs from 'node:fs'
+import path from 'node:path'
+import matter from 'gray-matter'
+import {
+  journeyTimeline,
+  portfolioStats,
+  projects,
+  servicesList,
+  skillGroups,
+  certificationsList,
+} from '../lib/data'
+
+config({ path: '.env' })
+config({ path: '.env.local', override: true })
+
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+const key = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+if (!url || !key) {
+  console.error('Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY')
+  process.exit(1)
+}
+
+const supabase = createClient(url, key, {
+  auth: { persistSession: false, autoRefreshToken: false },
+})
+
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+function readMdxDir(dir: string) {
+  const abs = path.join(process.cwd(), dir)
+  if (!fs.existsSync(abs)) return []
+  return fs
+    .readdirSync(abs)
+    .filter((f) => f.endsWith('.mdx') || f.endsWith('.md'))
+    .map((file) => {
+      const slug = file.replace(/\.mdx?$/, '')
+      const raw = fs.readFileSync(path.join(abs, file), 'utf8')
+      const { data, content } = matter(raw)
+      return { slug, data, content: content.trim() }
+    })
+}
+
+async function upsert(table: string, rows: Record<string, unknown>[], onConflict: string) {
+  if (!rows.length) return
+  const { error } = await supabase.from(table).upsert(rows, { onConflict })
+  if (error) throw new Error(`${table}: ${error.message}`)
+  console.log(`✓ ${table}: ${rows.length} rows`)
+}
+
+async function main() {
+  // Site settings
+  const settingsPath = path.join(process.cwd(), 'content/settings/site.json')
+  if (fs.existsSync(settingsPath)) {
+    const site = JSON.parse(fs.readFileSync(settingsPath, 'utf8'))
+    const { data: existing } = await supabase.from('site_settings').select('id').limit(1).maybeSingle()
+    const payload = {
+      site_name: site.siteName,
+      author_name: site.authorName,
+      tagline: site.tagline,
+      hero_title: site.heroTitle,
+      hero_subtitle: site.heroSubtitle,
+      contact_email: site.contactEmail,
+      location: site.location,
+      availability_status: site.availabilityStatus,
+      social_github: site.socialLinks?.github ?? '',
+      social_linkedin: site.socialLinks?.linkedin ?? '',
+      social_twitter: site.socialLinks?.twitter ?? '',
+      social_behance: site.socialLinks?.behance ?? '',
+      social_whatsapp: site.socialLinks?.whatsapp ?? '',
+      google_analytics_id: site.analytics?.googleAnalyticsId ?? '',
+    }
+    if (existing?.id) {
+      await supabase.from('site_settings').update(payload).eq('id', existing.id)
+    } else {
+      await supabase.from('site_settings').insert(payload)
+    }
+    console.log('✓ site_settings')
+  }
+
+  // Journal
+  const journal = readMdxDir('content/journal').map(({ slug, data, content }, i) => ({
+    slug,
+    title: data.title ?? slug,
+    excerpt: data.excerpt ?? '',
+    cover_image: data.coverImage ?? null,
+    category: data.category ?? 'Technology',
+    tags: data.tags ?? [],
+    featured: !!data.featured,
+    pinned: !!data.pinned,
+    published_date: data.publishedDate ?? null,
+    last_updated: data.lastUpdated ?? null,
+    author: data.author ?? 'Nestor Anyanwu',
+    seo_title: data.seoTitle ?? null,
+    seo_description: data.seoDescription ?? null,
+    draft: !!data.draft,
+    content,
+    sort_order: i,
+  }))
+  await upsert('journal_articles', journal, 'slug')
+
+  // Portfolio from MDX
+  const portfolioMdx = readMdxDir('content/portfolio').map(({ slug, data, content }, i) => ({
+    slug,
+    title: data.title ?? slug,
+    short_description: data.shortDescription ?? '',
+    cover_image: data.coverImage ?? null,
+    gallery: (data.gallery ?? []).filter(Boolean),
+    category: data.category ?? 'Software',
+    technologies: data.technologies ?? [],
+    status: data.status ?? 'Completed',
+    client: data.client ?? null,
+    role: data.role ?? null,
+    github_url: data.githubUrl ?? null,
+    live_url: data.liveUrl ?? null,
+    case_study_url: null,
+    featured: !!data.featured,
+    completion_date: data.completionDate ?? null,
+    full_description: content,
+    draft: false,
+    sort_order: i,
+  }))
+
+  // Merge lib/data projects that aren't already in MDX
+  const existingSlugs = new Set(portfolioMdx.map((p) => p.slug))
+  const portfolioFromData = projects.map((p, i) => {
+    const slug = p.id || slugify(p.title)
+    return {
+      slug,
+      title: p.title,
+      short_description: p.description,
+      cover_image: p.image ?? null,
+      gallery: [] as string[],
+      category: p.category ?? 'Software',
+      technologies: p.technologies ?? [],
+      status: p.status ?? 'Completed',
+      client: null as string | null,
+      role: p.role ?? null,
+      github_url: p.links.github ?? null,
+      live_url: p.links.demo ?? null,
+      case_study_url: p.links.caseStudy ?? null,
+      featured: i < 3,
+      completion_date: null as string | null,
+      full_description: p.description,
+      draft: false,
+      sort_order: portfolioMdx.length + i,
+    }
+  }).filter((p) => !existingSlugs.has(p.slug))
+
+  await upsert('portfolio_projects', [...portfolioMdx, ...portfolioFromData], 'slug')
+
+  // Community
+  const community = readMdxDir('content/community').map(({ slug, data, content }, i) => ({
+    slug,
+    organization: data.organization ?? slug,
+    role: data.role ?? '',
+    duration: data.duration ?? '',
+    cover_image: data.coverImage ?? null,
+    gallery: (data.gallery ?? []).filter(Boolean),
+    achievements: data.achievements ?? [],
+    impact_stats: data.impactStats ?? [],
+    featured: !!data.featured,
+    tags: data.tags ?? [],
+    description: content,
+    draft: false,
+    sort_order: i,
+  }))
+  await upsert('community_entries', community, 'slug')
+
+  // Journey
+  await supabase.from('journey_items').delete().neq('id', '00000000-0000-0000-0000-000000000000')
+  const journeyRows = journeyTimeline.map((item, i) => ({
+    title: item.title,
+    organization: item.organization,
+    role: item.role ?? null,
+    date_label: item.date,
+    description: item.description,
+    type: item.type,
+    details: item.details ?? [],
+    images: (item.images ?? []).filter((u) => u && !u.includes('placeholder')),
+    sort_order: i,
+  }))
+  const { error: journeyErr } = await supabase.from('journey_items').insert(journeyRows)
+  if (journeyErr) throw new Error(`journey_items: ${journeyErr.message}`)
+  console.log(`✓ journey_items: ${journeyRows.length} rows`)
+
+  // Stats
+  await supabase.from('portfolio_stats').delete().neq('id', '00000000-0000-0000-0000-000000000000')
+  const { error: statsErr } = await supabase.from('portfolio_stats').insert(
+    portfolioStats.map((s, i) => ({
+      value: s.value,
+      label: s.label,
+      description: s.description ?? null,
+      sort_order: i,
+    }))
+  )
+  if (statsErr) throw new Error(`portfolio_stats: ${statsErr.message}`)
+  console.log(`✓ portfolio_stats: ${portfolioStats.length} rows`)
+
+  // Services
+  const serviceRows = servicesList.map((s, i) => ({
+    slug: s.id,
+    title: s.title,
+    description: s.description,
+    icon_name: s.iconName,
+    cta_text: s.ctaText,
+    cta_href: s.ctaHref,
+    sort_order: i,
+  }))
+  await upsert('services', serviceRows, 'slug')
+
+  // Skills
+  await supabase.from('skills').delete().neq('id', '00000000-0000-0000-0000-000000000000')
+  await supabase.from('skill_groups').delete().neq('id', '00000000-0000-0000-0000-000000000000')
+  for (let i = 0; i < skillGroups.length; i++) {
+    const group = skillGroups[i]
+    const { data: g, error: gErr } = await supabase
+      .from('skill_groups')
+      .insert({ category: group.category, sort_order: i })
+      .select('id')
+      .single()
+    if (gErr || !g) throw new Error(`skill_groups: ${gErr?.message}`)
+    if (group.skills.length) {
+      const { error: sErr } = await supabase.from('skills').insert(
+        group.skills.map((s, j) => ({
+          group_id: g.id,
+          name: s.name,
+          experience_level: s.experienceLevel ?? null,
+          years: s.years ?? null,
+          sort_order: j,
+        }))
+      )
+      if (sErr) throw new Error(`skills: ${sErr.message}`)
+    }
+  }
+  console.log(`✓ skill_groups + skills`)
+
+  // Certifications
+  const certRows = certificationsList.map((c, i) => ({
+    slug: c.id,
+    title: c.title,
+    provider: c.provider,
+    date_label: c.date,
+    credential_url: c.credentialUrl ?? null,
+    sort_order: i,
+  }))
+  await upsert('certifications', certRows, 'slug')
+
+  console.log('\nSeed complete.')
+}
+
+main().catch((err) => {
+  console.error(err)
+  process.exit(1)
+})

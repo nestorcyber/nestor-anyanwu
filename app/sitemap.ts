@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next"
-import { getJournalArticles, getPortfolioProjects, getCommunityEntries } from "@/lib/keystatic"
+import { getJournalArticles, getPortfolioProjects, getCommunityEntries } from "@/lib/content"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://nestor.name.ng"

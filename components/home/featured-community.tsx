@@ -2,7 +2,7 @@ import React from "react"
 import Link from "next/link"
 import SectionContainer from "@/components/shared/section-container"
 import SectionHeader from "@/components/shared/section-header"
-import { getCommunityEntries } from "@/lib/keystatic"
+import { getCommunityEntries } from "@/lib/content"
 import { Users, ArrowUpRight } from "lucide-react"
 
 export default async function FeaturedCommunity() {

@@ -1,0 +1,374 @@
+'use client'
+
+import { FormEvent, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
+import { slugify } from '@/lib/utils/slug'
+import ImageUpload from '@/components/admin/image-upload'
+import {
+  DangerButton,
+  Field,
+  PrimaryButton,
+  TextInput,
+  TextTextarea,
+} from '@/components/admin/field'
+import type { Tables } from '@/lib/supabase/types'
+
+export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | null }) {
+  const router = useRouter()
+  const [title, setTitle] = useState(initial?.title ?? '')
+  const [imageUrl, setImageUrl] = useState(initial?.image_url ?? '')
+  const [alt, setAlt] = useState(initial?.alt ?? '')
+  const [sortOrder, setSortOrder] = useState(String(initial?.sort_order ?? 0))
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
+
+  async function onSubmit(e: FormEvent) {
+    e.preventDefault()
+    setSaving(true)
+    const supabase = createClient()
+    const payload = {
+      title: title || null,
+      image_url: imageUrl,
+      alt: alt || null,
+      sort_order: Number(sortOrder) || 0,
+    }
+    const res = initial
+      ? await supabase.from('gallery_images').update(payload).eq('id', initial.id)
+      : await supabase.from('gallery_images').insert(payload)
+    if (res.error) {
+      setError(res.error.message)
+      setSaving(false)
+      return
+    }
+    router.push('/admin/gallery')
+    router.refresh()
+  }
+
+  async function onDelete() {
+    if (!initial || !confirm('Delete?')) return
+    const supabase = createClient()
+    await supabase.from('gallery_images').delete().eq('id', initial.id)
+    router.push('/admin/gallery')
+    router.refresh()
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="max-w-xl space-y-5">
+      <Field label="Title">
+        <TextInput value={title} onChange={(e) => setTitle(e.target.value)} />
+      </Field>
+      <ImageUpload label="Image" value={imageUrl} onChange={setImageUrl} folder="gallery" />
+      <Field label="Alt text">
+        <TextInput value={alt} onChange={(e) => setAlt(e.target.value)} />
+      </Field>
+      <Field label="Sort order">
+        <TextInput type="number" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
+      </Field>
+      {error ? <p className="text-sm text-red-400">{error}</p> : null}
+      <div className="flex gap-3">
+        <PrimaryButton type="submit" disabled={saving || !imageUrl}>
+          Save
+        </PrimaryButton>
+        {initial ? <DangerButton type="button" onClick={onDelete}>Delete</DangerButton> : null}
+      </div>
+    </form>
+  )
+}
+
+export function ServiceForm({ initial }: { initial?: Tables<'services'> | null }) {
+  const router = useRouter()
+  const [title, setTitle] = useState(initial?.title ?? '')
+  const [slug, setSlug] = useState(initial?.slug ?? '')
+  const [description, setDescription] = useState(initial?.description ?? '')
+  const [iconName, setIconName] = useState(initial?.icon_name ?? 'Code')
+  const [ctaText, setCtaText] = useState(initial?.cta_text ?? 'Learn more')
+  const [ctaHref, setCtaHref] = useState(initial?.cta_href ?? '/contact')
+  const [sortOrder, setSortOrder] = useState(String(initial?.sort_order ?? 0))
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
+
+  async function onSubmit(e: FormEvent) {
+    e.preventDefault()
+    setSaving(true)
+    const supabase = createClient()
+    const payload = {
+      title,
+      slug: slug || slugify(title),
+      description,
+      icon_name: iconName,
+      cta_text: ctaText,
+      cta_href: ctaHref,
+      sort_order: Number(sortOrder) || 0,
+    }
+    const res = initial
+      ? await supabase.from('services').update(payload).eq('id', initial.id)
+      : await supabase.from('services').insert(payload)
+    if (res.error) {
+      setError(res.error.message)
+      setSaving(false)
+      return
+    }
+    router.push('/admin/services')
+    router.refresh()
+  }
+
+  async function onDelete() {
+    if (!initial || !confirm('Delete?')) return
+    const supabase = createClient()
+    await supabase.from('services').delete().eq('id', initial.id)
+    router.push('/admin/services')
+    router.refresh()
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="max-w-xl space-y-5">
+      <Field label="Title">
+        <TextInput
+          required
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value)
+            if (!initial) setSlug(slugify(e.target.value))
+          }}
+        />
+      </Field>
+      <Field label="Slug">
+        <TextInput required value={slug} onChange={(e) => setSlug(slugify(e.target.value))} />
+      </Field>
+      <Field label="Description">
+        <TextTextarea value={description} onChange={(e) => setDescription(e.target.value)} />
+      </Field>
+      <Field label="Icon name (Lucide)">
+        <TextInput value={iconName} onChange={(e) => setIconName(e.target.value)} />
+      </Field>
+      <Field label="CTA text">
+        <TextInput value={ctaText} onChange={(e) => setCtaText(e.target.value)} />
+      </Field>
+      <Field label="CTA href">
+        <TextInput value={ctaHref} onChange={(e) => setCtaHref(e.target.value)} />
+      </Field>
+      <Field label="Sort order">
+        <TextInput type="number" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
+      </Field>
+      {error ? <p className="text-sm text-red-400">{error}</p> : null}
+      <div className="flex gap-3">
+        <PrimaryButton type="submit" disabled={saving}>
+          Save
+        </PrimaryButton>
+        {initial ? <DangerButton type="button" onClick={onDelete}>Delete</DangerButton> : null}
+      </div>
+    </form>
+  )
+}
+
+export function StatForm({ initial }: { initial?: Tables<'portfolio_stats'> | null }) {
+  const router = useRouter()
+  const [value, setValue] = useState(initial?.value ?? '')
+  const [label, setLabel] = useState(initial?.label ?? '')
+  const [description, setDescription] = useState(initial?.description ?? '')
+  const [sortOrder, setSortOrder] = useState(String(initial?.sort_order ?? 0))
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
+
+  async function onSubmit(e: FormEvent) {
+    e.preventDefault()
+    setSaving(true)
+    const supabase = createClient()
+    const payload = {
+      value,
+      label,
+      description: description || null,
+      sort_order: Number(sortOrder) || 0,
+    }
+    const res = initial
+      ? await supabase.from('portfolio_stats').update(payload).eq('id', initial.id)
+      : await supabase.from('portfolio_stats').insert(payload)
+    if (res.error) {
+      setError(res.error.message)
+      setSaving(false)
+      return
+    }
+    router.push('/admin/stats')
+    router.refresh()
+  }
+
+  async function onDelete() {
+    if (!initial || !confirm('Delete?')) return
+    const supabase = createClient()
+    await supabase.from('portfolio_stats').delete().eq('id', initial.id)
+    router.push('/admin/stats')
+    router.refresh()
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="max-w-xl space-y-5">
+      <Field label="Value">
+        <TextInput required value={value} onChange={(e) => setValue(e.target.value)} />
+      </Field>
+      <Field label="Label">
+        <TextInput required value={label} onChange={(e) => setLabel(e.target.value)} />
+      </Field>
+      <Field label="Description">
+        <TextTextarea value={description} onChange={(e) => setDescription(e.target.value)} />
+      </Field>
+      <Field label="Sort order">
+        <TextInput type="number" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
+      </Field>
+      {error ? <p className="text-sm text-red-400">{error}</p> : null}
+      <div className="flex gap-3">
+        <PrimaryButton type="submit" disabled={saving}>
+          Save
+        </PrimaryButton>
+        {initial ? <DangerButton type="button" onClick={onDelete}>Delete</DangerButton> : null}
+      </div>
+    </form>
+  )
+}
+
+export function CertificationForm({ initial }: { initial?: Tables<'certifications'> | null }) {
+  const router = useRouter()
+  const [title, setTitle] = useState(initial?.title ?? '')
+  const [slug, setSlug] = useState(initial?.slug ?? '')
+  const [provider, setProvider] = useState(initial?.provider ?? '')
+  const [dateLabel, setDateLabel] = useState(initial?.date_label ?? '')
+  const [credentialUrl, setCredentialUrl] = useState(initial?.credential_url ?? '')
+  const [sortOrder, setSortOrder] = useState(String(initial?.sort_order ?? 0))
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
+
+  async function onSubmit(e: FormEvent) {
+    e.preventDefault()
+    setSaving(true)
+    const supabase = createClient()
+    const payload = {
+      title,
+      slug: slug || slugify(title),
+      provider,
+      date_label: dateLabel,
+      credential_url: credentialUrl || null,
+      sort_order: Number(sortOrder) || 0,
+    }
+    const res = initial
+      ? await supabase.from('certifications').update(payload).eq('id', initial.id)
+      : await supabase.from('certifications').insert(payload)
+    if (res.error) {
+      setError(res.error.message)
+      setSaving(false)
+      return
+    }
+    router.push('/admin/certifications')
+    router.refresh()
+  }
+
+  async function onDelete() {
+    if (!initial || !confirm('Delete?')) return
+    const supabase = createClient()
+    await supabase.from('certifications').delete().eq('id', initial.id)
+    router.push('/admin/certifications')
+    router.refresh()
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="max-w-xl space-y-5">
+      <Field label="Title">
+        <TextInput
+          required
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value)
+            if (!initial) setSlug(slugify(e.target.value))
+          }}
+        />
+      </Field>
+      <Field label="Slug">
+        <TextInput required value={slug} onChange={(e) => setSlug(slugify(e.target.value))} />
+      </Field>
+      <Field label="Provider">
+        <TextInput value={provider} onChange={(e) => setProvider(e.target.value)} />
+      </Field>
+      <Field label="Date">
+        <TextInput value={dateLabel} onChange={(e) => setDateLabel(e.target.value)} />
+      </Field>
+      <Field label="Credential URL">
+        <TextInput value={credentialUrl} onChange={(e) => setCredentialUrl(e.target.value)} />
+      </Field>
+      <Field label="Sort order">
+        <TextInput type="number" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
+      </Field>
+      {error ? <p className="text-sm text-red-400">{error}</p> : null}
+      <div className="flex gap-3">
+        <PrimaryButton type="submit" disabled={saving}>
+          Save
+        </PrimaryButton>
+        {initial ? <DangerButton type="button" onClick={onDelete}>Delete</DangerButton> : null}
+      </div>
+    </form>
+  )
+}
+
+export function SettingsForm({ initial }: { initial: Tables<'site_settings'> }) {
+  const router = useRouter()
+  const [form, setForm] = useState(initial)
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
+  const [ok, setOk] = useState(false)
+
+  function set<K extends keyof Tables<'site_settings'>>(key: K, value: Tables<'site_settings'>[K]) {
+    setForm((prev) => ({ ...prev, [key]: value }))
+  }
+
+  async function onSubmit(e: FormEvent) {
+    e.preventDefault()
+    setSaving(true)
+    setError('')
+    setOk(false)
+    const supabase = createClient()
+    const { id, created_at, updated_at, ...payload } = form
+    const res = await supabase.from('site_settings').update(payload).eq('id', id)
+    if (res.error) {
+      setError(res.error.message)
+      setSaving(false)
+      return
+    }
+    setOk(true)
+    setSaving(false)
+    router.refresh()
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="max-w-2xl space-y-5">
+      {(
+        [
+          ['site_name', 'Site name'],
+          ['author_name', 'Author name'],
+          ['tagline', 'Tagline'],
+          ['hero_title', 'Hero title'],
+          ['hero_subtitle', 'Hero subtitle'],
+          ['contact_email', 'Contact email'],
+          ['location', 'Location'],
+          ['availability_status', 'Availability'],
+          ['social_github', 'GitHub'],
+          ['social_linkedin', 'LinkedIn'],
+          ['social_twitter', 'Twitter'],
+          ['social_behance', 'Behance'],
+          ['social_whatsapp', 'WhatsApp'],
+          ['google_analytics_id', 'Google Analytics ID'],
+        ] as const
+      ).map(([key, label]) => (
+        <Field key={key} label={label}>
+          {key === 'hero_subtitle' || key === 'tagline' ? (
+            <TextTextarea value={String(form[key] ?? '')} onChange={(e) => set(key, e.target.value)} />
+          ) : (
+            <TextInput value={String(form[key] ?? '')} onChange={(e) => set(key, e.target.value)} />
+          )}
+        </Field>
+      ))}
+      {error ? <p className="text-sm text-red-400">{error}</p> : null}
+      {ok ? <p className="text-sm text-emerald-400">Saved.</p> : null}
+      <PrimaryButton type="submit" disabled={saving}>
+        {saving ? 'Saving…' : 'Save settings'}
+      </PrimaryButton>
+    </form>
+  )
+}

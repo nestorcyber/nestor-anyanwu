@@ -1,9 +1,9 @@
 import React from "react"
 import SectionHeader from "@/components/shared/section-header"
-import { certificationsList } from "@/lib/data"
+import type { CertificationItem } from "@/lib/content"
 import { Award, ExternalLink } from "lucide-react"
 
-export default function CertificationsGrid() {
+export default function CertificationsGrid({ certificationsList }: { certificationsList: CertificationItem[] }) {
   return (
     <section className="w-full py-16 md:py-24 border-b border-border/60 bg-secondary/10">
       <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">

@@ -5,189 +5,28 @@ import Image from "next/image"
 import Footer from "@/components/footer"
 import { Calendar, Users, Heart, Award, ChevronLeft, ChevronRight, MapPin } from "lucide-react"
 
-const volunteerEvents = [
-  {
-    id: 1,
-    title: "IEEE FUTO Student Branch",
-    role: "Event Logistics",
-    date: "May 2026 – Present",
-    category: "Engineering",
-    description: "Supporting IEEE FUTO Student Branch events through logistics coordination and on-ground event management.",
-    tags: ["Event Logistics", "IEEE", "Engineering"],
-    images: [],
-    accent: "#2563eb",
-  },
-  {
-    id: 2,
-    title: "Federal University of Technology Owerri",
-    role: "Media Team",
-    date: "Dec 2025 – Present",
-    category: "Media",
-    description: "Contributing to FUTO's official media team, supporting documentation, photography, and visual communications for university events.",
-    tags: ["Photography", "Media", "Documentation"],
-    images: [],
-    accent: "#7c3aed",
-  },
-  {
-    id: 3,
-    title: "Emerging Leaders Conference",
-    role: "Media Team",
-    date: "Dec 2025",
-    category: "Leadership",
-    description: "Served on the Media Team for the Emerging Leaders Conference by GOTNI, capturing impactful moments and supporting digital documentation of this leadership event.",
-    tags: ["Media", "Leadership", "GOTNI"],
-    images: [],
-    accent: "#0891b2",
-  },
-  {
-    id: 4,
-    title: "Edensprime Hospitality Summit",
-    role: "Event Setup",
-    date: "Nov 2025",
-    category: "Events",
-    description: "Contributed to the success of the Edensprime Hospitality Summit through dedicated event setup and coordination.",
-    tags: ["Event Setup", "Hospitality", "FLE Global"],
-    images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden2-sUzI0wvGmZMjB5UUP911IAB6WvBM5c.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden3%280%29-Md3eT61Brp60MhmfTcGcfxvEaFIHqs.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden5-LDykBdjx1JiJvGYDIdliITuBi0V8Ke.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden1-iePEIbrkoW7wba4cbBoCLfkFEsqQTU.jpg",
-    ],
-    accent: "#d97706",
-  },
-  {
-    id: 5,
-    title: "FLE Conference",
-    role: "Event Setup",
-    date: "Nov 2025",
-    category: "Leadership",
-    description: "Supported the Faith Life, Leadership & Entrepreneurship Conference by managing event setup logistics behind the scenes.",
-    tags: ["Event Setup", "Entrepreneurship", "FLE Global"],
-    images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fle3%280%29-CFKUWQDj8dfMZ5zkDTF9IEEXC6zDID.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fle2%280%29-FfRbgx2cSla1HuEuvaPzlOe8rKfEcm.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fle4-n7IdoFLGvctWYMK2ZspbSaqYEJz6n7.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fle1%280%29-RFztiDFA8wlZ5TUikrNKon6EVYY0te.jpg",
-    ],
-    accent: "#059669",
-  },
-  {
-    id: 6,
-    title: "DevFest Owerri 2025",
-    role: "Major Designer & Events Support",
-    date: "Nov 2025",
-    category: "Tech",
-    description: "Supported the largest developer festival in South-East Nigeria through major design contributions and event logistics.",
-    tags: ["Graphic Design", "GDG", "Tech Festival"],
-    images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
-    ],
-    accent: "#4f46e5",
-  },
-  {
-    id: 7,
-    title: "Gold In Real Estate Conference",
-    role: "Media Team & Welfare Team",
-    date: "Nov 2025",
-    category: "Media",
-    description: "Served on both the Media and Welfare teams, capturing key moments while ensuring the comfort of guests and speakers.",
-    tags: ["Media", "Welfare", "Real Estate"],
-    images: [],
-    accent: "#b45309",
-  },
-  {
-    id: 8,
-    title: "FUTO Alumni Homecoming 2025",
-    role: "Media and Photography",
-    date: "Aug 2025",
-    category: "Media",
-    description: "Captured memorable moments from FUTO Alumni Homecoming 2025 through professional media and photography.",
-    tags: ["Photography", "Alumni", "FUTO"],
-    images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f4%280%29-e7Yahcsw3qQbcQLNweaiCS5rzoAVvv.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f3%280%29-0OUNedcByaDnTaTWc7tAWWQQ2E60ff.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f2%280%29-pBS7ttoTwcS5IQq7BxPQga9W14pDXS.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f1%280%29-wdxseBoOzK6wN6TpiXjYnUVh67MS1C.jpg",
-    ],
-    accent: "#0284c7",
-  },
-  {
-    id: 9,
-    title: "Tech Nexus FUTO",
-    role: "Design, Event Setup & Photography",
-    date: "Aug 2025",
-    category: "Tech",
-    description: "Contributed to event design, setup, and photography at Tech Nexus — a community tech event at FUTO.",
-    tags: ["Design", "Photography", "GDG Campus"],
-    images: [],
-    accent: "#4f46e5",
-  },
-  {
-    id: 10,
-    title: "AWS Cloud Club FUTO",
-    role: "Front Desk",
-    date: "Aug – Sep 2025",
-    category: "Tech",
-    description: "Served at the front desk for AWS Cloud Club FUTO events, managing attendee registration and on-site coordination.",
-    tags: ["AWS", "Cloud Community", "Event Coordination"],
-    images: [],
-    accent: "#f59e0b",
-  },
-  {
-    id: 11,
-    title: "GDG on Campus FUTO",
-    role: "Graphic Designer",
-    date: "Jul 2025 – Present",
-    category: "Design",
-    description: "Designing visual content and brand communications for GDG on Campus FUTO, supporting student developer community events.",
-    tags: ["Graphic Design", "GDG", "Campus"],
-    images: [],
-    accent: "#10b981",
-  },
-  {
-    id: 12,
-    title: "Hack4Futo",
-    role: "Graphic Designer",
-    date: "Jun 2025 – Present",
-    category: "Design",
-    description: "Creating design assets and visual branding for Hack4Futo, a student-driven hackathon and innovation community.",
-    tags: ["Hackathon", "Branding", "Design"],
-    images: [],
-    accent: "#6366f1",
-  },
-  {
-    id: 13,
-    title: "CMX",
-    role: "Graphic Designer",
-    date: "Dec 2024 – Present",
-    category: "Design",
-    description: "Designing visual content and community assets for CMX, a global community management network.",
-    tags: ["Graphic Design", "Community", "Global"],
-    images: [],
-    accent: "#ec4899",
-  },
-  {
-    id: 14,
-    title: "GDG Owerri",
-    role: "Graphic Designer",
-    date: "Sep 2024 – Present",
-    category: "Design",
-    description: "Creating visual assets, branding materials, and design support for Google Developer Group Owerri events.",
-    tags: ["Graphic Design", "GDG", "Branding"],
-    images: [],
-    accent: "#0ea5e9",
-  },
-]
+export type CommunityEvent = {
+  id: string
+  title: string
+  role: string
+  date: string
+  category: string
+  description: string
+  tags: string[]
+  images: string[]
+  accent: string
+  href?: string
+}
 
-const categories = ["All", "Tech", "Design", "Media", "Events", "Leadership", "Engineering"]
-
-export default function CommunityPage() {
+export default function CommunityPage({ events }: { events: CommunityEvent[] }) {
   const [activeCategory, setActiveCategory] = useState("All")
-  const [expandedId, setExpandedId] = useState<number | null>(null)
+  const [expandedId, setExpandedId] = useState<string | null>(null)
+
+  const categories = ["All", ...Array.from(new Set(events.map((e) => e.category).filter(Boolean)))]
 
   const filtered = activeCategory === "All"
-    ? volunteerEvents
-    : volunteerEvents.filter(e => e.category === activeCategory)
+    ? events
+    : events.filter(e => e.category === activeCategory)
 
   return (
     <>
@@ -242,7 +81,7 @@ export default function CommunityPage() {
               {/* Stat pills — inline on all screens */}
               <div className="flex flex-wrap gap-3 mb-8">
                 {[
-                  { icon: <Heart className="w-3.5 h-3.5" />, label: `${volunteerEvents.length}+ Engagements` },
+                  { icon: <Heart className="w-3.5 h-3.5" />, label: `${events.length}+ Engagements` },
                   { icon: <Users className="w-3.5 h-3.5" />, label: "6+ Communities" },
                   { icon: <Calendar className="w-3.5 h-3.5" />, label: "Since 2021" },
                   { icon: <MapPin className="w-3.5 h-3.5" />, label: "5+ Institutions" },
@@ -310,7 +149,7 @@ function EventCard({
   isExpanded,
   onToggle,
 }: {
-  event: (typeof volunteerEvents)[0]
+  event: CommunityEvent
   isExpanded: boolean
   onToggle: () => void
 }) {

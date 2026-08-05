@@ -10,6 +10,14 @@ import CertificationsGrid from "@/components/portfolio/certifications-grid"
 import TestimonialsCarousel from "@/components/portfolio/testimonials-carousel"
 import PortfolioCTA from "@/components/portfolio/portfolio-cta"
 import Footer from "@/components/footer"
+import {
+  getCertifications,
+  getJourneyItems,
+  getPortfolioStats,
+  getProjectItems,
+  getServices,
+  getSkillGroups,
+} from "@/lib/content"
 
 export const metadata: Metadata = {
   title: "Portfolio & Engineering Evidence | Nestor Anyanwu (Nestor Cyber)",
@@ -28,40 +36,29 @@ export const metadata: Metadata = {
   },
 }
 
-export default function PortfolioPage() {
+export default async function PortfolioPage() {
+  const [stats, services, projects, skillGroups, journeyTimeline, certificationsList] =
+    await Promise.all([
+      getPortfolioStats(),
+      getServices(),
+      getProjectItems(),
+      getSkillGroups(),
+      getJourneyItems(),
+      getCertifications(),
+    ])
+
   return (
     <main className="min-h-screen bg-background">
-      {/* 1. Hero */}
       <PortfolioHero />
-
-      {/* 2. Portfolio Highlights (Stats) */}
-      <PortfolioStats />
-
-      {/* 3. Services Grid */}
-      <ServicesGrid />
-
-      {/* 4. Featured Projects Showcase */}
-      <FeaturedProjectsShowcase />
-
-      {/* 5. Filterable Project Library */}
-      <ProjectLibrary />
-
-      {/* 6. Skills & Technology Matrix (Moved before Career Milestones) */}
-      <SkillsMatrix />
-
-      {/* 7. Professional Experience Timeline (Career Milestones) */}
-      <ProfessionalExperience />
-
-      {/* 8. Certifications & Professional Development */}
-      <CertificationsGrid />
-
-      {/* 9. Selected Testimonials */}
+      <PortfolioStats stats={stats} />
+      <ServicesGrid services={services} />
+      <FeaturedProjectsShowcase projects={projects} />
+      <ProjectLibrary projects={projects} />
+      <SkillsMatrix skillGroups={skillGroups} />
+      <ProfessionalExperience journeyTimeline={journeyTimeline} />
+      <CertificationsGrid certificationsList={certificationsList} />
       <TestimonialsCarousel />
-
-      {/* 10. Call to Action Banner */}
       <PortfolioCTA />
-
-      {/* Footer */}
       <Footer />
     </main>
   )

@@ -1,8 +1,8 @@
 import React from "react"
 import SectionHeader from "@/components/shared/section-header"
-import { skillGroups } from "@/lib/data"
+import type { SkillGroup } from "@/lib/content"
 
-export default function SkillsMatrix() {
+export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[] }) {
   return (
     <section className="w-full py-16 md:py-24 border-b border-border/60">
       <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">

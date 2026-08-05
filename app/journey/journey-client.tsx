@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { journeyTimeline, JourneyItem } from "@/lib/data"
+import type { JourneyItem } from "@/lib/content"
 import Footer from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -9,7 +9,7 @@ import { Calendar, Briefcase, Award, GraduationCap, ChevronLeft, ChevronRight } 
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 
-export default function JourneyPage() {
+export default function JourneyPage({ journeyTimeline }: { journeyTimeline: JourneyItem[] }) {
   const [activeFilter, setActiveFilter] = useState<"all" | "work" | "membership">("all")
 
   const filteredTimeline = journeyTimeline.filter(

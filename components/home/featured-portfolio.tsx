@@ -3,7 +3,7 @@ import Link from "next/link"
 import SectionContainer from "@/components/shared/section-container"
 import SectionHeader from "@/components/shared/section-header"
 import ProjectCard from "@/components/shared/project-card"
-import { getPortfolioProjects } from "@/lib/keystatic"
+import { getPortfolioProjects } from "@/lib/content"
 import { ArrowUpRight } from "lucide-react"
 
 export default async function FeaturedPortfolio() {

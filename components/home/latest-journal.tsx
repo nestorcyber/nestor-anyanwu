@@ -3,7 +3,7 @@ import Link from "next/link"
 import SectionContainer from "@/components/shared/section-container"
 import SectionHeader from "@/components/shared/section-header"
 import ArticleCard from "@/components/shared/article-card"
-import { getJournalArticles } from "@/lib/keystatic"
+import { getJournalArticles } from "@/lib/content"
 import { ArrowUpRight } from "lucide-react"
 
 export default async function LatestJournal() {

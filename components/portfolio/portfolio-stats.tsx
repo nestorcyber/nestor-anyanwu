@@ -1,12 +1,12 @@
 import React from "react"
-import { portfolioStats } from "@/lib/data"
+import type { PortfolioStat } from "@/lib/content"
 
-export default function PortfolioStats() {
+export default function PortfolioStats({ stats }: { stats: PortfolioStat[] }) {
   return (
     <section className="w-full bg-secondary/40 py-12 border-b border-border/60">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 divide-y md:divide-y-0 md:divide-x divide-border/40">
-          {portfolioStats.map((stat, idx) => (
+          {stats.map((stat, idx) => (
             <div
               key={idx}
               className="p-4 md:p-6 flex flex-col justify-between space-y-2"

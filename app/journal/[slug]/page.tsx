@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { getJournalArticleBySlug, getJournalArticles } from '@/lib/keystatic'
+import { getJournalArticleBySlug, getJournalArticles } from '@/lib/content'
+import { Markdown } from '@/lib/content/markdown'
 import Footer from '@/components/footer'
 import SectionContainer from '@/components/shared/section-container'
 import { ArrowLeft, Calendar, User, Tag, Clock, ArrowUpRight, Share2 } from 'lucide-react'
@@ -163,8 +164,8 @@ export default async function JournalDetailPage({ params }: Props) {
 
           {/* Article Body Content */}
           <div className="max-w-3xl mx-auto space-y-12">
-            <article className="prose dark:prose-invert max-w-none text-foreground/90 space-y-6 text-base md:text-lg leading-relaxed font-light">
-              {article.content}
+            <article className="text-foreground/90 text-base md:text-lg leading-relaxed font-light">
+              <Markdown content={article.content} />
             </article>
 
             {/* Tags Section */}

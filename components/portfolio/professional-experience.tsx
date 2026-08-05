@@ -1,9 +1,9 @@
 import React from "react"
 import SectionHeader from "@/components/shared/section-header"
-import { journeyTimeline } from "@/lib/data"
+import type { JourneyItem } from "@/lib/content"
 import { Briefcase, Calendar } from "lucide-react"
 
-export default function ProfessionalExperience() {
+export default function ProfessionalExperience({ journeyTimeline }: { journeyTimeline: JourneyItem[] }) {
   const workExperience = journeyTimeline.filter((item) => item.type === "work")
 
   return (

@@ -3,24 +3,46 @@
 import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import Footer from "@/components/footer"
-import { journeyTimeline } from "@/lib/data"
+import type { JourneyItem } from "@/lib/content"
 import DribbbleCarousel, { CarouselItem } from "@/components/dribbble-carousel"
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react"
 
-export default function GalleryPageClient() {
+type GalleryImage = {
+  src: string
+  title: string
+  date: string
+  type: string
+  organization: string
+}
+
+export default function GalleryPageClient({
+  journeyTimeline,
+  extraImages = [],
+}: {
+  journeyTimeline: JourneyItem[]
+  extraImages?: { url: string; title?: string; alt?: string }[]
+}) {
   const [activeFilter, setActiveFilter] = useState<"all" | "work" | "volunteer">("all")
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
-  // Map timeline data to extract all associated photos
-  const allImages = journeyTimeline.flatMap((item) =>
-    (item.images || []).map((img) => ({
-      src: img,
-      title: item.title,
-      date: item.date,
-      type: item.type,
-      organization: item.organization,
-    }))
-  )
+  const allImages: GalleryImage[] = [
+    ...journeyTimeline.flatMap((item) =>
+      (item.images || []).map((img) => ({
+        src: img,
+        title: item.title,
+        date: item.date,
+        type: item.type,
+        organization: item.organization,
+      }))
+    ),
+    ...extraImages.map((img) => ({
+      src: img.url,
+      title: img.title || "Gallery",
+      date: "",
+      type: "volunteer" as const,
+      organization: "",
+    })),
+  ]
 
   // Filtered moments
   const filteredImages = allImages.filter(

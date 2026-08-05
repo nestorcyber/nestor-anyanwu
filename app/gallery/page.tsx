@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import GalleryPageClient from "./gallery-client"
+import { getJourneyItems, getStandaloneGalleryImages } from "@/lib/content"
 
 export const metadata: Metadata = {
   title: "Gallery & Photos | Nestor Anyanwu (Nestor Cyber)",
@@ -18,6 +19,11 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Page() {
-  return <GalleryPageClient />
+export default async function Page() {
+  const [journeyTimeline, extraImages] = await Promise.all([
+    getJourneyItems(),
+    getStandaloneGalleryImages(),
+  ])
+
+  return <GalleryPageClient journeyTimeline={journeyTimeline} extraImages={extraImages} />
 }
