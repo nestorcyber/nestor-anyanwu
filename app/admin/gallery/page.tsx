@@ -21,14 +21,14 @@ export default async function AdminGalleryPage() {
       />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {(data ?? []).map((row) => (
-          <Link key={row.id} href={`/admin/gallery/${row.id}`} className="border border-neutral-800 p-2 hover:border-neutral-600">
+          <Link key={row.id} href={`/admin/gallery/${row.id}`} className="border border-border p-2 hover:border-foreground/30">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={row.image_url} alt={row.title || ''} className="h-40 w-full object-cover" />
             <p className="mt-2 text-sm px-1">{row.title || 'Untitled'}</p>
           </Link>
         ))}
       </div>
-      {!data?.length ? <p className="text-sm text-neutral-500">No gallery images yet.</p> : null}
+      {!data?.length ? <p className="text-sm text-muted-foreground">No gallery images yet.</p> : null}
     </div>
   )
 }

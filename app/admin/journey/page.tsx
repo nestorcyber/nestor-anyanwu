@@ -19,23 +19,23 @@ export default async function AdminJourneyPage() {
           </Link>
         }
       />
-      <div className="border border-neutral-800 divide-y divide-neutral-800">
+      <div className="border border-border divide-y divide-border">
         {(data ?? []).map((row) => (
           <Link
             key={row.id}
             href={`/admin/journey/${row.id}`}
-            className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 px-3 sm:px-4 py-3 hover:bg-neutral-900"
+            className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 px-3 sm:px-4 py-3 hover:bg-muted/50"
           >
             <div>
               <p className="font-medium">{row.title}</p>
-              <p className="text-xs text-neutral-500">
+              <p className="text-xs text-muted-foreground">
                 {row.organization} · {row.date_label}
               </p>
             </div>
-            <span className="text-xs text-neutral-400">{row.type}</span>
+            <span className="text-xs text-muted-foreground">{row.type}</span>
           </Link>
         ))}
-        {!data?.length ? <p className="px-4 py-8 text-sm text-neutral-500">No journey items yet.</p> : null}
+        {!data?.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No journey items yet.</p> : null}
       </div>
     </div>
   )

@@ -1,7 +1,9 @@
 'use client'
 
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { Moon, Sun } from 'lucide-react'
+import { useTheme } from 'next-themes'
 import { createClient } from '@/lib/supabase/client'
 import { ADMIN_EMAIL } from '@/lib/constants'
 
@@ -12,6 +14,12 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault()
@@ -41,45 +49,54 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-neutral-950 px-4 py-8">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4 py-8 relative">
+      <button
+        type="button"
+        aria-label="Toggle theme"
+        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        className="absolute top-4 right-4 inline-flex h-10 w-10 items-center justify-center border border-border text-foreground hover:bg-muted"
+      >
+        {mounted && theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      </button>
+
       <form
         onSubmit={onSubmit}
-        className="w-full max-w-md border border-neutral-800 bg-neutral-900 p-6 sm:p-8 space-y-6"
+        className="w-full max-w-md border border-border bg-card p-6 sm:p-8 space-y-6"
       >
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">Admin</p>
-          <h1 className="mt-2 text-2xl font-semibold text-white">Sign in</h1>
-          <p className="mt-1 text-sm text-neutral-400">Restricted to {ADMIN_EMAIL}</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Admin</p>
+          <h1 className="mt-2 text-2xl font-semibold text-foreground">Sign in</h1>
+          <p className="mt-1 text-sm text-muted-foreground">Restricted to {ADMIN_EMAIL}</p>
         </div>
 
         <label className="block space-y-2">
-          <span className="text-sm text-neutral-300">Email</span>
+          <span className="text-sm text-foreground/80">Email</span>
           <input
             type="email"
             value={ADMIN_EMAIL}
             readOnly
-            className="w-full border border-neutral-700 bg-neutral-950 px-3 py-2 text-neutral-400"
+            className="w-full border border-border bg-muted/40 px-3 py-2 text-muted-foreground"
           />
         </label>
 
         <label className="block space-y-2">
-          <span className="text-sm text-neutral-300">Password</span>
+          <span className="text-sm text-foreground/80">Password</span>
           <input
             type="password"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-neutral-700 bg-neutral-950 px-3 py-2 text-white outline-none focus:border-neutral-400"
+            className="w-full border border-border bg-background px-3 py-2 text-foreground outline-none focus:border-foreground/40"
             autoFocus
           />
         </label>
 
-        {error ? <p className="text-sm text-red-400">{error}</p> : null}
+        {error ? <p className="text-sm text-red-500">{error}</p> : null}
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-white px-4 py-2.5 text-sm font-medium text-black hover:bg-neutral-200 disabled:opacity-60"
+          className="w-full bg-foreground px-4 py-2.5 text-sm font-medium text-background hover:opacity-90 disabled:opacity-60"
         >
           {loading ? 'Signing in…' : 'Sign in'}
         </button>

@@ -87,7 +87,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
     <div className="space-y-10">
       <div className="space-y-4">
         {groups.map((group) => (
-          <div key={group.id} className="border border-neutral-800 p-4">
+          <div key={group.id} className="border border-border p-4">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-3">
               <h2 className="font-medium break-words">{group.category}</h2>
               <DangerButton type="button" onClick={() => deleteGroup(group.id)} className="w-full sm:w-auto">
@@ -96,7 +96,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
             </div>
             <ul className="space-y-2">
               {group.skills.map((skill) => (
-                <li key={skill.id} className="flex items-center justify-between text-sm text-neutral-300">
+                <li key={skill.id} className="flex items-center justify-between text-sm text-foreground/80">
                   <span>
                     {skill.name}
                     {skill.experience_level ? ` · ${skill.experience_level}` : ''}
@@ -111,13 +111,13 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                   </button>
                 </li>
               ))}
-              {!group.skills.length ? <li className="text-sm text-neutral-500">No skills</li> : null}
+              {!group.skills.length ? <li className="text-sm text-muted-foreground">No skills</li> : null}
             </ul>
           </div>
         ))}
       </div>
 
-      <form onSubmit={addGroup} className="max-w-xl space-y-3 border border-neutral-800 p-4">
+      <form onSubmit={addGroup} className="max-w-xl space-y-3 border border-border p-4">
         <h3 className="font-medium">Add skill group</h3>
         <Field label="Category">
           <TextInput required value={category} onChange={(e) => setCategory(e.target.value)} />
@@ -125,11 +125,11 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
         <PrimaryButton type="submit">Add group</PrimaryButton>
       </form>
 
-      <form onSubmit={addSkill} className="max-w-xl space-y-3 border border-neutral-800 p-4">
+      <form onSubmit={addSkill} className="max-w-xl space-y-3 border border-border p-4">
         <h3 className="font-medium">Add skill</h3>
         <Field label="Group">
           <select
-            className="w-full border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm"
+            className="w-full border border-border bg-background px-3 py-2 text-sm"
             value={skillGroupId}
             onChange={(e) => setSkillGroupId(e.target.value)}
           >

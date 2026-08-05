@@ -19,16 +19,16 @@ export default async function AdminCommunityPage() {
           </Link>
         }
       />
-      <div className="border border-neutral-800 divide-y divide-neutral-800">
+      <div className="border border-border divide-y divide-border">
         {(data ?? []).map((row) => (
           <Link
             key={row.id}
             href={`/admin/community/${row.id}`}
-            className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 px-3 sm:px-4 py-3 hover:bg-neutral-900"
+            className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 px-3 sm:px-4 py-3 hover:bg-muted/50"
           >
             <div>
               <p className="font-medium">{row.organization}</p>
-              <p className="text-xs text-neutral-500">/{row.slug}</p>
+              <p className="text-xs text-muted-foreground">/{row.slug}</p>
             </div>
             <div className="flex gap-2 text-xs">
               {row.draft ? <span className="text-amber-400">Draft</span> : <span className="text-emerald-400">Live</span>}
@@ -36,7 +36,7 @@ export default async function AdminCommunityPage() {
             </div>
           </Link>
         ))}
-        {!data?.length ? <p className="px-4 py-8 text-sm text-neutral-500">No entries yet.</p> : null}
+        {!data?.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No entries yet.</p> : null}
       </div>
     </div>
   )

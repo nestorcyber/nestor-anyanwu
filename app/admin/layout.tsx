@@ -3,7 +3,7 @@ import AdminShell from '@/components/admin/admin-shell'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-neutral-950" />}>
+    <Suspense fallback={<div className="min-h-screen bg-background" />}>
       <AdminShell>{children}</AdminShell>
     </Suspense>
   )

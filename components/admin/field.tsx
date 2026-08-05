@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes, TextareaHTMLAttributes, SelectHTMLAttributes } from 'react'
 
 const inputClass =
-  'w-full border border-neutral-700 bg-neutral-950 px-3 py-2 text-sm text-white outline-none focus:border-neutral-400'
+  'w-full border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-foreground/40'
 
 export function Field({
   label,
@@ -12,7 +12,7 @@ export function Field({
 }) {
   return (
     <label className="block space-y-1.5">
-      <span className="text-xs uppercase tracking-wide text-neutral-400">{label}</span>
+      <span className="text-xs uppercase tracking-wide text-muted-foreground">{label}</span>
       {children}
     </label>
   )
@@ -40,12 +40,12 @@ export function Checkbox({
   onChange: (v: boolean) => void
 }) {
   return (
-    <label className="inline-flex items-center gap-2 text-sm text-neutral-300">
+    <label className="inline-flex items-center gap-2 text-sm text-foreground/80">
       <input
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="size-4 accent-white"
+        className="size-4 accent-foreground"
       />
       {label}
     </label>
@@ -56,7 +56,7 @@ export function PrimaryButton(props: React.ButtonHTMLAttributes<HTMLButtonElemen
   return (
     <button
       {...props}
-      className={`bg-white px-4 py-2 text-sm font-medium text-black hover:bg-neutral-200 disabled:opacity-60 ${props.className || ''}`}
+      className={`bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90 disabled:opacity-60 ${props.className || ''}`}
     />
   )
 }
@@ -65,7 +65,7 @@ export function DangerButton(props: React.ButtonHTMLAttributes<HTMLButtonElement
   return (
     <button
       {...props}
-      className={`border border-red-500/50 px-4 py-2 text-sm text-red-400 hover:bg-red-500/10 disabled:opacity-60 ${props.className || ''}`}
+      className={`border border-red-500/50 px-4 py-2 text-sm text-red-500 hover:bg-red-500/10 disabled:opacity-60 ${props.className || ''}`}
     />
   )
 }

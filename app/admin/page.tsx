@@ -38,9 +38,9 @@ export default async function AdminOverviewPage() {
           <Link
             key={card.href}
             href={card.href}
-            className="border border-neutral-800 bg-neutral-900 p-4 sm:p-5 hover:border-neutral-600 transition-colors"
+            className="border border-border bg-card p-4 sm:p-5 hover:border-foreground/30 transition-colors"
           >
-            <p className="text-xs sm:text-sm text-neutral-400">{card.label}</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">{card.label}</p>
             <p className="mt-2 text-2xl sm:text-3xl font-semibold">{card.count}</p>
           </Link>
         ))}

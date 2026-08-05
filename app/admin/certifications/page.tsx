@@ -16,14 +16,14 @@ export default async function AdminCertificationsPage() {
           </Link>
         }
       />
-      <div className="border border-neutral-800 divide-y divide-neutral-800">
+      <div className="border border-border divide-y divide-border">
         {(data ?? []).map((row) => (
-          <Link key={row.id} href={`/admin/certifications/${row.id}`} className="block px-4 py-3 hover:bg-neutral-900">
+          <Link key={row.id} href={`/admin/certifications/${row.id}`} className="block px-4 py-3 hover:bg-muted/50">
             <p className="font-medium">{row.title}</p>
-            <p className="text-xs text-neutral-500">{row.provider}</p>
+            <p className="text-xs text-muted-foreground">{row.provider}</p>
           </Link>
         ))}
-        {!data?.length ? <p className="px-4 py-8 text-sm text-neutral-500">No certifications yet.</p> : null}
+        {!data?.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No certifications yet.</p> : null}
       </div>
     </div>
   )

@@ -50,7 +50,7 @@ export default function ImageUpload({ label = 'Image', value, onChange, folder =
 
   return (
     <div className="space-y-2">
-      <span className="text-xs uppercase tracking-wide text-neutral-400">{label}</span>
+      <span className="text-xs uppercase tracking-wide text-muted-foreground">{label}</span>
       <TextInput
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -61,13 +61,13 @@ export default function ImageUpload({ label = 'Image', value, onChange, folder =
         accept="image/*"
         disabled={uploading}
         onChange={(e) => onFile(e.target.files?.[0] || null)}
-        className="block w-full text-sm text-neutral-400 file:mr-3 file:border-0 file:bg-neutral-800 file:px-3 file:py-1.5 file:text-white"
+        className="block w-full text-sm text-muted-foreground file:mr-3 file:border-0 file:bg-muted file:px-3 file:py-1.5 file:text-foreground"
       />
-      {uploading ? <p className="text-xs text-neutral-500">Uploading…</p> : null}
+      {uploading ? <p className="text-xs text-muted-foreground">Uploading…</p> : null}
       {error ? <p className="text-xs text-red-400">{error}</p> : null}
       {value ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={value} alt="" className="mt-2 h-28 w-auto object-cover border border-neutral-800" />
+        <img src={value} alt="" className="mt-2 h-28 w-auto object-cover border border-border" />
       ) : null}
     </div>
   )
