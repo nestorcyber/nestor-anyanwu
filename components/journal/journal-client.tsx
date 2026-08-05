@@ -103,7 +103,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Primary Featured Article (Large Card) */}
             {primaryFeatured && (
-              <article className={`lg:col-span-${secondaryFeatured.length > 0 ? "7" : "12"} group border border-border/60 hover:border-accent bg-card/60 rounded overflow-hidden flex flex-col justify-between transition-all`}>
+              <article className={`${secondaryFeatured.length > 0 ? "lg:col-span-7" : "lg:col-span-12"} group border border-border/60 hover:border-accent bg-card/60 rounded overflow-hidden flex flex-col justify-between transition-all`}>
                 <div className="space-y-4">
                   {primaryFeatured.coverImage && (
                     <div className="relative w-full h-[260px] md:h-[340px] overflow-hidden border-b border-border/40">
