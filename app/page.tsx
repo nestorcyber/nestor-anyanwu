@@ -147,18 +147,15 @@ export default function Home() {
       />
 
       {/* 3. Featured Portfolio */}
-      {/* @ts-expect-error Async Server Component */}
       <FeaturedPortfolio />
 
       {/* Core Initiatives (moved after Selected Work) */}
       <ExpandingEndeavors />
 
       {/* 6. Featured Community Work */}
-      {/* @ts-expect-error Async Server Component */}
       <FeaturedCommunity />
 
       {/* 7. Latest Journal */}
-      {/* @ts-expect-error Async Server Component */}
       <LatestJournal />
 
       {/* 8. Testimonials */}

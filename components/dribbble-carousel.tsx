@@ -190,7 +190,6 @@ export default function DribbbleCarousel({
     .filter((d) => d.absDist < 2.0)
     .sort((a, b) => a.dist - b.dist)
 
-  // Find the active item (closest to center)
   let activeSortedIndex = 0
   let minAbsDist = Infinity
   visibleItems.forEach((d, idx) => {
