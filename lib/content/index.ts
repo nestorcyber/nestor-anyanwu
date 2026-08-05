@@ -267,7 +267,6 @@ export async function getPortfolioProjectBySlug(slug: string): Promise<Portfolio
   return mapPortfolio(data)
 }
 
-/** Card-shaped projects for library/showcase/projects page */
 export async function getProjectItems(): Promise<ProjectItem[]> {
   const projects = await getPortfolioProjects()
   return projects.map((p) => ({

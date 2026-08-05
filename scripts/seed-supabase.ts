@@ -1,12 +1,3 @@
-/**
- * Seed Supabase from existing Keystatic MDX + lib/data.ts
- *
- * Prerequisites:
- * 1. Run supabase/migrations/001_init.sql in the Supabase SQL Editor
- * 2. Fill NEXT_PUBLIC_SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY in .env
- *
- * Usage: pnpm seed
- */
 import { config } from 'dotenv'
 import { createClient } from '@supabase/supabase-js'
 import fs from 'node:fs'
@@ -67,7 +58,6 @@ async function upsert(table: string, rows: Record<string, unknown>[], onConflict
 }
 
 async function main() {
-  // Site settings
   const settingsPath = path.join(process.cwd(), 'content/settings/site.json')
   if (fs.existsSync(settingsPath)) {
     const site = JSON.parse(fs.readFileSync(settingsPath, 'utf8'))
@@ -96,7 +86,6 @@ async function main() {
     console.log('✓ site_settings')
   }
 
-  // Journal
   const journal = readMdxDir('content/journal').map(({ slug, data, content }, i) => ({
     slug,
     title: data.title ?? slug,
@@ -117,7 +106,6 @@ async function main() {
   }))
   await upsert('journal_articles', journal, 'slug')
 
-  // Portfolio from MDX
   const portfolioMdx = readMdxDir('content/portfolio').map(({ slug, data, content }, i) => ({
     slug,
     title: data.title ?? slug,
@@ -139,7 +127,6 @@ async function main() {
     sort_order: i,
   }))
 
-  // Merge lib/data projects that aren't already in MDX
   const existingSlugs = new Set(portfolioMdx.map((p) => p.slug))
   const portfolioFromData = projects.map((p, i) => {
     const slug = p.id || slugify(p.title)
@@ -167,7 +154,6 @@ async function main() {
 
   await upsert('portfolio_projects', [...portfolioMdx, ...portfolioFromData], 'slug')
 
-  // Community
   const community = readMdxDir('content/community').map(({ slug, data, content }, i) => ({
     slug,
     organization: data.organization ?? slug,
@@ -185,7 +171,6 @@ async function main() {
   }))
   await upsert('community_entries', community, 'slug')
 
-  // Journey
   await supabase.from('journey_items').delete().neq('id', '00000000-0000-0000-0000-000000000000')
   const journeyRows = journeyTimeline.map((item, i) => ({
     title: item.title,
@@ -202,7 +187,6 @@ async function main() {
   if (journeyErr) throw new Error(`journey_items: ${journeyErr.message}`)
   console.log(`✓ journey_items: ${journeyRows.length} rows`)
 
-  // Stats
   await supabase.from('portfolio_stats').delete().neq('id', '00000000-0000-0000-0000-000000000000')
   const { error: statsErr } = await supabase.from('portfolio_stats').insert(
     portfolioStats.map((s, i) => ({
@@ -215,7 +199,6 @@ async function main() {
   if (statsErr) throw new Error(`portfolio_stats: ${statsErr.message}`)
   console.log(`✓ portfolio_stats: ${portfolioStats.length} rows`)
 
-  // Services
   const serviceRows = servicesList.map((s, i) => ({
     slug: s.id,
     title: s.title,
@@ -227,7 +210,6 @@ async function main() {
   }))
   await upsert('services', serviceRows, 'slug')
 
-  // Skills
   await supabase.from('skills').delete().neq('id', '00000000-0000-0000-0000-000000000000')
   await supabase.from('skill_groups').delete().neq('id', '00000000-0000-0000-0000-000000000000')
   for (let i = 0; i < skillGroups.length; i++) {
@@ -253,7 +235,6 @@ async function main() {
   }
   console.log(`✓ skill_groups + skills`)
 
-  // Certifications
   const certRows = certificationsList.map((c, i) => ({
     slug: c.id,
     title: c.title,

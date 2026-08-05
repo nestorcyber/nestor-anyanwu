@@ -67,7 +67,6 @@ export default async function Page() {
       accent: ACCENTS[(fromEntries.length + i) % ACCENTS.length],
     }))
 
-  // Prefer CMS community entries; fill with volunteer journey items
   const events = fromEntries.length ? [...fromEntries, ...fromJourney] : fromJourney
 
   return <CommunityPage events={events} />

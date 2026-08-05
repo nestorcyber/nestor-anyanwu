@@ -123,7 +123,6 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Mobile top bar */}
       <header className="sticky top-0 z-40 flex items-center justify-between gap-3 border-b border-border bg-background/95 px-4 py-3 backdrop-blur md:hidden">
         <button
           type="button"
@@ -134,7 +133,6 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           <Menu className="h-5 w-5" />
         </button>
         <div className="min-w-0 flex-1">
-          {/* <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">CMS Admin</p> */}
           <p className="truncate text-sm font-medium">{currentLabel}</p>
         </div>
         <div className="flex items-center gap-2">
@@ -149,7 +147,6 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         </div>
       </header>
 
-      {/* Mobile drawer overlay */}
       {open ? (
         <button
           type="button"
@@ -159,7 +156,6 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         />
       ) : null}
 
-      {/* Fixed sidebar (drawer on mobile) */}
       <aside
         className={`fixed inset-y-0 left-0 z-50 flex w-[min(18rem,88vw)] flex-col gap-6 border-r border-border bg-background p-4 transition-transform duration-200 md:w-60 md:translate-x-0 ${
           open ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
@@ -167,7 +163,6 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
       >
         <div className="flex items-start justify-between gap-3">
           <div>
-            {/* <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">CMS</p> */}
             <h1 className="mt-1 text-lg font-semibold">Admin</h1>
           </div>
           <div className="flex items-center gap-2">
@@ -211,7 +206,6 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         </div>
       </aside>
 
-      {/* Offset for fixed sidebar on desktop */}
       <main className="min-w-0 min-h-screen overflow-x-hidden p-4 sm:p-6 md:ml-60 md:p-10">
         {children}
       </main>

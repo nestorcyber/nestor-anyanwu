@@ -193,7 +193,6 @@ export function searchInIndex(index: SearchResult[], query: string): SearchResul
     })
 }
 
-/** Client-safe fallback: pages only until API loads */
 export const searchIndex: SearchResult[] = pageEntries
 
 export function searchContent(query: string): SearchResult[] {
