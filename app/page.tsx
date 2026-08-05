@@ -146,7 +146,6 @@ export default function Home() {
         heroImageAlt="Nestor Anyanwu at community event"
       />
 
-      {/* 3. Featured Portfolio */}
       <FeaturedPortfolio />
 
       {/* Core Initiatives (moved after Selected Work) */}
