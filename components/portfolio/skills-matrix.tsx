@@ -32,9 +32,9 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
                     className="p-3.5 bg-secondary/40 border border-border/50 rounded-none flex items-center justify-between"
                   >
                     <div>
-                      <h4 className="text-xs font-bold text-foreground">
+                      <h3 className="text-xs font-bold text-foreground">
                         {skill.name}
-                      </h4>
+                      </h3>
                       {skill.experienceLevel && (
                         <p className="text-[10px] text-muted-foreground font-mono">
                           {skill.experienceLevel}

@@ -324,7 +324,7 @@ export default function DribbbleCarousel({
       </div>
 
       {/* Slide Indicators / Bottom Navigation Dots */}
-      <div className="flex gap-2.5 mt-8 z-10">
+      <div className="flex gap-1 mt-6 z-10 items-center justify-center">
         {items.map((_, i) => (
           <button
             key={i}
@@ -335,14 +335,18 @@ export default function DribbbleCarousel({
               if (diff < -items.length / 2) target += items.length
               targetPosition.current = target
             }}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === activeIndex
-                ? "w-8"
-                : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-            }`}
-            style={{ backgroundColor: i === activeIndex ? activeItem?.accentColor : undefined }}
+            className="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center p-3 cursor-pointer group focus:outline-none"
             aria-label={`Go to slide ${i + 1}`}
-          />
+          >
+            <span
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                i === activeIndex
+                  ? "w-8"
+                  : "w-2.5 bg-slate-400 dark:bg-slate-600 group-hover:bg-slate-600 dark:group-hover:bg-slate-400"
+              }`}
+              style={{ backgroundColor: i === activeIndex ? activeItem?.accentColor : undefined }}
+            />
+          </button>
         ))}
       </div>
     </div>

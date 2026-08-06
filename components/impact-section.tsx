@@ -131,7 +131,7 @@ export default function ImpactSection({
                 {stat.label}
               </div>
               {stat.description && (
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-medium max-w-xs">
+                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium max-w-xs">
                   {stat.description}
                 </p>
               )}

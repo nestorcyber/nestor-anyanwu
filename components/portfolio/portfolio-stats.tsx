@@ -25,9 +25,9 @@ export default function PortfolioStats({ stats }: { stats: PortfolioStat[] }) {
                   {stat.value}
                 </span>
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-foreground group-hover:text-accent transition-colors">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-foreground group-hover:text-accent transition-colors">
                     {stat.label}
-                  </h4>
+                  </h3>
                   {stat.description && (
                     <p className="text-[11px] text-muted-foreground font-light leading-snug mt-0.5 line-clamp-1">
                       {stat.description}

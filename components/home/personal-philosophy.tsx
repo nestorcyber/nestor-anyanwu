@@ -89,6 +89,7 @@ export default function PersonalPhilosophy() {
 
               {/* Background number watermark */}
               <span
+                aria-hidden="true"
                 className="absolute bottom-4 right-4 text-7xl font-black leading-none select-none pointer-events-none transition-all duration-500"
                 style={{
                   color: v.color,

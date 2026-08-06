@@ -32,9 +32,9 @@ export default function TestimonialCard({
       </div>
 
       <div className="pt-4 border-t border-border/30">
-        <h4 className="text-sm font-extrabold text-foreground uppercase tracking-wide">
+        <h3 className="text-sm font-extrabold text-foreground uppercase tracking-wide">
           {author}
-        </h4>
+        </h3>
         <p className="text-xs text-muted-foreground font-mono">
           {role} • {organization}
         </p>
