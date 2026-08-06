@@ -75,7 +75,7 @@ export default function ImpactSection({
           />
 
           <div className="relative z-10 space-y-8">
-            <p className="text-sm md:text-base font-bold tracking-widest uppercase text-accent">
+            <p className="text-sm md:text-base font-bold tracking-widest uppercase text-sky-400">
               {category}
             </p>
 

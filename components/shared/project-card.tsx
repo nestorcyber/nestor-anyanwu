@@ -37,7 +37,7 @@ export default function ProjectCard({
         )}
 
         <div className="flex items-center justify-between">
-          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-accent px-2.5 py-0.5 rounded border border-accent/40 bg-accent/10">
+          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-accent dark:text-accent px-2.5 py-0.5 rounded border border-accent/50 bg-accent/15 dark:bg-accent/20">
             {category}
           </span>
           {role && (
