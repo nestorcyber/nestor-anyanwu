@@ -109,7 +109,7 @@ export default function Navigation() {
     <>
       {/* Fixed Primary Header Bar */}
       <nav
-        className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 lg:px-16 bg-background/95 backdrop-blur-md backdrop-saturate-150 border-b border-border/50 transition-all duration-300 py-3 md:py-4"
+        className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 lg:px-16 bg-background border-b-2 border-slate-900 dark:border-slate-800 transition-all duration-200 py-3 md:py-4"
         role="navigation"
         aria-label="Main navigation"
       >
@@ -134,7 +134,7 @@ export default function Navigation() {
           <div className="flex items-center gap-6 md:gap-10">
             {/* Desktop Quick Nav Links */}
             <div
-              className={`hidden md:flex items-center gap-8 md:gap-10 transition-opacity duration-300 ${
+              className={`hidden md:flex items-center gap-8 md:gap-10 transition-opacity duration-200 ${
                 isOpen ? "opacity-0 pointer-events-none" : "opacity-100"
               }`}
             >
@@ -142,7 +142,7 @@ export default function Navigation() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-foreground/80 hover:text-accent hover:scale-105 transition-all font-bold text-sm uppercase tracking-wider leading-tight cursor-pointer py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+                  className="text-foreground hover:text-accent font-extrabold text-xs uppercase tracking-wider leading-tight cursor-pointer py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   {item.label}
                 </Link>
@@ -153,11 +153,11 @@ export default function Navigation() {
             {mounted && (
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 rounded-lg bg-primary/5 hover:bg-primary/10 transition-colors text-foreground cursor-pointer flex items-center justify-center border border-border/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="p-1.5 bg-card text-foreground cursor-pointer flex items-center justify-center border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.8)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                 style={{ width: "34px", height: "34px" }}
               >
-                {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+                {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
               </button>
             )}
 
