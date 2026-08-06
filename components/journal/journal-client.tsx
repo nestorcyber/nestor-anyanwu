@@ -100,7 +100,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
           <div className="w-full pl-0 pr-4 sm:pr-6 lg:pr-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-stretch">
               {/* TOP-LEFT: Primary Pinned Card (lg:col-span-8) - Touches Left Edge & Flush Below Navbar */}
-              <div className="lg:col-span-8 relative rounded-md overflow-hidden border border-slate-900/20 dark:border-slate-800 bg-card shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-slate-800 dark:hover:border-slate-400 transition-all min-h-[420px] sm:min-h-[460px] md:min-h-[500px] flex flex-col justify-end group">
+              <div className="lg:col-span-8 relative rounded-none overflow-hidden border-2 border-slate-900/20 dark:border-slate-800 bg-card shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-slate-800 dark:hover:border-slate-400 transition-all min-h-[420px] sm:min-h-[460px] md:min-h-[500px] flex flex-col justify-end group">
                 {/* Hero Cover Image Background */}
                 {pinnedArticle.coverImage ? (
                   <Image
@@ -146,10 +146,10 @@ export default function JournalClient({ articles }: JournalClientProps) {
                   <Link
                     key={article.slug}
                     href={`/journal/${article.slug}`}
-                    className="group flex items-center gap-4 bg-card hover:bg-card/90 border border-slate-200 dark:border-slate-800/80 rounded-md p-3.5 transition-all shadow-xs hover:shadow-sm hover:border-slate-400 dark:hover:border-slate-700 cursor-pointer"
+                    className="group flex items-center gap-4 bg-card hover:bg-card/90 border-2 border-slate-900/20 dark:border-slate-800 rounded-none p-3.5 transition-all shadow-xs hover:shadow-sm hover:border-slate-800 dark:hover:border-slate-400 cursor-pointer"
                   >
                     {/* Left Thumbnail Image */}
-                    <div className="relative w-24 sm:w-28 h-20 sm:h-24 rounded-md overflow-hidden bg-secondary/50 border border-border/50 shrink-0">
+                    <div className="relative w-24 sm:w-28 h-20 sm:h-24 rounded-none overflow-hidden bg-secondary/50 border border-border/50 shrink-0">
                       {article.coverImage ? (
                         <Image
                           src={article.coverImage}
@@ -208,12 +208,12 @@ export default function JournalClient({ articles }: JournalClientProps) {
             {filteredArticles.map((article) => (
               <article
                 key={article.slug}
-                className="group border border-slate-200 dark:border-slate-800/80 bg-card rounded-md p-4 flex flex-col justify-between transition-all shadow-xs hover:shadow-sm hover:border-slate-400 dark:hover:border-slate-700 cursor-pointer"
+                className="group border-2 border-slate-900/20 dark:border-slate-800 bg-card rounded-none p-4 flex flex-col justify-between transition-all shadow-xs hover:shadow-sm hover:border-slate-800 dark:hover:border-slate-400 cursor-pointer"
               >
                 <Link href={`/journal/${article.slug}`} className="flex flex-col justify-between h-full space-y-4">
                   <div className="space-y-3">
                     {/* Cover Image Container */}
-                    <div className="relative w-full h-[180px] sm:h-[200px] rounded-md overflow-hidden bg-secondary/50 border border-border/40">
+                    <div className="relative w-full h-[180px] sm:h-[200px] rounded-none overflow-hidden bg-secondary/50 border border-border/40">
                       {article.coverImage ? (
                         <Image
                           src={article.coverImage}
