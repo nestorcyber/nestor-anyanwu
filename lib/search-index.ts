@@ -1,5 +1,6 @@
 import {
   getCertifications,
+  getCommunityEntries,
   getJournalArticles,
   getJourneyItems,
   getProjectItems,
@@ -84,7 +85,7 @@ const pageEntries: SearchResult[] = [
 ]
 
 export async function buildSearchIndex(): Promise<SearchResult[]> {
-  const [projects, services, skillGroups, journeyTimeline, certifications, articles] =
+  const [projects, services, skillGroups, journeyTimeline, certifications, articles, communityEntriesList] =
     await Promise.all([
       getProjectItems(),
       getServices(),
@@ -92,6 +93,7 @@ export async function buildSearchIndex(): Promise<SearchResult[]> {
       getJourneyItems(),
       getCertifications(),
       getJournalArticles(),
+      getCommunityEntries(),
     ])
 
   const projectEntries: SearchResult[] = projects.map((p) => ({
@@ -156,7 +158,16 @@ export async function buildSearchIndex(): Promise<SearchResult[]> {
     description: a.excerpt,
     category: "Journal" as const,
     href: `/journal/${a.slug}`,
-    keywords: [a.title.toLowerCase(), a.category.toLowerCase(), ...a.tags.map((t) => t.toLowerCase())],
+    keywords: [a.title.toLowerCase(), a.category.toLowerCase(), ...(a.tags || []).map((t) => t.toLowerCase())],
+  }))
+
+  const communityEntries: SearchResult[] = communityEntriesList.map((c) => ({
+    id: `community-${c.slug}`,
+    title: `${c.organization} — ${c.role}`,
+    description: c.description || `${c.organization} community impact and leadership role.`,
+    category: "Community" as const,
+    href: `/community/${c.slug}`,
+    keywords: [c.organization.toLowerCase(), c.role.toLowerCase(), ...(c.tags || []).map((t) => t.toLowerCase())],
   }))
 
   return [
@@ -167,6 +178,7 @@ export async function buildSearchIndex(): Promise<SearchResult[]> {
     ...journeyEntries,
     ...certEntries,
     ...journalEntries,
+    ...communityEntries,
   ]
 }
 

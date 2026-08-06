@@ -3,7 +3,7 @@ import Link from "next/link"
 import Footer from "@/components/footer"
 import SectionContainer from "@/components/shared/section-container"
 import { ArrowUpRight, Search, FileText, Briefcase, Zap, Star, BookOpen, Users, History, Award } from "lucide-react"
-import { searchIndex } from "@/lib/search-index"
+import { buildSearchIndex, searchInIndex } from "@/lib/search-index"
 
 export const dynamic = "force-dynamic"
 
@@ -41,17 +41,8 @@ interface Props {
 export default async function SearchPage({ searchParams }: Props) {
   const { q = "" } = await searchParams
   const query = q.trim()
-  const results = query
-    ? searchIndex.filter((item) => {
-        const lq = query.toLowerCase()
-        return (
-          item.title.toLowerCase().includes(lq) ||
-          item.description.toLowerCase().includes(lq) ||
-          item.category.toLowerCase().includes(lq) ||
-          item.keywords?.some((kw) => kw.toLowerCase().includes(lq))
-        )
-      })
-    : []
+  const fullIndex = await buildSearchIndex()
+  const results = query ? searchInIndex(fullIndex, query) : []
 
   return (
     <>
