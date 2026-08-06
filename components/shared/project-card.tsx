@@ -73,15 +73,16 @@ export default function ProjectCard({
         {link ? (
           <Link
             href={link}
-            className="w-full flex items-center justify-between text-xs font-bold text-foreground group-hover:text-accent uppercase tracking-wider transition-colors"
+            aria-label={`Explore ${title} project`}
+            className="w-full min-h-[48px] flex items-center justify-between text-xs font-bold text-foreground group-hover:text-accent uppercase tracking-wider transition-colors py-2.5"
           >
-            <span>Explore Project</span>
-            <div className="w-7 h-7 rounded-md border border-slate-900/20 dark:border-slate-800 bg-background flex items-center justify-center group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-950 transition-all">
-              <ArrowUpRight className="w-3.5 h-3.5" />
+            <span className="line-clamp-1 pr-2">Explore {title}</span>
+            <div className="w-8 h-8 rounded-md border border-slate-900/20 dark:border-slate-800 bg-background flex items-center justify-center group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-950 transition-all shrink-0">
+              <ArrowUpRight className="w-4 h-4" />
             </div>
           </Link>
         ) : (
-          <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+          <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest min-h-[48px] flex items-center">
             IN PRODUCTION ↗
           </span>
         )}
