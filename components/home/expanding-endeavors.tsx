@@ -111,10 +111,10 @@ export default function ExpandingEndeavors() {
                 </p>
               </div>
 
-              {/* Always Visible READ MORE Button */}
-              <Link href={item.link} className="block w-full">
+              {/* Always Visible Action Button */}
+              <Link href={item.link} className="block w-full" aria-label={`Explore ${item.title}`}>
                 <div className="w-full bg-accent hover:bg-accent/90 text-white font-extrabold text-xs uppercase tracking-widest px-6 py-4 flex items-center justify-between transition-colors">
-                  <span>READ MORE</span>
+                  <span>EXPLORE {item.title}</span>
                   <ArrowRight size={16} />
                 </div>
               </Link>
@@ -186,15 +186,15 @@ export default function ExpandingEndeavors() {
 
                 </div>
 
-                {/* READ MORE Button revealed strictly on Hover */}
+                {/* Descriptive Action Button revealed strictly on Hover */}
                 <div
                   className={`transition-all duration-300 ${
                     isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
                   }`}
                 >
-                  <Link href={item.link} className="block w-full">
+                  <Link href={item.link} className="block w-full" aria-label={`Explore ${item.title}`}>
                     <div className="w-full bg-accent hover:bg-accent/90 text-white font-extrabold text-xs uppercase tracking-widest px-5 py-3.5 flex items-center justify-between transition-colors cursor-pointer">
-                      <span>READ MORE</span>
+                      <span>EXPLORE {item.title}</span>
                       <ArrowRight size={15} />
                     </div>
                   </Link>

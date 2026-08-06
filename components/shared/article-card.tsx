@@ -22,7 +22,7 @@ export default function ArticleCard({
 }: ArticleCardProps) {
   return (
     <article className="group border-2 border-slate-900/20 dark:border-slate-800 bg-card rounded-lg overflow-hidden flex flex-col justify-between h-full transition-all shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent hover:-translate-y-1 cursor-pointer">
-      <Link href={slug} className="flex flex-col justify-between h-full">
+      <Link href={slug} className="flex flex-col justify-between h-full" aria-label={`Read article: ${title}`}>
         <div className="space-y-4">
           {/* Card Top Cover Image */}
           <div className="relative w-full h-[200px] overflow-hidden bg-slate-900 border-b-2 border-slate-900/20 dark:border-slate-800">
