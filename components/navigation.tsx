@@ -109,7 +109,7 @@ export default function Navigation() {
     <>
       {/* Fixed Primary Header Bar */}
       <nav
-        className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 lg:px-16 bg-background border-b-2 border-slate-900 dark:border-slate-800 transition-all duration-200 py-3 md:py-4"
+        className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 lg:px-16 bg-background/95 backdrop-blur-sm border-b border-slate-200/80 dark:border-slate-800/80 transition-all duration-200 py-3 md:py-3.5"
         role="navigation"
         aria-label="Main navigation"
       >
@@ -131,10 +131,10 @@ export default function Navigation() {
           </Link>
 
           {/* Right Navigation & Control Group */}
-          <div className="flex items-center gap-6 md:gap-10">
+          <div className="flex items-center gap-6 md:gap-8">
             {/* Desktop Quick Nav Links */}
             <div
-              className={`hidden md:flex items-center gap-8 md:gap-10 transition-opacity duration-200 ${
+              className={`hidden md:flex items-center gap-6 md:gap-8 transition-opacity duration-200 ${
                 isOpen ? "opacity-0 pointer-events-none" : "opacity-100"
               }`}
             >
@@ -142,7 +142,7 @@ export default function Navigation() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-foreground hover:text-accent font-extrabold text-xs uppercase tracking-wider leading-tight cursor-pointer py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  className="text-muted-foreground hover:text-foreground font-bold text-xs uppercase tracking-wider leading-tight cursor-pointer py-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   {item.label}
                 </Link>
@@ -153,7 +153,7 @@ export default function Navigation() {
             {mounted && (
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-1.5 bg-card text-foreground cursor-pointer flex items-center justify-center border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.8)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+                className="p-1.5 bg-card text-foreground cursor-pointer flex items-center justify-center border border-slate-200 dark:border-slate-800 rounded-md hover:bg-secondary transition-colors"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                 style={{ width: "34px", height: "34px" }}
               >

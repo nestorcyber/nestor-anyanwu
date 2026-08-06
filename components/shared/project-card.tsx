@@ -23,10 +23,10 @@ export default function ProjectCard({
   role,
 }: ProjectCardProps) {
   return (
-    <div className="group border-2 border-slate-900/20 dark:border-slate-800 bg-card rounded-none p-5 flex flex-col justify-between h-full transition-all shadow-[3px_3px_0px_0px_rgba(15,23,42,0.8)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent hover:-translate-y-1">
+    <div className="group border border-slate-200 dark:border-slate-800/80 bg-card rounded-md p-5 flex flex-col justify-between h-full transition-all shadow-xs hover:shadow-sm hover:border-slate-400 dark:hover:border-slate-700 hover:-translate-y-0.5">
       <div className="space-y-4">
         {image && (
-          <div className="relative aspect-video w-full rounded-none overflow-hidden bg-slate-950 border-2 border-slate-900/10 dark:border-slate-800">
+          <div className="relative aspect-video w-full rounded-md overflow-hidden bg-slate-950 border border-slate-200/60 dark:border-slate-800">
             <Image
               src={image}
               alt={title}
