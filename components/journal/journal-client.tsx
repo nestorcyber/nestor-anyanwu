@@ -142,9 +142,9 @@ export default function JournalClient({ articles }: JournalClientProps) {
   }, [articles, selectedCategory, searchQuery])
 
   return (
-    <div className="w-full space-y-10 pt-16 sm:pt-20 pb-16">
+    <div className="w-full space-y-8 pt-14 sm:pt-16 pb-16">
       {/* 1. GUMROAD BLOG TOP HERO SECTION (FULL WIDTH SPLIT LAYOUT) */}
-      {pinnedArticle && selectedCategory === "All" && !searchQuery && (
+      {pinnedArticle && (
         <section className="w-full px-4 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
             
@@ -183,43 +183,46 @@ export default function JournalClient({ articles }: JournalClientProps) {
               </Link>
             </div>
 
-            {/* RIGHT COLUMN (lg:col-span-4): 3 Side Story Rows with Image + Title/Date + Arrow Button */}
-            <div className="lg:col-span-4 flex flex-col justify-between divide-y divide-border/80 border-t border-b lg:border-t-0 lg:border-b-0 border-border/80">
+            {/* RIGHT COLUMN (lg:col-span-4): 3 Side Featured Cards with Full-Card Cover Images & Text Overlay */}
+            <div className="lg:col-span-4 flex flex-col justify-between space-y-4">
               {featuredArticles.map((article) => (
                 <Link
                   key={article.slug}
                   href={`/journal/${article.slug}`}
-                  className="group py-5 first:pt-0 last:pb-0 flex items-center justify-between gap-4 cursor-pointer transition-colors"
+                  className="group relative w-full h-[145px] sm:h-[150px] rounded-lg overflow-hidden border-2 border-slate-900/20 dark:border-slate-800 bg-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent flex flex-col justify-end p-4 transition-all cursor-pointer"
                 >
-                  {/* Image Thumbnail */}
-                  <div className="relative w-24 sm:w-28 h-20 sm:h-24 rounded-lg overflow-hidden bg-slate-900 border-2 border-slate-900/20 dark:border-slate-800 shrink-0">
-                    {article.coverImage ? (
-                      <Image
-                        src={article.coverImage}
-                        alt={article.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-amber-400 via-pink-500 to-indigo-600 flex items-center justify-center">
-                        <Sparkles className="w-6 h-6 text-white/60" />
-                      </div>
-                    )}
-                  </div>
+                  {/* Full Card Cover Image */}
+                  {article.coverImage ? (
+                    <Image
+                      src={article.coverImage}
+                      alt={article.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-90"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-amber-400 via-pink-500 to-indigo-600 flex items-center justify-center">
+                      <Sparkles className="w-8 h-8 text-white/60" />
+                    </div>
+                  )}
 
-                  {/* Title & Date */}
-                  <div className="space-y-1 flex-1 min-w-0">
-                    <h2 className="text-sm sm:text-base font-bold text-foreground leading-snug group-hover:text-accent transition-colors line-clamp-2 font-heading">
-                      {article.title}
-                    </h2>
-                    <span className="text-xs font-mono text-muted-foreground block">
-                      {formatDate(article.publishedDate)}
-                    </span>
-                  </div>
+                  {/* Gradient Text Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent z-0" />
 
-                  {/* Gumroad Pill Arrow Button */}
-                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-md border-2 border-slate-900/20 dark:border-slate-800 bg-background flex items-center justify-center text-foreground group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-950 transition-all shrink-0">
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  {/* Content Overlay */}
+                  <div className="relative z-10 flex items-end justify-between gap-3">
+                    <div className="space-y-1 flex-1 min-w-0">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 block">
+                        {formatDate(article.publishedDate)}
+                      </span>
+                      <h2 className="text-sm sm:text-base font-extrabold text-white leading-snug group-hover:text-[#f472b6] transition-colors line-clamp-2 font-heading">
+                        {article.title}
+                      </h2>
+                    </div>
+
+                    {/* Pill Arrow Icon */}
+                    <div className="w-7 h-7 rounded-md bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white group-hover:bg-[#f472b6] group-hover:text-slate-950 transition-all shrink-0">
+                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </div>
                   </div>
                 </Link>
               ))}
@@ -313,25 +316,25 @@ export default function JournalClient({ articles }: JournalClientProps) {
                     </div>
 
                     {/* Article Content Under Cover Image */}
-                    <div className="p-6 space-y-2">
-                      <div className="text-xs font-mono text-muted-foreground">
+                    <div className="p-4 sm:p-5 space-y-1.5">
+                      <div className="text-[11px] font-mono text-muted-foreground">
                         {formatDate(article.publishedDate)}
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-xl font-extrabold text-foreground tracking-tight leading-snug group-hover:text-accent transition-colors line-clamp-2 font-heading">
+                      <h3 className="text-base sm:text-lg font-extrabold text-foreground tracking-tight leading-snug group-hover:text-accent transition-colors line-clamp-2 font-heading">
                         {article.title}
                       </h3>
 
                       {/* Excerpt */}
-                      <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-light line-clamp-2 pt-1">
+                      <p className="text-xs sm:text-sm text-muted-foreground leading-normal font-light line-clamp-2 pt-0.5">
                         {article.excerpt}
                       </p>
                     </div>
                   </div>
 
                   {/* Read Article Link Line */}
-                  <div className="p-6 pt-0 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-foreground group-hover:text-accent transition-colors">
+                  <div className="px-4 sm:px-5 pb-4 pt-0 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-foreground group-hover:text-accent transition-colors">
                     <span>Read Article</span>
                     <div className="w-7 h-7 rounded-md border border-slate-900/20 dark:border-slate-800 bg-background flex items-center justify-center group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-950 transition-all">
                       <ArrowUpRight className="w-3.5 h-3.5" />

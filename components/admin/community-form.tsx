@@ -68,7 +68,8 @@ export default function CommunityForm({ initial }: Props) {
       sort_order: Number(sortOrder) || 0,
     }
 
-    const res = initial
+    const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
+    const res = isRealUuid
       ? await supabase.from('community_entries').update(payload).eq('id', initial.id)
       : await supabase.from('community_entries').insert(payload)
 

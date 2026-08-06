@@ -71,7 +71,8 @@ export default function JournalForm({ initial }: Props) {
       content,
     }
 
-    const res = initial
+    const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
+    const res = isRealUuid
       ? await supabase.from('journal_articles').update(payload).eq('id', initial.id)
       : await supabase.from('journal_articles').insert(payload)
 

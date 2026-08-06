@@ -33,8 +33,9 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
       alt: alt || null,
       sort_order: Number(sortOrder) || 0,
     }
-    const res = initial
-      ? await supabase.from('gallery_images').update(payload).eq('id', initial.id)
+    const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
+    const res = isRealUuid
+      ? await supabase.from('gallery_images').update(payload).eq('id', initial.id!)
       : await supabase.from('gallery_images').insert(payload)
     if (res.error) {
       setError(res.error.message)
@@ -101,8 +102,9 @@ export function ServiceForm({ initial }: { initial?: Tables<'services'> | null }
       cta_href: ctaHref,
       sort_order: Number(sortOrder) || 0,
     }
-    const res = initial
-      ? await supabase.from('services').update(payload).eq('id', initial.id)
+    const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
+    const res = isRealUuid
+      ? await supabase.from('services').update(payload).eq('id', initial.id!)
       : await supabase.from('services').insert(payload)
     if (res.error) {
       setError(res.error.message)
@@ -181,8 +183,9 @@ export function StatForm({ initial }: { initial?: Tables<'portfolio_stats'> | nu
       description: description || null,
       sort_order: Number(sortOrder) || 0,
     }
-    const res = initial
-      ? await supabase.from('portfolio_stats').update(payload).eq('id', initial.id)
+    const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
+    const res = isRealUuid
+      ? await supabase.from('portfolio_stats').update(payload).eq('id', initial.id!)
       : await supabase.from('portfolio_stats').insert(payload)
     if (res.error) {
       setError(res.error.message)
@@ -249,8 +252,9 @@ export function CertificationForm({ initial }: { initial?: Tables<'certification
       credential_url: credentialUrl || null,
       sort_order: Number(sortOrder) || 0,
     }
-    const res = initial
-      ? await supabase.from('certifications').update(payload).eq('id', initial.id)
+    const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
+    const res = isRealUuid
+      ? await supabase.from('certifications').update(payload).eq('id', initial.id!)
       : await supabase.from('certifications').insert(payload)
     if (res.error) {
       setError(res.error.message)
