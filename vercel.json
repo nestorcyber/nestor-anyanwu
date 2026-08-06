@@ -1,0 +1,6 @@
+{
+  "framework": "nextjs",
+  "env": {
+    "VERCEL_SUPPORT_LARGE_FUNCTIONS": "1"
+  }
+}
