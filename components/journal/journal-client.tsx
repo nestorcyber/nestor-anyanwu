@@ -142,7 +142,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
   }, [articles, selectedCategory, searchQuery])
 
   return (
-    <div className="w-full space-y-12 pt-24 pb-16">
+    <div className="w-full space-y-10 pt-16 sm:pt-20 pb-16">
       {/* 1. GUMROAD BLOG TOP HERO SECTION (FULL WIDTH SPLIT LAYOUT) */}
       {pinnedArticle && selectedCategory === "All" && !searchQuery && (
         <section className="w-full px-4 sm:px-8 lg:px-12">
@@ -183,16 +183,33 @@ export default function JournalClient({ articles }: JournalClientProps) {
               </Link>
             </div>
 
-            {/* RIGHT COLUMN (lg:col-span-4): 3 Side Story Rows with Arrow Buttons */}
+            {/* RIGHT COLUMN (lg:col-span-4): 3 Side Story Rows with Image + Title/Date + Arrow Button */}
             <div className="lg:col-span-4 flex flex-col justify-between divide-y divide-border/80 border-t border-b lg:border-t-0 lg:border-b-0 border-border/80">
               {featuredArticles.map((article) => (
                 <Link
                   key={article.slug}
                   href={`/journal/${article.slug}`}
-                  className="group py-6 first:pt-0 last:pb-0 flex items-center justify-between gap-4 cursor-pointer transition-colors"
+                  className="group py-5 first:pt-0 last:pb-0 flex items-center justify-between gap-4 cursor-pointer transition-colors"
                 >
-                  <div className="space-y-1.5 flex-1 min-w-0 pr-2">
-                    <h2 className="text-base sm:text-lg font-bold text-foreground leading-snug group-hover:text-accent transition-colors line-clamp-2 font-heading">
+                  {/* Image Thumbnail */}
+                  <div className="relative w-24 sm:w-28 h-20 sm:h-24 rounded-lg overflow-hidden bg-slate-900 border-2 border-slate-900/20 dark:border-slate-800 shrink-0">
+                    {article.coverImage ? (
+                      <Image
+                        src={article.coverImage}
+                        alt={article.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-amber-400 via-pink-500 to-indigo-600 flex items-center justify-center">
+                        <Sparkles className="w-6 h-6 text-white/60" />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Title & Date */}
+                  <div className="space-y-1 flex-1 min-w-0">
+                    <h2 className="text-sm sm:text-base font-bold text-foreground leading-snug group-hover:text-accent transition-colors line-clamp-2 font-heading">
                       {article.title}
                     </h2>
                     <span className="text-xs font-mono text-muted-foreground block">
@@ -201,7 +218,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
                   </div>
 
                   {/* Gumroad Pill Arrow Button */}
-                  <div className="w-9 h-9 rounded-md border-2 border-slate-900/20 dark:border-slate-800 bg-background flex items-center justify-center text-foreground group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-950 transition-all shrink-0">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-md border-2 border-slate-900/20 dark:border-slate-800 bg-background flex items-center justify-center text-foreground group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-950 transition-all shrink-0">
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
                 </Link>

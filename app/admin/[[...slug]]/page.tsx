@@ -17,6 +17,7 @@ import {
 import {
   getCertifications,
   getCommunityEntries,
+  getGalleryImages,
   getJournalArticles,
   getJourneyItems,
   getPortfolioProjects,
@@ -143,7 +144,6 @@ export default async function AdminCatchAllPage({ params }: Props) {
         </div>
       )
     }
-    // Edit journal by ID/slug
     let data = null
     const { data: byId } = await supabase.from('journal_articles').select('*').eq('id', actionOrId).maybeSingle()
     data = byId
@@ -156,7 +156,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
       const fb = all.find((a) => a.id === actionOrId || a.slug === actionOrId)
       if (fb) {
         data = {
-          id: fb.id,
+          id: undefined,
           slug: fb.slug,
           title: fb.title,
           excerpt: fb.excerpt,
@@ -258,7 +258,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
       const fb = all.find((p) => p.id === actionOrId || p.slug === actionOrId)
       if (fb) {
         data = {
-          id: fb.id,
+          id: undefined,
           slug: fb.slug,
           title: fb.title,
           short_description: fb.shortDescription,
@@ -362,7 +362,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
       const fb = all.find((e) => e.id === actionOrId || e.slug === actionOrId)
       if (fb) {
         data = {
-          id: fb.id,
+          id: undefined,
           slug: fb.slug,
           organization: fb.organization,
           role: fb.role,
@@ -454,7 +454,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
       const fb = all.find((j) => String(j.id) === String(actionOrId))
       if (fb) {
         data = {
-          id: fb.id,
+          id: undefined,
           title: fb.title,
           organization: fb.organization,
           role: fb.role,
@@ -479,7 +479,22 @@ export default async function AdminCatchAllPage({ params }: Props) {
   // 6. Gallery
   if (section === 'gallery') {
     if (!actionOrId) {
-      const { data } = await supabase.from('gallery_images').select('id, title, image_url').order('sort_order', { ascending: true })
+      const { data: dbData } = await supabase
+        .from('gallery_images')
+        .select('id, title, image_url')
+        .order('sort_order', { ascending: true })
+      const fallbackImages = await getGalleryImages()
+      const dbUrls = new Set((dbData ?? []).map((row) => row.image_url))
+      const items = [
+        ...(dbData ?? []),
+        ...fallbackImages
+          .filter((img) => !dbUrls.has(img.url))
+          .map((img, i) => ({
+            id: `img-${i}`,
+            title: img.title || 'Gallery Photo',
+            image_url: img.url,
+          })),
+      ]
       return (
         <div>
           <PageHeader
@@ -491,7 +506,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
             }
           />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {(data ?? []).map((row) => (
+            {items.map((row) => (
               <Link key={row.id} href={`/admin/gallery/${row.id}`} className="border border-border p-2 hover:border-foreground/30">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={row.image_url} alt={row.title || ''} className="h-40 w-full object-cover" />
@@ -499,7 +514,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </Link>
             ))}
           </div>
-          {!data?.length ? <p className="text-sm text-muted-foreground">No gallery images yet.</p> : null}
+          {!items.length ? <p className="text-sm text-muted-foreground">No gallery images yet.</p> : null}
         </div>
       )
     }
@@ -511,7 +526,23 @@ export default async function AdminCatchAllPage({ params }: Props) {
         </div>
       )
     }
-    const { data } = await supabase.from('gallery_images').select('*').eq('id', actionOrId).maybeSingle()
+    let data = null
+    const { data: dbData } = await supabase.from('gallery_images').select('*').eq('id', actionOrId).maybeSingle()
+    data = dbData
+    if (!data) {
+      const fallbackImages = await getGalleryImages()
+      const index = parseInt(actionOrId.replace('img-', ''), 10)
+      const fb = fallbackImages[index] || fallbackImages.find((img) => img.id === actionOrId)
+      if (fb) {
+        data = {
+          id: undefined,
+          title: fb.title || 'Gallery Photo',
+          image_url: fb.url,
+          alt: fb.alt || fb.title || '',
+          sort_order: index >= 0 ? index : 0,
+        } as any
+      }
+    }
     if (!data) notFound()
     return (
       <div>
@@ -561,7 +592,23 @@ export default async function AdminCatchAllPage({ params }: Props) {
         </div>
       )
     }
-    const { data } = await supabase.from('services').select('*').eq('id', actionOrId).maybeSingle()
+    let data = null
+    const { data: dbData } = await supabase.from('services').select('*').eq('id', actionOrId).maybeSingle()
+    data = dbData
+    if (!data) {
+      const fb = fallbackServices.find((s) => s.id === actionOrId || s.title === actionOrId)
+      if (fb) {
+        data = {
+          id: undefined,
+          title: fb.title,
+          slug: fb.id,
+          description: fb.description,
+          icon: fb.icon,
+          deliverables: fb.deliverables,
+          sort_order: 0,
+        } as any
+      }
+    }
     if (!data) notFound()
     return (
       <div>
@@ -612,7 +659,23 @@ export default async function AdminCatchAllPage({ params }: Props) {
         </div>
       )
     }
-    const { data } = await supabase.from('portfolio_stats').select('*').eq('id', actionOrId).maybeSingle()
+    let data = null
+    const { data: dbData } = await supabase.from('portfolio_stats').select('*').eq('id', actionOrId).maybeSingle()
+    data = dbData
+    if (!data) {
+      const fallbackStats = await getPortfolioStats()
+      const index = parseInt(actionOrId.replace('stat-', ''), 10)
+      const fb = fallbackStats[index] || fallbackStats.find((s) => s.label === actionOrId)
+      if (fb) {
+        data = {
+          id: undefined,
+          value: fb.value,
+          label: fb.label,
+          description: fb.description || '',
+          sort_order: !isNaN(index) ? index : 0,
+        } as any
+      }
+    }
     if (!data) notFound()
     return (
       <div>
@@ -632,7 +695,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
         ...(dbData ?? []),
         ...fallbackCertifications
           .filter((c) => !dbTitles.has(c.title))
-          .map((c, i) => ({ id: `cert-${i}`, title: c.title, provider: c.issuer })),
+          .map((c, i) => ({ id: `cert-${i}`, title: c.title, provider: c.provider })),
       ]
       return (
         <div>
@@ -664,7 +727,24 @@ export default async function AdminCatchAllPage({ params }: Props) {
         </div>
       )
     }
-    const { data } = await supabase.from('certifications').select('*').eq('id', actionOrId).maybeSingle()
+    let data = null
+    const { data: dbData } = await supabase.from('certifications').select('*').eq('id', actionOrId).maybeSingle()
+    data = dbData
+    if (!data) {
+      const fallbackCertifications = await getCertifications()
+      const index = parseInt(actionOrId.replace('cert-', ''), 10)
+      const fb = fallbackCertifications[index] || fallbackCertifications.find((c) => c.title === actionOrId)
+      if (fb) {
+        data = {
+          id: undefined,
+          title: fb.title,
+          provider: fb.provider,
+          issue_date: fb.date || null,
+          credential_url: fb.credentialUrl || null,
+          sort_order: !isNaN(index) ? index : 0,
+        } as any
+      }
+    }
     if (!data) notFound()
     return (
       <div>
