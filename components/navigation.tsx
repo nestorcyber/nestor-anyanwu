@@ -109,7 +109,7 @@ export default function Navigation() {
     <>
       {/* Fixed Primary Header Bar */}
       <nav
-        className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 lg:px-16 bg-background/95 backdrop-blur-sm border-b border-slate-200/80 dark:border-slate-800/80 transition-all duration-200 py-3 md:py-3.5"
+        className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 lg:px-16 bg-background border-b-2 border-slate-900 dark:border-slate-800 transition-all duration-200 py-3 md:py-3.5"
         role="navigation"
         aria-label="Main navigation"
       >

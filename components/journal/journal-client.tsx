@@ -65,13 +65,62 @@ export default function JournalClient({ articles }: JournalClientProps) {
     return articles.find((a) => a.pinned) || articles[0]
   }, [articles])
 
-  // 2. Featured Articles (Exactly 3 Cards for Right Side of Hero Section)
+  // 2. Featured Articles (Guaranteed EXACTLY 3 Cards for Right Side of Hero Section)
   const featuredArticles = useMemo(() => {
     if (!pinnedArticle) return []
     const featured = articles.filter((a) => a.featured && a.slug !== pinnedArticle.slug)
-    if (featured.length >= 3) return featured.slice(0, 3)
     const remaining = articles.filter((a) => a.slug !== pinnedArticle.slug)
-    return remaining.slice(0, 3)
+    
+    const combined = [...featured, ...remaining.filter((a) => !featured.includes(a))]
+
+    const defaultFallbacks: JournalArticleItem[] = [
+      {
+        slug: "technology-leadership-in-emerging-ecosystems",
+        title: "Technology Leadership in Emerging Ecosystems",
+        excerpt: "Lessons on building sustainable developer communities, fostering engineering talent, and driving digital inclusion.",
+        coverImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
+        category: "Leadership",
+        tags: ["Leadership", "Community"],
+        featured: true,
+        pinned: false,
+        publishedDate: "2026-01-10",
+        author: "Nestor Anyanwu",
+      },
+      {
+        slug: "building-scalable-web-architecture",
+        title: "Building Scalable Web Systems for Impact",
+        excerpt: "Best practices for architecting modern high-performance Next.js applications and cloud infrastructures.",
+        coverImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
+        category: "Software",
+        tags: ["Next.js", "Architecture"],
+        featured: true,
+        pinned: false,
+        publishedDate: "2025-12-20",
+        author: "Nestor Anyanwu",
+      },
+      {
+        slug: "design-systems-for-growing-brands",
+        title: "Crafting Cohesive Enterprise Design Systems",
+        excerpt: "How brand identity, typography, and component modularity align to create memorable digital product experiences.",
+        coverImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
+        category: "Design",
+        tags: ["Design", "Branding"],
+        featured: true,
+        pinned: false,
+        publishedDate: "2025-11-15",
+        author: "Nestor Anyanwu",
+      },
+    ]
+
+    const result = [...combined]
+    for (const fb of defaultFallbacks) {
+      if (result.length >= 3) break
+      if (!result.some((a) => a.slug === fb.slug) && fb.slug !== pinnedArticle.slug) {
+        result.push(fb)
+      }
+    }
+
+    return result.slice(0, 3)
   }, [articles, pinnedArticle])
 
   // Filtered latest articles for grid below hero
