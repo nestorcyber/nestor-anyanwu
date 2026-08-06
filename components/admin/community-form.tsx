@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { slugify } from '@/lib/utils/slug'
 import ImageUpload from '@/components/admin/image-upload'
+import MarkdownEditor from '@/components/admin/markdown-editor'
 import {
   Checkbox,
   DangerButton,
@@ -122,8 +123,13 @@ export default function CommunityForm({ initial }: Props) {
       <Field label="Tags (comma separated)">
         <TextInput value={tags} onChange={(e) => setTags(e.target.value)} />
       </Field>
-      <Field label="Description (Markdown)">
-        <TextTextarea value={description} onChange={(e) => setDescription(e.target.value)} className="min-h-[240px] font-mono" />
+      <Field label="Description">
+        <MarkdownEditor
+          value={description}
+          onChange={setDescription}
+          height={360}
+          placeholder="Write the community overview…"
+        />
       </Field>
       <Field label="Sort order">
         <TextInput type="number" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />

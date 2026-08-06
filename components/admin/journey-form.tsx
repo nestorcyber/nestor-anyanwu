@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import ImageUpload from '@/components/admin/image-upload'
+import MarkdownEditor from '@/components/admin/markdown-editor'
 import {
   DangerButton,
   Field,
@@ -100,7 +101,12 @@ export default function JourneyForm({ initial }: Props) {
         </TextSelect>
       </Field>
       <Field label="Description">
-        <TextTextarea value={description} onChange={(e) => setDescription(e.target.value)} />
+        <MarkdownEditor
+          value={description}
+          onChange={setDescription}
+          height={280}
+          placeholder="Write the journey description…"
+        />
       </Field>
       <Field label="Details (one per line)">
         <TextTextarea value={details} onChange={(e) => setDetails(e.target.value)} />

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { slugify } from '@/lib/utils/slug'
 import ImageUpload from '@/components/admin/image-upload'
+import MarkdownEditor from '@/components/admin/markdown-editor'
 import {
   Checkbox,
   DangerButton,
@@ -134,11 +135,12 @@ export default function JournalForm({ initial }: Props) {
       <Field label="SEO description">
         <TextTextarea value={seoDescription} onChange={(e) => setSeoDescription(e.target.value)} />
       </Field>
-      <Field label="Content (Markdown)">
-        <TextTextarea
+      <Field label="Content">
+        <MarkdownEditor
           value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className="min-h-[280px] font-mono"
+          onChange={setContent}
+          height={420}
+          placeholder="Write the full article…"
         />
       </Field>
       <div className="flex flex-wrap gap-4">

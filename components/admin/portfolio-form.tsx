@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { slugify } from '@/lib/utils/slug'
 import ImageUpload from '@/components/admin/image-upload'
+import MarkdownEditor from '@/components/admin/markdown-editor'
 import {
   Checkbox,
   DangerButton,
@@ -159,11 +160,12 @@ export default function PortfolioForm({ initial }: Props) {
       <Field label="Sort order">
         <TextInput type="number" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
       </Field>
-      <Field label="Full description (Markdown)">
-        <TextTextarea
+      <Field label="Full description">
+        <MarkdownEditor
           value={fullDescription}
-          onChange={(e) => setFullDescription(e.target.value)}
-          className="min-h-[280px] font-mono"
+          onChange={setFullDescription}
+          height={420}
+          placeholder="Write the full case study…"
         />
       </Field>
       <div className="flex gap-4">
