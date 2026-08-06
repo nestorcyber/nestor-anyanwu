@@ -5,7 +5,7 @@ import { getJournalArticleBySlug, getJournalArticles } from '@/lib/content'
 import { Markdown } from '@/lib/content/markdown'
 import Footer from '@/components/footer'
 import SectionContainer from '@/components/shared/section-container'
-import { ArrowLeft, Calendar, User, Tag, Clock, ArrowUpRight, Share2 } from 'lucide-react'
+import { ArrowLeft, Calendar, User, Clock, ArrowUpRight, Share2 } from 'lucide-react'
 import type { Metadata } from 'next'
 
 interface Props {
@@ -118,9 +118,6 @@ export default async function JournalDetailPage({ params }: Props) {
           {/* Article Header */}
           <header className="space-y-6 max-w-3xl mb-10">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 bg-accent/15 text-accent border border-accent/30 inline-block">
-                {article.category}
-              </span>
               {article.featured && (
                 <span className="text-[10px] font-mono text-accent uppercase tracking-wider px-2 py-0.5 border border-accent/40">
                   FEATURED
@@ -170,21 +167,6 @@ export default async function JournalDetailPage({ params }: Props) {
             <article className="text-foreground/90 text-base md:text-lg leading-relaxed font-light">
               <Markdown content={article.content} />
             </article>
-
-            {/* Tags Section */}
-            {article.tags.length > 0 && (
-              <div className="pt-8 border-t border-border/40 flex flex-wrap items-center gap-2">
-                <Tag className="w-3.5 h-3.5 text-muted-foreground" />
-                {article.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs font-mono px-3 py-1 border border-border/60 bg-card text-muted-foreground rounded-none"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            )}
 
             {/* Previous / Next Article Navigation */}
             <div className="pt-8 border-t border-border/60 grid grid-cols-1 md:grid-cols-2 gap-4">

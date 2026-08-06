@@ -100,14 +100,14 @@ export default function JournalClient({ articles }: JournalClientProps) {
           <div className="w-full pl-0 pr-4 sm:pr-6 lg:pr-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-stretch">
               {/* TOP-LEFT: Primary Pinned Card (lg:col-span-8) - Touches Left Edge & Flush Below Navbar */}
-              <div className="lg:col-span-8 relative rounded-none overflow-hidden border-2 border-slate-900/10 dark:border-slate-800 bg-card shadow-[6px_6px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.9)] hover:shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] dark:hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,0.85)] hover:border-slate-800 dark:hover:border-slate-400 transition-all min-h-[440px] sm:min-h-[500px] md:min-h-[540px] flex flex-col justify-end group">
+              <div className="lg:col-span-8 relative rounded-none overflow-hidden border-2 border-slate-900/20 dark:border-slate-800 bg-card shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.9)] hover:border-slate-800 dark:hover:border-slate-400 transition-all min-h-[420px] sm:min-h-[460px] md:min-h-[500px] flex flex-col justify-end group">
                 {/* Hero Cover Image Background */}
                 {pinnedArticle.coverImage ? (
                   <Image
                     src={pinnedArticle.coverImage}
                     alt={pinnedArticle.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-95"
                     priority
                   />
                 ) : (
@@ -120,12 +120,10 @@ export default function JournalClient({ articles }: JournalClientProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
 
                 {/* Bottom Content Area Over Image Gradient */}
-                <div className="relative z-10 p-6 sm:p-8 md:p-10 space-y-3">
-                  {/* Date & Category Line */}
-                  <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-slate-300">
-                    <span>{formatDate(pinnedArticle.publishedDate)}</span>
-                    <span>/</span>
-                    <span className="text-accent font-semibold">{pinnedArticle.category}</span>
+                <div className="relative z-10 p-6 sm:p-8 space-y-2.5">
+                  {/* Date Line (No Category Tags) */}
+                  <div className="text-[11px] font-mono uppercase tracking-widest text-slate-300">
+                    {formatDate(pinnedArticle.publishedDate)}
                   </div>
 
                   {/* Title */}
@@ -148,16 +146,16 @@ export default function JournalClient({ articles }: JournalClientProps) {
                   <Link
                     key={article.slug}
                     href={`/journal/${article.slug}`}
-                    className="group flex items-center gap-4 bg-card hover:bg-card/90 border-2 border-slate-900/10 dark:border-slate-800 hover:border-slate-800 dark:hover:border-slate-400 rounded-none p-3.5 transition-all shadow-[4px_4px_0px_0px_rgba(15,23,42,0.7)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)] hover:shadow-[6px_6px_0px_0px_rgba(15,23,42,0.9)] dark:hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,0.85)] hover:-translate-x-0.5 hover:-translate-y-0.5 cursor-pointer"
+                    className="group flex items-center gap-4 bg-card hover:bg-card/90 border-2 border-slate-900/20 dark:border-slate-800 rounded-none p-3 transition-all shadow-[3px_3px_0px_0px_rgba(15,23,42,0.8)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent cursor-pointer"
                   >
                     {/* Left Thumbnail Image */}
-                    <div className="relative w-28 sm:w-32 h-24 sm:h-28 rounded-none overflow-hidden bg-secondary/50 border border-border/50 shrink-0">
+                    <div className="relative w-24 sm:w-28 h-20 sm:h-24 rounded-none overflow-hidden bg-secondary/50 border border-border/50 shrink-0">
                       {article.coverImage ? (
                         <Image
                           src={article.coverImage}
                           alt={article.title}
                           fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-accent/20 to-background flex items-center justify-center">
@@ -166,10 +164,10 @@ export default function JournalClient({ articles }: JournalClientProps) {
                       )}
                     </div>
 
-                    {/* Right Text Block */}
-                    <div className="space-y-1.5 flex-1 min-w-0">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-accent block">
-                        {article.category}
+                    {/* Right Text Block (No Category Tags) */}
+                    <div className="space-y-1 flex-1 min-w-0">
+                      <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block">
+                        {formatDate(article.publishedDate)}
                       </span>
                       <h3 className="text-sm font-bold text-foreground leading-snug group-hover:text-accent transition-colors line-clamp-2">
                         {article.title}
@@ -191,7 +189,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
         <div className="flex items-center justify-between border-b-2 border-border/60 pb-4">
           <div className="flex items-center gap-2">
             <h2 className="text-xs font-bold uppercase tracking-widest text-foreground font-heading">
-              {selectedCategory === "All" ? "All Articles" : `${selectedCategory} Articles`}
+              Latest Articles
             </h2>
             {searchQuery && (
               <span className="text-xs text-muted-foreground">
@@ -210,18 +208,18 @@ export default function JournalClient({ articles }: JournalClientProps) {
             {filteredArticles.map((article) => (
               <article
                 key={article.slug}
-                className="group border-2 border-slate-900/10 dark:border-slate-800/80 bg-card/80 hover:bg-card rounded-none p-4 flex flex-col justify-between transition-all shadow-[4px_4px_0px_0px_rgba(15,23,42,0.7)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)] hover:shadow-[6px_6px_0px_0px_rgba(15,23,42,0.9)] dark:hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,0.85)] hover:border-slate-800 dark:hover:border-slate-400 hover:-translate-x-1 hover:-translate-y-1 cursor-pointer"
+                className="group border-2 border-slate-900/20 dark:border-slate-800 bg-card rounded-none p-4 flex flex-col justify-between transition-all shadow-[3px_3px_0px_0px_rgba(15,23,42,0.8)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent cursor-pointer"
               >
                 <Link href={`/journal/${article.slug}`} className="flex flex-col justify-between h-full space-y-4">
-                  <div className="space-y-3.5">
+                  <div className="space-y-3">
                     {/* Cover Image Container */}
-                    <div className="relative w-full h-[200px] sm:h-[220px] rounded-none overflow-hidden bg-secondary/50 border border-border/40">
+                    <div className="relative w-full h-[180px] sm:h-[200px] rounded-none overflow-hidden bg-secondary/50 border border-border/40">
                       {article.coverImage ? (
                         <Image
                           src={article.coverImage}
                           alt={article.title}
                           fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-accent/20 to-background flex items-center justify-center">
@@ -230,17 +228,14 @@ export default function JournalClient({ articles }: JournalClientProps) {
                       )}
                     </div>
 
-                    {/* Article Content Under Cover Image */}
-                    <div className="space-y-2 px-1">
-                      {/* Date & Category Line */}
-                      <div className="flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground uppercase tracking-wider">
-                        <span>{formatDate(article.publishedDate)}</span>
-                        <span>/</span>
-                        <span className="font-semibold text-foreground/80">{article.category}</span>
+                    {/* Article Content Under Cover Image (No Category Tags) */}
+                    <div className="space-y-1.5 px-1">
+                      <div className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">
+                        {formatDate(article.publishedDate)}
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-base sm:text-lg font-bold text-foreground tracking-tight leading-snug group-hover:text-accent transition-colors line-clamp-2">
+                      <h3 className="text-base font-bold text-foreground tracking-tight leading-snug group-hover:text-accent transition-colors line-clamp-2">
                         {article.title}
                       </h3>
 
@@ -266,7 +261,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
             <Search className="w-8 h-8 text-muted-foreground/30 mx-auto" />
             <h3 className="text-lg font-bold text-foreground">No articles found</h3>
             <p className="text-xs text-muted-foreground max-w-sm mx-auto">
-              No journal entries matched your search query or category filter. Try clearing filters.
+              No journal entries matched your search query. Try clearing filters.
             </p>
             <button
               onClick={() => {
@@ -275,7 +270,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
               }}
               className="text-xs font-bold uppercase tracking-widest text-accent hover:underline pt-2 cursor-pointer"
             >
-              Reset Filters
+              Reset Search
             </button>
           </div>
         )}
