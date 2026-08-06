@@ -142,21 +142,73 @@ export default function JournalClient({ articles }: JournalClientProps) {
   }, [articles, selectedCategory, searchQuery])
 
   return (
-    <div className="space-y-10">
-      {/* 1. JOURNAL HERO SECTION: PINNED CARD (LEFT) + 3 FEATURED CARDS (RIGHT) */}
+    <div className="space-y-12 pb-16">
+      {/* 1. GUMROAD BLOG TOP HERO HEADER */}
+      <section className="w-full pt-28 pb-10 border-b-2 border-slate-900/20 dark:border-slate-800 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <div className="space-y-3">
+            <div className="inline-block text-[10px] font-mono font-bold uppercase tracking-widest text-accent px-2.5 py-1 border border-accent/40 bg-accent/10">
+              EDITORIAL & WRITING
+            </div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-foreground tracking-tight leading-none uppercase font-heading">
+              The Journal
+            </h1>
+            <p className="text-base sm:text-lg text-muted-foreground font-light max-w-2xl leading-relaxed">
+              Tactics, engineering essays, ecosystem leadership insights, and digital product case studies.
+            </p>
+          </div>
+
+          {/* Category Filter Bar + Search Input (Gumroad Style) */}
+          <div className="pt-4 flex flex-col md:flex-row md:items-center justify-between gap-4 border-t border-border/60">
+            {/* Category Pills */}
+            <div className="flex flex-wrap items-center gap-2">
+              {categories.map((cat) => {
+                const isActive = selectedCategory === cat
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`text-xs font-mono font-bold uppercase tracking-wider px-3.5 py-2 transition-all cursor-pointer rounded-none border-2 ${
+                      isActive
+                        ? "bg-slate-900 text-white border-slate-900 dark:bg-white dark:text-slate-950 dark:border-white shadow-[2px_2px_0px_0px_rgba(244,114,182,1)]"
+                        : "bg-card text-foreground border-slate-900/20 dark:border-slate-800 hover:border-slate-900 dark:hover:border-slate-400"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                )
+              })}
+            </div>
+
+            {/* Search Input Box */}
+            <div className="relative w-full md:w-72">
+              <Search className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search articles..."
+                className="w-full bg-card text-foreground text-xs pl-9 pr-4 py-2.5 border-2 border-slate-900/20 dark:border-slate-800 rounded-none focus:outline-none focus:border-accent transition-colors"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. JOURNAL FEATURED HERO SECTION: PINNED CARD (LEFT) + 3 FEATURED CARDS (RIGHT) */}
       {pinnedArticle && selectedCategory === "All" && !searchQuery && (
-        <section className="w-full pt-0 pb-6 md:pb-8">
-          <div className="w-full pl-0 pr-4 sm:pr-6 lg:pr-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-stretch">
-              {/* TOP-LEFT: Primary Pinned Card (lg:col-span-8) - Touches Left Edge & Flush Below Navbar */}
-              <div className="lg:col-span-8 relative rounded-none overflow-hidden border-2 border-slate-900/20 dark:border-slate-800 bg-card shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-slate-800 dark:hover:border-slate-400 transition-all min-h-[420px] sm:min-h-[460px] md:min-h-[500px] flex flex-col justify-end group">
+        <section className="w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              {/* TOP-LEFT: Primary Pinned Card (lg:col-span-7) */}
+              <div className="lg:col-span-7 relative rounded-none overflow-hidden border-2 border-slate-900/20 dark:border-slate-800 bg-card shadow-[4px_4px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent transition-all min-h-[420px] sm:min-h-[460px] flex flex-col justify-end group">
                 {/* Hero Cover Image Background */}
                 {pinnedArticle.coverImage ? (
                   <Image
                     src={pinnedArticle.coverImage}
                     alt={pinnedArticle.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-95"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-90"
                     priority
                   />
                 ) : (
@@ -169,33 +221,47 @@ export default function JournalClient({ articles }: JournalClientProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
 
                 {/* Bottom Content Area Over Image Gradient */}
-                <div className="relative z-10 p-6 sm:p-8 space-y-2.5">
-                  {/* Date Line (No Category Tags) */}
-                  <div className="text-[11px] font-mono uppercase tracking-widest text-slate-300">
-                    {formatDate(pinnedArticle.publishedDate)}
+                <div className="relative z-10 p-6 sm:p-8 space-y-3">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-black bg-[#f472b6] px-2 py-0.5 border border-black">
+                      FEATURED STORY
+                    </span>
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-slate-300">
+                      {formatDate(pinnedArticle.publishedDate)}
+                    </span>
                   </div>
 
                   {/* Title */}
                   <Link href={`/journal/${pinnedArticle.slug}`} className="block group/title">
-                    <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-snug group-hover/title:text-accent transition-colors font-heading">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-snug group-hover/title:text-[#f472b6] transition-colors font-heading">
                       {pinnedArticle.title}
-                    </h1>
+                    </h2>
                   </Link>
 
                   {/* Excerpt */}
-                  <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed line-clamp-2 max-w-3xl">
+                  <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed line-clamp-2 max-w-2xl">
                     {pinnedArticle.excerpt}
                   </p>
+
+                  <div className="pt-2">
+                    <Link
+                      href={`/journal/${pinnedArticle.slug}`}
+                      className="inline-flex items-center gap-2 bg-[#f472b6] hover:bg-pink-400 text-slate-950 text-xs font-mono font-extrabold uppercase tracking-widest px-4 py-2 border border-slate-950 transition-all shadow-[2px_2px_0px_0px_rgba(255,255,255,0.9)]"
+                    >
+                      <span>Read Article</span>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </div>
               </div>
 
-              {/* RIGHT SIDE: 3 Featured Cards Stack (lg:col-span-4) */}
-              <div className="lg:col-span-4 flex flex-col justify-between space-y-4">
+              {/* RIGHT SIDE: 3 Featured Cards Stack (lg:col-span-5) */}
+              <div className="lg:col-span-5 flex flex-col justify-between space-y-4">
                 {featuredArticles.map((article) => (
                   <Link
                     key={article.slug}
                     href={`/journal/${article.slug}`}
-                    className="group flex items-center gap-4 bg-card hover:bg-card/90 border-2 border-slate-900/20 dark:border-slate-800 rounded-none p-3.5 transition-all shadow-xs hover:shadow-sm hover:border-slate-800 dark:hover:border-slate-400 cursor-pointer"
+                    className="group flex items-center gap-4 bg-card hover:bg-card/90 border-2 border-slate-900/20 dark:border-slate-800 rounded-none p-4 transition-all shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent cursor-pointer"
                   >
                     {/* Left Thumbnail Image */}
                     <div className="relative w-24 sm:w-28 h-20 sm:h-24 rounded-none overflow-hidden bg-secondary/50 border border-border/50 shrink-0">
@@ -213,12 +279,12 @@ export default function JournalClient({ articles }: JournalClientProps) {
                       )}
                     </div>
 
-                    {/* Right Text Block (No Category Tags) */}
+                    {/* Right Text Block */}
                     <div className="space-y-1 flex-1 min-w-0">
                       <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block">
                         {formatDate(article.publishedDate)}
                       </span>
-                      <h3 className="text-sm font-bold text-foreground leading-snug group-hover:text-accent transition-colors line-clamp-2">
+                      <h3 className="text-sm font-bold text-foreground leading-snug group-hover:text-accent transition-colors line-clamp-2 font-heading">
                         {article.title}
                       </h3>
                       <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed font-light">
@@ -233,12 +299,12 @@ export default function JournalClient({ articles }: JournalClientProps) {
         </section>
       )}
 
-      {/* 3. LATEST ARTICLES SECTION */}
-      <div className="max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        <div className="flex items-center justify-between border-b border-border/60 pb-4">
+      {/* 3. LATEST ARTICLES GRID SECTION */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div className="flex items-center justify-between border-b-2 border-slate-900/20 dark:border-slate-800 pb-4">
           <div className="flex items-center gap-2">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-foreground font-heading">
-              Latest Articles
+            <h2 className="text-sm font-mono font-extrabold uppercase tracking-widest text-foreground font-heading">
+              // All Journal Articles
             </h2>
             {searchQuery && (
               <span className="text-xs text-muted-foreground">
@@ -247,17 +313,17 @@ export default function JournalClient({ articles }: JournalClientProps) {
             )}
           </div>
           <span className="text-xs font-mono text-muted-foreground">
-            {filteredArticles.length} {filteredArticles.length === 1 ? "RESULT" : "RESULTS"}
+            {filteredArticles.length} {filteredArticles.length === 1 ? "ARTICLE" : "ARTICLES"}
           </span>
         </div>
 
-        {/* 4. LATEST ARTICLES GRID */}
+        {/* ARTICLES GRID */}
         {filteredArticles.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {filteredArticles.map((article) => (
               <article
                 key={article.slug}
-                className="group border-2 border-slate-900/20 dark:border-slate-800 bg-card rounded-none p-4 flex flex-col justify-between transition-all shadow-xs hover:shadow-sm hover:border-slate-800 dark:hover:border-slate-400 cursor-pointer"
+                className="group border-2 border-slate-900/20 dark:border-slate-800 bg-card rounded-none p-5 flex flex-col justify-between transition-all shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent hover:-translate-y-0.5 cursor-pointer"
               >
                 <Link href={`/journal/${article.slug}`} className="flex flex-col justify-between h-full space-y-4">
                   <div className="space-y-3">
@@ -277,14 +343,14 @@ export default function JournalClient({ articles }: JournalClientProps) {
                       )}
                     </div>
 
-                    {/* Article Content Under Cover Image (No Category Tags) */}
+                    {/* Article Content Under Cover Image */}
                     <div className="space-y-1.5 px-1">
                       <div className="text-[11px] font-mono text-muted-foreground uppercase tracking-wider">
                         {formatDate(article.publishedDate)}
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-base font-bold text-foreground tracking-tight leading-snug group-hover:text-accent transition-colors line-clamp-2">
+                      <h3 className="text-base font-extrabold text-foreground tracking-tight leading-snug group-hover:text-accent transition-colors line-clamp-2 font-heading">
                         {article.title}
                       </h3>
 
@@ -306,11 +372,11 @@ export default function JournalClient({ articles }: JournalClientProps) {
           </div>
         ) : (
           /* EMPTY STATE */
-          <div className="py-20 border border-dashed border-border/60 text-center space-y-3">
+          <div className="py-20 border-2 border-dashed border-slate-900/20 dark:border-slate-800 text-center space-y-3 bg-card">
             <Search className="w-8 h-8 text-muted-foreground/30 mx-auto" />
             <h3 className="text-lg font-bold text-foreground">No articles found</h3>
             <p className="text-xs text-muted-foreground max-w-sm mx-auto">
-              No journal entries matched your search query. Try clearing filters.
+              No journal entries matched your search query. Try resetting filters.
             </p>
             <button
               onClick={() => {

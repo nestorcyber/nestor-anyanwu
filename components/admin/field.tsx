@@ -23,7 +23,125 @@ export function TextInput(props: InputHTMLAttributes<HTMLInputElement>) {
 }
 
 export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  return <textarea {...props} className={`${inputClass} min-h-[120px] ${props.className || ''}`} />
+  const textareaId = props.id || props.name || 'markdown-textarea'
+
+  const applyFormat = (prefix: string, suffix: string = '') => {
+    const textarea = document.getElementById(textareaId) as HTMLTextAreaElement | null
+    if (!textarea) return
+
+    const start = textarea.selectionStart || 0
+    const end = textarea.selectionEnd || 0
+    const text = textarea.value
+    const selectedText = text.substring(start, end) || 'text'
+    const replacement = `${prefix}${selectedText}${suffix}`
+
+    const newValue = text.substring(0, start) + replacement + text.substring(end)
+
+    // Trigger input change for React state updates
+    const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value')?.set
+    if (nativeSetter) {
+      nativeSetter.call(textarea, newValue)
+    } else {
+      textarea.value = newValue
+    }
+    textarea.dispatchEvent(new Event('input', { bubbles: true }))
+
+    // Restore cursor position
+    setTimeout(() => {
+      textarea.focus()
+      textarea.setSelectionRange(start + prefix.length, start + prefix.length + selectedText.length)
+    }, 0)
+  }
+
+  return (
+    <div className="space-y-1">
+      {/* Markdown Formatter Toolbar */}
+      <div className="flex flex-wrap items-center gap-1 p-1 bg-muted/60 border border-border border-b-0 text-xs font-mono">
+        <button
+          type="button"
+          onClick={() => applyFormat('**', '**')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-extrabold cursor-pointer"
+          title="Bold (**text**)"
+        >
+          B
+        </button>
+        <button
+          type="button"
+          onClick={() => applyFormat('*', '*')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none italic font-bold cursor-pointer"
+          title="Italic (*text*)"
+        >
+          I
+        </button>
+        <button
+          type="button"
+          onClick={() => applyFormat('# ')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-bold cursor-pointer"
+          title="Heading 1 (# Heading)"
+        >
+          H1
+        </button>
+        <button
+          type="button"
+          onClick={() => applyFormat('## ')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-bold cursor-pointer"
+          title="Heading 2 (## Heading)"
+        >
+          H2
+        </button>
+        <button
+          type="button"
+          onClick={() => applyFormat('### ')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-bold cursor-pointer"
+          title="Heading 3 (### Heading)"
+        >
+          H3
+        </button>
+        <button
+          type="button"
+          onClick={() => applyFormat('> ')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          title="Blockquote (> Quote)"
+        >
+          &quot;
+        </button>
+        <button
+          type="button"
+          onClick={() => applyFormat('`', '`')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          title="Inline Code (`code`)"
+        >
+          `code`
+        </button>
+        <button
+          type="button"
+          onClick={() => applyFormat('\n```\n', '\n```\n')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          title="Code Block (``` code ```)"
+        >
+          ``` ```
+        </button>
+        <button
+          type="button"
+          onClick={() => applyFormat('- ')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          title="Bullet List (- item)"
+        >
+          • List
+        </button>
+        <button
+          type="button"
+          onClick={() => applyFormat('[', '](https://example.com)')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer text-accent"
+          title="Insert Link ([Text](URL))"
+        >
+          🔗 Link
+        </button>
+      </div>
+
+      <textarea id={textareaId} {...props} className={`${inputClass} min-h-[140px] ${props.className || ''}`} />
+    </div>
+  )
 }
 
 export function TextSelect(props: SelectHTMLAttributes<HTMLSelectElement>) {

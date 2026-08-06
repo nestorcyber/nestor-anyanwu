@@ -4,7 +4,17 @@ import type { JourneyItem } from "@/lib/content"
 import { Briefcase, Calendar } from "lucide-react"
 
 export default function ProfessionalExperience({ journeyTimeline }: { journeyTimeline: JourneyItem[] }) {
-  const workExperience = journeyTimeline.filter((item) => item.type === "work")
+  const workExperience = journeyTimeline.length
+    ? journeyTimeline.filter(
+        (item) =>
+          !item.type ||
+          item.type.toLowerCase().includes("work") ||
+          item.type.toLowerCase().includes("exp") ||
+          item.type.toLowerCase().includes("role") ||
+          item.type.toLowerCase().includes("career")
+      )
+    : []
+  const displayItems = workExperience.length ? workExperience : journeyTimeline
 
   return (
     <section className="w-full py-16 md:py-24 border-b border-border/60">
@@ -16,7 +26,7 @@ export default function ProfessionalExperience({ journeyTimeline }: { journeyTim
         />
 
         <div className="space-y-8 max-w-5xl">
-          {workExperience.map((exp, idx) => (
+          {displayItems.map((exp, idx) => (
             <div
               key={exp.id || idx}
               className="p-8 border border-border/60 hover:border-accent bg-card/60 rounded-none grid-cell-card flex flex-col md:flex-row justify-between gap-6 transition-all duration-300"
