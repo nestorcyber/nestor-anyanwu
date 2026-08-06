@@ -180,23 +180,38 @@ export default async function JournalDetailPage({ params }: Props) {
                     <Link
                       key={rel.slug}
                       href={`/journal/${rel.slug}`}
-                      className="group border-2 border-slate-900/20 dark:border-slate-800 bg-card rounded-none p-5 space-y-3 flex flex-col justify-between transition-all shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent hover:-translate-y-0.5"
+                      className="group relative w-full h-[180px] sm:h-[190px] rounded-lg overflow-hidden border-2 border-slate-900/20 dark:border-slate-800 bg-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent flex flex-col justify-end p-5 transition-all cursor-pointer"
                     >
-                      <div className="space-y-2">
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-accent px-2 py-0.5 border border-accent/40 bg-accent/10">
-                          {rel.category}
-                        </span>
-                        <h4 className="text-base font-extrabold text-foreground group-hover:text-accent transition-colors line-clamp-2 leading-snug font-heading">
-                          {rel.title}
-                        </h4>
-                        <p className="text-xs text-muted-foreground font-light leading-relaxed line-clamp-2">
-                          {rel.excerpt}
-                        </p>
-                      </div>
+                      {/* Full Card Cover Image */}
+                      {rel.coverImage ? (
+                        <Image
+                          src={rel.coverImage}
+                          alt={rel.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-90"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-amber-400 via-pink-500 to-indigo-600 flex items-center justify-center" />
+                      )}
 
-                      <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs font-bold text-foreground group-hover:text-accent uppercase tracking-wider">
-                        <span>Read Article</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      {/* Gradient Text Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent z-0" />
+
+                      {/* Content Overlay */}
+                      <div className="relative z-10 flex items-end justify-between gap-3">
+                        <div className="space-y-1 flex-1 min-w-0">
+                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 block">
+                            {rel.publishedDate}
+                          </span>
+                          <h4 className="text-sm sm:text-base font-extrabold text-white leading-snug group-hover:text-[#f472b6] transition-colors line-clamp-2 font-heading">
+                            {rel.title}
+                          </h4>
+                        </div>
+
+                        {/* Pill Arrow Icon */}
+                        <div className="w-7 h-7 rounded-md bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white group-hover:bg-[#f472b6] group-hover:text-slate-950 transition-all shrink-0">
+                          <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </div>
                       </div>
                     </Link>
                   ))}

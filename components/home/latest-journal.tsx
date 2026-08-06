@@ -23,13 +23,12 @@ export default async function LatestJournal() {
       />
 
       {displayArticles.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-3 border border-border/60 divide-y md:divide-y-0 md:divide-x divide-border/60 bg-card/40 rounded overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {displayArticles.map((article) => (
             <ArticleCard
               key={article.slug}
               title={article.title}
-              category={article.category}
-              readTime="ARTICLE"
+              image={article.coverImage}
               date={new Date(article.publishedDate || Date.now()).toLocaleDateString("en-US", {
                 month: "short",
                 year: "numeric",

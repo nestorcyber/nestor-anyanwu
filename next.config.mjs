@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  compress: true,
   serverExternalPackages: ["cloudinary"],
   outputFileTracingExcludes: {
     "*": ["node_modules/cloudinary/**/*"],
+  },
+  experimental: {
+    optimizePackageImports: ["lucide-react", "date-fns"],
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
   },
   eslint: {
     ignoreDuringBuilds: true,
@@ -11,7 +18,8 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
         protocol: "https",
@@ -41,8 +49,17 @@ const nextConfig = {
             value: "strict-origin-when-cross-origin",
           },
           {
-            key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/_next/image(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },

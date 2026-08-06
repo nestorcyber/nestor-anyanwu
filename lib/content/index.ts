@@ -241,24 +241,8 @@ function db() {
 }
 
 export async function getJournalArticles(): Promise<JournalArticle[]> {
-  const supabase = db()
-  if (supabase) {
-    const { data, error } = await supabase
-      .from('journal_articles')
-      .select('*')
-      .eq('draft', false)
-      .order('pinned', { ascending: false })
-      .order('published_date', { ascending: false })
-
-    if (!error && data && data.length > 0) {
-      return data.map(mapJournal)
-    }
-  }
-
-  // Seamless Fallback: Read local MDX files from content/journal
   const localFiles = readLocalMdxDir('content/journal')
-  const articles: JournalArticle[] = localFiles
-    .filter(({ data }) => !data.draft)
+  const localArticles: JournalArticle[] = localFiles
     .map(({ slug, data, content }) => ({
       id: slug,
       slug,
@@ -277,7 +261,27 @@ export async function getJournalArticles(): Promise<JournalArticle[]> {
       content,
     }))
 
-  return articles.sort((a, b) => {
+  const supabase = db()
+  let dbArticles: JournalArticle[] = []
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('journal_articles')
+      .select('*')
+      .order('pinned', { ascending: false })
+      .order('published_date', { ascending: false })
+
+    if (!error && data) {
+      dbArticles = data.map(mapJournal)
+    }
+  }
+
+  const dbSlugs = new Set(dbArticles.map((a) => a.slug))
+  const combined = [
+    ...dbArticles,
+    ...localArticles.filter((a) => !dbSlugs.has(a.slug)),
+  ]
+
+  return combined.sort((a, b) => {
     if (a.pinned !== b.pinned) return a.pinned ? -1 : 1
     return new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
   })

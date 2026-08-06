@@ -131,6 +131,46 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         </button>
         <button
           type="button"
+          onClick={() => applyFormat('\n\n', '\n\n')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-bold cursor-pointer"
+          title="Paragraph (<p>)"
+        >
+          P (Paragraph)
+        </button>
+        <button
+          type="button"
+          onClick={() => applyFormat('<div align="left">\n', '\n</div>')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          title="Align Left (<div align='left'>)"
+        >
+          Left ⇇
+        </button>
+        <button
+          type="button"
+          onClick={() => applyFormat('<div align="center">\n', '\n</div>')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          title="Align Center (<div align='center'>)"
+        >
+          Center ⇄
+        </button>
+        <button
+          type="button"
+          onClick={() => applyFormat('<div align="right">\n', '\n</div>')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          title="Align Right (<div align='right'>)"
+        >
+          Right ⇉
+        </button>
+        <button
+          type="button"
+          onClick={() => applyFormat('<div align="justify">\n', '\n</div>')}
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          title="Justify Text (<div align='justify'>)"
+        >
+          Justify ≡
+        </button>
+        <button
+          type="button"
           onClick={() => applyFormat('[', '](https://example.com)')}
           className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer text-accent"
           title="Insert Link ([Text](URL))"

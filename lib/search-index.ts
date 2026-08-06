@@ -184,25 +184,35 @@ export async function buildSearchIndex(): Promise<SearchResult[]> {
 
 export function searchInIndex(index: SearchResult[], query: string): SearchResult[] {
   if (!query.trim()) return []
-  const q = query.toLowerCase().trim()
+  const rawQ = query.toLowerCase().trim()
+  const tokens = rawQ.split(/\s+/).filter(Boolean)
 
   return index
-    .filter((item) => {
-      const titleMatch = item.title.toLowerCase().includes(q)
-      const descMatch = item.description.toLowerCase().includes(q)
-      const keywordMatch = item.keywords?.some((kw) => kw.includes(q)) ?? false
-      const categoryMatch = item.category.toLowerCase().includes(q)
-      return titleMatch || descMatch || keywordMatch || categoryMatch
+    .map((item) => {
+      const titleLower = item.title.toLowerCase()
+      const descLower = item.description.toLowerCase()
+      const catLower = item.category.toLowerCase()
+      const keywords = (item.keywords || []).map((k) => k.toLowerCase())
+
+      let score = 0
+      // Exact full query match bonus
+      if (titleLower.includes(rawQ)) score += 10
+      if (descLower.includes(rawQ)) score += 5
+      if (catLower.includes(rawQ)) score += 4
+
+      // Token matches
+      for (const token of tokens) {
+        if (titleLower.includes(token)) score += 4
+        if (descLower.includes(token)) score += 2
+        if (catLower.includes(token)) score += 2
+        if (keywords.some((kw) => kw.includes(token))) score += 3
+      }
+
+      return { item, score }
     })
-    .sort((a, b) => {
-      const aTitleExact = a.title.toLowerCase().startsWith(q) ? 4 : 0
-      const bTitleExact = b.title.toLowerCase().startsWith(q) ? 4 : 0
-      const aTitleMatch = a.title.toLowerCase().includes(q) ? 2 : 0
-      const bTitleMatch = b.title.toLowerCase().includes(q) ? 2 : 0
-      const aKeywordMatch = a.keywords?.some((kw) => kw.startsWith(q)) ? 1 : 0
-      const bKeywordMatch = b.keywords?.some((kw) => kw.startsWith(q)) ? 1 : 0
-      return bTitleExact + bTitleMatch + bKeywordMatch - (aTitleExact + aTitleMatch + aKeywordMatch)
-    })
+    .filter((entry) => entry.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map((entry) => entry.item)
 }
 
 export const searchIndex: SearchResult[] = pageEntries
