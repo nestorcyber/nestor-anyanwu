@@ -1,13 +1,29 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { PageHeader, PrimaryButton } from '@/components/admin/field'
+import { getCommunityEntries } from '@/lib/content'
 
 export default async function AdminCommunityPage() {
   const supabase = await createClient()
-  const { data } = await supabase
+  const { data: dbData } = await supabase
     .from('community_entries')
     .select('id, organization, slug, draft, featured')
     .order('sort_order', { ascending: true })
+
+  const fallbackEntries = await getCommunityEntries()
+  const dbSlugs = new Set((dbData ?? []).map((row) => row.slug))
+  const items = [
+    ...(dbData ?? []),
+    ...fallbackEntries
+      .filter((e) => !dbSlugs.has(e.slug))
+      .map((e) => ({
+        id: e.slug,
+        organization: e.organization,
+        slug: e.slug,
+        draft: false,
+        featured: e.featured,
+      })),
+  ]
 
   return (
     <div>
@@ -20,7 +36,7 @@ export default async function AdminCommunityPage() {
         }
       />
       <div className="border border-border divide-y divide-border">
-        {(data ?? []).map((row) => (
+        {items.map((row) => (
           <Link
             key={row.id}
             href={`/admin/community/${row.id}`}
@@ -36,7 +52,7 @@ export default async function AdminCommunityPage() {
             </div>
           </Link>
         ))}
-        {!data?.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No entries yet.</p> : null}
+        {!items.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No entries yet.</p> : null}
       </div>
     </div>
   )

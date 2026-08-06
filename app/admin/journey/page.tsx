@@ -1,13 +1,29 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { PageHeader, PrimaryButton } from '@/components/admin/field'
+import { getJourneyItems } from '@/lib/content'
 
 export default async function AdminJourneyPage() {
   const supabase = await createClient()
-  const { data } = await supabase
+  const { data: dbData } = await supabase
     .from('journey_items')
     .select('id, title, organization, date_label, type')
     .order('sort_order', { ascending: true })
+
+  const fallbackJourney = await getJourneyItems()
+  const dbTitles = new Set((dbData ?? []).map((row) => row.title))
+  const items = [
+    ...(dbData ?? []),
+    ...fallbackJourney
+      .filter((j) => !dbTitles.has(j.title))
+      .map((j) => ({
+        id: j.id,
+        title: j.title,
+        organization: j.organization,
+        date_label: j.date,
+        type: j.type,
+      })),
+  ]
 
   return (
     <div>
@@ -20,7 +36,7 @@ export default async function AdminJourneyPage() {
         }
       />
       <div className="border border-border divide-y divide-border">
-        {(data ?? []).map((row) => (
+        {items.map((row) => (
           <Link
             key={row.id}
             href={`/admin/journey/${row.id}`}
@@ -35,7 +51,7 @@ export default async function AdminJourneyPage() {
             <span className="text-xs text-muted-foreground">{row.type}</span>
           </Link>
         ))}
-        {!data?.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No journey items yet.</p> : null}
+        {!items.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No journey items yet.</p> : null}
       </div>
     </div>
   )

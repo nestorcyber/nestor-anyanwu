@@ -168,58 +168,45 @@ export default async function JournalDetailPage({ params }: Props) {
               <Markdown content={article.content} />
             </article>
 
-            {/* Previous / Next Article Navigation */}
-            <div className="pt-8 border-t border-border/60 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {prevArticle ? (
-                <Link
-                  href={`/journal/${prevArticle.slug}`}
-                  className="p-4 border border-border/60 hover:border-accent bg-card/40 rounded transition-all space-y-1 group"
-                >
-                  <span className="text-[10px] font-mono text-muted-foreground uppercase flex items-center gap-1">
-                    <ArrowLeft className="w-3 h-3" /> PREVIOUS ARTICLE
-                  </span>
-                  <p className="text-sm font-bold text-foreground group-hover:text-accent transition-colors line-clamp-1">
-                    {prevArticle.title}
-                  </p>
-                </Link>
-              ) : (
-                <div />
-              )}
-
-              {nextArticle && (
-                <Link
-                  href={`/journal/${nextArticle.slug}`}
-                  className="p-4 border border-border/60 hover:border-accent bg-card/40 rounded transition-all space-y-1 text-right group"
-                >
-                  <span className="text-[10px] font-mono text-muted-foreground uppercase flex items-center justify-end gap-1">
-                    NEXT ARTICLE <ArrowUpRight className="w-3 h-3" />
-                  </span>
-                  <p className="text-sm font-bold text-foreground group-hover:text-accent transition-colors line-clamp-1">
-                    {nextArticle.title}
-                  </p>
-                </Link>
-              )}
-            </div>
-
             {/* Related Articles */}
             {relatedArticles.length > 0 && (
-              <div className="pt-12 border-t border-border/60 space-y-6">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-foreground">
-                  Related Articles
-                </h3>
+              <div className="pt-10 border-t-2 border-slate-900/20 dark:border-slate-800 space-y-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-foreground">
+                    // Related Articles
+                  </h3>
+                  <Link
+                    href="/journal"
+                    className="text-xs font-mono font-bold text-accent hover:underline uppercase tracking-wider flex items-center gap-1"
+                  >
+                    <span>All Articles</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {relatedArticles.map((rel) => (
                     <Link
                       key={rel.slug}
                       href={`/journal/${rel.slug}`}
-                      className="p-5 border border-border/60 hover:border-accent bg-card/40 rounded space-y-2 group transition-all"
+                      className="group border-2 border-slate-900/20 dark:border-slate-800 bg-card rounded-none p-5 space-y-3 flex flex-col justify-between transition-all shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent hover:-translate-y-0.5"
                     >
-                      <span className="text-[9px] font-mono text-accent uppercase">
-                        {rel.category}
-                      </span>
-                      <h4 className="text-sm font-bold text-foreground group-hover:text-accent transition-colors line-clamp-2">
-                        {rel.title}
-                      </h4>
+                      <div className="space-y-2">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-accent px-2 py-0.5 border border-accent/40 bg-accent/10">
+                          {rel.category}
+                        </span>
+                        <h4 className="text-base font-extrabold text-foreground group-hover:text-accent transition-colors line-clamp-2 leading-snug font-heading">
+                          {rel.title}
+                        </h4>
+                        <p className="text-xs text-muted-foreground font-light leading-relaxed line-clamp-2">
+                          {rel.excerpt}
+                        </p>
+                      </div>
+
+                      <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs font-bold text-foreground group-hover:text-accent uppercase tracking-wider">
+                        <span>Read Article</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </div>
                     </Link>
                   ))}
                 </div>

@@ -1,13 +1,31 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { PageHeader, PrimaryButton } from '@/components/admin/field'
+import { getPortfolioProjects } from '@/lib/content'
 
 export default async function AdminPortfolioPage() {
   const supabase = await createClient()
-  const { data } = await supabase
+  const { data: dbData } = await supabase
     .from('portfolio_projects')
     .select('id, title, slug, draft, featured, category')
     .order('sort_order', { ascending: true })
+
+  const fallbackProjects = await getPortfolioProjects()
+
+  const dbSlugs = new Set((dbData ?? []).map((row) => row.slug))
+  const items = [
+    ...(dbData ?? []),
+    ...fallbackProjects
+      .filter((p) => !dbSlugs.has(p.slug))
+      .map((p) => ({
+        id: p.slug,
+        title: p.title,
+        slug: p.slug,
+        category: p.category,
+        draft: false,
+        featured: p.featured,
+      })),
+  ]
 
   return (
     <div>
@@ -20,7 +38,7 @@ export default async function AdminPortfolioPage() {
         }
       />
       <div className="border border-border divide-y divide-border">
-        {(data ?? []).map((row) => (
+        {items.map((row) => (
           <Link
             key={row.id}
             href={`/admin/portfolio/${row.id}`}
@@ -38,7 +56,7 @@ export default async function AdminPortfolioPage() {
             </div>
           </Link>
         ))}
-        {!data?.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No projects yet.</p> : null}
+        {!items.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No projects yet.</p> : null}
       </div>
     </div>
   )

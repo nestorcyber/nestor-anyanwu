@@ -1,13 +1,32 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { PageHeader, PrimaryButton } from '@/components/admin/field'
+import { getJournalArticles } from '@/lib/content'
 
 export default async function AdminJournalPage() {
   const supabase = await createClient()
-  const { data } = await supabase
+  const { data: dbData } = await supabase
     .from('journal_articles')
     .select('id, title, slug, draft, featured, published_date')
     .order('published_date', { ascending: false })
+
+  const fallbackArticles = await getJournalArticles()
+
+  // Merge DB data with fallbacks if DB is missing items
+  const dbSlugs = new Set((dbData ?? []).map((row) => row.slug))
+  const items = [
+    ...(dbData ?? []),
+    ...fallbackArticles
+      .filter((a) => !dbSlugs.has(a.slug))
+      .map((a) => ({
+        id: a.slug,
+        title: a.title,
+        slug: a.slug,
+        draft: false,
+        featured: a.featured,
+        published_date: a.publishedDate,
+      })),
+  ]
 
   return (
     <div>
@@ -20,7 +39,7 @@ export default async function AdminJournalPage() {
         }
       />
       <div className="border border-border divide-y divide-border">
-        {(data ?? []).map((row) => (
+        {items.map((row) => (
           <Link
             key={row.id}
             href={`/admin/journal/${row.id}`}
@@ -36,7 +55,7 @@ export default async function AdminJournalPage() {
             </div>
           </Link>
         ))}
-        {!data?.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No articles yet.</p> : null}
+        {!items.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No articles yet.</p> : null}
       </div>
     </div>
   )

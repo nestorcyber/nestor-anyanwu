@@ -2,7 +2,13 @@
 
 import React, { useState } from "react"
 import Link from "next/link"
-import { Linkedin, Github, Send, ArrowUp } from "lucide-react"
+import { ArrowRight, Linkedin, Github, Send } from "lucide-react"
+
+const TwitterXIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+)
 
 const BehanceIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -10,9 +16,9 @@ const BehanceIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
   </svg>
 )
 
-const TwitterXIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
+const WhatsappIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.413 9.864-9.83 0-2.623-1.01-5.09-2.846-6.93C16.655 1.993 14.202 1.01 11.66 1.01c-5.442 0-9.866 4.415-9.87 9.83-.001 1.702.463 3.361 1.34 4.8l-.996 3.633 3.725-.976z" />
   </svg>
 )
 
@@ -29,151 +35,181 @@ export default function Footer() {
     }
   }
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
-
   return (
-    <footer className="bg-card text-foreground border-t border-border/60 py-20 px-6 md:px-12 lg:px-24">
+    <footer className="w-full bg-slate-950 text-white border-t-2 border-slate-900 pt-16 pb-12 px-6 sm:px-10 lg:px-16 font-sans">
       <div className="max-w-7xl mx-auto space-y-16">
-        
-        {/* Main 3-Column Spacious Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-16">
+
+        {/* Top Section: Gumroad-style Headline & Form (Left) + Nav Links (Right) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* Column 1: Brand & Statement (Col 1-5) */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="space-y-2">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-foreground tracking-tight uppercase">
-                NESTOR ANYANWU
-              </h2>
-              <p className="text-accent text-xs font-bold uppercase tracking-widest">
-                TECH . LEADERSHIP . SERVICE
-              </p>
-            </div>
-
-            <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed max-w-md">
-              Software Engineer, Tech Leader, and Community Advocate driving digital innovation, capacity building, and impactful tech ecosystems across Nigeria.
-            </p>
-
-            {/* Social Icons Row */}
-            <div className="flex items-center gap-5 pt-2">
-              <a
-                href="https://linkedin.com/in/nestoranyanwu"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:text-accent/80 transition-colors p-1"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="https://github.com/nestorcyber"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:text-accent/80 transition-colors p-1"
-                aria-label="GitHub"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href="https://twitter.com/nestorcyber"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:text-accent/80 transition-colors p-1"
-                aria-label="Twitter X"
-              >
-                <TwitterXIcon className="w-5 h-5" />
-              </a>
-              <a
-                href="https://behance.net/nestorcyber"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:text-accent/80 transition-colors p-1"
-                aria-label="Behance"
-              >
-                <BehanceIcon className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-
-          {/* Column 2: Navigation Links (Col 6-8) */}
-          <div className="lg:col-span-3 space-y-5">
-            <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">
-              Navigation
-            </h3>
-            <nav className="flex flex-col gap-3.5">
-              <Link href="/" className="text-sm md:text-base font-medium text-muted-foreground hover:text-accent transition-colors">
-                Home
-              </Link>
-              <Link href="/about" className="text-sm md:text-base font-medium text-muted-foreground hover:text-accent transition-colors">
-                About
-              </Link>
-              <Link href="/portfolio" className="text-sm md:text-base font-medium text-muted-foreground hover:text-accent transition-colors">
-                Portfolio
-              </Link>
-              <Link href="/community" className="text-sm md:text-base font-medium text-muted-foreground hover:text-accent transition-colors">
-                Community
-              </Link>
-              <Link href="/gallery" className="text-sm md:text-base font-medium text-muted-foreground hover:text-accent transition-colors">
-                Gallery
-              </Link>
-              <Link href="/journal" className="text-sm md:text-base font-medium text-muted-foreground hover:text-accent transition-colors">
-                Journal
-              </Link>
-              <Link href="/contact" className="text-sm md:text-base font-medium text-muted-foreground hover:text-accent transition-colors">
-                Contact
-              </Link>
-            </nav>
-          </div>
-
-          {/* Column 3: Subscribe Form (Col 9-12) */}
-          <div className="lg:col-span-4 space-y-5">
-            <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">
-              Newsletter
-            </h3>
-
-            <p className="text-sm text-muted-foreground font-light leading-relaxed">
-              Subscribe to get technical case studies, essays, and community updates delivered to your inbox.
-            </p>
+          {/* Left Column (Col 1-7): Large Headline & Pink Accent Form */}
+          <div className="lg:col-span-7 space-y-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-xl font-heading">
+              Subscribe to get tips and tactics to grow the way you want.
+            </h2>
 
             {subscribed ? (
-              <div className="text-sm font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 p-4 rounded-none border border-emerald-500/30">
-                Thank you! You're subscribed.
+              <div className="p-4 bg-emerald-950/60 border-2 border-emerald-500 text-emerald-300 font-bold text-xs uppercase tracking-wider rounded-none">
+                ✓ You're subscribed! Thank you for joining.
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="space-y-3">
+              <form onSubmit={handleSubscribe} className="flex items-center gap-2 max-w-md">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address"
+                  placeholder="Your email address"
                   required
-                  className="w-full bg-background text-foreground text-sm px-4 py-3 rounded-none border border-border/80 focus:outline-none focus:border-accent"
+                  className="flex-1 bg-slate-900/90 text-white border-2 border-slate-800 px-4 py-3.5 text-sm placeholder:text-slate-500 rounded-none focus:outline-none focus:border-accent transition-colors"
                 />
                 <button
                   type="submit"
-                  className="w-full bg-accent hover:bg-accent/90 text-white font-bold text-xs uppercase tracking-widest px-6 py-3.5 rounded-none transition-all cursor-pointer shadow-md flex items-center justify-center gap-2"
+                  aria-label="Subscribe"
+                  className="bg-[#f472b6] hover:bg-pink-400 text-slate-950 font-extrabold px-5 py-3.5 border-2 border-slate-950 rounded-none transition-all shadow-[2px_2px_0px_0px_rgba(255,255,255,0.9)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none flex items-center justify-center cursor-pointer shrink-0"
                 >
-                  <span>Subscribe</span>
-                  <Send size={13} />
+                  <ArrowRight className="w-5 h-5 text-slate-950" />
                 </button>
               </form>
             )}
           </div>
 
+          {/* Right Columns (Col 8-12): 2 Column Nav Links */}
+          <div className="lg:col-span-5 grid grid-cols-2 gap-8 text-sm pt-2">
+            
+            {/* Nav Column 1 */}
+            <div className="space-y-3">
+              <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-slate-400">
+                Discover
+              </h3>
+              <ul className="space-y-2.5 font-medium text-slate-200">
+                <li>
+                  <Link href="/portfolio" className="hover:text-[#f472b6] transition-colors">
+                    Portfolio
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/journal" className="hover:text-[#f472b6] transition-colors">
+                    Journal
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/community" className="hover:text-[#f472b6] transition-colors">
+                    Community
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about" className="hover:text-[#f472b6] transition-colors">
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/gallery" className="hover:text-[#f472b6] transition-colors">
+                    Gallery
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Nav Column 2 */}
+            <div className="space-y-3">
+              <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-slate-400">
+                Connect
+              </h3>
+              <ul className="space-y-2.5 font-medium text-slate-200">
+                <li>
+                  <Link href="/contact" className="hover:text-[#f472b6] transition-colors">
+                    Contact Me
+                  </Link>
+                </li>
+                <li>
+                  <a href="https://linkedin.com/in/nestoranyanwu" target="_blank" rel="noopener noreferrer" className="hover:text-[#f472b6] transition-colors">
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/nestorcyber" target="_blank" rel="noopener noreferrer" className="hover:text-[#f472b6] transition-colors">
+                    GitHub
+                  </a>
+                </li>
+                <li>
+                  <a href="https://twitter.com/nestorcyber" target="_blank" rel="noopener noreferrer" className="hover:text-[#f472b6] transition-colors">
+                    Twitter / X
+                  </a>
+                </li>
+                <li>
+                  <a href="https://wa.me/message/GJIXLHQQPYDIE1" target="_blank" rel="noopener noreferrer" className="hover:text-[#f472b6] transition-colors">
+                    WhatsApp
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
         </div>
 
-        {/* Bottom Bar: Copyright & Back To Top */}
-        <div className="border-t border-border/40 pt-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs md:text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Nestor Anyanwu. All rights reserved.</p>
+        {/* Bottom Bar: Brand Pill + Copyright (Left) & Social Icons (Right) */}
+        <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-slate-400">
           
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-2 text-foreground hover:text-accent font-bold uppercase tracking-wider transition-colors cursor-pointer"
-          >
-            <span>Back to top</span>
-            <ArrowUp size={16} />
-          </button>
+          {/* Left: Brand Badge & Copyright */}
+          <div className="flex items-center gap-3">
+            <span className="w-6 h-6 rounded-full bg-[#f472b6] text-slate-950 font-black text-xs flex items-center justify-center select-none font-mono">
+              N
+            </span>
+            <span className="font-medium text-slate-300">
+              © {new Date().getFullYear()} Nestor Anyanwu (Nestor Cyber), Inc.
+            </span>
+          </div>
+
+          {/* Right: Gumroad-style Minimalist Social Icons Row */}
+          <div className="flex items-center gap-6 text-slate-300">
+            <a
+              href="https://twitter.com/nestorcyber"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#f472b6] transition-colors"
+              aria-label="Twitter X"
+            >
+              <TwitterXIcon className="w-4 h-4" />
+            </a>
+            <a
+              href="https://linkedin.com/in/nestoranyanwu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#f472b6] transition-colors"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="w-4 h-4" />
+            </a>
+            <a
+              href="https://github.com/nestorcyber"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#f472b6] transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="w-4 h-4" />
+            </a>
+            <a
+              href="https://behance.net/nestorcyber"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#f472b6] transition-colors"
+              aria-label="Behance"
+            >
+              <BehanceIcon className="w-4 h-4" />
+            </a>
+            <a
+              href="https://wa.me/message/GJIXLHQQPYDIE1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#f472b6] transition-colors"
+              aria-label="WhatsApp"
+            >
+              <WhatsappIcon className="w-4 h-4" />
+            </a>
+          </div>
+
         </div>
 
       </div>
