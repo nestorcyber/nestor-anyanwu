@@ -1,7 +1,36 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import matter from 'gray-matter'
 import { createPublicClient } from '@/lib/supabase/public'
 import type { ImpactStat, Tables } from '@/lib/supabase/types'
+import {
+  journeyTimeline,
+  portfolioStats as fallbackPortfolioStats,
+  projects as fallbackProjects,
+  servicesList as fallbackServicesList,
+  skillGroups as fallbackSkillGroups,
+  certificationsList as fallbackCertificationsList,
+} from '@/lib/data'
 
 const PLACEHOLDER = '/placeholder.svg'
+
+function readLocalMdxDir(dirPath: string) {
+  try {
+    const abs = path.join(process.cwd(), dirPath)
+    if (!fs.existsSync(abs)) return []
+    return fs
+      .readdirSync(abs)
+      .filter((f) => f.endsWith('.mdx') || f.endsWith('.md'))
+      .map((file) => {
+        const slug = file.replace(/\.mdx?$/, '')
+        const raw = fs.readFileSync(path.join(abs, file), 'utf8')
+        const { data, content } = matter(raw)
+        return { slug, data, content: content.trim() }
+      })
+  } catch (err) {
+    return []
+  }
+}
 
 export type JournalArticle = {
   id: string
@@ -213,58 +242,118 @@ function db() {
 
 export async function getJournalArticles(): Promise<JournalArticle[]> {
   const supabase = db()
-  if (!supabase) return []
-  const { data, error } = await supabase
-    .from('journal_articles')
-    .select('*')
-    .eq('draft', false)
-    .order('pinned', { ascending: false })
-    .order('published_date', { ascending: false })
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('journal_articles')
+      .select('*')
+      .eq('draft', false)
+      .order('pinned', { ascending: false })
+      .order('published_date', { ascending: false })
 
-  if (error || !data) return []
-  return data.map(mapJournal)
+    if (!error && data && data.length > 0) {
+      return data.map(mapJournal)
+    }
+  }
+
+  // Seamless Fallback: Read local MDX files from content/journal
+  const localFiles = readLocalMdxDir('content/journal')
+  const articles: JournalArticle[] = localFiles
+    .filter(({ data }) => !data.draft)
+    .map(({ slug, data, content }) => ({
+      id: slug,
+      slug,
+      title: data.title ?? slug,
+      excerpt: data.excerpt ?? '',
+      coverImage: data.coverImage || PLACEHOLDER,
+      category: data.category ?? 'Technology',
+      tags: data.tags ?? [],
+      featured: !!data.featured,
+      pinned: !!data.pinned,
+      publishedDate: data.publishedDate ? String(data.publishedDate) : '2026-01-15',
+      lastUpdated: data.lastUpdated ? String(data.lastUpdated) : null,
+      author: data.author ?? 'Nestor Anyanwu',
+      seoTitle: data.seoTitle ?? null,
+      seoDescription: data.seoDescription ?? null,
+      content,
+    }))
+
+  return articles.sort((a, b) => {
+    if (a.pinned !== b.pinned) return a.pinned ? -1 : 1
+    return new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
+  })
 }
 
 export async function getJournalArticleBySlug(slug: string): Promise<JournalArticle | null> {
-  const supabase = db()
-  if (!supabase) return null
-  const { data, error } = await supabase
-    .from('journal_articles')
-    .select('*')
-    .eq('slug', slug)
-    .eq('draft', false)
-    .maybeSingle()
-
-  if (error || !data) return null
-  return mapJournal(data)
+  const articles = await getJournalArticles()
+  return articles.find((a) => a.slug === slug) || null
 }
 
 export async function getPortfolioProjects(): Promise<PortfolioProject[]> {
   const supabase = db()
-  if (!supabase) return []
-  const { data, error } = await supabase
-    .from('portfolio_projects')
-    .select('*')
-    .eq('draft', false)
-    .order('sort_order', { ascending: true })
-    .order('created_at', { ascending: false })
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('portfolio_projects')
+      .select('*')
+      .eq('draft', false)
+      .order('sort_order', { ascending: true })
+      .order('created_at', { ascending: false })
 
-  if (error || !data) return []
-  return data.map(mapPortfolio)
+    if (!error && data && data.length > 0) {
+      return data.map(mapPortfolio)
+    }
+  }
+
+  // Fallback to local MDX files
+  const localFiles = readLocalMdxDir('content/portfolio')
+  if (localFiles.length > 0) {
+    return localFiles
+      .filter(({ data }) => !data.draft)
+      .map(({ slug, data, content }) => ({
+        id: slug,
+        slug,
+        title: data.title ?? slug,
+        shortDescription: data.shortDescription ?? '',
+        coverImage: data.coverImage || PLACEHOLDER,
+        gallery: data.gallery ?? [],
+        category: data.category ?? 'Software',
+        technologies: data.technologies ?? [],
+        status: data.status ?? 'Completed',
+        client: data.client ?? null,
+        role: data.role ?? null,
+        githubUrl: data.githubUrl ?? null,
+        liveUrl: data.liveUrl ?? null,
+        caseStudyUrl: data.caseStudyUrl ?? `/portfolio/${slug}`,
+        featured: !!data.featured,
+        completionDate: data.completionDate ? String(data.completionDate) : null,
+        fullDescription: content,
+      }))
+  }
+
+  // Fallback to data.ts projects
+  return fallbackProjects.map((p) => ({
+    id: p.title.toLowerCase().replace(/\s+/g, '-'),
+    slug: p.title.toLowerCase().replace(/\s+/g, '-'),
+    title: p.title,
+    shortDescription: p.description,
+    coverImage: p.image || PLACEHOLDER,
+    gallery: [],
+    category: p.category || 'Software',
+    technologies: p.technologies,
+    status: p.status || 'Completed',
+    client: null,
+    role: p.role || null,
+    githubUrl: p.links.github || null,
+    liveUrl: p.links.demo || null,
+    caseStudyUrl: p.links.caseStudy || null,
+    featured: true,
+    completionDate: null,
+    fullDescription: p.description,
+  }))
 }
 
 export async function getPortfolioProjectBySlug(slug: string): Promise<PortfolioProject | null> {
-  const supabase = db()
-  if (!supabase) return null
-  const { data, error } = await supabase
-    .from('portfolio_projects')
-    .select('*')
-    .eq('slug', slug)
-    .eq('draft', false)
-    .maybeSingle()
-
-  if (error || !data) return null
-  return mapPortfolio(data)
+  const projects = await getPortfolioProjects()
+  return projects.find((p) => p.slug === slug) || null
 }
 
 export async function getProjectItems(): Promise<ProjectItem[]> {
@@ -289,133 +378,175 @@ export async function getProjectItems(): Promise<ProjectItem[]> {
 
 export async function getCommunityEntries(): Promise<CommunityEntry[]> {
   const supabase = db()
-  if (!supabase) return []
-  const { data, error } = await supabase
-    .from('community_entries')
-    .select('*')
-    .eq('draft', false)
-    .order('sort_order', { ascending: true })
-    .order('created_at', { ascending: false })
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('community_entries')
+      .select('*')
+      .eq('draft', false)
+      .order('sort_order', { ascending: true })
+      .order('created_at', { ascending: false })
 
-  if (error || !data) return []
-  return data.map(mapCommunity)
+    if (!error && data && data.length > 0) {
+      return data.map(mapCommunity)
+    }
+  }
+
+  // Fallback to local MDX
+  const localFiles = readLocalMdxDir('content/community')
+  return localFiles
+    .filter(({ data }) => !data.draft)
+    .map(({ slug, data, content }) => ({
+      id: slug,
+      slug,
+      organization: data.organization ?? slug,
+      role: data.role ?? '',
+      duration: data.duration ?? '',
+      coverImage: data.coverImage || PLACEHOLDER,
+      gallery: data.gallery ?? [],
+      achievements: data.achievements ?? [],
+      impactStats: data.impactStats ?? [],
+      featured: !!data.featured,
+      tags: data.tags ?? [],
+      description: content || data.description || '',
+    }))
 }
 
 export async function getCommunityEntryBySlug(slug: string): Promise<CommunityEntry | null> {
-  const supabase = db()
-  if (!supabase) return null
-  const { data, error } = await supabase
-    .from('community_entries')
-    .select('*')
-    .eq('slug', slug)
-    .eq('draft', false)
-    .maybeSingle()
-
-  if (error || !data) return null
-  return mapCommunity(data)
+  const entries = await getCommunityEntries()
+  return entries.find((e) => e.slug === slug) || null
 }
 
 export async function getJourneyItems(): Promise<JourneyItem[]> {
   const supabase = db()
-  if (!supabase) return []
-  const { data, error } = await supabase
-    .from('journey_items')
-    .select('*')
-    .order('sort_order', { ascending: true })
-    .order('created_at', { ascending: false })
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('journey_items')
+      .select('*')
+      .order('sort_order', { ascending: true })
+      .order('created_at', { ascending: false })
 
-  if (error || !data) return []
-  return data.map((row) => ({
-    id: row.id,
-    title: row.title,
-    organization: row.organization,
-    role: row.role || undefined,
-    date: row.date_label,
-    description: row.description,
-    type: row.type,
-    details: row.details ?? [],
-    images: row.images ?? [],
+    if (!error && data && data.length > 0) {
+      return data.map((row) => ({
+        id: row.id,
+        title: row.title,
+        organization: row.organization,
+        role: row.role || undefined,
+        date: row.date_label,
+        description: row.description,
+        type: row.type,
+        details: row.details ?? [],
+        images: row.images ?? [],
+      }))
+    }
+  }
+
+  // Fallback to lib/data.ts journeyTimeline
+  return journeyTimeline.map((item) => ({
+    id: String(item.id),
+    title: item.title,
+    organization: item.organization,
+    role: item.role,
+    date: item.date,
+    description: item.description,
+    type: item.type,
+    details: item.details,
+    images: item.images,
   }))
 }
 
 export async function getPortfolioStats(): Promise<PortfolioStat[]> {
   const supabase = db()
-  if (!supabase) return []
-  const { data, error } = await supabase
-    .from('portfolio_stats')
-    .select('*')
-    .order('sort_order', { ascending: true })
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('portfolio_stats')
+      .select('*')
+      .order('sort_order', { ascending: true })
 
-  if (error || !data) return []
-  return data.map((row) => ({
-    value: row.value,
-    label: row.label,
-    description: row.description || undefined,
-  }))
+    if (!error && data && data.length > 0) {
+      return data.map((row) => ({
+        value: row.value,
+        label: row.label,
+        description: row.description || undefined,
+      }))
+    }
+  }
+
+  return fallbackPortfolioStats
 }
 
 export async function getServices(): Promise<ServiceItem[]> {
   const supabase = db()
-  if (!supabase) return []
-  const { data, error } = await supabase
-    .from('services')
-    .select('*')
-    .order('sort_order', { ascending: true })
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('services')
+      .select('*')
+      .order('sort_order', { ascending: true })
 
-  if (error || !data) return []
-  return data.map((row) => ({
-    id: row.slug,
-    title: row.title,
-    description: row.description,
-    iconName: row.icon_name,
-    ctaText: row.cta_text,
-    ctaHref: row.cta_href,
-  }))
+    if (!error && data && data.length > 0) {
+      return data.map((row) => ({
+        id: row.slug,
+        title: row.title,
+        description: row.description,
+        iconName: row.icon_name,
+        ctaText: row.cta_text,
+        ctaHref: row.cta_href,
+      }))
+    }
+  }
+
+  return fallbackServicesList
 }
 
 export async function getSkillGroups(): Promise<SkillGroup[]> {
   const supabase = db()
-  if (!supabase) return []
-  const { data: groups, error } = await supabase
-    .from('skill_groups')
-    .select('*')
-    .order('sort_order', { ascending: true })
+  if (supabase) {
+    const { data: groups, error } = await supabase
+      .from('skill_groups')
+      .select('*')
+      .order('sort_order', { ascending: true })
 
-  if (error || !groups) return []
+    if (!error && groups && groups.length > 0) {
+      const { data: skills } = await supabase
+        .from('skills')
+        .select('*')
+        .order('sort_order', { ascending: true })
 
-  const { data: skills } = await supabase
-    .from('skills')
-    .select('*')
-    .order('sort_order', { ascending: true })
+      return groups.map((group) => ({
+        category: group.category,
+        skills: (skills ?? [])
+          .filter((s) => s.group_id === group.id)
+          .map((s) => ({
+            name: s.name,
+            experienceLevel: s.experience_level || undefined,
+            years: s.years || undefined,
+          })),
+      }))
+    }
+  }
 
-  return groups.map((group) => ({
-    category: group.category,
-    skills: (skills ?? [])
-      .filter((s) => s.group_id === group.id)
-      .map((s) => ({
-        name: s.name,
-        experienceLevel: s.experience_level || undefined,
-        years: s.years || undefined,
-      })),
-  }))
+  return fallbackSkillGroups
 }
 
 export async function getCertifications(): Promise<CertificationItem[]> {
   const supabase = db()
-  if (!supabase) return []
-  const { data, error } = await supabase
-    .from('certifications')
-    .select('*')
-    .order('sort_order', { ascending: true })
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('certifications')
+      .select('*')
+      .order('sort_order', { ascending: true })
 
-  if (error || !data) return []
-  return data.map((row) => ({
-    id: row.slug,
-    title: row.title,
-    provider: row.provider,
-    date: row.date_label,
-    credentialUrl: row.credential_url || undefined,
-  }))
+    if (!error && data && data.length > 0) {
+      return data.map((row) => ({
+        id: row.slug,
+        title: row.title,
+        provider: row.provider,
+        date: row.date_label,
+        credentialUrl: row.credential_url || undefined,
+      }))
+    }
+  }
+
+  return fallbackCertificationsList
 }
 
 export async function getStandaloneGalleryImages(): Promise<

@@ -31,16 +31,14 @@ export default async function JournalPage() {
     tags: a.tags || [],
     featured: a.featured || false,
     pinned: a.pinned || false,
-    publishedDate: a.publishedDate,
+    publishedDate: a.publishedDate || "2026-01-15",
     author: a.author || "Nestor Anyanwu",
   }))
 
   return (
     <>
-      <main className="min-h-screen bg-background pt-24 pb-20 bg-grid-pattern">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <JournalClient articles={articles} />
-        </div>
+      <main className="min-h-screen bg-background pb-16 bg-grid-pattern">
+        <JournalClient articles={articles} />
       </main>
       <Footer />
     </>
