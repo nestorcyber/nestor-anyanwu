@@ -103,7 +103,14 @@ export default function Navigation() {
     { label: "Contact", href: "/contact" },
   ]
 
-  const isSearching = searchQuery.trim().length > 0
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!searchQuery.trim()) return
+    const url = `/search?q=${encodeURIComponent(searchQuery.trim())}`
+    window.open(url, "_blank")
+    setIsOpen(false)
+    setSearchQuery("")
+  }
 
   return (
     <>
@@ -206,119 +213,54 @@ export default function Navigation() {
       >
         {/* Seamless Search Bar inside Drawer */}
         <div className="w-full bg-secondary/80 dark:bg-neutral-900/90 border-b border-border/30 px-5 md:px-8 py-4">
-          <div className="max-w-7xl mx-auto relative flex items-center">
-            <Search className="absolute left-3 w-4 h-4 text-muted-foreground pointer-events-none" />
+          <form onSubmit={handleSearchSubmit} className="max-w-7xl mx-auto relative flex items-center">
+            <Search className="absolute left-3.5 w-4 h-4 text-muted-foreground pointer-events-none" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search pages, projects, skills, services..."
-              className="w-full bg-transparent text-foreground placeholder:text-muted-foreground/70 text-sm md:text-base pl-9 pr-14 py-2 rounded-md outline-none transition-all font-light"
+              placeholder="Type to search and press Enter..."
+              className="w-full bg-transparent text-foreground placeholder:text-muted-foreground/70 text-sm md:text-base pl-10 pr-24 py-2 rounded-md outline-none transition-all font-light"
             />
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery("")}
-                className="absolute right-3 text-xs text-muted-foreground hover:text-foreground cursor-pointer"
-              >
-                Clear
-              </button>
-            )}
-          </div>
+            <button
+              type="submit"
+              disabled={!searchQuery.trim()}
+              className="absolute right-3 px-3 py-1 bg-slate-900 text-white dark:bg-white dark:text-slate-950 text-xs font-mono font-bold uppercase tracking-wider rounded disabled:opacity-40 cursor-pointer transition-opacity"
+            >
+              Search
+            </button>
+          </form>
         </div>
 
         {/* Drawer Content Area */}
-        <div className="max-w-7xl w-full mx-auto flex-1 overflow-y-auto px-6 md:px-8 py-4 md:py-6 flex flex-col justify-center">
-          {isSearching ? (
-            /* ── Dynamic Live Search Results View ── */
-            <div className="space-y-6">
-              <div className="flex items-center justify-between border-b border-border/30 pb-3">
-                <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                  Search Results for "{searchQuery}"
-                </span>
-                <span className="text-xs text-muted-foreground font-mono">
-                  {searchResults.length} {searchResults.length === 1 ? "result" : "results"}
-                </span>
-              </div>
+        <div className="max-w-7xl w-full mx-auto flex-1 overflow-y-auto px-6 md:px-8 pt-6 pb-12 flex flex-col justify-start">
+          {/* ── Mobile Menu (Shows all 8 links nicely aligned from the top) ── */}
+          <nav className="flex md:hidden flex-col gap-2 pt-2">
+            {mobileDrawerItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className="text-foreground hover:text-accent transition-all font-light text-xl uppercase tracking-[0.18em] py-2.5 cursor-pointer block border-b border-border/15 focus-visible:outline-none focus-visible:text-accent"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-              {searchResults.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {searchResults.map((result) => (
-                    <Link
-                      key={result.id}
-                      href={result.href}
-                      onClick={() => setIsOpen(false)}
-                      className="group p-4 hover:bg-accent/5 transition-all flex items-start gap-3 border-b border-border/20"
-                    >
-                      <div
-                        className={`flex-shrink-0 flex items-center justify-center w-8 h-8 rounded mt-0.5 ${
-                          categoryColors[result.category] || "bg-muted"
-                        }`}
-                      >
-                        {categoryIcons[result.category] || <FileText className="w-4 h-4" />}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-2">
-                          <h3 className="text-sm font-bold text-foreground group-hover:text-accent transition-colors leading-snug truncate">
-                            {result.title}
-                          </h3>
-                          <span
-                            className={`flex-shrink-0 text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 ${
-                              categoryColors[result.category] || "bg-muted text-muted-foreground"
-                            }`}
-                          >
-                            {result.category}
-                          </span>
-                        </div>
-                        <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-relaxed font-light">
-                          {result.description}
-                        </p>
-                      </div>
-                      <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-accent transition-colors flex-shrink-0 mt-0.5" />
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                <div className="py-12 text-center space-y-3">
-                  <Search className="w-8 h-8 text-muted-foreground/30 mx-auto" />
-                  <p className="text-base font-semibold text-foreground">No matches found for "{searchQuery}"</p>
-                  <p className="text-xs text-muted-foreground max-w-sm mx-auto">
-                    Try searching for terms like "Portfolio", "Next.js", "GDG", "Design", or "Contact".
-                  </p>
-                </div>
-              )}
-            </div>
-          ) : (
-            <>
-              {/* ── Mobile Menu (Shows all 8 links on small screens) ── */}
-              <nav className="flex md:hidden flex-col gap-1.5 my-auto">
-                {mobileDrawerItems.map((item) => (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className="text-foreground hover:text-accent transition-all font-light text-lg uppercase tracking-[0.18em] py-1.5 cursor-pointer block border-b border-border/15 focus-visible:outline-none focus-visible:text-accent"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
-
-              {/* ── Desktop Drawer Menu (Shows original 2 links: Gallery & Contact) ── */}
-              <nav className="hidden md:flex flex-col gap-6 my-auto">
-                {desktopDrawerItems.map((item) => (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className="text-foreground hover:text-accent transition-all font-light text-4xl uppercase tracking-[0.2em] py-3 cursor-pointer block border-b border-border/20 focus-visible:outline-none focus-visible:text-accent"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
-            </>
-          )}
+          {/* ── Desktop Drawer Menu (Shows Gallery & Contact) ── */}
+          <nav className="hidden md:flex flex-col gap-6 pt-8">
+            {desktopDrawerItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className="text-foreground hover:text-accent transition-all font-light text-4xl uppercase tracking-[0.2em] py-3 cursor-pointer block border-b border-border/20 focus-visible:outline-none focus-visible:text-accent"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
         </div>
       </div>
     </>

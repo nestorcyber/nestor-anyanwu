@@ -106,15 +106,6 @@ export default async function JournalDetailPage({ params }: Props) {
       />
       <main className="min-h-screen bg-background text-foreground pt-24 pb-20">
         <SectionContainer>
-          {/* Back Navigation Link */}
-          <Link
-            href="/journal"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-accent mb-8 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to Journal</span>
-          </Link>
-
           {/* Article Header */}
           <header className="space-y-6 max-w-3xl mb-10">
             <div className="flex flex-wrap items-center gap-3">

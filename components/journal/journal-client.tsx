@@ -189,7 +189,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
                 <Link
                   key={article.slug}
                   href={`/journal/${article.slug}`}
-                  className="group relative w-full h-[145px] sm:h-[150px] rounded-lg overflow-hidden border-2 border-slate-900/20 dark:border-slate-800 bg-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent flex flex-col justify-end p-4 transition-all cursor-pointer"
+                  className="group relative w-full h-[175px] sm:h-[185px] rounded-lg overflow-hidden border-2 border-slate-900/20 dark:border-slate-800 bg-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent flex flex-col justify-end p-5 transition-all cursor-pointer"
                 >
                   {/* Full Card Cover Image */}
                   {article.coverImage ? (
@@ -232,57 +232,13 @@ export default function JournalClient({ articles }: JournalClientProps) {
         </section>
       )}
 
-      {/* 2. CATEGORY FILTER & SEARCH BAR (FULL WIDTH) */}
-      <section className="w-full px-4 sm:px-8 lg:px-12 pt-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-t-2 border-b-2 border-slate-900/20 dark:border-slate-800 py-4">
-          
-          {/* Category Filter Buttons */}
-          <div className="flex flex-wrap items-center gap-2">
-            {categories.map((cat) => {
-              const isActive = selectedCategory === cat
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`text-xs font-mono font-bold uppercase tracking-wider px-4 py-2 transition-all cursor-pointer rounded-full border-2 ${
-                    isActive
-                      ? "bg-slate-900 text-white border-slate-900 dark:bg-white dark:text-slate-950 dark:border-white shadow-[2px_2px_0px_0px_rgba(244,114,182,1)]"
-                      : "bg-card text-foreground border-slate-900/20 dark:border-slate-800 hover:border-slate-900 dark:hover:border-slate-400"
-                  }`}
-                >
-                  {cat}
-                </button>
-              )
-            })}
-          </div>
-
-          {/* Search Box */}
-          <div className="relative w-full md:w-80">
-            <Search className="w-4 h-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search articles..."
-              className="w-full bg-card text-foreground text-xs pl-10 pr-4 py-2.5 border-2 border-slate-900/20 dark:border-slate-800 rounded-full focus:outline-none focus:border-accent transition-colors"
-            />
-          </div>
-
-        </div>
-      </section>
-
-      {/* 3. LATEST ARTICLES GRID (FULL WIDTH) */}
+      {/* 2. LATEST ARTICLES GRID (FULL WIDTH) */}
       <div className="w-full px-4 sm:px-8 lg:px-12 space-y-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between border-t-2 border-slate-900/20 dark:border-slate-800 pt-8">
           <div className="flex items-center gap-2">
             <h2 className="text-sm font-mono font-extrabold uppercase tracking-widest text-foreground font-heading">
               // All Articles
             </h2>
-            {searchQuery && (
-              <span className="text-xs text-muted-foreground">
-                matching &quot;<span className="text-accent font-medium">{searchQuery}</span>&quot;
-              </span>
-            )}
           </div>
           <span className="text-xs font-mono text-muted-foreground">
             {filteredArticles.length} {filteredArticles.length === 1 ? "ARTICLE" : "ARTICLES"}
