@@ -10,6 +10,7 @@ export interface ProjectCardProps {
   technologies: string[]
   link?: string
   image?: string
+  role?: string
 }
 
 export default function ProjectCard({
@@ -19,44 +20,47 @@ export default function ProjectCard({
   technologies,
   link,
   image,
+  role,
 }: ProjectCardProps) {
   return (
-    <div className="p-8 md:p-10 bg-card/60 hover:bg-card/90 grid-cell-card flex flex-col justify-between group transition-all duration-300 relative border-b md:border-b-0 border-border/50">
+    <div className="group border-2 border-slate-900/20 dark:border-slate-800 bg-card rounded-none p-5 flex flex-col justify-between h-full transition-all shadow-[3px_3px_0px_0px_rgba(15,23,42,0.8)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent hover:-translate-y-1">
       <div className="space-y-4">
         {image && (
-          <div className="relative aspect-video w-full rounded overflow-hidden mb-4 border border-border/40">
+          <div className="relative aspect-video w-full rounded-none overflow-hidden bg-slate-950 border-2 border-slate-900/10 dark:border-slate-800">
             <Image
               src={image}
               alt={title}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
             />
           </div>
         )}
 
         <div className="flex items-center justify-between">
-          <span className="text-[10px] font-mono text-muted-foreground uppercase">
-            FEATURED
-          </span>
-          <span className="text-xs font-mono text-muted-foreground/80 tracking-wide">
+          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-accent px-2 py-0.5 border border-accent/40 bg-accent/10">
             {category}
           </span>
+          {role && (
+            <span className="text-[10px] font-mono text-muted-foreground uppercase">
+              {role}
+            </span>
+          )}
         </div>
 
-        <h3 className="text-xl md:text-2xl font-bold text-foreground tracking-tight leading-snug group-hover:text-accent transition-colors">
+        <h3 className="text-lg font-extrabold text-foreground tracking-tight leading-snug group-hover:text-accent transition-colors">
           {title}
         </h3>
 
-        <p className="text-xs md:text-sm text-muted-foreground font-light leading-relaxed">
+        <p className="text-xs text-muted-foreground font-light leading-relaxed line-clamp-2">
           {description}
         </p>
 
         {technologies && technologies.length > 0 && (
-          <div className="flex flex-wrap gap-2 pt-2">
+          <div className="flex flex-wrap gap-1.5 pt-1">
             {technologies.map((tech, idx) => (
               <span
                 key={idx}
-                className="text-[10px] font-mono font-medium uppercase px-2.5 py-1 bg-secondary text-foreground rounded border border-border/40"
+                className="text-[10px] font-mono uppercase px-2 py-0.5 bg-secondary text-foreground border border-border/50"
               >
                 {tech}
               </span>
@@ -65,20 +69,18 @@ export default function ProjectCard({
         )}
       </div>
 
-      <div className="pt-8 mt-6">
+      <div className="pt-4 mt-4 border-t border-border/40">
         {link ? (
-          <a
+          <Link
             href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-mono text-accent hover:text-accent/80 uppercase tracking-widest transition-colors font-bold"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-foreground group-hover:text-accent uppercase tracking-wider transition-colors"
           >
-            <span>EXPLORE WORK</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
+            <span>Explore Project</span>
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
         ) : (
           <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-            IN DEVELOPMENT ↗
+            IN PRODUCTION ↗
           </span>
         )}
       </div>

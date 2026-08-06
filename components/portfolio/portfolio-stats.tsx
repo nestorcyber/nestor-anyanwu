@@ -3,23 +3,23 @@ import type { PortfolioStat } from "@/lib/content"
 
 export default function PortfolioStats({ stats }: { stats: PortfolioStat[] }) {
   return (
-    <section className="w-full bg-secondary/40 py-12 border-b border-border/60">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 divide-y md:divide-y-0 md:divide-x divide-border/40">
+    <section className="w-full py-10 border-b-2 border-slate-900 dark:border-slate-800 bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {stats.map((stat, idx) => (
             <div
               key={idx}
-              className="p-4 md:p-6 flex flex-col justify-between space-y-2"
+              className="p-4 bg-card border-2 border-slate-900 dark:border-slate-800 shadow-[3px_3px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.9)] flex flex-col justify-between space-y-2"
             >
-              <span className="text-3xl md:text-5xl font-extrabold text-accent tracking-tight">
+              <span className="text-3xl sm:text-4xl font-extrabold text-accent font-heading">
                 {stat.value}
               </span>
               <div>
-                <h4 className="text-xs md:text-sm font-bold uppercase tracking-wider text-foreground">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">
                   {stat.label}
                 </h4>
                 {stat.description && (
-                  <p className="text-[11px] text-muted-foreground font-light leading-relaxed mt-1">
+                  <p className="text-[11px] text-muted-foreground font-light leading-snug mt-0.5 line-clamp-1">
                     {stat.description}
                   </p>
                 )}
