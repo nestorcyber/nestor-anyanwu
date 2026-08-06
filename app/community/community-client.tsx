@@ -2,8 +2,9 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import Footer from "@/components/footer"
-import { Calendar, Users, Heart, Award, ChevronLeft, ChevronRight, MapPin } from "lucide-react"
+import { Calendar, Users, Heart, Award, ChevronLeft, ChevronRight, MapPin, ArrowUpRight, Mail } from "lucide-react"
 
 export type CommunityEvent = {
   id: string
@@ -32,94 +33,165 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
     <>
       <main className="min-h-screen bg-background overflow-x-hidden">
 
-        {/* Hero Section - Creative Split */}
-        <section className="relative bg-primary overflow-hidden min-h-[100svh] md:min-h-[90vh] flex items-center">
-          {/* Background grid */}
-          <div className="absolute inset-0 opacity-[0.04]"
-            style={{
-              backgroundImage: "linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)",
-              backgroundSize: "48px 48px"
-            }}
-          />
-
-          {/* Full bleed image — right half desktop / full bleed mobile */}
-          <div className="absolute right-0 top-0 bottom-0 w-full lg:w-1/2 overflow-hidden">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg"
-              alt="Nestor volunteering at community event"
-              fill
-              className="object-cover object-top md:object-center"
-              priority
-            />
-            {/* Gradient fade — stronger on mobile */}
-            <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/30 lg:bg-gradient-to-r lg:from-primary lg:via-primary/60 lg:to-transparent" />
-            {/* Bottom fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-primary to-transparent" />
-          </div>
-
-          {/* Text content — left / centered on mobile */}
-          <div className="relative z-10 px-6 md:px-12 lg:px-24 pt-16 pb-40 md:py-24 max-w-7xl mx-auto w-full">
-            <div className="max-w-xl">
-              <div className="flex items-center gap-2 mb-5">
-                <div className="h-px w-8 bg-accent" />
-                <p className="text-accent text-xs font-black tracking-widest uppercase">
-                  Giving Back · Making Impact
-                </p>
-              </div>
-
-              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white mb-5 leading-none tracking-tighter">
-                Community<br />
-                <span className="text-accent">&</span><br />
-                <span className="italic font-light text-white/60">Volunteering</span>
-              </h1>
-
-              <p className="text-white/60 text-sm md:text-base max-w-md leading-relaxed font-medium mb-8 border-l-2 border-accent/40 pl-4">
-                &ldquo;Service is the rent you pay for room on this earth.&rdquo; — From tech festivals to leadership conferences,
-                here&apos;s a living record of impact, creativity and community across Nigeria.
-              </p>
-
-              {/* Stat pills — inline on all screens */}
-              <div className="flex flex-wrap gap-3 mb-8">
-                {[
-                  { icon: <Heart className="w-3.5 h-3.5" />, label: `${events.length}+ Engagements` },
-                  { icon: <Users className="w-3.5 h-3.5" />, label: "6+ Communities" },
-                  { icon: <Calendar className="w-3.5 h-3.5" />, label: "Since 2021" },
-                  { icon: <MapPin className="w-3.5 h-3.5" />, label: "5+ Institutions" },
-                  { icon: <Award className="w-3.5 h-3.5" />, label: "Media · Design · Logistics" },
-                ].map((pill) => (
-                  <div key={pill.label} className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-3 py-1.5 text-white/80 text-xs font-semibold">
-                    <span className="text-accent">{pill.icon}</span>
-                    {pill.label}
+        {/* 1. HERO SECTION: DESKTOP SPLIT / MOBILE STACK */}
+        <section className="w-full pt-20 md:pt-24 pb-12 md:pb-16 border-b-2 border-slate-900 dark:border-slate-800 bg-background relative">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+              
+              {/* Left Column: Hero Headline, Role Tags & CTAs (lg:col-span-7) */}
+              <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+                <div className="space-y-4">
+                  {/* Category Pills */}
+                  <div className="flex flex-wrap gap-2 text-[11px] font-mono font-bold uppercase tracking-wider">
+                    <span className="px-2.5 py-1 bg-accent text-white border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                      NACOS FUTO
+                    </span>
+                    <span className="px-2.5 py-1 bg-card text-foreground border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.8)]">
+                      IEEE Student Branch
+                    </span>
+                    <span className="px-2.5 py-1 bg-card text-foreground border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.8)]">
+                      GDG Owerri
+                    </span>
                   </div>
-                ))}
+
+                  <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight uppercase leading-tight font-heading">
+                    Community & Tech Advocacy
+                  </h1>
+
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl font-light">
+                    Building capacity, organizing developer hackathons, and empowering student engineers across South-East Nigeria. Here is a living record of ICT leadership, advocacy, and ecosystem impact.
+                  </p>
+                </div>
+
+                {/* Primary & Secondary CTAs */}
+                <div className="flex flex-wrap items-center gap-4 pt-2">
+                  <Link href="/contact">
+                    <button className="bg-accent hover:bg-accent/90 text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3 border-2 border-slate-900 dark:border-slate-700 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-2 cursor-pointer">
+                      <Users size={15} />
+                      <span>Join The Community</span>
+                    </button>
+                  </Link>
+
+                  <a
+                    href="#community-grid"
+                    className="bg-card hover:bg-secondary text-foreground border-2 border-slate-900 dark:border-slate-700 font-extrabold text-xs uppercase tracking-wider px-6 py-3 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,0.8)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-2 cursor-pointer"
+                  >
+                    <span>Explore Initiatives</span>
+                    <ArrowUpRight size={15} />
+                  </a>
+                </div>
               </div>
+
+              {/* Right Column: Integrated Featured Community Highlight Card (lg:col-span-5) */}
+              <div className="lg:col-span-5 border-2 border-slate-900 dark:border-slate-800 bg-card p-5 shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.9)] flex flex-col justify-between space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between border-b-2 border-slate-900/10 dark:border-slate-800 pb-2">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-accent">
+                      FEATURED HIGHLIGHT
+                    </span>
+                    <span className="text-[10px] font-mono text-muted-foreground uppercase">
+                      FLAGSHIP INITIATIVE
+                    </span>
+                  </div>
+
+                  <div className="relative w-full h-[180px] sm:h-[220px] overflow-hidden border-2 border-slate-900/20 dark:border-slate-800 bg-slate-950">
+                    <Image
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg"
+                      alt="Nestor volunteering at community event"
+                      fill
+                      className="object-cover object-top"
+                      priority
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <h3 className="text-lg font-bold text-foreground leading-snug">
+                      NACOS FUTO Director of Software
+                    </h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+                      Spearheading software development, technical bootcamps, and digital capacity building for over 3,000 computing undergraduates.
+                    </p>
+                  </div>
+                </div>
+
+                <Link href="/community/g" className="block pt-2">
+                  <div className="w-full py-2.5 bg-primary text-white text-center font-extrabold text-xs uppercase tracking-wider border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                    <span>View Community Profile</span>
+                    <ArrowUpRight size={14} />
+                  </div>
+                </Link>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        {/* 2. COMMUNITY IMPACT SECTION */}
+        <section className="w-full py-10 border-b-2 border-slate-900 dark:border-slate-800 bg-background">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              {[
+                { value: `${events.length}+`, label: "Engagements", desc: "Technical events & summits" },
+                { value: "6+", label: "Communities", desc: "NACOS, IEEE, GDG, Cowrywise" },
+                { value: "3,000+", label: "Members Reached", desc: "Students & developers" },
+                { value: "5+", label: "Institutions", desc: "University chapters" },
+                { value: "2021", label: "Active Since", desc: "Continuous advocacy" },
+              ].map((stat, idx) => (
+                <div
+                  key={idx}
+                  className="p-4 bg-card border-2 border-slate-900 dark:border-slate-800 shadow-[3px_3px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.9)] flex flex-col justify-between space-y-2"
+                >
+                  <span className="text-3xl sm:text-4xl font-extrabold text-accent font-heading">
+                    {stat.value}
+                  </span>
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">
+                      {stat.label}
+                    </h4>
+                    <p className="text-[11px] text-muted-foreground font-light leading-snug mt-0.5 line-clamp-1">
+                      {stat.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Filter Bar */}
-        <section className="sticky top-14 md:top-16 z-40 bg-background/90 backdrop-blur-md border-b border-border px-6 md:px-12 lg:px-24 py-3">
-          <div className="max-w-7xl mx-auto flex gap-2 overflow-x-auto scrollbar-hide">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-bold transition-all border ${
-                  activeCategory === cat
-                    ? "bg-accent text-white border-accent"
-                    : "bg-transparent text-foreground/60 border-border hover:border-accent hover:text-accent"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </section>
+        {/* 3. SEGMENTED FILTER BAR & CARDS GRID */}
+        <section id="community-grid" className="w-full py-12 md:py-16 border-b-2 border-slate-900 dark:border-slate-800 bg-background">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            
+            <div className="flex items-center justify-between border-b-2 border-slate-900/10 dark:border-slate-800 pb-4">
+              <h2 className="text-xs font-bold uppercase tracking-widest text-foreground font-heading">
+                All Community Initiatives
+              </h2>
+              <span className="text-xs font-mono text-muted-foreground">
+                {filtered.length} {filtered.length === 1 ? "RESULT" : "RESULTS"}
+              </span>
+            </div>
 
-        {/* Cards Grid */}
-        <section className="px-6 md:px-12 lg:px-24 py-14">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Segmented Neubrutalist Filter Bar */}
+            <div className="p-1 bg-card border-2 border-slate-900 dark:border-slate-800 shadow-[3px_3px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.9)] flex flex-wrap gap-1">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-2 text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer select-none rounded-none border-2 ${
+                    activeCategory === cat
+                      ? "bg-accent text-white border-slate-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                      : "bg-transparent text-muted-foreground border-transparent hover:text-foreground hover:border-slate-900/30"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* Cards Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
               {filtered.map((event) => (
                 <EventCard
                   key={event.id}
@@ -131,13 +203,50 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
             </div>
 
             {filtered.length === 0 && (
-              <div className="text-center py-24 text-foreground/40">
-                <Award className="w-12 h-12 mx-auto mb-4 opacity-30" />
-                <p className="text-lg font-semibold">No entries in this category</p>
+              <div className="text-center py-16 border-2 border-dashed border-border/60 text-muted-foreground font-mono text-xs uppercase">
+                <Award className="w-10 h-10 mx-auto mb-3 text-muted-foreground/40" />
+                <p>No community entries found under &quot;{activeCategory}&quot;.</p>
               </div>
             )}
           </div>
         </section>
+
+        {/* 4. FINAL CALL TO ACTION */}
+        <section className="w-full py-16 md:py-24 bg-background">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-primary text-white border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] p-8 sm:p-12 md:p-16 text-center space-y-6">
+              <span className="text-xs font-mono font-bold tracking-widest uppercase text-accent block">
+                // PARTNERSHIPS & ADVOCACY
+              </span>
+
+              <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight uppercase max-w-3xl mx-auto font-heading leading-snug">
+                Let's Build Stronger Tech Ecosystems Together
+              </h2>
+
+              <p className="text-slate-300 text-sm sm:text-base font-light leading-relaxed max-w-2xl mx-auto">
+                Interested in inviting Nestor for technical keynotes, community mentorship, student hackathon organization, or developer advocacy partnerships?
+              </p>
+
+              <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+                <Link href="/contact">
+                  <button className="bg-accent hover:bg-accent/90 text-white font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-2 cursor-pointer">
+                    <Users size={15} />
+                    <span>Get Involved</span>
+                  </button>
+                </Link>
+
+                <a
+                  href="mailto:nestoranyanwu@gmail.com"
+                  className="bg-card text-foreground border-2 border-slate-900 font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-2 cursor-pointer"
+                >
+                  <Mail size={15} />
+                  <span>Contact Nestor</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </main>
       <Footer />
     </>
@@ -158,111 +267,96 @@ function EventCard({
 
   return (
     <div
-      className={`group relative bg-card border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer flex flex-col ${
-        isExpanded ? "ring-2 ring-accent" : ""
-      }`}
+      className="group border-2 border-slate-900/20 dark:border-slate-800 bg-card rounded-none p-5 flex flex-col justify-between h-full transition-all shadow-[3px_3px_0px_0px_rgba(15,23,42,0.8)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent hover:-translate-y-1 cursor-pointer"
       onClick={onToggle}
     >
-      {/* Image or Color Block */}
-      {hasImages ? (
-        <div className="relative h-48 overflow-hidden">
-          <Image
-            src={event.images[imgIdx]}
-            alt={event.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          {/* Category badge */}
-          <span
-            className="absolute top-3 left-3 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full text-white"
-            style={{ backgroundColor: event.accent }}
-          >
-            {event.category}
-          </span>
-          {/* Image nav dots */}
-          {event.images.length > 1 && (
-            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
-              {event.images.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={(e) => { e.stopPropagation(); setImgIdx(i) }}
-                  className={`w-1.5 h-1.5 rounded-full transition-all ${i === imgIdx ? "bg-white scale-125" : "bg-white/50"}`}
-                />
+      <div className="space-y-4">
+        {/* Cover Image Container */}
+        {hasImages ? (
+          <div className="relative aspect-video w-full rounded-none overflow-hidden bg-slate-950 border-2 border-slate-900/10 dark:border-slate-800">
+            <Image
+              src={event.images[imgIdx]}
+              alt={event.title}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <span className="absolute top-2 left-2 text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-accent text-white border border-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+              {event.category}
+            </span>
+
+            {event.images.length > 1 && (
+              <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5 z-10">
+                {event.images.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={(e) => { e.stopPropagation(); setImgIdx(i) }}
+                    className={`w-2 h-2 rounded-none transition-all border border-black ${i === imgIdx ? "bg-accent" : "bg-white/80"}`}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="h-20 bg-secondary flex items-center justify-between px-4 border-2 border-slate-900/10 dark:border-slate-800">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-accent text-white border border-slate-900">
+              {event.category}
+            </span>
+            <Users className="w-5 h-5 text-accent" />
+          </div>
+        )}
+
+        {/* Content Details */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground uppercase tracking-wider">
+            <span className="flex items-center gap-1">
+              <Calendar className="w-3 h-3 text-accent" />
+              {event.date}
+            </span>
+          </div>
+
+          <h3 className="text-base font-extrabold text-foreground tracking-tight leading-snug group-hover:text-accent transition-colors">
+            {event.title}
+          </h3>
+
+          <p className="text-xs font-bold text-accent uppercase tracking-wider">
+            {event.role}
+          </p>
+
+          <p className="text-xs text-muted-foreground font-light leading-relaxed line-clamp-2">
+            {event.description}
+          </p>
+
+          {event.tags && event.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 pt-1">
+              {event.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-[10px] font-mono uppercase px-2 py-0.5 bg-secondary text-foreground border border-border/50"
+                >
+                  {tag}
+                </span>
               ))}
             </div>
           )}
-          {/* Arrows */}
-          {event.images.length > 1 && (
-            <>
-              <button
-                onClick={(e) => { e.stopPropagation(); setImgIdx((imgIdx - 1 + event.images.length) % event.images.length) }}
-                className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-black/40 text-white hover:bg-black/70 transition-colors"
-              >
-                <ChevronLeft className="w-3.5 h-3.5" />
-              </button>
-              <button
-                onClick={(e) => { e.stopPropagation(); setImgIdx((imgIdx + 1) % event.images.length) }}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-black/40 text-white hover:bg-black/70 transition-colors"
-              >
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
-            </>
-          )}
         </div>
-      ) : (
-        <div
-          className="h-24 flex items-end px-5 pb-4 relative overflow-hidden"
-          style={{ background: `linear-gradient(135deg, ${event.accent}22, ${event.accent}44)` }}
-        >
-          <div
-            className="absolute -right-6 -top-6 w-24 h-24 rounded-full opacity-20"
-            style={{ backgroundColor: event.accent }}
-          />
-          <span
-            className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full text-white"
-            style={{ backgroundColor: event.accent }}
+      </div>
+
+      <div className="pt-4 mt-4 border-t border-border/40 flex items-center justify-between">
+        {event.href ? (
+          <Link
+            href={event.href}
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-foreground group-hover:text-accent uppercase tracking-wider transition-colors"
           >
-            {event.category}
+            <span>View Details</span>
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
+        ) : (
+          <span className="text-xs font-mono text-accent uppercase font-bold flex items-center gap-1">
+            <span>{isExpanded ? "Collapse" : "Read Summary"}</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
           </span>
-        </div>
-      )}
-
-      {/* Content */}
-      <div className="p-5 flex flex-col flex-1">
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <div>
-            <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-1 flex items-center gap-1">
-              <Calendar className="w-3 h-3" />
-              {event.date}
-            </p>
-            <h3 className="text-base font-extrabold text-foreground leading-tight">{event.title}</h3>
-            <p className="text-xs font-semibold mt-0.5" style={{ color: event.accent }}>{event.role}</p>
-          </div>
-        </div>
-
-        {/* Expanded description */}
-        {isExpanded && (
-          <p className="text-sm text-foreground/70 leading-relaxed mt-3 mb-3 border-t border-border pt-3">
-            {event.description}
-          </p>
         )}
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-1.5 mt-auto pt-3">
-          {event.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-[10px] px-2 py-0.5 rounded-full font-semibold border"
-              style={{ color: event.accent, borderColor: `${event.accent}44`, backgroundColor: `${event.accent}11` }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <p className="text-[10px] text-foreground/30 mt-3 font-medium">
-          {isExpanded ? "Click to collapse" : "Click to read more"}
-        </p>
       </div>
     </div>
   )
