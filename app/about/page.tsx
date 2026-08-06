@@ -109,16 +109,15 @@ export default function AboutPage() {
 
         {/* 2. Core Philosophy Quote */}
         <section className="py-16 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
-          <div className="bg-card border border-border p-8 md:p-12 rounded-2xl shadow-sm relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="bg-card border-2 border-slate-900/20 dark:border-slate-800 p-8 md:p-12 rounded-none shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] relative overflow-hidden">
             <div className="max-w-4xl space-y-6">
               <span className="text-accent text-4xl font-sans font-bold">“</span>
-              <blockquote className="text-lg md:text-2xl font-semibold text-foreground/90 italic leading-relaxed">
+              <blockquote className="text-lg md:text-2xl font-semibold text-foreground/90 italic leading-relaxed font-heading">
                 Technology is not merely a profession. It is a platform for impact, a catalyst for growth, and a tool for shaping a better future. His core goal is creating an inclusive and collaborative tech ecosystem where everyone has the opportunity to thrive.
               </blockquote>
               <div className="flex items-center gap-3">
                 <span className="h-0.5 w-8 bg-accent"></span>
-                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground font-mono">
                   Nestor Anyanwu, Vision Statement
                 </span>
               </div>
@@ -127,16 +126,16 @@ export default function AboutPage() {
         </section>
 
         {/* 3. Alternating Scrolling Pillars Section (Forbes/Elumelu style) */}
-        <section className="py-20 px-6 md:px-12 lg:px-24 bg-secondary/30 border-y border-border">
+        <section className="py-20 px-6 md:px-12 lg:px-24 bg-background border-y-2 border-slate-900/20 dark:border-slate-800">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-24 space-y-3">
-              <p className="text-accent text-xs font-bold tracking-widest uppercase">
+              <p className="text-accent text-xs font-bold tracking-widest uppercase font-mono">
                 AREAS OF IMPACT
               </p>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight">
+              <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading uppercase">
                 Pillars of Leadership & Service
               </h2>
-              <p className="text-sm md:text-base text-muted-foreground font-medium">
+              <p className="text-sm md:text-base text-muted-foreground font-light">
                 A narrative walk through the key dimensions of Nestor's work and community footprint.
               </p>
             </div>
@@ -158,18 +157,18 @@ export default function AboutPage() {
                         isEven ? "lg:order-1" : "lg:order-2"
                       }`}
                     >
-                      <div className="relative bg-card border border-border p-10 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between aspect-video lg:aspect-square max-w-md mx-auto w-full">
-                        <div className="absolute -top-10 -right-6 text-[150px] font-black text-primary/5 select-none leading-none">
+                      <div className="relative bg-card border-2 border-slate-900/20 dark:border-slate-800 p-8 rounded-none shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col justify-between aspect-video lg:aspect-square max-w-md mx-auto w-full">
+                        <div className="absolute -top-10 -right-6 text-[150px] font-black text-foreground/5 select-none leading-none font-heading">
                           {p.num}
                         </div>
-                        <div className="p-3 bg-primary/5 rounded-xl w-fit mb-6">
+                        <div className="p-3 bg-secondary rounded-none border border-border w-fit mb-6">
                           {p.icon}
                         </div>
                         <div className="space-y-2 z-10">
-                          <h4 className="text-accent text-xs font-bold tracking-widest uppercase">
+                          <h4 className="text-accent text-xs font-bold tracking-widest uppercase font-mono">
                             PILLAR {p.num}
                           </h4>
-                          <h3 className="text-2xl font-extrabold text-primary">
+                          <h3 className="text-2xl font-extrabold text-foreground font-heading">
                             {p.title}
                           </h3>
                         </div>

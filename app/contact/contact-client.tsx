@@ -197,23 +197,24 @@ export default function ContactPage() {
               </div>
 
               {/* Availability */}
-              <div className="border border-border p-4 space-y-3">
+              {/* Availability badge */}
+              <div className="bg-card border-2 border-slate-900/20 dark:border-slate-800 p-4 space-y-3 shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)]">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-green-600 dark:text-green-400">Available for Work</span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Available for Work</span>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed font-light">
                   Open to freelance projects, consulting engagements, speaking invitations, and community collaborations.
                 </p>
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <Clock className="w-3.5 h-3.5" />
+                <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono">
+                  <Clock className="w-3.5 h-3.5 text-accent" />
                   <span>Typically responds within 24–48 hours</span>
                 </div>
               </div>
 
               {/* Social links */}
               <div className="space-y-3">
-                <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Connect Online</h2>
+                <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">Connect Online</h2>
                 <div className="grid grid-cols-1 gap-2">
                   {socialLinks.map((link) => (
                     <a
@@ -221,10 +222,10 @@ export default function ContactPage() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-2.5 border border-border/50 hover:border-accent hover:text-accent text-sm text-foreground transition-all group"
+                      className="flex items-center gap-3 p-3 bg-card border-2 border-slate-900/20 dark:border-slate-800 hover:border-accent hover:text-accent text-sm text-foreground transition-all shadow-xs hover:-translate-y-0.5 group"
                     >
                       <span className="text-muted-foreground group-hover:text-accent transition-colors">{link.icon}</span>
-                      {link.label}
+                      <span className="font-bold text-xs uppercase tracking-wider">{link.label}</span>
                       <ArrowUpRight className="w-3.5 h-3.5 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
                     </a>
                   ))}
@@ -232,12 +233,12 @@ export default function ContactPage() {
               </div>
 
               {/* Calendar stub */}
-              <div className="border border-dashed border-border p-4 space-y-2">
+              <div className="bg-card border-2 border-dashed border-slate-900/20 dark:border-slate-800 p-4 space-y-2">
                 <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Book a Call</span>
+                  <Clock className="w-4 h-4 text-accent" />
+                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-foreground">Book a Call</span>
                 </div>
-                <p className="text-xs text-muted-foreground">Calendar scheduling coming soon. For now, reach out via email or WhatsApp to arrange a call.</p>
+                <p className="text-xs text-muted-foreground font-light">Calendar scheduling coming soon. For now, reach out via email or WhatsApp to arrange a call.</p>
               </div>
             </aside>
 
