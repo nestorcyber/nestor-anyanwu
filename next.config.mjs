@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   serverExternalPackages: ["cloudinary"],
+  outputFileTracingExcludes: {
+    "*": ["node_modules/cloudinary/**/*"],
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },

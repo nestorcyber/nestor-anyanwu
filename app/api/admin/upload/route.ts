@@ -1,4 +1,3 @@
-import { v2 as cloudinary } from 'cloudinary'
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { ADMIN_EMAIL } from '@/lib/constants'
@@ -20,6 +19,8 @@ export async function POST(request: Request) {
   if (!cloudName || !apiKey || !apiSecret) {
     return NextResponse.json({ error: 'Cloudinary is not configured' }, { status: 500 })
   }
+
+  const { v2: cloudinary } = await import('cloudinary')
 
   cloudinary.config({
     cloud_name: cloudName,
