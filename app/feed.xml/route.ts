@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getJournalArticles } from '@/lib/content'
 
+export const revalidate = 60
+
 export async function GET() {
   const articles = await getJournalArticles()
   const baseUrl = 'https://nestor.name.ng'
