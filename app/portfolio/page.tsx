@@ -19,6 +19,9 @@ import {
   getSkillGroups,
 } from "@/lib/content"
 
+export const dynamic = "force-dynamic"
+export const revalidate = 0
+
 export const metadata: Metadata = {
   title: "Portfolio & Engineering Evidence | Nestor Anyanwu (Nestor Cyber)",
   description: "Explore the portfolio, production software deliverables, brand systems, and engineering capabilities of Nestor Anyanwu.",

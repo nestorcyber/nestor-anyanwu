@@ -11,6 +11,9 @@ import TestimonialsSection from "@/components/home/testimonials-section"
 import HomeCTA from "@/components/home/home-cta"
 import Footer from "@/components/footer"
 
+export const dynamic = "force-dynamic"
+export const revalidate = 0
+
 export const metadata: Metadata = {
   title: "Nestor Anyanwu (Nestor Cyber) | Software Engineer & Tech Leader",
   description: "Official website of Nestor Anyanwu (Nestor Cyber). Tech Leader, Software Developer, and Community Advocate driving digital innovation, capacity building, and impactful tech ecosystems.",
