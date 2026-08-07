@@ -107,15 +107,28 @@ export default function JourneyForm({ initial }: Props) {
           onChange={setDescription}
           height={280}
           placeholder="Write the journey description…"
+          folder="journey"
         />
       </Field>
       <Field label="Details (one per line)">
         <TextTextarea value={details} onChange={(e) => setDetails(e.target.value)} />
       </Field>
       <ImageUpload label="Primary image" value={cover} onChange={setCover} folder="journey" />
-      <Field label="Additional image URLs (one per line)">
-        <TextTextarea value={images} onChange={(e) => setImages(e.target.value)} />
-      </Field>
+      <div className="space-y-2">
+        <Field label="Additional image URLs (one per line)">
+          <TextTextarea value={images} onChange={(e) => setImages(e.target.value)} />
+        </Field>
+        <ImageUpload
+          label="Add Image to Journey Items"
+          value=""
+          onChange={(newUrl) => {
+            if (newUrl) {
+              setImages((prev) => (prev ? `${prev}\n${newUrl}` : newUrl))
+            }
+          }}
+          folder="journey"
+        />
+      </div>
       <Field label="Sort order">
         <TextInput type="number" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
       </Field>

@@ -118,9 +118,21 @@ export default function PortfolioForm({ initial }: Props) {
         <TextTextarea value={shortDescription} onChange={(e) => setShortDescription(e.target.value)} />
       </Field>
       <ImageUpload label="Cover image" value={coverImage} onChange={setCoverImage} folder="portfolio" />
-      <Field label="Gallery URLs (one per line)">
-        <TextTextarea value={gallery} onChange={(e) => setGallery(e.target.value)} />
-      </Field>
+      <div className="space-y-2">
+        <Field label="Gallery URLs (one per line)">
+          <TextTextarea value={gallery} onChange={(e) => setGallery(e.target.value)} />
+        </Field>
+        <ImageUpload
+          label="Add Image to Gallery"
+          value=""
+          onChange={(newUrl) => {
+            if (newUrl) {
+              setGallery((prev) => (prev ? `${prev}\n${newUrl}` : newUrl))
+            }
+          }}
+          folder="portfolio"
+        />
+      </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Category">
           <TextSelect value={category} onChange={(e) => setCategory(e.target.value)}>
@@ -167,6 +179,7 @@ export default function PortfolioForm({ initial }: Props) {
           onChange={setFullDescription}
           height={420}
           placeholder="Write the full case study…"
+          folder="portfolio"
         />
       </Field>
       <div className="flex gap-4">

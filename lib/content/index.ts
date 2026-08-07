@@ -12,6 +12,8 @@ import {
   certificationsList as fallbackCertificationsList,
 } from '@/lib/data'
 
+import { getOptimizedImageUrl } from '@/lib/cloudinary'
+
 const PLACEHOLDER = '/placeholder.svg'
 
 function readLocalMdxDir(dirPath: string) {
@@ -183,7 +185,7 @@ function mapJournal(row: Tables<'journal_articles'>): JournalArticle {
     slug: row.slug,
     title: row.title,
     excerpt: row.excerpt,
-    coverImage: row.cover_image || PLACEHOLDER,
+    coverImage: getOptimizedImageUrl(row.cover_image || PLACEHOLDER, { width: 1200 }),
     category: row.category,
     tags: row.tags ?? [],
     featured: row.featured,
@@ -203,8 +205,10 @@ function mapPortfolio(row: Tables<'portfolio_projects'>): PortfolioProject {
     slug: row.slug,
     title: row.title,
     shortDescription: row.short_description,
-    coverImage: row.cover_image || PLACEHOLDER,
-    gallery: (row.gallery ?? []).filter(Boolean),
+    coverImage: getOptimizedImageUrl(row.cover_image || PLACEHOLDER, { width: 1200 }),
+    gallery: (row.gallery ?? [])
+      .filter(Boolean)
+      .map((url) => getOptimizedImageUrl(url, { width: 1200 })),
     category: row.category,
     technologies: row.technologies ?? [],
     status: row.status,
@@ -226,8 +230,10 @@ function mapCommunity(row: Tables<'community_entries'>): CommunityEntry {
     organization: row.organization,
     role: row.role,
     duration: row.duration,
-    coverImage: row.cover_image || PLACEHOLDER,
-    gallery: (row.gallery ?? []).filter(Boolean),
+    coverImage: getOptimizedImageUrl(row.cover_image || PLACEHOLDER, { width: 1200 }),
+    gallery: (row.gallery ?? [])
+      .filter(Boolean)
+      .map((url) => getOptimizedImageUrl(url, { width: 1200 })),
     achievements: row.achievements ?? [],
     impactStats: (row.impact_stats as ImpactStat[]) ?? [],
     featured: row.featured,

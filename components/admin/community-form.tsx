@@ -112,9 +112,21 @@ export default function CommunityForm({ initial }: Props) {
         <TextInput value={duration} onChange={(e) => setDuration(e.target.value)} />
       </Field>
       <ImageUpload label="Cover image" value={coverImage} onChange={setCoverImage} folder="community" />
-      <Field label="Gallery URLs (one per line)">
-        <TextTextarea value={gallery} onChange={(e) => setGallery(e.target.value)} />
-      </Field>
+      <div className="space-y-2">
+        <Field label="Gallery URLs (one per line)">
+          <TextTextarea value={gallery} onChange={(e) => setGallery(e.target.value)} />
+        </Field>
+        <ImageUpload
+          label="Add Image to Gallery"
+          value=""
+          onChange={(newUrl) => {
+            if (newUrl) {
+              setGallery((prev) => (prev ? `${prev}\n${newUrl}` : newUrl))
+            }
+          }}
+          folder="community"
+        />
+      </div>
       <Field label="Achievements (one per line)">
         <TextTextarea value={achievements} onChange={(e) => setAchievements(e.target.value)} />
       </Field>
@@ -130,6 +142,7 @@ export default function CommunityForm({ initial }: Props) {
           onChange={setDescription}
           height={360}
           placeholder="Write the community overview…"
+          folder="community"
         />
       </Field>
       <Field label="Sort order">

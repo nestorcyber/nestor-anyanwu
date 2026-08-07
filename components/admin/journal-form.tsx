@@ -142,6 +142,7 @@ export default function JournalForm({ initial }: Props) {
           onChange={setContent}
           height={420}
           placeholder="Write the full article…"
+          folder="journal"
         />
       </Field>
       <div className="flex flex-wrap gap-4">
