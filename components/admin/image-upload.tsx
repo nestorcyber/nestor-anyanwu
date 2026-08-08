@@ -50,9 +50,16 @@ export default function ImageUpload({
         body: JSON.stringify({ folder }),
       })
 
-      const sig = await sigRes.json()
+      const rawText = await sigRes.text()
+      let sig: any = {}
+      try {
+        sig = rawText ? JSON.parse(rawText) : {}
+      } catch {
+        throw new Error(`Server returned non-JSON response (${sigRes.status}). Please verify environment configuration.`)
+      }
+
       if (!sigRes.ok) {
-        throw new Error(sig.error || 'Failed to generate upload authorization signature')
+        throw new Error(sig.error || `Failed to generate upload signature (HTTP ${sigRes.status})`)
       }
 
       // Step 2: Prepare FormData for direct Cloudinary upload

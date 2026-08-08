@@ -214,13 +214,13 @@ export default function JournalClient({ articles }: JournalClientProps) {
                       <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 block">
                         {formatDate(article.publishedDate)}
                       </span>
-                      <h2 className="text-sm sm:text-base font-extrabold text-white leading-snug group-hover:text-[#f472b6] transition-colors line-clamp-2 font-heading">
+                      <h2 className="text-sm sm:text-base font-extrabold text-white leading-snug group-hover:text-[#0284c7] transition-colors line-clamp-2 font-heading">
                         {article.title}
                       </h2>
                     </div>
 
                     {/* Pill Arrow Icon */}
-                    <div className="w-7 h-7 rounded-md bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white group-hover:bg-[#f472b6] group-hover:text-slate-950 transition-all shrink-0">
+                    <div className="w-7 h-7 rounded-md bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white group-hover:bg-[#0284c7] text-white transition-all shrink-0">
                       <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </div>
                   </div>
