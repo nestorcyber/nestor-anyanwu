@@ -52,30 +52,101 @@ export default async function AdminCatchAllPage({ params }: Props) {
       count('certifications'),
       count('portfolio_stats'),
     ])
+    const { data: recentLogs } = await supabase
+      .from('admin_activity_logs')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(6)
+
     const cards = [
-      { label: 'Journal', count: journal, href: '/admin/journal' },
-      { label: 'Portfolio', count: portfolio, href: '/admin/portfolio' },
-      { label: 'Community', count: community, href: '/admin/community' },
+      { label: 'Journal Articles', count: journal, href: '/admin/journal' },
+      { label: 'Portfolio Projects', count: portfolio, href: '/admin/portfolio' },
+      { label: 'Community Entries', count: community, href: '/admin/community' },
       { label: 'Career Milestones', count: journey, href: '/admin/journey' },
-      { label: 'Gallery', count: gallery, href: '/admin/gallery' },
+      { label: 'Media Assets (Gallery)', count: gallery, href: '/admin/gallery' },
       { label: 'Services', count: services, href: '/admin/services' },
       { label: 'Certifications', count: certifications, href: '/admin/certifications' },
       { label: 'Home Impact Stats', count: statsCount, href: '/admin/stats' },
     ]
+
     return (
-      <div>
-        <PageHeader title="Overview" />
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
-          {cards.map((card) => (
+      <div className="space-y-8">
+        <PageHeader title="CMS Overview" />
+
+        {/* Quick Actions Banners */}
+        <div className="border border-border bg-card p-4 sm:p-5 rounded-sm space-y-3">
+          <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">Quick Actions</h3>
+          <div className="flex flex-wrap gap-2.5">
             <Link
-              key={card.href}
-              href={card.href}
-              className="border border-border bg-card p-4 sm:p-5 hover:border-foreground/30 transition-colors"
+              href="/admin/journal/new"
+              className="px-3.5 py-2 text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
             >
-              <p className="text-xs sm:text-sm text-muted-foreground">{card.label}</p>
-              <p className="mt-2 text-2xl sm:text-3xl font-semibold">{card.count}</p>
+              + New Journal Post
             </Link>
-          ))}
+            <Link
+              href="/admin/portfolio/new"
+              className="px-3.5 py-2 text-xs font-semibold border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
+            >
+              + New Project
+            </Link>
+            <Link
+              href="/admin/gallery"
+              className="px-3.5 py-2 text-xs font-semibold border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
+            >
+              + Upload Media
+            </Link>
+            <Link
+              href="/admin/settings"
+              className="px-3.5 py-2 text-xs font-semibold border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
+            >
+              Manage Site Settings
+            </Link>
+          </div>
+        </div>
+
+        {/* Content Stats Cards */}
+        <div>
+          <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground mb-3">Content Metrics</h3>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {cards.map((card) => (
+              <Link
+                key={card.href}
+                href={card.href}
+                className="border border-border bg-card p-4 hover:border-foreground/30 transition-colors"
+              >
+                <p className="text-xs text-muted-foreground">{card.label}</p>
+                <p className="mt-2 text-2xl sm:text-3xl font-semibold">{card.count}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Recent Activity Log Feed */}
+        <div className="border border-border bg-card p-4 sm:p-5 rounded-sm space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">Recent Admin Activity</h3>
+            <Link href="/admin/activity" className="text-xs text-accent hover:underline">
+              View All Logs →
+            </Link>
+          </div>
+          {recentLogs && recentLogs.length > 0 ? (
+            <div className="border border-border divide-y divide-border">
+              {recentLogs.map((log: any) => (
+                <div key={log.id} className="p-3 text-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                  <div>
+                    <span className="font-semibold text-foreground">{log.action}</span>
+                    <span className="text-muted-foreground ml-2">({log.resource})</span>
+                    {log.details ? <p className="text-muted-foreground mt-0.5">{log.details}</p> : null}
+                  </div>
+                  <span className="text-[11px] text-muted-foreground font-mono shrink-0">
+                    {new Date(log.created_at).toLocaleString()}
+                  </span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-xs text-muted-foreground">No recent administrative actions recorded yet.</p>
+          )}
         </div>
       </div>
     )
@@ -790,7 +861,47 @@ export default async function AdminCatchAllPage({ params }: Props) {
     )
   }
 
-  // 11. Settings
+  // 11. Activity Logs
+  if (section === 'activity') {
+    const { data: logs } = await supabase
+      .from('admin_activity_logs')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(100)
+
+    return (
+      <div className="space-y-4">
+        <PageHeader title="Activity Logs" />
+        <div className="border border-border bg-card rounded-sm overflow-hidden">
+          {logs && logs.length > 0 ? (
+            <div className="divide-y divide-border">
+              {logs.map((log: any) => (
+                <div key={log.id} className="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <div className="space-y-0.5">
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-sm text-foreground">{log.action}</span>
+                      <span className="text-xs px-2 py-0.5 rounded border border-border bg-secondary/50 font-mono text-muted-foreground">
+                        {log.resource}
+                      </span>
+                    </div>
+                    {log.details ? <p className="text-xs text-muted-foreground">{log.details}</p> : null}
+                  </div>
+                  <div className="text-right shrink-0">
+                    <p className="text-xs font-mono text-muted-foreground">{new Date(log.created_at).toLocaleString()}</p>
+                    <p className="text-[11px] text-muted-foreground/70">{log.admin_email}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="p-8 text-center text-sm text-muted-foreground">No admin activity recorded yet.</p>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  // 12. Settings
   if (section === 'settings') {
     let { data } = await supabase.from('site_settings').select('*').limit(1).maybeSingle()
     if (!data) {

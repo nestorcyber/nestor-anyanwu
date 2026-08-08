@@ -53,6 +53,7 @@ export type Database = {
           seo_title: string | null
           seo_description: string | null
           draft: boolean
+          scheduled_at?: string | null
           content: string
           sort_order: number
           created_at: string
@@ -63,6 +64,22 @@ export type Database = {
           title: string
         }
         Update: Partial<Database['public']['Tables']['journal_articles']['Row']>
+      }
+      admin_activity_logs: {
+        Row: {
+          id: string
+          action: string
+          resource: string
+          resource_id: string | null
+          details: string | null
+          admin_email: string
+          created_at: string
+        }
+        Insert: Partial<Database['public']['Tables']['admin_activity_logs']['Row']> & {
+          action: string
+          resource: string
+        }
+        Update: Partial<Database['public']['Tables']['admin_activity_logs']['Row']>
       }
       portfolio_projects: {
         Row: {

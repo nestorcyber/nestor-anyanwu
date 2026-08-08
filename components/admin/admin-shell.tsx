@@ -13,11 +13,12 @@ const NAV = [
   { href: '/admin/portfolio', label: 'Portfolio' },
   { href: '/admin/community', label: 'Community' },
   { href: '/admin/journey', label: 'Career Milestones' },
-  { href: '/admin/gallery', label: 'Gallery' },
+  { href: '/admin/gallery', label: 'Media Library (Gallery)' },
   { href: '/admin/services', label: 'Services' },
-  { href: '/admin/skills', label: 'Skills' },
+  { href: '/admin/skills', label: 'Skills & Tech' },
   { href: '/admin/certifications', label: 'Certifications' },
   { href: '/admin/stats', label: 'Home Impact Stats' },
+  { href: '/admin/activity', label: 'Activity Logs' },
   { href: '/admin/settings', label: 'Site Settings' },
 ]
 

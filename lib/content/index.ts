@@ -277,7 +277,10 @@ export async function getJournalArticles(): Promise<JournalArticle[]> {
       .order('published_date', { ascending: false })
 
     if (!error && data) {
-      dbArticles = data.map(mapJournal)
+      const nowIso = new Date().toISOString()
+      dbArticles = data
+        .filter((row: any) => !row.scheduled_at || row.scheduled_at <= nowIso)
+        .map(mapJournal)
     }
   }
 

@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/client'
 import { slugify } from '@/lib/utils/slug'
 import ImageUpload from '@/components/admin/image-upload'
 import MarkdownEditor from '@/components/admin/markdown-editor'
+import { logAdminActivity } from '@/lib/admin-activity'
 import {
   Checkbox,
   DangerButton,
@@ -87,6 +88,14 @@ export default function PortfolioForm({ initial }: Props) {
       setSaving(false)
       return
     }
+
+    await logAdminActivity(
+      isRealUuid ? 'Updated Project' : 'Created Project',
+      'portfolio_projects',
+      initial?.id || payload.slug,
+      `Title: ${title}`
+    )
+
     router.push('/admin/portfolio')
     router.refresh()
   }
@@ -95,6 +104,7 @@ export default function PortfolioForm({ initial }: Props) {
     if (!initial || !confirm('Delete this project?')) return
     const supabase = createClient()
     await supabase.from('portfolio_projects').delete().eq('id', initial.id)
+    await logAdminActivity('Deleted Project', 'portfolio_projects', initial.id, `Title: ${title}`)
     router.push('/admin/portfolio')
     router.refresh()
   }
