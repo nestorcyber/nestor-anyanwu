@@ -38,115 +38,231 @@ export default async function AdminCatchAllPage({ params }: Props) {
 
   // 1. Root /admin Overview
   if (slug.length === 0) {
-    const count = async (table: string) => {
-      const { count } = await supabase.from(table as any).select('*', { count: 'exact', head: true })
+    const count = async (table: string, filter?: object) => {
+      let query = supabase.from(table as any).select('*', { count: 'exact', head: true })
+      if (filter) {
+        Object.entries(filter).forEach(([k, v]) => {
+          query = query.eq(k, v)
+        })
+      }
+      const { count } = await query
       return count ?? 0
     }
-    const [journal, portfolio, community, journey, gallery, services, certifications, statsCount] = await Promise.all([
+
+    const [journalTotal, journalPublished, journalDrafts, portfolioTotal] = await Promise.all([
       count('journal_articles'),
+      count('journal_articles', { draft: false }),
+      count('journal_articles', { draft: true }),
       count('portfolio_projects'),
-      count('community_entries'),
-      count('journey_items'),
-      count('gallery_images'),
-      count('services'),
-      count('certifications'),
-      count('portfolio_stats'),
     ])
+
+    const { data: recentJournal } = await supabase
+      .from('journal_articles')
+      .select('id, title, slug, draft, category, published_date, updated_at')
+      .order('updated_at', { ascending: false })
+      .limit(5)
+
     const { data: recentLogs } = await supabase
       .from('admin_activity_logs')
       .select('*')
       .order('created_at', { ascending: false })
-      .limit(6)
+      .limit(5)
 
-    const cards = [
-      { label: 'Journal Articles', count: journal, href: '/admin/journal' },
-      { label: 'Portfolio Projects', count: portfolio, href: '/admin/portfolio' },
-      { label: 'Community Entries', count: community, href: '/admin/community' },
-      { label: 'Career Milestones', count: journey, href: '/admin/journey' },
-      { label: 'Media Assets (Gallery)', count: gallery, href: '/admin/gallery' },
-      { label: 'Services', count: services, href: '/admin/services' },
-      { label: 'Certifications', count: certifications, href: '/admin/certifications' },
-      { label: 'Home Impact Stats', count: statsCount, href: '/admin/stats' },
+    const statCards = [
+      {
+        label: 'Total Journal Posts',
+        count: journalTotal,
+        actionLabel: 'View Journal →',
+        href: '/admin/journal',
+      },
+      {
+        label: 'Published Posts',
+        count: journalPublished,
+        actionLabel: 'View Published →',
+        href: '/admin/journal',
+      },
+      {
+        label: 'Draft Posts',
+        count: journalDrafts,
+        actionLabel: 'View Drafts →',
+        href: '/admin/journal',
+      },
+      {
+        label: 'Portfolio Projects',
+        count: portfolioTotal,
+        actionLabel: 'View Projects →',
+        href: '/admin/portfolio',
+      },
     ]
 
     return (
       <div className="space-y-8">
-        <PageHeader title="CMS Overview" />
+        {/* Header Title Section */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Dashboard</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+              Manage your website content, media, and publishing from one place.
+            </p>
+          </div>
+          <Link
+            href="/"
+            target="_blank"
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-accent text-accent-foreground hover:bg-accent/90 transition-colors shrink-0 shadow-xs"
+          >
+            <span>Preview Website</span>
+          </Link>
+        </div>
 
-        {/* Quick Actions Banners */}
-        <div className="border border-border bg-card p-4 sm:p-5 rounded-sm space-y-3">
-          <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">Quick Actions</h3>
-          <div className="flex flex-wrap gap-2.5">
+        {/* Real Content Statistics Cards (Reference Inspired) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {statCards.map((card) => (
+            <div
+              key={card.label}
+              className="bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-4 flex flex-col justify-between"
+            >
+              <div>
+                <p className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">{card.count}</p>
+                <p className="text-xs font-medium text-muted-foreground mt-1">{card.label}</p>
+              </div>
+              <Link
+                href={card.href}
+                className="text-xs font-semibold text-accent hover:underline inline-flex items-center gap-1"
+              >
+                {card.actionLabel}
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        {/* Quick Action Bar */}
+        <div className="bg-card border border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs space-y-3">
+          <p className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">
+            Quick Actions
+          </p>
+          <div className="flex flex-wrap gap-3">
             <Link
               href="/admin/journal/new"
-              className="px-3.5 py-2 text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+              className="px-4 py-2 text-xs font-semibold rounded-lg bg-accent text-accent-foreground hover:bg-accent/90 transition-colors shadow-2xs"
             >
               + New Journal Post
             </Link>
             <Link
               href="/admin/portfolio/new"
-              className="px-3.5 py-2 text-xs font-semibold border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
+              className="px-4 py-2 text-xs font-semibold rounded-lg border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
             >
               + New Project
             </Link>
             <Link
               href="/admin/gallery"
-              className="px-3.5 py-2 text-xs font-semibold border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
+              className="px-4 py-2 text-xs font-semibold rounded-lg border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
             >
               + Upload Media
             </Link>
             <Link
               href="/admin/settings"
-              className="px-3.5 py-2 text-xs font-semibold border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
+              className="px-4 py-2 text-xs font-semibold rounded-lg border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
             >
               Manage Site Settings
             </Link>
           </div>
         </div>
 
-        {/* Content Stats Cards */}
-        <div>
-          <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground mb-3">Content Metrics</h3>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {cards.map((card) => (
-              <Link
-                key={card.href}
-                href={card.href}
-                className="border border-border bg-card p-4 hover:border-foreground/30 transition-colors"
-              >
-                <p className="text-xs text-muted-foreground">{card.label}</p>
-                <p className="mt-2 text-2xl sm:text-3xl font-semibold">{card.count}</p>
+        {/* Content Activity Grid: Recent Journal Posts & Admin Activity Log */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Left Column (Col 1-7): Recent Journal Posts Table */}
+          <div className="lg:col-span-7 bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-base font-bold text-foreground">Recent Journal Posts</h3>
+                <p className="text-xs text-muted-foreground mt-0.5">Manage your latest journal entries.</p>
+              </div>
+              <Link href="/admin/journal" className="text-xs font-semibold text-accent hover:underline">
+                View all →
               </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Recent Activity Log Feed */}
-        <div className="border border-border bg-card p-4 sm:p-5 rounded-sm space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">Recent Admin Activity</h3>
-            <Link href="/admin/activity" className="text-xs text-accent hover:underline">
-              View All Logs →
-            </Link>
-          </div>
-          {recentLogs && recentLogs.length > 0 ? (
-            <div className="border border-border divide-y divide-border">
-              {recentLogs.map((log: any) => (
-                <div key={log.id} className="p-3 text-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                  <div>
-                    <span className="font-semibold text-foreground">{log.action}</span>
-                    <span className="text-muted-foreground ml-2">({log.resource})</span>
-                    {log.details ? <p className="text-muted-foreground mt-0.5">{log.details}</p> : null}
-                  </div>
-                  <span className="text-[11px] text-muted-foreground font-mono shrink-0">
-                    {new Date(log.created_at).toLocaleString()}
-                  </span>
-                </div>
-              ))}
             </div>
-          ) : (
-            <p className="text-xs text-muted-foreground">No recent administrative actions recorded yet.</p>
-          )}
+
+            <div className="border border-border/70 rounded-lg overflow-hidden">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-secondary/60 text-muted-foreground font-semibold uppercase tracking-wider text-[10px] border-b border-border/70">
+                  <tr>
+                    <th className="p-3">Title</th>
+                    <th className="p-3">Status</th>
+                    <th className="p-3">Category</th>
+                    <th className="p-3 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/60">
+                  {recentJournal && recentJournal.length > 0 ? (
+                    recentJournal.map((item: any) => (
+                      <tr key={item.id} className="hover:bg-secondary/40 transition-colors">
+                        <td className="p-3 font-medium text-foreground max-w-[180px] truncate">{item.title}</td>
+                        <td className="p-3">
+                          {item.draft ? (
+                            <span className="px-2 py-0.5 text-[10px] font-semibold rounded border bg-amber-500/10 text-amber-500 border-amber-500/20">
+                              Draft
+                            </span>
+                          ) : (
+                            <span className="px-2 py-0.5 text-[10px] font-semibold rounded border bg-emerald-500/10 text-emerald-500 border-emerald-500/20">
+                              Published
+                            </span>
+                          )}
+                        </td>
+                        <td className="p-3 text-muted-foreground">{item.category}</td>
+                        <td className="p-3 text-right">
+                          <Link
+                            href={`/admin/journal/${item.id}`}
+                            className="text-xs font-semibold text-accent hover:underline"
+                          >
+                            Edit
+                          </Link>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={4} className="p-4 text-center text-muted-foreground">
+                        No posts yet.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Right Column (Col 8-12): Recent Admin Activity Feed */}
+          <div className="lg:col-span-5 bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-base font-bold text-foreground">Recent Activity</h3>
+                <p className="text-xs text-muted-foreground mt-0.5">Administrative actions log.</p>
+              </div>
+              <Link href="/admin/activity" className="text-xs font-semibold text-accent hover:underline">
+                View logs →
+              </Link>
+            </div>
+
+            {recentLogs && recentLogs.length > 0 ? (
+              <div className="border border-border/70 rounded-lg divide-y divide-border/60">
+                {recentLogs.map((log: any) => (
+                  <div key={log.id} className="p-3 text-xs space-y-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-semibold text-foreground">{log.action}</span>
+                      <span className="text-[10px] font-mono text-muted-foreground">
+                        {new Date(log.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </span>
+                    </div>
+                    {log.details ? <p className="text-[11px] text-muted-foreground truncate">{log.details}</p> : null}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="p-6 text-center text-xs text-muted-foreground border border-dashed border-border/70 rounded-lg">
+                No recent activity recorded.
+              </p>
+            )}
+          </div>
         </div>
       </div>
     )
@@ -178,33 +294,81 @@ export default async function AdminCatchAllPage({ params }: Props) {
           })),
       ]
       return (
-        <div>
-          <PageHeader
-            title="Journal"
-            action={
-              <Link href="/admin/journal/new">
-                <PrimaryButton type="button">New article</PrimaryButton>
-              </Link>
-            }
-          />
-          <div className="border border-border divide-y divide-border">
-            {items.map((row) => (
-              <Link
-                key={row.id}
-                href={`/admin/journal/${row.id}`}
-                className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 px-3 sm:px-4 py-3 hover:bg-muted/50"
-              >
-                <div>
-                  <p className="font-medium">{row.title}</p>
-                  <p className="text-xs text-muted-foreground">/{row.slug}</p>
-                </div>
-                <div className="flex gap-2 text-xs">
-                  {row.draft ? <span className="text-amber-400">Draft</span> : <span className="text-emerald-400">Live</span>}
-                  {row.featured ? <span className="text-sky-400">Featured</span> : null}
-                </div>
-              </Link>
-            ))}
-            {!items.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No articles yet.</p> : null}
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Journal</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                Manage, edit and publish your journal articles.
+              </p>
+            </div>
+            <Link href="/admin/journal/new">
+              <button className="px-4 py-2 text-xs font-semibold rounded-lg bg-accent text-accent-foreground hover:bg-accent/90 transition-colors shadow-2xs">
+                + New Article
+              </button>
+            </Link>
+          </div>
+
+          <div className="bg-card border border-border/80 rounded-xl overflow-hidden shadow-2xs">
+            <div className="p-4 border-b border-border/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-secondary/30">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">
+                All Articles ({items.length})
+              </span>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-secondary/60 text-muted-foreground font-semibold uppercase tracking-wider text-[10px] border-b border-border/70">
+                  <tr>
+                    <th className="p-3.5">Title / Slug</th>
+                    <th className="p-3.5">Status</th>
+                    <th className="p-3.5">Category</th>
+                    <th className="p-3.5">Published Date</th>
+                    <th className="p-3.5 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/60">
+                  {items.map((row: any) => (
+                    <tr key={row.id} className="hover:bg-secondary/40 transition-colors">
+                      <td className="p-3.5 font-medium text-foreground">
+                        <p className="font-semibold text-sm">{row.title}</p>
+                        <p className="text-[11px] font-mono text-muted-foreground">/{row.slug}</p>
+                      </td>
+                      <td className="p-3.5">
+                        {row.draft ? (
+                          <span className="px-2.5 py-0.5 text-[10px] font-semibold rounded-full border bg-amber-500/10 text-amber-500 border-amber-500/20">
+                            Draft
+                          </span>
+                        ) : (
+                          <span className="px-2.5 py-0.5 text-[10px] font-semibold rounded-full border bg-emerald-500/10 text-emerald-500 border-emerald-500/20">
+                            Published
+                          </span>
+                        )}
+                        {row.featured ? (
+                          <span className="ml-1.5 px-2 py-0.5 text-[10px] font-semibold rounded-full border bg-sky-500/10 text-sky-500 border-sky-500/20">
+                            Featured
+                          </span>
+                        ) : null}
+                      </td>
+                      <td className="p-3.5 text-muted-foreground">{row.category || 'Technology'}</td>
+                      <td className="p-3.5 font-mono text-muted-foreground">{row.published_date || '—'}</td>
+                      <td className="p-3.5 text-right">
+                        <Link
+                          href={`/admin/journal/${row.id}`}
+                          className="px-3 py-1.5 text-xs font-semibold rounded-md border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
+                        >
+                          Edit
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {!items.length ? (
+              <div className="p-8 text-center text-xs text-muted-foreground">No articles published yet.</div>
+            ) : null}
           </div>
         </div>
       )

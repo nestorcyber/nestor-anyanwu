@@ -117,102 +117,154 @@ export default function JournalForm({ initial }: Props) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="max-w-3xl space-y-5">
-      <div className="flex items-center justify-between p-3 border border-border bg-card rounded-md">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-mono text-muted-foreground uppercase">Status:</span>
-          <span className={`px-2.5 py-0.5 text-xs font-semibold rounded border ${statusBadge.class}`}>
+    <form onSubmit={onSubmit} className="space-y-6">
+      {/* Top Editorial Action Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 border border-border/80 bg-card rounded-xl shadow-2xs">
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => router.push('/admin/journal')}
+            className="text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
+          >
+            ← Back to Journal
+          </button>
+          <span className="h-4 w-[1px] bg-border" />
+          <span className={`px-2.5 py-0.5 text-xs font-semibold rounded-full border ${statusBadge.class}`}>
             {statusBadge.label}
           </span>
+          {initial?.updated_at && (
+            <span className="hidden sm:inline text-xs text-muted-foreground">
+              Last saved: {new Date(initial.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            </span>
+          )}
         </div>
-        {initial?.updated_at && (
-          <span className="text-xs text-muted-foreground">
-            Last saved: {new Date(initial.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-          </span>
-        )}
-      </div>
 
-      <Field label="Title">
-        <TextInput
-          required
-          value={title}
-          onChange={(e) => {
-            setTitle(e.target.value)
-            if (!initial) setSlug(slugify(e.target.value))
-          }}
-        />
-      </Field>
-      <Field label="Slug">
-        <TextInput required value={slug} onChange={(e) => setSlug(slugify(e.target.value))} />
-      </Field>
-      <Field label="Excerpt">
-        <TextTextarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} />
-      </Field>
-      <ImageUpload label="Cover image" value={coverImage} onChange={setCoverImage} folder="journal" />
-      <Field label="Category">
-        <TextSelect value={category} onChange={(e) => setCategory(e.target.value)}>
-          {CATEGORIES.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
-          ))}
-        </TextSelect>
-      </Field>
-      <Field label="Tags (comma separated)">
-        <TextInput value={tags} onChange={(e) => setTags(e.target.value)} />
-      </Field>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <Field label="Published Date">
-          <TextInput type="date" value={publishedDate || ''} onChange={(e) => setPublishedDate(e.target.value)} />
-        </Field>
-        <Field label="Schedule Publication (Optional)">
-          <TextInput type="datetime-local" value={scheduledAt} onChange={(e) => setScheduledAt(e.target.value)} />
-        </Field>
-      </div>
-      <Field label="Author">
-        <TextInput value={author} onChange={(e) => setAuthor(e.target.value)} />
-      </Field>
-      <Field label="SEO Title (Fallback: Post Title)">
-        <TextInput value={seoTitle} onChange={(e) => setSeoTitle(e.target.value)} placeholder={title} />
-      </Field>
-      <Field label="SEO Description (Fallback: Post Excerpt)">
-        <TextTextarea value={seoDescription} onChange={(e) => setSeoDescription(e.target.value)} placeholder={excerpt} />
-      </Field>
-      <Field label="Content">
-        <MarkdownEditor
-          value={content}
-          onChange={setContent}
-          height={420}
-          placeholder="Write the full article…"
-          folder="journal"
-        />
-      </Field>
-      <div className="flex flex-wrap gap-4 pt-2">
-        <Checkbox label="Featured" checked={featured} onChange={setFeatured} />
-        <Checkbox label="Pinned" checked={pinned} onChange={setPinned} />
-        <Checkbox label="Draft (Hide from Public Website)" checked={draft} onChange={setDraft} />
-      </div>
-      {error ? <p className="text-sm text-red-400">{error}</p> : null}
-      <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-border">
-        <div className="flex gap-3">
-          <PrimaryButton type="submit" disabled={saving}>
-            {saving ? 'Saving…' : initial ? 'Update Post' : 'Create Post'}
-          </PrimaryButton>
+        <div className="flex items-center gap-3">
           {initial && (
             <button
               type="button"
               onClick={onDuplicate}
-              className="px-3.5 py-2 text-xs font-semibold border border-border bg-card hover:bg-muted text-foreground transition-colors rounded-none"
+              className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
             >
               Duplicate
             </button>
           )}
+          {initial && (
+            <button
+              type="button"
+              onClick={onDelete}
+              className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-red-500/30 bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors"
+            >
+              Delete
+            </button>
+          )}
+          <PrimaryButton type="submit" disabled={saving}>
+            {saving ? 'Saving…' : initial ? 'Update Article' : 'Publish Article'}
+          </PrimaryButton>
         </div>
-        {initial ? (
-          <DangerButton type="button" onClick={onDelete}>
-            Delete Article
-          </DangerButton>
-        ) : null}
+      </div>
+
+      {/* Two-Column Editorial Content Workspace */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Left Column (Col 1-8): Main Content & Editor */}
+        <div className="lg:col-span-8 space-y-6">
+          <div className="bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-5">
+            <Field label="Title">
+              <TextInput
+                required
+                value={title}
+                onChange={(e) => {
+                  setTitle(e.target.value)
+                  if (!initial) setSlug(slugify(e.target.value))
+                }}
+                placeholder="Enter article title…"
+              />
+            </Field>
+
+            <Field label="Slug">
+              <TextInput required value={slug} onChange={(e) => setSlug(slugify(e.target.value))} />
+            </Field>
+
+            <Field label="Excerpt">
+              <TextTextarea
+                value={excerpt}
+                onChange={(e) => setExcerpt(e.target.value)}
+                placeholder="Brief summary of the article…"
+              />
+            </Field>
+
+            <Field label="Article Content">
+              <MarkdownEditor
+                value={content}
+                onChange={setContent}
+                height={460}
+                placeholder="Write the full article using Markdown or rich text controls…"
+                folder="journal"
+              />
+            </Field>
+          </div>
+        </div>
+
+        {/* Right Column (Col 9-12): Publishing, Media, Category, & SEO */}
+        <div className="lg:col-span-4 space-y-6">
+          {/* Cover Media Panel */}
+          <div className="bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-4">
+            <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">Featured Cover Image</h3>
+            <ImageUpload label="Cover Image" value={coverImage} onChange={setCoverImage} folder="journal" />
+          </div>
+
+          {/* Publishing Settings */}
+          <div className="bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-4">
+            <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">Publishing & Taxonomy</h3>
+            
+            <Field label="Category">
+              <TextSelect value={category} onChange={(e) => setCategory(e.target.value)}>
+                {CATEGORIES.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </TextSelect>
+            </Field>
+
+            <Field label="Tags (comma-separated)">
+              <TextInput value={tags} onChange={(e) => setTags(e.target.value)} placeholder="tech, ai, tutorial" />
+            </Field>
+
+            <Field label="Published Date">
+              <TextInput type="date" value={publishedDate || ''} onChange={(e) => setPublishedDate(e.target.value)} />
+            </Field>
+
+            <Field label="Schedule Publication (Optional)">
+              <TextInput type="datetime-local" value={scheduledAt} onChange={(e) => setScheduledAt(e.target.value)} />
+            </Field>
+
+            <Field label="Author">
+              <TextInput value={author} onChange={(e) => setAuthor(e.target.value)} />
+            </Field>
+
+            <div className="space-y-2 pt-2 border-t border-border/70">
+              <Checkbox label="Featured Post" checked={featured} onChange={setFeatured} />
+              <Checkbox label="Pinned to Top" checked={pinned} onChange={setPinned} />
+              <Checkbox label="Save as Draft (Hidden Publicly)" checked={draft} onChange={setDraft} />
+            </div>
+          </div>
+
+          {/* SEO Metadata */}
+          <div className="bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-4">
+            <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">Search Engine Optimization</h3>
+            
+            <Field label="SEO Title (Fallback: Post Title)">
+              <TextInput value={seoTitle} onChange={(e) => setSeoTitle(e.target.value)} placeholder={title || 'SEO Title'} />
+            </Field>
+
+            <Field label="Meta Description (Fallback: Post Excerpt)">
+              <TextTextarea value={seoDescription} onChange={(e) => setSeoDescription(e.target.value)} placeholder={excerpt || 'Meta Description'} />
+            </Field>
+          </div>
+
+          {error ? <p className="text-sm text-red-500 font-medium">{error}</p> : null}
+        </div>
       </div>
     </form>
   )
