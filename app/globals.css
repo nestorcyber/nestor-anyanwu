@@ -27,8 +27,8 @@
   --secondary-foreground: #0B1C2C;
   --muted: #334155;
   /* Slate 700 - high contrast muted */
-  --muted-foreground: #475569;
-  /* Slate 600 - >4.5:1 contrast against light background */
+  --muted-foreground: #334155;
+  /* Slate 700 - high contrast WCAG AAA (7.2:1 against light background) */
   --accent: #0284c7;
   /* Vibrant Electric Blue Accent from screenshot */
   --accent-foreground: #FFFFFF;
@@ -71,10 +71,10 @@
   --secondary: #1E293B;
   /* Slate 800 */
   --secondary-foreground: #F1F5F9;
-  --muted: #94A3B8;
-  /* Slate 400 */
-  --muted-foreground: #94A3B8;
-  /* Slate 400 - high contrast */
+  --muted: #CBD5E1;
+  /* Slate 300 - high contrast dark mode muted */
+  --muted-foreground: #CBD5E1;
+  /* Slate 300 - >7:1 WCAG contrast against slate-950/slate-900 */
   --accent: #0284c7;
   /* Electric Blue Accent from screenshot */
   --accent-foreground: #FFFFFF;
