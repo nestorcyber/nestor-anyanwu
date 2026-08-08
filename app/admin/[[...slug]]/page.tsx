@@ -42,10 +42,11 @@ export default async function AdminCatchAllPage({ params }: Props) {
       const { count } = await supabase.from(table as any).select('*', { count: 'exact', head: true })
       return count ?? 0
     }
-    const [journal, portfolio, community, gallery, services, certifications, statsCount] = await Promise.all([
+    const [journal, portfolio, community, journey, gallery, services, certifications, statsCount] = await Promise.all([
       count('journal_articles'),
       count('portfolio_projects'),
       count('community_entries'),
+      count('journey_items'),
       count('gallery_images'),
       count('services'),
       count('certifications'),
@@ -55,6 +56,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
       { label: 'Journal', count: journal, href: '/admin/journal' },
       { label: 'Portfolio', count: portfolio, href: '/admin/portfolio' },
       { label: 'Community', count: community, href: '/admin/community' },
+      { label: 'Career Milestones', count: journey, href: '/admin/journey' },
       { label: 'Gallery', count: gallery, href: '/admin/gallery' },
       { label: 'Services', count: services, href: '/admin/services' },
       { label: 'Certifications', count: certifications, href: '/admin/certifications' },
@@ -412,10 +414,10 @@ export default async function AdminCatchAllPage({ params }: Props) {
       return (
         <div>
           <PageHeader
-            title="Journey"
+            title="Career Milestones"
             action={
               <Link href="/admin/journey/new">
-                <PrimaryButton type="button">New item</PrimaryButton>
+                <PrimaryButton type="button">New milestone</PrimaryButton>
               </Link>
             }
           />

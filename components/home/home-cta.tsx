@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react"
 
 export default function HomeCTA() {
   return (
-    <section className="w-full py-14 md:py-18 bg-primary text-primary-foreground border-b border-border/60 relative overflow-hidden">
+    <section className="w-full py-14 md:py-18 bg-[#0B1C2C] text-white border-b border-border/60 relative overflow-hidden">
       {/* Blueprint grid lines overlay */}
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
 

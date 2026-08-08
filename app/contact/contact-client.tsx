@@ -148,7 +148,7 @@ export default function ContactPage() {
     <>
       <main className="min-h-screen bg-background" id="main-content">
         {/* Hero header */}
-        <div className="w-full border-b border-border/60 py-14 md:py-20 bg-primary text-primary-foreground relative overflow-hidden">
+        <div className="w-full border-b border-border/60 py-14 md:py-20 bg-[#0B1C2C] text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
           <div className="max-w-5xl mx-auto px-6 md:px-10 relative z-10">
             <span className="text-xs font-bold tracking-widest uppercase text-accent block mb-3">GET IN TOUCH</span>

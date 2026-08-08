@@ -12,6 +12,7 @@ const NAV = [
   { href: '/admin/journal', label: 'Journal' },
   { href: '/admin/portfolio', label: 'Portfolio' },
   { href: '/admin/community', label: 'Community' },
+  { href: '/admin/journey', label: 'Career Milestones' },
   { href: '/admin/gallery', label: 'Gallery' },
   { href: '/admin/services', label: 'Services' },
   { href: '/admin/skills', label: 'Skills' },

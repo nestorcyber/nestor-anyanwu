@@ -184,7 +184,7 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
         {/* 4. FINAL CALL TO ACTION */}
         <section className="w-full py-16 md:py-24 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-primary text-white border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] p-8 sm:p-12 md:p-16 text-center space-y-6">
+            <div className="bg-[#0B1C2C] text-white border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] dark:border-slate-800 p-8 sm:p-12 md:p-16 text-center space-y-6">
               <span className="text-xs font-mono font-bold tracking-widest uppercase text-accent block">
                 // PARTNERSHIPS & ADVOCACY
               </span>
