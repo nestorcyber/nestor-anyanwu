@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import Footer from "@/components/footer"
 import type { JourneyItem } from "@/lib/content"
-import { X, ChevronLeft, ChevronRight, Maximize2, Sparkles } from "lucide-react"
+import { X, ChevronLeft, ChevronRight, Maximize2, Sparkles, Quote } from "lucide-react"
 
 type GalleryImage = {
   src: string
@@ -12,7 +12,6 @@ type GalleryImage = {
   date: string
   type: string
   organization: string
-  quote?: string
 }
 
 export default function GalleryPageClient({
@@ -70,7 +69,6 @@ export default function GalleryPageClient({
     setLightboxIndex((prev) => (prev !== null && prev < filteredImages.length - 1 ? prev + 1 : 0))
   }, [lightboxIndex, filteredImages.length])
 
-  // Keyboard navigation for Lightbox
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (lightboxIndex === null) return
@@ -82,13 +80,33 @@ export default function GalleryPageClient({
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [lightboxIndex, closeLightbox, navigatePrev, navigateNext])
 
-  // Custom Bento Quotes matching screenshot style
-  const quoteItems = [
-    { title: "Don't take risks.\nThat's scary!", sub: "Instead of waiting for perfection..." },
-    { title: "Place small bets.\nThat's exciting!", sub: "...start by building impact today!" },
-    { title: "Lead with empathy.\nBuild with purpose!", sub: "Empowering developers across West Africa." },
-    { title: "Consistency beats speed.\nEvery single time!", sub: "On-the-ground execution matters most." },
+  // Custom Bento Quotes
+  const quotesList = [
+    { title: "Don't take risks. That's scary!", subtitle: "Instead of waiting for perfection, start small today." },
+    { title: "Place small bets. That's exciting!", subtitle: "Consistency and small steps compound into massive impact." },
+    { title: "Lead with empathy. Build with purpose!", subtitle: "Empowering engineering talent across ecosystems." },
   ]
+
+  // Dynamic Bento Spans helper function
+  const getBentoSpanClass = (index: number) => {
+    const pattern = index % 7
+    switch (pattern) {
+      case 0:
+        return "md:col-span-2 md:row-span-2 min-h-[380px]" // Featured Big Hero Bento
+      case 1:
+        return "md:col-span-1 md:row-span-1 min-h-[220px]" // Standard Square Bento
+      case 2:
+        return "md:col-span-1 md:row-span-2 min-h-[380px]" // Tall Vertical Bento
+      case 3:
+        return "md:col-span-2 md:row-span-1 min-h-[220px]" // Wide Horizontal Bento
+      case 4:
+        return "md:col-span-1 md:row-span-1 min-h-[220px]" // Standard Bento
+      case 5:
+        return "md:col-span-2 md:row-span-2 min-h-[380px]" // Featured Big Hero Bento
+      default:
+        return "md:col-span-1 md:row-span-1 min-h-[220px]"
+    }
+  }
 
   return (
     <>
@@ -100,8 +118,8 @@ export default function GalleryPageClient({
               <p className="text-[#0284c7] text-xs font-mono font-bold tracking-widest mb-2 uppercase">
                 Captured Moments & Impact
               </p>
-              <h1 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight uppercase">
-                Gallery & Visuals
+              <h1 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight">
+                Gallery & Visual Moments
               </h1>
             </div>
 
@@ -141,120 +159,97 @@ export default function GalleryPageClient({
           </div>
         </div>
 
-        {/* Bento Grid Section (Matches attached screenshot style) */}
+        {/* Dynamic Bento Grid Container */}
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           {filteredImages.length === 0 ? (
             <div className="text-center py-24 border-2 border-dashed border-border rounded-3xl bg-card">
               <p className="text-muted-foreground font-medium">No moments captured in this category yet.</p>
             </div>
           ) : (
-            <div className="space-y-8">
-              {/* Grid Layout Container */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
-                
-                {/* 1. TOP LEFT STATEMENT CARD (Gumroad Bento Card) */}
-                <div className="bg-[#18181b] dark:bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-10 flex flex-col justify-center min-h-[200px] shadow-lg">
-                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight tracking-tight whitespace-pre-line font-heading">
-                    {quoteItems[0].title}
-                  </h2>
-                </div>
-
-                {/* 2. TOP RIGHT VISUAL CIRCLE CARD (Tall Circle Frame) */}
-                {filteredImages[0] && (
-                  <div
-                    onClick={() => openLightbox(0)}
-                    className="group bg-[#18181b] dark:bg-slate-900 border border-slate-800 rounded-3xl p-8 relative overflow-hidden flex flex-col items-center justify-center min-h-[380px] shadow-lg cursor-pointer transition-all hover:border-[#0284c7]"
-                  >
-                    {/* Floating Bubble Badge */}
-                    <div className="absolute top-6 left-6 z-20 bg-slate-950/80 backdrop-blur-md border border-slate-700/80 text-white text-xs font-semibold px-4 py-2 rounded-2xl shadow-xl">
-                      {filteredImages[0].title || quoteItems[0].sub}
-                    </div>
-
-                    {/* Circular Frame Graphic */}
-                    <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-amber-400/90 shadow-2xl group-hover:scale-105 transition-transform duration-500">
-                      <Image
-                        src={filteredImages[0].src}
-                        alt={filteredImages[0].title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {/* 3. BOTTOM LEFT VISUAL CIRCLE CARD */}
-                {filteredImages[1] && (
-                  <div
-                    onClick={() => openLightbox(1)}
-                    className="group bg-[#18181b] dark:bg-slate-900 border border-slate-800 rounded-3xl p-8 relative overflow-hidden flex flex-col items-center justify-center min-h-[380px] shadow-lg cursor-pointer transition-all hover:border-[#0284c7]"
-                  >
-                    {/* Floating Bubble Badge */}
-                    <div className="absolute top-6 left-6 z-20 bg-slate-950/80 backdrop-blur-md border border-slate-700/80 text-white text-xs font-semibold px-4 py-2 rounded-2xl shadow-xl">
-                      Instead of waiting for opportunities...
-                    </div>
-
-                    {/* Circular Frame Graphic */}
-                    <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-sky-400/90 shadow-2xl group-hover:scale-105 transition-transform duration-500">
-                      <Image
-                        src={filteredImages[1].src}
-                        alt={filteredImages[1].title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-
-                    {/* Bottom Floating Speech Bubble Badge */}
-                    <div className="absolute bottom-6 left-6 z-20 bg-slate-950/80 backdrop-blur-md border border-slate-700/80 text-white text-xs font-semibold px-4 py-2 rounded-2xl shadow-xl">
-                      ...start by creating value today!
-                    </div>
-                  </div>
-                )}
-
-                {/* 4. BOTTOM RIGHT STATEMENT CARD (Gumroad Bento Card) */}
-                <div className="bg-[#18181b] dark:bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-10 flex flex-col justify-center min-h-[200px] shadow-lg">
-                  <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight tracking-tight whitespace-pre-line font-heading">
-                    {quoteItems[1].title}
-                  </h2>
-                </div>
-
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[240px]">
+              
+              {/* Quote Statement Bento Card 1 */}
+              <div className="md:col-span-2 md:row-span-1 bg-[#18181b] dark:bg-slate-900 border-2 border-slate-900/30 dark:border-slate-800 rounded-3xl p-8 flex flex-col justify-center shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)]">
+                <Quote className="w-6 h-6 text-[#0284c7] mb-3" />
+                <h2 className="text-2xl md:text-3xl font-extrabold text-white leading-snug font-heading">
+                  {quotesList[0].title}
+                </h2>
+                <p className="text-xs md:text-sm text-slate-400 font-light mt-1">
+                  {quotesList[0].subtitle}
+                </p>
               </div>
 
-              {/* REMAINING GALLERY ITEMS IN BENTO & CARD GRID */}
-              {filteredImages.length > 2 && (
-                <div className="pt-8 border-t border-slate-800">
-                  <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground mb-6">
-                    // More Moments ({filteredImages.length - 2})
-                  </h3>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filteredImages.slice(2).map((image, idx) => (
-                      <div
-                        key={idx + 2}
-                        onClick={() => openLightbox(idx + 2)}
-                        className="group relative h-[320px] rounded-3xl overflow-hidden border border-slate-800 bg-[#18181b] shadow-lg cursor-pointer transition-all hover:border-[#0284c7]"
-                      >
+              {/* Dynamic Image Bento Cards */}
+              {filteredImages.map((image, idx) => {
+                const isCircleVignette = idx === 0 || idx === 3
+                const spanClass = getBentoSpanClass(idx)
+
+                return (
+                  <div
+                    key={idx}
+                    onClick={() => openLightbox(idx)}
+                    className={`group relative overflow-hidden rounded-3xl border-2 border-slate-900/30 dark:border-slate-800 bg-[#18181b] shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0284c7] transition-all cursor-pointer flex flex-col items-center justify-center p-4 ${spanClass}`}
+                  >
+                    {isCircleVignette ? (
+                      /* Circle Graphic Frame Bento Item */
+                      <div className="relative w-full h-full flex flex-col items-center justify-center">
+                        <div className="absolute top-3 left-3 z-20 bg-slate-950/85 backdrop-blur-md border border-slate-700/80 text-white text-[11px] font-semibold px-3 py-1.5 rounded-xl shadow-lg line-clamp-1">
+                          {image.title}
+                        </div>
+                        <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-amber-400/90 shadow-2xl group-hover:scale-105 transition-transform duration-500">
+                          <Image
+                            src={image.src}
+                            alt={image.title}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      /* Standard Full Bleed Photo Bento Card */
+                      <>
                         <Image
                           src={image.src}
                           alt={image.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
                         
-                        <div className="absolute bottom-4 inset-x-4 p-4 rounded-2xl bg-slate-950/75 backdrop-blur-md border border-slate-700/60 text-white">
-                          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#0284c7] text-white mb-1.5 inline-block">
+                        {/* Hover Quick View Button */}
+                        <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="w-8 h-8 rounded-xl bg-slate-950/80 backdrop-blur-md border border-slate-700 flex items-center justify-center text-white">
+                            <Maximize2 className="w-4 h-4" />
+                          </div>
+                        </div>
+
+                        {/* Glassmorphic Caption Bar */}
+                        <div className="absolute bottom-4 inset-x-4 z-20 p-3.5 rounded-2xl bg-slate-950/80 backdrop-blur-md border border-slate-700/60 text-white">
+                          <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#0284c7] text-white mb-1 inline-block">
                             {image.type === "work" ? "Leadership" : "Volunteering"}
                           </span>
-                          <h4 className="font-bold text-sm leading-snug line-clamp-1">{image.title}</h4>
+                          <h3 className="font-bold text-xs sm:text-sm leading-snug line-clamp-1">{image.title}</h3>
                           {image.organization && (
-                            <p className="text-xs text-slate-400 font-mono mt-0.5">{image.organization}</p>
+                            <p className="text-[11px] text-slate-400 font-mono mt-0.5">{image.organization}</p>
                           )}
                         </div>
-                      </div>
-                    ))}
+                      </>
+                    )}
                   </div>
-                </div>
-              )}
+                )
+              })}
+
+              {/* Quote Statement Bento Card 2 */}
+              <div className="md:col-span-2 md:row-span-1 bg-[#18181b] dark:bg-slate-900 border-2 border-slate-900/30 dark:border-slate-800 rounded-3xl p-8 flex flex-col justify-center shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)]">
+                <Quote className="w-6 h-6 text-[#0284c7] mb-3" />
+                <h2 className="text-2xl md:text-3xl font-extrabold text-white leading-snug font-heading">
+                  {quotesList[1].title}
+                </h2>
+                <p className="text-xs md:text-sm text-slate-400 font-light mt-1">
+                  {quotesList[1].subtitle}
+                </p>
+              </div>
+
             </div>
           )}
         </div>

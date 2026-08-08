@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { ADMIN_EMAIL } from '@/lib/constants'
+import crypto from 'crypto'
 
 export async function POST(request: Request) {
   try {
@@ -29,19 +30,13 @@ export async function POST(request: Request) {
       )
     }
 
-    const { v2: cloudinary } = await import('cloudinary')
-
-    cloudinary.config({
-      cloud_name: cloudName,
-      api_key: apiKey,
-      api_secret: apiSecret,
-      secure: true,
-    })
-
     const body = await request.json().catch(() => ({}))
     const folder = typeof body.folder === 'string' ? `nestor/${body.folder}` : 'nestor/uploads'
     const timestamp = Math.round(Date.now() / 1000)
-    const signature = cloudinary.utils.api_sign_request({ timestamp, folder }, apiSecret)
+
+    // Generate SHA-1 Cloudinary signature using Node.js built-in crypto module
+    const stringToSign = `folder=${folder}&timestamp=${timestamp}${apiSecret}`
+    const signature = crypto.createHash('sha1').update(stringToSign).digest('hex')
 
     return NextResponse.json({
       cloudName,

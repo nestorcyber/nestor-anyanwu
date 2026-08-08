@@ -22,15 +22,6 @@ interface JournalClientProps {
   articles: JournalArticleItem[]
 }
 
-// Calculate reading time dynamically (approx. 200 words per min)
-function calculateReadingTime(text?: string): string {
-  if (!text) return "1 MIN READ"
-  const wordCount = text.trim().split(/\s+/).length
-  const minutes = Math.max(1, Math.ceil(wordCount / 180))
-  return `${minutes} MIN READ`
-}
-
-// Safely format dates without throwing RangeErrors
 function formatDate(dateStr?: string): string {
   if (!dateStr) return "2026"
   try {
@@ -49,7 +40,6 @@ function formatDate(dateStr?: string): string {
 export default function JournalClient({ articles }: JournalClientProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>("All")
   const [searchQuery, setSearchQuery] = useState<string>("")
-  const [heroIndex, setHeroIndex] = useState<number>(0)
 
   // Extract unique categories from articles
   const categories = useMemo(() => {
@@ -60,12 +50,12 @@ export default function JournalClient({ articles }: JournalClientProps) {
     return ["All", ...Array.from(set)]
   }, [articles])
 
-  // 1. Pinned Article (Top-Left Primary Hero Focus)
+  // Pinned Article
   const pinnedArticle = useMemo(() => {
     return articles.find((a) => a.pinned) || articles[0]
   }, [articles])
 
-  // 2. Featured Articles (Guaranteed EXACTLY 3 Cards for Right Side of Hero Section)
+  // Featured Articles
   const featuredArticles = useMemo(() => {
     if (!pinnedArticle) return []
     const featured = articles.filter((a) => a.featured && a.slug !== pinnedArticle.slug)
@@ -123,7 +113,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
     return result.slice(0, 3)
   }, [articles, pinnedArticle])
 
-  // Filtered latest articles for grid below hero
+  // Filtered articles
   const filteredArticles = useMemo(() => {
     return articles.filter((article) => {
       const matchesCategory =
@@ -142,19 +132,18 @@ export default function JournalClient({ articles }: JournalClientProps) {
   }, [articles, selectedCategory, searchQuery])
 
   return (
-    <div className="w-full space-y-8 pt-14 sm:pt-16 pb-16">
-      {/* 1. GUMROAD BLOG TOP HERO SECTION (FULL WIDTH SPLIT LAYOUT) */}
+    <div className="w-full space-y-10 pt-14 sm:pt-16 pb-16">
+      {/* 1. TOP HERO SECTION */}
       {pinnedArticle && (
         <section className="w-full px-4 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
             
-            {/* LEFT COLUMN (lg:col-span-8): Big Featured Hero Card */}
+            {/* LEFT COLUMN: Big Featured Hero Card */}
             <div className="lg:col-span-8">
               <Link
                 href={`/journal/${pinnedArticle.slug}`}
-                className="group block border-2 border-slate-900/20 dark:border-slate-800 bg-card rounded-lg overflow-hidden shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.9)] hover:border-accent transition-all cursor-pointer"
+                className="group block border-2 border-slate-900/30 dark:border-slate-800 bg-card rounded-2xl overflow-hidden shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0284c7] transition-all cursor-pointer"
               >
-                {/* Large Featured Top Image */}
                 <div className="relative w-full h-[320px] sm:h-[400px] md:h-[450px] overflow-hidden bg-slate-900 border-b-2 border-slate-900/20 dark:border-slate-800">
                   {pinnedArticle.coverImage ? (
                     <Image
@@ -165,33 +154,43 @@ export default function JournalClient({ articles }: JournalClientProps) {
                       priority
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-amber-400 via-pink-500 to-indigo-600 flex items-center justify-center p-8">
+                    <div className="w-full h-full bg-gradient-to-br from-indigo-600 via-purple-600 to-sky-500 flex items-center justify-center p-8">
                       <Sparkles className="w-20 h-20 text-white/60" />
                     </div>
                   )}
                 </div>
 
-                {/* Bottom Card White/Dark Text Container */}
-                <div className="p-6 sm:p-8 space-y-2 bg-card">
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-foreground tracking-tight leading-snug group-hover:text-accent transition-colors font-heading">
+                <div className="p-6 sm:p-8 space-y-3 bg-card">
+                  <span className="text-xs font-mono font-bold text-[#0284c7] tracking-wider uppercase block">
+                    Featured Entry
+                  </span>
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-foreground tracking-tight leading-snug group-hover:text-[#0284c7] transition-colors font-heading">
                     {pinnedArticle.title}
                   </h1>
-                  <div className="text-xs sm:text-sm font-mono text-muted-foreground pt-1">
-                    {formatDate(pinnedArticle.publishedDate)}
+                  <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed line-clamp-2">
+                    {pinnedArticle.excerpt}
+                  </p>
+                  <div className="pt-2 flex items-center justify-between">
+                    <span className="text-xs font-mono text-muted-foreground">
+                      {formatDate(pinnedArticle.publishedDate)}
+                    </span>
+                    <div className="py-2 px-4 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-white text-slate-950 dark:bg-slate-900 dark:text-white font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] group-hover:bg-[#0284c7] group-hover:text-white group-hover:border-[#0284c7] transition-all">
+                      <span>Read Featured Article</span>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </div>
                   </div>
                 </div>
               </Link>
             </div>
 
-            {/* RIGHT COLUMN (lg:col-span-4): 3 Side Featured Cards with Full-Card Cover Images & Text Overlay */}
+            {/* RIGHT COLUMN: 3 Side Featured Cards */}
             <div className="lg:col-span-4 flex flex-col justify-between space-y-4">
               {featuredArticles.map((article) => (
                 <Link
                   key={article.slug}
                   href={`/journal/${article.slug}`}
-                  className="group relative w-full h-[175px] sm:h-[185px] rounded-lg overflow-hidden border-2 border-slate-900/20 dark:border-slate-800 bg-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent flex flex-col justify-end p-5 transition-all cursor-pointer"
+                  className="group relative w-full h-[175px] sm:h-[185px] rounded-2xl overflow-hidden border-2 border-slate-900/30 dark:border-slate-800 bg-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0284c7] flex flex-col justify-end p-5 transition-all cursor-pointer"
                 >
-                  {/* Full Card Cover Image */}
                   {article.coverImage ? (
                     <Image
                       src={article.coverImage}
@@ -200,15 +199,13 @@ export default function JournalClient({ articles }: JournalClientProps) {
                       className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-90"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-amber-400 via-pink-500 to-indigo-600 flex items-center justify-center">
+                    <div className="w-full h-full bg-gradient-to-br from-indigo-600 to-sky-500 flex items-center justify-center">
                       <Sparkles className="w-8 h-8 text-white/60" />
                     </div>
                   )}
 
-                  {/* Gradient Text Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent z-0" />
 
-                  {/* Content Overlay */}
                   <div className="relative z-10 flex items-end justify-between gap-3">
                     <div className="space-y-1 flex-1 min-w-0">
                       <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 block">
@@ -219,9 +216,8 @@ export default function JournalClient({ articles }: JournalClientProps) {
                       </h2>
                     </div>
 
-                    {/* Pill Arrow Icon */}
-                    <div className="w-7 h-7 rounded-md bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white group-hover:bg-[#0284c7] text-white transition-all shrink-0">
-                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    <div className="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-md border-2 border-white/40 flex items-center justify-center text-white group-hover:bg-[#0284c7] transition-all shrink-0">
+                      <ArrowUpRight className="w-4 h-4" />
                     </div>
                   </div>
                 </Link>
@@ -232,16 +228,16 @@ export default function JournalClient({ articles }: JournalClientProps) {
         </section>
       )}
 
-      {/* 2. LATEST ARTICLES GRID (FULL WIDTH) */}
+      {/* 2. LATEST ARTICLES GRID */}
       <div className="w-full px-4 sm:px-8 lg:px-12 space-y-8">
         <div className="flex items-center justify-between border-t-2 border-slate-900/20 dark:border-slate-800 pt-8">
           <div className="flex items-center gap-2">
-            <h2 className="text-sm font-mono font-extrabold uppercase tracking-widest text-foreground font-heading">
-              // All Articles
+            <h2 className="text-xl font-extrabold text-foreground font-heading">
+              Journal Articles
             </h2>
           </div>
           <span className="text-xs font-mono text-muted-foreground">
-            {filteredArticles.length} {filteredArticles.length === 1 ? "ARTICLE" : "ARTICLES"}
+            {filteredArticles.length} {filteredArticles.length === 1 ? "Article" : "Articles"}
           </span>
         </div>
 
@@ -251,12 +247,11 @@ export default function JournalClient({ articles }: JournalClientProps) {
             {filteredArticles.map((article) => (
               <article
                 key={article.slug}
-                className="group border-2 border-slate-900/20 dark:border-slate-800 bg-card rounded-lg overflow-hidden flex flex-col justify-between transition-all shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent hover:-translate-y-1 cursor-pointer"
+                className="group border-2 border-slate-900/30 dark:border-slate-800 bg-card rounded-2xl overflow-hidden flex flex-col justify-between transition-all shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0284c7] cursor-pointer"
               >
-                <Link href={`/journal/${article.slug}`} className="flex flex-col justify-between h-full" aria-label={`Read article: ${article.title}`}>
+                <Link href={`/journal/${article.slug}`} className="flex flex-col justify-between h-full p-5 space-y-4" aria-label={`Read article: ${article.title}`}>
                   <div className="space-y-4">
-                    {/* Cover Image Container */}
-                    <div className="relative w-full h-[220px] overflow-hidden bg-slate-900 border-b-2 border-slate-900/20 dark:border-slate-800">
+                    <div className="relative w-full h-[220px] overflow-hidden bg-slate-900 rounded-xl border-2 border-slate-900/20 dark:border-slate-800">
                       {article.coverImage ? (
                         <Image
                           src={article.coverImage}
@@ -271,38 +266,31 @@ export default function JournalClient({ articles }: JournalClientProps) {
                       )}
                     </div>
 
-                    {/* Article Content Under Cover Image */}
-                    <div className="p-4 sm:p-5 space-y-1.5">
+                    <div className="space-y-1.5">
                       <div className="text-[11px] font-mono text-muted-foreground">
                         {formatDate(article.publishedDate)}
                       </div>
 
-                      {/* Title */}
-                      <h3 className="text-base sm:text-lg font-extrabold text-foreground tracking-tight leading-snug group-hover:text-accent transition-colors line-clamp-2 font-heading">
+                      <h3 className="text-base sm:text-lg font-extrabold text-foreground tracking-tight leading-snug group-hover:text-[#0284c7] transition-colors line-clamp-2 font-heading">
                         {article.title}
                       </h3>
 
-                      {/* Excerpt */}
                       <p className="text-xs sm:text-sm text-muted-foreground leading-normal font-light line-clamp-2 pt-0.5">
                         {article.excerpt}
                       </p>
                     </div>
                   </div>
 
-                  {/* Read Article Link Line */}
-                  <div className="px-4 sm:px-5 pb-4 pt-0 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-foreground group-hover:text-accent transition-colors">
+                  <div className="w-full py-2.5 px-4 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-white text-slate-950 dark:bg-slate-900 dark:text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-between shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,0.9)] group-hover:bg-[#0284c7] group-hover:text-white group-hover:border-[#0284c7] transition-all">
                     <span>Read Article</span>
-                    <div className="w-7 h-7 rounded-md border border-slate-900/20 dark:border-slate-800 bg-background flex items-center justify-center group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-950 transition-all">
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </div>
+                    <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </Link>
               </article>
             ))}
           </div>
         ) : (
-          /* EMPTY STATE */
-          <div className="py-20 border-2 border-dashed border-slate-900/20 dark:border-slate-800 text-center space-y-3 bg-card rounded-lg">
+          <div className="py-20 border-2 border-dashed border-slate-900/20 dark:border-slate-800 text-center space-y-3 bg-card rounded-2xl">
             <Search className="w-8 h-8 text-muted-foreground/30 mx-auto" />
             <h3 className="text-lg font-bold text-foreground">No articles found</h3>
             <p className="text-xs text-muted-foreground max-w-sm mx-auto">
@@ -313,7 +301,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
                 setSelectedCategory("All")
                 setSearchQuery("")
               }}
-              className="text-xs font-bold uppercase tracking-widest text-accent hover:underline pt-2 cursor-pointer"
+              className="text-xs font-bold uppercase tracking-widest text-[#0284c7] hover:underline pt-2 cursor-pointer"
             >
               Reset Search
             </button>
