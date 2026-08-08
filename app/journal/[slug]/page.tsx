@@ -104,33 +104,33 @@ export default async function JournalDetailPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <main className="min-h-screen bg-background text-foreground pt-24 pb-20">
+      <main className="min-h-screen bg-background text-foreground pt-14 sm:pt-16 pb-20">
         <SectionContainer>
-          {/* Article Header */}
-          <header className="space-y-6 max-w-3xl mb-10">
+          {/* Article Header (Full Width) */}
+          <header className="space-y-4 w-full max-w-7xl mb-10">
             <div className="flex flex-wrap items-center gap-3">
               {article.featured && (
-                <span className="text-[10px] font-mono text-accent uppercase tracking-wider px-2 py-0.5 border border-accent/40">
-                  FEATURED
+                <span className="text-[10px] font-mono text-[#0284c7] uppercase tracking-wider px-2 py-0.5 border border-[#0284c7]/40 rounded-md bg-[#0284c7]/10">
+                  Featured Article
                 </span>
               )}
             </div>
 
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-tight uppercase">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-tight">
               {article.title}
             </h1>
 
-            <p className="text-base md:text-xl text-muted-foreground font-light leading-relaxed">
+            <p className="text-base md:text-xl text-muted-foreground font-light leading-relaxed max-w-5xl">
               {article.excerpt}
             </p>
 
             <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-border/40 text-xs text-muted-foreground font-mono">
               <span className="flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5 text-accent" />
+                <User className="w-3.5 h-3.5 text-[#0284c7]" />
                 {article.author || 'Nestor Anyanwu'}
               </span>
               <span className="flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-accent" />
+                <Calendar className="w-3.5 h-3.5 text-[#0284c7]" />
                 {new Date(article.publishedDate).toLocaleDateString('en-US', {
                   month: 'long',
                   day: 'numeric',
@@ -142,7 +142,7 @@ export default async function JournalDetailPage({ params }: Props) {
 
           {/* Hero Cover Image */}
           {article.coverImage && (
-            <div className="relative w-full h-[320px] md:h-[500px] mb-12 overflow-hidden border border-border/60 rounded">
+            <div className="relative w-full h-[320px] md:h-[500px] mb-12 overflow-hidden border-2 border-slate-900/30 dark:border-slate-800 rounded-2xl shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)]">
               <Image
                 src={article.coverImage}
                 alt={article.title}
@@ -163,12 +163,12 @@ export default async function JournalDetailPage({ params }: Props) {
             {relatedArticles.length > 0 && (
               <div className="pt-10 border-t-2 border-slate-900/20 dark:border-slate-800 space-y-6">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-foreground">
-                    // Related Articles
+                  <h3 className="text-lg font-extrabold text-foreground font-heading">
+                    Related Articles
                   </h3>
                   <Link
                     href="/journal"
-                    className="text-xs font-mono font-bold text-accent hover:underline uppercase tracking-wider flex items-center gap-1"
+                    className="text-xs font-mono font-bold text-[#0284c7] hover:underline uppercase tracking-wider flex items-center gap-1"
                   >
                     <span>All Articles</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -180,9 +180,8 @@ export default async function JournalDetailPage({ params }: Props) {
                     <Link
                       key={rel.slug}
                       href={`/journal/${rel.slug}`}
-                      className="group relative w-full h-[180px] sm:h-[190px] rounded-lg overflow-hidden border-2 border-slate-900/20 dark:border-slate-800 bg-slate-900 shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent flex flex-col justify-end p-5 transition-all cursor-pointer"
+                      className="group relative w-full h-[180px] sm:h-[190px] rounded-2xl overflow-hidden border-2 border-slate-900/30 dark:border-slate-800 bg-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0284c7] flex flex-col justify-end p-5 transition-all cursor-pointer"
                     >
-                      {/* Full Card Cover Image */}
                       {rel.coverImage ? (
                         <Image
                           src={rel.coverImage}
@@ -191,13 +190,11 @@ export default async function JournalDetailPage({ params }: Props) {
                           className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-90"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-amber-400 via-pink-500 to-indigo-600 flex items-center justify-center" />
+                        <div className="w-full h-full bg-gradient-to-br from-indigo-600 to-sky-500 flex items-center justify-center" />
                       )}
 
-                      {/* Gradient Text Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent z-0" />
 
-                      {/* Content Overlay */}
                       <div className="relative z-10 flex items-end justify-between gap-3">
                         <div className="space-y-1 flex-1 min-w-0">
                           <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 block">
@@ -208,9 +205,8 @@ export default async function JournalDetailPage({ params }: Props) {
                           </h4>
                         </div>
 
-                        {/* Pill Arrow Icon */}
-                        <div className="w-7 h-7 rounded-md bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white group-hover:bg-[#0284c7] text-white transition-all shrink-0">
-                          <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        <div className="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-md border-2 border-white/40 flex items-center justify-center text-white group-hover:bg-[#0284c7] transition-all shrink-0">
+                          <ArrowUpRight className="w-4 h-4" />
                         </div>
                       </div>
                     </Link>
