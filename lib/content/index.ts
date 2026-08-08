@@ -108,6 +108,7 @@ export type ProjectItem = {
   role?: string
   image?: string
   status?: string
+  featured?: boolean
   links: { demo?: string; caseStudy?: string; github?: string }
   slug?: string
 }
@@ -303,65 +304,79 @@ export async function getJournalArticleBySlug(slug: string): Promise<JournalArti
 
 export async function getPortfolioProjects(): Promise<PortfolioProject[]> {
   const supabase = db()
+  let dbProjects: PortfolioProject[] = []
+  const dbAllSlugs = new Set<string>()
+
   if (supabase) {
     const { data, error } = await supabase
       .from('portfolio_projects')
       .select('*')
-      .eq('draft', false)
       .order('sort_order', { ascending: true })
       .order('created_at', { ascending: false })
 
-    if (!error && data && data.length > 0) {
-      return data.map(mapPortfolio)
+    if (!error && data) {
+      data.forEach((row: any) => dbAllSlugs.add(row.slug))
+      dbProjects = data.filter((row: any) => !row.draft).map(mapPortfolio)
     }
   }
 
   // Fallback to local MDX files
   const localFiles = readLocalMdxDir('content/portfolio')
-  if (localFiles.length > 0) {
-    return localFiles
-      .filter(({ data }) => !data.draft)
-      .map(({ slug, data, content }) => ({
-        id: slug,
-        slug,
-        title: data.title ?? slug,
-        shortDescription: data.shortDescription ?? '',
-        coverImage: data.coverImage || PLACEHOLDER,
-        gallery: data.gallery ?? [],
-        category: data.category ?? 'Software',
-        technologies: data.technologies ?? [],
-        status: data.status ?? 'Completed',
-        client: data.client ?? null,
-        role: data.role ?? null,
-        githubUrl: data.githubUrl ?? null,
-        liveUrl: data.liveUrl ?? null,
-        caseStudyUrl: data.caseStudyUrl ?? `/portfolio/${slug}`,
-        featured: !!data.featured,
-        completionDate: data.completionDate ? String(data.completionDate) : null,
-        fullDescription: content,
-      }))
-  }
+  const localProjects: PortfolioProject[] = localFiles
+    .filter(({ data }) => !data.draft)
+    .map(({ slug, data, content }) => ({
+      id: slug,
+      slug,
+      title: data.title ?? slug,
+      shortDescription: data.shortDescription ?? '',
+      coverImage: data.coverImage || PLACEHOLDER,
+      gallery: data.gallery ?? [],
+      category: data.category ?? 'Software',
+      technologies: data.technologies ?? [],
+      status: data.status ?? 'Completed',
+      client: data.client ?? null,
+      role: data.role ?? null,
+      githubUrl: data.githubUrl ?? null,
+      liveUrl: data.liveUrl ?? null,
+      caseStudyUrl: data.caseStudyUrl ?? `/portfolio/${slug}`,
+      featured: !!data.featured,
+      completionDate: data.completionDate ? String(data.completionDate) : null,
+      fullDescription: content,
+    }))
 
   // Fallback to data.ts projects
-  return fallbackProjects.map((p) => ({
-    id: p.title.toLowerCase().replace(/\s+/g, '-'),
-    slug: p.title.toLowerCase().replace(/\s+/g, '-'),
-    title: p.title,
-    shortDescription: p.description,
-    coverImage: p.image || PLACEHOLDER,
-    gallery: [],
-    category: p.category || 'Software',
-    technologies: p.technologies,
-    status: p.status || 'Completed',
-    client: null,
-    role: p.role || null,
-    githubUrl: p.links.github || null,
-    liveUrl: p.links.demo || null,
-    caseStudyUrl: p.links.caseStudy || null,
-    featured: true,
-    completionDate: null,
-    fullDescription: p.description,
-  }))
+  const dataProjects: PortfolioProject[] = fallbackProjects.map((p, i) => {
+    const slug = p.id || p.title.toLowerCase().replace(/\s+/g, '-')
+    return {
+      id: slug,
+      slug,
+      title: p.title,
+      shortDescription: p.description,
+      coverImage: p.image || PLACEHOLDER,
+      gallery: [],
+      category: p.category || 'Software',
+      technologies: p.technologies,
+      status: p.status || 'Completed',
+      client: null,
+      role: p.role || null,
+      githubUrl: p.links.github || null,
+      liveUrl: p.links.demo || null,
+      caseStudyUrl: p.links.caseStudy || `/portfolio/${slug}`,
+      featured: i < 3,
+      completionDate: null,
+      fullDescription: p.description,
+    }
+  })
+
+  const localSlugs = new Set(localProjects.map((p) => p.slug))
+
+  const combined = [
+    ...dbProjects,
+    ...localProjects.filter((p) => !dbAllSlugs.has(p.slug)),
+    ...dataProjects.filter((p) => !dbAllSlugs.has(p.slug) && !localSlugs.has(p.slug)),
+  ]
+
+  return combined
 }
 
 export async function getPortfolioProjectBySlug(slug: string): Promise<PortfolioProject | null> {
@@ -381,6 +396,7 @@ export async function getProjectItems(): Promise<ProjectItem[]> {
     role: p.role || undefined,
     image: p.coverImage,
     status: p.status,
+    featured: p.featured,
     links: {
       demo: p.liveUrl || undefined,
       caseStudy: p.caseStudyUrl || `/portfolio/${p.slug}`,

@@ -6,7 +6,8 @@ import type { ProjectItem } from "@/lib/content"
 import { ArrowUpRight, Github, ExternalLink } from "lucide-react"
 
 export default function FeaturedProjectsShowcase({ projects }: { projects: ProjectItem[] }) {
-  const featuredList = projects.slice(0, 3)
+  const featuredOnly = projects.filter((p) => p.featured)
+  const featuredList = featuredOnly.length > 0 ? featuredOnly.slice(0, 3) : projects.slice(0, 3)
 
   return (
     <section className="w-full py-12 md:py-16 border-b-2 border-slate-900 dark:border-slate-800 bg-background">

@@ -8,7 +8,11 @@ import type { ProjectItem } from "@/lib/content"
 export default function ProjectLibrary({ projects }: { projects: ProjectItem[] }) {
   const [activeCategory, setActiveCategory] = useState<string>("All")
 
-  const categories = ["All", "Software", "Web", "Design", "Branding", "Automation", "Open Source"]
+  const defaultCategories = ["All", "Software", "Web", "Design", "Branding", "Automation", "Open Source"]
+  const dynamicCategories = Array.from(
+    new Set(projects.map((p) => p.category).filter((c): c is string => Boolean(c)))
+  )
+  const categories = Array.from(new Set([...defaultCategories, ...dynamicCategories]))
 
   const filteredProjects = activeCategory === "All"
     ? projects

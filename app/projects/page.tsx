@@ -59,15 +59,24 @@ export default async function ProjectsPage() {
                   ))}
                 </div>
 
-                <div className="flex gap-3 pt-4 border-t border-border">
+                <div className="flex flex-wrap gap-3 pt-4 border-t border-border">
+                  {project.slug && (
+                    <a
+                      href={`/portfolio/${project.slug}`}
+                      className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-accent text-secondary hover:text-primary rounded-lg font-bold text-sm transition-colors cursor-pointer"
+                    >
+                      <span>View Case Study</span>
+                      <ExternalLink size={16} />
+                    </a>
+                  )}
                   {project.links.demo && project.links.demo !== "#" && (
                     <a
                       href={project.links.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-accent text-secondary hover:text-primary rounded-lg font-bold text-sm transition-colors cursor-pointer"
+                      className="flex items-center gap-2 px-4 py-2 border border-primary text-primary hover:bg-primary hover:text-secondary rounded-lg font-bold text-sm transition-colors cursor-pointer"
                     >
-                      <span>Learn More</span>
+                      <span>Live Demo</span>
                       <ExternalLink size={16} />
                     </a>
                   )}
