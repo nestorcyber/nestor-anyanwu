@@ -394,7 +394,8 @@ export const portfolioStats: PortfolioStat[] = [
 
 export const projects: ProjectItem[] = [
   {
-    id: "devfest-2025",
+    id: "devfest-owerri-2025-branding",
+    slug: "devfest-owerri-2025-branding",
     title: "DevFest Owerri 2025 Branding",
     category: "Design",
     description: "Major design contributor for South-East Nigeria's largest developer festival. Supported visual branding, event creative assets, and logistical design systems.",
@@ -404,11 +405,12 @@ export const projects: ProjectItem[] = [
     status: "Completed",
     links: {
       demo: "https://www.behance.net/nestorcyber",
-      caseStudy: "https://www.behance.net/nestorcyber",
+      caseStudy: "/portfolio/devfest-owerri-2025-branding",
     },
   },
   {
-    id: "build-with-ai",
+    id: "build-with-ai-2025-branding",
+    slug: "build-with-ai-2025-branding",
     title: "Build With AI 2025 Branding",
     category: "Design",
     description: "Empowering developers and creators with AI-driven workflows and resources. Engineered platform design and community tools for rapid AI integration.",
@@ -419,10 +421,12 @@ export const projects: ProjectItem[] = [
     links: {
       demo: "https://github.com/nestorcyber",
       github: "https://github.com/nestorcyber",
+      caseStudy: "/portfolio/build-with-ai-2025-branding",
     },
   },
   {
-    id: "nacos-futo-web",
+    id: "nacos-futo-website-development",
+    slug: "nacos-futo-website-development",
     title: "NACOS FUTO Website Development",
     category: "Web",
     description: "Centralized ICT digital infrastructure and student engagement portal for the Nigeria Association of Computing Students across higher institutions.",
@@ -432,44 +436,7 @@ export const projects: ProjectItem[] = [
     status: "Production",
     links: {
       demo: "https://nacos.org.ng",
-    },
-  },
-  {
-    id: "tech-nexus-futo",
-    title: "Tech Nexus FUTO Platform",
-    category: "Open Source",
-    description: "Designed and coordinated event setup for Tech Nexus at FUTO, connecting student developers with tech leaders and networking resources.",
-    technologies: ["Event Design", "Open Source", "Documentation", "Community"],
-    role: "Lead Organizer & Designer",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden2-sUzI0wvGmZMjB5UUP911IAB6WvBM5c.jpg",
-    status: "Completed",
-    links: {
-      demo: "https://github.com/nestorcyber",
-    },
-  },
-  {
-    id: "cowrywise-campus",
-    title: "Cowrywise Campus Fintech Advocacy",
-    category: "Branding",
-    description: "Digital campaign assets and outreach materials promoting financial literacy and wealth building for university students.",
-    technologies: ["Brand Advocacy", "Graphic Design", "Fintech Outreach"],
-    role: "Campus Ambassador",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg",
-    status: "Active",
-    links: {
-      demo: "https://cowrywise.com",
-    },
-  },
-  {
-    id: "nobelton-consults-it",
-    title: "Nobelton Enterprise IT Automation",
-    category: "Automation",
-    description: "Custom business process automation and IT advisory portal for enterprise consulting engagements.",
-    technologies: ["IT Consulting", "System Automation", "Web Workflows"],
-    role: "IT Consultant",
-    status: "Active",
-    links: {
-      demo: "https://github.com/nestorcyber",
+      caseStudy: "/portfolio/nacos-futo-website-development",
     },
   },
 ]

@@ -344,36 +344,9 @@ export async function getPortfolioProjects(): Promise<PortfolioProject[]> {
       fullDescription: content,
     }))
 
-  // Fallback to data.ts projects
-  const dataProjects: PortfolioProject[] = fallbackProjects.map((p, i) => {
-    const slug = p.id || p.title.toLowerCase().replace(/\s+/g, '-')
-    return {
-      id: slug,
-      slug,
-      title: p.title,
-      shortDescription: p.description,
-      coverImage: p.image || PLACEHOLDER,
-      gallery: [],
-      category: p.category || 'Software',
-      technologies: p.technologies,
-      status: p.status || 'Completed',
-      client: null,
-      role: p.role || null,
-      githubUrl: p.links.github || null,
-      liveUrl: p.links.demo || null,
-      caseStudyUrl: p.links.caseStudy || `/portfolio/${slug}`,
-      featured: i < 3,
-      completionDate: null,
-      fullDescription: p.description,
-    }
-  })
-
-  const localSlugs = new Set(localProjects.map((p) => p.slug))
-
   const combined = [
     ...dbProjects,
     ...localProjects.filter((p) => !dbAllSlugs.has(p.slug)),
-    ...dataProjects.filter((p) => !dbAllSlugs.has(p.slug) && !localSlugs.has(p.slug)),
   ]
 
   return combined

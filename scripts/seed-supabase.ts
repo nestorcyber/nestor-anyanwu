@@ -127,32 +127,16 @@ async function main() {
     sort_order: i,
   }))
 
-  const existingSlugs = new Set(portfolioMdx.map((p) => p.slug))
-  const portfolioFromData = projects.map((p, i) => {
-    const slug = p.id || slugify(p.title)
-    return {
-      slug,
-      title: p.title,
-      short_description: p.description,
-      cover_image: p.image ?? null,
-      gallery: [] as string[],
-      category: p.category ?? 'Software',
-      technologies: p.technologies ?? [],
-      status: p.status ?? 'Completed',
-      client: null as string | null,
-      role: p.role ?? null,
-      github_url: p.links.github ?? null,
-      live_url: p.links.demo ?? null,
-      case_study_url: p.links.caseStudy ?? null,
-      featured: i < 3,
-      completion_date: null as string | null,
-      full_description: p.description,
-      draft: false,
-      sort_order: portfolioMdx.length + i,
+  const allowedSlugs = new Set(portfolioMdx.map((p) => p.slug))
+  const { data: dbItems } = await supabase.from('portfolio_projects').select('id, slug')
+  if (dbItems) {
+    const toDelete = dbItems.filter((item: any) => !allowedSlugs.has(item.slug)).map((item: any) => item.id)
+    if (toDelete.length > 0) {
+      await supabase.from('portfolio_projects').delete().in('id', toDelete)
     }
-  }).filter((p) => !existingSlugs.has(p.slug))
+  }
 
-  await upsert('portfolio_projects', [...portfolioMdx, ...portfolioFromData], 'slug')
+  await upsert('portfolio_projects', portfolioMdx, 'slug')
 
   const community = readMdxDir('content/community').map(({ slug, data, content }, i) => ({
     slug,
