@@ -78,7 +78,6 @@ export default function Navigation() {
     { label: "Portfolio", href: "/portfolio" },
     { label: "Community", href: "/community" },
     { label: "Journal", href: "/journal" },
-    { label: "Journey", href: "/journey" },
     { label: "Gallery", href: "/gallery" },
     { label: "Contact", href: "/contact" },
     { label: "Admin", href: "/admin" },

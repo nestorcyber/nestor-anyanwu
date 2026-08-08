@@ -71,7 +71,7 @@ const pageEntries: SearchResult[] = [
     title: "Career Journey & Timeline",
     description: "Interactive timeline of milestones, positions, organizations, and career achievements.",
     category: "Page",
-    href: "/journey",
+    href: "/portfolio",
     keywords: ["journey", "career", "timeline", "milestones", "history", "experience", "resume", "cv"],
   },
   {
@@ -134,7 +134,7 @@ export async function buildSearchIndex(): Promise<SearchResult[]> {
     title: `${j.title} — ${j.organization}`,
     description: `${j.description} (${j.date})`,
     category: "Experience" as const,
-    href: "/journey",
+    href: "/portfolio",
     keywords: [
       j.title.toLowerCase(),
       j.organization.toLowerCase(),
