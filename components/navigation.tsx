@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
-import { X, Sun, Moon, Search, Layers, Briefcase, Zap, Star, BookOpen, Users, FileText, Award, History } from "lucide-react"
+import { X, Sun, Moon, Search } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { useTheme } from "next-themes"
@@ -56,23 +56,8 @@ export default function Navigation() {
     }
   }, [isOpen])
 
-  // Desktop quick nav bar links
-  const desktopNavItems = [
-    { label: "HOME", href: "/" },
-    { label: "ABOUT", href: "/about" },
-    { label: "PORTFOLIO", href: "/portfolio" },
-    { label: "COMMUNITY", href: "/community" },
-    { label: "JOURNAL", href: "/journal" },
-  ]
-
-  // Desktop drawer extra items
-  const desktopDrawerItems = [
-    { label: "Gallery", href: "/gallery" },
-    { label: "Contact", href: "/contact" },
-  ]
-
-  // Mobile drawer items (All site links)
-  const mobileDrawerItems = [
+  // Complete site navigation items for the MENU drawer
+  const drawerNavItems = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Portfolio", href: "/portfolio" },
@@ -80,7 +65,6 @@ export default function Navigation() {
     { label: "Journal", href: "/journal" },
     { label: "Gallery", href: "/gallery" },
     { label: "Contact", href: "/contact" },
-    { label: "Admin", href: "/admin" },
   ]
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -94,7 +78,7 @@ export default function Navigation() {
 
   return (
     <>
-      {/* Dynamic Navbar: Light in light mode, Dark Slate in dark mode */}
+      {/* Top Header Bar: Clean logo on left + MENU / CLOSE button on right */}
       <nav
         className="fixed top-0 left-0 right-0 z-50 bg-background border-b-2 border-slate-900 dark:border-slate-800 text-foreground font-sans transition-colors duration-200"
         role="navigation"
@@ -120,34 +104,8 @@ export default function Navigation() {
             </Link>
           </div>
 
-          {/* RIGHT SIDE: Nav Links with Active Section Box + MENU Button */}
-          <div className="flex items-center gap-5 md:gap-7">
-            
-            {/* Desktop Quick Nav Links */}
-            <div className="hidden md:flex items-center gap-2 lg:gap-3 text-xs md:text-sm font-semibold">
-              {desktopNavItems.map((item) => {
-                const isActive =
-                  item.href === "/"
-                    ? pathname === "/"
-                    : pathname === item.href || pathname.startsWith(item.href + "/")
-
-                return (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className={`transition-all uppercase tracking-wider ${
-                      isActive
-                        ? "px-3.5 py-1 text-xs font-bold rounded-full bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 shadow-sm"
-                        : "px-2.5 py-1 text-slate-700 dark:text-slate-200 hover:text-[#0284c7] dark:hover:text-[#0284c7]"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                )
-              })}
-            </div>
-
-            {/* Dynamic MENU / CLOSE Drawer Toggle Button */}
+          {/* RIGHT SIDE: Dynamic MENU / CLOSE Drawer Toggle Button Only */}
+          <div className="flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="flex flex-col items-center justify-center cursor-pointer group p-1 transition-colors min-w-[50px] select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0284c7] rounded-sm"
@@ -212,55 +170,17 @@ export default function Navigation() {
         </div>
 
         {/* Drawer Content Area */}
-        <div className="max-w-7xl w-full mx-auto flex-1 overflow-y-auto px-6 md:px-8 pt-6 pb-12 flex flex-col justify-between">
-          <div>
-            {/* Mobile Drawer Links */}
-            <nav className="flex md:hidden flex-col gap-2 pt-2">
-              {mobileDrawerItems.map((item) => {
-                const isActive =
-                  item.href === "/"
-                    ? pathname === "/"
-                    : pathname === item.href || pathname.startsWith(item.href + "/")
-
-                return (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`transition-all font-light text-xl uppercase tracking-[0.18em] py-2.5 cursor-pointer block border-b border-border/15 ${
-                      isActive ? "text-[#0284c7] font-bold" : "text-foreground hover:text-[#0284c7]"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                )
-              })}
-            </nav>
-
-            {/* Desktop Drawer Links (Gallery & Contact) */}
-            <nav className="hidden md:flex flex-col gap-6 pt-8">
-              {desktopDrawerItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="text-foreground hover:text-[#0284c7] transition-all font-light text-4xl uppercase tracking-[0.2em] py-3 cursor-pointer block border-b border-border/20"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          {/* Theme Toggle Button (Inside MENU Drawer Section) */}
+        <div className="max-w-7xl w-full mx-auto flex-1 overflow-y-auto px-6 md:px-8 pt-4 pb-12 flex flex-col justify-start">
+          
+          {/* DESKTOP VIEW: Dark mode toggle AFTER search box BEFORE listing menu components */}
           {mounted && (
-            <div className="pt-8 border-t border-border/30 flex items-center justify-between">
+            <div className="hidden md:flex items-center justify-between py-4 border-b border-border/30 mb-4">
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">
                 Appearance Mode
               </span>
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="px-4 py-2.5 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-card text-foreground font-extrabold text-xs uppercase tracking-wider flex items-center gap-2.5 shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,0.9)] hover:border-[#0284c7] transition-all cursor-pointer"
+                className="px-4 py-2 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-card text-foreground font-extrabold text-xs uppercase tracking-wider flex items-center gap-2.5 shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,0.9)] hover:border-[#0284c7] transition-all cursor-pointer"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {theme === "dark" ? (
@@ -277,6 +197,79 @@ export default function Navigation() {
               </button>
             </div>
           )}
+
+          {/* DESKTOP DRAWER LINKS LIST */}
+          <nav className="hidden md:flex flex-col gap-4 pt-2">
+            {drawerNavItems.map((item) => {
+              const isActive =
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname === item.href || pathname.startsWith(item.href + "/")
+
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`transition-all font-light text-3xl lg:text-4xl uppercase tracking-[0.2em] py-2 cursor-pointer block border-b border-border/20 ${
+                    isActive ? "text-[#0284c7] font-bold" : "text-foreground hover:text-[#0284c7]"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              )
+            })}
+          </nav>
+
+          {/* MOBILE DRAWER LINKS LIST */}
+          <nav className="flex md:hidden flex-col gap-1 pt-2">
+            {drawerNavItems.map((item) => {
+              const isActive =
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname === item.href || pathname.startsWith(item.href + "/")
+
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`transition-all font-light text-xl uppercase tracking-[0.18em] py-2.5 cursor-pointer block border-b border-border/15 ${
+                    isActive ? "text-[#0284c7] font-bold" : "text-foreground hover:text-[#0284c7]"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              )
+            })}
+          </nav>
+
+          {/* MOBILE VIEW: Dark mode toggle IMMEDIATELY AFTER mobile nav listing */}
+          {mounted && (
+            <div className="flex md:hidden items-center justify-between pt-6 border-t border-border/30 mt-4">
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">
+                Appearance Mode
+              </span>
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="px-4 py-2 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-card text-foreground font-extrabold text-xs uppercase tracking-wider flex items-center gap-2.5 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] hover:border-[#0284c7] transition-all cursor-pointer"
+                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {theme === "dark" ? (
+                  <>
+                    <Sun size={15} className="text-amber-400" />
+                    <span>Light Mode</span>
+                  </>
+                ) : (
+                  <>
+                    <Moon size={15} className="text-slate-700" />
+                    <span>Dark Mode</span>
+                  </>
+                )}
+              </button>
+            </div>
+          )}
+
         </div>
       </div>
     </>
