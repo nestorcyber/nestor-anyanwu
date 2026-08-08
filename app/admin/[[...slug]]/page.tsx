@@ -42,23 +42,23 @@ export default async function AdminCatchAllPage({ params }: Props) {
       const { count } = await supabase.from(table as any).select('*', { count: 'exact', head: true })
       return count ?? 0
     }
-    const [journal, portfolio, community, journey, gallery, services, certifications] = await Promise.all([
+    const [journal, portfolio, community, gallery, services, certifications, statsCount] = await Promise.all([
       count('journal_articles'),
       count('portfolio_projects'),
       count('community_entries'),
-      count('journey_items'),
       count('gallery_images'),
       count('services'),
       count('certifications'),
+      count('portfolio_stats'),
     ])
     const cards = [
       { label: 'Journal', count: journal, href: '/admin/journal' },
       { label: 'Portfolio', count: portfolio, href: '/admin/portfolio' },
       { label: 'Community', count: community, href: '/admin/community' },
-      { label: 'Journey', count: journey, href: '/admin/journey' },
       { label: 'Gallery', count: gallery, href: '/admin/gallery' },
       { label: 'Services', count: services, href: '/admin/services' },
       { label: 'Certifications', count: certifications, href: '/admin/certifications' },
+      { label: 'Home Impact Stats', count: statsCount, href: '/admin/stats' },
     ]
     return (
       <div>
@@ -633,7 +633,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
       return (
         <div>
           <PageHeader
-            title="Portfolio stats"
+            title="Home Impact & Portfolio Stats"
             action={
               <Link href="/admin/stats/new">
                 <PrimaryButton type="button">New stat</PrimaryButton>

@@ -128,37 +128,7 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
           </div>
         </section>
 
-        {/* 2. COMMUNITY IMPACT SECTION */}
-        <section className="w-full py-10 border-b-2 border-slate-900 dark:border-slate-800 bg-background">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {[
-                { value: `${events.length}+`, label: "Engagements", desc: "Technical events & summits" },
-                { value: "6+", label: "Communities", desc: "NACOS, IEEE, GDG, Cowrywise" },
-                { value: "3,000+", label: "Members Reached", desc: "Students & developers" },
-                { value: "5+", label: "Institutions", desc: "University chapters" },
-                { value: "2021", label: "Active Since", desc: "Continuous advocacy" },
-              ].map((stat, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 bg-card border-2 border-slate-900 dark:border-slate-800 shadow-[3px_3px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.9)] flex flex-col justify-between space-y-2"
-                >
-                  <span className="text-3xl sm:text-4xl font-extrabold text-accent font-heading">
-                    {stat.value}
-                  </span>
-                  <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">
-                      {stat.label}
-                    </h4>
-                    <p className="text-[11px] text-muted-foreground font-light leading-snug mt-0.5 line-clamp-1">
-                      {stat.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+
 
         {/* 3. SEGMENTED FILTER BAR & CARDS GRID */}
         <section id="community-grid" className="w-full py-12 md:py-16 border-b-2 border-slate-900 dark:border-slate-800 bg-background">

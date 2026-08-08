@@ -10,6 +10,7 @@ import LatestJournal from "@/components/home/latest-journal"
 import TestimonialsSection from "@/components/home/testimonials-section"
 import HomeCTA from "@/components/home/home-cta"
 import Footer from "@/components/footer"
+import { getPortfolioStats } from "@/lib/content"
 
 export const dynamic = "force-dynamic"
 export const revalidate = 0
@@ -31,7 +32,9 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Home() {
+export default async function Home() {
+  const dbStats = await getPortfolioStats()
+
   const carouselItems: CarouselItem[] = [
     {
       id: "portfolio",
@@ -89,6 +92,33 @@ export default function Home() {
     }
   ]
 
+  // Default fallback stats if none in DB
+  const defaultImpactStats = [
+    {
+      value: "5000+",
+      label: "People Reached",
+      description: "Computing students, developers, and tech leaders empowered through workshops, events, and digital platforms.",
+    },
+    {
+      value: "25+",
+      label: "Projects Delivered",
+      description: "Production software, brand design systems, and engineering deliverables across multiple industries.",
+    },
+    {
+      value: "12+",
+      label: "Organizations",
+      description: "National bodies, student chapters, tech startups, and developer communities served and supported.",
+    },
+  ]
+
+  const formattedStats = dbStats.length > 0
+    ? dbStats.map((s) => ({
+        value: s.value,
+        label: s.label,
+        description: s.description || "",
+      }))
+    : defaultImpactStats
+
   return (
     <main className="min-h-screen bg-background">
       {/* 1. Hero */}
@@ -111,7 +141,7 @@ export default function Home() {
       {/* 2. Personal Philosophy */}
       <PersonalPhilosophy />
 
-      {/* Community Impact */}
+      {/* Community Impact (Dynamically Connected to Supabase Admin Stats) */}
       <ImpactSection
         category="Impact & Reach"
         title="Engineering Progress, Building Communities"
@@ -128,23 +158,7 @@ export default function Home() {
           "Technical Mentorship & Education",
           "IT Consulting & Digital Support",
         ]}
-        stats={[
-          {
-            value: "5000+",
-            label: "People Reached",
-            description: "Computing students, developers, and tech leaders empowered through workshops, events, and digital platforms.",
-          },
-          {
-            value: "25+",
-            label: "Projects Delivered",
-            description: "Production software, brand design systems, and engineering deliverables across multiple industries.",
-          },
-          {
-            value: "12+",
-            label: "Organizations",
-            description: "National bodies, student chapters, tech startups, and developer communities served and supported.",
-          },
-        ]}
+        stats={formattedStats}
         heroImage="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg"
         heroImageAlt="Nestor Anyanwu at community event"
       />

@@ -53,7 +53,6 @@ export default async function PortfolioPage() {
   return (
     <main className="min-h-screen bg-background">
       <PortfolioHero />
-      <PortfolioStats stats={stats} />
       <ServicesGrid services={services} />
       <FeaturedProjectsShowcase projects={projects} />
       <ProjectLibrary projects={projects} />
