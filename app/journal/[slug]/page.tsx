@@ -4,8 +4,7 @@ import { notFound } from 'next/navigation'
 import { getJournalArticleBySlug, getJournalArticles } from '@/lib/content'
 import { Markdown } from '@/lib/content/markdown'
 import Footer from '@/components/footer'
-import SectionContainer from '@/components/shared/section-container'
-import { ArrowLeft, Calendar, User, Clock, ArrowUpRight, Share2 } from 'lucide-react'
+import { Calendar, User, ArrowUpRight } from 'lucide-react'
 import type { Metadata } from 'next'
 
 interface Props {
@@ -104,11 +103,10 @@ export default async function JournalDetailPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <main className="min-h-screen bg-background text-foreground pt-14 md:pt-16 pb-20">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 pt-2">
+      <main className="min-h-screen bg-background text-foreground pt-14 md:pt-16 pb-16 md:pb-24">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 pt-2 sm:pt-4">
           {/* Article Header (Full Width) */}
-          <header className="space-y-4 w-full mb-8">
-
+          <header className="space-y-4 w-full mb-8 sm:mb-10">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-tight">
               {article.title}
             </h1>
@@ -135,7 +133,7 @@ export default async function JournalDetailPage({ params }: Props) {
 
           {/* Hero Cover Image */}
           {article.coverImage && (
-            <div className="relative w-full h-[320px] md:h-[500px] mb-12 overflow-hidden border-2 border-slate-900/30 dark:border-slate-800 rounded-2xl shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)]">
+            <div className="relative w-full h-[320px] md:h-[500px] mb-12 sm:mb-16 overflow-hidden border-2 border-slate-900/30 dark:border-slate-800 rounded-2xl shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)]">
               <Image
                 src={article.coverImage}
                 alt={article.title}
@@ -147,67 +145,67 @@ export default async function JournalDetailPage({ params }: Props) {
           )}
 
           {/* Article Body Content */}
-          <div className="max-w-3xl mx-auto space-y-12">
-            <article className="text-foreground/90 text-base md:text-lg leading-relaxed font-light">
+          <div className="max-w-3xl mx-auto mb-16 md:mb-24">
+            <article className="text-foreground/90 text-base md:text-lg leading-relaxed font-light space-y-6">
               <Markdown content={article.content} />
             </article>
-
-            {/* Related Articles */}
-            {relatedArticles.length > 0 && (
-              <div className="pt-10 border-t-2 border-slate-900/20 dark:border-slate-800 space-y-6">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-extrabold text-foreground font-heading">
-                    Related Articles
-                  </h3>
-                  <Link
-                    href="/journal"
-                    className="text-xs font-mono font-bold text-[#0284c7] hover:underline uppercase tracking-wider flex items-center gap-1"
-                  >
-                    <span>All Articles</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {relatedArticles.map((rel) => (
-                    <Link
-                      key={rel.slug}
-                      href={`/journal/${rel.slug}`}
-                      className="group relative w-full h-[180px] sm:h-[190px] rounded-2xl overflow-hidden border-2 border-slate-900/30 dark:border-slate-800 bg-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0284c7] flex flex-col justify-end p-5 transition-all cursor-pointer"
-                    >
-                      {rel.coverImage ? (
-                        <Image
-                          src={rel.coverImage}
-                          alt={rel.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-90"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-indigo-600 to-sky-500 flex items-center justify-center" />
-                      )}
-
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent z-0" />
-
-                      <div className="relative z-10 flex items-end justify-between gap-3">
-                        <div className="space-y-1 flex-1 min-w-0">
-                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 block">
-                            {rel.publishedDate}
-                          </span>
-                          <h4 className="text-sm sm:text-base font-extrabold text-white leading-snug group-hover:text-[#0284c7] transition-colors line-clamp-2 font-heading">
-                            {rel.title}
-                          </h4>
-                        </div>
-
-                        <div className="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-md border-2 border-white/40 flex items-center justify-center text-white group-hover:bg-[#0284c7] transition-all shrink-0">
-                          <ArrowUpRight className="w-4 h-4" />
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
+
+          {/* Related Articles (Full-Width Responsive Grid with Balanced Padding) */}
+          {relatedArticles.length > 0 && (
+            <div className="w-full pt-10 border-t-2 border-slate-900/20 dark:border-slate-800 space-y-6 mb-12 md:mb-20">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-extrabold text-foreground font-heading">
+                  Related Articles
+                </h3>
+                <Link
+                  href="/journal"
+                  className="text-xs font-mono font-bold text-[#0284c7] hover:underline uppercase tracking-wider flex items-center gap-1"
+                >
+                  <span>All Articles</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                {relatedArticles.map((rel) => (
+                  <Link
+                    key={rel.slug}
+                    href={`/journal/${rel.slug}`}
+                    className="group relative w-full h-[190px] sm:h-[210px] rounded-2xl overflow-hidden border-2 border-slate-900/30 dark:border-slate-800 bg-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0284c7] flex flex-col justify-end p-5 transition-all cursor-pointer"
+                  >
+                    {rel.coverImage ? (
+                      <Image
+                        src={rel.coverImage}
+                        alt={rel.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-90"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-indigo-600 to-sky-500 flex items-center justify-center" />
+                    )}
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent z-0" />
+
+                    <div className="relative z-10 flex items-end justify-between gap-3">
+                      <div className="space-y-1 flex-1 min-w-0">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 block">
+                          {rel.publishedDate}
+                        </span>
+                        <h4 className="text-sm sm:text-base font-extrabold text-white leading-snug group-hover:text-[#0284c7] transition-colors line-clamp-2 font-heading">
+                          {rel.title}
+                        </h4>
+                      </div>
+
+                      <div className="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-md border-2 border-white/40 flex items-center justify-center text-white group-hover:bg-[#0284c7] transition-all shrink-0">
+                        <ArrowUpRight className="w-4 h-4" />
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
         <Footer />
       </main>

@@ -120,7 +120,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
   }, [articles, selectedCategory, searchQuery])
 
   return (
-    <div className="w-full space-y-10 pt-12 sm:pt-14 pb-16">
+    <div className="w-full space-y-12 pt-12 sm:pt-14 pb-20 md:pb-28">
       {/* 1. TOP HERO SECTION */}
       {pinnedArticle && (
         <section className="w-full px-4 sm:px-8 lg:px-12">
