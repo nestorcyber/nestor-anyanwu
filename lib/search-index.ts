@@ -67,14 +67,6 @@ const pageEntries: SearchResult[] = [
     keywords: ["gallery", "photos", "events", "devfest", "summit", "pictures", "moments", "photography"],
   },
   {
-    id: "page-journey",
-    title: "Career Journey & Timeline",
-    description: "Interactive timeline of milestones, positions, organizations, and career achievements.",
-    category: "Page",
-    href: "/portfolio",
-    keywords: ["journey", "career", "timeline", "milestones", "history", "experience", "resume", "cv"],
-  },
-  {
     id: "page-contact",
     title: "Contact & Collaboration",
     description: "Start a project, business inquiry, speaking invitation, or community partnership.",
