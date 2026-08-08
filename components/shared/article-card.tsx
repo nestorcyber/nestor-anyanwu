@@ -55,10 +55,10 @@ export default function ArticleCard({
           </div>
         </div>
 
-        {/* Xbox UI Style Button */}
-        <div className="w-full py-2.5 px-4 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-white text-slate-950 dark:bg-slate-900 dark:text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-between shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,0.9)] group-hover:bg-[#0284c7] group-hover:text-white group-hover:border-[#0284c7] transition-all">
+        {/* Xbox UI Style Responsive Button */}
+        <div className="w-full py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-white text-slate-950 dark:bg-slate-900 dark:text-white font-extrabold text-[11px] sm:text-xs uppercase tracking-wider flex items-center justify-between shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] sm:shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,0.9)] group-hover:bg-[#0284c7] group-hover:text-white group-hover:border-[#0284c7] transition-all">
           <span>Read Article</span>
-          <ArrowUpRight className="w-4 h-4" />
+          <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
         </div>
       </Link>
     </article>
