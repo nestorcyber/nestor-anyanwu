@@ -105,9 +105,9 @@ export default async function JournalDetailPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main className="min-h-screen bg-background text-foreground pt-14 md:pt-16 pb-20">
-        <SectionContainer className="pt-2 pb-12 md:pt-4 md:pb-16 border-none">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 pt-2">
           {/* Article Header (Full Width) */}
-          <header className="space-y-4 w-full max-w-7xl mb-10">
+          <header className="space-y-4 w-full mb-8">
 
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-tight">
               {article.title}
@@ -208,7 +208,7 @@ export default async function JournalDetailPage({ params }: Props) {
               </div>
             )}
           </div>
-        </SectionContainer>
+        </div>
         <Footer />
       </main>
     </>
