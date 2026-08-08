@@ -56,8 +56,23 @@ export default function Navigation() {
     }
   }, [isOpen])
 
-  // Complete site navigation items for the MENU drawer
-  const drawerNavItems = [
+  // Desktop header quick links
+  const desktopNavItems = [
+    { label: "HOME", href: "/" },
+    { label: "ABOUT", href: "/about" },
+    { label: "PORTFOLIO", href: "/portfolio" },
+    { label: "COMMUNITY", href: "/community" },
+    { label: "JOURNAL", href: "/journal" },
+  ]
+
+  // Desktop drawer items (ONLY Gallery and Contact)
+  const desktopDrawerItems = [
+    { label: "Gallery", href: "/gallery" },
+    { label: "Contact", href: "/contact" },
+  ]
+
+  // Mobile drawer items (All site links)
+  const mobileDrawerItems = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Portfolio", href: "/portfolio" },
@@ -78,7 +93,7 @@ export default function Navigation() {
 
   return (
     <>
-      {/* Top Header Bar: Clean logo on left + MENU / CLOSE button on right */}
+      {/* Top Header Bar */}
       <nav
         className="fixed top-0 left-0 right-0 z-50 bg-background border-b-2 border-slate-900 dark:border-slate-800 text-foreground font-sans transition-colors duration-200"
         role="navigation"
@@ -104,8 +119,34 @@ export default function Navigation() {
             </Link>
           </div>
 
-          {/* RIGHT SIDE: Dynamic MENU / CLOSE Drawer Toggle Button Only */}
-          <div className="flex items-center">
+          {/* RIGHT SIDE: Desktop Nav Links + Dynamic MENU / CLOSE Drawer Toggle Button */}
+          <div className="flex items-center gap-5 md:gap-7">
+            
+            {/* Desktop Header Links */}
+            <div className="hidden md:flex items-center gap-2 lg:gap-3 text-xs md:text-sm font-semibold">
+              {desktopNavItems.map((item) => {
+                const isActive =
+                  item.href === "/"
+                    ? pathname === "/"
+                    : pathname === item.href || pathname.startsWith(item.href + "/")
+
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={`transition-all uppercase tracking-wider ${
+                      isActive
+                        ? "px-3.5 py-1 text-xs font-bold rounded-full bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 shadow-sm"
+                        : "px-2.5 py-1 text-slate-700 dark:text-slate-200 hover:text-[#0284c7] dark:hover:text-[#0284c7]"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              })}
+            </div>
+
+            {/* Dynamic MENU / CLOSE Drawer Toggle Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="flex flex-col items-center justify-center cursor-pointer group p-1 transition-colors min-w-[50px] select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0284c7] rounded-sm"
@@ -198,20 +239,17 @@ export default function Navigation() {
             </div>
           )}
 
-          {/* DESKTOP DRAWER LINKS LIST */}
-          <nav className="hidden md:flex flex-col gap-4 pt-2">
-            {drawerNavItems.map((item) => {
-              const isActive =
-                item.href === "/"
-                  ? pathname === "/"
-                  : pathname === item.href || pathname.startsWith(item.href + "/")
+          {/* DESKTOP DRAWER LINKS LIST (ONLY GALLERY & CONTACT) */}
+          <nav className="hidden md:flex flex-col gap-6 pt-4">
+            {desktopDrawerItems.map((item) => {
+              const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
 
               return (
                 <Link
                   key={item.label}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className={`transition-all font-light text-3xl lg:text-4xl uppercase tracking-[0.2em] py-2 cursor-pointer block border-b border-border/20 ${
+                  className={`transition-all font-light text-4xl lg:text-5xl uppercase tracking-[0.2em] py-3 cursor-pointer block border-b border-border/20 ${
                     isActive ? "text-[#0284c7] font-bold" : "text-foreground hover:text-[#0284c7]"
                   }`}
                 >
@@ -221,9 +259,9 @@ export default function Navigation() {
             })}
           </nav>
 
-          {/* MOBILE DRAWER LINKS LIST */}
+          {/* MOBILE DRAWER LINKS LIST (ALL SITE LINKS) */}
           <nav className="flex md:hidden flex-col gap-1 pt-2">
-            {drawerNavItems.map((item) => {
+            {mobileDrawerItems.map((item) => {
               const isActive =
                 item.href === "/"
                   ? pathname === "/"
