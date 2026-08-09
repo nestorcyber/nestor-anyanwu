@@ -227,7 +227,60 @@ async function main() {
     credential_url: c.credentialUrl ?? null,
     sort_order: i,
   }))
-  await upsert('certifications', certRows, 'slug')
+  const sampleGallery = [
+    {
+      title: 'DevFest Owerri 2025 Tech Summit',
+      caption: 'Directing visual design and logistics for South-East Nigeria largest developer festival.',
+      image_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg',
+      alt: 'DevFest Owerri 2025',
+      category: 'Events',
+      featured: true,
+      sort_order: 0,
+    },
+    {
+      title: 'Build With AI 2025',
+      caption: 'Facilitating AI developer workshops and prompt engineering sessions for FUTO students.',
+      image_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg',
+      alt: 'Build With AI 2025 Workshop',
+      category: 'Workshops',
+      featured: true,
+      sort_order: 1,
+    },
+    {
+      title: 'NACOS FUTO Leadership Directorate',
+      caption: 'Directing chapter digital infrastructure and student engagement initiatives across campus.',
+      image_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg',
+      alt: 'NACOS FUTO Leadership',
+      category: 'Leadership',
+      featured: true,
+      sort_order: 2,
+    },
+    {
+      title: 'Tech Nexus FUTO Summit',
+      caption: 'Connecting computing students with industry mentors and technology engineering leaders.',
+      image_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden2-sUzI0wvGmZMjB5UUP911IAB6WvBM5c.jpg',
+      alt: 'Tech Nexus FUTO',
+      category: 'Community',
+      featured: false,
+      sort_order: 3,
+    },
+    {
+      title: 'Cowrywise Campus Fintech Advocacy',
+      caption: 'Empowering university students with financial literacy and digital career skills.',
+      image_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg',
+      alt: 'Cowrywise Campus Advocacy',
+      category: 'Volunteering',
+      featured: false,
+      sort_order: 4,
+    },
+  ]
+
+  const { data: existingGallery } = await supabase.from('gallery_images').select('id').limit(1).maybeSingle()
+  if (!existingGallery?.id) {
+    const { error: galleryErr } = await supabase.from('gallery_images').insert(sampleGallery)
+    if (galleryErr) console.warn('gallery_images seed notice:', galleryErr.message)
+    else console.log(`✓ gallery_images: ${sampleGallery.length} rows`)
+  }
 
   console.log('\nSeed complete.')
 }

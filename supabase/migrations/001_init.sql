@@ -230,8 +230,14 @@ create trigger certifications_updated_at
 create table if not exists public.gallery_images (
   id uuid primary key default gen_random_uuid(),
   title text,
+  caption text,
   image_url text not null,
   alt text,
+  cloudinary_public_id text,
+  width int,
+  height int,
+  category text,
+  featured boolean not null default false,
   sort_order int not null default 0,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()

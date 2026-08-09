@@ -17,8 +17,11 @@ import type { Tables } from '@/lib/supabase/types'
 export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | null }) {
   const router = useRouter()
   const [title, setTitle] = useState(initial?.title ?? '')
+  const [caption, setCaption] = useState(initial?.caption ?? '')
   const [imageUrl, setImageUrl] = useState(initial?.image_url ?? '')
   const [alt, setAlt] = useState(initial?.alt ?? '')
+  const [category, setCategory] = useState(initial?.category ?? 'General')
+  const [featured, setFeatured] = useState(initial?.featured ?? false)
   const [sortOrder, setSortOrder] = useState(String(initial?.sort_order ?? 0))
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
@@ -26,11 +29,15 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
   async function onSubmit(e: FormEvent) {
     e.preventDefault()
     setSaving(true)
+    setError('')
     const supabase = createClient()
     const payload = {
       title: title || null,
+      caption: caption || null,
       image_url: imageUrl,
-      alt: alt || null,
+      alt: alt || title || null,
+      category: category || 'General',
+      featured,
       sort_order: Number(sortOrder) || 0,
     }
     const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
@@ -47,7 +54,7 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
   }
 
   async function onDelete() {
-    if (!initial || !confirm('Delete?')) return
+    if (!initial || !confirm('Delete image from gallery?')) return
     const supabase = createClient()
     await supabase.from('gallery_images').delete().eq('id', initial.id)
     router.push('/admin/gallery')
@@ -57,19 +64,38 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
   return (
     <form onSubmit={onSubmit} className="max-w-xl space-y-5">
       <Field label="Title">
-        <TextInput value={title} onChange={(e) => setTitle(e.target.value)} />
+        <TextInput value={title} onChange={(e) => setTitle(e.target.value)} placeholder="e.g. Speaking at Tech Summit 2025" />
       </Field>
-      <ImageUpload label="Image" value={imageUrl} onChange={setImageUrl} folder="gallery" />
-      <Field label="Alt text">
-        <TextInput value={alt} onChange={(e) => setAlt(e.target.value)} />
+      <Field label="Caption / Description">
+        <TextTextarea value={caption} onChange={(e) => setCaption(e.target.value)} placeholder="Context or details about this moment..." />
       </Field>
-      <Field label="Sort order">
-        <TextInput type="number" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
+      <ImageUpload label="Gallery Image" value={imageUrl} onChange={setImageUrl} folder="gallery" />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label="Category">
+          <TextInput value={category} onChange={(e) => setCategory(e.target.value)} placeholder="Events, Leadership, Projects..." />
+        </Field>
+        <Field label="Sort order">
+          <TextInput type="number" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
+        </Field>
+      </div>
+      <Field label="Alt text (SEO & Accessibility)">
+        <TextInput value={alt} onChange={(e) => setAlt(e.target.value)} placeholder="Describe the image content..." />
       </Field>
+      <div className="flex gap-4 items-center">
+        <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground cursor-pointer">
+          <input
+            type="checkbox"
+            checked={featured}
+            onChange={(e) => setFeatured(e.target.checked)}
+            className="rounded border-border"
+          />
+          <span>Featured Image</span>
+        </label>
+      </div>
       {error ? <p className="text-sm text-red-400">{error}</p> : null}
       <div className="flex gap-3">
         <PrimaryButton type="submit" disabled={saving || !imageUrl}>
-          Save
+          {saving ? 'Saving...' : 'Save Gallery Image'}
         </PrimaryButton>
         {initial ? <DangerButton type="button" onClick={onDelete}>Delete</DangerButton> : null}
       </div>

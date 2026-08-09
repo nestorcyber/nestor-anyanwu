@@ -561,25 +561,49 @@ export async function getCertifications(): Promise<CertificationItem[]> {
   return fallbackCertificationsList
 }
 
-export async function getStandaloneGalleryImages(): Promise<
-  { id: string; url: string; title?: string; alt?: string }[]
-> {
+export type GalleryItem = {
+  id: string
+  title: string | null
+  caption: string | null
+  altText: string | null
+  imageUrl: string
+  cloudinaryPublicId: string | null
+  width: number | null
+  height: number | null
+  category: string | null
+  featured: boolean
+  sortOrder: number
+  createdAt: string
+  updatedAt: string
+}
+
+export async function getStandaloneGalleryImages(): Promise<GalleryItem[]> {
   const supabase = db()
   if (!supabase) return []
   const { data } = await supabase
     .from('gallery_images')
     .select('*')
     .order('sort_order', { ascending: true })
+    .order('created_at', { ascending: false })
 
-  return (data ?? []).map((row) => ({
+  return (data ?? []).map((row: any) => ({
     id: row.id,
-    url: row.image_url,
-    title: row.title || undefined,
-    alt: row.alt || undefined,
+    title: row.title || null,
+    caption: row.caption || null,
+    altText: row.alt || row.title || null,
+    imageUrl: getOptimizedImageUrl(row.image_url, { width: 1200, quality: 'auto' }),
+    cloudinaryPublicId: row.cloudinary_public_id || null,
+    width: row.width || null,
+    height: row.height || null,
+    category: row.category || 'General',
+    featured: !!row.featured,
+    sortOrder: row.sort_order ?? 0,
+    createdAt: row.created_at || new Date().toISOString(),
+    updatedAt: row.updated_at || new Date().toISOString(),
   }))
 }
 
-export async function getGalleryImages(): Promise<{ id: string; url: string; title?: string; alt?: string }[]> {
+export async function getGalleryImages(): Promise<GalleryItem[]> {
   const supabase = db()
   if (!supabase) return []
   const [standalone, journeyItems] = await Promise.all([
@@ -587,14 +611,23 @@ export async function getGalleryImages(): Promise<{ id: string; url: string; tit
     getJourneyItems(),
   ])
 
-  const fromJourney = journeyItems.flatMap((item) =>
+  const fromJourney: GalleryItem[] = journeyItems.flatMap((item) =>
     (item.images ?? [])
       .filter((url) => url && !url.includes('placeholder'))
       .map((url, i) => ({
-        id: `${item.id}-${i}`,
-        url,
+        id: `journey-${item.id}-${i}`,
         title: item.title,
-        alt: item.title,
+        caption: item.description || null,
+        altText: item.title,
+        imageUrl: getOptimizedImageUrl(url, { width: 1200, quality: 'auto' }),
+        cloudinaryPublicId: null,
+        width: null,
+        height: null,
+        category: item.type === 'work' ? 'Leadership' : 'Volunteering',
+        featured: false,
+        sortOrder: 100 + i,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       }))
   )
 

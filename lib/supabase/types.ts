@@ -243,8 +243,14 @@ export type Database = {
         Row: {
           id: string
           title: string | null
+          caption: string | null
           image_url: string
           alt: string | null
+          cloudinary_public_id: string | null
+          width: number | null
+          height: number | null
+          category: string | null
+          featured: boolean
           sort_order: number
           created_at: string
           updated_at: string

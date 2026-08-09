@@ -718,18 +718,21 @@ export default async function AdminCatchAllPage({ params }: Props) {
     if (!actionOrId) {
       const { data: dbData } = await supabase
         .from('gallery_images')
-        .select('id, title, image_url')
+        .select('*')
         .order('sort_order', { ascending: true })
+        .order('created_at', { ascending: false })
       const fallbackImages = await getGalleryImages()
       const dbUrls = new Set((dbData ?? []).map((row) => row.image_url))
       const items = [
         ...(dbData ?? []),
         ...fallbackImages
-          .filter((img) => !dbUrls.has(img.url))
-          .map((img, i) => ({
-            id: `img-${i}`,
+          .filter((img) => !dbUrls.has(img.imageUrl))
+          .map((img) => ({
+            id: img.id,
             title: img.title || 'Gallery Photo',
-            image_url: img.url,
+            image_url: img.imageUrl,
+            category: img.category || 'General',
+            featured: img.featured,
           })),
       ]
       return (
@@ -744,10 +747,19 @@ export default async function AdminCatchAllPage({ params }: Props) {
           />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((row) => (
-              <Link key={row.id} href={`/admin/gallery/${row.id}`} className="border border-border p-2 hover:border-foreground/30">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={row.image_url} alt={row.title || ''} className="h-40 w-full object-cover" />
-                <p className="mt-2 text-sm px-1">{row.title || 'Untitled'}</p>
+              <Link key={row.id} href={`/admin/gallery/${row.id}`} className="group border border-border p-3 rounded-lg hover:border-foreground/40 bg-card transition-all flex flex-col justify-between">
+                <div className="relative aspect-video w-full overflow-hidden rounded bg-slate-950 mb-2">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={row.image_url} alt={row.title || ''} className="h-full w-full object-cover group-hover:scale-105 transition-transform" />
+                </div>
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-xs font-semibold truncate text-foreground">{row.title || 'Untitled'}</p>
+                  {row.category && (
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-muted text-muted-foreground shrink-0">
+                      {row.category}
+                    </span>
+                  )}
+                </div>
               </Link>
             ))}
           </div>
@@ -768,15 +780,17 @@ export default async function AdminCatchAllPage({ params }: Props) {
     data = dbData
     if (!data) {
       const fallbackImages = await getGalleryImages()
-      const index = parseInt(actionOrId.replace('img-', ''), 10)
-      const fb = fallbackImages[index] || fallbackImages.find((img) => img.id === actionOrId)
+      const fb = fallbackImages.find((img) => img.id === actionOrId)
       if (fb) {
         data = {
           id: undefined,
           title: fb.title || 'Gallery Photo',
-          image_url: fb.url,
-          alt: fb.alt || fb.title || '',
-          sort_order: index >= 0 ? index : 0,
+          caption: fb.caption || '',
+          image_url: fb.imageUrl,
+          alt: fb.altText || fb.title || '',
+          category: fb.category || 'General',
+          featured: fb.featured,
+          sort_order: fb.sortOrder || 0,
         } as any
       }
     }

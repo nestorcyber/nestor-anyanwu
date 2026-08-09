@@ -3,50 +3,27 @@
 import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import Footer from "@/components/footer"
-import type { JourneyItem } from "@/lib/content"
-import { X, ChevronLeft, ChevronRight, Maximize2, Sparkles, Quote } from "lucide-react"
-
-type GalleryImage = {
-  src: string
-  title: string
-  date: string
-  type: string
-  organization: string
-}
+import type { GalleryItem } from "@/lib/content"
+import { X, ChevronLeft, ChevronRight, Maximize2, Image as ImageIcon } from "lucide-react"
 
 export default function GalleryPageClient({
-  journeyTimeline,
-  extraImages = [],
+  initialImages = [],
 }: {
-  journeyTimeline: JourneyItem[]
-  extraImages?: { url: string; title?: string; alt?: string }[]
+  initialImages: GalleryItem[]
 }) {
-  const [activeFilter, setActiveFilter] = useState<"all" | "work" | "volunteer">("all")
+  const [activeCategory, setActiveCategory] = useState<string>("All")
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
-  const allImages: GalleryImage[] = [
-    ...journeyTimeline.flatMap((item) =>
-      (item.images || []).map((img) => ({
-        src: img,
-        title: item.title,
-        date: item.date,
-        type: item.type,
-        organization: item.organization,
-      }))
-    ),
-    ...extraImages.map((img) => ({
-      src: img.url,
-      title: img.title || "Gallery Moment",
-      date: "2025/2026",
-      type: "volunteer" as const,
-      organization: "Nestor Cyber",
-    })),
-  ]
-
-  // Filtered moments
-  const filteredImages = allImages.filter(
-    (img) => activeFilter === "all" || img.type === activeFilter
+  // Dynamically extract categories from images
+  const categoriesList = Array.from(
+    new Set(initialImages.map((img) => img.category).filter((c): c is string => Boolean(c)))
   )
+  const categories = ["All", ...categoriesList]
+
+  // Filtered images list
+  const filteredImages = activeCategory === "All"
+    ? initialImages
+    : initialImages.filter((img) => img.category === activeCategory)
 
   // Lightbox handlers
   const openLightbox = (idx: number) => {
@@ -60,12 +37,12 @@ export default function GalleryPageClient({
   }, [])
 
   const navigatePrev = useCallback(() => {
-    if (lightboxIndex === null) return
+    if (lightboxIndex === null || filteredImages.length === 0) return
     setLightboxIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : filteredImages.length - 1))
   }, [lightboxIndex, filteredImages.length])
 
   const navigateNext = useCallback(() => {
-    if (lightboxIndex === null) return
+    if (lightboxIndex === null || filteredImages.length === 0) return
     setLightboxIndex((prev) => (prev !== null && prev < filteredImages.length - 1 ? prev + 1 : 0))
   }, [lightboxIndex, filteredImages.length])
 
@@ -80,31 +57,23 @@ export default function GalleryPageClient({
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [lightboxIndex, closeLightbox, navigatePrev, navigateNext])
 
-  // Custom Bento Quotes
-  const quotesList = [
-    { title: "Don't take risks. That's scary!", subtitle: "Instead of waiting for perfection, start small today." },
-    { title: "Place small bets. That's exciting!", subtitle: "Consistency and small steps compound into massive impact." },
-    { title: "Lead with empathy. Build with purpose!", subtitle: "Empowering engineering talent across ecosystems." },
-  ]
-
-  // Dynamic Bento Spans helper function
-  const getBentoSpanClass = (index: number) => {
-    const pattern = index % 7
+  // Helper for bento grid column/row spans
+  const getBentoSpanClass = (item: GalleryItem, index: number) => {
+    if (item.featured) {
+      return "sm:col-span-2 sm:row-span-2 min-h-[360px]"
+    }
+    const pattern = index % 6
     switch (pattern) {
       case 0:
-        return "md:col-span-2 md:row-span-2 min-h-[380px]" // Featured Big Hero Bento
+        return "sm:col-span-2 sm:row-span-2 min-h-[360px]"
       case 1:
-        return "md:col-span-1 md:row-span-1 min-h-[220px]" // Standard Square Bento
+        return "sm:col-span-1 sm:row-span-1 min-h-[220px]"
       case 2:
-        return "md:col-span-1 md:row-span-2 min-h-[380px]" // Tall Vertical Bento
+        return "sm:col-span-1 sm:row-span-2 min-h-[360px]"
       case 3:
-        return "md:col-span-2 md:row-span-1 min-h-[220px]" // Wide Horizontal Bento
-      case 4:
-        return "md:col-span-1 md:row-span-1 min-h-[220px]" // Standard Bento
-      case 5:
-        return "md:col-span-2 md:row-span-2 min-h-[380px]" // Featured Big Hero Bento
+        return "sm:col-span-2 sm:row-span-1 min-h-[220px]"
       default:
-        return "md:col-span-1 md:row-span-1 min-h-[220px]"
+        return "sm:col-span-1 sm:row-span-1 min-h-[220px]"
     }
   }
 
@@ -112,201 +81,188 @@ export default function GalleryPageClient({
     <>
       <main className="min-h-screen bg-background text-foreground pt-12 pb-24">
         {/* Header Section */}
-        <div className="max-w-7xl mx-auto px-4 md:px-8 mb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/40 pb-8">
-            <div>
-              <p className="text-[#0284c7] text-xs font-mono font-bold tracking-widest mb-2 uppercase">
-                Captured Moments & Impact
-              </p>
-              <h1 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight">
-                Gallery & Visual Moments
+            <div className="space-y-2">
+              <span className="text-accent text-xs font-mono font-bold tracking-widest uppercase">
+                Visual Catalog
+              </span>
+              <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground">
+                Gallery
               </h1>
+              <p className="text-sm md:text-base text-muted-foreground font-light max-w-xl leading-relaxed">
+                Moments, people, projects, and experiences from my journey.
+              </p>
             </div>
 
-            {/* Filter Chips */}
-            <div className="flex flex-wrap gap-2.5">
-              <button
-                onClick={() => setActiveFilter("all")}
-                className={`px-5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                  activeFilter === "all"
-                    ? "bg-[#0284c7] text-white shadow-md"
-                    : "bg-secondary text-muted-foreground hover:bg-secondary/80"
-                }`}
-              >
-                All Moments ({allImages.length})
-              </button>
-              <button
-                onClick={() => setActiveFilter("work")}
-                className={`px-5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                  activeFilter === "work"
-                    ? "bg-[#0284c7] text-white shadow-md"
-                    : "bg-secondary text-muted-foreground hover:bg-secondary/80"
-                }`}
-              >
-                Leadership & Work
-              </button>
-              <button
-                onClick={() => setActiveFilter("volunteer")}
-                className={`px-5 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                  activeFilter === "volunteer"
-                    ? "bg-[#0284c7] text-white shadow-md"
-                    : "bg-secondary text-muted-foreground hover:bg-secondary/80"
-                }`}
-              >
-                Volunteering & Summits
-              </button>
-            </div>
+            {/* Category Filter Bar */}
+            {categories.length > 1 && (
+              <div className="flex flex-wrap gap-2">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer border ${
+                      activeCategory === cat
+                        ? "bg-accent text-white border-accent shadow-sm"
+                        : "bg-card text-muted-foreground border-border/60 hover:text-foreground hover:border-border"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Dynamic Bento Grid Container */}
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+        {/* Bento Grid Gallery */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {filteredImages.length === 0 ? (
-            <div className="text-center py-24 border-2 border-dashed border-border rounded-3xl bg-card">
-              <p className="text-muted-foreground font-medium">No moments captured in this category yet.</p>
+            <div className="text-center py-20 border border-dashed border-border/70 rounded-2xl bg-card/40 max-w-md mx-auto p-8 space-y-3">
+              <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mx-auto text-muted-foreground">
+                <ImageIcon className="w-6 h-6" />
+              </div>
+              <h3 className="text-base font-semibold text-foreground">Gallery coming soon</h3>
+              <p className="text-xs text-muted-foreground font-light">
+                No gallery moments uploaded under category &quot;{activeCategory}&quot; yet.
+              </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[240px]">
-              
-              {/* Quote Statement Bento Card 1 */}
-              <div className="md:col-span-2 md:row-span-1 bg-[#18181b] dark:bg-slate-900 border-2 border-slate-900/30 dark:border-slate-800 rounded-3xl p-8 flex flex-col justify-center shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)]">
-                <Quote className="w-6 h-6 text-[#0284c7] mb-3" />
-                <h2 className="text-2xl md:text-3xl font-extrabold text-white leading-snug font-heading">
-                  {quotesList[0].title}
-                </h2>
-                <p className="text-xs md:text-sm text-slate-400 font-light mt-1">
-                  {quotesList[0].subtitle}
-                </p>
-              </div>
-
-              {/* Dynamic Image Bento Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-[240px]">
               {filteredImages.map((image, idx) => {
-                const isCircleVignette = idx === 0 || idx === 3
-                const spanClass = getBentoSpanClass(idx)
+                const spanClass = getBentoSpanClass(image, idx)
 
                 return (
                   <div
-                    key={idx}
+                    key={image.id || idx}
                     onClick={() => openLightbox(idx)}
-                    className={`group relative overflow-hidden rounded-3xl border-2 border-slate-900/30 dark:border-slate-800 bg-[#18181b] shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0284c7] transition-all cursor-pointer flex flex-col items-center justify-center p-4 ${spanClass}`}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`View photo: ${image.title || "Gallery photo"}`}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault()
+                        openLightbox(idx)
+                      }
+                    }}
+                    className={`group relative overflow-hidden rounded-2xl border border-border/60 bg-card/80 hover:border-accent/80 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md ${spanClass}`}
                   >
-                    {isCircleVignette ? (
-                      /* Circle Graphic Frame Bento Item */
-                      <div className="relative w-full h-full flex flex-col items-center justify-center">
-                        <div className="absolute top-3 left-3 z-20 bg-slate-950/85 backdrop-blur-md border border-slate-700/80 text-white text-[11px] font-semibold px-3 py-1.5 rounded-xl shadow-lg line-clamp-1">
-                          {image.title}
-                        </div>
-                        <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-amber-400/90 shadow-2xl group-hover:scale-105 transition-transform duration-500">
-                          <Image
-                            src={image.src}
-                            alt={image.title}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                      </div>
-                    ) : (
-                      /* Standard Full Bleed Photo Bento Card */
-                      <>
-                        <Image
-                          src={image.src}
-                          alt={image.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
-                        
-                        {/* Hover Quick View Button */}
-                        <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <div className="w-8 h-8 rounded-xl bg-slate-950/80 backdrop-blur-md border border-slate-700 flex items-center justify-center text-white">
-                            <Maximize2 className="w-4 h-4" />
-                          </div>
-                        </div>
+                    <Image
+                      src={image.imageUrl}
+                      alt={image.altText || image.title || "Gallery image"}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
 
-                        {/* Glassmorphic Caption Bar */}
-                        <div className="absolute bottom-4 inset-x-4 z-20 p-3.5 rounded-2xl bg-slate-950/80 backdrop-blur-md border border-slate-700/60 text-white">
-                          <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#0284c7] text-white mb-1 inline-block">
-                            {image.type === "work" ? "Leadership" : "Volunteering"}
-                          </span>
-                          <h3 className="font-bold text-xs sm:text-sm leading-snug line-clamp-1">{image.title}</h3>
-                          {image.organization && (
-                            <p className="text-[11px] text-slate-400 font-mono mt-0.5">{image.organization}</p>
-                          )}
-                        </div>
-                      </>
-                    )}
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-85 transition-opacity" />
+
+                    {/* Quick Expand Icon */}
+                    <div className="absolute top-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white">
+                        <Maximize2 className="w-4 h-4" />
+                      </div>
+                    </div>
+
+                    {/* Caption Bar */}
+                    <div className="absolute bottom-0 inset-x-0 z-20 p-4 space-y-1 text-white">
+                      {image.category && (
+                        <span className="text-[10px] font-mono font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-accent/90 text-white inline-block">
+                          {image.category}
+                        </span>
+                      )}
+                      {image.title && (
+                        <h3 className="font-semibold text-sm leading-snug line-clamp-1">
+                          {image.title}
+                        </h3>
+                      )}
+                      {image.caption && (
+                        <p className="text-xs text-white/80 font-light leading-normal line-clamp-2">
+                          {image.caption}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 )
               })}
-
-              {/* Quote Statement Bento Card 2 */}
-              <div className="md:col-span-2 md:row-span-1 bg-[#18181b] dark:bg-slate-900 border-2 border-slate-900/30 dark:border-slate-800 rounded-3xl p-8 flex flex-col justify-center shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)]">
-                <Quote className="w-6 h-6 text-[#0284c7] mb-3" />
-                <h2 className="text-2xl md:text-3xl font-extrabold text-white leading-snug font-heading">
-                  {quotesList[1].title}
-                </h2>
-                <p className="text-xs md:text-sm text-slate-400 font-light mt-1">
-                  {quotesList[1].subtitle}
-                </p>
-              </div>
-
             </div>
           )}
         </div>
       </main>
 
       {/* Lightbox Modal */}
-      {lightboxIndex !== null && (
-        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 select-none">
-          <button
-            onClick={closeLightbox}
-            className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer z-50"
-            title="Close viewer"
-          >
-            <X className="w-5 h-5" />
-          </button>
-
-          <button
-            onClick={navigatePrev}
-            className="absolute left-4 md:left-8 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer z-50"
-            title="Previous image"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-
-          <div className="relative max-w-[90vw] max-h-[75vh] aspect-video w-full h-full flex items-center justify-center">
-            <Image
-              src={filteredImages[lightboxIndex].src}
-              alt={filteredImages[lightboxIndex].title}
-              fill
-              className="object-contain"
-              priority
-            />
+      {lightboxIndex !== null && filteredImages[lightboxIndex] && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-6 select-none"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image Lightbox"
+        >
+          {/* Top Controls Bar */}
+          <div className="flex items-center justify-between text-white z-50">
+            <span className="text-xs font-mono text-white/70 tracking-widest uppercase">
+              {lightboxIndex + 1} / {filteredImages.length}
+            </span>
+            <button
+              onClick={closeLightbox}
+              className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer"
+              aria-label="Close viewer"
+              title="Close viewer (Esc)"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
 
-          <button
-            onClick={navigateNext}
-            className="absolute right-4 md:right-8 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer z-50"
-            title="Next image"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
+          {/* Main Display Container */}
+          <div className="relative w-full h-[65vh] sm:h-[75vh] flex items-center justify-center my-auto">
+            <button
+              onClick={navigatePrev}
+              className="absolute left-2 sm:left-4 z-50 w-11 h-11 rounded-full bg-black/50 hover:bg-black/80 border border-white/20 flex items-center justify-center text-white transition-all cursor-pointer"
+              aria-label="Previous image"
+              title="Previous image (Left Arrow)"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
 
-          <div className="absolute bottom-6 inset-x-6 max-w-2xl mx-auto p-5 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-800 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-[#0284c7] text-white mb-2 inline-block">
-                {filteredImages[lightboxIndex].type === "work" ? "Leadership" : "Volunteering"}
+            <div className="relative w-full h-full max-w-5xl">
+              <Image
+                src={filteredImages[lightboxIndex].imageUrl}
+                alt={filteredImages[lightboxIndex].altText || filteredImages[lightboxIndex].title || "Gallery view"}
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+
+            <button
+              onClick={navigateNext}
+              className="absolute right-2 sm:right-4 z-50 w-11 h-11 rounded-full bg-black/50 hover:bg-black/80 border border-white/20 flex items-center justify-center text-white transition-all cursor-pointer"
+              aria-label="Next image"
+              title="Next image (Right Arrow)"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Lightbox Caption Box */}
+          <div className="max-w-3xl mx-auto w-full p-4 rounded-xl bg-slate-900/90 backdrop-blur-md border border-slate-800 text-white space-y-1 z-50 text-center">
+            {filteredImages[lightboxIndex].category && (
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-accent text-white inline-block mb-1">
+                {filteredImages[lightboxIndex].category}
               </span>
-              <h4 className="font-bold text-base leading-snug">{filteredImages[lightboxIndex].title}</h4>
-              <p className="text-xs text-slate-400 font-mono mt-1">
-                {filteredImages[lightboxIndex].organization} {filteredImages[lightboxIndex].date && `• ${filteredImages[lightboxIndex].date}`}
+            )}
+            {filteredImages[lightboxIndex].title && (
+              <h3 className="font-bold text-base sm:text-lg leading-snug">
+                {filteredImages[lightboxIndex].title}
+              </h3>
+            )}
+            {filteredImages[lightboxIndex].caption && (
+              <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed max-w-2xl mx-auto">
+                {filteredImages[lightboxIndex].caption}
               </p>
-            </div>
-            <div className="text-right shrink-0">
-              <span className="text-xs font-mono font-bold tracking-widest text-slate-400 uppercase">
-                {lightboxIndex + 1} / {filteredImages.length}
-              </span>
-            </div>
+            )}
           </div>
         </div>
       )}

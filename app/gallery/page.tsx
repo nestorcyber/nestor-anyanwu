@@ -1,29 +1,28 @@
 import type { Metadata } from "next"
 import GalleryPageClient from "./gallery-client"
-import { getJourneyItems, getStandaloneGalleryImages } from "@/lib/content"
+import { getGalleryImages } from "@/lib/content"
+
+export const revalidate = 0
+export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
-  title: "Gallery & Photos | Nestor Anyanwu (Nestor Cyber)",
-  description: "Visual collection of moments and events from Nestor Anyanwu's (Nestor Cyber) journey, community roles, and projects.",
+  title: "Gallery | Nestor Anyanwu (Nestor Cyber)",
+  description: "Moments, people, projects, and experiences from my journey.",
   alternates: {
     canonical: "/gallery",
   },
   openGraph: {
-    title: "Gallery & Photos | Nestor Anyanwu (Nestor Cyber)",
-    description: "Visual collection of moments and events from Nestor Anyanwu's (Nestor Cyber) journey, community roles, and projects.",
+    title: "Gallery | Nestor Anyanwu (Nestor Cyber)",
+    description: "Moments, people, projects, and experiences from my journey.",
     url: "/gallery",
   },
   twitter: {
-    title: "Gallery & Photos | Nestor Anyanwu (Nestor Cyber)",
-    description: "Visual collection of moments and events from Nestor Anyanwu's (Nestor Cyber) journey, community roles, and projects.",
+    title: "Gallery | Nestor Anyanwu (Nestor Cyber)",
+    description: "Moments, people, projects, and experiences from my journey.",
   },
 }
 
 export default async function Page() {
-  const [journeyTimeline, extraImages] = await Promise.all([
-    getJourneyItems(),
-    getStandaloneGalleryImages(),
-  ])
-
-  return <GalleryPageClient journeyTimeline={journeyTimeline} extraImages={extraImages} />
+  const images = await getGalleryImages()
+  return <GalleryPageClient initialImages={images} />
 }
