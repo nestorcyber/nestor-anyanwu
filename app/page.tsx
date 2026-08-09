@@ -131,10 +131,7 @@ export default async function Home() {
       {/* 2. Personal Philosophy ("Why I Build") */}
       <PersonalPhilosophy />
 
-      {/* 3. Trusted By Brand Logos Carousel (Immediately after Why I Build) */}
-      <TrustedBrands brands={brandPartners} />
-
-      {/* 4. Community Impact */}
+      {/* 3. Community Impact ("Impact & Reach") */}
       <ImpactSection
         category="Impact & Reach"
         title="Engineering Progress, Building Communities"
@@ -156,7 +153,10 @@ export default async function Home() {
         heroImageAlt="Nestor Anyanwu at community event"
       />
 
-      {/* 5. Core Focus (Moved up before Selected Work) */}
+      {/* 4. Trusted By Brand Logos Carousel (Moved under Impact & Reach) */}
+      <TrustedBrands brands={brandPartners} />
+
+      {/* 5. Core Focus */}
       <ExpandingEndeavors />
 
       {/* 6. Selected Work & Engineering */}

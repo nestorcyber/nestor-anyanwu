@@ -27,7 +27,7 @@ export default function TrustedBrands({ brands = [] }: { brands: BrandPartner[] 
         <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-background via-background/80 to-transparent z-20 pointer-events-none" />
 
         {/* Continuous Scrolling Marquee Track */}
-        <div className="flex items-center gap-12 sm:gap-16 md:gap-20 w-max animate-marquee-loop hover:[animation-play-state:paused] py-4">
+        <div className="flex items-center gap-4 sm:gap-6 md:gap-8 w-max animate-marquee-loop hover:[animation-play-state:paused] py-4">
           {marqueeItems.map((brand, idx) => {
             const itemKey = `${brand.id}-${idx}`
             const logoContent = (
