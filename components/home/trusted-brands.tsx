@@ -27,18 +27,18 @@ export default function TrustedBrands({ brands = [] }: { brands: BrandPartner[] 
         <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-background via-background/80 to-transparent z-20 pointer-events-none" />
 
         {/* Continuous Scrolling Marquee Track */}
-        <div className="flex items-center gap-4 sm:gap-6 md:gap-8 w-max animate-marquee-loop hover:[animation-play-state:paused] py-4">
+        <div className="flex items-center gap-8 w-max animate-marquee-loop hover:[animation-play-state:paused] py-4">
           {marqueeItems.map((brand, idx) => {
             const itemKey = `${brand.id}-${idx}`
             const logoContent = (
-              <div className="group relative flex items-center justify-center shrink-0 w-44 sm:w-56 md:w-64 h-24 sm:h-28 md:h-32 transition-transform duration-300 hover:scale-110 cursor-pointer">
+              <div className="group relative flex items-center justify-center w-48 sm:w-56 h-24 sm:h-28 transition-transform duration-300 hover:scale-105 cursor-pointer p-2">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <Image
                     src={brand.logoUrl}
                     alt={brand.name}
                     fill
-                    sizes="(max-width: 640px) 180px, (max-width: 1024px) 230px, 260px"
-                    className="object-contain transition-all duration-300 filter drop-shadow-sm"
+                    sizes="(max-width: 640px) 180px, 220px"
+                    className="object-contain transition-all duration-300"
                   />
                 </div>
                 <span className="sr-only">{brand.name}</span>
@@ -53,7 +53,7 @@ export default function TrustedBrands({ brands = [] }: { brands: BrandPartner[] 
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Visit ${brand.name}`}
-                  className="shrink-0"
+                  className="shrink-0 flex items-center justify-center"
                 >
                   {logoContent}
                 </a>
@@ -61,7 +61,7 @@ export default function TrustedBrands({ brands = [] }: { brands: BrandPartner[] 
             }
 
             return (
-              <div key={itemKey} className="shrink-0">
+              <div key={itemKey} className="shrink-0 flex items-center justify-center">
                 {logoContent}
               </div>
             )
