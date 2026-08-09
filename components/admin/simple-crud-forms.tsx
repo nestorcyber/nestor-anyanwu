@@ -429,7 +429,11 @@ export function BrandForm({ initial }: { initial?: Tables<'brand_partners'> | nu
       : await supabase.from('brand_partners').insert(payload)
 
     if (res.error) {
-      setError(res.error.message)
+      if (res.error.message.includes('schema cache') || res.error.message.includes('brand_partners')) {
+        setError("Database table 'brand_partners' has not been created in Supabase yet. Run the SQL script from supabase/migrations/002_brand_partners.sql in your Supabase SQL Editor.")
+      } else {
+        setError(res.error.message)
+      }
       setSaving(false)
       return
     }

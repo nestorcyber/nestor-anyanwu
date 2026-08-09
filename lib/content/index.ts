@@ -646,20 +646,24 @@ export type BrandPartner = {
 export async function getBrandPartners(): Promise<BrandPartner[]> {
   const supabase = db()
   if (supabase) {
-    const { data, error } = await supabase
-      .from('brand_partners')
-      .select('*')
-      .order('sort_order', { ascending: true })
-      .order('created_at', { ascending: false })
+    try {
+      const { data, error } = await supabase
+        .from('brand_partners')
+        .select('*')
+        .order('sort_order', { ascending: true })
+        .order('created_at', { ascending: false })
 
-    if (!error && data && data.length > 0) {
-      return data.map((row: any) => ({
-        id: row.id,
-        name: row.name,
-        logoUrl: getOptimizedImageUrl(row.logo_url, { width: 400, quality: 'auto' }),
-        websiteUrl: row.website_url || null,
-        sortOrder: row.sort_order ?? 0,
-      }))
+      if (!error && data && data.length > 0) {
+        return data.map((row: any) => ({
+          id: row.id,
+          name: row.name,
+          logoUrl: getOptimizedImageUrl(row.logo_url, { width: 400, quality: 'auto' }),
+          websiteUrl: row.website_url || null,
+          sortOrder: row.sort_order ?? 0,
+        }))
+      }
+    } catch {
+      // Table may not exist yet in schema cache, fallback seamlessly
     }
   }
 
