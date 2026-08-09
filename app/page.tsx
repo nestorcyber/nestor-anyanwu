@@ -95,18 +95,18 @@ export default async function Home() {
   // Default fallback stats if none in DB
   const defaultImpactStats = [
     {
-      value: "5000+",
+      value: "2000+",
       label: "People Reached",
       description: "Computing students, developers, and tech leaders empowered through workshops, events, and digital platforms.",
     },
     {
       value: "25+",
-      label: "Projects Delivered",
-      description: "Production software, brand design systems, and engineering deliverables across multiple industries.",
+      label: "Projects Completed",
+      description: "Production software, web apps, brand design systems, and engineering deliverables.",
     },
     {
       value: "12+",
-      label: "Organizations",
+      label: "Organizations & Communities",
       description: "National bodies, student chapters, tech startups, and developer communities served and supported.",
     },
   ]

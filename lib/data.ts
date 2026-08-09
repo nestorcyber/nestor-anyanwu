@@ -385,11 +385,21 @@ export interface CertificationItem {
 }
 
 export const portfolioStats: PortfolioStat[] = [
-  { value: "25+", label: "Projects Completed", description: "Production software, web apps & brand design systems." },
-  { value: "12+", label: "Organizations Worked With", description: "National bodies, tech startups, and student councils." },
-  { value: "18+", label: "Technologies & Tools", description: "Modern web frameworks, AI tools, and design stacks." },
-  { value: "3+", label: "Years of Experience", description: "Engineering, ICT leadership, and IT consulting." },
-  { value: "5000+", label: "Communities Supported", description: "Developers and computing students mentored." },
+  {
+    value: "2000+",
+    label: "People Reached",
+    description: "Computing students, developers, and tech leaders empowered through workshops, events, and digital platforms.",
+  },
+  {
+    value: "25+",
+    label: "Projects Completed",
+    description: "Production software, web apps, brand design systems, and engineering deliverables.",
+  },
+  {
+    value: "12+",
+    label: "Organizations & Communities",
+    description: "National bodies, student chapters, tech startups, and developer communities served and supported.",
+  },
 ]
 
 export const projects: ProjectItem[] = [
