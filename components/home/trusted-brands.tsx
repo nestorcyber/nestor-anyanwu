@@ -12,11 +12,8 @@ export default function TrustedBrands({ brands = [] }: { brands: BrandPartner[] 
 
   return (
     <section className="w-full py-12 md:py-16 bg-background border-b border-border/60 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 text-center space-y-4 mb-10">
-        <p className="text-xs font-mono font-bold tracking-widest uppercase text-accent">
-          PARTNERSHIPS & ECOSYSTEMS
-        </p>
-        <h2 className="text-2xl md:text-4xl font-extrabold text-foreground tracking-tight uppercase">
+      <div className="max-w-7xl mx-auto px-6 text-center space-y-3 mb-10">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight">
           Trusted By
         </h2>
         <div className="h-1 w-12 bg-accent mx-auto mt-2" />
