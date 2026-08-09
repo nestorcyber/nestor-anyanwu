@@ -380,22 +380,25 @@ export async function getProjectItems(): Promise<ProjectItem[]> {
 
 export async function getCommunityEntries(): Promise<CommunityEntry[]> {
   const supabase = db()
+  let dbEntries: CommunityEntry[] = []
+  const dbAllSlugs = new Set<string>()
+
   if (supabase) {
     const { data, error } = await supabase
       .from('community_entries')
       .select('*')
-      .eq('draft', false)
       .order('sort_order', { ascending: true })
       .order('created_at', { ascending: false })
 
-    if (!error && data && data.length > 0) {
-      return data.map(mapCommunity)
+    if (!error && data) {
+      data.forEach((row: any) => dbAllSlugs.add(row.slug))
+      dbEntries = data.filter((row: any) => !row.draft).map(mapCommunity)
     }
   }
 
   // Fallback to local MDX
   const localFiles = readLocalMdxDir('content/community')
-  return localFiles
+  const localEntries: CommunityEntry[] = localFiles
     .filter(({ data }) => !data.draft)
     .map(({ slug, data, content }) => ({
       id: slug,
@@ -411,6 +414,13 @@ export async function getCommunityEntries(): Promise<CommunityEntry[]> {
       tags: data.tags ?? [],
       description: content || data.description || '',
     }))
+
+  const combined = [
+    ...dbEntries,
+    ...localEntries.filter((e) => !dbAllSlugs.has(e.slug)),
+  ]
+
+  return combined
 }
 
 export async function getCommunityEntryBySlug(slug: string): Promise<CommunityEntry | null> {
