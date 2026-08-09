@@ -16,7 +16,10 @@ export default function TrustedBrands({ brands = [] }: { brands: BrandPartner[] 
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight">
           Trusted By
         </h2>
-        <div className="h-1 w-12 bg-accent mx-auto mt-2" />
+        <p className="text-sm md:text-base text-muted-foreground font-light max-w-xl mx-auto leading-relaxed">
+          Collaborating with forward-thinking organizations, developer communities, and technology institutions to build impactful digital ecosystems.
+        </p>
+        <div className="h-1 w-12 bg-accent mx-auto mt-3" />
       </div>
 
       {/* Infinite Animated Marquee Container */}
