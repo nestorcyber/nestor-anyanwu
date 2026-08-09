@@ -1,13 +1,12 @@
 "use client"
 
 import React from "react"
-import Image from "next/image"
 import type { BrandPartner } from "@/lib/content"
 
 export default function TrustedBrands({ brands = [] }: { brands: BrandPartner[] }) {
   if (!brands || brands.length === 0) return null
 
-  // Duplicate brand items for a continuous, seamless 360 infinite marquee animation loop
+  // Duplicate brand items for a continuous, seamless infinite marquee animation loop
   const marqueeItems = [...brands, ...brands, ...brands, ...brands]
 
   return (
@@ -26,23 +25,17 @@ export default function TrustedBrands({ brands = [] }: { brands: BrandPartner[] 
         <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-background via-background/80 to-transparent z-20 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-background via-background/80 to-transparent z-20 pointer-events-none" />
 
-        {/* Continuous Scrolling Marquee Track */}
-        <div className="flex items-center gap-8 w-max animate-marquee-loop hover:[animation-play-state:paused] py-4">
+        {/* Continuous Scrolling Marquee Track with Visually Equal Logo Spacing */}
+        <div className="flex items-center gap-12 sm:gap-16 md:gap-20 w-max animate-marquee-loop hover:[animation-play-state:paused] py-4 px-4">
           {marqueeItems.map((brand, idx) => {
             const itemKey = `${brand.id}-${idx}`
-            const logoContent = (
-              <div className="group relative flex items-center justify-center w-48 sm:w-56 h-24 sm:h-28 transition-transform duration-300 hover:scale-105 cursor-pointer p-2">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <Image
-                    src={brand.logoUrl}
-                    alt={brand.name}
-                    fill
-                    sizes="(max-width: 640px) 180px, 220px"
-                    className="object-contain transition-all duration-300"
-                  />
-                </div>
-                <span className="sr-only">{brand.name}</span>
-              </div>
+            const logoImage = (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={brand.logoUrl}
+                alt={brand.name}
+                className="h-12 sm:h-14 md:h-16 w-auto max-w-[220px] object-contain shrink-0 transition-transform duration-300 hover:scale-110 cursor-pointer"
+              />
             )
 
             if (brand.websiteUrl) {
@@ -55,14 +48,14 @@ export default function TrustedBrands({ brands = [] }: { brands: BrandPartner[] 
                   aria-label={`Visit ${brand.name}`}
                   className="shrink-0 flex items-center justify-center"
                 >
-                  {logoContent}
+                  {logoImage}
                 </a>
               )
             }
 
             return (
               <div key={itemKey} className="shrink-0 flex items-center justify-center">
-                {logoContent}
+                {logoImage}
               </div>
             )
           })}
