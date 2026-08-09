@@ -159,7 +159,7 @@ export default async function Home() {
           "IT Consulting & Digital Support",
         ]}
         stats={formattedStats}
-        heroImage="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg"
+        heroImage="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966495/techadv1_dyclrm.jpg"
         heroImageAlt="Nestor Anyanwu at community event"
       />
 
