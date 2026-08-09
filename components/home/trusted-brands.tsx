@@ -30,15 +30,15 @@ export default function TrustedBrands({ brands = [] }: { brands: BrandPartner[] 
             const content = (
               <div
                 key={brand.id}
-                className="group relative flex items-center justify-center p-4 sm:p-6 rounded-2xl bg-card border border-border/40 hover:border-accent/60 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 cursor-pointer w-36 sm:w-44 h-20 sm:h-24"
+                className="group relative flex items-center justify-center p-3 sm:p-4 transition-transform duration-300 hover:scale-105 cursor-pointer w-32 sm:w-44 h-16 sm:h-20"
               >
                 <div className="relative w-full h-full flex items-center justify-center">
                   <Image
                     src={brand.logoUrl}
                     alt={brand.name}
                     fill
-                    sizes="(max-width: 640px) 140px, 180px"
-                    className="object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300 opacity-80 group-hover:opacity-100"
+                    sizes="(max-width: 640px) 130px, 180px"
+                    className="object-contain"
                   />
                 </div>
                 <span className="sr-only">{brand.name}</span>
