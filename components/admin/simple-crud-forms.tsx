@@ -402,3 +402,68 @@ export function SettingsForm({ initial }: { initial: Tables<'site_settings'> }) 
     </form>
   )
 }
+
+export function BrandForm({ initial }: { initial?: Tables<'brand_partners'> | null }) {
+  const router = useRouter()
+  const [name, setName] = useState(initial?.name ?? '')
+  const [logoUrl, setLogoUrl] = useState(initial?.logo_url ?? '')
+  const [websiteUrl, setWebsiteUrl] = useState(initial?.website_url ?? '')
+  const [sortOrder, setSortOrder] = useState(String(initial?.sort_order ?? 0))
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
+
+  async function onSubmit(e: FormEvent) {
+    e.preventDefault()
+    setSaving(true)
+    setError('')
+    const supabase = createClient()
+    const payload = {
+      name,
+      logo_url: logoUrl,
+      website_url: websiteUrl || null,
+      sort_order: Number(sortOrder) || 0,
+    }
+    const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
+    const res = isRealUuid
+      ? await supabase.from('brand_partners').update(payload).eq('id', initial.id!)
+      : await supabase.from('brand_partners').insert(payload)
+
+    if (res.error) {
+      setError(res.error.message)
+      setSaving(false)
+      return
+    }
+    router.push('/admin/brands')
+    router.refresh()
+  }
+
+  async function onDelete() {
+    if (!initial || !confirm('Delete brand partner?')) return
+    const supabase = createClient()
+    await supabase.from('brand_partners').delete().eq('id', initial.id)
+    router.push('/admin/brands')
+    router.refresh()
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="max-w-xl space-y-5">
+      <Field label="Brand / Organization Name">
+        <TextInput value={name} onChange={(e) => setName(e.target.value)} required placeholder="e.g. NACOS FUTO, IEEE, GDG" />
+      </Field>
+      <ImageUpload label="Brand Logo Image" value={logoUrl} onChange={setLogoUrl} folder="brands" />
+      <Field label="Website URL (Optional)">
+        <TextInput value={websiteUrl} onChange={(e) => setWebsiteUrl(e.target.value)} placeholder="https://..." />
+      </Field>
+      <Field label="Sort Order">
+        <TextInput type="number" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
+      </Field>
+      {error ? <p className="text-sm text-red-400">{error}</p> : null}
+      <div className="flex gap-3">
+        <PrimaryButton type="submit" disabled={saving || !name || !logoUrl}>
+          {saving ? 'Saving...' : 'Save Brand Partner'}
+        </PrimaryButton>
+        {initial ? <DangerButton type="button" onClick={onDelete}>Delete</DangerButton> : null}
+      </div>
+    </form>
+  )
+}

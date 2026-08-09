@@ -8,9 +8,10 @@ import ImpactSection from "@/components/impact-section"
 import FeaturedCommunity from "@/components/home/featured-community"
 import LatestJournal from "@/components/home/latest-journal"
 import TestimonialsSection from "@/components/home/testimonials-section"
+import TrustedBrands from "@/components/home/trusted-brands"
 import HomeCTA from "@/components/home/home-cta"
 import Footer from "@/components/footer"
-import { getPortfolioStats } from "@/lib/content"
+import { getPortfolioStats, getBrandPartners } from "@/lib/content"
 
 export const dynamic = "force-dynamic"
 export const revalidate = 0
@@ -33,7 +34,10 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-  const dbStats = await getPortfolioStats()
+  const [dbStats, brandPartners] = await Promise.all([
+    getPortfolioStats(),
+    getBrandPartners(),
+  ])
 
   const carouselItems: CarouselItem[] = [
     {
@@ -124,24 +128,13 @@ export default async function Home() {
       {/* 1. Hero */}
       <HomeHero />
 
-      {/* Highlights Deck Carousel */}
-      <section className="w-full border-b border-border/60 bg-background py-12">
-        <div className="max-w-7xl mx-auto px-6 text-center mb-8 space-y-3">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight">
-            Featured Highlights
-          </h2>
-          <p className="text-sm md:text-base text-muted-foreground font-light max-w-2xl mx-auto leading-relaxed">
-            Explore professional software engineering, custom user interfaces, brand design, and technical deliverables.
-          </p>
-          <div className="h-1 w-16 bg-accent mx-auto mt-3" />
-        </div>
-        <DribbbleCarousel items={carouselItems} />
-      </section>
-
-      {/* 2. Personal Philosophy */}
+      {/* 2. Personal Philosophy ("Why I Build") */}
       <PersonalPhilosophy />
 
-      {/* Community Impact (Dynamically Connected to Supabase Admin Stats) */}
+      {/* 3. Trusted By Brand Logos Carousel (Immediately after Why I Build) */}
+      <TrustedBrands brands={brandPartners} />
+
+      {/* 4. Community Impact */}
       <ImpactSection
         category="Impact & Reach"
         title="Engineering Progress, Building Communities"
@@ -163,24 +156,39 @@ export default async function Home() {
         heroImageAlt="Nestor Anyanwu at community event"
       />
 
-      <FeaturedPortfolio />
-
-      {/* Core Initiatives (moved after Selected Work) */}
+      {/* 5. Core Focus (Moved up before Selected Work) */}
       <ExpandingEndeavors />
 
-      {/* 6. Featured Community Work */}
+      {/* 6. Selected Work & Engineering */}
+      <FeaturedPortfolio />
+
+      {/* 7. Featured Community Work */}
       <FeaturedCommunity />
 
-      {/* 7. Latest Journal */}
+      {/* 8. Latest Journal */}
       <LatestJournal />
 
-      {/* 8. Testimonials */}
+      {/* 9. Testimonials */}
       <TestimonialsSection />
 
-      {/* 9. Call To Action */}
+      {/* 10. Featured Highlights Carousel (Moved down immediately before HomeCTA) */}
+      <section className="w-full border-b border-border/60 bg-background py-12">
+        <div className="max-w-7xl mx-auto px-6 text-center mb-8 space-y-3">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight">
+            Featured Highlights
+          </h2>
+          <p className="text-sm md:text-base text-muted-foreground font-light max-w-2xl mx-auto leading-relaxed">
+            Explore professional software engineering, custom user interfaces, brand design, and technical deliverables.
+          </p>
+          <div className="h-1 w-16 bg-accent mx-auto mt-3" />
+        </div>
+        <DribbbleCarousel items={carouselItems} />
+      </section>
+
+      {/* 11. Call To Action */}
       <HomeCTA />
 
-      {/* 10. Footer */}
+      {/* 12. Footer */}
       <Footer />
     </main>
   )

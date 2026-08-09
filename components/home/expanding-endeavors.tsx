@@ -21,7 +21,7 @@ export default function ExpandingEndeavors() {
     {
       id: "software-engineering",
       title: "Software Development",
-      subtitle: "Web Platforms / Cloud & APIs",
+      subtitle: "Web Platforms & Cloud Solutions",
       description: "Engineering scalable web applications, robust APIs, and modern cloud architectures built for performance and high reliability.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
       link: "/portfolio",
@@ -29,32 +29,32 @@ export default function ExpandingEndeavors() {
     {
       id: "tech-leadership",
       title: "Tech Leadership",
-      subtitle: "NACOS National / IEEE FUTO",
-      description: "Directing computing student councils, national ICT strategy, and event logistics across Nigerian higher education institutions.",
+      subtitle: "Digital Strategy & Council Leadership",
+      description: "Directing technology council strategy, student engineering programs, and digital event logistics across tech ecosystems.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
       link: "/about",
     },
     {
-      id: "visual-brand-systems",
-      title: "Design & Systems",
-      subtitle: "GDG Owerri / DevFest Visuals",
-      description: "Crafting visual identities, conference creative systems, and brand documentation for major developer festivals.",
+      id: "designs-and-ai",
+      title: "Designs & AI",
+      subtitle: "Visual Systems & Generative AI",
+      description: "Crafting visual brand identities, conference design systems, and integrating generative AI workflows into digital experiences.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
       link: "/portfolio",
     },
     {
       id: "community-building",
       title: "Community Growth",
-      subtitle: "Workshops / Mentorship",
-      description: "Empowering thousands of computing students and software developers through hands-on technical workshops and hackathons.",
+      subtitle: "Workshops & Mentorship",
+      description: "Empowering software developers and technology enthusiasts through hands-on technical workshops, hackathons, and mentorship.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden2-sUzI0wvGmZMjB5UUP911IAB6WvBM5c.jpg",
       link: "/community",
     },
     {
       id: "technical-consulting",
-      title: "Technical Advisory",
-      subtitle: "Nobelton Consults / Advisory",
-      description: "Providing strategic IT advisory, technology audits, and digital transformation consulting for growing organizations.",
+      title: "Technical Consulting",
+      subtitle: "IT Advisory & Architecture",
+      description: "Providing strategic IT advisory, technology audits, system automation, and digital transformation consulting for growing organizations.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg",
       link: "/contact",
     },
@@ -66,7 +66,7 @@ export default function ExpandingEndeavors() {
       {/* Centered Section Header */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8 text-center space-y-3">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight">
-          Core Initiatives
+          Core Focus
         </h2>
         <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto">
           As a technology engineer and community leader, my engagements span software development, ICT leadership, visual design, and advisory.

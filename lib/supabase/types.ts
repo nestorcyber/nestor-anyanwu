@@ -260,6 +260,22 @@ export type Database = {
         }
         Update: Partial<Database['public']['Tables']['gallery_images']['Row']>
       }
+      brand_partners: {
+        Row: {
+          id: string
+          name: string
+          logo_url: string
+          website_url: string | null
+          sort_order: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: Partial<Database['public']['Tables']['brand_partners']['Row']> & {
+          name: string
+          logo_url: string
+        }
+        Update: Partial<Database['public']['Tables']['brand_partners']['Row']>
+      }
     }
     Views: Record<string, never>
     Functions: {

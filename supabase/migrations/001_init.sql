@@ -247,6 +247,21 @@ create trigger gallery_images_updated_at
   before update on public.gallery_images
   for each row execute function public.set_updated_at();
 
+-- ─── brand_partners ──────────────────────────────────────────────────────────
+create table if not exists public.brand_partners (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  logo_url text not null,
+  website_url text,
+  sort_order int not null default 0,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create trigger brand_partners_updated_at
+  before update on public.brand_partners
+  for each row execute function public.set_updated_at();
+
 -- ─── RLS ─────────────────────────────────────────────────────────────────────
 alter table public.site_settings enable row level security;
 alter table public.journal_articles enable row level security;
@@ -259,6 +274,7 @@ alter table public.skill_groups enable row level security;
 alter table public.skills enable row level security;
 alter table public.certifications enable row level security;
 alter table public.gallery_images enable row level security;
+alter table public.brand_partners enable row level security;
 
 -- Public read
 create policy "Public read site_settings" on public.site_settings
@@ -294,6 +310,9 @@ create policy "Public read certifications" on public.certifications
 create policy "Public read gallery" on public.gallery_images
   for select using (true);
 
+create policy "Public read brand_partners" on public.brand_partners
+  for select using (true);
+
 -- Admin write (all tables)
 do $$
 declare
@@ -310,7 +329,8 @@ begin
     'skill_groups',
     'skills',
     'certifications',
-    'gallery_images'
+    'gallery_images',
+    'brand_partners'
   ]
   loop
     execute format(

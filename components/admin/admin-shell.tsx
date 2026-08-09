@@ -44,6 +44,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: '/admin/journal', label: 'Journal', icon: BookOpen },
       { href: '/admin/portfolio', label: 'Projects', icon: FolderKanban },
       { href: '/admin/community', label: 'Community', icon: Users },
+      { href: '/admin/brands', label: 'Brand Partners', icon: Briefcase },
       { href: '/admin/journey', label: 'Milestones', icon: Milestone },
     ],
   },

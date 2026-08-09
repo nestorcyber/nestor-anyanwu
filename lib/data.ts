@@ -384,6 +384,44 @@ export interface CertificationItem {
   credentialUrl?: string
 }
 
+export interface BrandPartnerItem {
+  id: string
+  name: string
+  logoUrl: string
+  websiteUrl?: string
+}
+
+export const fallbackBrandPartners: BrandPartnerItem[] = [
+  {
+    id: "nacos-futo",
+    name: "NACOS FUTO",
+    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
+    websiteUrl: "https://nacos.org.ng",
+  },
+  {
+    id: "gdg-owerri",
+    name: "GDG Owerri",
+    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
+    websiteUrl: "https://gdg.community.dev",
+  },
+  {
+    id: "ieee-futo",
+    name: "IEEE FUTO SB",
+    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
+    websiteUrl: "https://ieee.org",
+  },
+  {
+    id: "build-with-ai",
+    name: "Build With AI",
+    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
+  },
+  {
+    id: "devfest-owerri",
+    name: "DevFest Owerri",
+    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
+  },
+]
+
 export const portfolioStats: PortfolioStat[] = [
   {
     value: "2000+",

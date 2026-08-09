@@ -10,6 +10,7 @@ import {
   servicesList as fallbackServicesList,
   skillGroups as fallbackSkillGroups,
   certificationsList as fallbackCertificationsList,
+  fallbackBrandPartners,
 } from '@/lib/data'
 
 import { getOptimizedImageUrl } from '@/lib/cloudinary'
@@ -632,6 +633,43 @@ export async function getGalleryImages(): Promise<GalleryItem[]> {
   )
 
   return [...standalone, ...fromJourney]
+}
+
+export type BrandPartner = {
+  id: string
+  name: string
+  logoUrl: string
+  websiteUrl: string | null
+  sortOrder: number
+}
+
+export async function getBrandPartners(): Promise<BrandPartner[]> {
+  const supabase = db()
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('brand_partners')
+      .select('*')
+      .order('sort_order', { ascending: true })
+      .order('created_at', { ascending: false })
+
+    if (!error && data && data.length > 0) {
+      return data.map((row: any) => ({
+        id: row.id,
+        name: row.name,
+        logoUrl: getOptimizedImageUrl(row.logo_url, { width: 400, quality: 'auto' }),
+        websiteUrl: row.website_url || null,
+        sortOrder: row.sort_order ?? 0,
+      }))
+    }
+  }
+
+  return fallbackBrandPartners.map((b, i) => ({
+    id: b.id,
+    name: b.name,
+    logoUrl: getOptimizedImageUrl(b.logoUrl, { width: 400, quality: 'auto' }),
+    websiteUrl: b.websiteUrl || null,
+    sortOrder: i,
+  }))
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {

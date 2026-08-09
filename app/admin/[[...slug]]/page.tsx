@@ -13,6 +13,7 @@ import {
   ServiceForm,
   SettingsForm,
   StatForm,
+  BrandForm,
 } from '@/components/admin/simple-crud-forms'
 import {
   getCertifications,
@@ -23,6 +24,7 @@ import {
   getPortfolioProjects,
   getPortfolioStats,
   getSkillGroups,
+  getBrandPartners,
 } from '@/lib/content'
 import { servicesList as fallbackServices } from '@/lib/data'
 
@@ -799,6 +801,87 @@ export default async function AdminCatchAllPage({ params }: Props) {
       <div>
         <PageHeader title="Edit gallery image" />
         <GalleryForm initial={data} />
+      </div>
+    )
+  }
+
+  // 6b. Brand Partners
+  if (section === 'brands') {
+    if (!actionOrId) {
+      const { data: dbData } = await supabase
+        .from('brand_partners')
+        .select('*')
+        .order('sort_order', { ascending: true })
+      const fallbackBrands = await getBrandPartners()
+      const dbNames = new Set((dbData ?? []).map((row) => row.name))
+      const items = [
+        ...(dbData ?? []),
+        ...fallbackBrands
+          .filter((b) => !dbNames.has(b.name))
+          .map((b) => ({
+            id: b.id,
+            name: b.name,
+            logo_url: b.logoUrl,
+            website_url: b.websiteUrl,
+          })),
+      ]
+      return (
+        <div>
+          <PageHeader
+            title="Brand Partners"
+            action={
+              <Link href="/admin/brands/new">
+                <PrimaryButton type="button">Add brand</PrimaryButton>
+              </Link>
+            }
+          />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {items.map((row) => (
+              <Link key={row.id} href={`/admin/brands/${row.id}`} className="group border border-border p-4 rounded-lg hover:border-foreground/40 bg-card transition-all flex flex-col justify-between">
+                <div className="relative aspect-video w-full overflow-hidden rounded bg-slate-950/80 mb-3 flex items-center justify-center p-4 border border-border/40">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={row.logo_url} alt={row.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform" />
+                </div>
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-xs font-semibold truncate text-foreground">{row.name}</p>
+                  <span className="text-[10px] font-mono text-muted-foreground">Edit</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+          {!items.length ? <p className="text-sm text-muted-foreground">No brand partners added yet.</p> : null}
+        </div>
+      )
+    }
+    if (actionOrId === 'new') {
+      return (
+        <div>
+          <PageHeader title="Add brand partner" />
+          <BrandForm />
+        </div>
+      )
+    }
+    let data = null
+    const { data: dbData } = await supabase.from('brand_partners').select('*').eq('id', actionOrId).maybeSingle()
+    data = dbData
+    if (!data) {
+      const fallbackBrands = await getBrandPartners()
+      const fb = fallbackBrands.find((b) => b.id === actionOrId)
+      if (fb) {
+        data = {
+          id: undefined,
+          name: fb.name,
+          logo_url: fb.logoUrl,
+          website_url: fb.websiteUrl,
+          sort_order: fb.sortOrder || 0,
+        } as any
+      }
+    }
+    if (!data) notFound()
+    return (
+      <div>
+        <PageHeader title="Edit brand partner" />
+        <BrandForm initial={data} />
       </div>
     )
   }

@@ -282,6 +282,44 @@ async function main() {
     else console.log(`✓ gallery_images: ${sampleGallery.length} rows`)
   }
 
+  const sampleBrands = [
+    {
+      name: 'NACOS FUTO',
+      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg',
+      website_url: 'https://nacos.org.ng',
+      sort_order: 0,
+    },
+    {
+      name: 'GDG Owerri',
+      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg',
+      website_url: 'https://gdg.community.dev',
+      sort_order: 1,
+    },
+    {
+      name: 'IEEE FUTO SB',
+      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg',
+      website_url: 'https://ieee.org',
+      sort_order: 2,
+    },
+    {
+      name: 'Build With AI',
+      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg',
+      sort_order: 3,
+    },
+    {
+      name: 'DevFest Owerri',
+      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg',
+      sort_order: 4,
+    },
+  ]
+
+  const { data: existingBrands } = await supabase.from('brand_partners').select('id').limit(1).maybeSingle()
+  if (!existingBrands?.id) {
+    const { error: brandErr } = await supabase.from('brand_partners').insert(sampleBrands)
+    if (brandErr) console.warn('brand_partners seed notice:', brandErr.message)
+    else console.log(`✓ brand_partners: ${sampleBrands.length} rows`)
+  }
+
   console.log('\nSeed complete.')
 }
 
