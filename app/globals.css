@@ -239,7 +239,7 @@
 }
 
 .animate-marquee-loop {
-  animation: marqueeLoop 25s linear infinite;
+  animation: marqueeLoop 12s linear infinite;
   will-change: transform;
 }
 
