@@ -59,6 +59,7 @@ create table if not exists public.journal_articles (
   featured boolean not null default false,
   pinned boolean not null default false,
   published_date date,
+  scheduled_at timestamptz,
   last_updated date,
   author text not null default 'Nestor Anyanwu',
   seo_title text,

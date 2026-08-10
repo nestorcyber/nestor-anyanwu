@@ -12,6 +12,7 @@ export interface JourneyItem {
 
 export interface ProjectItem {
   id?: string
+  slug?: string
   title: string
   category?: "Software" | "Web" | "Design" | "Branding" | "Automation" | "Open Source"
   description: string

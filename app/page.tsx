@@ -160,12 +160,15 @@ export default async function Home() {
       <ExpandingEndeavors />
 
       {/* 6. Selected Work & Engineering */}
+      {/* @ts-expect-error Async Server Component */}
       <FeaturedPortfolio />
 
       {/* 7. Featured Community Work */}
+      {/* @ts-expect-error Async Server Component */}
       <FeaturedCommunity />
 
       {/* 8. Latest Journal */}
+      {/* @ts-expect-error Async Server Component */}
       <LatestJournal />
 
       {/* 9. Testimonials */}

@@ -40,9 +40,10 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
       featured,
       sort_order: Number(sortOrder) || 0,
     }
-    const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
-    const res = isRealUuid
-      ? await supabase.from('gallery_images').update(payload).eq('id', initial.id!)
+    const initialId = initial?.id
+    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
+    const res = (isRealUuid && initialId)
+      ? await supabase.from('gallery_images').update(payload).eq('id', initialId)
       : await supabase.from('gallery_images').insert(payload)
     if (res.error) {
       setError(res.error.message)
@@ -128,9 +129,10 @@ export function ServiceForm({ initial }: { initial?: Tables<'services'> | null }
       cta_href: ctaHref,
       sort_order: Number(sortOrder) || 0,
     }
-    const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
-    const res = isRealUuid
-      ? await supabase.from('services').update(payload).eq('id', initial.id!)
+    const initialId = initial?.id
+    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
+    const res = (isRealUuid && initialId)
+      ? await supabase.from('services').update(payload).eq('id', initialId)
       : await supabase.from('services').insert(payload)
     if (res.error) {
       setError(res.error.message)
@@ -209,9 +211,10 @@ export function StatForm({ initial }: { initial?: Tables<'portfolio_stats'> | nu
       description: description || null,
       sort_order: Number(sortOrder) || 0,
     }
-    const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
-    const res = isRealUuid
-      ? await supabase.from('portfolio_stats').update(payload).eq('id', initial.id!)
+    const initialId = initial?.id
+    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
+    const res = (isRealUuid && initialId)
+      ? await supabase.from('portfolio_stats').update(payload).eq('id', initialId)
       : await supabase.from('portfolio_stats').insert(payload)
     if (res.error) {
       setError(res.error.message)
@@ -278,9 +281,10 @@ export function CertificationForm({ initial }: { initial?: Tables<'certification
       credential_url: credentialUrl || null,
       sort_order: Number(sortOrder) || 0,
     }
-    const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
-    const res = isRealUuid
-      ? await supabase.from('certifications').update(payload).eq('id', initial.id!)
+    const initialId = initial?.id
+    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
+    const res = (isRealUuid && initialId)
+      ? await supabase.from('certifications').update(payload).eq('id', initialId)
       : await supabase.from('certifications').insert(payload)
     if (res.error) {
       setError(res.error.message)
@@ -423,9 +427,10 @@ export function BrandForm({ initial }: { initial?: Tables<'brand_partners'> | nu
       website_url: websiteUrl || null,
       sort_order: Number(sortOrder) || 0,
     }
-    const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
-    const res = isRealUuid
-      ? await supabase.from('brand_partners').update(payload).eq('id', initial.id!)
+    const initialId = initial?.id
+    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
+    const res = (isRealUuid && initialId)
+      ? await supabase.from('brand_partners').update(payload).eq('id', initialId)
       : await supabase.from('brand_partners').insert(payload)
 
     if (res.error) {

@@ -937,8 +937,9 @@ export default async function AdminCatchAllPage({ params }: Props) {
           title: fb.title,
           slug: fb.id,
           description: fb.description,
-          icon: fb.icon,
-          deliverables: fb.deliverables,
+          icon_name: fb.iconName,
+          cta_text: fb.ctaText,
+          cta_href: fb.ctaHref,
           sort_order: 0,
         } as any
       }

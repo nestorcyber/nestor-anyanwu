@@ -82,10 +82,18 @@ export default function JournalForm({ initial }: Props) {
       content,
     }
 
-    const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
-    const res = isRealUuid
-      ? await supabase.from('journal_articles').update(payload).eq('id', initial.id)
+    const initialId = initial?.id
+    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
+    let res = (isRealUuid && initialId)
+      ? await supabase.from('journal_articles').update(payload).eq('id', initialId)
       : await supabase.from('journal_articles').insert(payload)
+
+    if (res.error && res.error.message.includes('scheduled_at')) {
+      delete (payload as Record<string, unknown>).scheduled_at
+      res = (isRealUuid && initialId)
+        ? await supabase.from('journal_articles').update(payload).eq('id', initialId)
+        : await supabase.from('journal_articles').insert(payload)
+    }
 
     if (res.error) {
       setError(res.error.message)

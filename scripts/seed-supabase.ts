@@ -52,7 +52,16 @@ function readMdxDir(dir: string) {
 
 async function upsert(table: string, rows: Record<string, unknown>[], onConflict: string) {
   if (!rows.length) return
-  const { error } = await supabase.from(table).upsert(rows, { onConflict })
+  let { error } = await supabase.from(table).upsert(rows, { onConflict })
+  if (error && error.message.includes('scheduled_at')) {
+    const strippedRows = rows.map((r) => {
+      const copy = { ...r }
+      delete copy.scheduled_at
+      return copy
+    })
+    const retry = await supabase.from(table).upsert(strippedRows, { onConflict })
+    error = retry.error
+  }
   if (error) throw new Error(`${table}: ${error.message}`)
   console.log(`✓ ${table}: ${rows.length} rows`)
 }

@@ -78,9 +78,10 @@ export default function PortfolioForm({ initial }: Props) {
       sort_order: Number(sortOrder) || 0,
     }
 
-    const isRealUuid = Boolean(initial?.id && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id))
-    const res = isRealUuid
-      ? await supabase.from('portfolio_projects').update(payload).eq('id', initial.id)
+    const initialId = initial?.id
+    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
+    const res = (isRealUuid && initialId)
+      ? await supabase.from('portfolio_projects').update(payload).eq('id', initialId)
       : await supabase.from('portfolio_projects').insert(payload)
 
     if (res.error) {

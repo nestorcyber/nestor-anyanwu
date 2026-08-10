@@ -62,7 +62,7 @@ export default function ExpandingEndeavors() {
 
   return (
     <section className="w-full py-12 md:py-16 border-b border-border/60 bg-background overflow-hidden">
-      
+
       {/* Centered Section Header */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8 text-center space-y-3">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight">
@@ -141,16 +141,14 @@ export default function ExpandingEndeavors() {
                 alt={item.title}
                 fill
                 sizes="20vw"
-                className={`object-cover transition-all duration-500 ease-out ${
-                  isHovered ? "scale-105 filter brightness-100" : "scale-100 filter brightness-75 grayscale-[20%]"
-                }`}
+                className={`object-cover transition-all duration-500 ease-out ${isHovered ? "scale-105 filter brightness-100" : "scale-100 filter brightness-75 grayscale-[20%]"
+                  }`}
               />
 
               {/* Dark Gradient Overlay */}
               <div
-                className={`absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent transition-opacity duration-300 ${
-                  isHovered ? "opacity-95" : "opacity-85"
-                }`}
+                className={`absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent transition-opacity duration-300 ${isHovered ? "opacity-95" : "opacity-85"
+                  }`}
               />
 
               {/* Top Padding / Spacer */}
@@ -159,7 +157,7 @@ export default function ExpandingEndeavors() {
               {/* Bottom Content Area */}
               <div className="relative z-10 flex flex-col justify-end h-full">
                 <div className="p-6 space-y-3 text-white">
-                  
+
                   {/* Title & Subtitle */}
                   <div>
                     <h3 className="text-xl lg:text-2xl font-extrabold tracking-tight text-white transition-colors">
@@ -172,11 +170,10 @@ export default function ExpandingEndeavors() {
 
                   {/* Description revealed strictly on Hover */}
                   <div
-                    className={`transition-all duration-300 ease-in-out ${
-                      isHovered
+                    className={`transition-all duration-300 ease-in-out ${isHovered
                         ? "opacity-100 max-h-40 translate-y-0"
                         : "opacity-0 max-h-0 translate-y-2 overflow-hidden pointer-events-none"
-                    }`}
+                      }`}
                   >
                     <div className="h-0.5 w-10 bg-accent my-2" />
                     <p className="text-xs text-slate-200 font-light leading-relaxed">
@@ -188,9 +185,8 @@ export default function ExpandingEndeavors() {
 
                 {/* Descriptive Action Button revealed strictly on Hover */}
                 <div
-                  className={`transition-all duration-300 ${
-                    isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
-                  }`}
+                  className={`transition-all duration-300 ${isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+                    }`}
                 >
                   <Link href={item.link} className="block w-full" aria-label={`Explore ${item.title}`}>
                     <div className="w-full bg-accent hover:bg-accent/90 text-white font-extrabold text-xs uppercase tracking-widest px-5 py-3.5 flex items-center justify-between transition-colors cursor-pointer">

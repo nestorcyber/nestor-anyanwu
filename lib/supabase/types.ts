@@ -35,6 +35,7 @@ export type Database = {
           id?: string
         }
         Update: Partial<Database['public']['Tables']['site_settings']['Row']>
+        Relationships: []
       }
       journal_articles: {
         Row: {
@@ -53,7 +54,7 @@ export type Database = {
           seo_title: string | null
           seo_description: string | null
           draft: boolean
-          scheduled_at?: string | null
+          scheduled_at: string | null
           content: string
           sort_order: number
           created_at: string
@@ -64,6 +65,7 @@ export type Database = {
           title: string
         }
         Update: Partial<Database['public']['Tables']['journal_articles']['Row']>
+        Relationships: []
       }
       admin_activity_logs: {
         Row: {
@@ -80,6 +82,7 @@ export type Database = {
           resource: string
         }
         Update: Partial<Database['public']['Tables']['admin_activity_logs']['Row']>
+        Relationships: []
       }
       portfolio_projects: {
         Row: {
@@ -110,6 +113,7 @@ export type Database = {
           title: string
         }
         Update: Partial<Database['public']['Tables']['portfolio_projects']['Row']>
+        Relationships: []
       }
       community_entries: {
         Row: {
@@ -135,6 +139,7 @@ export type Database = {
           organization: string
         }
         Update: Partial<Database['public']['Tables']['community_entries']['Row']>
+        Relationships: []
       }
       journey_items: {
         Row: {
@@ -155,6 +160,7 @@ export type Database = {
           title: string
         }
         Update: Partial<Database['public']['Tables']['journey_items']['Row']>
+        Relationships: []
       }
       portfolio_stats: {
         Row: {
@@ -171,6 +177,7 @@ export type Database = {
           label: string
         }
         Update: Partial<Database['public']['Tables']['portfolio_stats']['Row']>
+        Relationships: []
       }
       services: {
         Row: {
@@ -190,6 +197,7 @@ export type Database = {
           title: string
         }
         Update: Partial<Database['public']['Tables']['services']['Row']>
+        Relationships: []
       }
       skill_groups: {
         Row: {
@@ -203,6 +211,7 @@ export type Database = {
           category: string
         }
         Update: Partial<Database['public']['Tables']['skill_groups']['Row']>
+        Relationships: []
       }
       skills: {
         Row: {
@@ -220,6 +229,7 @@ export type Database = {
           name: string
         }
         Update: Partial<Database['public']['Tables']['skills']['Row']>
+        Relationships: []
       }
       certifications: {
         Row: {
@@ -238,6 +248,7 @@ export type Database = {
           title: string
         }
         Update: Partial<Database['public']['Tables']['certifications']['Row']>
+        Relationships: []
       }
       gallery_images: {
         Row: {
@@ -259,6 +270,7 @@ export type Database = {
           image_url: string
         }
         Update: Partial<Database['public']['Tables']['gallery_images']['Row']>
+        Relationships: []
       }
       brand_partners: {
         Row: {
@@ -275,6 +287,7 @@ export type Database = {
           logo_url: string
         }
         Update: Partial<Database['public']['Tables']['brand_partners']['Row']>
+        Relationships: []
       }
     }
     Views: Record<string, never>
