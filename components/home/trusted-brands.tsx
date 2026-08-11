@@ -13,10 +13,6 @@ export default function TrustedBrands({ brands = [] }: { brands: BrandPartner[] 
     <section className="w-full py-6 md:py-8 bg-background border-y border-border/60 overflow-hidden">
       {/* Infinite Animated Marquee Container */}
       <div className="relative w-full overflow-hidden flex items-center">
-        {/* Soft edge fade gradients for smooth in & out movement */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-36 bg-gradient-to-r from-background via-background/80 to-transparent z-20 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-36 bg-gradient-to-l from-background via-background/80 to-transparent z-20 pointer-events-none" />
-
         {/* Continuous Scrolling Marquee Track with Visually Equal Logo Spacing */}
         <div className="flex items-center gap-12 sm:gap-16 md:gap-20 w-max animate-marquee-loop hover:[animation-play-state:paused] py-2 px-4">
           {marqueeItems.map((brand, idx) => {
