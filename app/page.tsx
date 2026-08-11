@@ -128,10 +128,13 @@ export default async function Home() {
       {/* 1. Hero */}
       <HomeHero />
 
-      {/* 2. Personal Philosophy ("Why I Build") */}
+      {/* 2. Trusted Brand Logos Carousel */}
+      <TrustedBrands brands={brandPartners} />
+
+      {/* 3. Personal Philosophy ("Why I Build") */}
       <PersonalPhilosophy />
 
-      {/* 3. Community Impact ("Impact & Reach") */}
+      {/* 4. Community Impact ("Impact & Reach") */}
       <ImpactSection
         category="Impact & Reach"
         title="Engineering Progress, Building Communities"
@@ -152,9 +155,6 @@ export default async function Home() {
         heroImage="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966495/techadv1_dyclrm.jpg"
         heroImageAlt="Nestor Anyanwu at community event"
       />
-
-      {/* 4. Trusted By Brand Logos Carousel (Moved under Impact & Reach) */}
-      <TrustedBrands brands={brandPartners} />
 
       {/* 5. Core Focus */}
       <ExpandingEndeavors />
