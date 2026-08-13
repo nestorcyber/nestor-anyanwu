@@ -160,7 +160,8 @@
 
   body {
     @apply bg-background text-foreground transition-colors duration-350 font-sans;
-    font-size: 1.0625rem; /* 17px default base size */
+    font-size: 1.0625rem;
+    /* 17px default base size */
     line-height: 1.7;
   }
 
@@ -172,11 +173,13 @@
   /* Mobile typographic enhancement */
   @media (max-width: 640px) {
     html {
-      font-size: 17px; /* Scales rem-based utilities up on mobile */
+      font-size: 17px;
+      /* Scales rem-based utilities up on mobile */
     }
 
     body {
-      font-size: 1.0625rem; /* Effective 18px on mobile screen */
+      font-size: 1.0625rem;
+      /* Effective 18px on mobile screen */
       line-height: 1.75;
     }
 
@@ -187,12 +190,14 @@
 
     /* Prevent tiny text classes on mobile */
     .text-xs {
-      font-size: 0.875rem !important; /* 14px instead of 12px */
+      font-size: 0.875rem !important;
+      /* 14px instead of 12px */
       line-height: 1.4 !important;
     }
 
     .text-sm {
-      font-size: 0.9375rem !important; /* 15px instead of 14px */
+      font-size: 0.9375rem !important;
+      /* 15px instead of 14px */
       line-height: 1.5 !important;
     }
   }
@@ -233,6 +238,7 @@
   0% {
     transform: translate3d(0, 0, 0);
   }
+
   100% {
     transform: translate3d(-50%, 0, 0);
   }
@@ -245,6 +251,7 @@
 
 /* Accessibility & Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   ::before,
   ::after {
@@ -266,7 +273,12 @@
 }
 
 /* High-Performance System UI Neubrutalistic Typography System */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   letter-spacing: -0.02em;
 }
@@ -407,10 +419,159 @@ h1, h2, h3, h4, h5, h6 {
   .article-content h1 {
     font-size: 2.5rem;
   }
+
   .article-content h2 {
     font-size: 2rem;
   }
+
   .article-content h3 {
     font-size: 1.5rem;
   }
+}
+
+/* Tiptap / ProseMirror Active WYSIWYG Editor Canvas Styling */
+.ProseMirror,
+.article-editor-content {
+  min-height: 380px;
+  outline: none !important;
+}
+
+.ProseMirror strong,
+.ProseMirror b,
+.article-editor-content strong,
+.article-editor-content b {
+  font-weight: 800 !important;
+  color: #000000 !important;
+}
+
+.dark .ProseMirror strong,
+.dark .ProseMirror b,
+.dark .article-editor-content strong,
+.dark .article-editor-content b {
+  color: #ffffff !important;
+}
+
+.ProseMirror em,
+.ProseMirror i,
+.article-editor-content em,
+.article-editor-content i {
+  font-style: italic !important;
+}
+
+.ProseMirror u,
+.article-editor-content u {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+}
+
+.ProseMirror s,
+.article-editor-content s {
+  text-decoration: line-through !important;
+}
+
+.ProseMirror p,
+.article-editor-content p {
+  margin-bottom: 1.25rem;
+  line-height: 1.8;
+}
+
+.ProseMirror h1,
+.article-editor-content h1 {
+  font-size: 2.25rem !important;
+  font-weight: 800 !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+  color: var(--foreground) !important;
+}
+
+.ProseMirror h2,
+.article-editor-content h2 {
+  font-size: 1.75rem !important;
+  font-weight: 800 !important;
+  margin-top: 1.75rem !important;
+  margin-bottom: 0.75rem !important;
+  color: var(--foreground) !important;
+}
+
+.ProseMirror h3,
+.article-editor-content h3 {
+  font-size: 1.35rem !important;
+  font-weight: 700 !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.5rem !important;
+  color: var(--foreground) !important;
+}
+
+.ProseMirror h4,
+.article-editor-content h4 {
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  margin-top: 1.25rem !important;
+  margin-bottom: 0.5rem !important;
+  color: var(--foreground) !important;
+}
+
+.ProseMirror ul,
+.article-editor-content ul {
+  list-style-type: disc !important;
+  padding-left: 1.5rem !important;
+  margin-bottom: 1.25rem !important;
+}
+
+.ProseMirror ol,
+.article-editor-content ol {
+  list-style-type: decimal !important;
+  padding-left: 1.5rem !important;
+  margin-bottom: 1.25rem !important;
+}
+
+.ProseMirror li,
+.article-editor-content li {
+  margin-bottom: 0.35rem;
+}
+
+.ProseMirror blockquote,
+.article-editor-content blockquote {
+  border-left: 4px solid #0070f3 !important;
+  padding-left: 1.25rem !important;
+  font-style: italic !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+  color: var(--muted-foreground) !important;
+}
+
+.ProseMirror pre,
+.article-editor-content pre {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  padding: 1rem 1.25rem !important;
+  border-radius: 0.75rem !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.875rem !important;
+  margin-top: 1.25rem !important;
+  margin-bottom: 1.25rem !important;
+}
+
+.ProseMirror code,
+.article-editor-content code {
+  font-family: var(--font-mono) !important;
+  background-color: var(--secondary) !important;
+  padding: 0.2rem 0.4rem !important;
+  border-radius: 0.35rem !important;
+  font-size: 0.875em !important;
+}
+
+.ProseMirror pre code,
+.article-editor-content pre code {
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--muted-foreground);
+  pointer-events: none;
+  height: 0;
+  font-style: italic;
 }
