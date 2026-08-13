@@ -197,6 +197,16 @@ export default function MarkdownEditor({
             <span>{showImageModal ? 'Hide Image Drawer' : 'Cloudinary Options'}</span>
           </button>
 
+          <button
+            type="button"
+            onClick={() => onChange(value ? `${value}\n\n&nbsp;\n\n` : '&nbsp;\n\n')}
+            className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-2.5 py-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors cursor-pointer"
+            title="Add empty line space between sections"
+          >
+            <Plus className="h-3.5 w-3.5 text-[#0070f3]" />
+            <span>+ Section Gap Space</span>
+          </button>
+
           <input
             ref={fileInputRef}
             type="file"
