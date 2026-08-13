@@ -48,7 +48,7 @@ export default function ProjectCard({
       <CardWrapper {...(wrapperProps as any)} className="flex flex-col justify-between h-full">
         <div>
           {/* Card Top Cover Image / Placeholder Container */}
-          <div className="relative w-full h-[290px] overflow-hidden bg-[#dcdcdc] dark:bg-slate-800">
+          <div className="relative w-full h-[340px] overflow-hidden bg-[#dcdcdc] dark:bg-slate-800">
             {image ? (
               <Image
                 src={image}
