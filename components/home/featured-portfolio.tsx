@@ -4,7 +4,7 @@ import SectionContainer from "@/components/shared/section-container"
 import SectionHeader from "@/components/shared/section-header"
 import ProjectCard from "@/components/shared/project-card"
 import { getPortfolioProjects } from "@/lib/content"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 export default async function FeaturedPortfolio() {
   const projects = await getPortfolioProjects()
@@ -46,7 +46,7 @@ export default async function FeaturedPortfolio() {
         <Link href="/portfolio">
           <button className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-foreground border border-foreground/50 hover:border-accent hover:text-accent px-8 py-3.5 rounded-none transition-all cursor-pointer">
             <span>VIEW ALL PORTFOLIO</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-4 h-4" />
           </button>
         </Link>
       </div>
