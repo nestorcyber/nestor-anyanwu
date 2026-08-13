@@ -129,7 +129,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
               
               {/* LEFT COLUMN: Standard Hero Page Banner (Flush to left screen edge) */}
-              <div className="lg:col-span-7 xl:col-span-8 bg-slate-950 text-white p-6 sm:p-10 md:p-14 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 flex flex-col justify-between relative overflow-hidden rounded-r-2xl lg:rounded-r-3xl border-r-2 border-y-2 border-slate-900 shadow-2xl min-h-[440px] md:min-h-[520px]">
+              <div className="lg:col-span-7 xl:col-span-8 bg-slate-950 text-white p-6 sm:p-10 md:p-12 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 flex flex-col justify-between relative overflow-hidden rounded-r-2xl lg:rounded-r-3xl border-r-2 border-y-2 border-slate-900 shadow-2xl min-h-[440px] lg:h-[514px]">
                 {/* Background Cover Image with Dark Mask */}
                 {pinnedArticle.coverImage ? (
                   <Image
@@ -145,7 +145,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/75 to-transparent z-0" />
 
                 {/* Hero Overlay Content */}
-                <div className="relative z-10 space-y-6 max-w-2xl my-auto pt-4">
+                <div className="relative z-10 space-y-5 max-w-2xl my-auto pt-2">
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="text-[11px] font-mono font-bold uppercase tracking-widest px-3 py-1 bg-[#0070f3] text-white rounded-none shadow-sm">
                       FEATURED ESSAY
@@ -174,8 +174,8 @@ export default function JournalClient({ articles }: JournalClientProps) {
                 </div>
               </div>
 
-              {/* RIGHT COLUMN: 3 Side Featured Cards styled with our new card layout */}
-              <div className="lg:col-span-5 xl:col-span-4 px-4 sm:px-6 lg:px-0 lg:pr-8 flex flex-col justify-between gap-6">
+              {/* RIGHT COLUMN: 3 Horizontal Side Featured Cards bounded within hero height */}
+              <div className="lg:col-span-5 xl:col-span-4 px-4 sm:px-6 lg:px-0 lg:pr-8 flex flex-col justify-between gap-3.5 lg:h-[514px]">
                 {featuredArticles.map((article) => (
                   <ArticleCard
                     key={article.slug}
@@ -184,6 +184,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
                     date={article.publishedDate}
                     summary={article.excerpt}
                     slug={`/journal/${article.slug}`}
+                    variant="horizontal"
                   />
                 ))}
               </div>

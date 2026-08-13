@@ -11,6 +11,7 @@ export interface ArticleCardProps {
   summary: string
   slug?: string
   image?: string
+  variant?: "vertical" | "horizontal"
 }
 
 function parseDateBadge(dateStr?: string) {
@@ -33,8 +34,64 @@ export default function ArticleCard({
   summary,
   slug = "/journal",
   image,
+  variant = "vertical",
 }: ArticleCardProps) {
   const { day, monthYear } = parseDateBadge(date)
+
+  if (variant === "horizontal") {
+    return (
+      <article className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-none overflow-hidden flex flex-row justify-between h-[162px] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl cursor-pointer">
+        <Link href={slug} className="flex flex-row w-full h-full" aria-label={`Read article: ${title}`}>
+          {/* Left Cover Image Container */}
+          <div className="relative w-[38%] h-full overflow-hidden bg-[#dcdcdc] dark:bg-slate-800 shrink-0">
+            {image ? (
+              <Image
+                src={image}
+                alt={title}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            ) : (
+              <div className="w-full h-full bg-[#dcdcdc] dark:bg-slate-800 flex items-center justify-center">
+                <Sparkles className="w-6 h-6 text-slate-400/60 dark:text-slate-600" />
+              </div>
+            )}
+
+            {/* Overlaid Date Badge */}
+            <div className="absolute top-2 left-2 z-10 flex flex-col shadow-sm overflow-hidden rounded-none">
+              <div className="bg-[#0070f3] dark:bg-sky-600 px-2 py-0.5 min-w-[36px] text-center flex items-center justify-center">
+                <span className="text-sm font-black text-white leading-none tracking-tight font-mono">
+                  {day}
+                </span>
+              </div>
+              <div className="bg-white dark:bg-slate-100 px-1 py-0.5 min-w-[36px] text-center border-t border-blue-400/20">
+                <span className="text-[7.5px] font-bold text-slate-800 tracking-wider uppercase leading-tight block font-mono">
+                  {monthYear}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Content Area */}
+          <div className="w-[62%] p-3.5 flex flex-col justify-between h-full space-y-1">
+            <div className="space-y-1">
+              <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0070f3] dark:group-hover:text-sky-400 transition-colors font-heading line-clamp-2">
+                {title}
+              </h3>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400 font-normal leading-relaxed line-clamp-2">
+                {summary}
+              </p>
+            </div>
+
+            <div className="pt-1.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 group-hover:text-[#0070f3] transition-colors">
+              <span>View Post</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </div>
+          </div>
+        </Link>
+      </article>
+    )
+  }
 
   return (
     <article className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-none overflow-hidden flex flex-col justify-between h-full transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-2xl cursor-pointer">
