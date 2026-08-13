@@ -124,7 +124,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
     <div className="w-full space-y-12 pt-0 pb-20 md:pb-28">
       {/* 1. TOP 100% EDGE-TO-EDGE PINNED HERO SECTION */}
       {pinnedArticle && (
-        <section className="w-full relative overflow-hidden bg-slate-950 text-white border-b-2 border-slate-900 shadow-2xl min-h-[320px] md:min-h-[360px] lg:h-[380px] flex items-center">
+        <section className="w-full relative overflow-hidden bg-slate-950 text-white border-b-2 border-slate-900 shadow-2xl min-h-[320px] md:min-h-[360px] lg:h-[380px] flex items-end">
           {/* Edge-to-edge background cover image */}
           {pinnedArticle.coverImage ? (
             <Image
@@ -137,31 +137,24 @@ export default function JournalClient({ articles }: JournalClientProps) {
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-900 to-sky-950 opacity-90" />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/75 to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/85 to-transparent z-0" />
 
-          {/* Hero Content Overlay (Subpage bounded height) */}
-          <div className="relative z-10 w-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 py-8 space-y-4">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="text-[11px] font-mono font-bold uppercase tracking-widest px-3 py-1 bg-[#0070f3] text-white rounded-none shadow-sm">
-                PINNED POST
-              </span>
-              <span className="text-xs font-mono text-slate-300">
-                {formatDate(pinnedArticle.publishedDate)}
-              </span>
+          {/* Hero Content Overlay (Text on bottom left, button on bottom right) */}
+          <div className="relative z-10 w-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 py-8 sm:py-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+            <div className="space-y-3 max-w-4xl">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight font-heading">
+                {pinnedArticle.title}
+              </h1>
+
+              <p className="text-xs sm:text-sm md:text-base text-slate-300 font-normal leading-relaxed line-clamp-2 max-w-3xl">
+                {pinnedArticle.excerpt}
+              </p>
             </div>
 
-            <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight font-heading max-w-4xl">
-              {pinnedArticle.title}
-            </h1>
-
-            <p className="text-xs sm:text-sm md:text-base text-slate-300 font-normal leading-relaxed line-clamp-2 max-w-3xl">
-              {pinnedArticle.excerpt}
-            </p>
-
-            <div className="pt-2">
+            <div className="shrink-0 pt-2 sm:pt-0">
               <Link href={`/journal/${pinnedArticle.slug}`}>
-                <div className="inline-flex py-3 px-6 bg-[#0070f3] hover:bg-blue-600 text-white font-extrabold text-xs uppercase tracking-wider items-center gap-2 transition-colors cursor-pointer shadow-md">
-                  <span>Read Pinned Article</span>
+                <div className="inline-flex py-3.5 px-6 bg-[#0070f3] hover:bg-blue-600 text-white font-extrabold text-xs uppercase tracking-wider items-center gap-2 transition-colors cursor-pointer shadow-md">
+                  <span>Read Article</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </Link>
@@ -172,14 +165,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
 
       {/* 2. 3 FEATURED HIGHLIGHT CARDS (3 ON ONE LINE UNDER HERO) */}
       {featuredArticles.length > 0 && (
-        <section className="w-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-border/60">
-            <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#0070f3]" />
-              <span>Featured Journal Highlights</span>
-            </h2>
-          </div>
-
+        <section className="w-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {featuredArticles.map((article) => (
               <ArticleCard
