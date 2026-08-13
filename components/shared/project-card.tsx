@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowRight, Sparkles } from "lucide-react"
 
 export interface ProjectCardProps {
   title: string
@@ -11,6 +11,21 @@ export interface ProjectCardProps {
   link?: string
   image?: string
   role?: string
+  date?: string
+}
+
+function parseDateBadge(dateStr?: string) {
+  if (!dateStr) {
+    return { day: "12", monthYear: "MAY, 2026" }
+  }
+  const d = new Date(dateStr)
+  if (isNaN(d.getTime())) {
+    return { day: "12", monthYear: "MAY, 2026" }
+  }
+  const day = d.getDate().toString()
+  const month = d.toLocaleDateString("en-US", { month: "short" }).toUpperCase()
+  const year = d.getFullYear()
+  return { day, monthYear: `${month}, ${year}` }
 }
 
 export default function ProjectCard({
@@ -21,72 +36,91 @@ export default function ProjectCard({
   link,
   image,
   role,
+  date,
 }: ProjectCardProps) {
-  return (
-    <div className="group border-2 border-slate-900/30 dark:border-slate-800 bg-card rounded-2xl p-5 flex flex-col justify-between h-full transition-all shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0284c7] cursor-pointer">
-      <div className="space-y-4">
-        {image && (
-          <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-slate-950 border-2 border-slate-900/20 dark:border-slate-800">
-            <Image
-              src={image}
-              alt={title}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-        )}
+  const { day, monthYear } = parseDateBadge(date)
 
-        <div className="flex items-center justify-between">
-          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0284c7] dark:text-[#0284c7] px-2.5 py-0.5 rounded-md border border-[#0284c7]/40 bg-[#0284c7]/10">
-            {category}
-          </span>
-          {role && (
-            <span className="text-[10px] font-mono text-muted-foreground uppercase">
-              {role}
-            </span>
-          )}
+  const CardWrapper = link ? Link : "div"
+  const wrapperProps = link ? { href: link, ariaLabel: `Explore ${title} project` } : {}
+
+  return (
+    <div className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-none overflow-hidden flex flex-col justify-between h-full transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-2xl cursor-pointer">
+      <CardWrapper {...(wrapperProps as any)} className="flex flex-col justify-between h-full">
+        <div>
+          {/* Card Top Cover Image / Placeholder Container */}
+          <div className="relative w-full h-[220px] overflow-hidden bg-[#dcdcdc] dark:bg-slate-800">
+            {image ? (
+              <Image
+                src={image}
+                alt={title}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            ) : (
+              <div className="w-full h-full bg-[#dcdcdc] dark:bg-slate-800 flex items-center justify-center">
+                <Sparkles className="w-8 h-8 text-slate-400/60 dark:text-slate-600" />
+              </div>
+            )}
+
+            {/* Overlaid Date Badge */}
+            <div className="absolute top-4 left-4 z-10 flex flex-col shadow-md overflow-hidden rounded-none">
+              <div className="bg-[#0070f3] dark:bg-sky-600 px-3.5 py-1.5 min-w-[56px] text-center flex items-center justify-center">
+                <span className="text-2xl font-extrabold text-white leading-none tracking-tight font-mono">
+                  {day}
+                </span>
+              </div>
+              <div className="bg-white dark:bg-slate-100 px-2 py-1 min-w-[56px] text-center border-t border-blue-400/20">
+                <span className="text-[10px] font-bold text-slate-800 tracking-wider uppercase leading-tight block font-mono">
+                  {monthYear}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Content Area */}
+          <div className="p-6 space-y-3">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0070f3] dark:text-sky-400 px-2 py-0.5 rounded-sm bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/40">
+                {category}
+              </span>
+              {role && (
+                <span className="text-[10px] font-mono text-slate-500 uppercase">
+                  {role}
+                </span>
+              )}
+            </div>
+
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0070f3] dark:group-hover:text-sky-400 transition-colors font-heading line-clamp-2">
+              {title}
+            </h3>
+
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-normal leading-relaxed line-clamp-2">
+              {description}
+            </p>
+
+            {technologies && technologies.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {technologies.slice(0, 3).map((tech, idx) => (
+                  <span
+                    key={idx}
+                    className="text-[10px] font-mono uppercase px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-sm border border-slate-200 dark:border-slate-700"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
-        <h3 className="text-lg font-extrabold text-foreground tracking-tight leading-snug group-hover:text-[#0284c7] transition-colors font-heading">
-          {title}
-        </h3>
-
-        <p className="text-xs text-muted-foreground font-light leading-relaxed line-clamp-2">
-          {description}
-        </p>
-
-        {technologies && technologies.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 pt-1">
-            {technologies.map((tech, idx) => (
-              <span
-                key={idx}
-                className="text-[10px] font-mono uppercase px-2 py-0.5 bg-secondary text-foreground rounded-md border border-border/60"
-              >
-                {tech}
-              </span>
-            ))}
+        {/* Bottom Action Bar */}
+        <div className="px-6 pb-6 pt-2">
+          <div className="w-full py-3 px-4 bg-[#f1f5f9] dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 font-bold text-xs uppercase tracking-wider flex items-center justify-between group-hover:bg-[#0070f3] group-hover:text-white transition-colors duration-300">
+            <span>{link ? "Explore Project" : "In Production"}</span>
+            <ArrowRight className="w-4 h-4" />
           </div>
-        )}
-      </div>
-
-      {/* Xbox UI Style Action Button */}
-      <div className="pt-4 mt-4 border-t border-border/40">
-        {link ? (
-          <Link
-            href={link}
-            aria-label={`Explore ${title} project`}
-            className="w-full py-2.5 px-4 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-white text-slate-950 dark:bg-slate-900 dark:text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-between shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,0.9)] group-hover:bg-[#0284c7] group-hover:text-white group-hover:border-[#0284c7] transition-all"
-          >
-            <span className="line-clamp-1 pr-2">Explore {title}</span>
-            <ArrowUpRight className="w-4 h-4 shrink-0" />
-          </Link>
-        ) : (
-          <div className="w-full py-2.5 px-4 rounded-xl border-2 border-slate-700 bg-slate-800 text-slate-300 font-extrabold text-xs uppercase tracking-wider flex items-center justify-between opacity-80 cursor-not-allowed">
-            <span>In Production</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </div>
-        )}
-      </div>
+        </div>
+      </CardWrapper>
     </div>
   )
 }

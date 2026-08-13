@@ -31,6 +31,8 @@ export default async function FeaturedPortfolio() {
               description={project.shortDescription}
               technologies={[...project.technologies]}
               link={`/portfolio/${project.slug}`}
+              image={project.coverImage}
+              date={project.completionDate || undefined}
             />
           ))}
         </div>

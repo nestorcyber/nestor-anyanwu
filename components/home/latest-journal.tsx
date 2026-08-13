@@ -29,10 +29,7 @@ export default async function LatestJournal() {
               key={article.slug}
               title={article.title}
               image={article.coverImage}
-              date={new Date(article.publishedDate || Date.now()).toLocaleDateString("en-US", {
-                month: "short",
-                year: "numeric",
-              })}
+              date={article.publishedDate}
               summary={article.excerpt}
               slug={`/journal/${article.slug}`}
             />

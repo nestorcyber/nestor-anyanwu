@@ -1,16 +1,30 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowUpRight, Sparkles } from "lucide-react"
+import { ArrowRight, Sparkles } from "lucide-react"
 
 export interface ArticleCardProps {
   title: string
   category?: string
   readTime?: string
-  date: string
+  date?: string
   summary: string
   slug?: string
   image?: string
+}
+
+function parseDateBadge(dateStr?: string) {
+  if (!dateStr) {
+    return { day: "19", monthYear: "JUN, 2026" }
+  }
+  const d = new Date(dateStr)
+  if (isNaN(d.getTime())) {
+    return { day: "19", monthYear: "JUN, 2026" }
+  }
+  const day = d.getDate().toString()
+  const month = d.toLocaleDateString("en-US", { month: "short" }).toUpperCase()
+  const year = d.getFullYear()
+  return { day, monthYear: `${month}, ${year}` }
 }
 
 export default function ArticleCard({
@@ -20,45 +34,60 @@ export default function ArticleCard({
   slug = "/journal",
   image,
 }: ArticleCardProps) {
+  const { day, monthYear } = parseDateBadge(date)
+
   return (
-    <article className="group border-2 border-slate-900/30 dark:border-slate-800 bg-card rounded-2xl overflow-hidden flex flex-col justify-between h-full transition-all shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0284c7] cursor-pointer">
-      <Link href={slug} className="flex flex-col justify-between h-full p-5 space-y-4" aria-label={`Read article: ${title}`}>
-        <div className="space-y-4">
-          {/* Card Top Cover Image */}
-          <div className="relative w-full h-[200px] overflow-hidden bg-slate-900 rounded-xl border-2 border-slate-900/20 dark:border-slate-800">
+    <article className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-none overflow-hidden flex flex-col justify-between h-full transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-2xl cursor-pointer">
+      <Link href={slug} className="flex flex-col justify-between h-full" aria-label={`Read article: ${title}`}>
+        <div>
+          {/* Card Top Cover Image / Placeholder Container */}
+          <div className="relative w-full h-[220px] overflow-hidden bg-[#dcdcdc] dark:bg-slate-800">
             {image ? (
               <Image
                 src={image}
                 alt={title}
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-indigo-600 via-purple-600 to-sky-500 flex items-center justify-center">
-                <Sparkles className="w-8 h-8 text-white/60" />
+              <div className="w-full h-full bg-[#dcdcdc] dark:bg-slate-800 flex items-center justify-center">
+                <Sparkles className="w-8 h-8 text-slate-400/60 dark:text-slate-600" />
               </div>
             )}
+
+            {/* Overlaid Date Badge */}
+            <div className="absolute top-4 left-4 z-10 flex flex-col shadow-md overflow-hidden rounded-none">
+              <div className="bg-[#0070f3] dark:bg-sky-600 px-3.5 py-1.5 min-w-[56px] text-center flex items-center justify-center">
+                <span className="text-2xl font-extrabold text-white leading-none tracking-tight font-mono">
+                  {day}
+                </span>
+              </div>
+              <div className="bg-white dark:bg-slate-100 px-2 py-1 min-w-[56px] text-center border-t border-blue-400/20">
+                <span className="text-[10px] font-bold text-slate-800 tracking-wider uppercase leading-tight block font-mono">
+                  {monthYear}
+                </span>
+              </div>
+            </div>
           </div>
 
-          <div className="space-y-2">
-            <span className="text-[11px] font-mono text-muted-foreground uppercase block">
-              {date}
-            </span>
-
-            <h3 className="text-lg font-extrabold text-foreground tracking-tight leading-snug group-hover:text-[#0284c7] transition-colors font-heading line-clamp-2">
+          {/* Content Area */}
+          <div className="p-6 space-y-3">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0070f3] dark:group-hover:text-sky-400 transition-colors font-heading line-clamp-3">
               {title}
             </h3>
 
-            <p className="text-xs sm:text-sm text-muted-foreground font-light leading-relaxed line-clamp-2 pt-0.5">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-normal leading-relaxed line-clamp-2">
               {summary}
             </p>
           </div>
         </div>
 
-        {/* Xbox UI Style Responsive Button */}
-        <div className="w-full py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-white text-slate-950 dark:bg-slate-900 dark:text-white font-extrabold text-[11px] sm:text-xs uppercase tracking-wider flex items-center justify-between shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] sm:shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,0.9)] group-hover:bg-[#0284c7] group-hover:text-white group-hover:border-[#0284c7] transition-all">
-          <span>Read Article</span>
-          <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+        {/* Bottom Action Bar */}
+        <div className="px-6 pb-6 pt-2">
+          <div className="w-full py-3 px-4 bg-[#f1f5f9] dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 font-bold text-xs uppercase tracking-wider flex items-center justify-between group-hover:bg-[#0070f3] group-hover:text-white transition-colors duration-300">
+            <span>View Post</span>
+            <ArrowRight className="w-4 h-4" />
+          </div>
         </div>
       </Link>
     </article>
