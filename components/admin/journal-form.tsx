@@ -126,15 +126,15 @@ export default function JournalForm({ initial }: Props) {
 
   return (
     <form onSubmit={onSubmit} className="space-y-6">
-      {/* Top Editorial Action Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 border border-border/80 bg-card rounded-xl shadow-2xs">
+      {/* Top Sticky Editorial Action Header Bar */}
+      <div className="sticky top-14 md:top-16 z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 border border-border/80 bg-card/95 backdrop-blur rounded-xl shadow-sm">
         <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={() => router.push('/admin/journal')}
-            className="text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
+            className="text-xs font-bold text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
           >
-            ← Back to Journal
+            ← Back to Posts
           </button>
           <span className="h-4 w-[1px] bg-border" />
           <span className={`px-2.5 py-0.5 text-xs font-semibold rounded-full border ${statusBadge.class}`}>
@@ -142,7 +142,7 @@ export default function JournalForm({ initial }: Props) {
           </span>
           {initial?.updated_at && (
             <span className="hidden sm:inline text-xs text-muted-foreground">
-              Last saved: {new Date(initial.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              Saved: {new Date(initial.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </span>
           )}
         </div>
@@ -176,7 +176,7 @@ export default function JournalForm({ initial }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column (Col 1-8): Main Content & Editor */}
         <div className="lg:col-span-8 space-y-6">
-          <div className="bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-5">
+          <div className="bg-card border border-border/80 rounded-xl p-5 sm:p-6 shadow-2xs space-y-5">
             <Field label="Title">
               <TextInput
                 required
@@ -185,7 +185,7 @@ export default function JournalForm({ initial }: Props) {
                   setTitle(e.target.value)
                   if (!initial) setSlug(slugify(e.target.value))
                 }}
-                placeholder="Enter article title…"
+                placeholder="Enter post title…"
               />
             </Field>
 
@@ -201,11 +201,11 @@ export default function JournalForm({ initial }: Props) {
               />
             </Field>
 
-            <Field label="Article Content">
+            <Field label="Article Content (Full Page Editor)">
               <MarkdownEditor
                 value={content}
                 onChange={setContent}
-                height={460}
+                height={580}
                 placeholder="Write the full article using Markdown or rich text controls…"
                 folder="journal"
               />
