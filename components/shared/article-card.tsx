@@ -41,7 +41,7 @@ export default function ArticleCard({
       <Link href={slug} className="flex flex-col justify-between h-full" aria-label={`Read article: ${title}`}>
         <div>
           {/* Card Top Cover Image / Placeholder Container */}
-          <div className="relative w-full h-[220px] overflow-hidden bg-[#dcdcdc] dark:bg-slate-800">
+          <div className="relative w-full h-[290px] overflow-hidden bg-[#dcdcdc] dark:bg-slate-800">
             {image ? (
               <Image
                 src={image}
@@ -56,14 +56,14 @@ export default function ArticleCard({
             )}
 
             {/* Overlaid Date Badge */}
-            <div className="absolute top-4 left-4 z-10 flex flex-col shadow-md overflow-hidden rounded-none">
-              <div className="bg-[#0070f3] dark:bg-sky-600 px-3.5 py-1.5 min-w-[56px] text-center flex items-center justify-center">
-                <span className="text-2xl font-extrabold text-white leading-none tracking-tight font-mono">
+            <div className="absolute top-3 left-3 z-10 flex flex-col shadow-sm overflow-hidden rounded-none">
+              <div className="bg-[#0070f3] dark:bg-sky-600 px-2.5 py-1 min-w-[44px] text-center flex items-center justify-center">
+                <span className="text-lg font-black text-white leading-none tracking-tight font-mono">
                   {day}
                 </span>
               </div>
-              <div className="bg-white dark:bg-slate-100 px-2 py-1 min-w-[56px] text-center border-t border-blue-400/20">
-                <span className="text-[10px] font-bold text-slate-800 tracking-wider uppercase leading-tight block font-mono">
+              <div className="bg-white dark:bg-slate-100 px-1.5 py-0.5 min-w-[44px] text-center border-t border-blue-400/20">
+                <span className="text-[8.5px] font-bold text-slate-800 tracking-wider uppercase leading-tight block font-mono">
                   {monthYear}
                 </span>
               </div>
