@@ -121,10 +121,10 @@ export default function JournalClient({ articles }: JournalClientProps) {
   }, [articles, selectedCategory, searchQuery])
 
   return (
-    <div className="w-full space-y-12 pt-0 pb-20 md:pb-28">
+    <div className="w-full space-y-12 pt-14 md:pt-16 pb-20 md:pb-28">
       {/* 1. TOP HERO SECTION */}
       {pinnedArticle && (
-        <section className="w-full pt-4 md:pt-6">
+        <section className="w-full pt-0">
           <div className="w-full max-w-[1600px] mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
               
