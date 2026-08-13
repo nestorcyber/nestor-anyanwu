@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Search, ArrowUpRight, Sparkles } from "lucide-react"
+import { Search, ArrowRight, Sparkles } from "lucide-react"
 import ArticleCard from "@/components/shared/article-card"
 
 export interface JournalArticleItem {
@@ -121,95 +121,74 @@ export default function JournalClient({ articles }: JournalClientProps) {
   }, [articles, selectedCategory, searchQuery])
 
   return (
-    <div className="w-full space-y-12 pt-12 sm:pt-14 pb-20 md:pb-28">
+    <div className="w-full space-y-12 pt-0 pb-20 md:pb-28">
       {/* 1. TOP HERO SECTION */}
       {pinnedArticle && (
-        <section className="w-full px-4 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
-            
-            {/* LEFT COLUMN: Big Featured Hero Card */}
-            <div className="lg:col-span-8">
-              <Link
-                href={`/journal/${pinnedArticle.slug}`}
-                className="group block border-2 border-slate-900/30 dark:border-slate-800 bg-card rounded-2xl overflow-hidden shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0070f3] transition-all cursor-pointer"
-              >
-                <div className="relative w-full h-[320px] sm:h-[380px] md:h-[420px] overflow-hidden bg-slate-900 border-b-2 border-slate-900/20 dark:border-slate-800">
-                  {pinnedArticle.coverImage ? (
-                    <Image
-                      src={pinnedArticle.coverImage}
-                      alt={pinnedArticle.title}
-                      fill
-                      className="object-cover group-hover:scale-102 transition-transform duration-500"
-                      priority
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-indigo-600 via-purple-600 to-sky-500 flex items-center justify-center p-8">
-                      <Sparkles className="w-20 h-20 text-white/60" />
-                    </div>
-                  )}
-                </div>
+        <section className="w-full pt-4 md:pt-6">
+          <div className="w-full max-w-[1600px] mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+              
+              {/* LEFT COLUMN: Standard Hero Page Banner (Flush to left screen edge) */}
+              <div className="lg:col-span-7 xl:col-span-8 bg-slate-950 text-white p-6 sm:p-10 md:p-14 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 flex flex-col justify-between relative overflow-hidden rounded-r-2xl lg:rounded-r-3xl border-r-2 border-y-2 border-slate-900 shadow-2xl min-h-[440px] md:min-h-[520px]">
+                {/* Background Cover Image with Dark Mask */}
+                {pinnedArticle.coverImage ? (
+                  <Image
+                    src={pinnedArticle.coverImage}
+                    alt={pinnedArticle.title}
+                    fill
+                    className="object-cover opacity-30 filter brightness-90 contrast-110"
+                    priority
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-900 to-sky-950 opacity-90" />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/75 to-transparent z-0" />
 
-                <div className="p-6 sm:p-8 space-y-3 bg-card">
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-foreground tracking-tight leading-snug group-hover:text-[#0070f3] transition-colors font-heading">
-                    {pinnedArticle.title}
-                  </h1>
-                  <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed line-clamp-2">
-                    {pinnedArticle.excerpt}
-                  </p>
-                  <div className="pt-2 flex items-center justify-between">
-                    <span className="text-xs font-mono text-muted-foreground">
+                {/* Hero Overlay Content */}
+                <div className="relative z-10 space-y-6 max-w-2xl my-auto pt-4">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-widest px-3 py-1 bg-[#0070f3] text-white rounded-none shadow-sm">
+                      FEATURED ESSAY
+                    </span>
+                    <span className="text-xs font-mono text-slate-300">
                       {formatDate(pinnedArticle.publishedDate)}
                     </span>
-                    <div className="py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-white text-slate-950 dark:bg-slate-900 dark:text-white font-extrabold text-[11px] sm:text-xs uppercase tracking-wider flex items-center gap-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] group-hover:bg-[#0070f3] group-hover:text-white group-hover:border-[#0070f3] transition-all">
-                      <span>Read Article</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                    </div>
+                  </div>
+
+                  <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight font-heading">
+                    {pinnedArticle.title}
+                  </h1>
+
+                  <p className="text-sm md:text-base text-slate-300 font-normal leading-relaxed line-clamp-3 max-w-xl">
+                    {pinnedArticle.excerpt}
+                  </p>
+
+                  <div className="pt-2 flex flex-wrap items-center gap-4">
+                    <Link href={`/journal/${pinnedArticle.slug}`}>
+                      <div className="py-3.5 px-6 bg-[#0070f3] hover:bg-blue-600 text-white font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 transition-colors cursor-pointer shadow-md">
+                        <span>Read Featured Essay</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </div>
+                    </Link>
                   </div>
                 </div>
-              </Link>
+              </div>
+
+              {/* RIGHT COLUMN: 3 Side Featured Cards styled with our new card layout */}
+              <div className="lg:col-span-5 xl:col-span-4 px-4 sm:px-6 lg:px-0 lg:pr-8 flex flex-col justify-between gap-6">
+                {featuredArticles.map((article) => (
+                  <ArticleCard
+                    key={article.slug}
+                    title={article.title}
+                    image={article.coverImage}
+                    date={article.publishedDate}
+                    summary={article.excerpt}
+                    slug={`/journal/${article.slug}`}
+                  />
+                ))}
+              </div>
+
             </div>
-
-            {/* RIGHT COLUMN: 3 Side Featured Cards */}
-            <div className="lg:col-span-4 flex flex-col justify-between space-y-4">
-              {featuredArticles.map((article) => (
-                <Link
-                  key={article.slug}
-                  href={`/journal/${article.slug}`}
-                  className="group relative w-full h-[175px] sm:h-[185px] rounded-2xl overflow-hidden border-2 border-slate-900/30 dark:border-slate-800 bg-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0070f3] flex flex-col justify-end p-5 transition-all cursor-pointer"
-                >
-                  {article.coverImage ? (
-                    <Image
-                      src={article.coverImage}
-                      alt={article.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-90"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-indigo-600 to-sky-500 flex items-center justify-center">
-                      <Sparkles className="w-8 h-8 text-white/60" />
-                    </div>
-                  )}
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent z-0" />
-
-                  <div className="relative z-10 flex items-end justify-between gap-3">
-                    <div className="space-y-1 flex-1 min-w-0">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 block">
-                        {formatDate(article.publishedDate)}
-                      </span>
-                      <h2 className="text-sm sm:text-base font-extrabold text-white leading-snug group-hover:text-[#0070f3] transition-colors line-clamp-2 font-heading">
-                        {article.title}
-                      </h2>
-                    </div>
-
-                    <div className="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-md border-2 border-white/40 flex items-center justify-center text-white group-hover:bg-[#0070f3] transition-all shrink-0">
-                      <ArrowUpRight className="w-4 h-4" />
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
           </div>
         </section>
       )}
