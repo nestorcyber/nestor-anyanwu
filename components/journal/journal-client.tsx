@@ -131,7 +131,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
             <div className="lg:col-span-8">
               <Link
                 href={`/journal/${pinnedArticle.slug}`}
-                className="group block border-2 border-slate-900/30 dark:border-slate-800 bg-card rounded-2xl overflow-hidden shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0284c7] transition-all cursor-pointer"
+                className="group block border-2 border-slate-900/30 dark:border-slate-800 bg-card rounded-2xl overflow-hidden shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0070f3] transition-all cursor-pointer"
               >
                 <div className="relative w-full h-[320px] sm:h-[380px] md:h-[420px] overflow-hidden bg-slate-900 border-b-2 border-slate-900/20 dark:border-slate-800">
                   {pinnedArticle.coverImage ? (
@@ -150,7 +150,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
                 </div>
 
                 <div className="p-6 sm:p-8 space-y-3 bg-card">
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-foreground tracking-tight leading-snug group-hover:text-[#0284c7] transition-colors font-heading">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-foreground tracking-tight leading-snug group-hover:text-[#0070f3] transition-colors font-heading">
                     {pinnedArticle.title}
                   </h1>
                   <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed line-clamp-2">
@@ -160,7 +160,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
                     <span className="text-xs font-mono text-muted-foreground">
                       {formatDate(pinnedArticle.publishedDate)}
                     </span>
-                    <div className="py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-white text-slate-950 dark:bg-slate-900 dark:text-white font-extrabold text-[11px] sm:text-xs uppercase tracking-wider flex items-center gap-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] group-hover:bg-[#0284c7] group-hover:text-white group-hover:border-[#0284c7] transition-all">
+                    <div className="py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-white text-slate-950 dark:bg-slate-900 dark:text-white font-extrabold text-[11px] sm:text-xs uppercase tracking-wider flex items-center gap-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] group-hover:bg-[#0070f3] group-hover:text-white group-hover:border-[#0070f3] transition-all">
                       <span>Read Article</span>
                       <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
                     </div>
@@ -175,7 +175,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
                 <Link
                   key={article.slug}
                   href={`/journal/${article.slug}`}
-                  className="group relative w-full h-[175px] sm:h-[185px] rounded-2xl overflow-hidden border-2 border-slate-900/30 dark:border-slate-800 bg-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0284c7] flex flex-col justify-end p-5 transition-all cursor-pointer"
+                  className="group relative w-full h-[175px] sm:h-[185px] rounded-2xl overflow-hidden border-2 border-slate-900/30 dark:border-slate-800 bg-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0070f3] flex flex-col justify-end p-5 transition-all cursor-pointer"
                 >
                   {article.coverImage ? (
                     <Image
@@ -197,12 +197,12 @@ export default function JournalClient({ articles }: JournalClientProps) {
                       <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 block">
                         {formatDate(article.publishedDate)}
                       </span>
-                      <h2 className="text-sm sm:text-base font-extrabold text-white leading-snug group-hover:text-[#0284c7] transition-colors line-clamp-2 font-heading">
+                      <h2 className="text-sm sm:text-base font-extrabold text-white leading-snug group-hover:text-[#0070f3] transition-colors line-clamp-2 font-heading">
                         {article.title}
                       </h2>
                     </div>
 
-                    <div className="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-md border-2 border-white/40 flex items-center justify-center text-white group-hover:bg-[#0284c7] transition-all shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-md border-2 border-white/40 flex items-center justify-center text-white group-hover:bg-[#0070f3] transition-all shrink-0">
                       <ArrowUpRight className="w-4 h-4" />
                     </div>
                   </div>
@@ -253,7 +253,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
                 setSelectedCategory("All")
                 setSearchQuery("")
               }}
-              className="text-xs font-bold uppercase tracking-widest text-[#0284c7] hover:underline pt-2 cursor-pointer"
+              className="text-xs font-bold uppercase tracking-widest text-[#0070f3] hover:underline pt-2 cursor-pointer"
             >
               Reset Search
             </button>
