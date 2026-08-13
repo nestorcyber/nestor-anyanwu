@@ -4,6 +4,7 @@ import { useState, useMemo } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Search, ArrowUpRight, Sparkles } from "lucide-react"
+import ArticleCard from "@/components/shared/article-card"
 
 export interface JournalArticleItem {
   slug: string
@@ -230,48 +231,14 @@ export default function JournalClient({ articles }: JournalClientProps) {
         {filteredArticles.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredArticles.map((article) => (
-              <article
+              <ArticleCard
                 key={article.slug}
-                className="group border-2 border-slate-900/30 dark:border-slate-800 bg-card rounded-2xl overflow-hidden flex flex-col justify-between transition-all shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0284c7] cursor-pointer"
-              >
-                <Link href={`/journal/${article.slug}`} className="flex flex-col justify-between h-full p-5 space-y-4" aria-label={`Read article: ${article.title}`}>
-                  <div className="space-y-4">
-                    <div className="relative w-full h-[220px] overflow-hidden bg-slate-900 rounded-xl border-2 border-slate-900/20 dark:border-slate-800">
-                      {article.coverImage ? (
-                        <Image
-                          src={article.coverImage}
-                          alt={article.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                          <Sparkles className="w-8 h-8 text-white/60" />
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <div className="text-[11px] font-mono text-muted-foreground">
-                        {formatDate(article.publishedDate)}
-                      </div>
-
-                      <h3 className="text-base sm:text-lg font-extrabold text-foreground tracking-tight leading-snug group-hover:text-[#0284c7] transition-colors line-clamp-2 font-heading">
-                        {article.title}
-                      </h3>
-
-                      <p className="text-xs sm:text-sm text-muted-foreground leading-normal font-light line-clamp-2 pt-0.5">
-                        {article.excerpt}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="w-full py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-white text-slate-950 dark:bg-slate-900 dark:text-white font-extrabold text-[11px] sm:text-xs uppercase tracking-wider flex items-center justify-between shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] sm:shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,0.9)] group-hover:bg-[#0284c7] group-hover:text-white group-hover:border-[#0284c7] transition-all">
-                    <span>Read Article</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                  </div>
-                </Link>
-              </article>
+                title={article.title}
+                image={article.coverImage}
+                date={article.publishedDate}
+                summary={article.excerpt}
+                slug={`/journal/${article.slug}`}
+              />
             ))}
           </div>
         ) : (
