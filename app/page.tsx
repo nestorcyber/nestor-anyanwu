@@ -13,8 +13,7 @@ import HomeCTA from "@/components/home/home-cta"
 import Footer from "@/components/footer"
 import { getPortfolioStats, getBrandPartners } from "@/lib/content"
 
-export const dynamic = "force-dynamic"
-export const revalidate = 0
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: "Nestor Anyanwu (Nestor Cyber) | Software Engineer & Tech Leader",

@@ -3,8 +3,7 @@ import Footer from "@/components/footer"
 import { getJournalArticles } from "@/lib/content"
 import JournalClient, { JournalArticleItem } from "@/components/journal/journal-client"
 
-export const dynamic = "force-dynamic"
-export const revalidate = 0
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: "Journal & Writing | Nestor Anyanwu (Nestor Cyber)",
