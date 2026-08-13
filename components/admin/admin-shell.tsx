@@ -315,21 +315,6 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             collapsed ? 'w-full sm:w-[250px] md:w-[68px]' : 'w-full sm:w-[250px] md:w-[250px]'
           } ${open ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
         >
-          {/* Blogger-Style + NEW POST Button */}
-          <div className="mb-4 pt-1">
-            <Link
-              href="/admin/journal/new"
-              onClick={() => setOpen(false)}
-              className={`flex items-center justify-center gap-2 rounded-xl bg-[#0070f3] text-white font-extrabold text-xs tracking-wider uppercase shadow-md hover:bg-blue-600 transition-all ${
-                collapsed ? 'p-3' : 'px-4 py-3'
-              }`}
-              title="Create New Post"
-            >
-              <Plus className="h-4 w-4 shrink-0" />
-              {!collapsed && <span>NEW POST</span>}
-            </Link>
-          </div>
-
           {/* Grouped Navigation Links */}
           <div className="min-h-0 flex-1 overflow-y-auto pr-1">
             <SidebarNav pathname={pathname} collapsed={collapsed} onNavigate={() => setOpen(false)} />
