@@ -7,6 +7,7 @@ import { slugify } from '@/lib/utils/slug'
 import ImageUpload from '@/components/admin/image-upload'
 import MarkdownEditor from '@/components/admin/markdown-editor'
 import { logAdminActivity } from '@/lib/admin-activity'
+import { revalidateJournal } from '@/app/actions/revalidate'
 import {
   Checkbox,
   DangerButton,
@@ -48,22 +49,15 @@ export default function JournalForm({ initial }: Props) {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
 
-  // Determine current Publishing Status Indicator
-  let statusBadge = { label: 'Published', class: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' }
-  if (draft) {
-    statusBadge = { label: 'Draft', class: 'bg-amber-500/10 text-amber-400 border-amber-500/30' }
-  } else if (scheduledAt && new Date(scheduledAt) > new Date()) {
-    statusBadge = { label: `Scheduled: ${new Date(scheduledAt).toLocaleString()}`, class: 'bg-sky-500/10 text-sky-400 border-sky-500/30' }
-  }
-
   async function onSubmit(e: FormEvent) {
     e.preventDefault()
     setSaving(true)
     setError('')
     const supabase = createClient()
+    const targetSlug = slug || slugify(title)
     const payload = {
       title,
-      slug: slug || slugify(title),
+      slug: targetSlug,
       excerpt: excerpt || (content ? content.slice(0, 160) + '…' : ''),
       cover_image: coverImage || null,
       category,
@@ -82,17 +76,26 @@ export default function JournalForm({ initial }: Props) {
       content,
     }
 
-    const initialId = initial?.id
-    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
-    let res = (isRealUuid && initialId)
-      ? await supabase.from('journal_articles').update(payload).eq('id', initialId)
-      : await supabase.from('journal_articles').insert(payload)
+    let res
+    if (initial?.id) {
+      res = await supabase.from('journal_articles').update(payload).eq('id', initial.id)
+    } else if (initial?.slug) {
+      res = await supabase.from('journal_articles').update(payload).eq('slug', initial.slug)
+    } else {
+      res = await supabase.from('journal_articles').insert(payload)
+    }
+
+    if (res.error && initial) {
+      res = await supabase.from('journal_articles').upsert(payload, { onConflict: 'slug' })
+    }
 
     if (res.error && res.error.message.includes('scheduled_at')) {
       delete (payload as Record<string, unknown>).scheduled_at
-      res = (isRealUuid && initialId)
-        ? await supabase.from('journal_articles').update(payload).eq('id', initialId)
-        : await supabase.from('journal_articles').insert(payload)
+      if (initial?.id) {
+        res = await supabase.from('journal_articles').update(payload).eq('id', initial.id)
+      } else {
+        res = await supabase.from('journal_articles').upsert(payload, { onConflict: 'slug' })
+      }
     }
 
     if (res.error) {
@@ -101,9 +104,8 @@ export default function JournalForm({ initial }: Props) {
       return
     }
 
-    // Log admin activity
-    const actionName = isRealUuid ? (draft ? 'Updated Draft Post' : 'Updated Post') : 'Created Post'
-    await logAdminActivity(actionName, 'journal_articles', initial?.id || payload.slug, `Title: ${title}`)
+    await revalidateJournal(targetSlug)
+    await logAdminActivity(initial ? 'Updated Post' : 'Created Post', 'journal_articles', initial?.id || targetSlug, `Title: ${title}`)
 
     router.push('/admin/journal')
     router.refresh()
@@ -112,8 +114,13 @@ export default function JournalForm({ initial }: Props) {
   async function onDelete() {
     if (!initial || !confirm('Delete this article?')) return
     const supabase = createClient()
-    await supabase.from('journal_articles').delete().eq('id', initial.id)
-    await logAdminActivity('Deleted Post', 'journal_articles', initial.id, `Title: ${title}`)
+    if (initial.id) {
+      await supabase.from('journal_articles').delete().eq('id', initial.id)
+    } else if (initial.slug) {
+      await supabase.from('journal_articles').delete().eq('slug', initial.slug)
+    }
+    await revalidateJournal(initial.slug)
+    await logAdminActivity('Deleted Post', 'journal_articles', initial.id || initial.slug, `Title: ${title}`)
     router.push('/admin/journal')
     router.refresh()
   }
@@ -126,33 +133,14 @@ export default function JournalForm({ initial }: Props) {
 
   return (
     <form onSubmit={onSubmit} className="space-y-6">
-      {/* Top Sticky Editorial Action Header Bar */}
-      <div className="sticky top-14 md:top-16 z-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 border border-border/80 bg-card/95 backdrop-blur rounded-xl shadow-sm">
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={() => router.push('/admin/journal')}
-            className="text-xs font-bold text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
-          >
-            ← Back to Posts
-          </button>
-          <span className="h-4 w-[1px] bg-border" />
-          <span className={`px-2.5 py-0.5 text-xs font-semibold rounded-full border ${statusBadge.class}`}>
-            {statusBadge.label}
-          </span>
-          {initial?.updated_at && (
-            <span className="hidden sm:inline text-xs text-muted-foreground">
-              Saved: {new Date(initial.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-            </span>
-          )}
-        </div>
-
+      {/* Sticky Action Buttons at Top Right (No full bar) */}
+      <div className="sticky top-14 md:top-16 z-20 flex justify-end">
         <div className="flex items-center gap-3">
           {initial && (
             <button
               type="button"
               onClick={onDuplicate}
-              className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
+              className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-border bg-card hover:bg-secondary text-foreground transition-colors cursor-pointer shadow-2xs"
             >
               Duplicate
             </button>
@@ -161,7 +149,7 @@ export default function JournalForm({ initial }: Props) {
             <button
               type="button"
               onClick={onDelete}
-              className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-red-500/30 bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors"
+              className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-red-500/30 bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors cursor-pointer shadow-2xs"
             >
               Delete
             </button>

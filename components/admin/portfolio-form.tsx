@@ -7,6 +7,7 @@ import { slugify } from '@/lib/utils/slug'
 import ImageUpload from '@/components/admin/image-upload'
 import MarkdownEditor from '@/components/admin/markdown-editor'
 import { logAdminActivity } from '@/lib/admin-activity'
+import { revalidatePortfolio } from '@/app/actions/revalidate'
 import {
   Checkbox,
   DangerButton,
@@ -51,9 +52,10 @@ export default function PortfolioForm({ initial }: Props) {
     setSaving(true)
     setError('')
     const supabase = createClient()
+    const targetSlug = slug || slugify(title)
     const payload = {
       title,
-      slug: slug || slugify(title),
+      slug: targetSlug,
       short_description: shortDescription,
       cover_image: coverImage || null,
       gallery: gallery
@@ -78,11 +80,18 @@ export default function PortfolioForm({ initial }: Props) {
       sort_order: Number(sortOrder) || 0,
     }
 
-    const initialId = initial?.id
-    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
-    const res = (isRealUuid && initialId)
-      ? await supabase.from('portfolio_projects').update(payload).eq('id', initialId)
-      : await supabase.from('portfolio_projects').insert(payload)
+    let res
+    if (initial?.id) {
+      res = await supabase.from('portfolio_projects').update(payload).eq('id', initial.id)
+    } else if (initial?.slug) {
+      res = await supabase.from('portfolio_projects').update(payload).eq('slug', initial.slug)
+    } else {
+      res = await supabase.from('portfolio_projects').insert(payload)
+    }
+
+    if (res.error && initial) {
+      res = await supabase.from('portfolio_projects').upsert(payload, { onConflict: 'slug' })
+    }
 
     if (res.error) {
       setError(res.error.message)
@@ -90,12 +99,8 @@ export default function PortfolioForm({ initial }: Props) {
       return
     }
 
-    await logAdminActivity(
-      isRealUuid ? 'Updated Project' : 'Created Project',
-      'portfolio_projects',
-      initial?.id || payload.slug,
-      `Title: ${title}`
-    )
+    await revalidatePortfolio(targetSlug)
+    await logAdminActivity(initial ? 'Updated Project' : 'Created Project', 'portfolio_projects', initial?.id || targetSlug, `Title: ${title}`)
 
     router.push('/admin/portfolio')
     router.refresh()
@@ -104,14 +109,36 @@ export default function PortfolioForm({ initial }: Props) {
   async function onDelete() {
     if (!initial || !confirm('Delete this project?')) return
     const supabase = createClient()
-    await supabase.from('portfolio_projects').delete().eq('id', initial.id)
-    await logAdminActivity('Deleted Project', 'portfolio_projects', initial.id, `Title: ${title}`)
+    if (initial.id) {
+      await supabase.from('portfolio_projects').delete().eq('id', initial.id)
+    } else if (initial.slug) {
+      await supabase.from('portfolio_projects').delete().eq('slug', initial.slug)
+    }
+    await revalidatePortfolio(initial.slug)
+    await logAdminActivity('Deleted Project', 'portfolio_projects', initial.id || initial.slug, `Title: ${title}`)
     router.push('/admin/portfolio')
     router.refresh()
   }
 
   return (
-    <form onSubmit={onSubmit} className="max-w-3xl space-y-5">
+    <form onSubmit={onSubmit} className="space-y-6">
+      {/* Sticky Action Buttons at Top Right */}
+      <div className="sticky top-14 md:top-16 z-20 flex justify-end">
+        <div className="flex items-center gap-3">
+          {initial && (
+            <button
+              type="button"
+              onClick={onDelete}
+              className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-red-500/30 bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors cursor-pointer shadow-2xs"
+            >
+              Delete
+            </button>
+          )}
+          <PrimaryButton type="submit" disabled={saving}>
+            {saving ? 'Saving…' : initial ? 'Update Project' : 'Publish Project'}
+          </PrimaryButton>
+        </div>
+      </div>
       <Field label="Title">
         <TextInput
           required
