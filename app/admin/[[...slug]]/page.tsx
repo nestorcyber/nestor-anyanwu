@@ -504,51 +504,131 @@ export default async function AdminCatchAllPage({ params }: Props) {
     if (!actionOrId) {
       const { data: dbData } = await supabase
         .from('portfolio_projects')
-        .select('id, title, slug, draft, featured, category')
+        .select('id, title, slug, draft, featured, cover_image, category, technologies, client')
         .order('sort_order', { ascending: true })
       const fallbackProjects = await getPortfolioProjects()
       const dbSlugs = new Set((dbData ?? []).map((row) => row.slug))
       const items = [
-        ...(dbData ?? []),
+        ...(dbData ?? []).map((p: any) => ({
+          id: p.id,
+          title: p.title,
+          slug: p.slug,
+          draft: p.draft ?? false,
+          featured: p.featured ?? false,
+          coverImage: p.cover_image,
+          category: p.category || 'Portfolio',
+          tags: p.technologies || (p.category ? [p.category] : ['Project']),
+          client: p.client || 'Nestor Cyber',
+        })),
         ...fallbackProjects
           .filter((p) => !dbSlugs.has(p.slug))
           .map((p) => ({
             id: p.slug,
             title: p.title,
             slug: p.slug,
-            category: p.category,
             draft: false,
             featured: p.featured,
+            coverImage: p.coverImage,
+            category: p.category || 'Portfolio',
+            tags: p.technologies || (p.category ? [p.category] : ['Project']),
+            client: p.client || 'Nestor Cyber',
           })),
       ]
       return (
-        <div>
-          <PageHeader
-            title="Portfolio"
-            action={
-              <Link href="/admin/portfolio/new">
-                <PrimaryButton type="button">New project</PrimaryButton>
-              </Link>
-            }
-          />
-          <div className="border border-border divide-y divide-border">
-            {items.map((row) => (
-              <Link
-                key={row.id}
-                href={`/admin/portfolio/${row.id}`}
-                className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 px-3 sm:px-4 py-3 hover:bg-muted/50"
-              >
-                <div>
-                  <p className="font-medium">{row.title}</p>
-                  <p className="text-xs text-muted-foreground">{row.category} · /{row.slug}</p>
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Projects & Portfolio</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                Manage, edit, and organize your portfolio deliverables and case studies.
+              </p>
+            </div>
+            <Link href="/admin/portfolio/new">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
+                + New Project
+              </button>
+            </Link>
+          </div>
+
+          <div className="space-y-3.5">
+            {items.map((row: any) => {
+              const title = row.title || '(Untitled)'
+              const initial = title.replace(/[^a-zA-Z0-9]/g, '')[0]?.toUpperCase() || 'P'
+              const tagList = Array.isArray(row.tags) && row.tags.length > 0 ? row.tags : [row.category]
+
+              return (
+                <div
+                  key={row.id}
+                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                >
+                  <div className="flex items-center gap-4 min-w-0">
+                    {row.coverImage ? (
+                      <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
+                        <Image src={row.coverImage} alt={title} fill className="object-cover" />
+                      </div>
+                    ) : (
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 font-serif text-3xl font-normal flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700">
+                        {initial}
+                      </div>
+                    )}
+
+                    <div className="min-w-0 space-y-1.5">
+                      <Link
+                        href={`/admin/portfolio/${row.id}`}
+                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
+                      >
+                        {title}
+                      </Link>
+
+                      <div className="flex flex-wrap items-center gap-2 text-xs">
+                        {row.draft ? (
+                          <span className="font-bold text-amber-600 dark:text-amber-500">Draft</span>
+                        ) : (
+                          <span className="font-semibold text-slate-500 dark:text-slate-400">Published</span>
+                        )}
+                        <span className="text-slate-300 dark:text-slate-600">•</span>
+                        <span className="text-slate-500 dark:text-slate-400 font-medium font-mono">/{row.slug}</span>
+
+                        {tagList.length > 0 && (
+                          <div className="flex flex-wrap items-center gap-1.5 ml-1">
+                            {tagList.map((tag: string, i: number) => (
+                              <span
+                                key={i}
+                                className="px-2.5 py-0.5 text-[11px] font-medium rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">{row.client}</span>
+                      <div className="w-5 h-5 rounded-full bg-[#0070f3] text-white text-[10px] font-bold flex items-center justify-center shadow-2xs">
+                        {row.client[0]?.toUpperCase() || 'N'}
+                      </div>
+                    </div>
+
+                    <Link
+                      href={`/admin/portfolio/${row.id}`}
+                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
+                    >
+                      Edit
+                    </Link>
+                  </div>
                 </div>
-                <div className="flex gap-2 text-xs">
-                  {row.draft ? <span className="text-amber-400">Draft</span> : <span className="text-emerald-400">Live</span>}
-                  {row.featured ? <span className="text-sky-400">Featured</span> : null}
-                </div>
-              </Link>
-            ))}
-            {!items.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No projects yet.</p> : null}
+              )
+            })}
+
+            {!items.length ? (
+              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
+                No projects added yet.
+              </div>
+            ) : null}
           </div>
         </div>
       )
@@ -609,50 +689,124 @@ export default async function AdminCatchAllPage({ params }: Props) {
     if (!actionOrId) {
       const { data: dbData } = await supabase
         .from('community_entries')
-        .select('id, organization, slug, draft, featured')
+        .select('id, organization, role, slug, draft, featured, cover_image, tags')
         .order('sort_order', { ascending: true })
       const fallbackEntries = await getCommunityEntries()
       const dbSlugs = new Set((dbData ?? []).map((row) => row.slug))
       const items = [
-        ...(dbData ?? []),
+        ...(dbData ?? []).map((e: any) => ({
+          id: e.id,
+          title: e.organization,
+          subTitle: e.role || 'Community Leader',
+          slug: e.slug,
+          draft: e.draft ?? false,
+          featured: e.featured ?? false,
+          coverImage: e.cover_image,
+          tags: e.tags || ['Community'],
+        })),
         ...fallbackEntries
           .filter((e) => !dbSlugs.has(e.slug))
           .map((e) => ({
             id: e.slug,
-            organization: e.organization,
+            title: e.organization,
+            subTitle: e.role || 'Community Leader',
             slug: e.slug,
             draft: false,
             featured: e.featured,
+            coverImage: e.coverImage,
+            tags: e.tags || ['Community'],
           })),
       ]
       return (
-        <div>
-          <PageHeader
-            title="Community"
-            action={
-              <Link href="/admin/community/new">
-                <PrimaryButton type="button">New entry</PrimaryButton>
-              </Link>
-            }
-          />
-          <div className="border border-border divide-y divide-border">
-            {items.map((row) => (
-              <Link
-                key={row.id}
-                href={`/admin/community/${row.id}`}
-                className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 px-3 sm:px-4 py-3 hover:bg-muted/50"
-              >
-                <div>
-                  <p className="font-medium">{row.organization}</p>
-                  <p className="text-xs text-muted-foreground">/{row.slug}</p>
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Community Leadership</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                Manage, edit, and organize community initiatives and leadership roles.
+              </p>
+            </div>
+            <Link href="/admin/community/new">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
+                + New Entry
+              </button>
+            </Link>
+          </div>
+
+          <div className="space-y-3.5">
+            {items.map((row: any) => {
+              const title = row.title || '(Untitled)'
+              const initial = title.replace(/[^a-zA-Z0-9]/g, '')[0]?.toUpperCase() || 'C'
+              const tagList = Array.isArray(row.tags) && row.tags.length > 0 ? row.tags : ['Community']
+
+              return (
+                <div
+                  key={row.id}
+                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                >
+                  <div className="flex items-center gap-4 min-w-0">
+                    {row.coverImage ? (
+                      <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
+                        <Image src={row.coverImage} alt={title} fill className="object-cover" />
+                      </div>
+                    ) : (
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 font-serif text-3xl font-normal flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700">
+                        {initial}
+                      </div>
+                    )}
+
+                    <div className="min-w-0 space-y-1.5">
+                      <Link
+                        href={`/admin/community/${row.id}`}
+                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
+                      >
+                        {title}
+                      </Link>
+
+                      <div className="flex flex-wrap items-center gap-2 text-xs">
+                        {row.draft ? (
+                          <span className="font-bold text-amber-600 dark:text-amber-500">Draft</span>
+                        ) : (
+                          <span className="font-semibold text-slate-500 dark:text-slate-400">Published</span>
+                        )}
+                        <span className="text-slate-300 dark:text-slate-600">•</span>
+                        <span className="text-slate-500 dark:text-slate-400 font-medium font-mono">/{row.slug}</span>
+
+                        {tagList.length > 0 && (
+                          <div className="flex flex-wrap items-center gap-1.5 ml-1">
+                            {tagList.map((tag: string, i: number) => (
+                              <span
+                                key={i}
+                                className="px-2.5 py-0.5 text-[11px] font-medium rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
+                    <span className="text-xs font-medium text-muted-foreground">{row.subTitle}</span>
+
+                    <Link
+                      href={`/admin/community/${row.id}`}
+                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
+                    >
+                      Edit
+                    </Link>
+                  </div>
                 </div>
-                <div className="flex gap-2 text-xs">
-                  {row.draft ? <span className="text-amber-400">Draft</span> : <span className="text-emerald-400">Live</span>}
-                  {row.featured ? <span className="text-sky-400">Featured</span> : null}
-                </div>
-              </Link>
-            ))}
-            {!items.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No entries yet.</p> : null}
+              )
+            })}
+
+            {!items.length ? (
+              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
+                No community entries added yet.
+              </div>
+            ) : null}
           </div>
         </div>
       )
@@ -703,52 +857,115 @@ export default async function AdminCatchAllPage({ params }: Props) {
     )
   }
 
-  // 5. Journey
+  // 5. Journey / Career Milestones
   if (section === 'journey') {
     if (!actionOrId) {
       const { data: dbData } = await supabase
         .from('journey_items')
-        .select('id, title, organization, date_label, type')
+        .select('id, title, organization, role, date_label, type')
         .order('sort_order', { ascending: true })
       const fallbackJourney = await getJourneyItems()
       const dbTitles = new Set((dbData ?? []).map((row) => row.title))
       const items = [
-        ...(dbData ?? []),
+        ...(dbData ?? []).map((j: any) => ({
+          id: j.id,
+          title: j.title,
+          organization: j.organization,
+          dateLabel: j.date_label || '2026',
+          type: j.type || 'milestone',
+          tags: [j.organization, j.type],
+        })),
         ...fallbackJourney
           .filter((j) => !dbTitles.has(j.title))
           .map((j) => ({
             id: j.id,
             title: j.title,
             organization: j.organization,
-            date_label: j.date,
-            type: j.type,
+            dateLabel: j.date,
+            type: j.type || 'milestone',
+            tags: [j.organization, j.type],
           })),
       ]
       return (
-        <div>
-          <PageHeader
-            title="Career Milestones"
-            action={
-              <Link href="/admin/journey/new">
-                <PrimaryButton type="button">New milestone</PrimaryButton>
-              </Link>
-            }
-          />
-          <div className="border border-border divide-y divide-border">
-            {items.map((row) => (
-              <Link
-                key={row.id}
-                href={`/admin/journey/${row.id}`}
-                className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 px-3 sm:px-4 py-3 hover:bg-muted/50"
-              >
-                <div>
-                  <p className="font-medium">{row.title}</p>
-                  <p className="text-xs text-muted-foreground">{row.organization} · {row.date_label}</p>
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Career & Leadership Milestones</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                Manage, edit, and organize career timeline entries and milestones.
+              </p>
+            </div>
+            <Link href="/admin/journey/new">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
+                + New Milestone
+              </button>
+            </Link>
+          </div>
+
+          <div className="space-y-3.5">
+            {items.map((row: any) => {
+              const title = row.title || '(Untitled)'
+              const initial = title.replace(/[^a-zA-Z0-9]/g, '')[0]?.toUpperCase() || 'M'
+              const tagList = Array.isArray(row.tags) && row.tags.length > 0 ? row.tags : ['Milestone']
+
+              return (
+                <div
+                  key={row.id}
+                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                >
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 font-serif text-3xl font-normal flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700">
+                      {initial}
+                    </div>
+
+                    <div className="min-w-0 space-y-1.5">
+                      <Link
+                        href={`/admin/journey/${row.id}`}
+                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
+                      >
+                        {title}
+                      </Link>
+
+                      <div className="flex flex-wrap items-center gap-2 text-xs">
+                        <span className="font-semibold text-slate-500 dark:text-slate-400">{row.organization}</span>
+                        <span className="text-slate-300 dark:text-slate-600">•</span>
+                        <span className="text-slate-500 dark:text-slate-400 font-medium">{row.dateLabel}</span>
+
+                        {tagList.length > 0 && (
+                          <div className="flex flex-wrap items-center gap-1.5 ml-1">
+                            {tagList.map((tag: string, i: number) => (
+                              <span
+                                key={i}
+                                className="px-2.5 py-0.5 text-[11px] font-medium rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
+                    <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{row.type}</span>
+
+                    <Link
+                      href={`/admin/journey/${row.id}`}
+                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
+                    >
+                      Edit
+                    </Link>
+                  </div>
                 </div>
-                <span className="text-xs text-muted-foreground">{row.type}</span>
-              </Link>
-            ))}
-            {!items.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No journey items yet.</p> : null}
+              )
+            })}
+
+            {!items.length ? (
+              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
+                No career milestones added yet.
+              </div>
+            ) : null}
           </div>
         </div>
       )
@@ -965,31 +1182,84 @@ export default async function AdminCatchAllPage({ params }: Props) {
   // 7. Services
   if (section === 'services') {
     if (!actionOrId) {
-      const { data: dbData } = await supabase.from('services').select('id, title, slug').order('sort_order')
+      const { data: dbData } = await supabase.from('services').select('id, title, slug, description').order('sort_order')
       const items = [
-        ...(dbData ?? []),
+        ...(dbData ?? []).map((s: any) => ({
+          id: s.id,
+          title: s.title,
+          description: s.description || 'Service Offering',
+          slug: s.slug || s.id,
+        })),
         ...fallbackServices
           .filter((s) => !new Set((dbData ?? []).map((row) => row.title)).has(s.title))
-          .map((s) => ({ id: s.id, title: s.title, slug: s.id })),
+          .map((s) => ({
+            id: s.id,
+            title: s.title,
+            description: s.description || 'Service Offering',
+            slug: s.id,
+          })),
       ]
       return (
-        <div>
-          <PageHeader
-            title="Services"
-            action={
-              <Link href="/admin/services/new">
-                <PrimaryButton type="button">New service</PrimaryButton>
-              </Link>
-            }
-          />
-          <div className="border border-border divide-y divide-border">
-            {items.map((row) => (
-              <Link key={row.id} href={`/admin/services/${row.id}`} className="block px-4 py-3 hover:bg-muted/50">
-                <p className="font-medium">{row.title}</p>
-                <p className="text-xs text-muted-foreground">{row.slug}</p>
-              </Link>
-            ))}
-            {!items.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No services yet.</p> : null}
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Services & Offerings</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                Manage, edit, and publish your professional engineering and design services.
+              </p>
+            </div>
+            <Link href="/admin/services/new">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
+                + New Service
+              </button>
+            </Link>
+          </div>
+
+          <div className="space-y-3.5">
+            {items.map((row: any) => {
+              const title = row.title || '(Untitled Service)'
+              const initial = title.replace(/[^a-zA-Z0-9]/g, '')[0]?.toUpperCase() || 'S'
+
+              return (
+                <div
+                  key={row.id}
+                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                >
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 font-serif text-3xl font-normal flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700">
+                      {initial}
+                    </div>
+
+                    <div className="min-w-0 space-y-1">
+                      <Link
+                        href={`/admin/services/${row.id}`}
+                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
+                      >
+                        {title}
+                      </Link>
+                      <p className="text-xs text-muted-foreground line-clamp-1">{row.description}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
+                    <span className="text-xs font-mono text-muted-foreground">/{row.slug}</span>
+
+                    <Link
+                      href={`/admin/services/${row.id}`}
+                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
+                    >
+                      Edit
+                    </Link>
+                  </div>
+                </div>
+              )
+            })}
+
+            {!items.length ? (
+              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
+                No services added yet.
+              </div>
+            ) : null}
           </div>
         </div>
       )
@@ -1036,28 +1306,82 @@ export default async function AdminCatchAllPage({ params }: Props) {
       const fallbackStats = await getPortfolioStats()
       const dbLabels = new Set((dbData ?? []).map((row) => row.label))
       const items = [
-        ...(dbData ?? []),
+        ...(dbData ?? []).map((s: any) => ({
+          id: s.id,
+          value: s.value,
+          label: s.label,
+          description: s.description || '',
+        })),
         ...fallbackStats
           .filter((s) => !dbLabels.has(s.label))
-          .map((s, i) => ({ id: `stat-${i}`, value: s.value, label: s.label })),
+          .map((s, i) => ({
+            id: `stat-${i}`,
+            value: s.value,
+            label: s.label,
+            description: s.description || '',
+          })),
       ]
       return (
-        <div>
-          <PageHeader
-            title="Home Impact & Portfolio Stats"
-            action={
-              <Link href="/admin/stats/new">
-                <PrimaryButton type="button">New stat</PrimaryButton>
-              </Link>
-            }
-          />
-          <div className="border border-border divide-y divide-border">
-            {items.map((row) => (
-              <Link key={row.id} href={`/admin/stats/${row.id}`} className="block px-4 py-3 hover:bg-muted/50">
-                <p className="font-medium">{row.value} — {row.label}</p>
-              </Link>
-            ))}
-            {!items.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No stats yet.</p> : null}
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Impact & Portfolio Metrics</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                Manage, edit, and display home page impact statistics.
+              </p>
+            </div>
+            <Link href="/admin/stats/new">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
+                + New Metric
+              </button>
+            </Link>
+          </div>
+
+          <div className="space-y-3.5">
+            {items.map((row: any) => {
+              const label = row.label || '(Untitled Stat)'
+              const initial = row.value || '#'
+
+              return (
+                <div
+                  key={row.id}
+                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                >
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-[#0070f3] font-bold text-xl sm:text-2xl flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700 font-mono">
+                      {initial}
+                    </div>
+
+                    <div className="min-w-0 space-y-1">
+                      <Link
+                        href={`/admin/stats/${row.id}`}
+                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
+                      >
+                        {label}
+                      </Link>
+                      {row.description ? <p className="text-xs text-muted-foreground line-clamp-1">{row.description}</p> : null}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
+                    <span className="text-xs font-mono font-bold text-[#0070f3]">{row.value}</span>
+
+                    <Link
+                      href={`/admin/stats/${row.id}`}
+                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
+                    >
+                      Edit
+                    </Link>
+                  </div>
+                </div>
+              )
+            })}
+
+            {!items.length ? (
+              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
+                No impact stats added yet.
+              </div>
+            ) : null}
           </div>
         </div>
       )
@@ -1099,33 +1423,86 @@ export default async function AdminCatchAllPage({ params }: Props) {
   // 9. Certifications
   if (section === 'certifications') {
     if (!actionOrId) {
-      const { data: dbData } = await supabase.from('certifications').select('id, title, provider').order('sort_order')
+      const { data: dbData } = await supabase.from('certifications').select('id, title, provider, date_label').order('sort_order')
       const fallbackCertifications = await getCertifications()
       const dbTitles = new Set((dbData ?? []).map((row) => row.title))
       const items = [
-        ...(dbData ?? []),
+        ...(dbData ?? []).map((c: any) => ({
+          id: c.id,
+          title: c.title,
+          provider: c.provider,
+          date: c.date_label || '2026',
+        })),
         ...fallbackCertifications
           .filter((c) => !dbTitles.has(c.title))
-          .map((c, i) => ({ id: `cert-${i}`, title: c.title, provider: c.provider })),
+          .map((c, i) => ({
+            id: `cert-${i}`,
+            title: c.title,
+            provider: c.provider,
+            date: c.date || '2026',
+          })),
       ]
       return (
-        <div>
-          <PageHeader
-            title="Certifications"
-            action={
-              <Link href="/admin/certifications/new">
-                <PrimaryButton type="button">New certification</PrimaryButton>
-              </Link>
-            }
-          />
-          <div className="border border-border divide-y divide-border">
-            {items.map((row) => (
-              <Link key={row.id} href={`/admin/certifications/${row.id}`} className="block px-4 py-3 hover:bg-muted/50">
-                <p className="font-medium">{row.title}</p>
-                <p className="text-xs text-muted-foreground">{row.provider}</p>
-              </Link>
-            ))}
-            {!items.length ? <p className="px-4 py-8 text-sm text-muted-foreground">No certifications yet.</p> : null}
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Certifications & Diplomas</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                Manage, edit, and display professional credentials and achievements.
+              </p>
+            </div>
+            <Link href="/admin/certifications/new">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
+                + New Certification
+              </button>
+            </Link>
+          </div>
+
+          <div className="space-y-3.5">
+            {items.map((row: any) => {
+              const title = row.title || '(Untitled Certification)'
+              const initial = title.replace(/[^a-zA-Z0-9]/g, '')[0]?.toUpperCase() || 'C'
+
+              return (
+                <div
+                  key={row.id}
+                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                >
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 font-serif text-3xl font-normal flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700">
+                      {initial}
+                    </div>
+
+                    <div className="min-w-0 space-y-1">
+                      <Link
+                        href={`/admin/certifications/${row.id}`}
+                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
+                      >
+                        {title}
+                      </Link>
+                      <p className="text-xs text-muted-foreground">{row.provider} • {row.date}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
+                    <span className="text-xs font-medium text-slate-600 dark:text-slate-400">{row.provider}</span>
+
+                    <Link
+                      href={`/admin/certifications/${row.id}`}
+                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
+                    >
+                      Edit
+                    </Link>
+                  </div>
+                </div>
+              )
+            })}
+
+            {!items.length ? (
+              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
+                No certifications added yet.
+              </div>
+            ) : null}
           </div>
         </div>
       )
