@@ -83,7 +83,7 @@ export default function ArticleCard({
               </p>
             </div>
 
-            <div className="pt-1.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 group-hover:text-[#0070f3] transition-colors">
+            <div className="pt-1.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-white bg-[#0070f3] hover:bg-blue-600 px-2.5 py-1 rounded transition-colors shadow-2xs">
               <span>View Post</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </div>
@@ -141,7 +141,7 @@ export default function ArticleCard({
 
         {/* Bottom Action Bar */}
         <div className="px-6 pb-6 pt-2">
-          <div className="w-full py-3 px-4 bg-[#f1f5f9] dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 font-bold text-xs uppercase tracking-wider flex items-center justify-between group-hover:bg-[#0070f3] group-hover:text-white transition-colors duration-300">
+          <div className="w-full py-3 px-4 bg-[#0070f3] text-white hover:bg-blue-600 font-extrabold text-xs uppercase tracking-wider flex items-center justify-between transition-all duration-300 shadow-md hover:shadow-lg">
             <span>View Post</span>
             <ArrowRight className="w-4 h-4" />
           </div>
