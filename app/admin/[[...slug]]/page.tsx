@@ -1,5 +1,7 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import { Share2, MessageSquare, BarChart2, Sparkles, ExternalLink } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { PageHeader, PrimaryButton } from '@/components/admin/field'
 import JournalForm from '@/components/admin/journal-form'
@@ -29,6 +31,21 @@ import {
 import { servicesList as fallbackServices } from '@/lib/data'
 
 export const dynamic = 'force-dynamic'
+
+function formatDate(dateStr?: string): string {
+  if (!dateStr) return 'Aug 13'
+  try {
+    const d = new Date(dateStr)
+    if (isNaN(d.getTime())) return String(dateStr)
+    return d.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: d.getFullYear() === 2026 ? undefined : 'numeric',
+    })
+  } catch {
+    return String(dateStr)
+  }
+}
 
 interface Props {
   params: Promise<{ slug?: string[] }>
@@ -278,12 +295,24 @@ export default async function AdminCatchAllPage({ params }: Props) {
     if (!actionOrId) {
       const { data: dbData } = await supabase
         .from('journal_articles')
-        .select('id, title, slug, draft, featured, published_date')
+        .select('id, title, slug, draft, featured, cover_image, category, tags, published_date, author, updated_at')
         .order('published_date', { ascending: false })
       const fallbackArticles = await getJournalArticles()
       const dbSlugs = new Set((dbData ?? []).map((row) => row.slug))
       const items = [
-        ...(dbData ?? []),
+        ...(dbData ?? []).map((a: any) => ({
+          id: a.id,
+          title: a.title,
+          slug: a.slug,
+          draft: a.draft ?? false,
+          featured: a.featured ?? false,
+          coverImage: a.cover_image,
+          category: a.category || 'Technology',
+          tags: a.tags || (a.category ? [a.category] : ['Technology']),
+          publishedDate: a.published_date || a.updated_at,
+          author: a.author || 'Nestor Cyber',
+          views: a.views || 0,
+        })),
         ...fallbackArticles
           .filter((a) => !dbSlugs.has(a.slug))
           .map((a) => ({
@@ -292,84 +321,131 @@ export default async function AdminCatchAllPage({ params }: Props) {
             slug: a.slug,
             draft: false,
             featured: a.featured,
-            published_date: a.publishedDate,
+            coverImage: a.coverImage,
+            category: a.category || 'Technology',
+            tags: a.tags || (a.category ? [a.category] : ['Technology']),
+            publishedDate: a.publishedDate,
+            author: a.author || 'Nestor Cyber',
+            views: 3,
           })),
       ]
       return (
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Journal</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Journal Articles</h1>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Manage, edit and publish your journal articles.
+                Manage, edit, and publish your journal posts.
               </p>
             </div>
             <Link href="/admin/journal/new">
-              <button className="px-4 py-2 text-xs font-semibold rounded-lg bg-accent text-accent-foreground hover:bg-accent/90 transition-colors shadow-2xs">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
                 + New Article
               </button>
             </Link>
           </div>
 
-          <div className="bg-card border border-border/80 rounded-xl overflow-hidden shadow-2xs">
-            <div className="p-4 border-b border-border/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-secondary/30">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">
-                All Articles ({items.length})
-              </span>
-            </div>
+          {/* Admin Posts List Cards matching UI screenshot */}
+          <div className="space-y-3.5">
+            {items.map((row: any) => {
+              const isDraft = row.draft
+              const title = row.title || '(Untitled)'
+              const initial = title.replace(/[^a-zA-Z0-9]/g, '')[0]?.toUpperCase() || 'U'
+              const formattedDate = row.publishedDate ? formatDate(row.publishedDate) : 'Aug 13'
+              const authorName = row.author || 'Nestor Cyber'
+              const tagList = Array.isArray(row.tags) && row.tags.length > 0 ? row.tags : [row.category || 'Technology']
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
-                <thead className="bg-secondary/60 text-muted-foreground font-semibold uppercase tracking-wider text-[10px] border-b border-border/70">
-                  <tr>
-                    <th className="p-3.5">Title / Slug</th>
-                    <th className="p-3.5">Status</th>
-                    <th className="p-3.5">Category</th>
-                    <th className="p-3.5">Published Date</th>
-                    <th className="p-3.5 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border/60">
-                  {items.map((row: any) => (
-                    <tr key={row.id} className="hover:bg-secondary/40 transition-colors">
-                      <td className="p-3.5 font-medium text-foreground">
-                        <p className="font-semibold text-sm">{row.title}</p>
-                        <p className="text-[11px] font-mono text-muted-foreground">/{row.slug}</p>
-                      </td>
-                      <td className="p-3.5">
-                        {row.draft ? (
-                          <span className="px-2.5 py-0.5 text-[10px] font-semibold rounded-full border bg-amber-500/10 text-amber-500 border-amber-500/20">
-                            Draft
-                          </span>
+              return (
+                <div
+                  key={row.id}
+                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                >
+                  {/* Left Side: Thumbnail / Initial Avatar + Title & Meta & Tags */}
+                  <div className="flex items-center gap-4 min-w-0">
+                    {/* Thumbnail Image or Large Initial Square Box */}
+                    {row.coverImage ? (
+                      <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
+                        <Image src={row.coverImage} alt={title} fill className="object-cover" />
+                      </div>
+                    ) : (
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 font-serif text-3xl font-normal flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700">
+                        {initial}
+                      </div>
+                    )}
+
+                    {/* Title & Meta Subline (Draft/Published, Date, Tag Pills) */}
+                    <div className="min-w-0 space-y-1.5">
+                      <Link
+                        href={`/admin/journal/${row.id}`}
+                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
+                      >
+                        {title}
+                      </Link>
+
+                      <div className="flex flex-wrap items-center gap-2 text-xs">
+                        {isDraft ? (
+                          <span className="font-bold text-amber-600 dark:text-amber-500">Draft</span>
                         ) : (
-                          <span className="px-2.5 py-0.5 text-[10px] font-semibold rounded-full border bg-emerald-500/10 text-emerald-500 border-emerald-500/20">
-                            Published
-                          </span>
+                          <span className="font-semibold text-slate-500 dark:text-slate-400">Published</span>
                         )}
-                        {row.featured ? (
-                          <span className="ml-1.5 px-2 py-0.5 text-[10px] font-semibold rounded-full border bg-sky-500/10 text-sky-500 border-sky-500/20">
-                            Featured
-                          </span>
-                        ) : null}
-                      </td>
-                      <td className="p-3.5 text-muted-foreground">{row.category || 'Technology'}</td>
-                      <td className="p-3.5 font-mono text-muted-foreground">{row.published_date || '—'}</td>
-                      <td className="p-3.5 text-right">
-                        <Link
-                          href={`/admin/journal/${row.id}`}
-                          className="px-3 py-1.5 text-xs font-semibold rounded-md border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
-                        >
-                          Edit
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                        <span className="text-slate-300 dark:text-slate-600">•</span>
+                        <span className="text-slate-500 dark:text-slate-400 font-medium">{formattedDate}</span>
+
+                        {/* Tag Pills */}
+                        {tagList.length > 0 && (
+                          <div className="flex flex-wrap items-center gap-1.5 ml-1">
+                            {tagList.map((tag: string, i: number) => (
+                              <span
+                                key={i}
+                                className="px-2.5 py-0.5 text-[11px] font-medium rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Side: Author Avatar & Name + Stat Icons + Edit Button */}
+                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">{authorName}</span>
+                      <div className="w-5 h-5 rounded-full bg-[#0070f3] text-white text-[10px] font-bold flex items-center justify-center shadow-2xs">
+                        {authorName[0]?.toUpperCase() || 'N'}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 text-slate-400 dark:text-slate-500 text-xs">
+                      <button title="Share" className="hover:text-slate-700 dark:hover:text-slate-200 transition-colors">
+                        <Share2 className="w-4 h-4" />
+                      </button>
+                      <span className="flex items-center gap-1" title="Comments">
+                        <MessageSquare className="w-4 h-4" />
+                        <span>0</span>
+                      </span>
+                      <span className="flex items-center gap-1" title="Views">
+                        <BarChart2 className="w-4 h-4" />
+                        <span>{row.views || 0}</span>
+                      </span>
+                    </div>
+
+                    <Link
+                      href={`/admin/journal/${row.id}`}
+                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
+                    >
+                      Edit
+                    </Link>
+                  </div>
+                </div>
+              )
+            })}
 
             {!items.length ? (
-              <div className="p-8 text-center text-xs text-muted-foreground">No articles published yet.</div>
+              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
+                No articles published yet.
+              </div>
             ) : null}
           </div>
         </div>
