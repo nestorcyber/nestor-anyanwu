@@ -31,7 +31,7 @@ export default function PortfolioHero() {
             <Link href="/contact">
               <button className="bg-accent hover:bg-accent/90 text-white font-semibold text-sm px-6 py-2.5 rounded-xl shadow-xs active:scale-98 transition-all flex items-center gap-2 cursor-pointer">
                 <Send size={16} />
-                <span>Message / Contact</span>
+                <span>Contact</span>
               </button>
             </Link>
 
