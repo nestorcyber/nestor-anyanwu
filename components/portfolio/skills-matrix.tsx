@@ -1,6 +1,64 @@
 import React from "react"
+import Image from "next/image"
 import type { SkillGroup } from "@/lib/content"
-import { Wrench, CheckCircle2 } from "lucide-react"
+import { Wrench, Layers } from "lucide-react"
+
+// Helper function to resolve logo SVG/image URLs from Simple Icons & Devicon CDNs
+function getTechLogoUrl(skillName: string, customIcon?: string): string | null {
+  if (customIcon && (customIcon.startsWith("http://") || customIcon.startsWith("https://") || customIcon.startsWith("/"))) {
+    return customIcon
+  }
+
+  const name = (customIcon || skillName).toLowerCase().trim()
+
+  // 1. Direct custom icon slug mappings to SimpleIcons / Devicon CDN
+  const logoMap: Record<string, string> = {
+    // Frameworks & Dev Languages
+    "react & next.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    "next.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    "react": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    "typescript & javascript": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    "typescript": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    "javascript": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    "tailwind css & web ui": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+    "tailwind css": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+    "git & github": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+    "github": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+    "git": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+    "python": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+    "node.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+
+    // Design & Apps
+    "figma & coreldraw": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+    "figma": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+    "photoshop & illustrator": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-original.svg",
+    "photoshop": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-original.svg",
+    "illustrator": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-line.svg",
+
+    // AI & Cloud Platforms
+    "google ai studio": "https://cdn.simpleicons.org/google",
+    "google workspace & office 365": "https://cdn.simpleicons.org/googleworkspace",
+    "google workspace": "https://cdn.simpleicons.org/googleworkspace",
+    "hubspot": "https://cdn.simpleicons.org/hubspot",
+    "replit": "https://cdn.simpleicons.org/replit",
+    "intellij idea": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg",
+    "gamma": "https://cdn.simpleicons.org/gamma",
+    "supabase": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg",
+    "cloudinary": "https://cdn.simpleicons.org/cloudinary",
+    "vercel": "https://cdn.simpleicons.org/vercel",
+    "vscode": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
+  }
+
+  if (logoMap[name]) return logoMap[name]
+
+  // Dynamic fallback attempt with SimpleIcons CDN slug format
+  const simpleSlug = name.replace(/[^a-z0-9]/g, "")
+  if (simpleSlug.length > 2) {
+    return `https://cdn.simpleicons.org/${simpleSlug}`
+  }
+
+  return null
+}
 
 export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[] }) {
   return (
@@ -8,40 +66,74 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Section Header */}
-        <div className="flex items-center gap-3 border-b border-border/60 pb-4">
-          <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center font-bold">
-            <Wrench className="w-5 h-5" />
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold text-foreground tracking-tight">Skills & Endorsements</h2>
-            <p className="text-xs text-muted-foreground">Core competencies, technical frameworks, brand design tools, and engineering capabilities.</p>
+        <div className="flex items-center justify-between border-b border-border/60 pb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center font-bold">
+              <Wrench className="w-5 h-5" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-foreground tracking-tight">Connected Apps & Technologies</h2>
+              <p className="text-xs text-muted-foreground">Software products, frameworks, design applications, and developer tools used across projects.</p>
+            </div>
           </div>
         </div>
 
-        {/* Skills Categorized Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* LinkedIn "Connected Apps" Card Grid Styling */}
+        <div className="space-y-8">
           {skillGroups.map((group, idx) => (
-            <div key={idx} className="p-6 bg-secondary/20 border border-border/70 rounded-2xl space-y-5 shadow-xs">
-              <div className="flex items-center justify-between border-b border-border/60 pb-3">
-                <h3 className="text-base font-bold text-foreground">
-                  {group.category}
-                </h3>
-                <span className="text-xs font-mono text-accent font-semibold">
-                  {group.skills.length} skills
-                </span>
-              </div>
+            <div key={idx} className="space-y-4">
+              <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
+                <Layers className="w-3.5 h-3.5 text-accent" />
+                <span>{group.category}</span>
+              </h3>
 
-              <div className="flex flex-wrap gap-2.5">
-                {group.skills.map((skill, i) => (
-                  <div
-                    key={i}
-                    className="px-4 py-2 bg-card border border-border/80 rounded-xl text-xs font-semibold text-foreground flex items-center gap-2 shadow-2xs"
-                  >
-                    <CheckCircle2 className="w-4 h-4 text-accent" />
-                    <span>{skill.name}</span>
-                    {skill.years ? <span className="text-[11px] text-muted-foreground">({skill.years})</span> : null}
-                  </div>
-                ))}
+              {/* Connected Apps Horizontal Card Badge Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5">
+                {group.skills.map((skill, i) => {
+                  const logoUrl = getTechLogoUrl(skill.name, skill.icon)
+
+                  return (
+                    <div
+                      key={i}
+                      className="p-3.5 bg-card border border-border/80 hover:border-accent rounded-xl flex items-center gap-3 shadow-2xs hover:shadow-sm transition-all duration-200 group"
+                    >
+                      {/* Logo Icon Container */}
+                      <div className="w-10 h-10 rounded-lg bg-secondary/80 border border-border/60 shrink-0 flex items-center justify-center p-2 group-hover:scale-105 transition-transform">
+                        {logoUrl ? (
+                          <img
+                            src={logoUrl}
+                            alt={skill.name}
+                            className="w-full h-full object-contain dark:invert-[0.1]"
+                            onError={(e) => {
+                              // If CDN image fails to load, fallback gracefully
+                              ;(e.target as HTMLElement).style.display = "none"
+                            }}
+                          />
+                        ) : (
+                          <span className="text-xs font-extrabold text-accent uppercase">
+                            {skill.name.charAt(0)}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Tech Name & Info */}
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs font-bold text-foreground truncate group-hover:text-accent transition-colors">
+                          {skill.name}
+                        </p>
+                        {skill.years ? (
+                          <p className="text-[10px] text-muted-foreground font-mono truncate">
+                            {skill.years}
+                          </p>
+                        ) : skill.experienceLevel ? (
+                          <p className="text-[10px] text-muted-foreground font-mono truncate">
+                            {skill.experienceLevel}
+                          </p>
+                        ) : null}
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
             </div>
           ))}

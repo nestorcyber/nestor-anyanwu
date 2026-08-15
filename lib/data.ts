@@ -370,6 +370,7 @@ export interface SkillItem {
   name: string
   experienceLevel?: string
   years?: string
+  icon?: string
 }
 
 export interface SkillGroup {

@@ -1,13 +1,13 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Download, MapPin, Send, MoreHorizontal, ArrowUpRight } from "lucide-react"
+import { Download, Send } from "lucide-react"
 
 export default function PortfolioHero() {
   return (
     <section className="w-full bg-background border-b border-border/70 relative">
       
-      {/* 1. Natural Integrated Cover Photo Header (Smoothed gradient & backdrop blur bottom edge) */}
+      {/* 1. Natural Integrated Cover Photo Header */}
       <div className="h-60 sm:h-80 lg:h-96 w-full relative bg-slate-950 overflow-hidden">
         <Image
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg"
@@ -23,7 +23,7 @@ export default function PortfolioHero() {
 
       {/* 2. Hero Content Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-6 relative">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           
           {/* Identity & Headline */}
           <div className="space-y-3 max-w-3xl">
@@ -65,23 +65,6 @@ export default function PortfolioHero() {
           </div>
 
         </div>
-
-        {/* Location & Meta info */}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-sm text-muted-foreground font-medium pt-2 border-t border-border/50">
-          <span className="inline-flex items-center gap-1.5 text-foreground font-semibold">
-            <MapPin className="w-4 h-4 text-accent" />
-            Owerri, Imo State, Nigeria
-          </span>
-          <span>•</span>
-          <Link href="/contact" className="text-accent hover:underline font-bold">
-            Contact info
-          </Link>
-          <span>•</span>
-          <span className="text-accent font-bold">
-            500+ Connections & Collaborators
-          </span>
-        </div>
-
       </div>
     </section>
   )
