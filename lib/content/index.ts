@@ -155,6 +155,7 @@ export type SiteSettings = {
   tagline: string
   heroTitle: string
   heroSubtitle: string
+  aboutParagraph: string
   contactEmail: string
   location: string
   availabilityStatus: string
@@ -175,6 +176,8 @@ const defaultSettings: SiteSettings = {
   heroTitle: 'BUILDING DIGITAL FUTURE WITH PURPOSE',
   heroSubtitle:
     'Director of ICT at NACOS FUTO, Data Privacy Ambassador, Software Engineer, and Community Leader.',
+  aboutParagraph:
+    'From directing national computing initiatives to engineering web applications and mentoring student developers, my mission centers on leveraging technology to drive real-world impact and empower future builders.',
   contactEmail: 'nestoranyanwu@gmail.com',
   location: 'Owerri, Imo State, Nigeria',
   availabilityStatus: 'Available for Work',
@@ -699,6 +702,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     tagline: data.tagline,
     heroTitle: data.hero_title,
     heroSubtitle: data.hero_subtitle,
+    aboutParagraph: data.about_paragraph || defaultSettings.aboutParagraph,
     contactEmail: data.contact_email,
     location: data.location,
     availabilityStatus: data.availability_status,

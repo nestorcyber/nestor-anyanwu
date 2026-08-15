@@ -378,7 +378,8 @@ export function SettingsForm({ initial }: { initial: Tables<'site_settings'> }) 
           ['author_name', 'Author name'],
           ['tagline', 'Tagline'],
           ['hero_title', 'Hero title'],
-          ['hero_subtitle', 'Hero subtitle'],
+          ['hero_subtitle', 'Hero subtitle / Bio'],
+          ['about_paragraph', 'About Me (Detailed Paragraph)'],
           ['contact_email', 'Contact email'],
           ['location', 'Location'],
           ['availability_status', 'Availability'],
@@ -391,10 +392,10 @@ export function SettingsForm({ initial }: { initial: Tables<'site_settings'> }) 
         ] as const
       ).map(([key, label]) => (
         <Field key={key} label={label}>
-          {key === 'hero_subtitle' || key === 'tagline' ? (
-            <TextTextarea value={String(form[key] ?? '')} onChange={(e) => set(key, e.target.value)} />
+          {key === 'hero_subtitle' || key === 'tagline' || key === 'about_paragraph' ? (
+            <TextTextarea value={String(form[key as keyof Tables<'site_settings'>] ?? '')} onChange={(e) => set(key as any, e.target.value)} />
           ) : (
-            <TextInput value={String(form[key] ?? '')} onChange={(e) => set(key, e.target.value)} />
+            <TextInput value={String(form[key as keyof Tables<'site_settings'>] ?? '')} onChange={(e) => set(key as any, e.target.value)} />
           )}
         </Field>
       ))}

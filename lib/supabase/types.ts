@@ -28,6 +28,7 @@ export type Database = {
           social_behance: string
           social_whatsapp: string
           google_analytics_id: string
+          about_paragraph: string | null
           created_at: string
           updated_at: string
         }

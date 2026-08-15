@@ -1,6 +1,5 @@
 import { Metadata } from "next"
 import PortfolioHero from "@/components/portfolio/portfolio-hero"
-import PortfolioAboutSection from "@/components/portfolio/portfolio-about-section"
 import PortfolioStats from "@/components/portfolio/portfolio-stats"
 import ServicesGrid from "@/components/portfolio/services-grid"
 import FeaturedProjectsShowcase from "@/components/portfolio/featured-projects-showcase"
@@ -18,6 +17,7 @@ import {
   getProjectItems,
   getServices,
   getSkillGroups,
+  getSiteSettings,
 } from "@/lib/content"
 
 export const revalidate = 60
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 }
 
 export default async function PortfolioPage() {
-  const [stats, services, projects, skillGroups, journeyTimeline, certificationsList] =
+  const [stats, services, projects, skillGroups, journeyTimeline, certificationsList, siteSettings] =
     await Promise.all([
       getPortfolioStats(),
       getServices(),
@@ -48,12 +48,12 @@ export default async function PortfolioPage() {
       getSkillGroups(),
       getJourneyItems(),
       getCertifications(),
+      getSiteSettings(),
     ])
 
   return (
     <main className="min-h-screen bg-background">
-      <PortfolioHero />
-      <PortfolioAboutSection />
+      <PortfolioHero settings={siteSettings} />
       <PortfolioStats stats={stats} />
       <FeaturedProjectsShowcase projects={projects} />
       <SkillsMatrix skillGroups={skillGroups} />

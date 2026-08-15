@@ -1,9 +1,15 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Download, Send } from "lucide-react"
+import { Download, Send, ArrowRight } from "lucide-react"
 
-export default function PortfolioHero() {
+import type { SiteSettings } from "@/lib/content"
+
+export default function PortfolioHero({ settings }: { settings?: SiteSettings }) {
+  const bio = settings?.heroSubtitle || "Tech Advocate, AI Enthusiast, Ingenious Designer, Virtual Assistant and IT Consultant. Crafting quality designs that align with brand goals and deliver exceptional user experience. Your story begins here."
+  const about = settings?.aboutParagraph || "From directing national computing initiatives to engineering web applications and mentoring student developers, my mission centers on leveraging technology to drive real-world impact and empower future builders."
+  const author = settings?.authorName || "Nestor Anyanwu"
+
   return (
     <section className="w-full bg-background border-b border-border/70 relative">
       
@@ -11,7 +17,7 @@ export default function PortfolioHero() {
       <div className="h-52 sm:h-72 lg:h-96 xl:h-[420px] w-full relative bg-slate-950 overflow-hidden">
         <Image
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg"
-          alt="Nestor Anyanwu Cover Banner"
+          alt={`${author} Cover Banner`}
           fill
           className="object-cover"
           priority
@@ -23,7 +29,7 @@ export default function PortfolioHero() {
         {/* Title & Action Buttons on Same Line on Desktop */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-foreground tracking-tight leading-snug font-heading">
-            Nestor Anyanwu
+            {author}
           </h1>
 
           {/* Action Buttons: side-by-side on mobile & desktop */}
@@ -47,10 +53,25 @@ export default function PortfolioHero() {
           </div>
         </div>
 
-        {/* Bio Description Paragraph */}
-        <p className="text-base text-muted-foreground font-medium leading-relaxed max-w-3xl">
-          Tech Advocate, AI Enthusiast, Ingenious Designer, Virtual Assistant and IT Consultant. Crafting quality designs that align with brand goals and deliver exceptional user experience. Your story begins here.
-        </p>
+        {/* Integrated About Description Paragraph with exact requested styling */}
+        <div className="space-y-4 max-w-3xl">
+          <p className="text-base text-muted-foreground font-medium leading-relaxed">
+            {bio}
+          </p>
+
+          <p className="text-sm text-muted-foreground/90 leading-relaxed">
+            {about}
+          </p>
+
+          <div className="pt-1">
+            <Link href="/about">
+              <button className="inline-flex items-center gap-2 text-xs font-bold text-accent hover:underline border border-accent/30 bg-accent/10 px-4 py-2 rounded-xl transition-all shadow-2xs">
+                <span>Read Full Story</span>
+                <ArrowRight size={14} />
+              </button>
+            </Link>
+          </div>
+        </div>
 
       </div>
     </section>
