@@ -1,6 +1,6 @@
 import React from "react"
 import Link from "next/link"
-import { Download, ArrowUpRight, FolderKanban, Sparkles, Code2, Cpu, Globe } from "lucide-react"
+import { Download, ArrowUpRight, Sparkles, ShieldCheck, MapPin, Users } from "lucide-react"
 
 export default function PortfolioHero() {
   return (
@@ -23,10 +23,10 @@ export default function PortfolioHero() {
           </div>
         </div>
 
-        {/* Hero Title & Description Container */}
+        {/* Hero Title & Identity Header */}
         <div className="max-w-4xl space-y-4 pt-2">
           {/* Tag Badges */}
-          <div className="flex flex-wrap gap-2 text-[11px] font-mono font-bold uppercase tracking-wider">
+          <div className="flex flex-wrap items-center gap-2.5 text-[11px] font-mono font-bold uppercase tracking-wider">
             <span className="px-2.5 py-1 bg-accent text-white border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
               Software Engineering
             </span>
@@ -34,17 +34,43 @@ export default function PortfolioHero() {
               Brand Systems
             </span>
             <span className="px-2.5 py-1 bg-card text-foreground border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.8)]">
-              ICT Architecture
+              IT Consulting
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight uppercase leading-tight font-heading">
-            Portfolio & Production Evidence
-          </h1>
+          {/* Name & Verification Badge */}
+          <div className="flex flex-wrap items-center gap-3">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight uppercase leading-tight font-heading">
+              Nestor Anyanwu
+            </h1>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/30 text-xs font-semibold rounded-full shadow-2xs">
+              <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <span>Verified Executive Profile</span>
+            </div>
+          </div>
 
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-light max-w-3xl">
-            A comprehensive index of production software applications, design systems, infrastructure projects, and technical case studies engineered across software technology, design advocacy, and community leadership.
-          </p>
+          {/* Detailed Professional Profile Bio */}
+          <div className="space-y-3 pt-1">
+            <p className="text-base sm:text-xl font-medium text-foreground leading-relaxed">
+              Tech Advocate, AI Enthusiast, Ingenious Designer, Virtual Assistant and IT Consultant. Crafting quality designs that align with brand goals and deliver exceptional user experience. Your story begins here.
+            </p>
+            
+            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-muted-foreground pt-1">
+              <span className="inline-flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-accent" />
+                Owerri, Imo State, Nigeria
+              </span>
+              <span>•</span>
+              <Link href="/contact" className="text-accent hover:underline font-bold">
+                Contact Info
+              </Link>
+              <span>•</span>
+              <span className="inline-flex items-center gap-1 text-foreground font-semibold">
+                <Users className="w-3.5 h-3.5 text-accent" />
+                500+ Connections & Tech Advocates
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* Hero Action Buttons & Quick Stats Bar */}
@@ -85,4 +111,5 @@ export default function PortfolioHero() {
     </section>
   )
 }
+
 
