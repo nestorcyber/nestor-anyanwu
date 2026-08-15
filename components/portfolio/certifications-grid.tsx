@@ -1,60 +1,71 @@
 import React from "react"
-import SectionHeader from "@/components/shared/section-header"
 import type { CertificationItem } from "@/lib/content"
-import { Award, ExternalLink } from "lucide-react"
+import { Award, ExternalLink, ShieldCheck } from "lucide-react"
 
 export default function CertificationsGrid({ certificationsList }: { certificationsList: CertificationItem[] }) {
   return (
-    <section className="w-full py-16 md:py-24 border-b border-border/60 bg-secondary/10">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
-        <SectionHeader
-          badge="CONTINUOUS LEARNING"
-          title="Certifications & Development"
-          subtitle="Formal credentials, industry recognitions, and technical advocacy accreditations."
-        />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {certificationsList.map((cert) => (
-            <div
-              key={cert.id}
-              className="p-6 bg-card border border-border/60 hover:border-accent rounded-none transition-all duration-300 grid-cell-card flex flex-col justify-between space-y-4"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="p-2 bg-accent/10 border border-accent/20">
-                    <Award className="w-5 h-5 text-accent" />
-                  </div>
-                  <span className="text-[10px] font-mono text-muted-foreground uppercase">
-                    {cert.date}
-                  </span>
-                </div>
-
-                <h3 className="text-base font-extrabold text-foreground tracking-tight">
-                  {cert.title}
-                </h3>
-
-                <p className="text-xs text-muted-foreground font-mono">
-                  {cert.provider}
-                </p>
-              </div>
-
-              {cert.credentialUrl && (
-                <div className="pt-3 border-t border-border/30">
-                  <a
-                    href={cert.credentialUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs font-bold text-accent uppercase tracking-wider flex items-center gap-1 hover:underline"
-                  >
-                    <span>Verify Credential</span>
-                    <ExternalLink size={12} />
-                  </a>
-                </div>
-              )}
+    <section className="w-full py-6 md:py-8 bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-card border border-border/80 rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm">
+          
+          {/* Section Title Header */}
+          <div className="flex items-center gap-3 border-b border-border/60 pb-4">
+            <div className="w-8 h-8 rounded-lg bg-accent/10 text-accent flex items-center justify-center font-bold">
+              <Award className="w-4 h-4" />
             </div>
-          ))}
+            <div>
+              <h2 className="text-xl font-bold text-foreground">Licenses & Certifications</h2>
+              <p className="text-xs text-muted-foreground">Formal credentials, industry recognitions, and technical advocacy accreditations.</p>
+            </div>
+          </div>
+
+          {/* Licenses & Certifications List */}
+          <div className="divide-y divide-border/60">
+            {certificationsList.map((cert) => (
+              <div key={cert.id} className="py-5 first:pt-2 last:pb-2 flex gap-4 items-start">
+                
+                {/* Certification Icon */}
+                <div className="w-12 h-12 rounded-xl bg-secondary border border-border shrink-0 flex items-center justify-center text-accent">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+
+                {/* Certification Details */}
+                <div className="space-y-1 flex-1">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="text-base font-bold text-foreground">
+                      {cert.title}
+                    </h3>
+                    <span className="text-xs font-mono text-muted-foreground">
+                      Issued {cert.date}
+                    </span>
+                  </div>
+
+                  <p className="text-xs font-semibold text-accent">
+                    {cert.provider}
+                  </p>
+
+                  {cert.credentialUrl && (
+                    <div className="pt-1.5">
+                      <a
+                        href={cert.credentialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-bold text-accent hover:underline border border-accent/30 bg-accent/10 px-3 py-1 rounded-full"
+                      >
+                        <span>Show credential</span>
+                        <ExternalLink size={12} />
+                      </a>
+                    </div>
+                  )}
+                </div>
+
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>
   )
 }
+
