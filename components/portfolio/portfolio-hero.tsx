@@ -26,10 +26,10 @@ export default function PortfolioHero() {
             Nestor Anyanwu
           </h1>
 
-          {/* Action Buttons with rounded-xl edges */}
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <Link href="/contact">
-              <button className="bg-accent hover:bg-accent/90 text-white font-semibold text-sm px-6 py-2.5 rounded-xl shadow-xs active:scale-98 transition-all flex items-center gap-2 cursor-pointer">
+          {/* Action Buttons: side-by-side on mobile & desktop */}
+          <div className="flex flex-row items-center gap-2.5 sm:gap-3 shrink-0">
+            <Link href="/contact" className="flex-1 sm:flex-none">
+              <button className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-white font-semibold text-sm px-4 sm:px-6 py-2.5 rounded-xl shadow-xs active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer">
                 <Send size={16} />
                 <span>Contact</span>
               </button>
@@ -39,10 +39,10 @@ export default function PortfolioHero() {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-secondary/80 hover:bg-secondary border border-border/80 text-foreground font-semibold text-sm px-6 py-2.5 rounded-xl shadow-xs active:scale-98 transition-all flex items-center gap-2 cursor-pointer"
+              className="flex-1 sm:flex-none bg-secondary/80 hover:bg-secondary border border-border/80 text-foreground font-semibold text-sm px-4 sm:px-6 py-2.5 rounded-xl shadow-xs active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <Download size={16} />
-              <span>Resume / CV</span>
+              <span>View resume</span>
             </a>
           </div>
         </div>
