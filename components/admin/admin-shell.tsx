@@ -39,35 +39,44 @@ type NavGroup = {
 const NAV_GROUPS: NavGroup[] = [
   {
     title: 'MAIN',
-    items: [{ href: '/admin', label: 'Dashboard', icon: LayoutDashboard }],
+    items: [{ href: '/admin', label: 'Dashboard Overview', icon: LayoutDashboard }],
   },
   {
-    title: 'CONTENT',
+    title: 'PORTFOLIO PAGE',
     items: [
-      { href: '/admin/journal', label: 'Journal Posts', icon: BookOpen },
-      { href: '/admin/portfolio', label: 'Projects', icon: FolderKanban },
-      { href: '/admin/community', label: 'Community', icon: Users },
-      { href: '/admin/brands', label: 'Brand Partners', icon: Briefcase },
-      { href: '/admin/journey', label: 'Milestones', icon: Milestone },
-    ],
-  },
-  {
-    title: 'MEDIA',
-    items: [{ href: '/admin/gallery', label: 'Media Library', icon: ImageIcon }],
-  },
-  {
-    title: 'MANAGEMENT',
-    items: [
-      { href: '/admin/services', label: 'Services', icon: Briefcase },
-      { href: '/admin/skills', label: 'Skills & Tech', icon: Wrench },
+      { href: '/admin/portfolio', label: 'Projects & Case Studies', icon: FolderKanban },
+      { href: '/admin/services', label: 'Services Offered', icon: Briefcase },
+      { href: '/admin/skills', label: 'Skills Matrix', icon: Wrench },
       { href: '/admin/certifications', label: 'Certifications', icon: Award },
-      { href: '/admin/stats', label: 'Impact Stats', icon: BarChart3 },
-      { href: '/admin/activity', label: 'Activity Logs', icon: Activity },
+      { href: '/admin/stats', label: 'Impact Statistics', icon: BarChart3 },
     ],
   },
   {
-    title: 'SYSTEM',
-    items: [{ href: '/admin/settings', label: 'Settings', icon: Settings }],
+    title: 'HOME & ABOUT PAGES',
+    items: [
+      { href: '/admin/community', label: 'Community & Advocacy', icon: Users },
+      { href: '/admin/brands', label: 'Brand Partners', icon: Briefcase },
+      { href: '/admin/journey', label: 'Career Journey / Milestones', icon: Milestone },
+    ],
+  },
+  {
+    title: 'JOURNAL PAGE',
+    items: [
+      { href: '/admin/journal', label: 'Journal Articles & Writing', icon: BookOpen },
+    ],
+  },
+  {
+    title: 'GALLERY & MEDIA PAGE',
+    items: [
+      { href: '/admin/gallery', label: 'Media Library & Photos', icon: ImageIcon },
+    ],
+  },
+  {
+    title: 'SYSTEM & LOGS',
+    items: [
+      { href: '/admin/activity', label: 'Activity Logs', icon: Activity },
+      { href: '/admin/settings', label: 'Site Settings', icon: Settings },
+    ],
   },
 ]
 

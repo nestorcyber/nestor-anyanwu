@@ -68,11 +68,11 @@ export default async function AdminCatchAllPage({ params }: Props) {
       return count ?? 0
     }
 
-    const [journalTotal, journalPublished, journalDrafts, portfolioTotal] = await Promise.all([
+    const [journalTotal, portfolioTotal, communityTotal, galleryTotal] = await Promise.all([
       count('journal_articles'),
-      count('journal_articles', { draft: false }),
-      count('journal_articles', { draft: true }),
       count('portfolio_projects'),
+      count('community_entries'),
+      count('gallery_images'),
     ])
 
     const { data: recentJournal } = await supabase
@@ -89,28 +89,28 @@ export default async function AdminCatchAllPage({ params }: Props) {
 
     const statCards = [
       {
-        label: 'Total Journal Posts',
-        count: journalTotal,
-        actionLabel: 'View Journal →',
-        href: '/admin/journal',
-      },
-      {
-        label: 'Published Posts',
-        count: journalPublished,
-        actionLabel: 'View Published →',
-        href: '/admin/journal',
-      },
-      {
-        label: 'Draft Posts',
-        count: journalDrafts,
-        actionLabel: 'View Drafts →',
-        href: '/admin/journal',
-      },
-      {
-        label: 'Portfolio Projects',
+        label: 'Portfolio Page (Projects)',
         count: portfolioTotal,
-        actionLabel: 'View Projects →',
+        actionLabel: 'Manage Portfolio →',
         href: '/admin/portfolio',
+      },
+      {
+        label: 'Journal Page (Articles)',
+        count: journalTotal,
+        actionLabel: 'Manage Journal →',
+        href: '/admin/journal',
+      },
+      {
+        label: 'Home/About (Advocacy)',
+        count: communityTotal,
+        actionLabel: 'Manage Community →',
+        href: '/admin/community',
+      },
+      {
+        label: 'Gallery & Media Page',
+        count: galleryTotal,
+        actionLabel: 'Manage Media →',
+        href: '/admin/gallery',
       },
     ]
 
