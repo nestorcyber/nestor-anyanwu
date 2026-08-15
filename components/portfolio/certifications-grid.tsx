@@ -49,7 +49,7 @@ export default function CertificationsGrid({ certificationsList }: { certificati
                       href={cert.credentialUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:underline border border-accent/30 bg-accent/10 px-4 py-1.5 rounded-full"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:bg-accent hover:text-white border border-accent/40 bg-accent/10 px-4 py-2 rounded-xl transition-all shadow-xs"
                     >
                       <span>Show credential</span>
                       <ExternalLink size={13} />

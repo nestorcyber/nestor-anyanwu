@@ -33,16 +33,16 @@ export default function ProjectLibrary({ projects }: { projects: ProjectItem[] }
           </div>
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex flex-wrap gap-2.5">
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap gap-2">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 text-xs font-semibold rounded-full border transition-all cursor-pointer ${
+              className={`px-4 py-2 text-xs font-semibold rounded-xl border transition-all cursor-pointer ${
                 activeCategory === cat
-                  ? "bg-accent text-white border-accent shadow-2xs"
-                  : "bg-secondary/60 text-muted-foreground border-border hover:bg-secondary hover:text-foreground"
+                  ? "bg-accent text-white border-accent shadow-xs font-bold"
+                  : "bg-secondary/70 text-muted-foreground border-border/80 hover:bg-secondary hover:text-foreground"
               }`}
             >
               {cat}

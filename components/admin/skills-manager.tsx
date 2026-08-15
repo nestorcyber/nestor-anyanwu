@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { DangerButton, Field, PrimaryButton, TextInput } from '@/components/admin/field'
 import type { Tables } from '@/lib/supabase/types'
+import { Edit2, Check, X, Trash2, Plus } from 'lucide-react'
 
 type Skill = Tables<'skills'>
 type Group = Tables<'skill_groups'> & { skills: Skill[] }
@@ -19,6 +20,16 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
   const [years, setYears] = useState('')
   const [error, setError] = useState('')
 
+  // Editing Group state
+  const [editingGroupId, setEditingGroupId] = useState<string | null>(null)
+  const [editCategoryName, setEditCategoryName] = useState('')
+
+  // Editing Skill state
+  const [editingSkillId, setEditingSkillId] = useState<string | null>(null)
+  const [editSkillName, setEditSkillName] = useState('')
+  const [editSkillLevel, setEditSkillLevel] = useState('')
+  const [editSkillYears, setEditSkillYears] = useState('')
+
   async function addGroup(e: FormEvent) {
     e.preventDefault()
     const supabase = createClient()
@@ -28,12 +39,37 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
       .select('*')
       .single()
     if (err || !data) {
-      setError(err?.message || 'Failed')
+      setError(err?.message || 'Failed to add group')
       return
     }
     setGroups((g) => [...g, { ...data, skills: [] }])
     setCategory('')
     setSkillGroupId(data.id)
+    router.refresh()
+  }
+
+  async function startEditGroup(group: Group) {
+    setEditingGroupId(group.id)
+    setEditCategoryName(group.category)
+  }
+
+  async function saveEditGroup(groupId: string) {
+    if (!editCategoryName.trim()) return
+    const supabase = createClient()
+    const { error: err } = await supabase
+      .from('skill_groups')
+      .update({ category: editCategoryName.trim() })
+      .eq('id', groupId)
+
+    if (err) {
+      setError(err.message || 'Failed to update category')
+      return
+    }
+
+    setGroups((prev) =>
+      prev.map((g) => (g.id === groupId ? { ...g, category: editCategoryName.trim() } : g))
+    )
+    setEditingGroupId(null)
     router.refresh()
   }
 
@@ -54,7 +90,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
       .select('*')
       .single()
     if (err || !data) {
-      setError(err?.message || 'Failed')
+      setError(err?.message || 'Failed to add skill')
       return
     }
     setGroups((prev) =>
@@ -63,6 +99,53 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
     setSkillName('')
     setLevel('')
     setYears('')
+    router.refresh()
+  }
+
+  function startEditSkill(skill: Skill) {
+    setEditingSkillId(skill.id)
+    setEditSkillName(skill.name)
+    setEditSkillLevel(skill.experience_level || '')
+    setEditSkillYears(skill.years || '')
+  }
+
+  async function saveEditSkill(skillId: string, groupId: string) {
+    if (!editSkillName.trim()) return
+    const supabase = createClient()
+    const { error: err } = await supabase
+      .from('skills')
+      .update({
+        name: editSkillName.trim(),
+        experience_level: editSkillLevel.trim() || null,
+        years: editSkillYears.trim() || null,
+      })
+      .eq('id', skillId)
+
+    if (err) {
+      setError(err.message || 'Failed to update skill')
+      return
+    }
+
+    setGroups((prev) =>
+      prev.map((g) =>
+        g.id === groupId
+          ? {
+              ...g,
+              skills: g.skills.map((s) =>
+                s.id === skillId
+                  ? {
+                      ...s,
+                      name: editSkillName.trim(),
+                      experience_level: editSkillLevel.trim() || null,
+                      years: editSkillYears.trim() || null,
+                    }
+                  : s
+              ),
+            }
+          : g
+      )
+    )
+    setEditingSkillId(null)
     router.refresh()
   }
 
@@ -85,76 +168,193 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
 
   return (
     <div className="space-y-10">
-      <div className="space-y-4">
+      
+      {/* Skill Groups & Skills List */}
+      <div className="space-y-6">
         {groups.map((group) => (
-          <div key={group.id} className="border border-border p-4">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-3">
-              <h2 className="font-medium break-words">{group.category}</h2>
-              <DangerButton type="button" onClick={() => deleteGroup(group.id)} className="w-full sm:w-auto">
+          <div key={group.id} className="bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-4">
+            
+            {/* Group Category Header with Inline Editing */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border/60 pb-3">
+              {editingGroupId === group.id ? (
+                <div className="flex items-center gap-2 flex-1 max-w-md">
+                  <TextInput
+                    value={editCategoryName}
+                    onChange={(e) => setEditCategoryName(e.target.value)}
+                    placeholder="Group category name"
+                    autoFocus
+                  />
+                  <button
+                    type="button"
+                    onClick={() => saveEditGroup(group.id)}
+                    className="p-2 bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20"
+                    title="Save"
+                  >
+                    <Check className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setEditingGroupId(null)}
+                    className="p-2 bg-secondary text-muted-foreground border border-border rounded-lg hover:text-foreground"
+                    title="Cancel"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center gap-3">
+                  <h2 className="text-base font-bold text-foreground">{group.category}</h2>
+                  <button
+                    type="button"
+                    onClick={() => startEditGroup(group)}
+                    className="p-1.5 text-muted-foreground hover:text-accent rounded-md hover:bg-secondary transition-colors"
+                    title="Edit group category name"
+                  >
+                    <Edit2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              )}
+
+              <DangerButton type="button" onClick={() => deleteGroup(group.id)} className="w-full sm:w-auto text-xs py-1.5 px-3">
                 Delete group
               </DangerButton>
             </div>
-            <ul className="space-y-2">
+
+            {/* Skills List under Group with Inline Skill Editing */}
+            <ul className="space-y-2.5">
               {group.skills.map((skill) => (
-                <li key={skill.id} className="flex items-center justify-between text-sm text-foreground/80">
-                  <span>
-                    {skill.name}
-                    {skill.experience_level ? ` · ${skill.experience_level}` : ''}
-                    {skill.years ? ` · ${skill.years}` : ''}
-                  </span>
-                  <button
-                    type="button"
-                    className="text-red-400 text-xs"
-                    onClick={() => deleteSkill(skill.id, group.id)}
-                  >
-                    Remove
-                  </button>
+                <li key={skill.id} className="p-3 bg-secondary/40 border border-border/60 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  {editingSkillId === skill.id ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 flex-1 items-center">
+                      <TextInput
+                        value={editSkillName}
+                        onChange={(e) => setEditSkillName(e.target.value)}
+                        placeholder="Skill Name"
+                        autoFocus
+                      />
+                      <TextInput
+                        value={editSkillLevel}
+                        onChange={(e) => setEditSkillLevel(e.target.value)}
+                        placeholder="Level (e.g. Advanced)"
+                      />
+                      <TextInput
+                        value={editSkillYears}
+                        onChange={(e) => setEditSkillYears(e.target.value)}
+                        placeholder="Years (e.g. 3+ yrs)"
+                      />
+                    </div>
+                  ) : (
+                    <div className="text-xs font-semibold text-foreground flex flex-wrap items-center gap-2">
+                      <span>{skill.name}</span>
+                      {skill.experience_level && (
+                        <span className="text-[10px] text-muted-foreground font-normal px-2 py-0.5 bg-secondary rounded border border-border/50">
+                          {skill.experience_level}
+                        </span>
+                      )}
+                      {skill.years && (
+                        <span className="text-[10px] font-mono text-accent font-bold px-2 py-0.5 bg-accent/10 rounded border border-accent/20">
+                          {skill.years}
+                        </span>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Actions for Skill */}
+                  <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
+                    {editingSkillId === skill.id ? (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => saveEditSkill(skill.id, group.id)}
+                          className="p-1.5 bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 rounded-md hover:bg-emerald-500/20"
+                          title="Save Skill"
+                        >
+                          <Check className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setEditingSkillId(null)}
+                          className="p-1.5 bg-secondary text-muted-foreground border border-border rounded-md hover:text-foreground"
+                          title="Cancel"
+                        >
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => startEditSkill(skill)}
+                          className="text-xs text-accent font-medium hover:underline px-2 py-1"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          type="button"
+                          className="text-red-400 text-xs font-medium hover:underline px-2 py-1"
+                          onClick={() => deleteSkill(skill.id, group.id)}
+                        >
+                          Remove
+                        </button>
+                      </>
+                    )}
+                  </div>
                 </li>
               ))}
-              {!group.skills.length ? <li className="text-sm text-muted-foreground">No skills</li> : null}
+              {!group.skills.length ? <li className="text-xs text-muted-foreground italic py-2">No skills in this group yet.</li> : null}
             </ul>
+
           </div>
         ))}
       </div>
 
-      <form onSubmit={addGroup} className="max-w-xl space-y-3 border border-border p-4">
-        <h3 className="font-medium">Add skill group</h3>
-        <Field label="Category">
-          <TextInput required value={category} onChange={(e) => setCategory(e.target.value)} />
-        </Field>
-        <PrimaryButton type="submit">Add group</PrimaryButton>
-      </form>
+      {/* Forms for Add Group & Add Skill */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        {/* Add Group Form */}
+        <form onSubmit={addGroup} className="bg-card border border-border/80 rounded-xl p-5 space-y-4 shadow-2xs">
+          <h3 className="text-sm font-bold text-foreground border-b border-border/60 pb-2">Add Skill Group</h3>
+          <Field label="Group Category Name">
+            <TextInput required value={category} onChange={(e) => setCategory(e.target.value)} placeholder="e.g. Software Engineering & Web" />
+          </Field>
+          <PrimaryButton type="submit">Add Group</PrimaryButton>
+        </form>
 
-      <form onSubmit={addSkill} className="max-w-xl space-y-3 border border-border p-4">
-        <h3 className="font-medium">Add skill</h3>
-        <Field label="Group">
-          <select
-            className="w-full border border-border bg-background px-3 py-2 text-sm"
-            value={skillGroupId}
-            onChange={(e) => setSkillGroupId(e.target.value)}
-          >
-            {groups.map((g) => (
-              <option key={g.id} value={g.id}>
-                {g.category}
-              </option>
-            ))}
-          </select>
-        </Field>
-        <Field label="Skill name">
-          <TextInput required value={skillName} onChange={(e) => setSkillName(e.target.value)} />
-        </Field>
-        <Field label="Experience level">
-          <TextInput value={level} onChange={(e) => setLevel(e.target.value)} />
-        </Field>
-        <Field label="Years">
-          <TextInput value={years} onChange={(e) => setYears(e.target.value)} />
-        </Field>
-        <PrimaryButton type="submit" disabled={!groups.length}>
-          Add skill
-        </PrimaryButton>
-      </form>
+        {/* Add Skill Form */}
+        <form onSubmit={addSkill} className="bg-card border border-border/80 rounded-xl p-5 space-y-4 shadow-2xs">
+          <h3 className="text-sm font-bold text-foreground border-b border-border/60 pb-2">Add Skill to Group</h3>
+          <Field label="Target Skill Group">
+            <select
+              className="w-full border border-border bg-secondary/50 text-foreground px-3 py-2 text-xs rounded-lg font-medium focus:outline-none focus:border-accent"
+              value={skillGroupId}
+              onChange={(e) => setSkillGroupId(e.target.value)}
+            >
+              {groups.map((g) => (
+                <option key={g.id} value={g.id}>
+                  {g.category}
+                </option>
+              ))}
+            </select>
+          </Field>
+          <Field label="Skill Name">
+            <TextInput required value={skillName} onChange={(e) => setSkillName(e.target.value)} placeholder="e.g. React & Next.js" />
+          </Field>
+          <div className="grid grid-cols-2 gap-3">
+            <Field label="Experience Level">
+              <TextInput value={level} onChange={(e) => setLevel(e.target.value)} placeholder="e.g. Advanced" />
+            </Field>
+            <Field label="Years">
+              <TextInput value={years} onChange={(e) => setYears(e.target.value)} placeholder="e.g. 3+ yrs" />
+            </Field>
+          </div>
+          <PrimaryButton type="submit" disabled={!groups.length}>
+            Add Skill
+          </PrimaryButton>
+        </form>
 
-      {error ? <p className="text-sm text-red-400">{error}</p> : null}
+      </div>
+
+      {error ? <p className="text-xs text-red-400 font-semibold">{error}</p> : null}
     </div>
   )
 }

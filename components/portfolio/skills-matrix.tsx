@@ -74,7 +74,7 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
               <Wrench className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-foreground tracking-tight">Connected Apps & Technologies</h2>
+              <h2 className="text-2xl font-bold text-foreground tracking-tight">Skills and Technologies</h2>
               <p className="text-xs text-muted-foreground">Software products, frameworks, design applications, and developer tools used across projects.</p>
             </div>
           </div>
