@@ -20,19 +20,6 @@ export default function PortfolioHero() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-6 relative space-y-6">
         
-        {/* Role Tags */}
-        <div className="flex flex-wrap gap-2 text-[11px] font-mono font-bold uppercase tracking-wider">
-          <span className="px-2.5 py-1 bg-accent text-white rounded-md">
-            Software Engineering
-          </span>
-          <span className="px-2.5 py-1 bg-secondary text-foreground rounded-md border border-border">
-            Brand Systems
-          </span>
-          <span className="px-2.5 py-1 bg-secondary text-foreground rounded-md border border-border">
-            IT Consulting
-          </span>
-        </div>
-
         {/* Title & Action Buttons on Same Line on Desktop */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-foreground tracking-tight leading-snug font-heading">
