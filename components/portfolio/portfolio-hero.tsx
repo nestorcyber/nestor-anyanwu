@@ -1,13 +1,13 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Download, Send, ArrowRight } from "lucide-react"
+import { Download, Send, User, ArrowRight } from "lucide-react"
 
 import type { SiteSettings } from "@/lib/content"
 
 export default function PortfolioHero({ settings }: { settings?: SiteSettings }) {
-  const bio = settings?.heroSubtitle || "Tech Advocate, AI Enthusiast, Ingenious Designer, Virtual Assistant and IT Consultant. Crafting quality designs that align with brand goals and deliver exceptional user experience. Your story begins here."
-  const about = settings?.aboutParagraph || "From directing national computing initiatives to engineering web applications and mentoring student developers, my mission centers on leveraging technology to drive real-world impact and empower future builders."
+  const bio = "Tech Advocate, AI Enthusiast, Ingenious Designer, Virtual Assistant and IT Consultant. Crafting quality designs that align with brand goals and deliver exceptional user experience. Your story begins here."
+  const aboutText = settings?.aboutParagraph || "I am an ICT Director, Software Engineer, IT Consultant, and Community Leader. I build digital infrastructure, lead tech communities like NACOS FUTO & GDG, advocate for data privacy, and deliver production software solutions. From directing national computing initiatives to engineering web applications and mentoring student developers, my mission centers on leveraging technology to drive real-world impact and empower future builders."
   const author = settings?.authorName || "Nestor Anyanwu"
 
   return (
@@ -24,7 +24,7 @@ export default function PortfolioHero({ settings }: { settings?: SiteSettings })
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-6 relative space-y-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-6 relative space-y-8">
         
         {/* Title & Action Buttons on Same Line on Desktop */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
@@ -53,19 +53,25 @@ export default function PortfolioHero({ settings }: { settings?: SiteSettings })
           </div>
         </div>
 
-        {/* Integrated About Description Paragraph with exact requested styling */}
-        <div className="space-y-4 max-w-3xl">
-          <p className="text-base text-muted-foreground font-medium leading-relaxed">
-            {bio}
+        {/* Original Tagline (Left Aligned under Name) */}
+        <p className="text-base text-muted-foreground font-medium leading-relaxed max-w-3xl">
+          {bio}
+        </p>
+
+        {/* Separate Centered About Me Section */}
+        <div className="pt-6 border-t border-border/60 max-w-4xl mx-auto text-center space-y-5">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-accent/10 text-accent border border-accent/30 text-xs font-mono font-bold uppercase tracking-wider rounded-md mx-auto">
+            <User className="w-3.5 h-3.5" />
+            <span>About Me</span>
+          </div>
+
+          <p className="text-base sm:text-lg text-foreground font-medium leading-relaxed max-w-3xl mx-auto text-center">
+            {aboutText}
           </p>
 
-          <p className="text-sm text-muted-foreground/90 leading-relaxed">
-            {about}
-          </p>
-
-          <div className="pt-1">
+          <div className="pt-2 flex justify-center">
             <Link href="/about">
-              <button className="inline-flex items-center gap-2 text-xs font-bold text-accent hover:underline border border-accent/30 bg-accent/10 px-4 py-2 rounded-xl transition-all shadow-2xs">
+              <button className="inline-flex items-center gap-2 text-xs font-bold text-accent hover:bg-accent hover:text-white border border-accent/40 bg-accent/10 px-5 py-2.5 rounded-xl transition-all shadow-2xs">
                 <span>Read Full Story</span>
                 <ArrowRight size={14} />
               </button>
