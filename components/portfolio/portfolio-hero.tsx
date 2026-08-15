@@ -7,8 +7,8 @@ export default function PortfolioHero() {
   return (
     <section className="w-full bg-background border-b border-border/70 relative">
       
-      {/* Sub page Hero Cover Photo Banner (Normal crisp image without bottom gradient overlay) */}
-      <div className="h-48 sm:h-64 lg:h-72 w-full relative bg-slate-950 overflow-hidden">
+      {/* Sub page Hero Cover Photo Banner */}
+      <div className="h-52 sm:h-72 lg:h-96 xl:h-[420px] w-full relative bg-slate-950 overflow-hidden">
         <Image
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg"
           alt="Nestor Anyanwu Cover Banner"
