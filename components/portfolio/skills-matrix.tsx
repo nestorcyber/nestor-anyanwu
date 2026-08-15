@@ -4,6 +4,7 @@ import React from "react"
 import Image from "next/image"
 import type { SkillGroup } from "@/lib/content"
 import { Wrench, Layers } from "lucide-react"
+import { SkillIcon } from "@/components/admin/icon-picker"
 
 // Helper function to resolve logo SVG/image URLs from Simple Icons & Devicon CDNs
 function getTechLogoUrl(skillName: string, customIcon?: string): string | null {
@@ -92,8 +93,6 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
               {/* Connected Apps Horizontal Card Badge Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5">
                 {group.skills.map((skill, i) => {
-                  const logoUrl = getTechLogoUrl(skill.name, skill.icon)
-
                   return (
                     <div
                       key={i}
@@ -101,21 +100,13 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
                     >
                       {/* Logo Icon Container */}
                       <div className="w-10 h-10 rounded-lg bg-secondary/80 border border-border/60 shrink-0 flex items-center justify-center p-2 group-hover:scale-105 transition-transform">
-                        {logoUrl ? (
-                          <img
-                            src={logoUrl}
-                            alt={skill.name}
-                            className="w-full h-full object-contain dark:invert-[0.1]"
-                            onError={(e) => {
-                              // If CDN image fails to load, fallback gracefully
-                              ;(e.target as HTMLElement).style.display = "none"
-                            }}
-                          />
-                        ) : (
-                          <span className="text-xs font-extrabold text-accent uppercase">
-                            {skill.name.charAt(0)}
-                          </span>
-                        )}
+                        <SkillIcon
+                          provider={skill.iconProvider}
+                          name={skill.iconName || skill.name}
+                          rawUrl={skill.icon}
+                          fallbackText={skill.name.charAt(0)}
+                          className="w-full h-full object-contain dark:invert-[0.1]"
+                        />
                       </div>
 
                       {/* Tech Name & Info */}

@@ -371,6 +371,8 @@ export interface SkillItem {
   experienceLevel?: string
   years?: string
   icon?: string
+  iconProvider?: string
+  iconName?: string
 }
 
 export interface SkillGroup {

@@ -220,6 +220,9 @@ export type Database = {
           name: string
           experience_level: string | null
           years: string | null
+          icon: string | null
+          icon_provider: string | null
+          icon_name: string | null
           sort_order: number
           created_at: string
           updated_at: string

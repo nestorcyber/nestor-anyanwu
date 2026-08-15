@@ -131,7 +131,14 @@ export type ServiceItem = {
 
 export type SkillGroup = {
   category: string
-  skills: { name: string; experienceLevel?: string; years?: string; icon?: string }[]
+  skills: {
+    name: string
+    experienceLevel?: string
+    years?: string
+    icon?: string
+    iconProvider?: string
+    iconName?: string
+  }[]
 }
 
 export type CertificationItem = {
@@ -532,7 +539,9 @@ export async function getSkillGroups(): Promise<SkillGroup[]> {
             name: s.name,
             experienceLevel: s.experience_level || undefined,
             years: s.years || undefined,
-            icon: (s as any).icon || undefined,
+            icon: s.icon || undefined,
+            iconProvider: s.icon_provider || undefined,
+            iconName: s.icon_name || undefined,
           })),
       }))
     }

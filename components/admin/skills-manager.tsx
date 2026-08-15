@@ -1,11 +1,12 @@
 'use client'
 
-import { FormEvent, useState } from 'react'
+import React, { useState, useEffect, useRef, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { DangerButton, Field, PrimaryButton, TextInput } from '@/components/admin/field'
 import type { Tables } from '@/lib/supabase/types'
-import { Edit2, Check, X, Trash2, Plus } from 'lucide-react'
+import { Edit2, Check, X, Search, Loader2 } from 'lucide-react'
+import { searchIcons, SkillIcon, IconOption } from '@/components/admin/icon-picker'
 
 type Skill = Tables<'skills'>
 type Group = Tables<'skill_groups'> & { skills: Skill[] }
@@ -14,11 +15,19 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
   const router = useRouter()
   const [groups, setGroups] = useState(initialGroups)
   const [category, setCategory] = useState('')
+  
+  // Add Skill Form state
   const [skillName, setSkillName] = useState('')
   const [skillGroupId, setSkillGroupId] = useState(initialGroups[0]?.id ?? '')
   const [level, setLevel] = useState('')
   const [years, setYears] = useState('')
-  const [error, setError] = useState('')
+  const [selectedIcon, setSelectedIcon] = useState<IconOption | null>(null)
+  
+  // Icon Search Popover state for Add Form
+  const [iconQuery, setIconQuery] = useState('')
+  const [searchResults, setSearchResults] = useState<IconOption[]>([])
+  const [isSearching, setIsSearching] = useState(false)
+  const [searchError, setSearchError] = useState('')
 
   // Editing Group state
   const [editingGroupId, setEditingGroupId] = useState<string | null>(null)
@@ -29,6 +38,59 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
   const [editSkillName, setEditSkillName] = useState('')
   const [editSkillLevel, setEditSkillLevel] = useState('')
   const [editSkillYears, setEditSkillYears] = useState('')
+  const [editSelectedIcon, setEditSelectedIcon] = useState<IconOption | null>(null)
+  const [editIconQuery, setEditIconQuery] = useState('')
+  const [editSearchResults, setEditSearchResults] = useState<IconOption[]>([])
+  const [editIsSearching, setEditIsSearching] = useState(false)
+
+  const [error, setError] = useState('')
+
+  // Debounced icon search for Add Skill
+  useEffect(() => {
+    const query = iconQuery.trim() || skillName.trim()
+    if (!query) {
+      setSearchResults([])
+      return
+    }
+
+    const timer = setTimeout(async () => {
+      setIsSearching(true)
+      setSearchError('')
+      try {
+        const results = await searchIcons(query)
+        setSearchResults(results)
+      } catch (err) {
+        setSearchError('Unable to load icons. Try another search.')
+      } finally {
+        setIsSearching(false)
+      }
+    }, 300)
+
+    return () => clearTimeout(timer)
+  }, [iconQuery, skillName])
+
+  // Debounced icon search for Edit Skill
+  useEffect(() => {
+    const query = editIconQuery.trim() || editSkillName.trim()
+    if (!query) {
+      setEditSearchResults([])
+      return
+    }
+
+    const timer = setTimeout(async () => {
+      setEditIsSearching(true)
+      try {
+        const results = await searchIcons(query)
+        setEditSearchResults(results)
+      } catch (err) {
+        // silent fallback
+      } finally {
+        setEditIsSearching(false)
+      }
+    }, 300)
+
+    return () => clearTimeout(timer)
+  }, [editIconQuery, editSkillName])
 
   async function addGroup(e: FormEvent) {
     e.preventDefault()
@@ -78,27 +140,37 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
     if (!skillGroupId) return
     const supabase = createClient()
     const group = groups.find((g) => g.id === skillGroupId)
+
+    const payload: any = {
+      group_id: skillGroupId,
+      name: skillName.trim(),
+      experience_level: level.trim() || null,
+      years: years.trim() || null,
+      sort_order: group?.skills.length ?? 0,
+      icon_provider: selectedIcon?.provider || null,
+      icon_name: selectedIcon?.name || null,
+      icon: selectedIcon?.svgUrl || null,
+    }
+
     const { data, error: err } = await supabase
       .from('skills')
-      .insert({
-        group_id: skillGroupId,
-        name: skillName,
-        experience_level: level || null,
-        years: years || null,
-        sort_order: group?.skills.length ?? 0,
-      })
+      .insert(payload)
       .select('*')
       .single()
+
     if (err || !data) {
       setError(err?.message || 'Failed to add skill')
       return
     }
+
     setGroups((prev) =>
       prev.map((g) => (g.id === skillGroupId ? { ...g, skills: [...g.skills, data] } : g))
     )
     setSkillName('')
     setLevel('')
     setYears('')
+    setSelectedIcon(null)
+    setIconQuery('')
     router.refresh()
   }
 
@@ -107,18 +179,35 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
     setEditSkillName(skill.name)
     setEditSkillLevel(skill.experience_level || '')
     setEditSkillYears(skill.years || '')
+    setEditSelectedIcon(
+      skill.icon_name
+        ? {
+            provider: (skill.icon_provider as any) || 'simple-icons',
+            name: skill.icon_name,
+            title: skill.name,
+            svgUrl: skill.icon || undefined,
+          }
+        : null
+    )
+    setEditIconQuery('')
   }
 
   async function saveEditSkill(skillId: string, groupId: string) {
     if (!editSkillName.trim()) return
     const supabase = createClient()
+
+    const payload: any = {
+      name: editSkillName.trim(),
+      experience_level: editSkillLevel.trim() || null,
+      years: editSkillYears.trim() || null,
+      icon_provider: editSelectedIcon?.provider || null,
+      icon_name: editSelectedIcon?.name || null,
+      icon: editSelectedIcon?.svgUrl || null,
+    }
+
     const { error: err } = await supabase
       .from('skills')
-      .update({
-        name: editSkillName.trim(),
-        experience_level: editSkillLevel.trim() || null,
-        years: editSkillYears.trim() || null,
-      })
+      .update(payload)
       .eq('id', skillId)
 
     if (err) {
@@ -138,6 +227,9 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                       name: editSkillName.trim(),
                       experience_level: editSkillLevel.trim() || null,
                       years: editSkillYears.trim() || null,
+                      icon_provider: editSelectedIcon?.provider || null,
+                      icon_name: editSelectedIcon?.name || null,
+                      icon: editSelectedIcon?.svgUrl || null,
                     }
                   : s
               ),
@@ -220,42 +312,120 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
               </DangerButton>
             </div>
 
-            {/* Skills List under Group with Inline Skill Editing */}
+            {/* Skills List under Group */}
             <ul className="space-y-2.5">
               {group.skills.map((skill) => (
                 <li key={skill.id} className="p-3 bg-secondary/40 border border-border/60 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   {editingSkillId === skill.id ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 flex-1 items-center">
-                      <TextInput
-                        value={editSkillName}
-                        onChange={(e) => setEditSkillName(e.target.value)}
-                        placeholder="Skill Name"
-                        autoFocus
-                      />
-                      <TextInput
-                        value={editSkillLevel}
-                        onChange={(e) => setEditSkillLevel(e.target.value)}
-                        placeholder="Level (e.g. Advanced)"
-                      />
-                      <TextInput
-                        value={editSkillYears}
-                        onChange={(e) => setEditSkillYears(e.target.value)}
-                        placeholder="Years (e.g. 3+ yrs)"
-                      />
+                    <div className="space-y-3 flex-1">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
+                        <TextInput
+                          value={editSkillName}
+                          onChange={(e) => setEditSkillName(e.target.value)}
+                          placeholder="Skill Name"
+                          autoFocus
+                        />
+                        <TextInput
+                          value={editSkillLevel}
+                          onChange={(e) => setEditSkillLevel(e.target.value)}
+                          placeholder="Level (e.g. Advanced)"
+                        />
+                        <TextInput
+                          value={editSkillYears}
+                          onChange={(e) => setEditSkillYears(e.target.value)}
+                          placeholder="Years (e.g. 3+ yrs)"
+                        />
+                      </div>
+
+                      {/* Icon Selector in Edit Mode */}
+                      <div className="p-3 bg-card border border-border/60 rounded-lg space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-semibold text-foreground">Skill Icon</span>
+                          {editSelectedIcon ? (
+                            <div className="flex items-center gap-2">
+                              <div className="w-6 h-6 p-1 bg-secondary rounded border border-border flex items-center justify-center">
+                                <SkillIcon provider={editSelectedIcon.provider} name={editSelectedIcon.name} rawUrl={editSelectedIcon.svgUrl} className="w-4 h-4 object-contain" />
+                              </div>
+                              <span className="text-xs font-mono font-bold text-accent">{editSelectedIcon.title}</span>
+                              <button
+                                type="button"
+                                onClick={() => setEditSelectedIcon(null)}
+                                className="text-[10px] text-muted-foreground hover:text-red-400 underline ml-1"
+                              >
+                                Change
+                              </button>
+                            </div>
+                          ) : (
+                            <span className="text-xs text-muted-foreground italic">No icon selected</span>
+                          )}
+                        </div>
+
+                        {/* Search Input & Results for Edit */}
+                        <div className="relative">
+                          <Search className="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-muted-foreground" />
+                          <input
+                            type="text"
+                            value={editIconQuery}
+                            onChange={(e) => setEditIconQuery(e.target.value)}
+                            placeholder="🔍 Search icons (e.g. React, Next.js)..."
+                            className="w-full pl-8 pr-3 py-1.5 bg-background border border-border/80 rounded-md text-xs text-foreground focus:outline-none focus:border-accent"
+                          />
+                        </div>
+
+                        {editIsSearching ? (
+                          <div className="flex items-center gap-2 text-xs text-muted-foreground py-1">
+                            <Loader2 className="w-3 h-3 animate-spin text-accent" />
+                            <span>Searching icons...</span>
+                          </div>
+                        ) : editSearchResults.length > 0 ? (
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+                            {editSearchResults.map((iconOption, idx) => (
+                              <button
+                                key={idx}
+                                type="button"
+                                onClick={() => setEditSelectedIcon(iconOption)}
+                                className={`p-2 rounded-lg border text-left flex items-center gap-2 text-xs transition-all cursor-pointer ${
+                                  editSelectedIcon?.name === iconOption.name
+                                    ? 'bg-accent/10 border-accent text-accent font-bold'
+                                    : 'bg-secondary/40 border-border/60 hover:bg-secondary hover:border-accent/50'
+                                }`}
+                              >
+                                <div className="w-5 h-5 p-0.5 bg-secondary/80 rounded border border-border/50 flex items-center justify-center shrink-0">
+                                  <SkillIcon provider={iconOption.provider} name={iconOption.name} rawUrl={iconOption.svgUrl} className="w-3.5 h-3.5 object-contain" />
+                                </div>
+                                <span className="truncate text-[11px]">{iconOption.title}</span>
+                              </button>
+                            ))}
+                          </div>
+                        ) : null}
+                      </div>
                     </div>
                   ) : (
-                    <div className="text-xs font-semibold text-foreground flex flex-wrap items-center gap-2">
-                      <span>{skill.name}</span>
-                      {skill.experience_level && (
-                        <span className="text-[10px] text-muted-foreground font-normal px-2 py-0.5 bg-secondary rounded border border-border/50">
-                          {skill.experience_level}
-                        </span>
-                      )}
-                      {skill.years && (
-                        <span className="text-[10px] font-mono text-accent font-bold px-2 py-0.5 bg-accent/10 rounded border border-accent/20">
-                          {skill.years}
-                        </span>
-                      )}
+                    <div className="text-xs font-semibold text-foreground flex items-center gap-3">
+                      {/* Icon Preview Badge */}
+                      <div className="w-8 h-8 rounded-lg bg-secondary/80 border border-border/60 flex items-center justify-center p-1.5 shrink-0">
+                        <SkillIcon
+                          provider={skill.icon_provider || undefined}
+                          name={skill.icon_name || undefined}
+                          rawUrl={skill.icon || undefined}
+                          fallbackText={skill.name.charAt(0)}
+                          className="w-5 h-5 object-contain"
+                        />
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-bold text-sm text-foreground">{skill.name}</span>
+                        {skill.experience_level && (
+                          <span className="text-[10px] text-muted-foreground font-normal px-2 py-0.5 bg-secondary rounded border border-border/50">
+                            {skill.experience_level}
+                          </span>
+                        )}
+                        {skill.years && (
+                          <span className="text-[10px] font-mono text-accent font-bold px-2 py-0.5 bg-accent/10 rounded border border-accent/20">
+                            {skill.years}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   )}
 
@@ -320,9 +490,10 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
           <PrimaryButton type="submit">Add Group</PrimaryButton>
         </form>
 
-        {/* Add Skill Form */}
+        {/* Add Skill Form with Dynamic Icon Picker */}
         <form onSubmit={addSkill} className="bg-card border border-border/80 rounded-xl p-5 space-y-4 shadow-2xs">
           <h3 className="text-sm font-bold text-foreground border-b border-border/60 pb-2">Add Skill to Group</h3>
+          
           <Field label="Target Skill Group">
             <select
               className="w-full border border-border bg-secondary/50 text-foreground px-3 py-2 text-xs rounded-lg font-medium focus:outline-none focus:border-accent"
@@ -336,9 +507,82 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
               ))}
             </select>
           </Field>
+
           <Field label="Skill Name">
-            <TextInput required value={skillName} onChange={(e) => setSkillName(e.target.value)} placeholder="e.g. React & Next.js" />
+            <TextInput required value={skillName} onChange={(e) => setSkillName(e.target.value)} placeholder="e.g. React, Next.js, Figma..." />
           </Field>
+
+          {/* Icon Picker Section */}
+          <div className="p-3 bg-secondary/30 border border-border/60 rounded-xl space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-foreground">Select Skill Icon</span>
+              {selectedIcon ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 p-1 bg-card rounded border border-border flex items-center justify-center">
+                    <SkillIcon provider={selectedIcon.provider} name={selectedIcon.name} rawUrl={selectedIcon.svgUrl} className="w-4 h-4 object-contain" />
+                  </div>
+                  <span className="text-xs font-mono font-bold text-accent">{selectedIcon.title}</span>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedIcon(null)}
+                    className="text-[10px] text-muted-foreground hover:text-red-400 underline ml-1"
+                  >
+                    Change Icon
+                  </button>
+                </div>
+              ) : (
+                <span className="text-xs text-muted-foreground italic">No icon selected (auto-searched)</span>
+              )}
+            </div>
+
+            {/* Icon Search Field */}
+            <div className="relative">
+              <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-muted-foreground" />
+              <input
+                type="text"
+                value={iconQuery}
+                onChange={(e) => setIconQuery(e.target.value)}
+                placeholder="🔍 Search icons (e.g. React, Next.js, Docker)..."
+                className="w-full pl-9 pr-3 py-1.5 bg-background border border-border/80 rounded-lg text-xs text-foreground focus:outline-none focus:border-accent"
+              />
+            </div>
+
+            {/* Search Feedback & Results Grid */}
+            {isSearching ? (
+              <div className="flex items-center gap-2 text-xs text-muted-foreground py-2">
+                <Loader2 className="w-3.5 h-3.5 animate-spin text-accent" />
+                <span>Searching icons...</span>
+              </div>
+            ) : searchError ? (
+              <p className="text-xs text-red-400 py-1">{searchError}</p>
+            ) : searchResults.length > 0 ? (
+              <div className="space-y-1.5">
+                <p className="text-[10px] font-mono uppercase text-muted-foreground font-semibold">Suggested icons</p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-40 overflow-y-auto pr-1">
+                  {searchResults.map((iconOption, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setSelectedIcon(iconOption)}
+                      className={`p-2 rounded-lg border text-left flex items-center gap-2 text-xs transition-all cursor-pointer ${
+                        selectedIcon?.name === iconOption.name
+                          ? 'bg-accent/10 border-accent text-accent font-bold'
+                          : 'bg-card border-border/60 hover:bg-secondary hover:border-accent/50'
+                      }`}
+                    >
+                      <div className="w-6 h-6 p-1 bg-secondary/80 rounded border border-border/50 flex items-center justify-center shrink-0">
+                        <SkillIcon provider={iconOption.provider} name={iconOption.name} rawUrl={iconOption.svgUrl} className="w-4 h-4 object-contain" />
+                      </div>
+                      <span className="truncate text-xs">{iconOption.title}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : (iconQuery || skillName) ? (
+              <p className="text-xs text-muted-foreground italic py-1">No matching icons found. Try another term or choose a generic icon.</p>
+            ) : null}
+          </div>
+
           <div className="grid grid-cols-2 gap-3">
             <Field label="Experience Level">
               <TextInput value={level} onChange={(e) => setLevel(e.target.value)} placeholder="e.g. Advanced" />
@@ -347,6 +591,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
               <TextInput value={years} onChange={(e) => setYears(e.target.value)} placeholder="e.g. 3+ yrs" />
             </Field>
           </div>
+
           <PrimaryButton type="submit" disabled={!groups.length}>
             Add Skill
           </PrimaryButton>
