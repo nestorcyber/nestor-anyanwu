@@ -1,42 +1,25 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Download, Send, Sparkles } from "lucide-react"
+import { Download, Send } from "lucide-react"
 
 export default function PortfolioHero() {
   return (
     <section className="w-full bg-background border-b border-border/70 relative">
       
-      {/* Sub page Hero / Cover Photo Banner */}
-      <div className="h-44 sm:h-56 lg:h-64 w-full relative bg-slate-950 overflow-hidden">
+      {/* Sub page Hero Cover Photo Banner (Normal crisp image without bottom gradient overlay) */}
+      <div className="h-48 sm:h-64 lg:h-72 w-full relative bg-slate-950 overflow-hidden">
         <Image
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg"
           alt="Nestor Anyanwu Cover Banner"
           fill
-          className="object-cover opacity-85"
+          className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-6 relative space-y-6">
         
-        {/* Top Status Badge */}
-        <div className="flex items-center justify-between gap-4 border-b border-border/60 pb-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-accent/10 text-accent border border-accent/30 text-xs font-mono font-bold uppercase tracking-wider rounded-md">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Portfolio & Engineering Deliverables</span>
-          </div>
-
-          <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="uppercase tracking-wider font-semibold">Available for Work</span>
-          </div>
-        </div>
-
         {/* Role Tags */}
         <div className="flex flex-wrap gap-2 text-[11px] font-mono font-bold uppercase tracking-wider">
           <span className="px-2.5 py-1 bg-accent text-white rounded-md">
@@ -50,7 +33,7 @@ export default function PortfolioHero() {
           </span>
         </div>
 
-        {/* Title (Normal Title Case, medium-sized font) & Action Buttons on Same Line on Desktop */}
+        {/* Title & Action Buttons on Same Line on Desktop */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-foreground tracking-tight leading-snug font-heading">
             Nestor Anyanwu
