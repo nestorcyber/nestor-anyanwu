@@ -100,15 +100,6 @@ export default function PortfolioHero() {
               </span>
             </div>
 
-            {/* Open To Work Banner */}
-            <div className="p-4 rounded-2xl bg-accent/10 border border-accent/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
-              <div>
-                <span className="font-bold text-accent text-sm block">Open to work & Consulting</span>
-                <span className="text-muted-foreground">Software Engineer, Brand Designer & IT Architect roles</span>
-              </div>
-              <Link href="/contact" className="text-accent font-bold hover:underline shrink-0 text-xs">
-                See details →
-              </Link>
             </div>
           </div>
 
