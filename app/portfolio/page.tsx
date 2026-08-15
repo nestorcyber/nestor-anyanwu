@@ -53,9 +53,9 @@ export default async function PortfolioPage() {
     <main className="min-h-screen bg-background">
       <PortfolioHero />
       <FeaturedProjectsShowcase projects={projects} />
+      <SkillsMatrix skillGroups={skillGroups} />
       <ProfessionalExperience journeyTimeline={journeyTimeline} />
       <CertificationsGrid certificationsList={certificationsList} />
-      <SkillsMatrix skillGroups={skillGroups} />
       <ProjectLibrary projects={projects} />
       <ServicesGrid services={services} />
       <TestimonialsCarousel />
