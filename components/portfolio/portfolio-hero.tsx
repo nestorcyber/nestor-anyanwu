@@ -11,8 +11,8 @@ export default function PortfolioHero({ settings }: { settings?: SiteSettings })
   return (
     <section className="w-full bg-background border-b border-border/70 relative">
       
-      {/* Sub page Hero Cover Photo Banner */}
-      <div className="h-52 sm:h-72 lg:h-96 xl:h-[420px] w-full relative bg-slate-950 overflow-hidden">
+      {/* Standard Sub Page Hero Cover Photo Banner */}
+      <div className="h-36 sm:h-48 lg:h-56 w-full relative bg-slate-950 overflow-hidden">
         <Image
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg"
           alt={`${author} Cover Banner`}
