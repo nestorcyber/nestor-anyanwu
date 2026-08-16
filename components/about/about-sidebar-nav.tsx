@@ -95,8 +95,8 @@ export default function AboutSidebarNav() {
   }
 
   return (
-    <aside className="w-72 shrink-0 hidden lg:block h-full border-r border-border/70 bg-card/40 backdrop-blur-md sticky top-0 self-start">
-      <div className="p-5 space-y-6 min-h-screen flex flex-col justify-between">
+    <aside className="w-72 shrink-0 hidden lg:block border-r border-border/70 bg-card/40 backdrop-blur-md sticky top-14 md:top-16 self-start">
+      <div className="p-5 space-y-6 max-h-[calc(100vh-4rem)] overflow-y-auto flex flex-col justify-between">
         
         <div className="space-y-6">
           {/* Sidebar Top Header Logo / Branding */}
