@@ -21,6 +21,8 @@ import {
   getSiteSettings,
 } from "@/lib/content"
 
+import PortfolioSidebar from "@/components/portfolio/portfolio-sidebar"
+
 export const revalidate = 60
 
 export const metadata: Metadata = {
@@ -55,15 +57,33 @@ export default async function PortfolioPage() {
   return (
     <main className="min-h-screen bg-background">
       <PortfolioHero settings={siteSettings} />
-      <PortfolioAboutSection settings={siteSettings} />
-      <PortfolioStats stats={stats} />
-      <FeaturedProjectsShowcase projects={projects} />
-      <SkillsMatrix skillGroups={skillGroups} />
-      <ProfessionalExperience journeyTimeline={journeyTimeline} />
-      <CertificationsGrid certificationsList={certificationsList} />
-      <ProjectLibrary projects={projects} />
-      <ServicesGrid services={services} />
-      <TestimonialsCarousel />
+
+      {/* Main Content Layout with Sticky Twitter-Style Desktop Navigation Sidebar */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex gap-8">
+        
+        {/* Desktop Sticky Sidebar */}
+        <PortfolioSidebar
+          projectCount={projects.length}
+          skillGroupCount={skillGroups.length}
+          expCount={journeyTimeline.length}
+          certCount={certificationsList.length}
+        />
+
+        {/* Main Sections Stream */}
+        <div className="flex-1 min-w-0 space-y-4">
+          <PortfolioAboutSection settings={siteSettings} />
+          <PortfolioStats stats={stats} />
+          <FeaturedProjectsShowcase projects={projects} />
+          <SkillsMatrix skillGroups={skillGroups} />
+          <ProfessionalExperience journeyTimeline={journeyTimeline} />
+          <CertificationsGrid certificationsList={certificationsList} />
+          <ProjectLibrary projects={projects} />
+          <ServicesGrid services={services} />
+          <TestimonialsCarousel />
+        </div>
+
+      </div>
+
       <PortfolioCTA />
       <Footer />
     </main>

@@ -19,7 +19,7 @@ export default function ProjectLibrary({ projects }: { projects: ProjectItem[] }
     : projects.filter((p) => p.category === activeCategory)
 
   return (
-    <section className="w-full py-12 md:py-16 border-b border-border/70 bg-background">
+    <section id="library" className="w-full py-12 md:py-16 border-b border-border/70 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Section Header */}

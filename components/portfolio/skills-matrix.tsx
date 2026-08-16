@@ -65,7 +65,7 @@ function getTechLogoUrl(skillName: string, customIcon?: string): string | null {
 
 export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[] }) {
   return (
-    <section className="w-full py-12 md:py-16 border-b border-border/70 bg-background">
+    <section id="skills" className="w-full py-12 md:py-16 border-b border-border/70 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Section Header */}

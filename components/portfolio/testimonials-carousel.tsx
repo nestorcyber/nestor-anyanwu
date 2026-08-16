@@ -28,7 +28,7 @@ export default function TestimonialsCarousel() {
   ]
 
   return (
-    <section className="w-full py-16 md:py-24 border-b border-border/60">
+    <section id="testimonials" className="w-full py-16 md:py-24 border-b border-border/60">
       <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
         <SectionHeader
           badge="TESTIMONIALS & ENDORSEMENTS"
