@@ -42,6 +42,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
   const [editIconQuery, setEditIconQuery] = useState('')
   const [editSearchResults, setEditSearchResults] = useState<IconOption[]>([])
   const [editIsSearching, setEditIsSearching] = useState(false)
+  const [savingSkillId, setSavingSkillId] = useState<string | null>(null)
 
   const [error, setError] = useState('')
 
@@ -197,6 +198,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
   async function saveEditSkill(skillId: string, groupId: string) {
     if (!editSkillName.trim()) return
     setError('')
+    setSavingSkillId(skillId)
     const supabase = createClient()
 
     // Determine icon fields: use editSelectedIcon if picked, or fallback to name-based simple icon
@@ -220,6 +222,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
 
     if (err) {
       setError(err.message || 'Failed to update skill')
+      setSavingSkillId(null)
       return
     }
 
@@ -245,6 +248,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
           : g
       )
     )
+    setSavingSkillId(null)
     setEditingSkillId(null)
     setEditSelectedIcon(null)
     setEditIconQuery('')
@@ -408,20 +412,31 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                             ))}
                           </div>
                         ) : null}
-                        {/* Prominent Save Skill Button at bottom of Edit Card */}
-                        <div className="flex items-center gap-2 pt-1">
+                        {/* Clean Primary Save Skill & Cancel Bar */}
+                        <div className="flex items-center gap-2 pt-2">
                           <button
                             type="button"
                             onClick={() => saveEditSkill(skill.id, group.id)}
-                            className="bg-accent hover:bg-accent/90 text-white font-semibold text-xs px-4 py-2 rounded-lg flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
+                            disabled={savingSkillId === skill.id}
+                            className="bg-accent hover:bg-accent/90 text-white font-semibold text-xs px-5 py-2 rounded-lg flex items-center gap-2 shadow-xs transition-all cursor-pointer disabled:opacity-50"
                           >
-                            <Check className="w-4 h-4" />
-                            <span>Save Skill</span>
+                            {savingSkillId === skill.id ? (
+                              <>
+                                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                                <span>Saving...</span>
+                              </>
+                            ) : (
+                              <>
+                                <Check className="w-4 h-4" />
+                                <span>Save Skill</span>
+                              </>
+                            )}
                           </button>
                           <button
                             type="button"
                             onClick={() => setEditingSkillId(null)}
-                            className="bg-secondary hover:bg-secondary/80 text-muted-foreground border border-border text-xs px-3 py-2 rounded-lg transition-all"
+                            disabled={savingSkillId === skill.id}
+                            className="bg-secondary hover:bg-secondary/80 text-muted-foreground border border-border text-xs px-4 py-2 rounded-lg transition-all cursor-pointer"
                           >
                             Cancel
                           </button>
@@ -457,29 +472,9 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                     </div>
                   )}
 
-                  {/* Actions for Skill */}
+                  {/* Actions for Skill in normal view mode */}
                   <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
-                    {editingSkillId === skill.id ? (
-                      <>
-                        <button
-                          type="button"
-                          onClick={() => saveEditSkill(skill.id, group.id)}
-                          className="px-3 py-1.5 bg-emerald-500/10 text-emerald-500 font-bold border border-emerald-500/30 rounded-md hover:bg-emerald-500/20 text-xs flex items-center gap-1"
-                          title="Save Skill"
-                        >
-                          <Check className="w-3.5 h-3.5" />
-                          <span>Save</span>
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setEditingSkillId(null)}
-                          className="p-1.5 bg-secondary text-muted-foreground border border-border rounded-md hover:text-foreground"
-                          title="Cancel"
-                        >
-                          <X className="w-3.5 h-3.5" />
-                        </button>
-                      </>
-                    ) : (
+                    {editingSkillId === skill.id ? null : (
                       <>
                         <button
                           type="button"
