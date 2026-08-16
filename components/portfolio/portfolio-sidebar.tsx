@@ -114,65 +114,75 @@ export default function PortfolioSidebar({
   }
 
   return (
-    <aside className="hidden xl:block w-72 shrink-0">
-      <div className="sticky top-20 space-y-4 p-4 bg-card/60 backdrop-blur-md border border-border/80 rounded-2xl shadow-sm">
+    <aside className="hidden xl:block w-72 shrink-0 border-r border-border/70 bg-card/40 backdrop-blur-md sticky top-14 md:top-16 self-start">
+      <div className="p-5 space-y-6 max-h-[calc(100vh-4rem)] overflow-y-auto flex flex-col justify-between">
         
-        {/* Navigation Header */}
-        <div className="px-3 py-2 border-b border-border/60 flex items-center justify-between">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">
-            Navigation
-          </span>
-          <button
-            onClick={scrollToTop}
-            className="text-[11px] font-medium text-accent hover:underline flex items-center gap-1 cursor-pointer"
-            title="Scroll to top"
-          >
-            <span>Top</span>
-            <ArrowUp className="w-3 h-3" />
-          </button>
+        <div className="space-y-5">
+          {/* Sidebar Top Header Logo / Branding */}
+          <div className="flex items-center justify-between border-b border-border/60 pb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-accent text-white flex items-center justify-center font-bold font-mono">
+                N
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-foreground truncate">Nestor Anyanwu</h3>
+                <p className="text-[11px] font-mono text-muted-foreground">Portfolio Navigation</p>
+              </div>
+            </div>
+            <button
+              onClick={scrollToTop}
+              className="p-1.5 rounded-lg text-muted-foreground hover:text-accent hover:bg-secondary transition-colors"
+              title="Scroll to top"
+            >
+              <ArrowUp className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Sidebar Nav List (Twitter / Modern App Sidebar Style) */}
+          <nav className="space-y-1">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-muted-foreground px-3 block mb-2">
+              Page Contents
+            </span>
+            {navItems.map((item) => {
+              const isActive = activeSection === item.id
+
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer text-left group ${
+                    isActive
+                      ? "bg-accent text-white shadow-xs font-bold"
+                      : "text-foreground hover:bg-secondary/80 hover:text-accent"
+                  }`}
+                >
+                  <div className="flex items-center gap-3.5 min-w-0">
+                    <span
+                      className={`transition-transform group-hover:scale-110 ${
+                        isActive ? "text-white" : "text-accent"
+                      }`}
+                    >
+                      {item.icon}
+                    </span>
+                    <span className="truncate">{item.label}</span>
+                  </div>
+
+                  {item.count !== undefined && (
+                    <span
+                      className={`ml-2 px-2.5 py-0.5 rounded-full text-xs font-mono font-bold shrink-0 transition-all ${
+                        isActive
+                          ? "bg-white text-accent"
+                          : "bg-secondary border border-border text-muted-foreground group-hover:border-accent/40 group-hover:text-accent"
+                      }`}
+                    >
+                      {item.count}
+                    </span>
+                  )}
+                </button>
+              )
+            })}
+          </nav>
         </div>
-
-        {/* Sidebar Nav List (Twitter / Modern App Sidebar Style) */}
-        <nav className="space-y-1">
-          {navItems.map((item) => {
-            const isActive = activeSection === item.id
-
-            return (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer text-left group ${
-                  isActive
-                    ? "bg-accent text-white shadow-xs font-bold"
-                    : "text-foreground hover:bg-secondary/80 hover:text-accent"
-                }`}
-              >
-                <div className="flex items-center gap-3.5 min-w-0">
-                  <span
-                    className={`transition-transform group-hover:scale-110 ${
-                      isActive ? "text-white" : "text-accent"
-                    }`}
-                  >
-                    {item.icon}
-                  </span>
-                  <span className="truncate">{item.label}</span>
-                </div>
-
-                {item.count !== undefined && (
-                  <span
-                    className={`ml-2 px-2.5 py-0.5 rounded-full text-xs font-mono font-bold shrink-0 transition-all ${
-                      isActive
-                        ? "bg-white text-accent"
-                        : "bg-secondary border border-border text-muted-foreground group-hover:border-accent/40 group-hover:text-accent"
-                    }`}
-                  >
-                    {item.count}
-                  </span>
-                )}
-              </button>
-            )
-          })}
-        </nav>
 
       </div>
     </aside>

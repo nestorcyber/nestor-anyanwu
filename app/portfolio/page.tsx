@@ -55,36 +55,38 @@ export default async function PortfolioPage() {
     ])
 
   return (
-    <main className="min-h-screen bg-background">
-      <PortfolioHero settings={siteSettings} stats={stats} />
+    <div className="min-h-screen bg-background flex flex-col xl:flex-row w-full">
+      
+      {/* Full-Height Left Navigation Sidebar (Desktop - Twitter/SlothUI app style) */}
+      <PortfolioSidebar
+        projectCount={projects.length}
+        skillGroupCount={skillGroups.length}
+        expCount={journeyTimeline.length}
+        certCount={certificationsList.length}
+      />
 
-      {/* Main Content Layout with Sticky Twitter-Style Desktop Navigation Sidebar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex gap-8">
-        
-        {/* Desktop Sticky Sidebar */}
-        <PortfolioSidebar
-          projectCount={projects.length}
-          skillGroupCount={skillGroups.length}
-          expCount={journeyTimeline.length}
-          certCount={certificationsList.length}
-        />
+      {/* Main Feed Column (Hero, Sections & Footer) */}
+      <main className="flex-1 min-w-0 flex flex-col justify-between overflow-x-hidden">
+        <div>
+          <PortfolioHero settings={siteSettings} stats={stats} />
 
-        {/* Main Sections Stream */}
-        <div className="flex-1 min-w-0 space-y-4">
-          <PortfolioAboutSection settings={siteSettings} />
-          <FeaturedProjectsShowcase projects={projects} />
-          <SkillsMatrix skillGroups={skillGroups} />
-          <ProfessionalExperience journeyTimeline={journeyTimeline} />
-          <CertificationsGrid certificationsList={certificationsList} />
-          <ProjectLibrary projects={projects} />
-          <ServicesGrid services={services} />
-          <TestimonialsCarousel />
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+            <PortfolioAboutSection settings={siteSettings} />
+            <FeaturedProjectsShowcase projects={projects} />
+            <SkillsMatrix skillGroups={skillGroups} />
+            <ProfessionalExperience journeyTimeline={journeyTimeline} />
+            <CertificationsGrid certificationsList={certificationsList} />
+            <ProjectLibrary projects={projects} />
+            <ServicesGrid services={services} />
+            <TestimonialsCarousel />
+          </div>
+
+          <PortfolioCTA />
         </div>
 
-      </div>
-
-      <PortfolioCTA />
-      <Footer />
-    </main>
+        {/* Footer dynamically nested in main feed column */}
+        <Footer />
+      </main>
+    </div>
   )
 }
