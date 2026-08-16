@@ -408,6 +408,24 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                             ))}
                           </div>
                         ) : null}
+                        {/* Prominent Save Skill Button at bottom of Edit Card */}
+                        <div className="flex items-center gap-2 pt-1">
+                          <button
+                            type="button"
+                            onClick={() => saveEditSkill(skill.id, group.id)}
+                            className="bg-accent hover:bg-accent/90 text-white font-semibold text-xs px-4 py-2 rounded-lg flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
+                          >
+                            <Check className="w-4 h-4" />
+                            <span>Save Skill</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setEditingSkillId(null)}
+                            className="bg-secondary hover:bg-secondary/80 text-muted-foreground border border-border text-xs px-3 py-2 rounded-lg transition-all"
+                          >
+                            Cancel
+                          </button>
+                        </div>
                       </div>
                     </div>
                   ) : (
@@ -446,10 +464,11 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                         <button
                           type="button"
                           onClick={() => saveEditSkill(skill.id, group.id)}
-                          className="p-1.5 bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 rounded-md hover:bg-emerald-500/20"
+                          className="px-3 py-1.5 bg-emerald-500/10 text-emerald-500 font-bold border border-emerald-500/30 rounded-md hover:bg-emerald-500/20 text-xs flex items-center gap-1"
                           title="Save Skill"
                         >
                           <Check className="w-3.5 h-3.5" />
+                          <span>Save</span>
                         </button>
                         <button
                           type="button"
