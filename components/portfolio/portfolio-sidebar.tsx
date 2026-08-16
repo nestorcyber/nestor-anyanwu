@@ -115,7 +115,7 @@ export default function PortfolioSidebar({
 
   return (
     <aside className="hidden xl:block w-72 shrink-0">
-      <div className="sticky top-24 space-y-4 p-4 bg-card/60 backdrop-blur-md border border-border/80 rounded-2xl shadow-sm">
+      <div className="sticky top-20 space-y-4 p-4 bg-card/60 backdrop-blur-md border border-border/80 rounded-2xl shadow-sm">
         
         {/* Navigation Header */}
         <div className="px-3 py-2 border-b border-border/60 flex items-center justify-between">
