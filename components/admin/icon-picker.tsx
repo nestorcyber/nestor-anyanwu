@@ -1,76 +1,143 @@
 'use client'
 
 import React, { useState } from 'react'
+import {
+  Code,
+  Globe,
+  Layout,
+  Palette,
+  Briefcase,
+  Zap,
+  Shield,
+  FileText,
+  Sparkles,
+  Brain,
+  Layers,
+  Wrench,
+  Database,
+  ListChecks,
+  Bot,
+  Folder,
+  Award,
+  Users,
+  MessageSquare,
+  Cpu,
+  Workflow,
+  PenTool,
+  CheckCircle,
+} from 'lucide-react'
 
 export type IconOption = {
-  provider: 'simple-icons' | 'lucide'
+  provider: string
   name: string
   title: string
   svgUrl?: string
 }
 
-// Popular curated tech/brand icons for instant matching
-const SIMPLE_ICONS_POPULAR: { name: string; title: string }[] = [
-  { name: 'react', title: 'React' },
-  { name: 'nextdotjs', title: 'Next.js' },
-  { name: 'typescript', title: 'TypeScript' },
-  { name: 'javascript', title: 'JavaScript' },
-  { name: 'tailwindcss', title: 'Tailwind CSS' },
-  { name: 'python', title: 'Python' },
-  { name: 'figma', title: 'Figma' },
-  { name: 'github', title: 'GitHub' },
-  { name: 'supabase', title: 'Supabase' },
-  { name: 'docker', title: 'Docker' },
-  { name: 'vercel', title: 'Vercel' },
-  { name: 'nodedotjs', title: 'Node.js' },
-  { name: 'html5', title: 'HTML5' },
-  { name: 'css3', title: 'CSS3' },
-  { name: 'git', title: 'Git' },
-  { name: 'googlecloud', title: 'Google Cloud' },
-  { name: 'amazonaws', title: 'Amazon Web Services' },
-  { name: 'postman', title: 'Postman' },
-  { name: 'graphql', title: 'GraphQL' },
-  { name: 'mongodb', title: 'MongoDB' },
-  { name: 'postgresql', title: 'PostgreSQL text' },
-  { name: 'redis', title: 'Redis' },
-  { name: 'adobephotoshop', title: 'Adobe Photoshop' },
-  { name: 'adobeillustrator', title: 'Adobe Illustrator' },
-  { name: 'hubspot', title: 'HubSpot' },
-  { name: 'replit', title: 'Replit' },
-  { name: 'intellijidea', title: 'IntelliJ IDEA' },
-  { name: 'googleworkspace', title: 'Google Workspace' },
-  { name: 'google', title: 'Google' },
-  { name: 'openai', title: 'OpenAI' },
-]
+// Direct brand & technology logo URL resolution
+export function getCanonicalTechLogoUrl(name: string): string | null {
+  const clean = name.toLowerCase().trim()
 
-// Curated Lucide icons for generic/soft skills
-const LUCIDE_GENERIC_ICONS: { name: string; title: string }[] = [
-  { name: 'Users', title: 'Leadership / Users' },
-  { name: 'MessageSquare', title: 'Communication / Messaging' },
-  { name: 'Brain', title: 'Problem Solving / AI' },
-  { name: 'Sparkles', title: 'Creativity / Innovation' },
-  { name: 'Shield', title: 'Security / Governance' },
-  { name: 'Wrench', title: 'Tools / Operations' },
-  { name: 'Folder', title: 'Organization / Files' },
-  { name: 'Briefcase', title: 'Management / Business' },
-  { name: 'Award', title: 'Excellence / Quality' },
-  { name: 'Zap', title: 'Automation / Speed' },
-  { name: 'Globe', title: 'Web / Global' },
-  { name: 'Cpu', title: 'Hardware / Computing' },
-]
-
-export function resolveIconUrl(provider?: string, name?: string, rawUrl?: string): string | null {
-  if (rawUrl && (rawUrl.startsWith('http://') || rawUrl.startsWith('https://') || rawUrl.startsWith('/'))) {
-    return rawUrl
+  const staticMap: Record<string, string> = {
+    'react & next.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+    'next.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+    'nextdotjs': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+    'react': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    'typescript & javascript': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+    'typescript': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+    'javascript': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+    'tailwind css & web ui': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
+    'tailwind css': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
+    'tailwindcss': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
+    'git & github': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
+    'github': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
+    'git': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+    'figma & coreldraw': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
+    'figma': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
+    'photoshop & illustrator': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-original.svg',
+    'photoshop': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-original.svg',
+    'illustrator': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-line.svg',
+    'python': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+    'node.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+    'nodedotjs': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+    'supabase': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg',
+    'docker': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
+    'vscode': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg',
+    'google ai studio': 'https://cdn.simpleicons.org/google',
+    'google workspace & office 365': 'https://cdn.simpleicons.org/googleworkspace',
+    'google workspace': 'https://cdn.simpleicons.org/googleworkspace',
+    'googleworkspace': 'https://cdn.simpleicons.org/googleworkspace',
+    'google': 'https://cdn.simpleicons.org/google',
+    'hubspot': 'https://cdn.simpleicons.org/hubspot',
+    'replit': 'https://cdn.simpleicons.org/replit',
+    'vercel': 'https://cdn.simpleicons.org/vercel',
   }
-  if (!name) return null
 
-  if (provider === 'simple-icons' || !provider) {
-    const slug = name.toLowerCase().replace(/[^a-z0-9]/g, '')
+  if (staticMap[clean]) return staticMap[clean]
+
+  // Clean slug fallback
+  const slug = clean.replace(/[^a-z0-9]/g, '')
+  if (staticMap[slug]) return staticMap[slug]
+
+  if (slug.length > 2) {
     return `https://cdn.simpleicons.org/${slug}`
   }
 
   return null
+}
+
+const LUCIDE_ICON_MAP: Record<string, React.ElementType> = {
+  Code,
+  Globe,
+  Layout,
+  Palette,
+  Briefcase,
+  Zap,
+  Shield,
+  FileText,
+  Sparkles,
+  Brain,
+  Layers,
+  Wrench,
+  Database,
+  ListChecks,
+  Bot,
+  Folder,
+  Award,
+  Users,
+  MessageSquare,
+  Cpu,
+  Workflow,
+  PenTool,
+  CheckCircle,
+}
+
+// Fallback Lucide selector based on text keywords
+export function getLucideFallback(name?: string): React.ElementType {
+  if (!name) return Code
+  const n = name.toLowerCase()
+
+  if (n.includes('doc') || n.includes('write') || n.includes('text')) return FileText
+  if (n.includes('api') || n.includes('rest') || n.includes('webhook')) return Globe
+  if (n.includes('prompt') || n.includes('ai') || n.includes('generative') || n.includes('bot')) return Bot
+  if (n.includes('ethics') || n.includes('governance') || n.includes('privacy') || n.includes('security')) return Shield
+  if (n.includes('design') || n.includes('branding') || n.includes('identity') || n.includes('presentation')) return Palette
+  if (n.includes('database') || n.includes('file') || n.includes('storage')) return Database
+  if (n.includes('project') || n.includes('coordination') || n.includes('manage')) return ListChecks
+  if (n.includes('team') || n.includes('leader') || n.includes('user')) return Users
+  if (n.includes('speed') || n.includes('automation')) return Zap
+
+  return Code
+}
+
+export function resolveIconUrl(provider?: string, name?: string, rawUrl?: string): string | null {
+  if (rawUrl && (rawUrl.startsWith('http://') || rawUrl.startsWith('https://') || rawUrl.startsWith('/') || rawUrl.startsWith('data:'))) {
+    return rawUrl
+  }
+  if (!name) return null
+
+  // Check IconStack or simple-icons canonical mapping
+  return getCanonicalTechLogoUrl(name)
 }
 
 export function SkillIcon({
@@ -87,10 +154,20 @@ export function SkillIcon({
   fallbackText?: string
 }) {
   const [error, setError] = useState(false)
+
+  // 1. Check if provider is explicitly lucide or custom Lucide icon name
+  if (provider === 'lucide' || (name && LUCIDE_ICON_MAP[name])) {
+    const IconComp = (name && LUCIDE_ICON_MAP[name]) || getLucideFallback(name)
+    return <IconComp className="w-5 h-5 text-accent shrink-0" />
+  }
+
+  // 2. Resolve image / SVG URL
   const url = resolveIconUrl(provider, name, rawUrl)
 
+  // 3. Fallback to Lucide icon instead of plain text letter if image fails to load
   if (error || !url) {
-    return <span className="text-xs font-mono font-extrabold text-accent">{fallbackText}</span>
+    const FallbackIcon = getLucideFallback(name)
+    return <FallbackIcon className="w-5 h-5 text-accent shrink-0" />
   }
 
   return (
@@ -99,60 +176,59 @@ export function SkillIcon({
       alt={name || 'Skill Icon'}
       className={className}
       onError={() => setError(true)}
+      loading="lazy"
     />
   )
 }
 
+// IconStack.io Search API integration
 export async function searchIcons(query: string): Promise<IconOption[]> {
   const cleanQuery = query.trim().toLowerCase()
   if (!cleanQuery) return []
 
   const results: IconOption[] = []
-  const slugQuery = cleanQuery.replace(/[^a-z0-9]/g, '')
 
-  // 1. Check brand/tech matches from Simple Icons CDN
-  const exactBrandMatch = SIMPLE_ICONS_POPULAR.filter(
-    (item) =>
-      item.title.toLowerCase().includes(cleanQuery) ||
-      item.name.includes(slugQuery) ||
-      cleanQuery.includes(item.name)
-  )
+  try {
+    // Search IconStack.io public API
+    const res = await fetch(
+      `https://sglpxftkuzsqdpdhftwv.supabase.co/functions/v1/icon-search?q=${encodeURIComponent(cleanQuery)}&limit=12`
+    )
+    if (res.ok) {
+      const data = await res.json()
+      if (data?.results && Array.isArray(data.results)) {
+        data.results.forEach((item: any) => {
+          let svgUrl = `https://sglpxftkuzsqdpdhftwv.supabase.co/functions/v1/icon-svg?library=${item.library}&id=${item.id}`
+          if (item.library === 'simple') {
+            const slug = (item.id || '').replace(/^simple-/, '')
+            svgUrl = `https://cdn.simpleicons.org/${slug}`
+          }
 
-  exactBrandMatch.forEach((item) => {
-    results.push({
-      provider: 'simple-icons',
-      name: item.name,
-      title: item.title,
-      svgUrl: `https://cdn.simpleicons.org/${item.name}`,
-    })
-  })
+          results.push({
+            provider: item.library || 'iconstack',
+            name: item.id || item.name,
+            title: `${item.name} (${item.libraryName || item.library || 'IconStack'})`,
+            svgUrl,
+          })
+        })
+      }
+    }
+  } catch (err) {
+    console.warn('IconStack search fallback:', err)
+  }
 
-  // Dynamic fallback attempt for any tech term
-  if (slugQuery.length >= 2 && !results.some((r) => r.name === slugQuery)) {
-    results.push({
-      provider: 'simple-icons',
-      name: slugQuery,
-      title: query,
-      svgUrl: `https://cdn.simpleicons.org/${slugQuery}`,
+  // Fallback / complement with local Lucide options if results are sparse
+  if (results.length < 4) {
+    Object.keys(LUCIDE_ICON_MAP).forEach((lucideName) => {
+      if (lucideName.toLowerCase().includes(cleanQuery)) {
+        results.push({
+          provider: 'lucide',
+          name: lucideName,
+          title: `${lucideName} (Lucide Icon)`,
+        })
+      }
     })
   }
 
-  // 2. Add generic Lucide icons for soft skills or general topics
-  LUCIDE_GENERIC_ICONS.forEach((item) => {
-    if (
-      item.title.toLowerCase().includes(cleanQuery) ||
-      item.name.toLowerCase().includes(cleanQuery) ||
-      cleanQuery.includes('leadership') ||
-      cleanQuery.includes('manage') ||
-      cleanQuery.includes('communication')
-    ) {
-      results.push({
-        provider: 'lucide',
-        name: item.name,
-        title: item.title,
-      })
-    }
-  })
-
   return results.slice(0, 12)
 }
+

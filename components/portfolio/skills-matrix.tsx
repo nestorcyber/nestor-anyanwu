@@ -6,62 +6,8 @@ import type { SkillGroup } from "@/lib/content"
 import { Wrench, Layers } from "lucide-react"
 import { SkillIcon } from "@/components/admin/icon-picker"
 
-// Helper function to resolve logo SVG/image URLs from Simple Icons & Devicon CDNs
-function getTechLogoUrl(skillName: string, customIcon?: string): string | null {
-  if (customIcon && (customIcon.startsWith("http://") || customIcon.startsWith("https://") || customIcon.startsWith("/"))) {
-    return customIcon
-  }
 
-  const name = (customIcon || skillName).toLowerCase().trim()
 
-  // 1. Direct custom icon slug mappings to SimpleIcons / Devicon CDN
-  const logoMap: Record<string, string> = {
-    // Frameworks & Dev Languages
-    "react & next.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-    "next.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-    "react": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    "typescript & javascript": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-    "typescript": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-    "javascript": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-    "tailwind css & web ui": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-    "tailwind css": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-    "git & github": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-    "github": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-    "git": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-    "python": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-    "node.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-
-    // Design & Apps
-    "figma & coreldraw": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-    "figma": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-    "photoshop & illustrator": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-original.svg",
-    "photoshop": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-original.svg",
-    "illustrator": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-line.svg",
-
-    // AI & Cloud Platforms
-    "google ai studio": "https://cdn.simpleicons.org/google",
-    "google workspace & office 365": "https://cdn.simpleicons.org/googleworkspace",
-    "google workspace": "https://cdn.simpleicons.org/googleworkspace",
-    "hubspot": "https://cdn.simpleicons.org/hubspot",
-    "replit": "https://cdn.simpleicons.org/replit",
-    "intellij idea": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg",
-    "gamma": "https://cdn.simpleicons.org/gamma",
-    "supabase": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg",
-    "cloudinary": "https://cdn.simpleicons.org/cloudinary",
-    "vercel": "https://cdn.simpleicons.org/vercel",
-    "vscode": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
-  }
-
-  if (logoMap[name]) return logoMap[name]
-
-  // Dynamic fallback attempt with SimpleIcons CDN slug format
-  const simpleSlug = name.replace(/[^a-z0-9]/g, "")
-  if (simpleSlug.length > 2) {
-    return `https://cdn.simpleicons.org/${simpleSlug}`
-  }
-
-  return null
-}
 
 export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[] }) {
   return (

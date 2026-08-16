@@ -220,6 +220,9 @@ async function main() {
           name: s.name,
           experience_level: s.experienceLevel ?? null,
           years: s.years ?? null,
+          icon_provider: s.iconProvider ?? null,
+          icon_name: s.iconName ?? null,
+          icon: s.icon ?? null,
           sort_order: j,
         }))
       )
