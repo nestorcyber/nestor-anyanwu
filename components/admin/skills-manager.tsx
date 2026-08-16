@@ -179,30 +179,38 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
     setEditSkillName(skill.name)
     setEditSkillLevel(skill.experience_level || '')
     setEditSkillYears(skill.years || '')
-    setEditSelectedIcon(
-      skill.icon_name
-        ? {
-            provider: (skill.icon_provider as any) || 'simple-icons',
-            name: skill.icon_name,
-            title: skill.name,
-            svgUrl: skill.icon || undefined,
-          }
-        : null
-    )
+    
+    // Check if skill has icon info or default to auto-derived slug
+    const provider = (skill.icon_provider as any) || 'simple-icons'
+    const iconName = skill.icon_name || skill.name.toLowerCase().replace(/[^a-z0-9]/g, '')
+    const iconUrl = skill.icon || `https://cdn.simpleicons.org/${iconName}`
+
+    setEditSelectedIcon({
+      provider,
+      name: iconName,
+      title: skill.name,
+      svgUrl: iconUrl,
+    })
     setEditIconQuery('')
   }
 
   async function saveEditSkill(skillId: string, groupId: string) {
     if (!editSkillName.trim()) return
+    setError('')
     const supabase = createClient()
+
+    // Determine icon fields: use editSelectedIcon if picked, or fallback to name-based simple icon
+    const chosenProvider = editSelectedIcon?.provider || 'simple-icons'
+    const chosenName = editSelectedIcon?.name || editSkillName.trim().toLowerCase().replace(/[^a-z0-9]/g, '')
+    const chosenUrl = editSelectedIcon?.svgUrl || `https://cdn.simpleicons.org/${chosenName}`
 
     const payload: any = {
       name: editSkillName.trim(),
       experience_level: editSkillLevel.trim() || null,
       years: editSkillYears.trim() || null,
-      icon_provider: editSelectedIcon?.provider || null,
-      icon_name: editSelectedIcon?.name || null,
-      icon: editSelectedIcon?.svgUrl || null,
+      icon_provider: chosenProvider,
+      icon_name: chosenName,
+      icon: chosenUrl,
     }
 
     const { error: err } = await supabase
@@ -227,9 +235,9 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                       name: editSkillName.trim(),
                       experience_level: editSkillLevel.trim() || null,
                       years: editSkillYears.trim() || null,
-                      icon_provider: editSelectedIcon?.provider || null,
-                      icon_name: editSelectedIcon?.name || null,
-                      icon: editSelectedIcon?.svgUrl || null,
+                      icon_provider: chosenProvider,
+                      icon_name: chosenName,
+                      icon: chosenUrl,
                     }
                   : s
               ),
@@ -238,6 +246,8 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
       )
     )
     setEditingSkillId(null)
+    setEditSelectedIcon(null)
+    setEditIconQuery('')
     router.refresh()
   }
 
