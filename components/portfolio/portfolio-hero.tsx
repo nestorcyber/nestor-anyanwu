@@ -2,9 +2,15 @@ import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Download, Send } from "lucide-react"
-import type { SiteSettings } from "@/lib/content"
+import type { SiteSettings, PortfolioStat } from "@/lib/content"
 
-export default function PortfolioHero({ settings }: { settings?: SiteSettings }) {
+export default function PortfolioHero({
+  settings,
+  stats,
+}: {
+  settings?: SiteSettings
+  stats?: PortfolioStat[]
+}) {
   const bio = "Tech Advocate, AI Enthusiast, Ingenious Designer, Virtual Assistant and IT Consultant. Crafting quality designs that align with brand goals and deliver exceptional user experience. Your story begins here."
   const author = settings?.authorName || "Nestor Anyanwu"
 
@@ -22,7 +28,7 @@ export default function PortfolioHero({ settings }: { settings?: SiteSettings })
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-6 relative space-y-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 pt-6 relative space-y-5">
         
         {/* Title & Action Buttons on Same Line on Desktop */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
@@ -51,12 +57,29 @@ export default function PortfolioHero({ settings }: { settings?: SiteSettings })
           </div>
         </div>
 
-        {/* Original Tagline (Left Aligned under Name) */}
+        {/* Tagline under Name */}
         <p className="text-base text-muted-foreground font-medium leading-relaxed max-w-3xl">
           {bio}
         </p>
 
+        {/* Top Follower-Count / Impact Metric Badges directly under hero bio */}
+        {stats && stats.length > 0 && (
+          <div className="pt-2 flex flex-wrap items-center gap-4 sm:gap-8 border-t border-border/60">
+            {stats.map((stat, idx) => (
+              <div key={idx} className="flex items-baseline gap-2">
+                <span className="text-lg sm:text-2xl font-black text-foreground font-heading tracking-tight">
+                  {stat.value}
+                </span>
+                <span className="text-xs sm:text-sm font-semibold text-muted-foreground">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+
       </div>
     </section>
   )
+}
 }

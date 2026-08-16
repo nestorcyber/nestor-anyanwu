@@ -56,7 +56,7 @@ export default async function PortfolioPage() {
 
   return (
     <main className="min-h-screen bg-background">
-      <PortfolioHero settings={siteSettings} />
+      <PortfolioHero settings={siteSettings} stats={stats} />
 
       {/* Main Content Layout with Sticky Twitter-Style Desktop Navigation Sidebar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex gap-8">
@@ -72,7 +72,6 @@ export default async function PortfolioPage() {
         {/* Main Sections Stream */}
         <div className="flex-1 min-w-0 space-y-4">
           <PortfolioAboutSection settings={siteSettings} />
-          <PortfolioStats stats={stats} />
           <FeaturedProjectsShowcase projects={projects} />
           <SkillsMatrix skillGroups={skillGroups} />
           <ProfessionalExperience journeyTimeline={journeyTimeline} />
