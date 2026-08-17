@@ -65,8 +65,9 @@ export default function Navigation() {
     { label: "JOURNAL", href: "/journal" },
   ]
 
-  // Desktop drawer items (ONLY Gallery and Contact)
+  // Desktop drawer items (Gallery, Projects, and Contact)
   const desktopDrawerItems = [
+    { label: "Projects", href: "/projects" },
     { label: "Gallery", href: "/gallery" },
     { label: "Contact", href: "/contact" },
   ]
@@ -76,6 +77,7 @@ export default function Navigation() {
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Portfolio", href: "/portfolio" },
+    { label: "Projects", href: "/projects" },
     { label: "Community", href: "/community" },
     { label: "Journal", href: "/journal" },
     { label: "Gallery", href: "/gallery" },

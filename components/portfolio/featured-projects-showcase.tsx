@@ -2,7 +2,7 @@ import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import type { ProjectItem } from "@/lib/content"
-import { ExternalLink, Star } from "lucide-react"
+import { ExternalLink, Star, ArrowRight } from "lucide-react"
 
 export default function FeaturedProjectsShowcase({ projects }: { projects: ProjectItem[] }) {
   const featuredOnly = projects.filter((p) => p.featured)
@@ -24,8 +24,9 @@ export default function FeaturedProjectsShowcase({ projects }: { projects: Proje
             </div>
           </div>
 
-          <Link href="/projects" className="text-xs font-bold text-accent hover:underline">
-            View all projects →
+          <Link href="/projects" className="text-xs font-mono font-bold text-accent hover:underline flex items-center gap-1 uppercase tracking-wider">
+            <span>View all projects</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
@@ -78,6 +79,17 @@ export default function FeaturedProjectsShowcase({ projects }: { projects: Proje
 
             </div>
           ))}
+        </div>
+
+        {/* View All Projects Button */}
+        <div className="flex items-center justify-center pt-2">
+          <Link
+            href="/projects"
+            className="px-6 py-3.5 bg-accent hover:bg-accent/90 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-xs hover:shadow-md transition-all flex items-center gap-2 cursor-pointer"
+          >
+            <span>Explore All Projects & Deliverables</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
 
       </div>

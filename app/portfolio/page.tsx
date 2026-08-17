@@ -4,7 +4,6 @@ import PortfolioAboutSection from "@/components/portfolio/portfolio-about-sectio
 import PortfolioStats from "@/components/portfolio/portfolio-stats"
 import ServicesGrid from "@/components/portfolio/services-grid"
 import FeaturedProjectsShowcase from "@/components/portfolio/featured-projects-showcase"
-import ProjectLibrary from "@/components/portfolio/project-library"
 import SkillsMatrix from "@/components/portfolio/skills-matrix"
 import ProfessionalExperience from "@/components/portfolio/professional-experience"
 import CertificationsGrid from "@/components/portfolio/certifications-grid"
@@ -76,7 +75,6 @@ export default async function PortfolioPage() {
             <SkillsMatrix skillGroups={skillGroups} />
             <ProfessionalExperience journeyTimeline={journeyTimeline} />
             <CertificationsGrid certificationsList={certificationsList} />
-            <ProjectLibrary projects={projects} />
             <ServicesGrid services={services} />
             <TestimonialsCarousel />
           </div>
