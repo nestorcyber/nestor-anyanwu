@@ -9,7 +9,7 @@ export default function FeaturedProjectsShowcase({ projects }: { projects: Proje
   const featuredList = featuredOnly.length > 0 ? featuredOnly.slice(0, 3) : projects.slice(0, 3)
 
   return (
-    <section id="featured" className="w-full py-12 md:py-16 border-b border-border/70 bg-background">
+    <section id="featured" className="w-full py-8 md:py-10 border-b border-border/70 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Centered Image-Matching Section Header */}

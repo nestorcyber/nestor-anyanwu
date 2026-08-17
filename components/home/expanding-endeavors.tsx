@@ -61,7 +61,7 @@ export default function ExpandingEndeavors() {
   ]
 
   return (
-    <section className="w-full py-12 md:py-16 border-b border-border/60 bg-background overflow-hidden">
+    <section className="w-full py-8 md:py-10 border-b border-border/60 bg-background overflow-hidden">
 
       {/* Centered Section Header */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-8 text-center space-y-3">

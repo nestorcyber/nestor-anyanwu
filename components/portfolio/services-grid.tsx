@@ -92,7 +92,7 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
   const orderedServices = [...filtered].sort((a, b) => getOrderRank(a) - getOrderRank(b))
 
   return (
-    <section id="services" className="w-full py-12 md:py-16 border-b border-border/70 bg-background">
+    <section id="services" className="w-full py-8 md:py-10 border-b border-border/70 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Centered Section Header */}

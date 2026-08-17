@@ -87,15 +87,11 @@ export default function ArticleCard({
           </div>
         </div>
 
-        {/* Bottom Action Bar: Metadata on Left & Square ArrowUpRight Button on Right */}
-        <div className="px-6 pb-6 pt-3 flex items-center justify-between gap-4 border-t border-slate-100 dark:border-slate-800/80">
-          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase font-mono tracking-wider">
-            {category} • {year}
-          </p>
-
-          {/* Right Square Arrow Action Button (Matching Reference Image) */}
-          <div className="w-10 h-10 sm:w-11 sm:h-11 bg-slate-950 dark:bg-slate-800 group-hover:bg-[#0075ff] text-white rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 shadow-sm group-hover:scale-105">
-            <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        {/* Standard Full-Width Action Button with ArrowUpRight Icon */}
+        <div className="px-6 pb-6 pt-2">
+          <div className="w-full py-3 px-4 rounded-xl bg-[#0075ff] text-white hover:bg-blue-600 font-extrabold text-xs uppercase tracking-wider flex items-center justify-between transition-all duration-300 shadow-md group-hover:shadow-lg">
+            <span>Read Article</span>
+            <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </div>
         </div>
 

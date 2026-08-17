@@ -16,7 +16,7 @@ export default function SectionContainer({
   return (
     <section
       id={id}
-      className={`w-full py-12 md:py-16 border-b border-border/60 ${
+      className={`w-full py-8 md:py-10 border-b border-border/60 ${
         pattern ? "bg-grid-pattern" : ""
       } ${className}`}
     >

@@ -28,7 +28,7 @@ export default function TestimonialsCarousel() {
   ]
 
   return (
-    <section id="testimonials" className="w-full py-16 md:py-24 border-b border-border/60">
+    <section id="testimonials" className="w-full py-8 md:py-10 border-b border-border/60">
       <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
         {/* Centered Image-Matching Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">

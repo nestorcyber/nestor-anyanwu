@@ -174,7 +174,7 @@ export default async function Home() {
       <TestimonialsSection />
 
       {/* 10. Featured Highlights Carousel (Moved down immediately before HomeCTA) */}
-      <section className="w-full border-b border-border/60 bg-background py-12">
+      <section className="w-full border-b border-border/60 bg-background py-8 md:py-10">
         <div className="max-w-7xl mx-auto px-6 text-center mb-8 space-y-3">
           <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight">
             Featured Highlights

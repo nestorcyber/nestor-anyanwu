@@ -9,7 +9,7 @@ export default function PortfolioAboutSection({ settings }: { settings?: SiteSet
     "I am an ICT Director, Software Engineer, IT Consultant, and Community Leader. I build digital infrastructure, lead tech communities like NACOS FUTO & GDG, advocate for data privacy, and deliver production software solutions. From directing national computing initiatives to engineering web applications and mentoring student developers, my mission centers on leveraging technology to drive real-world impact and empower future builders."
 
   return (
-    <section id="about" className="w-full py-12 md:py-16 border-b border-border/70 bg-background">
+    <section id="about" className="w-full py-8 md:py-10 border-b border-border/70 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Centered Image-Matching Section Header */}
