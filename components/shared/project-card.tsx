@@ -42,17 +42,16 @@ export default function ProjectCard({
       <CardWrapper {...(wrapperProps as any)} className="flex flex-col justify-between h-full w-full">
         
         <div>
-          {/* Project Cover Image Showcase (Padded & Wrapped to Preserve Aspect Ratio) */}
-          <div className="relative w-full h-[250px] sm:h-[290px] bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4 sm:p-6 overflow-hidden border-b border-slate-100 dark:border-slate-800/60">
+          {/* Project Cover Image (Edge-to-edge flush top with object-cover, matching ArticleCard) */}
+          <div className="relative w-full h-[260px] sm:h-[290px] overflow-hidden bg-slate-100 dark:bg-slate-950 flex items-center justify-center">
             {image ? (
-              <div className="relative w-full h-full flex items-center justify-center">
-                <Image
-                  src={image}
-                  alt={title}
-                  fill
-                  className="object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
+              <Image
+                src={image}
+                alt={title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
             ) : (
               <div className="w-full h-full bg-slate-100 dark:bg-slate-950 flex items-center justify-center">
                 <Sparkles className="w-8 h-8 text-slate-400/60 dark:text-slate-600" />
@@ -61,8 +60,8 @@ export default function ProjectCard({
           </div>
 
           {/* Title & Short Description */}
-          <div className="p-6 space-y-2">
-            <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors font-heading truncate">
+          <div className="p-6 space-y-3">
+            <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors font-heading line-clamp-2">
               {title}
             </h3>
             {description && (
