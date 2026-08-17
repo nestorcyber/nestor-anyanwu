@@ -18,7 +18,7 @@ export default function FeaturedProjectsShowcase({ projects }: { projects: Proje
             Featured Projects
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            Highlighted production builds, web infrastructure, brand systems, and architecture case studies.
+            Highlighted software and design builds.
           </p>
           <div className="w-14 h-1 bg-accent rounded-full mt-2" />
         </div>

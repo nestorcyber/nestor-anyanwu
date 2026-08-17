@@ -36,7 +36,7 @@ export default function TestimonialsCarousel() {
             What Collaborators Say
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            Feedback from community leaders, event organizers, enterprise clients, and technical partners.
+            Feedback from leaders and clients.
           </p>
           <div className="w-14 h-1 bg-accent rounded-full mt-2" />
         </div>

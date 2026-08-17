@@ -18,7 +18,7 @@ export default function PortfolioAboutSection({ settings }: { settings?: SiteSet
             Core Focus
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            As a technology engineer and community leader, my engagements span software development, ICT leadership, visual design, and advisory.
+            Engineering, design, and ICT leadership.
           </p>
           <div className="w-14 h-1 bg-accent rounded-full mt-2" />
         </div>

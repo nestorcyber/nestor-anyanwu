@@ -33,7 +33,7 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
             Technologies & Tools
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            Software products, frameworks, design applications, and tools used across projects.
+            Modern stack, tools, and frameworks.
           </p>
           <div className="w-14 h-1 bg-accent rounded-full mt-2" />
         </div>

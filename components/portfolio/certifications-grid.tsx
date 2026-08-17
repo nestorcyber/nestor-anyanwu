@@ -13,7 +13,7 @@ export default function CertificationsGrid({ certificationsList }: { certificati
             Licenses & Certifications
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            Formal technical credentials, industry recognitions, and community advocacy accreditations.
+            Technical credentials and verified accreditations.
           </p>
           <div className="w-14 h-1 bg-accent rounded-full mt-2" />
         </div>

@@ -19,13 +19,13 @@ export default function ProfessionalExperience({ journeyTimeline }: { journeyTim
     <section id="experience" className="w-full py-12 md:py-16 border-b border-border/70 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
-        {/* Centered Image-Matching Section Header */}
+        {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Experience & Leadership
+            Experience
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            Professional engineering roles, ICT leadership positions, and community management engagements.
+            Engineering and leadership track record.
           </p>
           <div className="w-14 h-1 bg-accent rounded-full mt-2" />
         </div>

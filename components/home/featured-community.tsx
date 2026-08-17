@@ -16,7 +16,7 @@ export default async function FeaturedCommunity() {
       <SectionHeader
         badge="FEATURED COMMUNITY WORK"
         title="Organizations & Volunteer Impact"
-        subtitle="Dedicated to serving developer chapters, national student bodies, and leadership conferences through active contribution and service."
+        subtitle="Serving developer chapters and communities."
       />
 
       {displayEntries.length > 0 ? (
