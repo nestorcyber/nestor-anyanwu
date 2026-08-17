@@ -20,8 +20,6 @@ import {
   getSiteSettings,
 } from "@/lib/content"
 
-import PortfolioSidebar from "@/components/portfolio/portfolio-sidebar"
-
 export const revalidate = 60
 
 export const metadata: Metadata = {
@@ -54,35 +52,26 @@ export default async function PortfolioPage() {
     ])
 
   return (
-    <div className="min-h-screen bg-background flex flex-col xl:flex-row w-full">
-      
-      {/* Full-Height Left Navigation Sidebar (Desktop - Twitter/SlothUI app style) */}
-      <PortfolioSidebar
-        projectCount={projects.length}
-        skillGroupCount={skillGroups.length}
-        expCount={journeyTimeline.length}
-        certCount={certificationsList.length}
-      />
-
-      {/* Main Feed Column (Hero, Sections & Footer) */}
-      <main className="flex-1 min-w-0 flex flex-col justify-between overflow-x-hidden">
+    <div className="min-h-screen bg-background flex flex-col w-full">
+      {/* Main Full-Width Content Column */}
+      <main className="flex-1 w-full min-w-0 flex flex-col justify-between overflow-x-hidden">
         <div>
           <PortfolioHero settings={siteSettings} stats={stats} />
 
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
             <PortfolioAboutSection settings={siteSettings} />
             <SkillsMatrix skillGroups={skillGroups} />
+            <ServicesGrid services={services} />
             <FeaturedProjectsShowcase projects={projects} />
             <ProfessionalExperience journeyTimeline={journeyTimeline} />
             <CertificationsGrid certificationsList={certificationsList} />
-            <ServicesGrid services={services} />
             <TestimonialsCarousel />
           </div>
 
           <PortfolioCTA />
         </div>
 
-        {/* Footer dynamically nested in main feed column */}
+        {/* Global Footer */}
         <Footer />
       </main>
     </div>

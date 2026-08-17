@@ -3,14 +3,7 @@ import Link from "next/link"
 import ProjectLibrary from "@/components/portfolio/project-library"
 import Footer from "@/components/footer"
 import PortfolioCTA from "@/components/portfolio/portfolio-cta"
-import PortfolioSidebar from "@/components/portfolio/portfolio-sidebar"
-import {
-  getCertifications,
-  getJourneyItems,
-  getProjectItems,
-  getSkillGroups,
-  getSiteSettings,
-} from "@/lib/content"
+import { getProjectItems } from "@/lib/content"
 import { ArrowLeft, FolderKanban } from "lucide-react"
 
 export const revalidate = 60
@@ -33,27 +26,12 @@ export const metadata: Metadata = {
 }
 
 export default async function ProjectsPage() {
-  const [projects, skillGroups, journeyTimeline, certificationsList] =
-    await Promise.all([
-      getProjectItems(),
-      getSkillGroups(),
-      getJourneyItems(),
-      getCertifications(),
-      getSiteSettings(),
-    ])
+  const projects = await getProjectItems()
 
   return (
-    <div className="min-h-screen bg-background flex flex-col xl:flex-row w-full">
-      {/* Full-Height Left Navigation Sidebar (Desktop - Twitter/SlothUI app style) */}
-      <PortfolioSidebar
-        projectCount={projects.length}
-        skillGroupCount={skillGroups.length}
-        expCount={journeyTimeline.length}
-        certCount={certificationsList.length}
-      />
-
-      {/* Main Column */}
-      <main className="flex-1 min-w-0 flex flex-col justify-between overflow-x-hidden">
+    <div className="min-h-screen bg-background flex flex-col w-full">
+      {/* Main Full-Width Content Column */}
+      <main className="flex-1 w-full min-w-0 flex flex-col justify-between overflow-x-hidden">
         <div>
           {/* Top Breadcrumb & Page Banner */}
           <div className="w-full bg-card/60 border-b border-border/70 py-8 px-4 sm:px-6 lg:px-8">
