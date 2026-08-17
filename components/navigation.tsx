@@ -137,7 +137,7 @@ export default function Navigation() {
                     className={`transition-all uppercase tracking-wider ${
                       isActive
                         ? "px-3.5 py-1 text-xs font-bold rounded-full bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 shadow-sm"
-                        : "px-2.5 py-1 text-slate-700 dark:text-slate-200 hover:text-[#0284c7] dark:hover:text-[#0284c7]"
+                        : "px-2.5 py-1 text-slate-700 dark:text-slate-200 hover:text-[#0075ff] dark:hover:text-[#0075ff]"
                     }`}
                   >
                     {item.label}
@@ -149,26 +149,26 @@ export default function Navigation() {
             {/* Dynamic MENU / CLOSE Drawer Toggle Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="flex flex-col items-center justify-center cursor-pointer group p-1 transition-colors min-w-[50px] select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0284c7] rounded-sm"
+              className="flex flex-col items-center justify-center cursor-pointer group p-1 transition-colors min-w-[50px] select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0075ff] rounded-sm"
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
               aria-controls="main-drawer"
             >
               {isOpen ? (
-                <div className="flex flex-col items-center justify-center text-foreground/80 group-hover:text-[#0284c7] transition-colors">
+                <div className="flex flex-col items-center justify-center text-foreground/80 group-hover:text-[#0075ff] transition-colors">
                   <span className="text-[11px] uppercase tracking-[0.18em] font-light leading-none mb-[3px]">
                     CLOSE
                   </span>
                   <X size={19} className="stroke-[1.3] transition-colors" />
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-center text-foreground/80 group-hover:text-[#0284c7] transition-colors">
+                <div className="flex flex-col items-center justify-center text-foreground/80 group-hover:text-[#0075ff] transition-colors">
                   <span className="text-[11px] uppercase tracking-[0.18em] font-light leading-none mb-[4px]">
                     MENU
                   </span>
                   <div className="flex flex-col gap-[4px] w-9 items-center">
-                    <span className="w-full h-[1.2px] bg-foreground/80 group-hover:bg-[#0284c7] transition-colors" />
-                    <span className="w-full h-[1.2px] bg-foreground/80 group-hover:bg-[#0284c7] transition-colors" />
+                    <span className="w-full h-[1.2px] bg-foreground/80 group-hover:bg-[#0075ff] transition-colors" />
+                    <span className="w-full h-[1.2px] bg-foreground/80 group-hover:bg-[#0075ff] transition-colors" />
                   </div>
                 </div>
               )}
@@ -203,7 +203,7 @@ export default function Navigation() {
             <button
               type="submit"
               disabled={!searchQuery.trim()}
-              className="absolute right-3 px-3 py-1 bg-[#0284c7] text-white text-xs font-mono font-bold uppercase tracking-wider rounded disabled:opacity-40 cursor-pointer transition-opacity"
+              className="absolute right-3 px-3 py-1 bg-[#0075ff] text-white text-xs font-mono font-bold uppercase tracking-wider rounded disabled:opacity-40 cursor-pointer transition-opacity"
             >
               Search
             </button>
@@ -221,7 +221,7 @@ export default function Navigation() {
               </span>
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="px-4 py-2 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-card text-foreground font-extrabold text-xs uppercase tracking-wider flex items-center gap-2.5 shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,0.9)] hover:border-[#0284c7] transition-all cursor-pointer"
+                className="px-4 py-2 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-card text-foreground font-extrabold text-xs uppercase tracking-wider flex items-center gap-2.5 shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,0.9)] hover:border-[#0075ff] transition-all cursor-pointer"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {theme === "dark" ? (
@@ -250,7 +250,7 @@ export default function Navigation() {
                   href={item.href}
                   onClick={() => setIsOpen(false)}
                   className={`transition-all font-light text-4xl lg:text-5xl uppercase tracking-[0.2em] py-3 cursor-pointer block border-b border-border/20 ${
-                    isActive ? "text-[#0284c7] font-bold" : "text-foreground hover:text-[#0284c7]"
+                    isActive ? "text-[#0075ff] font-bold" : "text-foreground hover:text-[#0075ff]"
                   }`}
                 >
                   {item.label}
@@ -273,7 +273,7 @@ export default function Navigation() {
                   href={item.href}
                   onClick={() => setIsOpen(false)}
                   className={`transition-all font-light text-xl uppercase tracking-[0.18em] py-2.5 cursor-pointer block border-b border-border/15 ${
-                    isActive ? "text-[#0284c7] font-bold" : "text-foreground hover:text-[#0284c7]"
+                    isActive ? "text-[#0075ff] font-bold" : "text-foreground hover:text-[#0075ff]"
                   }`}
                 >
                   {item.label}
@@ -290,7 +290,7 @@ export default function Navigation() {
               </span>
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="px-4 py-2 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-card text-foreground font-extrabold text-xs uppercase tracking-wider flex items-center gap-2.5 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] hover:border-[#0284c7] transition-all cursor-pointer"
+                className="px-4 py-2 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-card text-foreground font-extrabold text-xs uppercase tracking-wider flex items-center gap-2.5 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] hover:border-[#0075ff] transition-all cursor-pointer"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {theme === "dark" ? (

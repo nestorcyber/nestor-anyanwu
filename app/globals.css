@@ -29,7 +29,7 @@
   /* Slate 700 - high contrast muted */
   --muted-foreground: #334155;
   /* Slate 700 - high contrast WCAG AAA (7.2:1 against light background) */
-  --accent: #0284c7;
+  --accent: #0075ff;
   /* Vibrant Electric Blue Accent from screenshot */
   --accent-foreground: #FFFFFF;
   --destructive: oklch(0.577 0.245 27.325);
@@ -37,7 +37,7 @@
   --border: #E2E8F0;
   /* Slate 200 - clean thin borders */
   --input: #F1F5F9;
-  --ring: #0284c7;
+  --ring: #0075ff;
   --chart-1: oklch(0.55 0.15 240);
   --chart-2: oklch(0.65 0.12 160);
   --chart-3: oklch(0.6 0.118 184.704);
@@ -75,7 +75,7 @@
   /* Slate 300 - high contrast dark mode muted */
   --muted-foreground: #CBD5E1;
   /* Slate 300 - >7:1 WCAG contrast against slate-950/slate-900 */
-  --accent: #0284c7;
+  --accent: #0075ff;
   /* Electric Blue Accent from screenshot */
   --accent-foreground: #FFFFFF;
   --destructive: oklch(0.396 0.141 25.723);
@@ -83,7 +83,7 @@
   --border: #1E293B;
   /* Slate 800 border */
   --input: #0F172A;
-  --ring: #0284c7;
+  --ring: #0075ff;
   --chart-1: oklch(0.7 0.15 240);
   --chart-2: oklch(0.75 0.12 160);
   --chart-3: oklch(0.769 0.188 70.08);

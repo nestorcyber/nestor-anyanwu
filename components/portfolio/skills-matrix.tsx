@@ -42,22 +42,22 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
                   return (
                     <div
                       key={i}
-                      className="p-3.5 bg-card border border-border/80 hover:border-accent rounded-xl flex items-center gap-3 shadow-2xs hover:shadow-sm transition-all duration-200 group"
+                      className="p-3 sm:p-3.5 bg-card border border-border/80 hover:border-accent/80 rounded-2xl flex items-center gap-3 shadow-2xs hover:shadow-md transition-all duration-200 group cursor-pointer"
                     >
-                      {/* Logo Icon Container */}
-                      <div className="w-10 h-10 rounded-lg bg-secondary/80 border border-border/60 shrink-0 flex items-center justify-center p-2 group-hover:scale-105 transition-transform">
+                      {/* Logo Icon Container - Dynamic Space Filling */}
+                      <div className="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-800/90 border border-border/60 shrink-0 flex items-center justify-center p-1.5 overflow-hidden group-hover:scale-105 transition-transform">
                         <SkillIcon
                           provider={skill.iconProvider}
                           name={skill.iconName || skill.name}
                           rawUrl={skill.icon}
                           fallbackText={skill.name.charAt(0)}
-                          className="w-full h-full object-contain dark:invert-[0.1]"
+                          className="w-full h-full object-contain"
                         />
                       </div>
 
                       {/* Tech Name & Info */}
                       <div className="min-w-0 flex-1">
-                        <p className="text-xs font-bold text-foreground truncate group-hover:text-accent transition-colors">
+                        <p className="text-xs sm:text-sm font-bold text-foreground truncate group-hover:text-accent transition-colors">
                           {skill.name}
                         </p>
                         {skill.years ? (

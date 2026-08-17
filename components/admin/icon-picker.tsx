@@ -158,7 +158,7 @@ export function SkillIcon({
   // 1. Check if provider is explicitly lucide or custom Lucide icon name
   if (provider === 'lucide' || (name && LUCIDE_ICON_MAP[name])) {
     const IconComp = (name && LUCIDE_ICON_MAP[name]) || getLucideFallback(name)
-    return <IconComp className="w-5 h-5 text-accent shrink-0" />
+    return <IconComp className={className ? `${className} text-accent shrink-0` : "w-5 h-5 text-accent shrink-0"} />
   }
 
   // 2. Resolve image / SVG URL
@@ -167,7 +167,7 @@ export function SkillIcon({
   // 3. Fallback to Lucide icon instead of plain text letter if image fails to load
   if (error || !url) {
     const FallbackIcon = getLucideFallback(name)
-    return <FallbackIcon className="w-5 h-5 text-accent shrink-0" />
+    return <FallbackIcon className={className ? `${className} text-accent shrink-0` : "w-5 h-5 text-accent shrink-0"} />
   }
 
   return (
