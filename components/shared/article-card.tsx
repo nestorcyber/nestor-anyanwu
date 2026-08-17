@@ -38,14 +38,14 @@ export default function ArticleCard({
   image,
   tags = [],
 }: ArticleCardProps) {
-  const { day, monthYear } = parseDateBadge(date)
+  const { day, monthYear, year } = parseDateBadge(date)
 
   return (
     <article className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden flex flex-col justify-between h-full transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#0075ff]/80 cursor-pointer">
       <Link href={slug} className="flex flex-col justify-between h-full w-full" aria-label={`Read article: ${title}`}>
         
         <div>
-          {/* Card Top Cover Image Showcase with Overlaid Date Badge */}
+          {/* Card Top Cover Image Showcase (No Top Bar Above Image) */}
           <div className="relative w-full h-[260px] sm:h-[290px] overflow-hidden bg-slate-100 dark:bg-slate-950 flex items-center justify-center">
             {image ? (
               <Image
@@ -73,18 +73,11 @@ export default function ArticleCard({
                 </span>
               </div>
             </div>
-
-            {/* Category Tag Overlay on Image */}
-            <div className="absolute top-3 right-3 z-10">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full bg-slate-900/70 backdrop-blur-sm border border-white/20">
-                {category}
-              </span>
-            </div>
           </div>
 
           {/* Content Area: Title & Summary Excerpt */}
           <div className="p-6 space-y-3">
-            <h3 className="text-lg font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors font-heading line-clamp-2">
+            <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors font-heading line-clamp-2 uppercase">
               {title}
             </h3>
 
@@ -94,11 +87,15 @@ export default function ArticleCard({
           </div>
         </div>
 
-        {/* Standard Full-Width Action Button with ArrowUpRight Icon */}
-        <div className="px-6 pb-6 pt-2">
-          <div className="w-full py-3 px-4 rounded-xl bg-[#0075ff] text-white hover:bg-blue-600 font-extrabold text-xs uppercase tracking-wider flex items-center justify-between transition-all duration-300 shadow-md group-hover:shadow-lg">
-            <span>Read Article</span>
-            <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        {/* Bottom Action Bar: Metadata on Left & Square ArrowUpRight Button on Right */}
+        <div className="px-6 pb-6 pt-3 flex items-center justify-between gap-4 border-t border-slate-100 dark:border-slate-800/80">
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase font-mono tracking-wider">
+            {category} • {year}
+          </p>
+
+          {/* Right Square Arrow Action Button (Matching Reference Image) */}
+          <div className="w-10 h-10 sm:w-11 sm:h-11 bg-slate-950 dark:bg-slate-800 group-hover:bg-[#0075ff] text-white rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 shadow-sm group-hover:scale-105">
+            <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </div>
         </div>
 
