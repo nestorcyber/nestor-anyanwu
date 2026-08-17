@@ -30,7 +30,7 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
         {/* Centered Image-Matching Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Skills & Technologies
+            Technologies & Tools
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             Software products, frameworks, design applications, and tools used across projects.
@@ -40,6 +40,10 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
 
         {/* Squircle App Logo Carousels moving in opposite directions */}
         <div className="relative w-full space-y-6 pt-1">
+
+          {/* Subtle Narrow Edge Blur & Soft Fade Overlay */}
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-r from-background via-background/60 to-transparent backdrop-blur-[1px] z-20" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-l from-background via-background/60 to-transparent backdrop-blur-[1px] z-20" />
 
           {/* Row 1: Leftward Moving Carousel */}
           <div className="overflow-hidden w-full py-2">
