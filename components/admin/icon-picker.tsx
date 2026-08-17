@@ -136,6 +136,11 @@ export function resolveIconUrl(provider?: string, name?: string, rawUrl?: string
   }
   if (!name) return null
 
+  if (provider === 'iconify' && name.includes(':')) {
+    const parts = name.split(':')
+    return `https://api.iconify.design/${parts[0]}/${parts[1]}.svg`
+  }
+
   // Check IconStack or simple-icons canonical mapping
   return getCanonicalTechLogoUrl(name)
 }
@@ -181,17 +186,48 @@ export function SkillIcon({
   )
 }
 
-// IconStack.io Search API integration
+// Unified Iconify API + IconStack.io + Simple Icons Search integration
 export async function searchIcons(query: string): Promise<IconOption[]> {
   const cleanQuery = query.trim().toLowerCase()
   if (!cleanQuery) return []
 
   const results: IconOption[] = []
+  const seenUrls = new Set<string>()
 
+  // 1. Search Iconify API (200,000+ icons including Devicon, Logos, Simple Icons, FontAwesome, Remix, Tabler, VSCode, Skill Icons)
   try {
-    // Search IconStack.io public API
+    const iconifyRes = await fetch(
+      `https://api.iconify.design/search?query=${encodeURIComponent(cleanQuery)}&limit=16`
+    )
+    if (iconifyRes.ok) {
+      const data = await iconifyRes.json()
+      if (data?.icons && Array.isArray(data.icons)) {
+        data.icons.forEach((iconKey: string) => {
+          const parts = iconKey.split(':')
+          const collection = parts[0] || 'iconify'
+          const iconName = parts[1] || iconKey
+          const svgUrl = `https://api.iconify.design/${collection}/${iconName}.svg`
+
+          if (!seenUrls.has(svgUrl)) {
+            seenUrls.add(svgUrl)
+            results.push({
+              provider: 'iconify',
+              name: iconKey,
+              title: `${iconName} (${collection})`,
+              svgUrl,
+            })
+          }
+        })
+      }
+    }
+  } catch (err) {
+    console.warn('Iconify search error:', err)
+  }
+
+  // 2. Search IconStack.io public API
+  try {
     const res = await fetch(
-      `https://sglpxftkuzsqdpdhftwv.supabase.co/functions/v1/icon-search?q=${encodeURIComponent(cleanQuery)}&limit=12`
+      `https://sglpxftkuzsqdpdhftwv.supabase.co/functions/v1/icon-search?q=${encodeURIComponent(cleanQuery)}&limit=10`
     )
     if (res.ok) {
       const data = await res.json()
@@ -203,12 +239,15 @@ export async function searchIcons(query: string): Promise<IconOption[]> {
             svgUrl = `https://cdn.simpleicons.org/${slug}`
           }
 
-          results.push({
-            provider: item.library || 'iconstack',
-            name: item.id || item.name,
-            title: `${item.name} (${item.libraryName || item.library || 'IconStack'})`,
-            svgUrl,
-          })
+          if (!seenUrls.has(svgUrl)) {
+            seenUrls.add(svgUrl)
+            results.push({
+              provider: item.library || 'iconstack',
+              name: item.id || item.name,
+              title: `${item.name} (${item.libraryName || item.library || 'IconStack'})`,
+              svgUrl,
+            })
+          }
         })
       }
     }
@@ -216,19 +255,32 @@ export async function searchIcons(query: string): Promise<IconOption[]> {
     console.warn('IconStack search fallback:', err)
   }
 
-  // Fallback / complement with local Lucide options if results are sparse
-  if (results.length < 4) {
-    Object.keys(LUCIDE_ICON_MAP).forEach((lucideName) => {
-      if (lucideName.toLowerCase().includes(cleanQuery)) {
-        results.push({
-          provider: 'lucide',
-          name: lucideName,
-          title: `${lucideName} (Lucide Icon)`,
-        })
-      }
-    })
+  // 3. Fallback to Simple Icons CDN direct slug match
+  const slug = cleanQuery.replace(/[^a-z0-9]/g, '')
+  if (slug.length >= 2) {
+    const simpleUrl = `https://cdn.simpleicons.org/${slug}`
+    if (!seenUrls.has(simpleUrl)) {
+      seenUrls.add(simpleUrl)
+      results.push({
+        provider: 'simpleicons',
+        name: slug,
+        title: `${cleanQuery} (Brand Logo)`,
+        svgUrl: simpleUrl,
+      })
+    }
   }
 
-  return results.slice(0, 12)
+  // 4. Complement with Lucide vector icons
+  Object.keys(LUCIDE_ICON_MAP).forEach((lucideName) => {
+    if (lucideName.toLowerCase().includes(cleanQuery)) {
+      results.push({
+        provider: 'lucide',
+        name: lucideName,
+        title: `${lucideName} (Lucide Icon)`,
+      })
+    }
+  })
+
+  return results.slice(0, 24)
 }
 
