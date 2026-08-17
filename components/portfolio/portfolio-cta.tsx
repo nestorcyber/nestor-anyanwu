@@ -6,7 +6,7 @@ export default function PortfolioCTA() {
   return (
     <section className="w-full py-16 md:py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#0B1C2C] text-white border border-border/80 rounded-2xl shadow-md p-8 sm:p-12 md:p-16 text-center space-y-6">
+        <div className="bg-[#0B1C2C] text-white border border-border/80 rounded-xl shadow-md p-8 sm:p-12 md:p-16 text-center space-y-6">
           <span className="text-xs font-mono font-bold tracking-widest uppercase text-accent block">
             // COLLABORATION & INQUIRIES
           </span>

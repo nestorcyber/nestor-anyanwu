@@ -261,7 +261,7 @@ export default function DribbbleCarousel({
                 filter: `blur(${blurVal}px)`,
                 zIndex: isActive ? 30 : 20,
               }}
-              className="absolute left-1/2 top-1/2 h-[220px] sm:h-[300px] md:h-[380px] rounded-none overflow-hidden border border-border bg-card shadow-2xl transition-shadow duration-[600ms] group pointer-events-auto"
+              className="absolute left-1/2 top-1/2 h-[220px] sm:h-[300px] md:h-[380px] rounded-xl overflow-hidden border border-border bg-card shadow-2xl transition-shadow duration-[600ms] group pointer-events-auto"
             >
               {/* Background Image */}
               <div className="absolute inset-0 w-full h-full pointer-events-none">

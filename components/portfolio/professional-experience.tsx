@@ -36,7 +36,7 @@ export default function ProfessionalExperience({ journeyTimeline }: { journeyTim
             <div key={exp.id || idx} className="py-6 first:pt-0 last:pb-0 flex gap-5 items-start">
               
               {/* Organization Icon Avatar */}
-              <div className="w-14 h-14 rounded-2xl bg-secondary border border-border shrink-0 flex items-center justify-center text-accent font-bold text-base shadow-2xs">
+              <div className="w-14 h-14 rounded-xl bg-secondary border border-border shrink-0 flex items-center justify-center text-accent font-bold text-base shadow-2xs">
                 <Building2 className="w-6 h-6" />
               </div>
 

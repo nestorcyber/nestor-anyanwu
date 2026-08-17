@@ -495,11 +495,11 @@ export const projects: ProjectItem[] = [
 
 export const servicesList: ServiceItem[] = [
   {
-    id: "software-dev",
-    title: "Software Development",
-    description: "Building production-grade web applications, robust APIs, and custom software systems tailored for performance and scale.",
-    iconName: "Code",
-    ctaText: "Start Software Project ↗",
+    id: "graphic-design",
+    title: "Graphic Design & Branding",
+    description: "Creating brand identities, conference graphics, marketing collateral, and visual communication systems.",
+    iconName: "Palette",
+    ctaText: "Brand Strategy ↗",
     ctaHref: "/contact",
   },
   {
@@ -511,27 +511,11 @@ export const servicesList: ServiceItem[] = [
     ctaHref: "/contact",
   },
   {
-    id: "graphic-design",
-    title: "Graphic Design & Branding",
-    description: "Creating brand identities, conference graphics, marketing collateral, and visual communication systems.",
-    iconName: "Palette",
-    ctaText: "Brand Strategy ↗",
-    ctaHref: "/contact",
-  },
-  {
-    id: "business-registration",
-    title: "Business Registration & Digital Support",
-    description: "Guiding emerging tech startups and businesses through formal registration and digital setup workflows.",
-    iconName: "Briefcase",
-    ctaText: "Digital Support ↗",
-    ctaHref: "/contact",
-  },
-  {
-    id: "automation",
-    title: "Business Automation",
-    description: "Automating repetitive operational workflows using modern script integrations, AI workflows, and cloud tools.",
-    iconName: "Zap",
-    ctaText: "Automate Process ↗",
+    id: "software-dev",
+    title: "Software Development",
+    description: "Building production-grade web applications, robust APIs, and custom software systems tailored for performance and scale.",
+    iconName: "Code",
+    ctaText: "Start Software Project ↗",
     ctaHref: "/contact",
   },
   {
@@ -540,6 +524,14 @@ export const servicesList: ServiceItem[] = [
     description: "Providing strategic IT advisory, technology architecture reviews, and community digital strategy consulting.",
     iconName: "Shield",
     ctaText: "Book Advisory ↗",
+    ctaHref: "/contact",
+  },
+  {
+    id: "automation",
+    title: "Business Automation",
+    description: "Automating repetitive operational workflows using modern script integrations, AI workflows, and cloud tools.",
+    iconName: "Zap",
+    ctaText: "Automate Process ↗",
     ctaHref: "/contact",
   },
 ]

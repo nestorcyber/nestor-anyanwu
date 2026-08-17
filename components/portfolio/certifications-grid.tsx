@@ -24,7 +24,7 @@ export default function CertificationsGrid({ certificationsList }: { certificati
             <div key={cert.id} className="py-6 first:pt-0 last:pb-0 flex gap-5 items-start">
               
               {/* Certification Icon */}
-              <div className="w-14 h-14 rounded-2xl bg-secondary border border-border shrink-0 flex items-center justify-center text-accent shadow-2xs">
+              <div className="w-14 h-14 rounded-xl bg-secondary border border-border shrink-0 flex items-center justify-center text-accent shadow-2xs">
                 <ShieldCheck className="w-7 h-7" />
               </div>
 

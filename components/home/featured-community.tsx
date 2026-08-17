@@ -20,15 +20,15 @@ export default async function FeaturedCommunity() {
       />
 
       {displayEntries.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-collapse">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {displayEntries.map((item) => (
             <div
               key={item.slug}
-              className="p-6 md:p-8 border border-border/60 hover:border-accent bg-card/80 rounded space-y-4 flex flex-col justify-between group"
+              className="p-6 md:p-8 border border-border/70 hover:border-accent bg-card rounded-xl space-y-4 flex flex-col justify-between group shadow-2xs hover:shadow-md transition-all"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between border-b border-border/30 pb-3">
-                  <div className="p-2 bg-accent/10 rounded">
+                  <div className="p-2.5 bg-accent/10 rounded-xl">
                     <Users className="w-5 h-5 text-accent" />
                   </div>
                   <span className="text-xs font-bold text-accent uppercase tracking-widest">
@@ -36,7 +36,7 @@ export default async function FeaturedCommunity() {
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-foreground uppercase tracking-tight group-hover:text-accent transition-colors">
+                <h3 className="text-xl font-bold text-foreground uppercase tracking-tight group-hover:text-accent transition-colors font-heading">
                   {item.organization}
                 </h3>
                 <p className="text-xs font-mono text-muted-foreground uppercase font-semibold">
@@ -53,7 +53,7 @@ export default async function FeaturedCommunity() {
               <div className="pt-4 border-t border-border/30 flex justify-end">
                 <Link
                   href={`/community/${item.slug}`}
-                  className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-foreground group-hover:text-accent transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-foreground group-hover:text-accent transition-colors"
                 >
                   <span>View Details</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -70,8 +70,8 @@ export default async function FeaturedCommunity() {
 
       <div className="flex justify-center mt-10">
         <Link href="/community">
-          <button className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-foreground border border-foreground/50 hover:border-accent hover:text-accent px-8 py-3.5 rounded-none transition-all cursor-pointer">
-            <span>EXPLORE COMMUNITY PAGE</span>
+          <button className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-white bg-accent hover:bg-accent/90 px-6 py-2.5 sm:py-3.5 rounded-xl shadow-xs transition-all cursor-pointer">
+            <span>EXPLORE ALL COMMUNITY WORK</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </button>
         </Link>

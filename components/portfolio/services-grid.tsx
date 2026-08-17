@@ -24,6 +24,27 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
     }
   }
 
+  // Filter out business registration card completely
+  const filtered = services.filter(
+    (s) =>
+      !s.id?.toLowerCase().includes("business-reg") &&
+      !s.title?.toLowerCase().includes("business registration")
+  )
+
+  // Enforce requested order: 1. Design, 2. Website, 3. Software, 4. Consultation, 5. Automation
+  const getOrderRank = (item: ServiceItem) => {
+    const t = item.title.toLowerCase()
+    const id = (item.id || "").toLowerCase()
+    if (t.includes("design") || id.includes("graphic")) return 1
+    if (t.includes("website") || id.includes("web-dev")) return 2
+    if (t.includes("software") || id.includes("software")) return 3
+    if (t.includes("consult") || t.includes("advisory") || id.includes("consulting")) return 4
+    if (t.includes("auto") || id.includes("automation")) return 5
+    return 6
+  }
+
+  const orderedServices = [...filtered].sort((a, b) => getOrderRank(a) - getOrderRank(b))
+
   return (
     <section id="services" className="w-full py-12 md:py-16 border-b border-border/70 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
@@ -39,9 +60,9 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
           <div className="w-14 h-1 bg-accent rounded-full mt-2" />
         </div>
 
-        {/* Services Grid */}
+        {/* Services Grid (5 Cards: Design, Website, Software, Consultation, Automation) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service) => (
+          {orderedServices.map((service) => (
             <div
               key={service.id}
               className="p-6 bg-card border border-border/70 rounded-xl flex flex-col space-y-3.5 hover:border-accent transition-all shadow-xs"
