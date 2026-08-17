@@ -77,7 +77,7 @@ export default function ArticleCard({
 
           {/* Content Area: Title & Summary Excerpt */}
           <div className="p-6 space-y-3">
-            <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors font-heading line-clamp-2 uppercase">
+            <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors font-heading line-clamp-2">
               {title}
             </h3>
 
@@ -89,7 +89,7 @@ export default function ArticleCard({
 
         {/* Standard Full-Width Action Button with ArrowUpRight Icon */}
         <div className="px-6 pb-6 pt-2">
-          <div className="w-full py-3.5 px-5 rounded-xl bg-[#0075ff] text-white group-hover:bg-blue-600 font-extrabold text-xs uppercase tracking-wider flex items-center justify-between transition-all duration-300 shadow-md group-hover:shadow-lg">
+          <div className="w-full py-3.5 px-5 rounded-xl bg-[#0075ff] text-white group-hover:bg-blue-600 font-extrabold text-xs tracking-wider flex items-center justify-between transition-all duration-300 shadow-md group-hover:shadow-lg">
             <span>Read Article</span>
             <ArrowUpRight className="w-4.5 h-4.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 shrink-0" />
           </div>

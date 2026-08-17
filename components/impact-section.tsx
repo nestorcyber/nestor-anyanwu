@@ -26,7 +26,7 @@ export default function ImpactSection({
   category = "Impact & Vision",
   title = "Building prosperity & self-sufficiency",
   description = "Empowering developers, students, and communities.",
-  ctaText = "GET STARTED TODAY",
+  ctaText = "Let's Collaborate",
   ctaLink = "/contact",
   pillarsTitle = "Our 7 Key Pillars are:",
   pillars = [

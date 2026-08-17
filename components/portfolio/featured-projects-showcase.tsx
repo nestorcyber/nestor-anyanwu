@@ -44,7 +44,7 @@ export default function FeaturedProjectsShowcase({ projects }: { projects: Proje
         <div className="flex items-center justify-center pt-2">
           <Link
             href="/projects"
-            className="px-4 sm:px-6 py-2.5 sm:py-3.5 bg-accent hover:bg-accent/90 text-white font-extrabold text-[11px] sm:text-xs uppercase tracking-wider rounded-xl shadow-xs hover:shadow-md transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer text-center"
+            className="px-4 sm:px-6 py-2.5 sm:py-3.5 bg-accent hover:bg-accent/90 text-white font-extrabold text-[11px] sm:text-xs tracking-wider rounded-xl shadow-xs hover:shadow-md transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer text-center"
           >
             <span>Explore All Projects & Deliverables</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />

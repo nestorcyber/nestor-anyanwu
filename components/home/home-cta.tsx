@@ -9,8 +9,8 @@ export default function HomeCTA() {
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-center space-y-8">
-        <span className="text-xs md:text-sm font-bold tracking-widest uppercase text-sky-400 block">
-          COLLABORATION & INITIATIVES
+        <span className="text-xs md:text-sm font-bold tracking-wider text-sky-400 block">
+          Collaboration & Initiatives
         </span>
 
         <h2 className="text-2xl sm:text-4xl font-bold tracking-tight leading-tight max-w-3xl mx-auto">
@@ -23,8 +23,9 @@ export default function HomeCTA() {
 
         <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
           <Link href="/contact">
-            <button className="bg-accent hover:bg-accent/90 text-white font-bold text-xs md:text-sm tracking-[0.15em] uppercase px-8 py-4 rounded-none shadow-lg transition-all flex items-center gap-2 cursor-pointer">
-              <span>Start A Collaboration ↗</span>
+            <button className="bg-accent hover:bg-accent/90 text-white font-bold text-xs md:text-sm tracking-wide px-7 py-3.5 rounded-xl shadow-lg transition-all flex items-center gap-2 cursor-pointer">
+              <span>Start A Collaboration</span>
+              <ArrowUpRight className="w-4 h-4" />
             </button>
           </Link>
         </div>
