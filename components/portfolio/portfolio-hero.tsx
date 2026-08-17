@@ -75,29 +75,29 @@ export default function PortfolioHero({
 
           {/* Stats Card inspired by minimalist icon-on-top layout */}
           {stats && stats.length > 0 && (
-            <div className="shrink-0 bg-card border border-border/80 rounded-2xl p-4 sm:p-5 shadow-2xs">
-              <div className="flex items-center justify-between divide-x divide-border/60">
+            <div className="w-full lg:w-auto shrink-0 bg-card border border-border/80 rounded-2xl p-3.5 sm:p-5 shadow-2xs overflow-hidden">
+              <div className="flex items-center justify-around sm:justify-between divide-x divide-border/60">
                 {stats.map((stat, idx) => {
                   const Icon = getStatIcon(stat.label)
                   return (
                     <div
                       key={idx}
-                      className={`flex flex-col items-center text-center space-y-1 ${
-                        idx === 0 ? "pr-4 sm:pr-6" : idx === stats.length - 1 ? "pl-4 sm:pl-6" : "px-4 sm:px-6"
+                      className={`flex flex-col items-center text-center flex-1 space-y-1 min-w-0 ${
+                        idx === 0 ? "pr-2.5 sm:pr-6" : idx === stats.length - 1 ? "pl-2.5 sm:pl-6" : "px-2.5 sm:px-6"
                       }`}
                     >
                       {/* Icon */}
                       <div className="text-muted-foreground/80 mb-0.5">
-                        <Icon size={20} strokeWidth={1.8} />
+                        <Icon size={18} strokeWidth={1.8} className="sm:w-5 sm:h-5" />
                       </div>
                       
                       {/* Count / Number */}
-                      <span className="text-lg sm:text-xl font-extrabold text-foreground tracking-tight font-heading">
+                      <span className="text-base sm:text-xl font-extrabold text-foreground tracking-tight font-heading truncate max-w-full">
                         {stat.value}
                       </span>
                       
                       {/* Label */}
-                      <span className="text-[11px] sm:text-xs font-medium text-muted-foreground whitespace-nowrap">
+                      <span className="text-[10px] sm:text-xs font-medium text-muted-foreground leading-tight text-center max-w-[90px] sm:max-w-none">
                         {stat.label}
                       </span>
                     </div>
