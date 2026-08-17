@@ -25,7 +25,7 @@ export interface ImpactSectionProps {
 export default function ImpactSection({
   category = "Impact & Vision",
   title = "Building prosperity & self-sufficiency",
-  description = "Our approach to technology development, community leadership, and software engineering goes beyond conventional expectations. We are driven by a passion to contribute to and transform host communities and society at large.",
+  description = "Empowering developers, students, and communities.",
   ctaText = "GET STARTED TODAY",
   ctaLink = "/contact",
   pillarsTitle = "Our 7 Key Pillars are:",

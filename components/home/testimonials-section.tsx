@@ -33,7 +33,7 @@ export default function TestimonialsSection() {
       <SectionHeader
         badge="TESTIMONIALS & RECOGNITION"
         title="Social Proof & Endorsements"
-        subtitle="Feedback from community leaders, event organizers, partners, and team members."
+        subtitle="Feedback from leaders and clients."
       />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

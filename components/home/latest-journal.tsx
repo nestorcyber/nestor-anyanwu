@@ -19,7 +19,7 @@ export default async function LatestJournal() {
       <SectionHeader
         badge="LATEST JOURNAL"
         title="Articles & Technical Essays"
-        subtitle="Exploring thoughts on technology leadership, community advocacy, software development, and digital inclusion."
+        subtitle="Articles on software and leadership."
       />
 
       {displayArticles.length > 0 ? (

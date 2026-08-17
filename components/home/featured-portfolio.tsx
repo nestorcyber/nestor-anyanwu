@@ -18,7 +18,7 @@ export default async function FeaturedPortfolio() {
       <SectionHeader
         badge="FEATURED PORTFOLIO"
         title="Selected Work & Engineering"
-        subtitle="Exploring technical engineering deliverables, design systems, and digital platforms built to empower communities."
+        subtitle="Highlighted software and design deliverables."
       />
 
       {displayProjects.length > 0 ? (

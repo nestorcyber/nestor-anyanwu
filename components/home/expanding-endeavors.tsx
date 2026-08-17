@@ -69,7 +69,7 @@ export default function ExpandingEndeavors() {
           Core Focus
         </h2>
         <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto">
-          As a technology engineer and community leader, my engagements span software development, ICT leadership, visual design, and advisory.
+          Engineering, design, and ICT leadership.
         </p>
         <div className="h-1 w-16 bg-accent mx-auto mt-3" />
       </div>

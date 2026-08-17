@@ -180,7 +180,7 @@ export default async function Home() {
             Featured Highlights
           </h2>
           <p className="text-sm md:text-base text-muted-foreground font-light max-w-2xl mx-auto leading-relaxed">
-            Explore professional software engineering, custom user interfaces, brand design, and technical deliverables.
+            Featured software and visual designs.
           </p>
           <div className="h-1 w-16 bg-accent mx-auto mt-3" />
         </div>
