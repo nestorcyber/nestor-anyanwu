@@ -75,9 +75,9 @@ export default function ProjectCard({
 
         {/* Standard Full-Width Action Button with ArrowUpRight Icon */}
         <div className="px-6 pb-6 pt-2">
-          <div className="w-full py-3 px-4 rounded-xl bg-[#0075ff] text-white hover:bg-blue-600 font-extrabold text-xs uppercase tracking-wider flex items-center justify-between transition-all duration-300 shadow-md group-hover:shadow-lg">
+          <div className="w-full py-3.5 px-5 rounded-xl bg-[#0075ff] text-white group-hover:bg-blue-600 font-extrabold text-xs uppercase tracking-wider flex items-center justify-between transition-all duration-300 shadow-md group-hover:shadow-lg">
             <span>View Project</span>
-            <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight className="w-4.5 h-4.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 shrink-0" />
           </div>
         </div>
 
