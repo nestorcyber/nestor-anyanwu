@@ -3,7 +3,7 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { CheckCircle2, ArrowUpRight } from "lucide-react"
+import { CheckCircle2, ArrowUpRight, Sparkles } from "lucide-react"
 
 export interface ImpactSectionProps {
   category?: string
@@ -23,85 +23,81 @@ export interface ImpactSectionProps {
 }
 
 export default function ImpactSection({
-  category = "Impact & Vision",
-  title = "Building prosperity & self-sufficiency",
-  description = "Empowering developers, students, and communities.",
+  category = "Impact & Reach",
+  title = "Engineering Progress, Building Communities",
+  description = "From directing national computing initiatives to shipping production software and designing developer conference identities — every role I take on is rooted in one conviction: technology is most powerful when it serves people, not the other way around.",
   ctaText = "Let's Collaborate",
   ctaLink = "/contact",
-  pillarsTitle = "Our 7 Key Pillars are:",
+  pillarsTitle = "How I show up:",
   pillars = [
-    "Software Engineering",
-    "Tech Leadership",
-    "Economic Impact",
-    "Community Logistics",
-    "Cultural Inclusion",
-    "Environmental Tech",
-    "Social Development",
+    "Software Development & Delivery",
+    "National ICT Strategy & Direction",
+    "Developer Community Activation",
+    "Graphic Design & Visual Systems",
+    "Data Privacy Advocacy",
+    "Technical Mentorship & Education",
+    "IT Consulting & Digital Support",
   ],
   stats = [
     {
-      value: "30%",
-      label: "Growth",
+      value: "2000+",
+      label: "People Reached",
       description:
-        "Annual expansion across student tech initiatives, open-source projects, and enterprise solutions.",
+        "Computing students, developers, and tech leaders empowered through workshops, events, and digital platforms.",
     },
     {
-      value: "5000+",
-      label: "Ecosystem Impact",
+      value: "25+",
+      label: "Projects Completed",
       description:
-        "Engineers, students, and tech leaders empowered through workshops, keynotes, and developer initiatives.",
+        "Production software, web apps, brand design systems, and engineering deliverables.",
+    },
+    {
+      value: "12+",
+      label: "Organizations & Communities",
+      description:
+        "National bodies, student chapters, tech startups, and developer communities served and supported.",
     },
   ],
-  heroImage = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
-  heroImageAlt = "Nestor Anyanwu",
+  heroImage = "https://res.cloudinary.com/z3wgqisj/image/upload/v1785966495/techadv1_dyclrm.jpg",
+  heroImageAlt = "Nestor Anyanwu at community event",
 }: ImpactSectionProps) {
   return (
-    <section className="w-full font-sans border-y border-border overflow-hidden">
-      {/* 
-        3-Column Layout:
-        - Column 1 & 2 (Primary Brand Dark Navy): Main content, 7 Pillars checkmark list, CTA button
-        - Column 3 (Secondary Brand Light Neutral / Dark Card): Stats & key numbers with theme adaptation
-        - Column 4 (Image Column): High quality image with dynamic hover effects
-      */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[580px] w-full">
-        {/* LEFT BRAND PRIMARY CONTAINER */}
-        <div className="lg:col-span-6 bg-[#0B1C2C] text-white relative p-8 md:p-12 lg:p-16 flex flex-col justify-between overflow-hidden">
-          {/* Background image overlay */}
-          <div
-            className="absolute inset-0 opacity-10 bg-cover bg-center mix-blend-overlay pointer-events-none"
-            style={{
-              backgroundImage: `url(${heroImage})`,
-            }}
-          />
-
-          <div className="relative z-10 space-y-8">
-            <p className="text-sm md:text-base font-bold tracking-widest uppercase text-sky-400">
-              {category}
+    <section id="impact" className="w-full py-8 md:py-10 border-b border-border/70 bg-slate-50/60 dark:bg-slate-900/30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        {/* Section Header with Balanced Hierarchy */}
+        <div className="space-y-3 max-w-3xl">
+          <span className="text-xs font-mono font-bold text-[#0075ff] tracking-wider uppercase block">
+            {category}
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground font-heading tracking-tight leading-tight">
+            {title}
+          </h2>
+          {description && (
+            <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
+              {description}
             </p>
+          )}
+          <div className="w-14 h-1 bg-accent rounded-full mt-2" />
+        </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold leading-[1.1] tracking-tight">
-              {title}
-            </h2>
+        {/* 3-Column Unified Grid: Pillars Card, Stats Card & Hero Image */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          
+          {/* Card 1: Pillars & Capabilities (5 cols) */}
+          <div className="lg:col-span-5 bg-card border border-border/70 rounded-3xl p-6 sm:p-8 flex flex-col justify-between space-y-6 shadow-xs">
+            <div className="space-y-5">
+              <h3 className="text-lg sm:text-xl font-extrabold text-foreground font-heading tracking-tight">
+                {pillarsTitle}
+              </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pt-2">
-              {/* Description column */}
-              <div className="md:col-span-6 space-y-4 text-slate-200 text-sm md:text-base leading-relaxed font-medium">
-                <p>{description}</p>
-                {pillarsTitle && (
-                  <p className="font-bold text-white pt-2">
-                    {pillarsTitle}
-                  </p>
-                )}
-              </div>
-
-              {/* Pillars Checkmark List */}
-              <div className="md:col-span-6 space-y-2.5">
+              <div className="space-y-3">
                 {pillars.map((pillar, idx) => (
                   <div key={idx} className="flex items-center gap-3 group">
-                    <span className="flex-shrink-0 text-sky-400 bg-sky-400/20 rounded-full p-0.5 group-hover:scale-110 transition-transform">
-                      <CheckCircle2 className="w-5 h-5 text-sky-400" />
-                    </span>
-                    <span className="text-sm md:text-base font-bold tracking-wide text-white">
+                    <div className="w-6 h-6 rounded-lg bg-blue-500/10 dark:bg-blue-500/20 text-[#0075ff] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                      <CheckCircle2 className="w-4 h-4" />
+                    </div>
+                    <span className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 group-hover:text-[#0075ff] transition-colors">
                       {pillar}
                     </span>
                   </div>
@@ -109,57 +105,68 @@ export default function ImpactSection({
               </div>
             </div>
 
-            {/* CTA Button */}
-            <div className="pt-4">
-              <Link href={ctaLink} className="inline-block">
-                <button className="bg-accent hover:bg-accent/90 text-white font-extrabold text-xs md:text-sm tracking-wider uppercase px-8 py-4 rounded-none shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2 cursor-pointer">
+            {/* Standard Button */}
+            <div className="pt-2">
+              <Link href={ctaLink} className="block w-full">
+                <div className="w-full py-3.5 px-5 rounded-xl bg-[#0075ff] hover:bg-blue-600 text-white font-extrabold text-xs tracking-wider flex items-center justify-between transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer">
                   <span>{ctaText}</span>
-                </button>
+                  <ArrowUpRight className="w-4.5 h-4.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 shrink-0" />
+                </div>
               </Link>
             </div>
           </div>
-        </div>
 
-        {/* MIDDLE STATS CONTAINER */}
-        <div className="lg:col-span-3 bg-slate-50 text-slate-900 dark:bg-slate-900/90 dark:text-slate-100 p-8 md:p-12 flex flex-col justify-center gap-8 border-t lg:border-t-0 lg:border-l border-border/60">
-          {stats.map((stat, idx) => (
-            <div key={idx} className="space-y-3">
-              <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-sky-600 dark:text-sky-400 tracking-tight">
-                {stat.value}
+          {/* Card 2: Impact Metrics & Numbers (4 cols) */}
+          <div className="lg:col-span-4 bg-card border border-border/70 rounded-3xl p-6 sm:p-8 flex flex-col justify-between divide-y divide-border/60 shadow-xs">
+            {stats.map((stat, idx) => (
+              <div key={idx} className={`${idx === 0 ? "pb-4" : idx === stats.length - 1 ? "pt-4" : "py-4"} space-y-1.5`}>
+                <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0075ff] font-mono tracking-tight">
+                  {stat.value}
+                </div>
+                <div className="text-sm sm:text-base font-bold text-foreground font-heading">
+                  {stat.label}
+                </div>
+                {stat.description && (
+                  <p className="text-xs text-muted-foreground font-normal leading-relaxed line-clamp-2">
+                    {stat.description}
+                  </p>
+                )}
               </div>
-              <div className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
-                {stat.label}
-              </div>
-              {stat.description && (
-                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed font-medium max-w-xs">
-                  {stat.description}
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* RIGHT IMAGE CONTAINER */}
-        <div className="lg:col-span-3 relative min-h-[380px] lg:min-h-full w-full bg-slate-950 overflow-hidden">
-          <Image
-            src={heroImage}
-            alt={heroImageAlt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 25vw"
-            className="object-cover object-top hover:scale-105 transition-transform duration-700 ease-out"
-            priority
-          />
-          {/* Floating Action Button */}
-          <div className="absolute bottom-6 right-6 flex flex-col gap-3 z-20">
-            <Link
-              href="/contact"
-              aria-label="Contact Nestor Cyber"
-              className="w-12 h-12 rounded-2xl bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground flex items-center justify-center shadow-xl border border-border/20 transition-all duration-300"
-            >
-              <ArrowUpRight className="w-5 h-5" />
-            </Link>
+            ))}
           </div>
+
+          {/* Card 3: Action Image Showcase (3 cols) */}
+          <div className="lg:col-span-3 relative min-h-[320px] lg:min-h-full rounded-3xl overflow-hidden border border-border/70 bg-slate-950 shadow-xs group">
+            {heroImage ? (
+              <Image
+                src={heroImage}
+                alt={heroImageAlt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 25vw"
+                className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-slate-900 text-slate-600">
+                <Sparkles className="w-8 h-8" />
+              </div>
+            )}
+            
+            {/* Bottom Gradient & Floating Link */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+            
+            <div className="absolute bottom-4 right-4 z-10">
+              <Link
+                href={ctaLink}
+                aria-label="Contact Nestor Anyanwu"
+                className="w-11 h-11 rounded-xl bg-[#0075ff] text-white hover:bg-blue-600 flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-105"
+              >
+                <ArrowUpRight className="w-5 h-5" />
+              </Link>
+            </div>
+          </div>
+
         </div>
+
       </div>
     </section>
   )

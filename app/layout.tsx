@@ -21,14 +21,15 @@ const bodyFont = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Nestor Cyber – Tech Advocate, Designer & Community Leader",
-    template: "%s | Nestor Cyber",
+    default: "Nestor Anyanwu (Nestor Cyber) | Software Engineer & Tech Leader",
+    template: "%s | Nestor Anyanwu",
   },
   description:
-    "Nestor Anyanwu is a Nigerian tech professional, software developer, and community leader driving digital innovation and impact. Director of ICT at NACOS FUTO, Data Privacy Ambassador, IEEE member, involved in tech advocacy, design, and building inclusive tech ecosystems.",
+    "Official website of Nestor Anyanwu (Nestor Cyber). Tech Leader, Software Developer, and Community Advocate driving digital innovation, capacity building, and impactful tech ecosystems.",
+  applicationName: "Nestor Anyanwu",
   keywords: [
-    "Nestor Cyber",
     "Nestor Anyanwu",
+    "Nestor Cyber",
     "FUTO",
     "NACOS FUTO",
     "SICT",
@@ -50,7 +51,33 @@ export const metadata: Metadata = {
     "NIRA",
   ],
   icons: {
-    icon: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/icon-KYSpcrNz26o3mpB4HWBdr1BqrujpQi.png",
+    icon: [
+      {
+        url: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg",
+        sizes: "any",
+      },
+      {
+        url: "/icon.png",
+        type: "image/png",
+      },
+      {
+        url: "/favicon.ico",
+        sizes: "any",
+      },
+    ],
+    shortcut: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg",
+    apple: [
+      {
+        url: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg",
+        sizes: "180x180",
+        type: "image/jpeg",
+      },
+      {
+        url: "/apple-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
   },
   authors: [{ name: "Nestor Anyanwu" }],
   creator: "Nestor Anyanwu",
@@ -60,8 +87,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_NG",
     url: "https://nestor.name.ng",
-    siteName: "Nestor Cyber - Tech Leader & Designer",
-    title: "Nestor Cyber – Tech Advocate, Designer & Community Leader",
+    siteName: "Nestor Anyanwu",
+    title: "Nestor Anyanwu (Nestor Cyber) | Software Engineer & Tech Leader",
     description:
       "Discover the journey of Nestor Anyanwu - a tech professional driving digital innovation, building communities, and creating meaningful impact through technology and design.",
     images: [
@@ -69,13 +96,13 @@ export const metadata: Metadata = {
         url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/OG%20quote-BHHcl2O0kvGuuo2DaGtrRhPArOE0Ph.jpg",
         width: 1200,
         height: 630,
-        alt: "Nestor Cyber - Tech Advocate & Community Leader",
+        alt: "Nestor Anyanwu - Tech Advocate & Community Leader",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nestor Cyber – Tech Advocate & Community Leader",
+    title: "Nestor Anyanwu (Nestor Cyber) | Software Engineer & Tech Leader",
     description:
       "Tech professional, software developer, and community leader driving innovation and impact in Nigeria's digital ecosystem.",
     images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/OG%20quote-BHHcl2O0kvGuuo2DaGtrRhPArOE0Ph.jpg"],
@@ -152,11 +179,12 @@ export default function RootLayout({
   const jsonLdWebsite = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Nestor Cyber",
+    name: "Nestor Anyanwu",
+    alternateName: ["Nestor Cyber", "Nestor Anyanwu (Nestor Cyber)", "nestor.name.ng"],
     url: "https://nestor.name.ng",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://nestor.name.ng/?q={search_term_string}",
+      target: "https://nestor.name.ng/search?q={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   }
@@ -164,6 +192,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`bg-background ${headingFont.variable} ${bodyFont.variable}`} suppressHydrationWarning>
       <head suppressHydrationWarning>
+        <link rel="icon" href="https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg" sizes="any" />
+        <link rel="apple-touch-icon" href="https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg" />
+        <meta name="application-name" content="Nestor Anyanwu" />
         <script
           id="schema-org-person"
           type="application/ld+json"

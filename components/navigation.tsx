@@ -216,12 +216,15 @@ export default function Navigation() {
           {/* DESKTOP VIEW: Dark mode toggle AFTER search box BEFORE listing menu components */}
           {mounted && (
             <div className="hidden md:flex items-center justify-between py-4 border-b border-border/30 mb-4">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">
+              <span className="text-xs font-mono font-bold tracking-wider text-muted-foreground">
                 Appearance Mode
               </span>
               <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-card text-foreground font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-2xs hover:border-[#0075ff] transition-all cursor-pointer"
+                onClick={() => {
+                  setTheme(theme === "dark" ? "light" : "dark")
+                  setIsOpen(false)
+                }}
+                className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-card text-foreground font-bold text-xs tracking-wider flex items-center gap-2 shadow-2xs hover:border-[#0075ff] transition-all cursor-pointer"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {theme === "dark" ? (
@@ -249,7 +252,7 @@ export default function Navigation() {
                   key={item.label}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className={`transition-all font-light text-4xl lg:text-5xl uppercase tracking-[0.2em] py-3 cursor-pointer block border-b border-border/20 ${
+                  className={`transition-all font-light text-4xl lg:text-5xl tracking-[0.15em] py-3 cursor-pointer block border-b border-border/20 ${
                     isActive ? "text-[#0075ff] font-bold" : "text-foreground hover:text-[#0075ff]"
                   }`}
                 >
@@ -272,7 +275,7 @@ export default function Navigation() {
                   key={item.label}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className={`transition-all font-light text-xl uppercase tracking-[0.18em] py-2.5 cursor-pointer block border-b border-border/15 ${
+                  className={`transition-all font-light text-xl tracking-[0.12em] py-2.5 cursor-pointer block border-b border-border/15 ${
                     isActive ? "text-[#0075ff] font-bold" : "text-foreground hover:text-[#0075ff]"
                   }`}
                 >
@@ -285,12 +288,15 @@ export default function Navigation() {
           {/* MOBILE VIEW: Dark mode toggle IMMEDIATELY AFTER mobile nav listing */}
           {mounted && (
             <div className="flex md:hidden items-center justify-between pt-6 border-t border-border/30 mt-4">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">
+              <span className="text-xs font-mono font-bold tracking-wider text-muted-foreground">
                 Appearance Mode
               </span>
               <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-card text-foreground font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-2xs hover:border-[#0075ff] transition-all cursor-pointer"
+                onClick={() => {
+                  setTheme(theme === "dark" ? "light" : "dark")
+                  setIsOpen(false)
+                }}
+                className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-card text-foreground font-bold text-xs tracking-wider flex items-center gap-2 shadow-2xs hover:border-[#0075ff] transition-all cursor-pointer"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {theme === "dark" ? (

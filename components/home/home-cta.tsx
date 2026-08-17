@@ -9,10 +9,6 @@ export default function HomeCTA() {
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-center space-y-8">
-        <span className="text-xs md:text-sm font-bold tracking-wider text-sky-400 block">
-          Collaboration & Initiatives
-        </span>
-
         <h2 className="text-2xl sm:text-4xl font-bold tracking-tight leading-tight max-w-3xl mx-auto">
           Let's Build Impactful Technology Together
         </h2>
