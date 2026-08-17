@@ -44,7 +44,7 @@ export default function ProjectCard({
   const wrapperProps = link ? { href: link, ariaLabel: `Explore ${title} project` } : {}
 
   return (
-    <div className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-none overflow-hidden flex flex-col justify-between h-full transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-2xl cursor-pointer">
+    <div className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between h-full transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl cursor-pointer">
       <CardWrapper {...(wrapperProps as any)} className="flex flex-col justify-between h-full">
         <div>
           {/* Card Top Cover Image / Placeholder Container */}
@@ -63,8 +63,8 @@ export default function ProjectCard({
             )}
 
             {/* Overlaid Date Badge */}
-            <div className="absolute top-3 left-3 z-10 flex flex-col shadow-sm overflow-hidden rounded-none">
-              <div className="bg-[#0070f3] dark:bg-sky-600 px-2.5 py-1 min-w-[44px] text-center flex items-center justify-center">
+            <div className="absolute top-3 left-3 z-10 flex flex-col shadow-sm overflow-hidden rounded-xl">
+              <div className="bg-[#0075ff] px-2.5 py-1 min-w-[44px] text-center flex items-center justify-center">
                 <span className="text-lg font-black text-white leading-none tracking-tight font-mono">
                   {day}
                 </span>
@@ -80,7 +80,7 @@ export default function ProjectCard({
           {/* Content Area */}
           <div className="p-6 space-y-3">
             <div className="flex items-center justify-between gap-2">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0070f3] dark:text-sky-400 px-2 py-0.5 rounded-sm bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/40">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0075ff] px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/40">
                 {category}
               </span>
               {role && (
@@ -90,7 +90,7 @@ export default function ProjectCard({
               )}
             </div>
 
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0070f3] dark:group-hover:text-sky-400 transition-colors font-heading line-clamp-2">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0075ff] dark:group-hover:text-sky-400 transition-colors font-heading line-clamp-2">
               {title}
             </h3>
 
@@ -103,7 +103,7 @@ export default function ProjectCard({
                 {technologies.slice(0, 3).map((tech, idx) => (
                   <span
                     key={idx}
-                    className="text-[10px] font-mono uppercase px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-sm border border-slate-200 dark:border-slate-700"
+                    className="text-[10px] font-mono uppercase px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-md border border-slate-200 dark:border-slate-700"
                   >
                     {tech}
                   </span>
@@ -115,7 +115,7 @@ export default function ProjectCard({
 
         {/* Bottom Action Bar */}
         <div className="px-6 pb-6 pt-2">
-          <div className="w-full py-3 px-4 bg-[#f1f5f9] dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 font-bold text-xs uppercase tracking-wider flex items-center justify-between group-hover:bg-[#0070f3] group-hover:text-white transition-colors duration-300">
+          <div className="w-full py-3 px-4 rounded-xl bg-[#f1f5f9] dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 font-bold text-xs uppercase tracking-wider flex items-center justify-between group-hover:bg-[#0075ff] group-hover:text-white transition-colors duration-300 shadow-2xs">
             <span>{link ? "Explore Project" : "In Production"}</span>
             <ArrowRight className="w-4 h-4" />
           </div>

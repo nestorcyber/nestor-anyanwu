@@ -136,7 +136,7 @@ export default function Navigation() {
                     href={item.href}
                     className={`transition-all uppercase tracking-wider ${
                       isActive
-                        ? "px-3.5 py-1 text-xs font-bold rounded-full bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 shadow-sm"
+                        ? "px-3.5 py-1 text-xs font-bold rounded-xl bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 shadow-xs"
                         : "px-2.5 py-1 text-slate-700 dark:text-slate-200 hover:text-[#0075ff] dark:hover:text-[#0075ff]"
                     }`}
                   >
@@ -221,7 +221,7 @@ export default function Navigation() {
               </span>
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="px-4 py-2 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-card text-foreground font-extrabold text-xs uppercase tracking-wider flex items-center gap-2.5 shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,0.9)] hover:border-[#0075ff] transition-all cursor-pointer"
+                className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-card text-foreground font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-2xs hover:border-[#0075ff] transition-all cursor-pointer"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {theme === "dark" ? (
@@ -290,7 +290,7 @@ export default function Navigation() {
               </span>
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="px-4 py-2 rounded-xl border-2 border-slate-900 dark:border-slate-800 bg-card text-foreground font-extrabold text-xs uppercase tracking-wider flex items-center gap-2.5 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] hover:border-[#0075ff] transition-all cursor-pointer"
+                className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-card text-foreground font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-2xs hover:border-[#0075ff] transition-all cursor-pointer"
                 aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {theme === "dark" ? (

@@ -39,35 +39,27 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
         </div>
 
         {/* Squircle App Logo Carousels moving in opposite directions */}
-        <div className="relative w-full space-y-4 pt-1">
-          
-          {/* Side Fade Masks for Seamless In/Out Effect */}
-          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 md:w-40 bg-gradient-to-r from-background via-background/90 to-transparent z-20" />
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 md:w-40 bg-gradient-to-l from-background via-background/90 to-transparent z-20" />
+        <div className="relative w-full space-y-6 pt-1">
 
           {/* Row 1: Leftward Moving Carousel */}
-          <div className="overflow-hidden w-full py-1">
-            <div className="animate-marquee gap-3.5 sm:gap-5">
+          <div className="overflow-hidden w-full py-2">
+            <div className="animate-marquee gap-5 sm:gap-7">
               {row1.map((skill, idx) => (
-                <div
-                  key={`r1-${idx}`}
-                  className="group relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-2xl sm:rounded-3xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-[0_6px_20px_rgba(0,0,0,0.05)] dark:shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:border-accent/80 flex items-center justify-center p-3 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
-                >
-                  {/* Clean Center Logo Icon filling ~65% space */}
-                  <div className="w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <SkillIcon
-                      provider={skill.iconProvider}
-                      name={skill.iconName || skill.name}
-                      rawUrl={skill.icon}
-                      fallbackText={skill.name.charAt(0)}
-                      className="w-full h-full object-contain"
-                    />
+                <div key={`r1-${idx}`} className="flex flex-col items-center gap-2 shrink-0 group cursor-pointer">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-[0_6px_20px_rgba(0,0,0,0.05)] dark:shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:border-accent/80 flex items-center justify-center p-3 transition-all duration-300 group-hover:-translate-y-1">
+                    <div className="w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <SkillIcon
+                        provider={skill.iconProvider}
+                        name={skill.iconName || skill.name}
+                        rawUrl={skill.icon}
+                        fallbackText={skill.name.charAt(0)}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
                   </div>
-
-                  {/* Sleek Floating Hover Tooltip */}
-                  <div className="absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-[10px] font-bold rounded-md whitespace-nowrap shadow-md opacity-0 pointer-events-none group-hover:opacity-100 group-hover:-top-10 transition-all duration-200 z-30">
+                  <span className="text-[11px] sm:text-xs font-semibold text-foreground/90 max-w-[80px] sm:max-w-[100px] truncate text-center transition-colors group-hover:text-accent">
                     {skill.name}
-                  </div>
+                  </span>
                 </div>
               ))}
             </div>
@@ -77,28 +69,24 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
           <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-border/60 to-transparent my-1" />
 
           {/* Row 2: Rightward Moving Carousel */}
-          <div className="overflow-hidden w-full py-1">
-            <div className="animate-marquee-reverse gap-3.5 sm:gap-5">
+          <div className="overflow-hidden w-full py-2">
+            <div className="animate-marquee-reverse gap-5 sm:gap-7">
               {row2.map((skill, idx) => (
-                <div
-                  key={`r2-${idx}`}
-                  className="group relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-2xl sm:rounded-3xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-[0_6px_20px_rgba(0,0,0,0.05)] dark:shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:border-accent/80 flex items-center justify-center p-3 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
-                >
-                  {/* Clean Center Logo Icon filling ~65% space */}
-                  <div className="w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <SkillIcon
-                      provider={skill.iconProvider}
-                      name={skill.iconName || skill.name}
-                      rawUrl={skill.icon}
-                      fallbackText={skill.name.charAt(0)}
-                      className="w-full h-full object-contain"
-                    />
+                <div key={`r2-${idx}`} className="flex flex-col items-center gap-2 shrink-0 group cursor-pointer">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-[0_6px_20px_rgba(0,0,0,0.05)] dark:shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:border-accent/80 flex items-center justify-center p-3 transition-all duration-300 group-hover:-translate-y-1">
+                    <div className="w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <SkillIcon
+                        provider={skill.iconProvider}
+                        name={skill.iconName || skill.name}
+                        rawUrl={skill.icon}
+                        fallbackText={skill.name.charAt(0)}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
                   </div>
-
-                  {/* Sleek Floating Hover Tooltip */}
-                  <div className="absolute -bottom-9 left-1/2 -translate-x-1/2 px-2.5 py-1 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-[10px] font-bold rounded-md whitespace-nowrap shadow-md opacity-0 pointer-events-none group-hover:opacity-100 group-hover:-bottom-10 transition-all duration-200 z-30">
+                  <span className="text-[11px] sm:text-xs font-semibold text-foreground/90 max-w-[80px] sm:max-w-[100px] truncate text-center transition-colors group-hover:text-accent">
                     {skill.name}
-                  </div>
+                  </span>
                 </div>
               ))}
             </div>

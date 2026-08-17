@@ -45,10 +45,10 @@ export default function PortfolioHero({
           </h1>
 
           {/* Action Buttons */}
-          <div className="flex flex-row items-center gap-2.5 sm:gap-3 shrink-0">
+          <div className="flex flex-row items-center gap-2 sm:gap-3 shrink-0">
             <Link href="/contact" className="flex-1 sm:flex-none">
-              <button className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-white font-semibold text-sm px-4 sm:px-6 py-2.5 rounded-xl shadow-xs active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer">
-                <Send size={16} />
+              <button className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-white font-semibold text-xs sm:text-sm px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl shadow-xs active:scale-98 transition-all flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer">
+                <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span>Contact</span>
               </button>
             </Link>
@@ -57,9 +57,9 @@ export default function PortfolioHero({
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 sm:flex-none bg-secondary/80 hover:bg-secondary border border-border/80 text-foreground font-semibold text-sm px-4 sm:px-6 py-2.5 rounded-xl shadow-xs active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="flex-1 sm:flex-none bg-secondary/80 hover:bg-secondary border border-border/80 text-foreground font-semibold text-xs sm:text-sm px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl shadow-xs active:scale-98 transition-all flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer"
             >
-              <Download size={16} />
+              <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               <span>View resume</span>
             </a>
           </div>
@@ -75,7 +75,7 @@ export default function PortfolioHero({
 
           {/* Stats Card inspired by minimalist icon-on-top layout */}
           {stats && stats.length > 0 && (
-            <div className="w-full lg:w-auto shrink-0 bg-card border border-border/80 rounded-2xl p-3.5 sm:p-5 shadow-2xs overflow-hidden">
+            <div className="w-full lg:w-auto shrink-0 bg-card border border-border/80 rounded-xl p-3.5 sm:p-5 shadow-2xs overflow-hidden">
               <div className="flex items-center justify-around sm:justify-between divide-x divide-border/60">
                 {stats.map((stat, idx) => {
                   const Icon = getStatIcon(stat.label)

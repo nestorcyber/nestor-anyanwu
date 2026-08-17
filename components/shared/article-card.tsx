@@ -40,7 +40,7 @@ export default function ArticleCard({
 
   if (variant === "horizontal") {
     return (
-      <article className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-none overflow-hidden flex flex-row justify-between h-[162px] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl cursor-pointer">
+      <article className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden flex flex-row justify-between h-[162px] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl cursor-pointer">
         <Link href={slug} className="flex flex-row w-full h-full" aria-label={`Read article: ${title}`}>
           {/* Left Cover Image Container */}
           <div className="relative w-[38%] h-full overflow-hidden bg-[#dcdcdc] dark:bg-slate-800 shrink-0">
@@ -58,8 +58,8 @@ export default function ArticleCard({
             )}
 
             {/* Overlaid Date Badge */}
-            <div className="absolute top-2 left-2 z-10 flex flex-col shadow-sm overflow-hidden rounded-none">
-              <div className="bg-[#0070f3] dark:bg-sky-600 px-2 py-0.5 min-w-[36px] text-center flex items-center justify-center">
+            <div className="absolute top-2 left-2 z-10 flex flex-col shadow-sm overflow-hidden rounded-xl">
+              <div className="bg-[#0075ff] px-2 py-0.5 min-w-[36px] text-center flex items-center justify-center">
                 <span className="text-sm font-black text-white leading-none tracking-tight font-mono">
                   {day}
                 </span>
@@ -75,7 +75,7 @@ export default function ArticleCard({
           {/* Right Content Area */}
           <div className="w-[62%] p-3.5 flex flex-col justify-between h-full space-y-1">
             <div className="space-y-1">
-              <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0070f3] dark:group-hover:text-sky-400 transition-colors font-heading line-clamp-2">
+              <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors font-heading line-clamp-2">
                 {title}
               </h3>
               <p className="text-[11px] text-slate-600 dark:text-slate-400 font-normal leading-relaxed line-clamp-2">
@@ -83,7 +83,7 @@ export default function ArticleCard({
               </p>
             </div>
 
-            <div className="pt-1.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-white bg-[#0070f3] hover:bg-blue-600 px-2.5 py-1 rounded transition-colors shadow-2xs">
+            <div className="pt-1.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-white bg-[#0075ff] hover:bg-blue-600 px-2.5 py-1 rounded-xl transition-colors shadow-2xs">
               <span>View Post</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </div>
@@ -94,7 +94,7 @@ export default function ArticleCard({
   }
 
   return (
-    <article className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-none overflow-hidden flex flex-col justify-between h-full transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-2xl cursor-pointer">
+    <article className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between h-full transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl cursor-pointer">
       <Link href={slug} className="flex flex-col justify-between h-full" aria-label={`Read article: ${title}`}>
         <div>
           {/* Card Top Cover Image / Placeholder Container */}
@@ -113,8 +113,8 @@ export default function ArticleCard({
             )}
 
             {/* Overlaid Date Badge */}
-            <div className="absolute top-3 left-3 z-10 flex flex-col shadow-sm overflow-hidden rounded-none">
-              <div className="bg-[#0070f3] dark:bg-sky-600 px-2.5 py-1 min-w-[44px] text-center flex items-center justify-center">
+            <div className="absolute top-3 left-3 z-10 flex flex-col shadow-sm overflow-hidden rounded-xl">
+              <div className="bg-[#0075ff] px-2.5 py-1 min-w-[44px] text-center flex items-center justify-center">
                 <span className="text-lg font-black text-white leading-none tracking-tight font-mono">
                   {day}
                 </span>
@@ -129,7 +129,7 @@ export default function ArticleCard({
 
           {/* Content Area */}
           <div className="p-6 space-y-3">
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0070f3] dark:group-hover:text-sky-400 transition-colors font-heading line-clamp-3">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors font-heading line-clamp-3">
               {title}
             </h3>
 
@@ -141,7 +141,7 @@ export default function ArticleCard({
 
         {/* Bottom Action Bar */}
         <div className="px-6 pb-6 pt-2">
-          <div className="w-full py-3 px-4 bg-[#0070f3] text-white hover:bg-blue-600 font-extrabold text-xs uppercase tracking-wider flex items-center justify-between transition-all duration-300 shadow-md hover:shadow-lg">
+          <div className="w-full py-3 px-4 rounded-xl bg-[#0075ff] text-white hover:bg-blue-600 font-extrabold text-xs uppercase tracking-wider flex items-center justify-between transition-all duration-300 shadow-md hover:shadow-lg">
             <span>View Post</span>
             <ArrowRight className="w-4 h-4" />
           </div>

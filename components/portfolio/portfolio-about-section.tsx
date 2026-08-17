@@ -31,9 +31,9 @@ export default function PortfolioAboutSection({ settings }: { settings?: SiteSet
 
           <div className="flex justify-center pt-2">
             <Link href="/about">
-              <button className="bg-accent hover:bg-accent/90 text-white font-semibold text-sm px-6 py-2.5 rounded-xl shadow-xs active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer">
+              <button className="bg-accent hover:bg-accent/90 text-white font-semibold text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl shadow-xs active:scale-98 transition-all flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer">
                 <span>Read Full Story</span>
-                <ArrowRight size={16} />
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </button>
             </Link>
           </div>

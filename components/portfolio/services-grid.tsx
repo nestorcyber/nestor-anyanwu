@@ -44,7 +44,7 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
           {services.map((service) => (
             <div
               key={service.id}
-              className="p-6 bg-card border border-border/70 rounded-2xl flex flex-col space-y-3.5 hover:border-accent transition-all shadow-xs"
+              className="p-6 bg-card border border-border/70 rounded-xl flex flex-col space-y-3.5 hover:border-accent transition-all shadow-xs"
             >
               <div className="p-3 bg-secondary/80 border border-border/80 rounded-xl w-fit shadow-2xs">
                 {getIcon(service.iconName)}

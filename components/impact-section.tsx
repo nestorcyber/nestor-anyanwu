@@ -154,7 +154,7 @@ export default function ImpactSection({
             <Link
               href="/contact"
               aria-label="Contact Nestor Cyber"
-              className="w-12 h-12 rounded-full bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground flex items-center justify-center shadow-xl border border-border/20 transition-all duration-300"
+              className="w-12 h-12 rounded-2xl bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground flex items-center justify-center shadow-xl border border-border/20 transition-all duration-300"
             >
               <ArrowUpRight className="w-5 h-5" />
             </Link>
