@@ -40,9 +40,9 @@ export default function ArticleCard({
 }: ArticleCardProps) {
   const { day, monthYear, year } = parseDateBadge(date)
 
-  // CSS Polygon Clip Path for Top-Right Folder Notch Geometry
+  // Cut-out starts before the middle (at ~34% width) and smoothly transitions down to ~52% width
   const folderClipPath =
-    "polygon(0 0, calc(100% - 135px) 0, calc(100% - 105px) 32px, 100% 32px, 100% 100%, 0 100%)"
+    "polygon(0 0, calc(34% - 8px) 0, calc(52% + 8px) 34px, 100% 34px, 100% 100%, 0 100%)"
 
   return (
     <article className="group relative w-full flex flex-col h-full cursor-pointer transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl">
@@ -62,29 +62,29 @@ export default function ArticleCard({
               style={{ clipPath: folderClipPath }}
             >
               <div>
-                {/* TOP HEADER: Category on Left & Tech/Topic Pills on Right Shelf */}
-                <div className="px-5 pt-3.5 pb-2 flex items-center justify-between gap-2 bg-slate-50/70 dark:bg-slate-900/70 border-b border-slate-100 dark:border-slate-800/80">
+                {/* TOP HEADER: Topic Pills on Left High Shoulder & Main Category Tag on Top-Right Shelf */}
+                <div className="px-4 pt-3 pb-2.5 flex items-center justify-between gap-2 bg-slate-50/80 dark:bg-slate-900/80 border-b border-slate-100 dark:border-slate-800/80">
                   
-                  {/* Left Category Badge */}
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0075ff] px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/60">
-                    {category}
-                  </span>
-
-                  {/* Right Folder Shelf Pill Tags */}
-                  <div className="flex items-center gap-1.5 pt-0.5">
-                    {(tags.length > 0 ? tags : [category]).slice(0, 2).map((t, idx) => (
+                  {/* Left High Shoulder: Secondary Topic/Tech Pills */}
+                  <div className="flex items-center gap-1.5 overflow-hidden max-w-[55%]">
+                    {(tags.length > 0 ? tags : ["TECHNICAL"]).slice(0, 2).map((t, idx) => (
                       <span
                         key={idx}
-                        className="text-[9.5px] font-mono font-semibold uppercase px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                        className="text-[9px] font-mono font-semibold uppercase px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 truncate"
                       >
                         {t}
                       </span>
                     ))}
                   </div>
+
+                  {/* Top-Right Shelf: Main Category Badge (DESIGN / WEB / JOURNAL) */}
+                  <span className="text-[10px] font-mono font-extrabold uppercase tracking-wider text-[#0075ff] px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800/70 shadow-2xs">
+                    {category}
+                  </span>
                 </div>
 
                 {/* CENTER IMAGE SHOWCASE WITH PRESERVED OVERLAID DATE BADGE */}
-                <div className="relative w-full h-[240px] sm:h-[270px] bg-slate-100 dark:bg-slate-950 flex items-center justify-center p-2 overflow-hidden">
+                <div className="relative w-full h-[240px] sm:h-[270px] bg-slate-100 dark:bg-slate-950 flex items-center justify-center overflow-hidden">
                   {image ? (
                     <Image
                       src={image}
@@ -113,7 +113,7 @@ export default function ArticleCard({
                   </div>
                 </div>
 
-                {/* EXCEPT & TITLE CONTENT AREA */}
+                {/* EXCERPT & TITLE CONTENT AREA */}
                 <div className="p-5 space-y-2">
                   <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight uppercase group-hover:text-[#0075ff] transition-colors font-heading line-clamp-2 leading-snug">
                     {title}

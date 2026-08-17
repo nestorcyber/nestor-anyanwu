@@ -37,65 +37,66 @@ export default function ProjectCard({
   const CardWrapper = link ? Link : "div"
   const wrapperProps = link ? { href: link } : {}
 
-  // CSS Polygon Clip Path for Top-Right Folder Notch Geometry
+  // Cut-out starts before the middle (at ~34% width) and smoothly transitions down to ~52% width
   const folderClipPath =
-    "polygon(0 0, calc(100% - 135px) 0, calc(100% - 105px) 32px, 100% 32px, 100% 100%, 0 100%)"
+    "polygon(0 0, calc(34% - 8px) 0, calc(52% + 8px) 34px, 100% 34px, 100% 100%, 0 100%)"
 
   return (
     <div className="group relative w-full flex flex-col h-full cursor-pointer transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl">
       <CardWrapper {...(wrapperProps as any)} className="flex flex-col justify-between h-full w-full">
         
-        {/* TOP-RIGHT FOLDER NOTCH PILL TAGS CONTAINER */}
-        <div className="relative w-full">
+        <div className="relative w-full h-full flex flex-col justify-between">
           
-          {/* Card Border & Background Outer Shell (with Folder Clip Path) */}
+          {/* Card Outer Shell Border (Clipped to smooth folder shape) */}
           <div
-            className="relative w-full bg-slate-200 dark:bg-slate-800 p-[1px] rounded-2xl transition-colors duration-300 group-hover:bg-[#0075ff]"
+            className="relative w-full h-full bg-slate-200 dark:bg-slate-800 p-[1px] rounded-2xl transition-colors duration-300 group-hover:bg-[#0075ff]"
             style={{ clipPath: folderClipPath }}
           >
-            {/* Inner Content Box (clipped to folder shape) */}
+            {/* Inner Content Card (clipped to folder shape) */}
             <div
-              className="w-full bg-white dark:bg-slate-900 rounded-2xl overflow-hidden flex flex-col justify-between"
+              className="w-full h-full bg-white dark:bg-slate-900 rounded-2xl overflow-hidden flex flex-col justify-between"
               style={{ clipPath: folderClipPath }}
             >
-              {/* TOP HEADER: Category on Left High Shoulder & Tech Pills on Right Shelf */}
-              <div className="px-5 pt-3.5 pb-2 flex items-center justify-between gap-2 bg-slate-50/70 dark:bg-slate-900/70 border-b border-slate-100 dark:border-slate-800/80">
-                
-                {/* Left Category Badge */}
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0075ff] px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/60">
-                  {category}
-                </span>
+              <div>
+                {/* TOP HEADER: Tech Pills on Left High Shoulder & Category Badge on Top-Right Shelf */}
+                <div className="px-4 pt-3 pb-2.5 flex items-center justify-between gap-2 bg-slate-50/80 dark:bg-slate-900/80 border-b border-slate-100 dark:border-slate-800/80">
+                  
+                  {/* Left High Shoulder: Secondary Tech Pills */}
+                  <div className="flex items-center gap-1.5 overflow-hidden max-w-[55%]">
+                    {technologies.slice(0, 2).map((tech, idx) => (
+                      <span
+                        key={idx}
+                        className="text-[9px] font-mono font-semibold uppercase px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 truncate"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
 
-                {/* Right Folder Shelf Pill Tags (Image 1 Reference Style: Branding, Website, Marketing) */}
-                <div className="flex items-center gap-1.5 pt-0.5">
-                  {technologies.slice(0, 2).map((tech, idx) => (
-                    <span
-                      key={idx}
-                      className="text-[9.5px] font-mono font-semibold uppercase px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  {/* Top-Right Shelf: Main Category Badge (DESIGN / WEB / SOFTWARE) */}
+                  <span className="text-[10px] font-mono font-extrabold uppercase tracking-wider text-[#0075ff] px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800/70 shadow-2xs">
+                    {category}
+                  </span>
+                </div>
+
+                {/* COVER IMAGE SHOWCASE (Fills the upper part of the card) */}
+                <div className="relative w-full h-[250px] sm:h-[280px] bg-slate-100 dark:bg-slate-950 flex items-center justify-center overflow-hidden">
+                  {image ? (
+                    <Image
+                      src={image}
+                      alt={title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-slate-100 dark:bg-slate-950 flex items-center justify-center">
+                      <Sparkles className="w-8 h-8 text-slate-400/60 dark:text-slate-600" />
+                    </div>
+                  )}
                 </div>
               </div>
 
-              {/* CENTER IMAGE SHOWCASE (Clipped to Folder Silhouette) */}
-              <div className="relative w-full h-[240px] sm:h-[270px] bg-slate-100 dark:bg-slate-950 flex items-center justify-center p-2 overflow-hidden">
-                {image ? (
-                  <Image
-                    src={image}
-                    alt={title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-slate-100 dark:bg-slate-950 flex items-center justify-center">
-                    <Sparkles className="w-8 h-8 text-slate-400/60 dark:text-slate-600" />
-                  </div>
-                )}
-              </div>
-
-              {/* BOTTOM OVERLAY ACTION BAR (Image 2 Overlay Style) */}
+              {/* BOTTOM ACTION BAR: Title, Metadata & Right Square Action Button */}
               <div className="p-5 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-4 transition-all duration-300">
                 <div className="space-y-1 min-w-0 flex-1">
                   <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight uppercase group-hover:text-[#0075ff] transition-colors font-heading truncate">
