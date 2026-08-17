@@ -12,9 +12,9 @@ export default async function FeaturedCommunity() {
   const displayEntries = featured.length > 0 ? featured.slice(0, 4) : entries.slice(0, 4)
 
   return (
-    <SectionContainer id="community-work" className="bg-secondary/30">
+    <SectionContainer id="community-work" className="bg-white dark:bg-background">
       <SectionHeader
-        badge="FEATURED COMMUNITY WORK"
+        badge="Featured Community Work"
         title="Organizations & Volunteer Impact"
         subtitle="Serving developer chapters and communities."
       />
@@ -31,15 +31,15 @@ export default async function FeaturedCommunity() {
                   <div className="p-2.5 bg-accent/10 rounded-xl">
                     <Users className="w-5 h-5 text-accent" />
                   </div>
-                  <span className="text-xs font-bold text-accent uppercase tracking-widest">
+                  <span className="text-xs font-bold text-accent tracking-wider">
                     {item.duration}
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-foreground uppercase tracking-tight group-hover:text-accent transition-colors font-heading">
+                <h3 className="text-xl font-bold text-foreground tracking-tight group-hover:text-accent transition-colors font-heading">
                   {item.organization}
                 </h3>
-                <p className="text-xs font-mono text-muted-foreground uppercase font-semibold">
+                <p className="text-xs font-mono text-muted-foreground font-semibold">
                   {item.role}
                 </p>
 
@@ -53,7 +53,7 @@ export default async function FeaturedCommunity() {
               <div className="pt-4 border-t border-border/30 flex justify-end">
                 <Link
                   href={`/community/${item.slug}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-foreground group-hover:text-accent transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider text-foreground group-hover:text-accent transition-colors"
                 >
                   <span>View Details</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -70,8 +70,8 @@ export default async function FeaturedCommunity() {
 
       <div className="flex justify-center mt-10">
         <Link href="/community">
-          <button className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-white bg-accent hover:bg-accent/90 px-6 py-2.5 sm:py-3.5 rounded-xl shadow-xs transition-all cursor-pointer">
-            <span>EXPLORE ALL COMMUNITY WORK</span>
+          <button className="inline-flex items-center gap-2 text-xs font-extrabold tracking-wider text-white bg-accent hover:bg-accent/90 px-6 py-2.5 sm:py-3.5 rounded-xl shadow-xs transition-all cursor-pointer">
+            <span>Explore All Community Work</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </button>
         </Link>

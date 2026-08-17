@@ -14,9 +14,9 @@ export default async function FeaturedPortfolio() {
   const displayProjects = featured.length > 0 ? featured.slice(0, 3) : projects.slice(0, 3)
 
   return (
-    <SectionContainer id="portfolio">
+    <SectionContainer id="portfolio" className="bg-slate-50/60 dark:bg-slate-900/30">
       <SectionHeader
-        badge="FEATURED PORTFOLIO"
+        badge="Featured Portfolio"
         title="Selected Work & Engineering"
         subtitle="Highlighted software and design deliverables."
       />
@@ -27,7 +27,7 @@ export default async function FeaturedPortfolio() {
             <ProjectCard
               key={project.slug}
               title={project.title}
-              category={project.category || "DEVELOPMENT"}
+              category={project.category || "Software Development"}
               description={project.shortDescription}
               technologies={[...project.technologies]}
               link={`/portfolio/${project.slug}`}
@@ -44,8 +44,8 @@ export default async function FeaturedPortfolio() {
 
       <div className="flex justify-center mt-10">
         <Link href="/portfolio">
-          <button className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-foreground border border-foreground/50 hover:border-accent hover:text-accent px-8 py-3.5 rounded-none transition-all cursor-pointer">
-            <span>VIEW ALL PORTFOLIO</span>
+          <button className="inline-flex items-center gap-2 text-xs font-bold tracking-wider text-foreground border border-foreground/50 hover:border-accent hover:text-accent px-7 py-3 rounded-xl transition-all cursor-pointer">
+            <span>View All Portfolio</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </Link>

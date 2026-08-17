@@ -173,7 +173,7 @@ const defaultSettings: SiteSettings = {
   siteName: 'Nestor Cyber',
   authorName: 'Nestor Anyanwu',
   tagline: 'Tech Advocate, Designer & Community Leader',
-  heroTitle: 'BUILDING DIGITAL FUTURE WITH PURPOSE',
+  heroTitle: 'Building Digital Future With Purpose',
   heroSubtitle:
     'Director of ICT at NACOS FUTO, Data Privacy Ambassador, Software Engineer, and Community Leader.',
   aboutParagraph:
@@ -499,6 +499,9 @@ export async function getPortfolioStats(): Promise<PortfolioStat[]> {
 
 export async function getServices(): Promise<ServiceItem[]> {
   const supabase = db()
+  let dbServices: ServiceItem[] = []
+  const dbSlugs = new Set<string>()
+
   if (supabase) {
     const { data, error } = await supabase
       .from('services')
@@ -506,18 +509,26 @@ export async function getServices(): Promise<ServiceItem[]> {
       .order('sort_order', { ascending: true })
 
     if (!error && data && data.length > 0) {
-      return data.map((row) => ({
-        id: row.slug,
+      data.forEach((row: any) => {
+        if (row.slug) dbSlugs.add(row.slug)
+        if (row.title) dbSlugs.add(row.title.toLowerCase())
+      })
+      dbServices = data.map((row) => ({
+        id: row.id || row.slug,
         title: row.title,
         description: row.description,
-        iconName: row.icon_name,
-        ctaText: row.cta_text,
-        ctaHref: row.cta_href,
+        iconName: row.icon_name || 'Code',
+        ctaText: row.cta_text || 'Learn more',
+        ctaHref: row.cta_href || '/contact',
       }))
     }
   }
 
-  return fallbackServicesList
+  const fallbackMerged = fallbackServicesList.filter(
+    (s) => !dbSlugs.has(s.id) && !dbSlugs.has(s.title.toLowerCase())
+  )
+
+  return [...dbServices, ...fallbackMerged]
 }
 
 export async function getSkillGroups(): Promise<SkillGroup[]> {

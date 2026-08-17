@@ -54,9 +54,9 @@ export default function PersonalPhilosophy() {
   ]
 
   return (
-    <SectionContainer id="philosophy">
+    <SectionContainer id="philosophy" className="bg-white dark:bg-background">
       <SectionHeader
-        badge="PERSONAL PHILOSOPHY"
+        badge="Personal Philosophy"
         title="Why I Build & Lead"
         subtitle="Platform for impact and growth."
       />

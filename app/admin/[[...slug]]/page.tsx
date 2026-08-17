@@ -1273,10 +1273,14 @@ export default async function AdminCatchAllPage({ params }: Props) {
       )
     }
     let data = null
-    const { data: dbData } = await supabase.from('services').select('*').eq('id', actionOrId).maybeSingle()
-    data = dbData
+    const { data: byId } = await supabase.from('services').select('*').eq('id', actionOrId).maybeSingle()
+    data = byId
     if (!data) {
-      const fb = fallbackServices.find((s) => s.id === actionOrId || s.title === actionOrId)
+      const { data: bySlug } = await supabase.from('services').select('*').eq('slug', actionOrId).maybeSingle()
+      data = bySlug
+    }
+    if (!data) {
+      const fb = fallbackServices.find((s) => s.id === actionOrId || s.title.toLowerCase() === actionOrId.toLowerCase())
       if (fb) {
         data = {
           id: undefined,

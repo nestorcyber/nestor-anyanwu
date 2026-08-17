@@ -113,8 +113,8 @@ export default function ExpandingEndeavors() {
 
               {/* Always Visible Action Button */}
               <Link href={item.link} className="block w-full" aria-label={`Explore ${item.title}`}>
-                <div className="w-full bg-accent hover:bg-accent/90 text-white font-extrabold text-xs uppercase tracking-widest px-6 py-4 flex items-center justify-between transition-colors">
-                  <span>EXPLORE {item.title}</span>
+                <div className="w-full bg-accent hover:bg-accent/90 text-white font-extrabold text-xs tracking-wider px-6 py-4 flex items-center justify-between transition-colors">
+                  <span>Explore {item.title}</span>
                   <ArrowRight size={16} />
                 </div>
               </Link>
@@ -189,8 +189,8 @@ export default function ExpandingEndeavors() {
                     }`}
                 >
                   <Link href={item.link} className="block w-full" aria-label={`Explore ${item.title}`}>
-                    <div className="w-full bg-accent hover:bg-accent/90 text-white font-extrabold text-xs uppercase tracking-widest px-5 py-3.5 flex items-center justify-between transition-colors cursor-pointer">
-                      <span>EXPLORE {item.title}</span>
+                    <div className="w-full bg-accent hover:bg-accent/90 text-white font-extrabold text-xs tracking-wider px-5 py-3.5 flex items-center justify-between transition-colors cursor-pointer">
+                      <span>Explore {item.title}</span>
                       <ArrowRight size={15} />
                     </div>
                   </Link>

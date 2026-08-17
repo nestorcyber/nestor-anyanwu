@@ -15,9 +15,9 @@ export default async function LatestJournal() {
   const displayArticles = [...pinned, ...regular].slice(0, 3)
 
   return (
-    <SectionContainer id="journal">
+    <SectionContainer id="journal" className="bg-slate-50/60 dark:bg-slate-900/30">
       <SectionHeader
-        badge="LATEST JOURNAL"
+        badge="Latest Journal"
         title="Articles & Technical Essays"
         subtitle="Articles on software and leadership."
       />
@@ -43,8 +43,8 @@ export default async function LatestJournal() {
 
       <div className="flex justify-center mt-10">
         <Link href="/journal">
-          <button className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-foreground border border-foreground/50 hover:border-accent hover:text-accent px-8 py-3.5 rounded-none transition-all cursor-pointer">
-            <span>READ ALL ARTICLES</span>
+          <button className="inline-flex items-center gap-2 text-xs font-bold tracking-wider text-foreground border border-foreground/50 hover:border-accent hover:text-accent px-7 py-3 rounded-xl transition-all cursor-pointer">
+            <span>Read All Articles</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </Link>

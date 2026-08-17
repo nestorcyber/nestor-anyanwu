@@ -29,7 +29,7 @@ export default function FeaturedProjectsShowcase({ projects }: { projects: Proje
             <ProjectCard
               key={project.id || project.slug}
               title={project.title}
-              category={project.category || "DEVELOPMENT"}
+              category={project.category || "Software Development"}
               description={project.description}
               technologies={project.technologies || []}
               link={`/portfolio/${project.slug}`}

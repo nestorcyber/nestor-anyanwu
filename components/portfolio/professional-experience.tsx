@@ -16,7 +16,7 @@ export default function ProfessionalExperience({ journeyTimeline }: { journeyTim
   const displayItems = workExperience.length ? workExperience : journeyTimeline
 
   return (
-    <section id="experience" className="w-full py-8 md:py-10 border-b border-border/70 bg-background">
+    <section id="experience" className="w-full py-8 md:py-10 border-b border-border/70 bg-slate-50/60 dark:bg-slate-900/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Centered Section Header */}
