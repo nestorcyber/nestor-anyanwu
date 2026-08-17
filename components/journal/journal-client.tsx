@@ -123,72 +123,102 @@ export default function JournalClient({ articles }: JournalClientProps) {
   return (
     <div className="w-full space-y-12 pt-0 pb-20 md:pb-28">
       
-      {/* WEBFLOW-INSPIRED HIGH-IMPACT HERO SECTION */}
-      <section className="w-full relative overflow-hidden bg-[#0B1C2C] text-white py-16 sm:py-24 md:py-28 px-4 sm:px-6 lg:px-8 border-b border-border/80 shadow-2xl">
-        {/* Dynamic Electric Blue Ambient Radial Glow in Background */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,_var(--tw-gradient-stops))] from-[#0075ff]/25 via-[#0075ff]/5 to-transparent pointer-events-none z-0" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-[#0075ff]/10 blur-[120px] rounded-full pointer-events-none z-0" />
+      {/* ATMOSPHERIC MULTI-LAYER VERTICAL GRADIENT HERO SECTION */}
+      <section className="w-full relative overflow-hidden bg-gradient-to-b from-[#060C14] via-[#091827] to-[#0A1A2A] text-white py-16 sm:py-24 md:py-28 px-4 sm:px-6 lg:px-8 border-b border-white/[0.08] shadow-2xl">
+        
+        {/* Layer 1: Dark Edge Vignette Mask for Focused Center Contrast */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_40%,_rgba(6,12,20,0.65)_100%)] pointer-events-none z-0" />
 
-        <div className="relative z-10 max-w-7xl mx-auto space-y-10 sm:space-y-14">
+        {/* Layer 2: Ambient Blue Radial Glow Positioned around Lower-Middle Area */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/3 w-full max-w-6xl h-[420px] bg-[radial-gradient(circle_at_center,_rgba(0,117,255,0.22)_0%,_rgba(0,117,255,0.06)_50%,_transparent_75%)] pointer-events-none z-0 blur-2xl" />
+
+        {/* Layer 3: Top Ambient Soft Light Glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-72 bg-[#0075ff]/10 blur-[100px] rounded-full pointer-events-none z-0" />
+
+        <div className="relative z-10 max-w-7xl mx-auto space-y-12 sm:space-y-16">
           
-          {/* Centered Large Display Title & Subtitle */}
+          {/* Hero Header Content */}
           <div className="text-center space-y-4 max-w-4xl mx-auto">
+            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#0075ff] inline-block px-3 py-1 rounded-full bg-[#0075ff]/10 border border-[#0075ff]/30">
+              // JOURNAL & TECHNICAL WRITING
+            </span>
+
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight font-heading leading-[1.08]">
               Ideas, Insights & Technical Writing
             </h1>
+            
             <p className="text-sm sm:text-base md:text-lg text-slate-300 font-normal leading-relaxed text-center max-w-2xl mx-auto">
-              Explore software architecture case studies, design system notes, tech advocacy, and community leadership journals by Nestor Anyanwu.
+              Thoughts, software architecture case studies, design system notes, tech advocacy, and personal growth journals by Nestor Anyanwu.
             </p>
           </div>
 
-          {/* Featured Triple-Card Spotlight Row (3 Glassmorphic Cards) */}
+          {/* Featured Elevated Dark Journal Cards (3 Spotlight Panel Row) */}
           {featuredArticles.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {featuredArticles.map((article, idx) => {
                 const badgeLabel = idx === 0 ? "FEATURED" : idx === 1 ? "NEW" : "TRENDING"
                 return (
                   <Link
                     key={article.slug || idx}
                     href={`/journal/${article.slug}`}
-                    className="bg-slate-900/60 hover:bg-slate-900/90 backdrop-blur-md border border-slate-800/80 hover:border-[#0075ff] rounded-xl p-5 transition-all duration-300 flex items-center justify-between gap-4 group shadow-lg hover:shadow-[0_10px_30px_rgba(0,117,255,0.15)] cursor-pointer"
+                    className="bg-[#0D1E30]/80 hover:bg-[#0F2236]/95 backdrop-blur-md border border-white/[0.08] hover:border-[#0075ff]/80 rounded-xl p-5 transition-all duration-300 flex flex-col justify-between gap-4 group shadow-xl hover:shadow-[0_12px_32px_rgba(0,117,255,0.18)] hover:-translate-y-1 cursor-pointer overflow-hidden"
                   >
-                    <div className="space-y-2 flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-base font-extrabold text-white group-hover:text-[#0075ff] transition-colors truncate font-heading">
-                          {article.title}
-                        </h3>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0075ff] px-2.5 py-0.5 rounded-full bg-[#0075ff]/15 border border-[#0075ff]/30">
+                          {article.category || "JOURNAL"}
+                        </span>
                         {badgeLabel && (
-                          <span className="text-[9px] font-mono font-extrabold uppercase px-1.5 py-0.5 rounded bg-[#0075ff]/20 text-[#0075ff] border border-[#0075ff]/40 shrink-0">
+                          <span className="text-[9px] font-mono font-extrabold uppercase px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">
                             {badgeLabel}
                           </span>
                         )}
                       </div>
+
+                      <h3 className="text-base sm:text-lg font-extrabold text-white group-hover:text-[#0075ff] transition-colors line-clamp-2 font-heading leading-snug">
+                        {article.title}
+                      </h3>
 
                       <p className="text-xs text-slate-300 font-normal line-clamp-2 leading-relaxed">
                         {article.excerpt}
                       </p>
                     </div>
 
-                    {/* Preview Thumbnail on Right Side */}
-                    {article.coverImage && (
-                      <div className="relative w-24 h-16 sm:w-28 sm:h-20 rounded-lg overflow-hidden border border-slate-700/60 shrink-0 bg-slate-800">
-                        <Image
-                          src={article.coverImage}
-                          alt={article.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
+                    {/* Integrated Media Image Box with Soft Dark Gradient Fade */}
+                    <div className="relative w-full h-36 sm:h-40 rounded-lg overflow-hidden border border-white/[0.06] bg-slate-900 mt-2 shrink-0">
+                      {article.coverImage ? (
+                        <>
+                          <Image
+                            src={article.coverImage}
+                            alt={article.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#0D1E30] via-transparent to-transparent z-10 pointer-events-none opacity-80" />
+                        </>
+                      ) : (
+                        <div className="w-full h-full bg-slate-900 flex items-center justify-center text-xs font-mono text-slate-500">
+                          NESTOR JOURNAL
+                        </div>
+                      )}
+
+                      <div className="absolute bottom-2.5 left-3 right-3 z-20 flex items-center justify-between text-[10px] font-mono text-slate-200 font-semibold">
+                        <span>{formatDate(article.publishedDate)}</span>
+                        <span className="flex items-center gap-1 text-[#0075ff] group-hover:translate-x-0.5 transition-transform">
+                          <span>Read</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </span>
                       </div>
-                    )}
+                    </div>
                   </Link>
                 )
               })}
             </div>
           )}
 
-          {/* Bottom Quick Link Sub-Text (matching Webflow footer line in screenshot) */}
-          <div className="text-center pt-1">
-            <p className="text-xs sm:text-sm text-slate-300 font-medium">
+          {/* Sub-text Link */}
+          <div className="text-center pt-2">
+            <p className="text-xs sm:text-sm text-slate-400 font-medium">
               <span>Looking for specific technical articles? </span>
               {pinnedArticle && (
                 <Link
