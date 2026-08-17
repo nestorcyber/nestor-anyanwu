@@ -6,7 +6,7 @@ import { createClient } from '@/lib/supabase/client'
 import { DangerButton, Field, PrimaryButton, TextInput } from '@/components/admin/field'
 import type { Tables } from '@/lib/supabase/types'
 import { Edit2, Check, X, Search, Loader2 } from 'lucide-react'
-import { searchIcons, SkillIcon, IconOption } from '@/components/admin/icon-picker'
+import { searchIcons, SkillIcon, IconOption, getCanonicalTechLogoUrl } from '@/components/admin/icon-picker'
 
 type Skill = Tables<'skills'>
 type Group = Tables<'skill_groups'> & { skills: Skill[] }
@@ -139,8 +139,13 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
   async function addSkill(e: FormEvent) {
     e.preventDefault()
     if (!skillGroupId) return
+    setError('')
     const supabase = createClient()
     const group = groups.find((g) => g.id === skillGroupId)
+
+    const chosenProvider = selectedIcon?.provider || 'simple'
+    const chosenName = selectedIcon?.name || skillName.trim()
+    const chosenUrl = selectedIcon?.svgUrl || getCanonicalTechLogoUrl(skillName.trim()) || null
 
     const payload: any = {
       group_id: skillGroupId,
@@ -148,9 +153,9 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
       experience_level: level.trim() || null,
       years: years.trim() || null,
       sort_order: group?.skills.length ?? 0,
-      icon_provider: selectedIcon?.provider || null,
-      icon_name: selectedIcon?.name || null,
-      icon: selectedIcon?.svgUrl || null,
+      icon_provider: chosenProvider,
+      icon_name: chosenName,
+      icon: chosenUrl,
     }
 
     const { data, error: err } = await supabase
@@ -181,10 +186,10 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
     setEditSkillLevel(skill.experience_level || '')
     setEditSkillYears(skill.years || '')
     
-    // Check if skill has icon info or default to auto-derived slug
-    const provider = (skill.icon_provider as any) || 'simple-icons'
-    const iconName = skill.icon_name || skill.name.toLowerCase().replace(/[^a-z0-9]/g, '')
-    const iconUrl = skill.icon || `https://cdn.simpleicons.org/${iconName}`
+    // Check if skill has icon info or resolve via canonical tech logo helper
+    const provider = skill.icon_provider || (getCanonicalTechLogoUrl(skill.name) ? 'simple' : 'lucide')
+    const iconName = skill.icon_name || skill.name
+    const iconUrl = skill.icon || getCanonicalTechLogoUrl(skill.name) || undefined
 
     setEditSelectedIcon({
       provider,
@@ -201,10 +206,10 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
     setSavingSkillId(skillId)
     const supabase = createClient()
 
-    // Determine icon fields: use editSelectedIcon if picked, or fallback to name-based simple icon
-    const chosenProvider = editSelectedIcon?.provider || 'simple-icons'
-    const chosenName = editSelectedIcon?.name || editSkillName.trim().toLowerCase().replace(/[^a-z0-9]/g, '')
-    const chosenUrl = editSelectedIcon?.svgUrl || `https://cdn.simpleicons.org/${chosenName}`
+    // Determine icon fields: use editSelectedIcon if picked, or resolve via canonical tech logo helper
+    const chosenProvider = editSelectedIcon?.provider || 'simple'
+    const chosenName = editSelectedIcon?.name || editSkillName.trim()
+    const chosenUrl = editSelectedIcon?.svgUrl || getCanonicalTechLogoUrl(editSkillName.trim()) || null
 
     const payload: any = {
       name: editSkillName.trim(),
@@ -215,13 +220,14 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
       icon: chosenUrl,
     }
 
-    const { error: err } = await supabase
+    const { data, error: err } = await supabase
       .from('skills')
       .update(payload)
       .eq('id', skillId)
+      .select('*')
 
     if (err) {
-      setError(err.message || 'Failed to update skill')
+      setError(`Failed to update skill: ${err.message}`)
       setSavingSkillId(null)
       return
     }
@@ -413,33 +419,36 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                           </div>
                         ) : null}
                         {/* Clean Primary Save Skill & Cancel Bar */}
-                        <div className="flex items-center gap-2 pt-2">
-                          <button
-                            type="button"
-                            onClick={() => saveEditSkill(skill.id, group.id)}
-                            disabled={savingSkillId === skill.id}
-                            className="bg-accent hover:bg-accent/90 text-white font-semibold text-xs px-5 py-2 rounded-lg flex items-center gap-2 shadow-xs transition-all cursor-pointer disabled:opacity-50"
-                          >
-                            {savingSkillId === skill.id ? (
-                              <>
-                                <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                                <span>Saving...</span>
-                              </>
-                            ) : (
-                              <>
-                                <Check className="w-4 h-4" />
-                                <span>Save Skill</span>
-                              </>
-                            )}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => setEditingSkillId(null)}
-                            disabled={savingSkillId === skill.id}
-                            className="bg-secondary hover:bg-secondary/80 text-muted-foreground border border-border text-xs px-4 py-2 rounded-lg transition-all cursor-pointer"
-                          >
-                            Cancel
-                          </button>
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-2">
+                          <div className="flex items-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => saveEditSkill(skill.id, group.id)}
+                              disabled={savingSkillId === skill.id}
+                              className="bg-accent hover:bg-accent/90 text-white font-semibold text-xs px-5 py-2 rounded-lg flex items-center gap-2 shadow-xs transition-all cursor-pointer disabled:opacity-50"
+                            >
+                              {savingSkillId === skill.id ? (
+                                <>
+                                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                                  <span>Saving...</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Check className="w-4 h-4" />
+                                  <span>Save Skill</span>
+                                </>
+                              )}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setEditingSkillId(null)}
+                              disabled={savingSkillId === skill.id}
+                              className="bg-secondary hover:bg-secondary/80 text-muted-foreground border border-border text-xs px-4 py-2 rounded-lg transition-all cursor-pointer"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                          {error ? <p className="text-xs text-red-400 font-semibold">{error}</p> : null}
                         </div>
                       </div>
                     </div>

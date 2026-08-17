@@ -201,6 +201,9 @@ create table if not exists public.skills (
   name text not null,
   experience_level text,
   years text,
+  icon text,
+  icon_provider text,
+  icon_name text,
   sort_order int not null default 0,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
