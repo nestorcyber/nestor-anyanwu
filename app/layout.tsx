@@ -1,10 +1,23 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/next"
+import { Plus_Jakarta_Sans, Inter } from "next/font/google"
 import SiteShell from "@/components/site-shell"
 import { ThemeProvider } from "@/components/theme-provider"
 import GoogleAnalytics from "@/components/analytics/google-analytics"
 import "./globals.css"
+
+const headingFont = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-heading-fallback",
+  display: "swap",
+})
+
+const bodyFont = Inter({
+  subsets: ["latin"],
+  variable: "--font-body-fallback",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: {
@@ -149,7 +162,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en" className="bg-background" suppressHydrationWarning>
+    <html lang="en" className={`bg-background ${headingFont.variable} ${bodyFont.variable}`} suppressHydrationWarning>
       <head suppressHydrationWarning>
         <script
           id="schema-org-person"

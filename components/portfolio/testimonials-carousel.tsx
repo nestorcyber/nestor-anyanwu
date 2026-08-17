@@ -30,11 +30,16 @@ export default function TestimonialsCarousel() {
   return (
     <section id="testimonials" className="w-full py-16 md:py-24 border-b border-border/60">
       <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
-        <SectionHeader
-          badge="TESTIMONIALS & ENDORSEMENTS"
-          title="What Collaborators Say"
-          subtitle="Feedback from community presidents, event organizers, enterprise clients, and technical partners."
-        />
+        {/* Centered Image-Matching Section Header */}
+        <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
+            What Collaborators Say
+          </h2>
+          <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
+            Feedback from community leaders, event organizers, enterprise clients, and technical partners.
+          </p>
+          <div className="w-14 h-1 bg-accent rounded-full mt-2" />
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((t, idx) => (

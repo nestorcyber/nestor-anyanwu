@@ -27,21 +27,15 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
     <section id="skills" className="w-full py-14 md:py-20 border-b border-border/70 bg-background overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
-        {/* Section Header */}
-        <div className="flex items-center justify-between border-b border-border/60 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center font-bold">
-              <Wrench className="w-4 h-4" />
-            </div>
-            <div>
-              <h2 className="text-xl sm:text-2xl font-extrabold text-foreground tracking-tight font-heading">
-                Skills & Technologies
-              </h2>
-              <p className="text-xs text-muted-foreground">
-                Software products, frameworks, design applications, and tools used across projects.
-              </p>
-            </div>
-          </div>
+        {/* Centered Image-Matching Section Header */}
+        <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
+            Skills & Technologies
+          </h2>
+          <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
+            Software products, frameworks, design applications, and tools used across projects.
+          </p>
+          <div className="w-14 h-1 bg-accent rounded-full mt-2" />
         </div>
 
         {/* Squircle App Logo Carousels moving in opposite directions */}

@@ -12,20 +12,18 @@ export default function PortfolioAboutSection({ settings }: { settings?: SiteSet
     <section id="about" className="w-full py-12 md:py-16 border-b border-border/70 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
-        {/* Section Header - Matching all other portfolio sections */}
-        <div className="flex items-center justify-between border-b border-border/60 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center font-bold">
-              <User className="w-5 h-5" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold text-foreground tracking-tight">About Me</h2>
-              <p className="text-xs text-muted-foreground">Background, leadership roles, engineering vision, and community impact.</p>
-            </div>
-          </div>
+        {/* Centered Image-Matching Section Header */}
+        <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
+            Core Focus
+          </h2>
+          <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
+            As a technology engineer and community leader, my engagements span software development, ICT leadership, visual design, and advisory.
+          </p>
+          <div className="w-14 h-1 bg-accent rounded-full mt-2" />
         </div>
 
-        {/* Centered Content with Standard Portfolio Text Colors & Size */}
+        {/* Centered Content */}
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <p className="text-base text-muted-foreground font-medium leading-relaxed text-center">
             {aboutText}

@@ -12,22 +12,15 @@ export default function FeaturedProjectsShowcase({ projects }: { projects: Proje
     <section id="featured" className="w-full py-12 md:py-16 border-b border-border/70 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
-        {/* Edge Section Title Header */}
-        <div className="flex items-center justify-between border-b border-border/60 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center font-bold">
-              <Star className="w-5 h-5" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold text-foreground tracking-tight">Featured Deliverables</h2>
-              <p className="text-xs text-muted-foreground">Highlighted production builds, design systems, and architecture case studies.</p>
-            </div>
-          </div>
-
-          <Link href="/projects" className="text-xs font-mono font-bold text-accent hover:underline flex items-center gap-1 uppercase tracking-wider">
-            <span>View all projects</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+        {/* Centered Image-Matching Section Header */}
+        <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
+            Featured Projects
+          </h2>
+          <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
+            Highlighted production builds, web infrastructure, brand systems, and architecture case studies.
+          </p>
+          <div className="w-14 h-1 bg-accent rounded-full mt-2" />
         </div>
 
         {/* Featured Horizontal Grid */}

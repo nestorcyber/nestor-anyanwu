@@ -1,7 +1,6 @@
 import React from "react"
-import Link from "next/link"
 import type { ServiceItem } from "@/lib/content"
-import { Code, Globe, Layout, Palette, Briefcase, Zap, Shield, ArrowUpRight } from "lucide-react"
+import { Code, Globe, Layout, Palette, Briefcase, Zap, Shield } from "lucide-react"
 
 export default function ServicesGrid({ services }: { services: ServiceItem[] }) {
   const getIcon = (iconName: string) => {
@@ -29,21 +28,15 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
     <section id="services" className="w-full py-12 md:py-16 border-b border-border/70 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
-        {/* Section Header */}
-        <div className="flex items-center justify-between border-b border-border/60 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center font-bold">
-              <Briefcase className="w-5 h-5" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold text-foreground tracking-tight">Services & Consulting Offering</h2>
-              <p className="text-xs text-muted-foreground">Specialized services for tech startups, organizations, and enterprise teams.</p>
-            </div>
-          </div>
-          
-          <Link href="/contact" className="text-xs font-bold text-accent hover:underline">
-            Inquire service →
-          </Link>
+        {/* Centered Image-Matching Section Header */}
+        <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
+            Services & Offerings
+          </h2>
+          <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
+            Specialized services for tech startups, student developer communities, and enterprise teams.
+          </p>
+          <div className="w-14 h-1 bg-accent rounded-full mt-2" />
         </div>
 
         {/* Services Grid */}
@@ -51,28 +44,19 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
           {services.map((service) => (
             <div
               key={service.id}
-              className="p-6 bg-card border border-border/70 rounded-2xl flex flex-col justify-between space-y-5 hover:border-accent transition-all shadow-xs"
+              className="p-6 bg-card border border-border/70 rounded-2xl flex flex-col space-y-3.5 hover:border-accent transition-all shadow-xs"
             >
-              <div className="space-y-3.5">
-                <div className="p-3 bg-secondary/80 border border-border/80 rounded-xl w-fit shadow-2xs">
-                  {getIcon(service.iconName)}
-                </div>
-
-                <h3 className="text-base font-bold text-foreground">
-                  {service.title}
-                </h3>
-
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {service.description}
-                </p>
+              <div className="p-3 bg-secondary/80 border border-border/80 rounded-xl w-fit shadow-2xs">
+                {getIcon(service.iconName)}
               </div>
 
-              <div className="pt-3 border-t border-border/40">
-                <Link href={service.ctaHref} className="text-xs font-bold text-accent hover:underline inline-flex items-center gap-1">
-                  <span>{service.ctaText}</span>
-                  <ArrowUpRight size={14} />
-                </Link>
-              </div>
+              <h3 className="text-base font-bold text-foreground">
+                {service.title}
+              </h3>
+
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                {service.description}
+              </p>
             </div>
           ))}
         </div>

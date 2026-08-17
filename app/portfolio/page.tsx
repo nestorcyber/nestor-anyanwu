@@ -55,19 +55,15 @@ export default async function PortfolioPage() {
     <div className="min-h-screen bg-background flex flex-col w-full">
       {/* Main Full-Width Content Column */}
       <main className="flex-1 w-full min-w-0 flex flex-col justify-between overflow-x-hidden">
-        <div>
+        <div className="w-full">
           <PortfolioHero settings={siteSettings} stats={stats} />
-
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-            <PortfolioAboutSection settings={siteSettings} />
-            <SkillsMatrix skillGroups={skillGroups} />
-            <ServicesGrid services={services} />
-            <FeaturedProjectsShowcase projects={projects} />
-            <ProfessionalExperience journeyTimeline={journeyTimeline} />
-            <CertificationsGrid certificationsList={certificationsList} />
-            <TestimonialsCarousel />
-          </div>
-
+          <PortfolioAboutSection settings={siteSettings} />
+          <SkillsMatrix skillGroups={skillGroups} />
+          <ServicesGrid services={services} />
+          <FeaturedProjectsShowcase projects={projects} />
+          <ProfessionalExperience journeyTimeline={journeyTimeline} />
+          <CertificationsGrid certificationsList={certificationsList} />
+          <TestimonialsCarousel />
           <PortfolioCTA />
         </div>
 
