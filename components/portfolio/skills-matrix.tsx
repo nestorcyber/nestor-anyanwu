@@ -12,7 +12,7 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
   if (!allSkills.length) return null
 
   // Ensure enough items for seamless infinite ticker loop
-  const baseSkills = allSkills.length < 10 ? [...allSkills, ...allSkills, ...allSkills] : allSkills
+  const baseSkills = allSkills.length < 12 ? [...allSkills, ...allSkills, ...allSkills, ...allSkills] : allSkills
 
   // Split into 2 rows for opposite scrolling directions
   const midIndex = Math.ceil(baseSkills.length / 2)
@@ -24,20 +24,20 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
   const row2 = [...row2Raw, ...row2Raw]
 
   return (
-    <section id="skills" className="w-full py-16 md:py-24 border-b border-border/70 bg-background overflow-hidden relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <section id="skills" className="w-full py-14 md:py-20 border-b border-border/70 bg-background overflow-hidden relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Section Header */}
         <div className="flex items-center justify-between border-b border-border/60 pb-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-accent/10 text-accent flex items-center justify-center font-bold">
-              <Wrench className="w-5 h-5" />
+            <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center font-bold">
+              <Wrench className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight font-heading">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-foreground tracking-tight font-heading">
                 Skills & Technologies
               </h2>
-              <p className="text-xs sm:text-sm text-muted-foreground">
+              <p className="text-xs text-muted-foreground">
                 Software products, frameworks, design applications, and tools used across projects.
               </p>
             </div>
@@ -45,22 +45,22 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
         </div>
 
         {/* Squircle App Logo Carousels moving in opposite directions */}
-        <div className="relative w-full space-y-6 pt-2">
+        <div className="relative w-full space-y-4 pt-1">
           
           {/* Side Fade Masks for Seamless In/Out Effect */}
-          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-24 md:w-36 bg-gradient-to-r from-background via-background/80 to-transparent z-10" />
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 md:w-36 bg-gradient-to-l from-background via-background/80 to-transparent z-10" />
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 md:w-40 bg-gradient-to-r from-background via-background/90 to-transparent z-20" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 md:w-40 bg-gradient-to-l from-background via-background/90 to-transparent z-20" />
 
           {/* Row 1: Leftward Moving Carousel */}
-          <div className="overflow-hidden w-full py-2">
-            <div className="animate-marquee gap-4 sm:gap-6">
+          <div className="overflow-hidden w-full py-1">
+            <div className="animate-marquee gap-3.5 sm:gap-5">
               {row1.map((skill, idx) => (
                 <div
                   key={`r1-${idx}`}
-                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 shrink-0 rounded-3xl sm:rounded-[28px] bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 shadow-[0_10px_30px_rgba(0,0,0,0.06)] dark:shadow-none hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)] hover:border-accent/80 flex flex-col items-center justify-center p-3 transition-all duration-300 hover:-translate-y-1.5 group cursor-pointer relative"
+                  className="group relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-2xl sm:rounded-3xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-[0_6px_20px_rgba(0,0,0,0.05)] dark:shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:border-accent/80 flex items-center justify-center p-3 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
                 >
-                  {/* Large Center Squircle Logo Icon */}
-                  <div className="w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  {/* Clean Center Logo Icon filling ~65% space */}
+                  <div className="w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <SkillIcon
                       provider={skill.iconProvider}
                       name={skill.iconName || skill.name}
@@ -70,25 +70,28 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
                     />
                   </div>
 
-                  {/* Clean Tooltip/Badge on Hover */}
-                  <span className="text-[10px] sm:text-xs font-bold text-foreground truncate max-w-full mt-1.5 opacity-80 group-hover:opacity-100 group-hover:text-accent transition-all">
+                  {/* Sleek Floating Hover Tooltip */}
+                  <div className="absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-[10px] font-bold rounded-md whitespace-nowrap shadow-md opacity-0 pointer-events-none group-hover:opacity-100 group-hover:-top-10 transition-all duration-200 z-30">
                     {skill.name}
-                  </span>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
+          {/* Dynamic Separator Line between Top & Bottom Carousels */}
+          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-border/60 to-transparent my-1" />
+
           {/* Row 2: Rightward Moving Carousel */}
-          <div className="overflow-hidden w-full py-2">
-            <div className="animate-marquee-reverse gap-4 sm:gap-6">
+          <div className="overflow-hidden w-full py-1">
+            <div className="animate-marquee-reverse gap-3.5 sm:gap-5">
               {row2.map((skill, idx) => (
                 <div
                   key={`r2-${idx}`}
-                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 shrink-0 rounded-3xl sm:rounded-[28px] bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 shadow-[0_10px_30px_rgba(0,0,0,0.06)] dark:shadow-none hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)] hover:border-accent/80 flex flex-col items-center justify-center p-3 transition-all duration-300 hover:-translate-y-1.5 group cursor-pointer relative"
+                  className="group relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-2xl sm:rounded-3xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-[0_6px_20px_rgba(0,0,0,0.05)] dark:shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:border-accent/80 flex items-center justify-center p-3 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
                 >
-                  {/* Large Center Squircle Logo Icon */}
-                  <div className="w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  {/* Clean Center Logo Icon filling ~65% space */}
+                  <div className="w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <SkillIcon
                       provider={skill.iconProvider}
                       name={skill.iconName || skill.name}
@@ -98,10 +101,10 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
                     />
                   </div>
 
-                  {/* Clean Tooltip/Badge on Hover */}
-                  <span className="text-[10px] sm:text-xs font-bold text-foreground truncate max-w-full mt-1.5 opacity-80 group-hover:opacity-100 group-hover:text-accent transition-all">
+                  {/* Sleek Floating Hover Tooltip */}
+                  <div className="absolute -bottom-9 left-1/2 -translate-x-1/2 px-2.5 py-1 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-[10px] font-bold rounded-md whitespace-nowrap shadow-md opacity-0 pointer-events-none group-hover:opacity-100 group-hover:-bottom-10 transition-all duration-200 z-30">
                     {skill.name}
-                  </span>
+                  </div>
                 </div>
               ))}
             </div>
