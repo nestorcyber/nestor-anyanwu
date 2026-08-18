@@ -123,46 +123,43 @@ export default function JournalClient({ articles }: JournalClientProps) {
   return (
     <div className="w-full space-y-12 pt-0 pb-20 md:pb-28 font-sans">
       
-      {/* ─── WEBFLOW-INSPIRED HERO SECTION (LIGHT & DARK THEMES) ─── */}
-      <section className="w-full relative overflow-hidden bg-gradient-to-b from-blue-50/70 via-slate-50/40 to-background dark:from-[#060D17] dark:via-[#081525] dark:to-[#0A1D33] text-foreground dark:text-white py-16 sm:py-24 md:py-28 border-b border-border/70 dark:border-white/[0.08] shadow-xs dark:shadow-2xl">
+      {/* ─── WEBFLOW-INSPIRED HERO SECTION (STANDARD VIEWPORT HERO) ─── */}
+      <section className="w-full relative overflow-hidden bg-gradient-to-b from-blue-50/70 via-slate-50/40 to-background dark:from-[#060D17] dark:via-[#081525] dark:to-[#0A1D33] text-foreground dark:text-white min-h-[calc(100vh-5rem)] flex flex-col justify-center py-10 sm:py-12 md:py-16 border-b border-border/70 dark:border-white/[0.08] shadow-xs dark:shadow-2xl">
         
-        {/* Radial Light Glow Illuminating from Center / Bottom */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[380px] bg-[radial-gradient(ellipse_at_bottom_center,_rgba(0,117,255,0.15)_0%,_rgba(0,117,255,0.04)_45%,_transparent_75%)] dark:bg-[radial-gradient(ellipse_at_bottom_center,_rgba(0,117,255,0.38)_0%,_rgba(0,117,255,0.12)_45%,_transparent_75%)] pointer-events-none z-0 blur-2xl" />
+        {/* Radial Light Glow Illuminating from Center / Bottom (3x Boosted Intensity) */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full bg-[radial-gradient(ellipse_at_bottom_center,_rgba(0,117,255,0.45)_0%,_rgba(0,117,255,0.15)_45%,_transparent_80%)] dark:bg-[radial-gradient(ellipse_at_bottom_center,_rgba(0,117,255,0.85)_0%,_rgba(0,117,255,0.35)_45%,_transparent_80%)] pointer-events-none z-0 blur-2xl opacity-90" />
 
-        {/* Soft Ambient Glow in Lower Center */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-64 bg-sky-200/30 dark:bg-[#0075ff]/20 blur-[100px] rounded-full pointer-events-none z-0" />
+        {/* Soft Ambient Glow in Lower Center (3x Boosted Intensity) */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-sky-400/60 dark:bg-[#0075ff]/60 blur-[100px] rounded-full pointer-events-none z-0" />
 
-        <div className="relative z-10 container-webflow space-y-12 sm:space-y-16">
+        <div className="relative z-10 container-webflow space-y-8 sm:space-y-10 my-auto">
           
           {/* Centered Large Display Title & Subtitle */}
-          <div className="text-center space-y-4 max-w-4xl mx-auto">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#0055cc] dark:text-sky-400 block">
-              Journal & Publications
-            </span>
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-foreground dark:text-white tracking-tight font-heading leading-[1.08]">
+          <div className="text-center space-y-3 sm:space-y-4 max-w-4xl mx-auto">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground dark:text-white tracking-tight font-heading leading-[1.08]">
               Ideas, Insights & Technical Writing
             </h1>
             
-            <p className="text-sm sm:text-base md:text-lg text-muted-foreground dark:text-slate-300 font-normal leading-relaxed text-center max-w-2xl mx-auto">
+            <p className="text-xs sm:text-base md:text-lg text-muted-foreground dark:text-slate-300 font-normal leading-relaxed text-center max-w-2xl mx-auto">
               Explore software engineering case studies, design system notes, tech advocacy, and community leadership journals by Nestor Anyanwu.
             </p>
           </div>
 
           {/* Featured Spotlight Cards (3 Card Row in Webflow Showcase Style) */}
           {featuredArticles.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 max-w-6xl mx-auto">
               {featuredArticles.map((article, idx) => {
                 const badgeLabel = idx === 0 ? "FEATURED" : idx === 1 ? "NEW" : "2.0"
                 return (
                   <Link
                     key={article.slug || idx}
                     href={`/journal/${article.slug}`}
-                    className="bg-white/90 dark:bg-[#0B1A2A]/85 hover:bg-white dark:hover:bg-[#0E2238]/95 backdrop-blur-xl border border-slate-200/80 dark:border-white/[0.08] hover:border-[#0075ff]/80 dark:hover:border-[#0075ff]/80 rounded-2xl p-5 transition-all duration-300 flex flex-row items-center justify-between gap-4 group shadow-sm hover:shadow-xl dark:shadow-lg dark:hover:shadow-[0_10px_30px_rgba(0,117,255,0.2)] hover:-translate-y-1 cursor-pointer overflow-hidden min-h-[140px]"
+                    className="bg-white/90 dark:bg-[#0B1A2A]/85 hover:bg-white dark:hover:bg-[#0E2238]/95 backdrop-blur-xl border border-slate-200/80 dark:border-white/[0.08] hover:border-[#0075ff]/80 dark:hover:border-[#0075ff]/80 rounded-2xl p-4 sm:p-5 transition-all duration-300 flex flex-row items-center justify-between gap-3 sm:gap-4 group shadow-sm hover:shadow-xl dark:shadow-lg dark:hover:shadow-[0_10px_30px_rgba(0,117,255,0.2)] hover:-translate-y-1 cursor-pointer overflow-hidden min-h-[120px] sm:min-h-[135px]"
                   >
                     {/* Left Text Info */}
-                    <div className="space-y-2 flex-1 min-w-0">
+                    <div className="space-y-1.5 flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <h3 className="text-base sm:text-lg font-extrabold text-foreground dark:text-white group-hover:text-[#0055cc] dark:group-hover:text-[#0075ff] transition-colors truncate font-heading">
+                        <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-foreground dark:text-white group-hover:text-[#0055cc] dark:group-hover:text-[#0075ff] transition-colors truncate font-heading">
                           {article.title}
                         </h3>
                         {badgeLabel && (
@@ -179,7 +176,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
 
                     {/* Right Side Preview Image Thumbnail */}
                     {article.coverImage && (
-                      <div className="relative w-24 h-16 sm:w-28 sm:h-20 rounded-xl overflow-hidden border border-slate-200/80 dark:border-white/10 shrink-0 bg-slate-100 dark:bg-slate-900 shadow-xs">
+                      <div className="relative w-20 h-14 sm:w-24 sm:h-16 md:w-28 md:h-20 rounded-xl overflow-hidden border border-slate-200/80 dark:border-white/10 shrink-0 bg-slate-100 dark:bg-slate-900 shadow-xs">
                         <Image
                           src={article.coverImage}
                           alt={article.title}
@@ -196,7 +193,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
           )}
 
           {/* Sub-text Link */}
-          <div className="text-center pt-2">
+          <div className="text-center pt-1 sm:pt-2">
             <p className="text-xs sm:text-sm text-muted-foreground dark:text-slate-300 font-medium">
               <span>Looking for specific technical articles? </span>
               {pinnedArticle && (
