@@ -3,6 +3,7 @@
 import React, { useState, FormEvent } from "react"
 import Link from "next/link"
 import Footer from "@/components/footer"
+import TrustedBrands from "@/components/home/trusted-brands"
 import {
   Mail,
   Linkedin,
@@ -42,30 +43,41 @@ const TwitterXIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
   </svg>
 )
 
-const defaultBrandLogos = [
+const defaultBrandLogos: BrandPartner[] = [
   {
-    name: "NACOS FUTO",
-    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
-  },
-  {
+    id: "gdg",
     name: "GDG Owerri",
-    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
+    logoUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/f_auto,q_auto,w_400,c_limit/nestor/brands/mk1vyobppwlmmvyw894f.png",
+    websiteUrl: "https://gdg.community.dev/gdg-owerri/",
+    sortOrder: 1,
   },
   {
+    id: "futo",
+    name: "Federal University of Technology Owerri",
+    logoUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/f_auto,q_auto,w_400,c_limit/nestor/brands/mk1vyobppwlmmvyw894f.png",
+    websiteUrl: "https://futo.edu.ng",
+    sortOrder: 2,
+  },
+  {
+    id: "nacos",
+    name: "NACOS FUTO Chapter",
+    logoUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/f_auto,q_auto,w_400,c_limit/nestor/brands/mk1vyobppwlmmvyw894f.png",
+    websiteUrl: "https://nacosfuto.org",
+    sortOrder: 3,
+  },
+  {
+    id: "ieee",
     name: "IEEE FUTO SB",
-    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
+    logoUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/f_auto,q_auto,w_400,c_limit/nestor/brands/mk1vyobppwlmmvyw894f.png",
+    websiteUrl: "https://ieee.org",
+    sortOrder: 4,
   },
   {
-    name: "Build With AI",
-    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
-  },
-  {
-    name: "DevFest Owerri",
-    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
-  },
-  {
-    name: "SICT Directorate",
-    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg",
+    id: "ieee-pes",
+    name: "IEEE Power Electronics Society",
+    logoUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/f_auto,q_auto,w_400,c_limit/nestor/brands/mk1vyobppwlmmvyw894f.png",
+    websiteUrl: "https://pels.ieee.org",
+    sortOrder: 5,
   },
 ]
 
@@ -159,34 +171,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                 </p>
               </div>
 
-              {/* Trusted Organizations / Brand Partners (Full Color, No Card Boxes) */}
-              <div className="pt-2">
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 items-center">
-                  {displayBrands.map((brand, idx) => (
-                    <div
-                      key={idx}
-                      className="h-12 flex items-center justify-start transition-transform hover:scale-105 group"
-                    >
-                      {brand.logoUrl ? (
-                        /* eslint-disable-next-line @next/next/no-img-element */
-                        <img
-                          src={brand.logoUrl}
-                          alt={brand.name}
-                          width={140}
-                          height={40}
-                          loading="lazy"
-                          decoding="async"
-                          className="max-h-9 max-w-[140px] object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-                        />
-                      ) : (
-                        <span className="text-xs font-bold text-foreground text-left line-clamp-1">
-                          {brand.name}
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
+
 
               {/* Direct Reach Highlights */}
               <div className="border-t border-border/60 pt-6 space-y-4">
@@ -449,6 +434,11 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
 
           </div>
 
+        </div>
+
+        {/* ─── Trusted Brand Partners Infinite Marquee Carousel ─── */}
+        <div className="mt-16 md:mt-20">
+          <TrustedBrands brands={displayBrands} />
         </div>
 
         {/* ─── Webflow-Style "Why Choose Nestor Anyanwu?" 6-Feature Grid Section ─── */}
