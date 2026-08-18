@@ -8,7 +8,7 @@ export default function HomeCTA() {
       {/* Blueprint grid lines overlay */}
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-center space-y-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 relative z-10 text-center space-y-8">
         <h2 className="text-2xl sm:text-4xl font-bold tracking-tight leading-tight max-w-3xl mx-auto">
           Let's Build Impactful Technology Together
         </h2>

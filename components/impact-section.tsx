@@ -3,7 +3,7 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { CheckCircle2, ArrowUpRight, Sparkles } from "lucide-react"
+import { CheckCircle2, ArrowUpRight } from "lucide-react"
 
 export interface ImpactSectionProps {
   category?: string
@@ -62,42 +62,58 @@ export default function ImpactSection({
   heroImageAlt = "Nestor Anyanwu at community event",
 }: ImpactSectionProps) {
   return (
-    <section id="impact" className="w-full py-8 md:py-10 border-b border-border/70 bg-slate-50/60 dark:bg-slate-900/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <section id="impact" className="w-full font-sans border-y border-border/80 overflow-hidden">
+      {/* 
+        3-Column Balanced Layout:
+        - Column 1 (Left 6 cols): Navy Brand Container with category badge, balanced title, 2-column description & 7 pillars, and CTA button
+        - Column 2 (Middle 3 cols): Cohesive dark-tinted stats container with balanced numbers, labels & descriptions
+        - Column 3 (Right 3 cols): Full-height action image showcase with floating CTA button
+      */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[580px] w-full">
         
-        {/* Section Header with Balanced Hierarchy */}
-        <div className="space-y-3 max-w-3xl">
-          <span className="text-xs font-mono font-bold text-[#0075ff] tracking-wider uppercase block">
-            {category}
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground font-heading tracking-tight leading-tight">
-            {title}
-          </h2>
-          {description && (
-            <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
-              {description}
-            </p>
-          )}
-          <div className="w-14 h-1 bg-accent rounded-full mt-2" />
-        </div>
+        {/* LEFT CONTAINER (6 cols) */}
+        <div className="lg:col-span-6 bg-[#0B1C2C] text-white relative p-8 sm:p-10 md:p-12 lg:p-14 flex flex-col justify-between overflow-hidden">
+          {/* Background image overlay */}
+          <div
+            className="absolute inset-0 opacity-10 bg-cover bg-center mix-blend-overlay pointer-events-none"
+            style={{
+              backgroundImage: `url(${heroImage})`,
+            }}
+          />
 
-        {/* 3-Column Unified Grid: Pillars Card, Stats Card & Hero Image */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          
-          {/* Card 1: Pillars & Capabilities (5 cols) */}
-          <div className="lg:col-span-5 bg-card border border-border/70 rounded-3xl p-6 sm:p-8 flex flex-col justify-between space-y-6 shadow-xs">
-            <div className="space-y-5">
-              <h3 className="text-lg sm:text-xl font-extrabold text-foreground font-heading tracking-tight">
-                {pillarsTitle}
-              </h3>
+          <div className="relative z-10 space-y-6">
+            {/* Category Subtitle */}
+            <span className="text-xs font-mono font-bold tracking-widest uppercase text-sky-400 block">
+              {category}
+            </span>
 
-              <div className="space-y-3">
+            {/* Main Headline */}
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight text-white font-heading">
+              {title}
+            </h2>
+
+            {/* 2-Column Content: Description on Left, 7 Pillars on Right */}
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 pt-2">
+              {/* Description side */}
+              <div className="sm:col-span-6 space-y-3">
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
+                  {description}
+                </p>
+                {pillarsTitle && (
+                  <p className="text-xs sm:text-sm font-bold text-white pt-2">
+                    {pillarsTitle}
+                  </p>
+                )}
+              </div>
+
+              {/* Pillars list side */}
+              <div className="sm:col-span-6 space-y-2.5">
                 {pillars.map((pillar, idx) => (
-                  <div key={idx} className="flex items-center gap-3 group">
-                    <div className="w-6 h-6 rounded-lg bg-blue-500/10 dark:bg-blue-500/20 text-[#0075ff] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                      <CheckCircle2 className="w-4 h-4" />
-                    </div>
-                    <span className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 group-hover:text-[#0075ff] transition-colors">
+                  <div key={idx} className="flex items-center gap-2.5 group">
+                    <span className="shrink-0 text-sky-400 bg-sky-400/20 rounded-full p-0.5 group-hover:scale-110 transition-transform">
+                      <CheckCircle2 className="w-4 h-4 text-sky-400" />
+                    </span>
+                    <span className="text-xs sm:text-sm font-medium tracking-wide text-slate-200 group-hover:text-white transition-colors">
                       {pillar}
                     </span>
                   </div>
@@ -105,66 +121,57 @@ export default function ImpactSection({
               </div>
             </div>
 
-            {/* Standard Button */}
-            <div className="pt-2">
-              <Link href={ctaLink} className="block w-full">
-                <div className="w-full py-3.5 px-5 rounded-xl bg-[#0075ff] hover:bg-blue-600 text-white font-extrabold text-xs tracking-wider flex items-center justify-between transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer">
+            {/* CTA Button */}
+            <div className="pt-3">
+              <Link href={ctaLink} className="inline-block">
+                <button className="bg-[#0075ff] hover:bg-blue-600 text-white font-bold text-xs tracking-wider px-7 py-3.5 rounded-xl shadow-lg transition-all flex items-center gap-2 cursor-pointer">
                   <span>{ctaText}</span>
-                  <ArrowUpRight className="w-4.5 h-4.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 shrink-0" />
-                </div>
+                  <ArrowUpRight className="w-4 h-4" />
+                </button>
               </Link>
             </div>
           </div>
+        </div>
 
-          {/* Card 2: Impact Metrics & Numbers (4 cols) */}
-          <div className="lg:col-span-4 bg-card border border-border/70 rounded-3xl p-6 sm:p-8 flex flex-col justify-between divide-y divide-border/60 shadow-xs">
-            {stats.map((stat, idx) => (
-              <div key={idx} className={`${idx === 0 ? "pb-4" : idx === stats.length - 1 ? "pt-4" : "py-4"} space-y-1.5`}>
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0075ff] font-mono tracking-tight">
-                  {stat.value}
-                </div>
-                <div className="text-sm sm:text-base font-bold text-foreground font-heading">
-                  {stat.label}
-                </div>
-                {stat.description && (
-                  <p className="text-xs text-muted-foreground font-normal leading-relaxed line-clamp-2">
-                    {stat.description}
-                  </p>
-                )}
+        {/* MIDDLE STATS CONTAINER (3 cols) */}
+        <div className="lg:col-span-3 bg-[#0e2238] text-white p-8 sm:p-10 flex flex-col justify-center gap-8 border-t lg:border-t-0 lg:border-l border-white/10">
+          {stats.map((stat, idx) => (
+            <div key={idx} className="space-y-2">
+              <div className="text-4xl sm:text-5xl font-black text-sky-400 font-mono tracking-tight">
+                {stat.value}
               </div>
-            ))}
-          </div>
-
-          {/* Card 3: Action Image Showcase (3 cols) */}
-          <div className="lg:col-span-3 relative min-h-[320px] lg:min-h-full rounded-3xl overflow-hidden border border-border/70 bg-slate-950 shadow-xs group">
-            {heroImage ? (
-              <Image
-                src={heroImage}
-                alt={heroImageAlt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 25vw"
-                className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-slate-900 text-slate-600">
-                <Sparkles className="w-8 h-8" />
+              <div className="text-lg sm:text-xl font-bold tracking-tight text-white font-heading">
+                {stat.label}
               </div>
-            )}
-            
-            {/* Bottom Gradient & Floating Link */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
-            
-            <div className="absolute bottom-4 right-4 z-10">
-              <Link
-                href={ctaLink}
-                aria-label="Contact Nestor Anyanwu"
-                className="w-11 h-11 rounded-xl bg-[#0075ff] text-white hover:bg-blue-600 flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-105"
-              >
-                <ArrowUpRight className="w-5 h-5" />
-              </Link>
+              {stat.description && (
+                <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                  {stat.description}
+                </p>
+              )}
             </div>
-          </div>
+          ))}
+        </div>
 
+        {/* RIGHT IMAGE CONTAINER (3 cols) */}
+        <div className="lg:col-span-3 relative min-h-[380px] lg:min-h-full w-full bg-slate-950 overflow-hidden">
+          <Image
+            src={heroImage}
+            alt={heroImageAlt}
+            fill
+            sizes="(max-width: 1024px) 100vw, 25vw"
+            className="object-cover object-top hover:scale-105 transition-transform duration-700 ease-out"
+            priority
+          />
+          {/* Floating Action Button */}
+          <div className="absolute bottom-6 right-6 flex flex-col gap-3 z-20">
+            <Link
+              href={ctaLink}
+              aria-label="Contact Nestor Anyanwu"
+              className="w-12 h-12 rounded-2xl bg-[#0075ff] text-white hover:bg-blue-600 flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-105"
+            >
+              <ArrowUpRight className="w-5 h-5" />
+            </Link>
+          </div>
         </div>
 
       </div>

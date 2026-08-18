@@ -36,7 +36,7 @@ export default function PortfolioHero({
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 pt-6 relative space-y-6">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 pb-8 pt-6 relative space-y-6">
         
         {/* Title & Action Buttons Row */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

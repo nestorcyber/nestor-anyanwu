@@ -20,7 +20,7 @@ export default function SectionContainer({
         pattern ? "bg-grid-pattern" : ""
       } ${className}`}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-8">{children}</div>
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">{children}</div>
     </section>
   )
 }

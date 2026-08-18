@@ -99,7 +99,7 @@ export default function Navigation() {
         role="navigation"
         aria-label="Main navigation"
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between h-14 md:h-16 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between h-14 md:h-16 px-6 sm:px-8 md:px-12 lg:px-16">
           
           {/* LEFT SIDE: Brand Logo */}
           <div className="flex items-center shrink-0">
@@ -190,7 +190,7 @@ export default function Navigation() {
         }`}
       >
         {/* Seamless Search Bar inside Drawer */}
-        <div className="w-full bg-secondary/80 dark:bg-neutral-900/90 border-b border-border/30 px-5 md:px-8 py-4">
+        <div className="w-full bg-secondary/80 dark:bg-neutral-900/90 border-b border-border/30 px-6 sm:px-8 md:px-12 lg:px-16 py-4">
           <form onSubmit={handleSearchSubmit} className="max-w-7xl mx-auto relative flex items-center">
             <Search className="absolute left-3.5 w-4 h-4 text-muted-foreground pointer-events-none" />
             <input
@@ -211,7 +211,7 @@ export default function Navigation() {
         </div>
 
         {/* Drawer Content Area */}
-        <div className="max-w-7xl w-full mx-auto flex-1 overflow-y-auto px-6 md:px-8 pt-4 pb-12 flex flex-col justify-start">
+        <div className="max-w-7xl w-full mx-auto flex-1 overflow-y-auto px-6 sm:px-8 md:px-12 lg:px-16 pt-4 pb-12 flex flex-col justify-start">
           
           {/* DESKTOP VIEW: Dark mode toggle AFTER search box BEFORE listing menu components */}
           {mounted && (
