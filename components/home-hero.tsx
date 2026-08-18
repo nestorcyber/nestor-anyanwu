@@ -8,8 +8,10 @@ export default function HomeHero() {
         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg"
         alt="Nestor speaking at event"
         fill
-        className="object-cover object-[70%_15%] md:object-center"
+        sizes="100vw"
         priority
+        fetchPriority="high"
+        className="object-cover object-[70%_15%] md:object-center"
       />
 
       {/* Overlay gradient - strong contrast across all screen sizes */}

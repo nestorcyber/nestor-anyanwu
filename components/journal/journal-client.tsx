@@ -121,34 +121,34 @@ export default function JournalClient({ articles }: JournalClientProps) {
   }, [articles, selectedCategory, searchQuery])
 
   return (
-    <div className="w-full space-y-12 pt-0 pb-20 md:pb-28">
+    <div className="w-full space-y-12 pt-0 pb-20 md:pb-28 font-sans">
       
-      {/* WEBFLOW-INSPIRED HERO SECTION WITH BOTTOM-UP BRIGHT BLUE GRADIENT */}
-      <section className="w-full relative overflow-hidden bg-[#060D17] text-white py-16 sm:py-24 md:py-28 px-4 sm:px-6 lg:px-8 border-b border-white/[0.08] shadow-2xl">
+      {/* ─── WEBFLOW-INSPIRED HERO SECTION (LIGHT & DARK THEMES) ─── */}
+      <section className="w-full relative overflow-hidden bg-gradient-to-b from-blue-50/70 via-slate-50/40 to-background dark:from-[#060D17] dark:via-[#081525] dark:to-[#0A1D33] text-foreground dark:text-white py-16 sm:py-24 md:py-28 border-b border-border/70 dark:border-white/[0.08] shadow-xs dark:shadow-2xl">
         
-        {/* Top Dark Blend Background Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#060D17] via-[#081525] to-[#0A1D33] pointer-events-none z-0" />
+        {/* Radial Light Glow Illuminating from Center / Bottom */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[380px] bg-[radial-gradient(ellipse_at_bottom_center,_rgba(0,117,255,0.15)_0%,_rgba(0,117,255,0.04)_45%,_transparent_75%)] dark:bg-[radial-gradient(ellipse_at_bottom_center,_rgba(0,117,255,0.38)_0%,_rgba(0,117,255,0.12)_45%,_transparent_75%)] pointer-events-none z-0 blur-2xl" />
 
-        {/* Bright Blue Glow Illuminating Upward from Bottom of Hero */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[380px] bg-[radial-gradient(ellipse_at_bottom_center,_rgba(0,117,255,0.38)_0%,_rgba(0,117,255,0.12)_45%,_transparent_75%)] pointer-events-none z-0 blur-2xl" />
+        {/* Soft Ambient Glow in Lower Center */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-64 bg-sky-200/30 dark:bg-[#0075ff]/20 blur-[100px] rounded-full pointer-events-none z-0" />
 
-        {/* Soft Ambient Light in Lower Center */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-64 bg-[#0075ff]/20 blur-[100px] rounded-full pointer-events-none z-0" />
-
-        <div className="relative z-10 max-w-7xl mx-auto space-y-12 sm:space-y-16">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 space-y-12 sm:space-y-16">
           
-          {/* Centered Large Display Title & Subtitle (Pill Tag Removed) */}
+          {/* Centered Large Display Title & Subtitle */}
           <div className="text-center space-y-4 max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight font-heading leading-[1.08]">
+            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#0055cc] dark:text-sky-400 block">
+              Journal & Publications
+            </span>
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-foreground dark:text-white tracking-tight font-heading leading-[1.08]">
               Ideas, Insights & Technical Writing
             </h1>
             
-            <p className="text-sm sm:text-base md:text-lg text-slate-300 font-normal leading-relaxed text-center max-w-2xl mx-auto">
-              Build your brand. Explore software architecture case studies, design system notes, tech advocacy, and community leadership journals by Nestor Anyanwu.
+            <p className="text-sm sm:text-base md:text-lg text-muted-foreground dark:text-slate-300 font-normal leading-relaxed text-center max-w-2xl mx-auto">
+              Explore software engineering case studies, design system notes, tech advocacy, and community leadership journals by Nestor Anyanwu.
             </p>
           </div>
 
-          {/* Featured Horizontal Spotlight Cards (3 Card Row matching Webflow Reference Sizing) */}
+          {/* Featured Spotlight Cards (3 Card Row in Webflow Showcase Style) */}
           {featuredArticles.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
               {featuredArticles.map((article, idx) => {
@@ -157,36 +157,36 @@ export default function JournalClient({ articles }: JournalClientProps) {
                   <Link
                     key={article.slug || idx}
                     href={`/journal/${article.slug}`}
-                    className="bg-[#0B1A2A]/85 hover:bg-[#0E2238]/95 backdrop-blur-md border border-white/[0.08] hover:border-[#0075ff]/80 rounded-xl p-5 transition-all duration-300 flex flex-row items-center justify-between gap-4 group shadow-lg hover:shadow-[0_10px_30px_rgba(0,117,255,0.2)] hover:-translate-y-1 cursor-pointer overflow-hidden min-h-[140px]"
+                    className="bg-white/90 dark:bg-[#0B1A2A]/85 hover:bg-white dark:hover:bg-[#0E2238]/95 backdrop-blur-xl border border-slate-200/80 dark:border-white/[0.08] hover:border-[#0075ff]/80 dark:hover:border-[#0075ff]/80 rounded-2xl p-5 transition-all duration-300 flex flex-row items-center justify-between gap-4 group shadow-sm hover:shadow-xl dark:shadow-lg dark:hover:shadow-[0_10px_30px_rgba(0,117,255,0.2)] hover:-translate-y-1 cursor-pointer overflow-hidden min-h-[140px]"
                   >
                     {/* Left Text Info */}
                     <div className="space-y-2 flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <h3 className="text-base sm:text-lg font-extrabold text-white group-hover:text-[#0075ff] transition-colors truncate font-heading">
+                        <h3 className="text-base sm:text-lg font-extrabold text-foreground dark:text-white group-hover:text-[#0055cc] dark:group-hover:text-[#0075ff] transition-colors truncate font-heading">
                           {article.title}
                         </h3>
                         {badgeLabel && (
-                          <span className="text-[9px] font-mono font-extrabold uppercase px-1.5 py-0.5 rounded bg-[#0075ff]/20 text-[#0075ff] border border-[#0075ff]/40 shrink-0">
+                          <span className="text-[9px] font-mono font-extrabold uppercase px-1.5 py-0.5 rounded bg-blue-50 text-[#0055cc] border border-blue-200 dark:bg-[#0075ff]/20 dark:text-[#0075ff] dark:border-[#0075ff]/40 shrink-0">
                             {badgeLabel}
                           </span>
                         )}
                       </div>
 
-                      <p className="text-xs text-slate-300 font-normal line-clamp-2 leading-relaxed">
+                      <p className="text-xs text-muted-foreground dark:text-slate-300 font-normal line-clamp-2 leading-relaxed">
                         {article.excerpt}
                       </p>
                     </div>
 
-                    {/* Right Side Preview Image Thumbnail (Webflow Reference Style) */}
+                    {/* Right Side Preview Image Thumbnail */}
                     {article.coverImage && (
-                      <div className="relative w-24 h-16 sm:w-28 sm:h-20 rounded-lg overflow-hidden border border-white/10 shrink-0 bg-slate-900 shadow-md">
+                      <div className="relative w-24 h-16 sm:w-28 sm:h-20 rounded-xl overflow-hidden border border-slate-200/80 dark:border-white/10 shrink-0 bg-slate-100 dark:bg-slate-900 shadow-xs">
                         <Image
                           src={article.coverImage}
                           alt={article.title}
                           fill
+                          sizes="112px"
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
                       </div>
                     )}
                   </Link>
@@ -195,14 +195,14 @@ export default function JournalClient({ articles }: JournalClientProps) {
             </div>
           )}
 
-          {/* Sub-text Link (matching Webflow footer line in reference) */}
+          {/* Sub-text Link */}
           <div className="text-center pt-2">
-            <p className="text-xs sm:text-sm text-slate-300 font-medium">
+            <p className="text-xs sm:text-sm text-muted-foreground dark:text-slate-300 font-medium">
               <span>Looking for specific technical articles? </span>
               {pinnedArticle && (
                 <Link
                   href={`/journal/${pinnedArticle.slug}`}
-                  className="font-bold text-white hover:text-[#0075ff] underline underline-offset-4 inline-flex items-center gap-1 transition-colors"
+                  className="font-bold text-foreground dark:text-white hover:text-[#0055cc] dark:hover:text-[#0075ff] underline underline-offset-4 inline-flex items-center gap-1 transition-colors"
                 >
                   <span>Read latest post</span>
                   <ArrowRight className="w-3.5 h-3.5 inline" />
@@ -214,8 +214,8 @@ export default function JournalClient({ articles }: JournalClientProps) {
         </div>
       </section>
 
-      {/* ALL JOURNAL ARTICLES SECTION WITH FILTERS & SEARCH */}
-      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 space-y-8">
+      {/* ─── ALL JOURNAL ARTICLES SECTION WITH FILTERS & SEARCH ─── */}
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 space-y-8">
         
         {/* Category Filters & Search Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/60 pb-6">
@@ -276,7 +276,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
                 setSelectedCategory("All")
                 setSearchQuery("")
               }}
-              className="text-xs font-bold uppercase tracking-widest text-[#0075ff] hover:underline pt-2 cursor-pointer"
+              className="text-xs font-bold uppercase tracking-widest text-[#0055cc] dark:text-sky-400 hover:underline pt-2 cursor-pointer"
             >
               Reset Search
             </button>

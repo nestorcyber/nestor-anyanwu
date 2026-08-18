@@ -53,29 +53,29 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg",
-        sizes: "any",
-      },
-      {
         url: "/icon.png",
+        sizes: "192x192",
         type: "image/png",
       },
       {
         url: "/favicon.ico",
+        type: "image/x-icon",
+      },
+      {
+        url: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg",
         sizes: "any",
       },
     ],
-    shortcut: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg",
+    shortcut: "/favicon.ico",
     apple: [
-      {
-        url: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg",
-        sizes: "180x180",
-        type: "image/jpeg",
-      },
       {
         url: "/apple-icon.png",
         sizes: "180x180",
         type: "image/png",
+      },
+      {
+        url: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg",
+        sizes: "180x180",
       },
     ],
   },
@@ -179,8 +179,8 @@ export default function RootLayout({
   const jsonLdWebsite = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Nestor Anyanwu",
-    alternateName: ["Nestor Cyber", "Nestor Anyanwu (Nestor Cyber)", "nestor.name.ng"],
+    name: "Anyanwu Nestor Ifeanyi",
+    alternateName: ["Nestor Anyanwu", "Nestor Cyber", "nestor.name.ng"],
     url: "https://nestor.name.ng",
     potentialAction: {
       "@type": "SearchAction",
@@ -192,9 +192,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`bg-background ${headingFont.variable} ${bodyFont.variable}`} suppressHydrationWarning>
       <head suppressHydrationWarning>
-        <link rel="icon" href="https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg" sizes="any" />
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <link rel="dns-prefetch" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icon.png" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png" />
         <link rel="apple-touch-icon" href="https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg" />
-        <meta name="application-name" content="Nestor Anyanwu" />
+        <meta name="application-name" content="Anyanwu Nestor Ifeanyi" />
         <script
           id="schema-org-person"
           type="application/ld+json"

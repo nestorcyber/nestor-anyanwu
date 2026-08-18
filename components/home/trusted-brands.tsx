@@ -22,6 +22,10 @@ export default function TrustedBrands({ brands = [] }: { brands: BrandPartner[] 
               <img
                 src={brand.logoUrl}
                 alt={brand.name}
+                width={160}
+                height={40}
+                loading="lazy"
+                decoding="async"
                 className="h-8 sm:h-9 md:h-10 w-auto object-contain shrink-0 transition-transform duration-300 hover:scale-105 cursor-pointer"
               />
             )

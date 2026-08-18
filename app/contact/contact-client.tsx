@@ -147,14 +147,11 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
             {/* ─── LEFT COLUMN: Headline, Intro, Trusted Brand Logos & Direct Reach ─── */}
-            <div className="lg:col-span-5 space-y-10">
+            <div className="lg:col-span-5 space-y-8 lg:pt-1">
               
               {/* Headline & Description */}
               <div className="space-y-4">
-                <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#0075ff] dark:text-sky-400 block">
-                  Let's Collaborate
-                </span>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-[1.15]">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-[1.12]">
                   Talk to Nestor about your website and engineering goals
                 </h1>
                 <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
@@ -162,27 +159,27 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                 </p>
               </div>
 
-              {/* Trusted Organizations / Brand Partners Grid */}
-              <div className="space-y-4 pt-2">
-                <p className="text-xs font-mono font-bold tracking-wider text-muted-foreground uppercase">
-                  Trusted By Leading Communities & Organizations
-                </p>
-
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {/* Trusted Organizations / Brand Partners (Full Color, No Card Boxes) */}
+              <div className="pt-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 items-center">
                   {displayBrands.map((brand, idx) => (
                     <div
                       key={idx}
-                      className="h-16 rounded-xl border border-border/70 bg-card/80 dark:bg-slate-900/60 p-3 flex items-center justify-center transition-all hover:border-[#0075ff]/50 hover:shadow-xs group"
+                      className="h-12 flex items-center justify-start transition-transform hover:scale-105 group"
                     >
                       {brand.logoUrl ? (
                         /* eslint-disable-next-line @next/next/no-img-element */
                         <img
                           src={brand.logoUrl}
                           alt={brand.name}
-                          className="max-h-8 max-w-full object-contain grayscale dark:brightness-0 dark:invert opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
+                          width={140}
+                          height={40}
+                          loading="lazy"
+                          decoding="async"
+                          className="max-h-9 max-w-[140px] object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
                         />
                       ) : (
-                        <span className="text-xs font-bold text-slate-700 dark:text-slate-300 text-center line-clamp-1">
+                        <span className="text-xs font-bold text-foreground text-left line-clamp-1">
                           {brand.name}
                         </span>
                       )}
@@ -459,17 +456,13 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
           <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 space-y-12">
             
             {/* Section Heading */}
-            <div className="space-y-3 max-w-3xl">
-              <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#0075ff] dark:text-sky-400 block">
-                Engineering Value & Standards
-              </span>
+            <div className="space-y-4 max-w-3xl">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-tight">
                 Why Collaborate With Nestor?
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
                 A multidisciplinary approach that unites robust software engineering, strategic design systems, and dedicated technical leadership.
               </p>
-              <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-2" />
             </div>
 
             {/* 6-Item Feature Grid (3x2) */}

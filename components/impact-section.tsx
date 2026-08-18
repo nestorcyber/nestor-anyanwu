@@ -124,7 +124,7 @@ export default function ImpactSection({
             {/* CTA Button */}
             <div className="pt-3">
               <Link href={ctaLink} className="inline-block">
-                <button className="bg-[#0075ff] hover:bg-blue-600 text-white font-bold text-xs tracking-wider px-7 py-3.5 rounded-xl shadow-lg transition-all flex items-center gap-2 cursor-pointer">
+                <button className="bg-[#005fe6] hover:bg-[#0052cc] text-white font-bold text-xs tracking-wider px-7 py-3.5 rounded-xl shadow-lg transition-all flex items-center gap-2 cursor-pointer">
                   <span>{ctaText}</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </button>
@@ -167,7 +167,7 @@ export default function ImpactSection({
             <Link
               href={ctaLink}
               aria-label="Contact Nestor Anyanwu"
-              className="w-12 h-12 rounded-2xl bg-[#0075ff] text-white hover:bg-blue-600 flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-105"
+              className="w-12 h-12 rounded-2xl bg-[#005fe6] text-white hover:bg-[#0052cc] flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-105"
             >
               <ArrowUpRight className="w-5 h-5" />
             </Link>

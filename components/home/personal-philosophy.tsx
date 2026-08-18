@@ -87,18 +87,29 @@ export default function PersonalPhilosophy() {
                 }}
               />
 
-              {/* Background number watermark */}
-              <span
+              {/* Background number watermark (SVG vector for WCAG/Lighthouse contrast compliance) */}
+              <svg
                 aria-hidden="true"
-                className="absolute bottom-4 right-4 text-7xl font-black leading-none select-none pointer-events-none transition-all duration-500"
+                role="presentation"
+                viewBox="0 0 100 80"
+                className="absolute bottom-2 right-2 w-28 h-20 select-none pointer-events-none transition-all duration-500 overflow-visible"
                 style={{
-                  color: v.color,
                   opacity: isHovered ? 0.08 : 0.04,
                   transform: isHovered ? "scale(1.15)" : "scale(1)",
                 }}
               >
-                {v.number}
-              </span>
+                <text
+                  x="50%"
+                  y="75%"
+                  textAnchor="middle"
+                  fill={v.color}
+                  fontSize="70"
+                  fontWeight="900"
+                  fontFamily="sans-serif"
+                >
+                  {v.number}
+                </text>
+              </svg>
 
               {/* Icon ring */}
               <div

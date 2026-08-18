@@ -6,7 +6,13 @@ const nextConfig = {
     "*": ["node_modules/cloudinary/**/*"],
   },
   experimental: {
-    optimizePackageImports: ["lucide-react", "date-fns"],
+    optimizePackageImports: [
+      "lucide-react",
+      "date-fns",
+      "recharts",
+      "clsx",
+      "tailwind-merge",
+    ],
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",

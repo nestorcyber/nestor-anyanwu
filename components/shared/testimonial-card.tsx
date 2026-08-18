@@ -20,7 +20,7 @@ export default function TestimonialCard({
     <div className="p-6 md:p-8 border border-border/80 bg-card rounded-xl flex flex-col justify-between relative overflow-hidden space-y-6 shadow-2xs hover:border-[#0075ff] transition-all">
       <div className="space-y-4">
         <div className="flex items-center justify-between border-b border-border/40 pb-3">
-          <span className="text-xs font-bold text-[#0075ff] tracking-widest">
+          <span className="text-xs font-bold text-[#0055cc] dark:text-sky-400 tracking-widest">
             {type}
           </span>
           <Quote className="w-4 h-4 text-muted-foreground/50" />
