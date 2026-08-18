@@ -6,7 +6,7 @@ export default function PortfolioStats({ stats }: { stats: PortfolioStat[] }) {
 
   return (
     <section className="w-full py-8 border-b border-border/70 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container-webflow">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {stats.map((stat, idx) => (
             <div

@@ -35,7 +35,7 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
 
         {/* 1. HERO SECTION: DESKTOP SPLIT / MOBILE STACK */}
         <section className="w-full pt-20 md:pt-24 pb-12 md:pb-16 border-b-2 border-slate-900 dark:border-slate-800 bg-background relative">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="container-webflow space-y-8">
             
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
               

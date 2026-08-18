@@ -72,7 +72,7 @@ export default function ImpactSection({
       <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[580px] w-full">
         
         {/* LEFT CONTAINER (6 cols) */}
-        <div className="lg:col-span-6 bg-[#0B1C2C] text-white relative p-8 sm:p-10 md:p-12 lg:p-14 flex flex-col justify-between overflow-hidden">
+        <div className="lg:col-span-6 bg-[#0B1C2C] text-white relative px-4 sm:px-5 lg:px-6 py-8 sm:py-10 md:py-12 flex flex-col justify-between overflow-hidden">
           {/* Background image overlay */}
           <div
             className="absolute inset-0 opacity-10 bg-cover bg-center mix-blend-overlay pointer-events-none"

@@ -17,7 +17,7 @@ export default function ProfessionalExperience({ journeyTimeline }: { journeyTim
 
   return (
     <section id="experience" className="w-full py-8 md:py-10 border-b border-border/70 bg-slate-50/60 dark:bg-slate-900/30">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 space-y-8">
+      <div className="container-webflow space-y-8">
         
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">

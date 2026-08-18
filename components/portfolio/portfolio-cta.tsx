@@ -5,7 +5,7 @@ import { ArrowUpRight, Calendar, Mail } from "lucide-react"
 export default function PortfolioCTA() {
   return (
     <section className="w-full py-16 md:py-24 bg-background">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
+      <div className="container-webflow">
         <div className="bg-[#0B1C2C] text-white border border-border/80 rounded-2xl shadow-md p-8 sm:p-12 md:p-16 text-center space-y-6">
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto font-heading leading-snug">
             Let's Build Something Impactful

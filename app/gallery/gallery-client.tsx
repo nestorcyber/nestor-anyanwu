@@ -81,7 +81,7 @@ export default function GalleryPageClient({
     <>
       <main className="min-h-screen bg-background text-foreground pt-12 pb-24">
         {/* Header Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div className="container-webflow mb-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/40 pb-8">
             <div className="space-y-2">
               <span className="text-accent text-xs font-mono font-bold tracking-widest uppercase">
@@ -117,7 +117,7 @@ export default function GalleryPageClient({
         </div>
 
         {/* Bento Grid Gallery */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-webflow">
           {filteredImages.length === 0 ? (
             <div className="text-center py-20 border border-dashed border-border/70 rounded-2xl bg-card/40 max-w-md mx-auto p-8 space-y-3">
               <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mx-auto text-muted-foreground">

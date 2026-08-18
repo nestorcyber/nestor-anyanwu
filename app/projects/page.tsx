@@ -34,8 +34,8 @@ export default async function ProjectsPage() {
       <main className="flex-1 w-full min-w-0 flex flex-col justify-between overflow-x-hidden">
         <div>
           {/* Top Breadcrumb & Page Banner */}
-          <div className="w-full bg-card/60 border-b border-border/70 py-8 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-7xl mx-auto space-y-4">
+          <div className="w-full bg-card/60 border-b border-border/70 py-8">
+            <div className="container-webflow space-y-4">
               <Link
                 href="/portfolio"
                 className="inline-flex items-center gap-2 text-xs font-mono font-bold text-accent hover:underline uppercase tracking-wider"
@@ -61,7 +61,7 @@ export default async function ProjectsPage() {
           </div>
 
           {/* Project Library Filterable Grid */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="container-webflow py-8">
             <ProjectLibrary projects={projects} />
           </div>
 

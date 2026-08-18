@@ -29,7 +29,7 @@ export default function TestimonialsCarousel() {
 
   return (
     <section id="testimonials" className="w-full py-8 md:py-10 border-b border-border/60 bg-slate-50/60 dark:bg-slate-900/30">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 space-y-12">
+      <div className="container-webflow space-y-12">
         {/* Centered Image-Matching Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">

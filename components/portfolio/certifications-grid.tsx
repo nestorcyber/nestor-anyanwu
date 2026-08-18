@@ -5,7 +5,7 @@ import { Award, ExternalLink, ShieldCheck } from "lucide-react"
 export default function CertificationsGrid({ certificationsList }: { certificationsList: CertificationItem[] }) {
   return (
     <section id="certifications" className="w-full py-8 md:py-10 border-b border-border/70 bg-background">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 space-y-8">
+      <div className="container-webflow space-y-8">
         
         {/* Centered Image-Matching Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">

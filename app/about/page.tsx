@@ -93,7 +93,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent md:bg-gradient-to-t md:from-black/85 md:via-black/45 md:to-transparent"></div>
           
           {/* Content */}
-          <div className="relative z-10 w-full px-6 md:px-20 lg:px-32 pb-12 md:pb-0 md:pt-36 md:flex md:items-center md:justify-start md:h-full">
+          <div className="relative z-10 w-full container-webflow pb-12 md:pb-0 md:pt-36 md:flex md:items-center md:justify-start md:h-full">
             <div className="max-w-3xl">
               <p className="text-accent text-xs md:text-sm font-bold tracking-widest mb-3 uppercase [text-shadow:_0_1px_2px_rgba(0,0,0,0.4)]">
                 EXECUTIVE PROFILE
@@ -109,7 +109,7 @@ export default function AboutPage() {
         </section>
 
         {/* 2. Core Philosophy Quote */}
-        <section className="py-16 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
+        <section className="py-16 container-webflow">
           <div className="bg-card border-2 border-slate-900/20 dark:border-slate-800 p-8 md:p-12 rounded-none shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] relative overflow-hidden">
             <div className="max-w-4xl space-y-6">
               <span className="text-accent text-4xl font-sans font-bold">“</span>
@@ -126,9 +126,9 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* 3. Alternating Scrolling Pillars Section */}
-        <section className="py-20 px-6 md:px-12 lg:px-24 bg-background border-y-2 border-slate-900/20 dark:border-slate-800">
-          <div className="max-w-7xl mx-auto">
+        {/* 3. Four Pillars Detailed Grid */}
+        <section className="py-20 bg-background border-y-2 border-slate-900/20 dark:border-slate-800">
+          <div className="container-webflow">
             <div className="text-center max-w-3xl mx-auto mb-24 space-y-3">
               <p className="text-accent text-xs font-bold tracking-widest uppercase font-mono">
                 AREAS OF IMPACT
@@ -210,7 +210,7 @@ export default function AboutPage() {
         </section>
 
         {/* 4. Service & Future Commitment */}
-        <section className="py-20 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto space-y-12">
+        <section className="py-20 container-webflow space-y-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <div className="space-y-6">
               <h3 className="text-2xl md:text-4xl font-extrabold text-foreground tracking-tight">
