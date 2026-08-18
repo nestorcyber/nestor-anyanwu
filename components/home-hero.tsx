@@ -21,7 +21,7 @@ export default function HomeHero() {
       <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-black/90 to-transparent md:from-black/50 md:to-transparent md:h-full"></div>
 
       {/* Content */}
-      <div className="relative z-10 w-full px-6 md:px-20 lg:px-32 pb-16 md:pb-0 md:pt-32 md:flex md:items-center md:justify-start md:h-full">
+      <div className="relative z-10 w-full container-webflow pb-16 md:pb-0 md:pt-32 md:flex md:items-center md:justify-start md:h-full">
         <div className="max-w-3xl">
           <p className="text-white text-xs md:text-sm font-bold tracking-widest mb-3 md:mb-2 uppercase [text-shadow:_0_1px_2px_rgba(0,0,0,0.6)]">
             THE CHRONICLES OF NESTOR ANYANWU

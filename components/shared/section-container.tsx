@@ -16,11 +16,11 @@ export default function SectionContainer({
   return (
     <section
       id={id}
-      className={`w-full py-8 md:py-10 border-b border-border/60 ${
+      className={`w-full py-16 sm:py-20 md:py-24 border-b border-border/60 ${
         pattern ? "bg-grid-pattern" : ""
       } ${className}`}
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">{children}</div>
+      <div className="container-webflow">{children}</div>
     </section>
   )
 }

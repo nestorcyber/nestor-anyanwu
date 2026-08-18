@@ -99,7 +99,7 @@ export default function Navigation() {
         role="navigation"
         aria-label="Main navigation"
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between h-14 md:h-16 px-6 sm:px-8 md:px-12 lg:px-16">
+        <div className="container-webflow flex items-center justify-between h-14 md:h-16">
           
           {/* LEFT SIDE: Brand Logo */}
           <div className="flex items-center shrink-0">

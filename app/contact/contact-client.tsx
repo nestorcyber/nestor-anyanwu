@@ -141,7 +141,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
   return (
     <>
       <main className="min-h-screen bg-background font-sans pt-20 md:pt-24 pb-16" id="main-content">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
+        <div className="container-webflow">
           
           {/* Main 2-Column Webflow Enterprise Style Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -453,7 +453,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
 
         {/* ─── Webflow-Style "Why Choose Nestor Anyanwu?" 6-Feature Grid Section ─── */}
         <section className="w-full mt-16 md:mt-24 pt-16 md:pt-20 pb-8 border-t border-border/70 bg-slate-50/60 dark:bg-slate-900/30">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 space-y-12">
+          <div className="container-webflow space-y-12">
             
             {/* Section Heading */}
             <div className="space-y-4 max-w-3xl">
