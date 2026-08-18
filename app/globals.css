@@ -16,7 +16,7 @@ body {
   min-height: 100%;
 }
 
-/* ─── Webflow Standard Container & 53px Responsive Gutters ─── */
+/* ─── Webflow Standard Container & 30px Gutters ─── */
 .container-webflow,
 .webflow-container {
   width: 100%;
@@ -30,16 +30,16 @@ body {
 @media (min-width: 768px) {
   .container-webflow,
   .webflow-container {
-    padding-left: 2rem; /* 32px on tablets */
-    padding-right: 2rem;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 }
 
 @media (min-width: 1024px) {
   .container-webflow,
   .webflow-container {
-    padding-left: 53px; /* Strict 53px desktop gutter baseline */
-    padding-right: 53px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 }
 
