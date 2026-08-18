@@ -1,11 +1,26 @@
 "use client"
 
+import React, { useState, FormEvent } from "react"
+import Link from "next/link"
 import Footer from "@/components/footer"
 import {
-  Mail, Linkedin, Github, Send, Rocket, Briefcase, Mic, Users, MessageSquare, Handshake,
-  MapPin, Clock, CheckCircle2, ArrowUpRight, Phone,
+  Mail,
+  Linkedin,
+  Github,
+  MapPin,
+  Clock,
+  CheckCircle2,
+  ArrowUpRight,
+  Phone,
+  Sparkles,
+  Layers,
+  ShieldCheck,
+  Handshake,
+  Code2,
+  CloudUpload,
+  Zap,
 } from "lucide-react"
-import { FormEvent, useState } from "react"
+import type { BrandPartner } from "@/lib/content"
 import { trackContact } from "@/lib/analytics"
 
 // ─── Social icon SVGs ─────────────────────────────────────────────────────────
@@ -27,87 +42,53 @@ const TwitterXIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
   </svg>
 )
 
-// ─── Inquiry types ────────────────────────────────────────────────────────────
-const inquiryTypes = [
+const defaultBrandLogos = [
   {
-    id: "project",
-    label: "Start a Project",
-    icon: Rocket,
-    color: "#0ea5e9",
-    placeholder: "Tell me about the project — scope, goals, timeline, and any technical details.",
-    subjectPlaceholder: "e.g. Web App Development for XYZ",
-    showOrg: true,
+    name: "NACOS FUTO",
+    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
   },
   {
-    id: "business",
-    label: "Business Inquiry",
-    icon: Briefcase,
-    color: "#7c3aed",
-    placeholder: "Share your business context, what you need, and how you'd like to proceed.",
-    subjectPlaceholder: "e.g. Business Partnership Proposal",
-    showOrg: true,
+    name: "GDG Owerri",
+    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
   },
   {
-    id: "speaking",
-    label: "Speaking Invitation",
-    icon: Mic,
-    color: "#e11d48",
-    placeholder: "Describe the event, topic, audience, date, and any speaker requirements.",
-    subjectPlaceholder: "e.g. DevFest Talk on AI Ethics",
-    showOrg: true,
+    name: "IEEE FUTO SB",
+    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
   },
   {
-    id: "partnership",
-    label: "Partnership",
-    icon: Handshake,
-    color: "#059669",
-    placeholder: "Outline the partnership opportunity, mutual benefits, and what you're envisioning.",
-    subjectPlaceholder: "e.g. Community Tech Partnership",
-    showOrg: true,
+    name: "Build With AI",
+    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
   },
   {
-    id: "volunteer",
-    label: "Volunteer / Community",
-    icon: Users,
-    color: "#d97706",
-    placeholder: "Share details about the community initiative, cause, or volunteer opportunity.",
-    subjectPlaceholder: "e.g. GDG Owerri Volunteer Support",
-    showOrg: false,
+    name: "DevFest Owerri",
+    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
   },
   {
-    id: "general",
-    label: "General Message",
-    icon: MessageSquare,
-    color: "#6b7280",
-    placeholder: "Write your message here — feel free to keep it casual.",
-    subjectPlaceholder: "e.g. Quick Question",
-    showOrg: false,
+    name: "SICT Directorate",
+    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg",
   },
 ]
 
-// ─── Social links ─────────────────────────────────────────────────────────────
-const socialLinks = [
-  { label: "LinkedIn", href: "https://linkedin.com/in/nestoranyanwu", icon: <Linkedin className="w-5 h-5" /> },
-  { label: "GitHub", href: "https://github.com/nestorcyber", icon: <Github className="w-5 h-5" /> },
-  { label: "Twitter / X", href: "https://twitter.com/nestorcyber", icon: <TwitterXIcon /> },
-  { label: "Behance", href: "https://behance.net/nestorcyber", icon: <BehanceIcon /> },
-  { label: "WhatsApp", href: "https://wa.me/message/GJIXLHQQPYDIE1", icon: <WhatsappIcon /> },
-]
-
-export default function ContactPage() {
-  const [activeType, setActiveType] = useState(inquiryTypes[0])
-  const [formData, setFormData] = useState({ name: "", email: "", organization: "", subject: "", message: "" })
+export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }) {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    organization: "",
+    serviceInterest: "Software Development",
+    phone: "",
+    message: "",
+  })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const displayBrands = brands && brands.length > 0 ? brands : defaultBrandLogos
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleTypeChange = (type: typeof inquiryTypes[0]) => {
-    setActiveType(type)
-    setSubmitStatus("idle")
   }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -116,7 +97,6 @@ export default function ContactPage() {
     setSubmitStatus("idle")
 
     try {
-      // Formspree-compatible submission (activate by setting NEXT_PUBLIC_FORMSPREE_ID in .env.local)
       const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ID
         ? `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`
         : null
@@ -125,18 +105,32 @@ export default function ContactPage() {
         const res = await fetch(endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({ ...formData, inquiryType: activeType.label }),
+          body: JSON.stringify({
+            name: `${formData.firstName} ${formData.lastName}`.trim(),
+            email: formData.email,
+            organization: formData.organization,
+            serviceInterest: formData.serviceInterest,
+            phone: formData.phone,
+            message: formData.message,
+          }),
         })
         if (!res.ok) throw new Error("Submission failed")
       } else {
-        // Simulate for demo — replace with real endpoint
         await new Promise((r) => setTimeout(r, 800))
       }
 
-      trackContact(activeType.id)
+      trackContact(formData.serviceInterest)
       setSubmitStatus("success")
-      setFormData({ name: "", email: "", organization: "", subject: "", message: "" })
-      setTimeout(() => setSubmitStatus("idle"), 5000)
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        organization: "",
+        serviceInterest: "Software Development",
+        phone: "",
+        message: "",
+      })
+      setTimeout(() => setSubmitStatus("idle"), 6000)
     } catch {
       setSubmitStatus("error")
     } finally {
@@ -146,263 +140,425 @@ export default function ContactPage() {
 
   return (
     <>
-      <main className="min-h-screen bg-background" id="main-content">
-        {/* Hero header */}
-        <div className="w-full border-b border-border/60 py-14 md:py-20 bg-[#0B1C2C] text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
-          <div className="max-w-5xl mx-auto px-6 md:px-10 relative z-10">
-            <span className="text-xs font-bold tracking-widest uppercase text-accent block mb-3">GET IN TOUCH</span>
-            <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4">
-              Let's Build Something<br />That Matters
-            </h1>
-            <p className="text-primary-foreground/75 text-base md:text-lg font-light max-w-xl leading-relaxed">
-              Whether it's a software project, speaking engagement, community collaboration, or just a conversation — I'm here.
-            </p>
-          </div>
-        </div>
-
-        <div className="max-w-5xl mx-auto px-6 md:px-10 py-14 md:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
-            {/* ── Left: Info panel ── */}
-            <aside className="lg:col-span-2 space-y-8">
-              {/* Contact details */}
+      <main className="min-h-screen bg-background font-sans pt-20 md:pt-24 pb-16" id="main-content">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
+          
+          {/* Main 2-Column Webflow Enterprise Style Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            {/* ─── LEFT COLUMN: Headline, Intro, Trusted Brand Logos & Direct Reach ─── */}
+            <div className="lg:col-span-5 space-y-10">
+              
+              {/* Headline & Description */}
               <div className="space-y-4">
-                <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Contact Details</h2>
-                <a
-                  href="mailto:nestoranyanwu@gmail.com"
-                  className="flex items-center gap-3 group text-sm text-foreground hover:text-accent transition-colors"
-                >
-                  <div className="w-9 h-9 border border-border flex items-center justify-center group-hover:border-accent transition-colors">
-                    <Mail className="w-4 h-4" />
-                  </div>
-                  <span>nestoranyanwu@gmail.com</span>
-                </a>
-                <a
-                  href="https://wa.me/message/GJIXLHQQPYDIE1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 group text-sm text-foreground hover:text-accent transition-colors"
-                >
-                  <div className="w-9 h-9 border border-border flex items-center justify-center group-hover:border-accent transition-colors">
-                    <Phone className="w-4 h-4" />
-                  </div>
-                  <span>WhatsApp / Chat</span>
-                </a>
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <div className="w-9 h-9 border border-border/50 flex items-center justify-center">
-                    <MapPin className="w-4 h-4" />
-                  </div>
-                  <span>Owerri, Imo State, Nigeria</span>
-                </div>
-              </div>
-
-              {/* Availability */}
-              {/* Availability badge */}
-              <div className="bg-card border-2 border-slate-900/20 dark:border-slate-800 p-4 space-y-3 shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)]">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Available for Work</span>
-                </div>
-                <p className="text-xs text-muted-foreground leading-relaxed font-light">
-                  Open to freelance projects, consulting engagements, speaking invitations, and community collaborations.
+                <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#0075ff] dark:text-sky-400 block">
+                  Let's Collaborate
+                </span>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-[1.15]">
+                  Talk to Nestor about your website and engineering goals
+                </h1>
+                <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
+                  Build production software, web applications, enterprise visual identities, and community tech initiatives — backed by technical precision, clean code, and strategic leadership.
                 </p>
-                <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono">
-                  <Clock className="w-3.5 h-3.5 text-accent" />
-                  <span>Typically responds within 24–48 hours</span>
-                </div>
               </div>
 
-              {/* Social links */}
-              <div className="space-y-3">
-                <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">Connect Online</h2>
-                <div className="grid grid-cols-1 gap-2">
-                  {socialLinks.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 bg-card border-2 border-slate-900/20 dark:border-slate-800 hover:border-accent hover:text-accent text-sm text-foreground transition-all shadow-xs hover:-translate-y-0.5 group"
+              {/* Trusted Organizations / Brand Partners Grid */}
+              <div className="space-y-4 pt-2">
+                <p className="text-xs font-mono font-bold tracking-wider text-muted-foreground uppercase">
+                  Trusted By Leading Communities & Organizations
+                </p>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {displayBrands.map((brand, idx) => (
+                    <div
+                      key={idx}
+                      className="h-16 rounded-xl border border-border/70 bg-card/80 dark:bg-slate-900/60 p-3 flex items-center justify-center transition-all hover:border-[#0075ff]/50 hover:shadow-xs group"
                     >
-                      <span className="text-muted-foreground group-hover:text-accent transition-colors">{link.icon}</span>
-                      <span className="font-bold text-xs uppercase tracking-wider">{link.label}</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </a>
+                      {brand.logoUrl ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                          src={brand.logoUrl}
+                          alt={brand.name}
+                          className="max-h-8 max-w-full object-contain grayscale dark:brightness-0 dark:invert opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
+                        />
+                      ) : (
+                        <span className="text-xs font-bold text-slate-700 dark:text-slate-300 text-center line-clamp-1">
+                          {brand.name}
+                        </span>
+                      )}
+                    </div>
                   ))}
                 </div>
               </div>
 
-              {/* Calendar stub */}
-              <div className="bg-card border-2 border-dashed border-slate-900/20 dark:border-slate-800 p-4 space-y-2">
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-accent" />
-                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-foreground">Book a Call</span>
+              {/* Direct Reach Highlights */}
+              <div className="border-t border-border/60 pt-6 space-y-4">
+                <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                  <Mail className="w-4.5 h-4.5 text-[#0075ff] shrink-0" />
+                  <a
+                    href="mailto:nestoranyanwu@gmail.com"
+                    className="hover:text-[#0075ff] transition-colors font-medium text-foreground"
+                  >
+                    nestoranyanwu@gmail.com
+                  </a>
                 </div>
-                <p className="text-xs text-muted-foreground font-light">Calendar scheduling coming soon. For now, reach out via email or WhatsApp to arrange a call.</p>
-              </div>
-            </aside>
 
-            {/* ── Right: Form panel ── */}
-            <div className="lg:col-span-3 space-y-6">
-              <div>
-                <h2 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">What's this about?</h2>
-                {/* Inquiry type tabs */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {inquiryTypes.map((type) => {
-                    const Icon = type.icon
-                    const isActive = activeType.id === type.id
-                    return (
-                      <button
-                        key={type.id}
-                        onClick={() => handleTypeChange(type)}
-                        className={`flex items-center gap-2 px-3 py-2.5 text-xs font-bold uppercase tracking-wider border transition-all cursor-pointer text-left ${
-                          isActive
-                            ? "border-current text-white"
-                            : "border-border text-foreground/70 hover:border-foreground/50"
-                        }`}
-                        style={isActive ? { backgroundColor: type.color, borderColor: type.color } : {}}
-                        aria-pressed={isActive}
-                      >
-                        <Icon className="w-3.5 h-3.5 flex-shrink-0" />
-                        <span className="leading-tight">{type.label}</span>
-                      </button>
-                    )
-                  })}
+                <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                  <MapPin className="w-4.5 h-4.5 text-[#0075ff] shrink-0" />
+                  <span>Owerri, Imo State, Nigeria & Remote Worldwide</span>
+                </div>
+
+                <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                  <Clock className="w-4.5 h-4.5 text-[#0075ff] shrink-0" />
+                  <span>Typically responds within 24 hours</span>
+                </div>
+
+                {/* Social Badges */}
+                <div className="flex items-center gap-2 pt-2">
+                  <a
+                    href="https://wa.me/message/GJIXLHQQPYDIE1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
+                    aria-label="Chat on WhatsApp"
+                  >
+                    <WhatsappIcon className="w-4.5 h-4.5" />
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/nestoranyanwu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
+                    aria-label="Connect on LinkedIn"
+                  >
+                    <Linkedin className="w-4.5 h-4.5" />
+                  </a>
+                  <a
+                    href="https://github.com/nestorcyber"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
+                    aria-label="GitHub Profile"
+                  >
+                    <Github className="w-4.5 h-4.5" />
+                  </a>
+                  <a
+                    href="https://twitter.com/nestorcyber"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
+                    aria-label="Twitter Profile"
+                  >
+                    <TwitterXIcon className="w-4.5 h-4.5" />
+                  </a>
+                  <a
+                    href="https://behance.net/nestorcyber"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
+                    aria-label="Behance Portfolio"
+                  >
+                    <BehanceIcon className="w-4.5 h-4.5" />
+                  </a>
                 </div>
               </div>
 
-              {/* Form */}
-              {submitStatus === "success" ? (
-                <div className="border border-green-500/30 bg-green-500/5 p-8 text-center space-y-3">
-                  <CheckCircle2 className="w-10 h-10 text-green-500 mx-auto" />
-                  <h3 className="text-lg font-bold text-foreground">Message Received!</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Thanks for reaching out. I'll get back to you within 24–48 hours.
+            </div>
+
+            {/* ─── RIGHT COLUMN: Webflow-Style Clean Enterprise Contact Form ─── */}
+            <div className="lg:col-span-7">
+              <div className="bg-card border border-border/80 rounded-3xl p-6 sm:p-8 md:p-10 shadow-lg space-y-6">
+                
+                <div className="space-y-1 pb-2">
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-foreground font-heading">
+                    Send a Message
+                  </h2>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
+                    Fill out the form below to start a conversation about your project or initiative.
                   </p>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label htmlFor="name" className="block text-xs font-bold uppercase tracking-wider text-foreground mb-1.5">
-                        Full Name <span className="text-accent">*</span>
+
+                {submitStatus === "success" && (
+                  <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center gap-3 text-sm font-medium">
+                    <CheckCircle2 className="w-5 h-5 shrink-0" />
+                    <span>Thank you! Your message has been received. Nestor will get back to you shortly.</span>
+                  </div>
+                )}
+
+                {submitStatus === "error" && (
+                  <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-sm font-medium">
+                    Something went wrong sending your message. Please reach out directly to{" "}
+                    <a href="mailto:nestoranyanwu@gmail.com" className="underline font-bold">
+                      nestoranyanwu@gmail.com
+                    </a>.
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  
+                  {/* Name Fields (2 cols) */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-foreground block">
+                        First Name <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
+                        name="firstName"
                         required
-                        aria-required="true"
-                        placeholder="Your name"
-                        className="w-full px-4 py-3 border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all placeholder:text-muted-foreground/50 rounded-none"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        placeholder="Enter your first name"
+                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
                       />
                     </div>
-                    <div>
-                      <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-foreground mb-1.5">
-                        Email Address <span className="text-accent">*</span>
+
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-foreground block">
+                        Last Name <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="lastName"
+                        required
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        placeholder="Enter your last name"
+                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Email & Organization (2 cols) */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-foreground block">
+                        Email Address <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="email"
-                        id="email"
                         name="email"
+                        required
                         value={formData.email}
                         onChange={handleChange}
-                        required
-                        aria-required="true"
-                        placeholder="you@example.com"
-                        className="w-full px-4 py-3 border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all placeholder:text-muted-foreground/50 rounded-none"
+                        placeholder="name@company.com"
+                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
                       />
                     </div>
-                  </div>
 
-                  {activeType.showOrg && (
-                    <div>
-                      <label htmlFor="organization" className="block text-xs font-bold uppercase tracking-wider text-foreground mb-1.5">
-                        Organization / Company
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-foreground block">
+                        Company / Organization
                       </label>
                       <input
                         type="text"
-                        id="organization"
                         name="organization"
                         value={formData.organization}
                         onChange={handleChange}
-                        placeholder="Where are you from?"
-                        className="w-full px-4 py-3 border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all placeholder:text-muted-foreground/50 rounded-none"
+                        placeholder="Where do you work?"
+                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
                       />
                     </div>
-                  )}
-
-                  <div>
-                    <label htmlFor="subject" className="block text-xs font-bold uppercase tracking-wider text-foreground mb-1.5">
-                      Subject <span className="text-accent">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      aria-required="true"
-                      placeholder={activeType.subjectPlaceholder}
-                      className="w-full px-4 py-3 border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all placeholder:text-muted-foreground/50 rounded-none"
-                    />
                   </div>
 
-                  <div>
-                    <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-foreground mb-1.5">
-                      Message <span className="text-accent">*</span>
+                  {/* Service Interest & Phone (2 cols) */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-foreground block">
+                        How can I support you? <span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        name="serviceInterest"
+                        value={formData.serviceInterest}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all cursor-pointer"
+                      >
+                        <option value="Software Development">Software Development & Delivery</option>
+                        <option value="Web Applications">Web Application Development</option>
+                        <option value="Brand Design">Brand Design & Visual Systems</option>
+                        <option value="Technical Advisory">IT Advisory & Architecture Consulting</option>
+                        <option value="Speaking Engagement">Speaking Invitation & Keynote</option>
+                        <option value="Community Collaboration">Community Tech Initiative</option>
+                        <option value="General Inquiry">Other Inquiry</option>
+                      </select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-foreground block">
+                        Phone / WhatsApp
+                      </label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="+234..."
+                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Message Details */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-foreground block">
+                      Project Details / Message <span className="text-red-500">*</span>
                     </label>
                     <textarea
-                      id="message"
                       name="message"
+                      required
+                      rows={4}
                       value={formData.message}
                       onChange={handleChange}
-                      required
-                      aria-required="true"
-                      rows={6}
-                      placeholder={activeType.placeholder}
-                      className="w-full px-4 py-3 border border-border bg-card text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all resize-none placeholder:text-muted-foreground/50 rounded-none"
+                      placeholder="Share details about your goals, timeline, deliverables, or questions..."
+                      className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all resize-y min-h-[120px]"
                     />
                   </div>
 
-                  {submitStatus === "error" && (
-                    <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-sm">
-                      Something went wrong. Please try emailing directly at nestoranyanwu@gmail.com
-                    </div>
-                  )}
+                  {/* Submit Button */}
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full py-4 px-8 rounded-xl bg-[#0075ff] hover:bg-blue-600 text-white font-extrabold text-xs tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
+                    >
+                      {isSubmitting ? (
+                        <span>Sending Message...</span>
+                      ) : (
+                        <>
+                          <span>Submit Inquiry</span>
+                          <ArrowUpRight className="w-4.5 h-4.5" />
+                        </>
+                      )}
+                    </button>
+                  </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full flex items-center justify-center gap-2 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-all disabled:opacity-60 cursor-pointer"
-                    style={{ backgroundColor: activeType.color }}
-                    aria-busy={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Sending…
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        Send {activeType.label}
-                      </>
-                    )}
-                  </button>
-
-                  <p className="text-[11px] text-muted-foreground text-center">
-                    Your information is handled with care and never shared with third parties.
+                  {/* Bottom Privacy & Help Note */}
+                  <p className="text-[11px] text-muted-foreground text-center pt-2">
+                    By submitting this form, you agree to direct communication regarding your inquiry. Looking for instant chat?{" "}
+                    <a
+                      href="https://wa.me/message/GJIXLHQQPYDIE1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#0075ff] hover:underline font-bold"
+                    >
+                      Chat on WhatsApp
+                    </a>.
                   </p>
+
                 </form>
-              )}
+
+              </div>
             </div>
+
           </div>
+
         </div>
+
+        {/* ─── Webflow-Style "Why Choose Nestor Anyanwu?" 6-Feature Grid Section ─── */}
+        <section className="w-full mt-16 md:mt-24 pt-16 md:pt-20 pb-8 border-t border-border/70 bg-slate-50/60 dark:bg-slate-900/30">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 space-y-12">
+            
+            {/* Section Heading */}
+            <div className="space-y-3 max-w-3xl">
+              <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#0075ff] dark:text-sky-400 block">
+                Engineering Value & Standards
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-tight">
+                Why Collaborate With Nestor?
+              </h2>
+              <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
+                A multidisciplinary approach that unites robust software engineering, strategic design systems, and dedicated technical leadership.
+              </p>
+              <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-2" />
+            </div>
+
+            {/* 6-Item Feature Grid (3x2) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
+              
+              {/* Feature 1 */}
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-full border border-blue-200 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/50 flex items-center justify-center text-[#0075ff] dark:text-sky-400 shadow-2xs">
+                  <Layers className="w-5 h-5" />
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-foreground font-heading tracking-tight leading-snug">
+                  Break down silos between design, code, and strategy
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground font-normal leading-relaxed">
+                  Combining software engineering precision with strong visual identity design to build digital solutions that look exceptional and perform reliably.
+                </p>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-full border border-blue-200 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/50 flex items-center justify-center text-[#0075ff] dark:text-sky-400 shadow-2xs">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-foreground font-heading tracking-tight leading-snug">
+                  Backed by enterprise-grade reliability & clean code
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground font-normal leading-relaxed">
+                  Engineered with modern frameworks, rigorous typing, and clean component architecture built for long-term scalability and security.
+                </p>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-full border border-blue-200 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/50 flex items-center justify-center text-[#0075ff] dark:text-sky-400 shadow-2xs">
+                  <Handshake className="w-5 h-5" />
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-foreground font-heading tracking-tight leading-snug">
+                  Dedicated partnership & transparent delivery
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground font-normal leading-relaxed">
+                  Direct collaboration with clear communication, milestone-driven sprints, and technical advisory from discovery to deployment.
+                </p>
+              </div>
+
+              {/* Feature 4 */}
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-full border border-blue-200 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/50 flex items-center justify-center text-[#0075ff] dark:text-sky-400 shadow-2xs">
+                  <Code2 className="w-5 h-5" />
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-foreground font-heading tracking-tight leading-snug">
+                  Modern full-stack engineering & APIs
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground font-normal leading-relaxed">
+                  Shipping responsive Next.js web applications, performant backend integrations, and custom software systems tailored to real-world demands.
+                </p>
+              </div>
+
+              {/* Feature 5 */}
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-full border border-blue-200 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/50 flex items-center justify-center text-[#0075ff] dark:text-sky-400 shadow-2xs">
+                  <CloudUpload className="w-5 h-5" />
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-foreground font-heading tracking-tight leading-snug">
+                  Seamless cloud architecture & deployment
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground font-normal leading-relaxed">
+                  Deploying scalable digital infrastructure with automated CI/CD pipelines, modern databases, and serverless hosting.
+                </p>
+              </div>
+
+              {/* Feature 6 */}
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-full border border-blue-200 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/50 flex items-center justify-center text-[#0075ff] dark:text-sky-400 shadow-2xs">
+                  <Zap className="w-5 h-5" />
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-foreground font-heading tracking-tight leading-snug">
+                  Obsessive performance & user experience
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground font-normal leading-relaxed">
+                  Fast page load times, accessible interfaces, and fluid micro-interactions designed to elevate user engagement and brand credibility.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
       </main>
+
       <Footer />
     </>
   )
