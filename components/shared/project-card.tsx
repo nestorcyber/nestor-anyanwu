@@ -39,7 +39,7 @@ export default function ProjectCard({
 
   return (
     <article className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden flex flex-col justify-between h-full transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#0075ff]/80 cursor-pointer">
-      <CardWrapper {...(wrapperProps as any)} className="flex flex-col justify-between h-full w-full">
+      <CardWrapper {...(wrapperProps as any)} aria-label={`View project details for ${title}`} className="flex flex-col justify-between h-full w-full">
         
         <div>
           {/* Project Cover Image (Edge-to-edge flush top with object-cover, matching ArticleCard) */}

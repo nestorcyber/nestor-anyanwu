@@ -12,6 +12,8 @@ export interface EndeavorItem {
   description: string
   image: string
   link: string
+  buttonText: string
+  ariaLabel: string
 }
 
 export default function ExpandingEndeavors() {
@@ -25,6 +27,8 @@ export default function ExpandingEndeavors() {
       description: "Engineering scalable web applications, robust APIs, and modern cloud architectures built for performance and high reliability.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
       link: "/portfolio",
+      buttonText: "Explore Software Projects",
+      ariaLabel: "Explore Nestor Anyanwu's software engineering portfolio and web platforms",
     },
     {
       id: "tech-leadership",
@@ -33,6 +37,8 @@ export default function ExpandingEndeavors() {
       description: "Directing technology council strategy, student engineering programs, and digital event logistics across tech ecosystems.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
       link: "/about",
+      buttonText: "Read Leadership Profile",
+      ariaLabel: "Read about Nestor Anyanwu's technology leadership and digital strategy",
     },
     {
       id: "designs-and-ai",
@@ -41,6 +47,8 @@ export default function ExpandingEndeavors() {
       description: "Crafting visual brand identities, conference design systems, and integrating generative AI workflows into digital experiences.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
       link: "/portfolio",
+      buttonText: "View Design & AI Work",
+      ariaLabel: "View Nestor Anyanwu's design systems and AI workflow portfolio",
     },
     {
       id: "community-building",
@@ -49,6 +57,8 @@ export default function ExpandingEndeavors() {
       description: "Empowering software developers and technology enthusiasts through hands-on technical workshops, hackathons, and mentorship.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden2-sUzI0wvGmZMjB5UUP911IAB6WvBM5c.jpg",
       link: "/community",
+      buttonText: "View Community Initiatives",
+      ariaLabel: "View Nestor Anyanwu's developer community initiatives and workshops",
     },
     {
       id: "technical-consulting",
@@ -57,6 +67,8 @@ export default function ExpandingEndeavors() {
       description: "Providing strategic IT advisory, technology audits, system automation, and digital transformation consulting for growing organizations.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg",
       link: "/contact",
+      buttonText: "Request Technical Advisory",
+      ariaLabel: "Contact Nestor Anyanwu for technical advisory and IT consulting",
     },
   ]
 
@@ -74,7 +86,7 @@ export default function ExpandingEndeavors() {
         <div className="h-1 w-16 bg-accent mx-auto mt-3" />
       </div>
 
-      {/* MOBILE LAYOUT: Full-width edge-to-edge stacked cards (Original height & overlay style) where description & READ MORE button are always visible */}
+      {/* MOBILE LAYOUT: Full-width edge-to-edge stacked cards */}
       <div className="md:hidden w-full flex flex-col gap-0 border-y border-border/60 bg-slate-950">
         {endeavors.map((item) => (
           <div
@@ -98,8 +110,8 @@ export default function ExpandingEndeavors() {
 
             {/* Bottom Details & Button */}
             <div className="relative z-10 flex flex-col justify-end">
-              <div className="p-6 space-y-2 text-white">
-                <h3 className="text-2xl font-extrabold tracking-tight text-white">
+              <div className="p-5 space-y-2 text-white">
+                <h3 className="text-xl font-extrabold tracking-tight text-white font-heading">
                   {item.title}
                 </h3>
                 <p className="text-xs text-accent font-semibold uppercase tracking-wider">
@@ -112,9 +124,9 @@ export default function ExpandingEndeavors() {
               </div>
 
               {/* Always Visible Action Button */}
-              <Link href={item.link} className="block w-full" aria-label={`Explore ${item.title}`}>
+              <Link href={item.link} className="block w-full" aria-label={item.ariaLabel}>
                 <div className="w-full bg-[#005fe6] hover:bg-[#0052cc] text-white font-extrabold text-xs tracking-wider px-6 py-4 flex items-center justify-between transition-colors">
-                  <span>Explore {item.title}</span>
+                  <span>{item.buttonText}</span>
                   <ArrowRight size={16} />
                 </div>
               </Link>
@@ -123,7 +135,7 @@ export default function ExpandingEndeavors() {
         ))}
       </div>
 
-      {/* DESKTOP LAYOUT: 5 Equal Width Columns, Hover to Reveal Description & Read More Button (No Width Expanding) */}
+      {/* DESKTOP LAYOUT: 5 Equal Width Columns */}
       <div className="hidden md:flex w-full h-[500px] border-y border-border/60 bg-slate-950 overflow-hidden">
         {endeavors.map((item) => {
           const isHovered = hoveredId === item.id
@@ -188,9 +200,9 @@ export default function ExpandingEndeavors() {
                   className={`transition-all duration-300 ${isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
                     }`}
                 >
-                  <Link href={item.link} className="block w-full" aria-label={`Explore ${item.title}`}>
+                  <Link href={item.link} className="block w-full" aria-label={item.ariaLabel}>
                     <div className="w-full bg-[#005fe6] hover:bg-[#0052cc] text-white font-extrabold text-xs tracking-wider px-5 py-3.5 flex items-center justify-between transition-colors cursor-pointer">
-                      <span>Explore {item.title}</span>
+                      <span>{item.buttonText}</span>
                       <ArrowRight size={15} />
                     </div>
                   </Link>

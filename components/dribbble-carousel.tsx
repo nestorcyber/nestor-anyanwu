@@ -308,9 +308,10 @@ export default function DribbbleCarousel({
                       <Link
                         href={item.link}
                         onClick={(e) => e.stopPropagation()}
+                        aria-label={`Explore details for ${item.title}`}
                       >
                         <button className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-white border border-white/50 hover:border-white hover:bg-white/10 px-5 py-2.5 rounded-none transition-all cursor-pointer">
-                          <span>Explore More</span>
+                          <span>Explore {item.title}</span>
                           <ArrowRight className="w-3.5 h-3.5" />
                         </button>
                       </Link>

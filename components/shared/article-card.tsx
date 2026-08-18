@@ -42,7 +42,7 @@ export default function ArticleCard({
 
   return (
     <article className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden flex flex-col justify-between h-full transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#0075ff]/80 cursor-pointer">
-      <Link href={slug} className="flex flex-col justify-between h-full w-full" aria-label={`Read article: ${title}`}>
+      <Link href={slug} className="flex flex-col justify-between h-full w-full" aria-label={`Read full article: ${title}`}>
         
         <div>
           {/* Card Top Cover Image Showcase (No Top Bar Above Image) */}
