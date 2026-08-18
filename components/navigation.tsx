@@ -14,7 +14,8 @@ export default function Navigation() {
   const [mounted, setMounted] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [searchResults, setSearchResults] = useState<SearchResult[]>([])
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme, resolvedTheme } = useTheme()
+  const isDark = (resolvedTheme || theme) === "dark"
 
   useEffect(() => {
     setMounted(true)
@@ -221,13 +222,13 @@ export default function Navigation() {
               </span>
               <button
                 onClick={() => {
-                  setTheme(theme === "dark" ? "light" : "dark")
+                  setTheme(isDark ? "light" : "dark")
                   setIsOpen(false)
                 }}
                 className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-card text-foreground font-bold text-xs tracking-wider flex items-center gap-2 shadow-2xs hover:border-[#0075ff] transition-all cursor-pointer"
-                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
               >
-                {theme === "dark" ? (
+                {isDark ? (
                   <>
                     <Sun size={15} className="text-amber-400" />
                     <span>Light Mode</span>
@@ -293,13 +294,13 @@ export default function Navigation() {
               </span>
               <button
                 onClick={() => {
-                  setTheme(theme === "dark" ? "light" : "dark")
+                  setTheme(isDark ? "light" : "dark")
                   setIsOpen(false)
                 }}
                 className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-card text-foreground font-bold text-xs tracking-wider flex items-center gap-2 shadow-2xs hover:border-[#0075ff] transition-all cursor-pointer"
-                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
               >
-                {theme === "dark" ? (
+                {isDark ? (
                   <>
                     <Sun size={15} className="text-amber-400" />
                     <span>Light Mode</span>

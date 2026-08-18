@@ -214,7 +214,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased overflow-x-hidden" suppressHydrationWarning>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
           <SiteShell>{children}</SiteShell>
           <Analytics />
           <GoogleAnalytics />
