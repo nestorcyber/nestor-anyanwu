@@ -89,6 +89,8 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
     organization: "",
     serviceInterest: "Software Development",
     phone: "",
+    country: "",
+    subject: "",
     message: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -123,6 +125,8 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
             organization: formData.organization,
             serviceInterest: formData.serviceInterest,
             phone: formData.phone,
+            country: formData.country,
+            subject: formData.subject,
             message: formData.message,
           }),
         })
@@ -140,6 +144,8 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
         organization: "",
         serviceInterest: "Software Development",
         phone: "",
+        country: "",
+        subject: "",
         message: "",
       })
       setTimeout(() => setSubmitStatus("idle"), 6000)
@@ -158,18 +164,18 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
           {/* Main 2-Column Responsive Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
-            {/* ─── 1. HEADLINE & INTRO DESCRIPTION (Always 1st) ─── */}
-            <div className="order-1 lg:order-1 lg:col-span-5 space-y-4">
+            {/* ─── 1. HEADLINE & INTRO DESCRIPTION ─── */}
+            <div className="order-1 lg:order-1 lg:col-span-5 space-y-6 pt-2">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-[1.12]">
-                Talk to Nestor about your website and engineering goals
+                Talk to Nestor about your next project or engineering initiative
               </h1>
               <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
-                Build production software, web applications, enterprise visual identities, and community tech initiatives — backed by technical precision, clean code, and strategic leadership.
+                Whether you are looking to build scalable software, integrate AI workflows, direct product strategy, consult on IT infrastructure, or collaborate on developer relations and community initiatives — let's connect.
               </p>
             </div>
 
-            {/* ─── 2. CONTACT FORM (2nd on Mobile, Right Column on Desktop) ─── */}
-            <div className="order-2 lg:order-2 lg:col-span-7 lg:row-span-2">
+            {/* ─── 2. CONTACT FORM ─── */}
+            <div className="order-2 lg:order-2 lg:col-span-7">
               <div className="bg-card border border-border/80 rounded-3xl p-6 sm:p-8 md:p-10 shadow-lg space-y-6">
                 
                 <div className="space-y-1 pb-2">
@@ -258,52 +264,83 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                         name="organization"
                         value={formData.organization}
                         onChange={handleChange}
-                        placeholder="Where do you work?"
+                        placeholder="Organization or company name"
                         className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
                       />
                     </div>
                   </div>
 
-                  {/* Service Interest & Phone (2 cols) */}
+                  {/* Phone & Country (2 cols) */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-xs font-bold text-foreground block">
-                        How can I support you? <span className="text-red-500">*</span>
-                      </label>
-                      <select
-                        name="serviceInterest"
-                        value={formData.serviceInterest}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all cursor-pointer"
-                      >
-                        <option value="Software Engineering & Web Dev">Software Engineering & Web Development</option>
-                        <option value="AI & Technology">AI Solutions & Technology Systems</option>
-                        <option value="Developer Relations">Developer Relations (DevRel) & Advocacy</option>
-                        <option value="Product Management">Product Management & Strategy</option>
-                        <option value="IT Consulting">IT Consulting & Architecture</option>
-                        <option value="Design & Branding">Design & Visual Systems</option>
-                        <option value="Community & Leadership">Community Leadership & Ecosystem</option>
-                        <option value="Volunteering">Volunteering & Mentorship Initiative</option>
-                        <option value="General Inquiry">Other Inquiry</option>
-                      </select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-foreground block">
-                        Phone / WhatsApp
+                        Phone Number
                       </label>
                       <input
                         type="tel"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+234..."
+                        placeholder="+234 800 000 0000"
+                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-foreground block">
+                        Country / Location
+                      </label>
+                      <input
+                        type="text"
+                        name="country"
+                        value={formData.country}
+                        onChange={handleChange}
+                        placeholder="e.g. Nigeria, United States, Remote"
                         className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
                       />
                     </div>
                   </div>
 
-                  {/* Message Details */}
+                  {/* Inquiry Type Dropdown */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-foreground block">
+                      How can I support you? <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      name="serviceInterest"
+                      required
+                      value={formData.serviceInterest}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
+                    >
+                      <option value="Software Engineering & Web Development">Software Engineering & Web Development</option>
+                      <option value="Artificial Intelligence & Emerging Tech">Artificial Intelligence & Emerging Tech</option>
+                      <option value="Developer Relations (DevRel) & Community">Developer Relations (DevRel) & Community</option>
+                      <option value="Product Strategy & IT Consulting">Product Strategy & IT Consulting</option>
+                      <option value="Ingenious Design & Brand Systems">Ingenious Design & Brand Systems</option>
+                      <option value="Tech Leadership & Volunteering">Tech Leadership & Volunteering</option>
+                      <option value="Speaking Engagement / Tech Event">Speaking Engagement / Tech Event</option>
+                      <option value="Other Inquiry / Collaboration">Other Inquiry / Collaboration</option>
+                    </select>
+                  </div>
+
+                  {/* Subject Line */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-foreground block">
+                      Subject <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="subject"
+                      required
+                      value={formData.subject}
+                      onChange={handleChange}
+                      placeholder="Brief summary of your project or inquiry"
+                      className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
+                    />
+                  </div>
+
+                  {/* Message Field */}
                   <div className="space-y-2">
                     <label className="text-xs font-bold text-foreground block">
                       Project Details / Message <span className="text-red-500">*</span>
@@ -311,11 +348,11 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                     <textarea
                       name="message"
                       required
-                      rows={4}
+                      rows={5}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Share details about your goals, timeline, deliverables, or questions..."
-                      className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all resize-y min-h-[120px]"
+                      placeholder="Describe your project, timeline, deliverables, or collaboration goals..."
+                      className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all resize-y"
                     />
                   </div>
 
@@ -339,91 +376,11 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
 
                   {/* Bottom Privacy & Help Note */}
                   <p className="text-[11px] text-muted-foreground text-center pt-2">
-                    By submitting this form, you agree to direct communication regarding your inquiry. Looking for instant chat?{" "}
-                    <a
-                      href="https://wa.me/message/GJIXLHQQPYDIE1"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#0075ff] hover:underline font-bold"
-                    >
-                      Chat on WhatsApp
-                    </a>.
+                    By submitting this form, you agree to direct communication regarding your inquiry.
                   </p>
 
                 </form>
 
-              </div>
-            </div>
-
-            {/* ─── 3. DIRECT REACH & SOCIALS (3rd on Mobile, Left Column Bottom on Desktop) ─── */}
-            <div className="order-3 lg:order-3 lg:col-span-5 border-t border-border/60 pt-6 space-y-4">
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <Mail className="w-4.5 h-4.5 text-[#0075ff] shrink-0" />
-                <a
-                  href="mailto:nestoranyanwu@gmail.com"
-                  className="hover:text-[#0075ff] transition-colors font-medium text-foreground"
-                >
-                  nestoranyanwu@gmail.com
-                </a>
-              </div>
-
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <MapPin className="w-4.5 h-4.5 text-[#0075ff] shrink-0" />
-                <span>Owerri, Imo State, Nigeria & Remote Worldwide</span>
-              </div>
-
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <Clock className="w-4.5 h-4.5 text-[#0075ff] shrink-0" />
-                <span>Typically responds within 24 hours</span>
-              </div>
-
-              {/* Social Badges */}
-              <div className="flex items-center gap-2 pt-2">
-                <a
-                  href="https://wa.me/message/GJIXLHQQPYDIE1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
-                  aria-label="Chat on WhatsApp"
-                >
-                  <WhatsappIcon className="w-4.5 h-4.5" />
-                </a>
-                <a
-                  href="https://linkedin.com/in/nestoranyanwu"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
-                  aria-label="Connect on LinkedIn"
-                >
-                  <Linkedin className="w-4.5 h-4.5" />
-                </a>
-                <a
-                  href="https://github.com/nestorcyber"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
-                  aria-label="GitHub Profile"
-                >
-                  <Github className="w-4.5 h-4.5" />
-                </a>
-                <a
-                  href="https://twitter.com/nestorcyber"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
-                  aria-label="Twitter Profile"
-                >
-                  <TwitterXIcon className="w-4.5 h-4.5" />
-                </a>
-                <a
-                  href="https://behance.net/nestorcyber"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
-                  aria-label="Behance Portfolio"
-                >
-                  <BehanceIcon className="w-4.5 h-4.5" />
-                </a>
               </div>
             </div>
 
