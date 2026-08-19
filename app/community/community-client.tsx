@@ -60,7 +60,7 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
                   </h1>
 
                   <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl font-light">
-                    Building capacity, organizing developer hackathons, and empowering student engineers across South-East Nigeria. Here is a living record of ICT leadership, advocacy, and ecosystem impact.
+                    Empowering developers, directing student tech councils, organizing hackathons, and volunteering to foster an inclusive, collaborative tech ecosystem where everyone can thrive.
                   </p>
                 </div>
 

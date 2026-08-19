@@ -17,19 +17,19 @@ export const revalidate = 60
 
 export const metadata: Metadata = {
   title: "Nestor Anyanwu | Software Engineering, AI, DevRel, Leadership, Product & Design",
-  description: "Official website of Nestor Anyanwu (Nestor Cyber). Expertise in Software Engineering, AI, Web Development, Developer Relations (DevRel), Leadership, Product Management, Design, IT Consulting, Community Building, and Volunteering — creating an inclusive and collaborative tech ecosystem where everyone and anyone can thrive.",
+  description: "Official portfolio of Nestor Anyanwu (Nestor Cyber). Software Engineer, AI Enthusiast, and Tech Leader with expertise spanning Developer Relations, Product Management, IT Consulting, and Design — dedicated to building impactful digital solutions and an inclusive, collaborative tech ecosystem where everyone can thrive.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Nestor Anyanwu | Software Engineering, AI, DevRel, Leadership, Product & Design",
-    description: "Official website of Nestor Anyanwu (Nestor Cyber). Expertise in Software Engineering, AI, Web Development, Developer Relations (DevRel), Leadership, Product Management, Design, IT Consulting, Community Building, and Volunteering — creating an inclusive and collaborative tech ecosystem where everyone and anyone can thrive.",
+    description: "Official portfolio of Nestor Anyanwu (Nestor Cyber). Software Engineer, AI Enthusiast, and Tech Leader with expertise spanning Developer Relations, Product Management, IT Consulting, and Design — dedicated to building impactful digital solutions and an inclusive, collaborative tech ecosystem where everyone can thrive.",
     url: "/",
     siteName: "Nestor Anyanwu",
   },
   twitter: {
     title: "Nestor Anyanwu | Software Engineering, AI, DevRel, Leadership, Product & Design",
-    description: "Official website of Nestor Anyanwu (Nestor Cyber). Expertise in Software Engineering, AI, Web Development, Developer Relations (DevRel), Leadership, Product Management, Design, IT Consulting, Community Building, and Volunteering — creating an inclusive and collaborative tech ecosystem where everyone and anyone can thrive.",
+    description: "Official portfolio of Nestor Anyanwu (Nestor Cyber). Software Engineer, AI Enthusiast, and Tech Leader with expertise spanning Developer Relations, Product Management, IT Consulting, and Design — dedicated to building impactful digital solutions and an inclusive, collaborative tech ecosystem where everyone can thrive.",
   },
 }
 

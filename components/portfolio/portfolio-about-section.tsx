@@ -5,8 +5,7 @@ import type { SiteSettings } from "@/lib/content"
 
 export default function PortfolioAboutSection({ settings }: { settings?: SiteSettings }) {
   const aboutText =
-    settings?.aboutParagraph ||
-    "I am an ICT Director, Software Engineer, IT Consultant, and Community Leader. I build digital infrastructure, lead tech communities like NACOS FUTO & GDG, advocate for data privacy, and deliver production software solutions. From directing national computing initiatives to engineering web applications and mentoring student developers, my mission centers on leveraging technology to drive real-world impact and empower future builders."
+    "I operate at the intersection of full-stack engineering, AI workflows, and tech leadership. Through developer relations, product management, and hands-on volunteering, I work to bridge raw technical capability with human potential — building tools, systems, and communities that drive measurable impact and open opportunities for all."
 
   return (
     <section id="about" className="w-full py-8 md:py-10 border-b border-border/70 bg-slate-50/60 dark:bg-slate-900/30">
@@ -18,7 +17,7 @@ export default function PortfolioAboutSection({ settings }: { settings?: SiteSet
             Core Focus
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            Engineering, design, and ICT leadership.
+            Engineering precision, strategic IT consulting, and community leadership.
           </p>
           <div className="w-14 h-1 bg-accent rounded-full mt-2" />
         </div>

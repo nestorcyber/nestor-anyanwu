@@ -77,11 +77,11 @@ export default function ExpandingEndeavors() {
 
       {/* Centered Section Header */}
       <div className="site-container mb-8 text-center space-y-3">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight font-heading">
           Core Disciplines & Focus
         </h2>
-        <p className="text-sm md:text-base text-muted-foreground font-medium leading-relaxed max-w-3xl mx-auto">
-          Technology, Design, AI, Leadership, Volunteering, IT Consulting, DevRel, Software Engineering, Web Dev, Community Building & Product Management — creating an inclusive and collaborative tech ecosystem where everyone and anyone can thrive.
+        <p className="text-sm md:text-base text-muted-foreground font-normal leading-relaxed max-w-2xl mx-auto">
+          Bridging software engineering, AI innovation, product strategy, and community leadership to build an inclusive, collaborative ecosystem where every builder can thrive.
         </p>
         <div className="h-1 w-16 bg-accent mx-auto mt-3" />
       </div>

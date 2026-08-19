@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s | Nestor Anyanwu",
   },
   description:
-    "Official website of Nestor Anyanwu (Nestor Cyber). Tech Advocate, Leadership, Ingenious Designer, AI Enthusiast, IT Consulting, Software Engineering, Community Building, Volunteering, Developer Relations, and Product Management — dedicated to creating an impact and an inclusive and collaborative tech ecosystem where everyone and anyone can thrive.",
+    "Official portfolio of Nestor Anyanwu (Nestor Cyber). Software Engineer, AI Enthusiast, and Tech Leader with expertise spanning Developer Relations, Product Management, IT Consulting, and Design — dedicated to building impactful digital solutions and an inclusive, collaborative tech ecosystem where everyone can thrive.",
   applicationName: "Nestor Anyanwu",
   keywords: [
     "Nestor Anyanwu",

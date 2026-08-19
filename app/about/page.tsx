@@ -101,8 +101,8 @@ export default function AboutPage() {
               <h1 className="font-sans text-3xl md:text-6xl lg:text-7xl font-bold text-white mb-2 leading-none tracking-tight [text-shadow:_0_2px_8px_rgba(0,0,0,0.8)]">
                 Nestor Anyanwu
               </h1>
-              <p className="text-white/90 text-xs sm:text-sm md:text-base font-medium tracking-wide [text-shadow:_0_2px_4px_rgba(0,0,0,0.6)]">
-                Tech Advocate • Leadership • Ingenious Designer • AI Enthusiast • IT Consulting • Software Engineering • Community Building • Volunteering • Developer Relations • Product Management
+              <p className="text-white/90 text-sm sm:text-base md:text-lg font-medium tracking-wide [text-shadow:_0_2px_4px_rgba(0,0,0,0.6)]">
+                Software Engineering • AI & Emerging Tech • Tech Leadership • Design • Developer Relations
               </p>
             </div>
           </div>
@@ -114,7 +114,7 @@ export default function AboutPage() {
             <div className="max-w-4xl space-y-6">
               <span className="text-accent text-4xl font-sans font-bold">“</span>
               <blockquote className="text-lg md:text-2xl font-semibold text-foreground/90 italic leading-relaxed font-heading">
-                Technology, AI, design, and strategic leadership are most powerful when dedicated to one central mission: creating an impact and an inclusive and collaborative tech ecosystem where everyone and anyone can thrive.
+                Technology, AI, design, and strategic leadership are catalysts for progress. My mission is to build software that creates real-world impact while cultivating an inclusive, collaborative ecosystem where builders everywhere can thrive.
               </blockquote>
               <div className="flex items-center gap-3">
                 <span className="h-0.5 w-8 bg-accent"></span>

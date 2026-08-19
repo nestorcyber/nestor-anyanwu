@@ -98,10 +98,10 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Services
+            Services & Expertise
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            Specialized technical services for clients.
+            Comprehensive technical consulting, full-stack product engineering, AI workflows, and visual design tailored to scale organizations and empower communities.
           </p>
           <div className="w-14 h-1 bg-accent rounded-full mt-2" />
         </div>
