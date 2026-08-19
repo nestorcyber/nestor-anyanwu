@@ -155,100 +155,21 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
       <main className="min-h-screen bg-background font-sans pt-20 md:pt-24 pb-16" id="main-content">
         <div className="site-container">
           
-          {/* Main 2-Column Webflow Enterprise Style Layout */}
+          {/* Main 2-Column Responsive Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
-            {/* ─── LEFT COLUMN: Headline, Intro, Trusted Brand Logos & Direct Reach ─── */}
-            <div className="lg:col-span-5 space-y-8 lg:pt-1">
-              
-              {/* Headline & Description */}
-              <div className="space-y-4">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-[1.12]">
-                  Talk to Nestor about your website and engineering goals
-                </h1>
-                <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
-                  Build production software, web applications, enterprise visual identities, and community tech initiatives — backed by technical precision, clean code, and strategic leadership.
-                </p>
-              </div>
-
-
-
-              {/* Direct Reach Highlights */}
-              <div className="border-t border-border/60 pt-6 space-y-4">
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <Mail className="w-4.5 h-4.5 text-[#0075ff] shrink-0" />
-                  <a
-                    href="mailto:nestoranyanwu@gmail.com"
-                    className="hover:text-[#0075ff] transition-colors font-medium text-foreground"
-                  >
-                    nestoranyanwu@gmail.com
-                  </a>
-                </div>
-
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <MapPin className="w-4.5 h-4.5 text-[#0075ff] shrink-0" />
-                  <span>Owerri, Imo State, Nigeria & Remote Worldwide</span>
-                </div>
-
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <Clock className="w-4.5 h-4.5 text-[#0075ff] shrink-0" />
-                  <span>Typically responds within 24 hours</span>
-                </div>
-
-                {/* Social Badges */}
-                <div className="flex items-center gap-2 pt-2">
-                  <a
-                    href="https://wa.me/message/GJIXLHQQPYDIE1"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
-                    aria-label="Chat on WhatsApp"
-                  >
-                    <WhatsappIcon className="w-4.5 h-4.5" />
-                  </a>
-                  <a
-                    href="https://linkedin.com/in/nestoranyanwu"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
-                    aria-label="Connect on LinkedIn"
-                  >
-                    <Linkedin className="w-4.5 h-4.5" />
-                  </a>
-                  <a
-                    href="https://github.com/nestorcyber"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
-                    aria-label="GitHub Profile"
-                  >
-                    <Github className="w-4.5 h-4.5" />
-                  </a>
-                  <a
-                    href="https://twitter.com/nestorcyber"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
-                    aria-label="Twitter Profile"
-                  >
-                    <TwitterXIcon className="w-4.5 h-4.5" />
-                  </a>
-                  <a
-                    href="https://behance.net/nestorcyber"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
-                    aria-label="Behance Portfolio"
-                  >
-                    <BehanceIcon className="w-4.5 h-4.5" />
-                  </a>
-                </div>
-              </div>
-
+            {/* ─── 1. HEADLINE & INTRO DESCRIPTION (Always 1st) ─── */}
+            <div className="order-1 lg:order-1 lg:col-span-5 space-y-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-[1.12]">
+                Talk to Nestor about your website and engineering goals
+              </h1>
+              <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
+                Build production software, web applications, enterprise visual identities, and community tech initiatives — backed by technical precision, clean code, and strategic leadership.
+              </p>
             </div>
 
-            {/* ─── RIGHT COLUMN: Webflow-Style Clean Enterprise Contact Form ─── */}
-            <div className="lg:col-span-7">
+            {/* ─── 2. CONTACT FORM (2nd on Mobile, Right Column on Desktop) ─── */}
+            <div className="order-2 lg:order-2 lg:col-span-7 lg:row-span-2">
               <div className="bg-card border border-border/80 rounded-3xl p-6 sm:p-8 md:p-10 shadow-lg space-y-6">
                 
                 <div className="space-y-1 pb-2">
@@ -429,6 +350,78 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
 
                 </form>
 
+              </div>
+            </div>
+
+            {/* ─── 3. DIRECT REACH & SOCIALS (3rd on Mobile, Left Column Bottom on Desktop) ─── */}
+            <div className="order-3 lg:order-3 lg:col-span-5 border-t border-border/60 pt-6 space-y-4">
+              <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                <Mail className="w-4.5 h-4.5 text-[#0075ff] shrink-0" />
+                <a
+                  href="mailto:nestoranyanwu@gmail.com"
+                  className="hover:text-[#0075ff] transition-colors font-medium text-foreground"
+                >
+                  nestoranyanwu@gmail.com
+                </a>
+              </div>
+
+              <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                <MapPin className="w-4.5 h-4.5 text-[#0075ff] shrink-0" />
+                <span>Owerri, Imo State, Nigeria & Remote Worldwide</span>
+              </div>
+
+              <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                <Clock className="w-4.5 h-4.5 text-[#0075ff] shrink-0" />
+                <span>Typically responds within 24 hours</span>
+              </div>
+
+              {/* Social Badges */}
+              <div className="flex items-center gap-2 pt-2">
+                <a
+                  href="https://wa.me/message/GJIXLHQQPYDIE1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
+                  aria-label="Chat on WhatsApp"
+                >
+                  <WhatsappIcon className="w-4.5 h-4.5" />
+                </a>
+                <a
+                  href="https://linkedin.com/in/nestoranyanwu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
+                  aria-label="Connect on LinkedIn"
+                >
+                  <Linkedin className="w-4.5 h-4.5" />
+                </a>
+                <a
+                  href="https://github.com/nestorcyber"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
+                  aria-label="GitHub Profile"
+                >
+                  <Github className="w-4.5 h-4.5" />
+                </a>
+                <a
+                  href="https://twitter.com/nestorcyber"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
+                  aria-label="Twitter Profile"
+                >
+                  <TwitterXIcon className="w-4.5 h-4.5" />
+                </a>
+                <a
+                  href="https://behance.net/nestorcyber"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl border border-border/80 bg-card text-foreground hover:bg-[#0075ff] hover:text-white hover:border-[#0075ff] flex items-center justify-center transition-all shadow-2xs"
+                  aria-label="Behance Portfolio"
+                >
+                  <BehanceIcon className="w-4.5 h-4.5" />
+                </a>
               </div>
             </div>
 
