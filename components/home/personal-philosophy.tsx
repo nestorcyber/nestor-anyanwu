@@ -128,7 +128,7 @@ export default function PersonalPhilosophy() {
 
               {/* Title */}
               <h3
-                className="text-sm md:text-base font-extrabold tracking-tight leading-snug mb-3 transition-colors duration-300"
+                className="text-base sm:text-lg md:text-xl font-extrabold tracking-tight leading-snug mb-3 transition-colors duration-300"
                 style={{ color: isHovered ? v.color : "var(--foreground)" }}
               >
                 {v.title}
@@ -145,7 +145,7 @@ export default function PersonalPhilosophy() {
               />
 
               {/* Description */}
-              <p className="text-xs text-muted-foreground font-light leading-relaxed max-w-[220px]">
+              <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed max-w-xs sm:max-w-sm">
                 {v.description}
               </p>
             </div>
