@@ -50,7 +50,7 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
             <div className="animate-marquee gap-5 sm:gap-7">
               {row1.map((skill, idx) => (
                 <div key={`r1-${idx}`} className="flex flex-col items-center gap-2 shrink-0 group cursor-pointer">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-[0_6px_20px_rgba(0,0,0,0.05)] dark:shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:border-accent/80 flex items-center justify-center p-3 transition-all duration-300 group-hover:-translate-y-1">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-slate-950 text-white dark:bg-white dark:text-slate-950 border border-slate-800 dark:border-slate-200 shadow-[0_6px_20px_rgba(0,0,0,0.15)] dark:shadow-[0_6px_20px_rgba(255,255,255,0.1)] hover:shadow-xl hover:border-accent/80 flex items-center justify-center p-3 transition-all duration-300 group-hover:-translate-y-1">
                     <div className="w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <SkillIcon
                         provider={skill.iconProvider}
@@ -77,7 +77,7 @@ export default function SkillsMatrix({ skillGroups }: { skillGroups: SkillGroup[
             <div className="animate-marquee-reverse gap-5 sm:gap-7">
               {row2.map((skill, idx) => (
                 <div key={`r2-${idx}`} className="flex flex-col items-center gap-2 shrink-0 group cursor-pointer">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 shadow-[0_6px_20px_rgba(0,0,0,0.05)] dark:shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:border-accent/80 flex items-center justify-center p-3 transition-all duration-300 group-hover:-translate-y-1">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-slate-950 text-white dark:bg-white dark:text-slate-950 border border-slate-800 dark:border-slate-200 shadow-[0_6px_20px_rgba(0,0,0,0.15)] dark:shadow-[0_6px_20px_rgba(255,255,255,0.1)] hover:shadow-xl hover:border-accent/80 flex items-center justify-center p-3 transition-all duration-300 group-hover:-translate-y-1">
                     <div className="w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <SkillIcon
                         provider={skill.iconProvider}
