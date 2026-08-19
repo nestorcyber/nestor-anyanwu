@@ -1,79 +1,100 @@
 import { Metadata } from "next"
 import Footer from "@/components/footer"
 import Image from "next/image"
-import { Award, Cpu, PenTool, Users } from "lucide-react"
+import { Award, Cpu, Users, Briefcase, HeartHandshake } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "About Nestor Anyanwu | Profile & Vision",
-  description: "Biography of Nestor Anyanwu (Nestor Cyber), Tech Leader and Software Engineer. Read about his core pillars in technology advocacy, design, and AI.",
+  title: "About Nestor Anyanwu | Profile, Leadership & Impact",
+  description:
+    "Biography of Nestor Anyanwu (Nestor Cyber). Software Engineer, AI Enthusiast, Tech Leader, and Community Advocate dedicated to creating an inclusive and collaborative tech ecosystem where everyone can thrive.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "About Nestor Anyanwu | Profile & Vision",
-    description: "Biography of Nestor Anyanwu (Nestor Cyber), Tech Leader and Software Engineer. Read about his core pillars in technology advocacy, design, and AI.",
+    title: "About Nestor Anyanwu | Profile, Leadership & Impact",
+    description:
+      "Biography of Nestor Anyanwu (Nestor Cyber). Software Engineer, AI Enthusiast, Tech Leader, and Community Advocate dedicated to creating an inclusive and collaborative tech ecosystem where everyone can thrive.",
     url: "/about",
   },
   twitter: {
-    title: "About Nestor Anyanwu | Profile & Vision",
-    description: "Biography of Nestor Anyanwu (Nestor Cyber), Tech Leader and Software Engineer. Read about his core pillars in technology advocacy, design, and AI.",
+    title: "About Nestor Anyanwu | Profile, Leadership & Impact",
+    description:
+      "Biography of Nestor Anyanwu (Nestor Cyber). Software Engineer, AI Enthusiast, Tech Leader, and Community Advocate dedicated to creating an inclusive and collaborative tech ecosystem where everyone can thrive.",
   },
 }
 
 export default function AboutPage() {
   const pillars = [
     {
-      id: "advocate",
+      id: "leadership",
       num: "01",
-      title: "Tech Advocate",
+      title: "Technology & Leadership",
       icon: <Award className="w-6 h-6 text-accent" />,
-      tagline: "SHAPING ADOPTING BEHAVIORS & DIGITAL INCLUSION",
-      description: "Nestor is a strong advocate for technology adoption, digital literacy, and innovation-driven development. He believes that technology should not be reserved for a select few but should be accessible, understandable, and impactful for everyone.",
+      tagline: "STRATEGIC TECH DIRECTION, ADVOCACY & ECOSYSTEM GOVERNANCE",
+      description:
+        "Serving as the Director of ICT for NACOS National and FUTO chapters, Nestor directs digital strategy, student computing infrastructure, and institutional technology transformation to empower thousands of aspiring engineers.",
       points: [
-        "Promoting cybersecurity and digital ethics awareness.",
-        "Advocating for digital literacy and technology careers among youth.",
-        "Facilitating public workshops and online engagement for emerging tech."
-      ]
+        "Directing national ICT strategy, student computing ecosystems, and developer governance.",
+        "Advocating for digital literacy, youth technology careers, and data privacy awareness.",
+        "Facilitating executive tech summits, institutional partnerships, and digital transformation.",
+      ],
     },
     {
-      id: "ai",
+      id: "ai-engineering",
       num: "02",
-      title: "AI Enthusiast",
+      title: "AI, Design & Software Engineering",
       icon: <Cpu className="w-6 h-6 text-accent" />,
-      tagline: "UNLOCKING PRODUCTIVITY THROUGH INTELLIGENT SYSTEMS",
-      description: "As an Artificial Intelligence enthusiast, Nestor actively explores the applications of machine learning, automation, and generative platforms. He is passionate about helping others discover how these tools enhance creativity and problem-solving.",
+      tagline: "FULL-STACK ARCHITECTURE, GENERATIVE AI & VISUAL SYSTEMS",
+      description:
+        "Uniting robust software engineering with machine learning workflows and human-centered design principles. Nestor builds high-performance web applications, integrates generative AI systems, and crafts brand identities that command credibility.",
       points: [
-        "Exploring machine learning and generative workflows.",
-        "Advocating for ethical AI adoption in daily professional workflows.",
-        "Sharing productivity-focused artificial intelligence resources."
-      ]
+        "Engineering scalable, production-grade web applications, robust APIs, and modern frontends.",
+        "Integrating generative AI models, machine learning APIs, and intelligent workflow automation.",
+        "Designing human-centered user experiences, event collateral, and corporate brand systems.",
+      ],
     },
     {
-      id: "designer",
+      id: "community-devrel",
       num: "03",
-      title: "Ingenious Designer",
-      icon: <PenTool className="w-6 h-6 text-accent" />,
-      tagline: "BRIDGING HUMAN-CENTERED AESTHETICS WITH CLEAN CODE",
-      description: "Creativity remains a defining aspect of Nestor's identity. As a designer, he combines visual storytelling, user experience principles, and strategic thinking to shape functional and beautiful digital interfaces.",
+      title: "Community & Developer Relations",
+      icon: <Users className="w-6 h-6 text-accent" />,
+      tagline: "TECHNICAL ADVOCACY, HACKATHONS & BUILDER NETWORKS",
+      description:
+        "Actively cultivating developer ecosystems across GDG Owerri, IEEE, and NACOS. Nestor champions developer advocacy, organizes regional hackathons, and facilitates hands-on bootcamps to empower emerging builders.",
       points: [
-        "Designing intuitive user experiences and product interfaces.",
-        "Creating corporate branding assets and campaign resources.",
-        "Aligning visual communication with strategic development objectives."
-      ]
+        "Fostering developer relations, open-source engagement, and technical advocacy.",
+        "Coordinating tech conferences, developer hackathons, and hands-on code bootcamps.",
+        "Authoring technical guides, essays, and resources to accelerate builder growth.",
+      ],
     },
     {
-      id: "leader",
+      id: "product-consulting",
       num: "04",
-      title: "Community Leader",
-      icon: <Users className="w-6 h-6 text-accent" />,
-      tagline: "EMPOWERING TECH TALENT AND COLLECTIVE PROGRESS",
-      description: "Serving as the Director of ICT for both NACOS National and FUTO chapters, Nestor drives digital strategy, technical infrastructure, and developer community coordination to support thousands of computing students.",
+      title: "Product & IT Consulting",
+      icon: <Briefcase className="w-6 h-6 text-accent" />,
+      tagline: "PRODUCT ROADMAPS, SYSTEM AUDITS & ENTERPRISE ARCHITECTURE",
+      description:
+        "Translating complex business vision into executable technical roadmaps and scalable digital systems. Nestor consults for startups, student bodies, and growing enterprises on architecture audits and product strategy.",
       points: [
-        "Leading ICT strategy for student computing ecosystems.",
-        "Coordinating tech conferences, bootcamps, and networking summits.",
-        "Promoting volunteer-led digital mentorship networks."
-      ]
-    }
+        "Leading end-to-end product lifecycles from user research to production deployment.",
+        "Delivering enterprise IT consulting, tech audits, and scalable cloud architecture advisory.",
+        "Aligning commercial business objectives with sustainable technical execution.",
+      ],
+    },
+    {
+      id: "volunteering-impact",
+      num: "05",
+      title: "Volunteering & Impact",
+      icon: <HeartHandshake className="w-6 h-6 text-accent" />,
+      tagline: "INCLUSIVE PROGRESS, MENTORSHIP & ACCESSIBLE PATHWAYS",
+      description:
+        "At the core of every endeavor is a deep commitment to voluntary service and human impact. Nestor mentors aspiring developers and leads capacity-building initiatives to ensure everyone can thrive in the digital economy.",
+      points: [
+        "Mentoring student builders and bridging educational gaps across South-East Nigeria.",
+        "Leading voluntary outreach, digital safety workshops, and community education programs.",
+        "Championing an inclusive and collaborative tech ecosystem where anyone can build and thrive.",
+      ],
+    },
   ]
 
   return (
@@ -102,7 +123,7 @@ export default function AboutPage() {
                 Nestor Anyanwu
               </h1>
               <p className="text-white/90 text-sm sm:text-base md:text-lg font-medium tracking-wide [text-shadow:_0_2px_4px_rgba(0,0,0,0.6)]">
-                Software Engineering • AI & Emerging Tech • Tech Leadership • Design • Developer Relations
+                Technology & Leadership • AI & Software Engineering • DevRel & Community • Product & IT Consulting • Volunteering & Impact
               </p>
             </div>
           </div>
@@ -126,10 +147,10 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* 3. Four Pillars Detailed Grid */}
+        {/* 3. Five Pillars Detailed Grid */}
         <section className="py-20 bg-background border-y-2 border-slate-900/20 dark:border-slate-800">
           <div className="site-container">
-            <div className="text-center max-w-3xl mx-auto mb-24 space-y-3">
+            <div className="text-center max-w-3xl mx-auto mb-20 space-y-3">
               <p className="text-accent text-xs font-bold tracking-widest uppercase font-mono">
                 AREAS OF IMPACT
               </p>
@@ -137,7 +158,7 @@ export default function AboutPage() {
                 Pillars of Leadership & Service
               </h2>
               <p className="text-sm md:text-base text-muted-foreground font-light">
-                A narrative walk through the key dimensions of Nestor's work and community footprint.
+                A narrative walkthrough of Nestor's core disciplines, community footprint, and dedication to impact.
               </p>
             </div>
 
@@ -213,14 +234,14 @@ export default function AboutPage() {
         <section className="py-20 site-container space-y-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <div className="space-y-6">
-              <h3 className="text-2xl md:text-4xl font-extrabold text-foreground tracking-tight">
-                A Commitment to Voluntary Service & Growth
+              <h3 className="text-2xl md:text-4xl font-extrabold text-foreground tracking-tight font-heading">
+                A Commitment to Voluntary Service & Inclusive Impact
               </h3>
               <p className="text-sm md:text-base text-foreground/80 leading-relaxed font-medium">
                 Nestor actively contributes to volunteer-driven initiatives promoting technical education, mentorship, and network development. He serves in key leadership programs, helping bridge educational resources with aspiring technology professionals in Nigeria.
               </p>
               <p className="text-sm md:text-base text-foreground/80 leading-relaxed font-medium">
-                By maintaining a presence in student-led organizations, developer chapters, and professional networks like GOTNI (Guardians of the Nation International), IEEE, and NACOS, he helps secure growth pathways for computing talents.
+                By maintaining an active presence in student-led organizations, developer chapters, and professional networks like GOTNI (Guardians of the Nation International), IEEE, and NACOS, he helps secure growth pathways for computing talents.
               </p>
             </div>
             <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg border border-border/80">
