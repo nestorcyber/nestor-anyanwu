@@ -123,16 +123,16 @@ export default function JournalClient({ articles }: JournalClientProps) {
   return (
     <div className="w-full space-y-12 pt-0 pb-20 md:pb-28 font-sans">
       
-      {/* ─── WEBFLOW-INSPIRED HERO SECTION ─── */}
-      <section className="w-full relative overflow-hidden bg-gradient-to-b from-blue-50/70 via-slate-50/40 to-background dark:from-[#060D17] dark:via-[#081525] dark:to-[#0A1D33] text-foreground dark:text-white py-12 sm:py-16 md:py-20 border-b border-border/70 dark:border-white/[0.08] shadow-xs dark:shadow-2xl">
+      {/* ─── WEBFLOW-INSPIRED HERO SECTION (FULL VIEWPORT HERO MATCHING HOME) ─── */}
+      <section className="w-full relative overflow-hidden bg-gradient-to-b from-blue-50/70 via-slate-50/40 to-background dark:from-[#060D17] dark:via-[#081525] dark:to-[#0A1D33] text-foreground dark:text-white min-h-[calc(100vh-4rem)] flex flex-col justify-center py-12 sm:py-16 md:py-20 border-b border-border/70 dark:border-white/[0.08] shadow-xs dark:shadow-2xl">
         
         {/* Radial Light Glow Illuminating from Center / Bottom (3x Boosted Intensity) */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full bg-[radial-gradient(ellipse_at_bottom_center,_rgba(0,117,255,0.45)_0%,_rgba(0,117,255,0.15)_45%,_transparent_80%)] dark:bg-[radial-gradient(ellipse_at_bottom_center,_rgba(0,117,255,0.85)_0%,_rgba(0,117,255,0.35)_45%,_transparent_80%)] pointer-events-none z-0 blur-2xl opacity-90" />
 
         {/* Soft Ambient Glow in Lower Center (3x Boosted Intensity) */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-80 bg-sky-400/60 dark:bg-[#0075ff]/60 blur-[100px] rounded-full pointer-events-none z-0" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-sky-400/60 dark:bg-[#0075ff]/60 blur-[100px] rounded-full pointer-events-none z-0" />
 
-        <div className="relative z-10 container-webflow space-y-8 sm:space-y-10">
+        <div className="relative z-10 container-webflow space-y-8 sm:space-y-10 my-auto">
           
           {/* Centered Large Display Title & Subtitle */}
           <div className="text-center space-y-3 sm:space-y-4 max-w-4xl mx-auto">
