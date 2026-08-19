@@ -134,22 +134,22 @@ export default async function Home() {
       {/* 3. Personal Philosophy ("Why I Build") */}
       <PersonalPhilosophy />
 
-      {/* 4. Community Impact ("Impact & Reach") */}
+      {/* 4. Impact & Reach */}
       <ImpactSection
         category="Impact & Reach"
-        title="Engineering Progress, Building Communities"
-        description="From directing national computing initiatives to shipping production software and designing developer conference identities — every role I take on is rooted in one conviction: technology is most powerful when it serves people, not the other way around."
+        title="Engineering Progress, Strategic Leadership & Ecosystem Impact"
+        description="From architecting software and AI solutions to tech leadership, developer relations, product management, IT consulting, and volunteering — every role I take on is driven by one conviction: creating real impact and an inclusive, collaborative tech ecosystem where everyone can thrive."
         ctaText="LET'S COLLABORATE"
         ctaLink="/contact"
-        pillarsTitle="How I show up:"
+        pillarsTitle="Core Disciplines:"
         pillars={[
-          "Software Development & Delivery",
-          "National ICT Strategy & Direction",
-          "Developer Community Activation",
-          "Graphic Design & Visual Systems",
-          "Data Privacy Advocacy",
-          "Technical Mentorship & Education",
-          "IT Consulting & Digital Support",
+          "Software Engineering & Web Development",
+          "AI & Intelligent Systems",
+          "Tech Leadership & Strategy",
+          "Developer Relations (DevRel)",
+          "Product Management & IT Consulting",
+          "Ingenious Design & Visual Systems",
+          "Community Building & Volunteering",
         ]}
         stats={formattedStats}
         heroImage="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966495/techadv1_dyclrm.jpg"
