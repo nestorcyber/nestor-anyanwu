@@ -78,7 +78,7 @@ export default function ImpactSection({
 
             <div className="relative z-10 space-y-6">
               {/* Category Subtitle */}
-              <span className="text-xs font-mono font-bold tracking-widest uppercase text-sky-400 block">
+              <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#0075ff] dark:text-sky-400 block">
                 {category}
               </span>
 
@@ -105,7 +105,7 @@ export default function ImpactSection({
                 <div className="sm:col-span-6 space-y-2.5">
                   {pillars.map((pillar, idx) => (
                     <div key={idx} className="flex items-center gap-2.5 group">
-                      <span className="shrink-0 text-sky-400 bg-sky-400/20 rounded-full p-0.5 group-hover:scale-110 transition-transform">
+                      <span className="shrink-0 text-sky-400 bg-sky-400/15 rounded-full p-0.5 group-hover:scale-110 transition-transform">
                         <CheckCircle2 className="w-4 h-4 text-sky-400" />
                       </span>
                       <span className="text-xs sm:text-sm font-medium tracking-wide text-slate-200 group-hover:text-white transition-colors">
@@ -119,7 +119,7 @@ export default function ImpactSection({
               {/* CTA Button */}
               <div className="pt-3">
                 <Link href={ctaLink} className="inline-block">
-                  <button className="bg-[#005fe6] hover:bg-[#0052cc] text-white font-bold text-xs tracking-wider px-7 py-3.5 rounded-xl shadow-lg transition-all flex items-center gap-2 cursor-pointer">
+                  <button className="bg-[#0075ff] hover:bg-[#0060d0] text-white font-bold text-xs tracking-wider px-7 py-3.5 rounded-xl shadow-md active:scale-98 transition-all flex items-center gap-2 cursor-pointer">
                     <span>{ctaText}</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </button>
@@ -129,7 +129,7 @@ export default function ImpactSection({
           </div>
 
           {/* MIDDLE STATS CONTAINER (3 cols) */}
-          <div className="lg:col-span-3 bg-[#0e2238] text-white p-6 sm:p-8 flex flex-col justify-center gap-8 border-t lg:border-t-0 lg:border-l border-white/10">
+          <div className="lg:col-span-3 bg-[#081525] text-white p-6 sm:p-8 flex flex-col justify-center gap-8 border-t lg:border-t-0 lg:border-l border-white/10">
             {stats.map((stat, idx) => (
               <div key={idx} className="space-y-2">
                 <div className="text-4xl sm:text-5xl font-black text-sky-400 font-mono tracking-tight">
@@ -162,7 +162,7 @@ export default function ImpactSection({
               <Link
                 href={ctaLink}
                 aria-label="Contact Nestor Anyanwu"
-                className="w-12 h-12 rounded-2xl bg-[#005fe6] text-white hover:bg-[#0052cc] flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-105"
+                className="w-12 h-12 rounded-2xl bg-[#0075ff] text-white hover:bg-[#0060d0] flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-105"
               >
                 <ArrowUpRight className="w-5 h-5" />
               </Link>
