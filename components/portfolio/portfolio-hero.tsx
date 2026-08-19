@@ -19,7 +19,7 @@ export default function PortfolioHero({
   settings?: SiteSettings
   stats?: PortfolioStat[]
 }) {
-  const bio = "Tech Advocate, AI Enthusiast, Ingenious Designer, Virtual Assistant and IT Consultant. Crafting quality designs that align with brand goals and deliver exceptional user experience. Your story begins here."
+  const bio = "Tech Advocate • Leadership • Ingenious Designer • AI Enthusiast • IT Consulting • Software Engineering • Community Building • Volunteering • Developer Relations • Product Management — dedicated to creating an impact and an inclusive and collaborative tech ecosystem where everyone and anyone can thrive."
   const author = settings?.authorName || "Nestor Anyanwu"
 
   return (

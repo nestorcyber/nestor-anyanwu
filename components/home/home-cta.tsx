@@ -9,12 +9,12 @@ export default function HomeCTA() {
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 relative z-10 text-center space-y-8">
-        <h2 className="text-2xl sm:text-4xl font-bold tracking-tight leading-tight max-w-3xl mx-auto">
-          Let's Build Impactful Technology Together
+        <h2 className="text-2xl sm:text-4xl font-bold tracking-tight leading-tight max-w-3xl mx-auto font-heading">
+          Let's Build an Inclusive Tech Ecosystem Together
         </h2>
 
         <p className="text-primary-foreground/80 text-sm md:text-lg font-light leading-relaxed max-w-2xl mx-auto">
-          Whether you are looking to build a digital product, collaborate on community tech programs, or invite me for a speaking engagement—let's connect.
+          Whether you're looking to build software, integrate AI, direct product strategy, consult on IT architecture, or collaborate on developer relations and community initiatives — let's connect.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4 pt-4">

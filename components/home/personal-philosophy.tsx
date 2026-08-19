@@ -58,7 +58,7 @@ export default function PersonalPhilosophy() {
       <SectionHeader
         badge="Personal Philosophy"
         title="Why I Build & Lead"
-        subtitle="Platform for impact and growth."
+        subtitle="Building technology, AI, and leadership to foster an inclusive and collaborative tech ecosystem where everyone and anyone can thrive."
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-border/60 divide-y md:divide-y lg:divide-y-0 divide-border/60">

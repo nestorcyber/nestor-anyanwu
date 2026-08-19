@@ -276,12 +276,14 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                         onChange={handleChange}
                         className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all cursor-pointer"
                       >
-                        <option value="Software Development">Software Development & Delivery</option>
-                        <option value="Web Applications">Web Application Development</option>
-                        <option value="Brand Design">Brand Design & Visual Systems</option>
-                        <option value="Technical Advisory">IT Advisory & Architecture Consulting</option>
-                        <option value="Speaking Engagement">Speaking Invitation & Keynote</option>
-                        <option value="Community Collaboration">Community Tech Initiative</option>
+                        <option value="Software Engineering & Web Dev">Software Engineering & Web Development</option>
+                        <option value="AI & Technology">AI Solutions & Technology Systems</option>
+                        <option value="Developer Relations">Developer Relations (DevRel) & Advocacy</option>
+                        <option value="Product Management">Product Management & Strategy</option>
+                        <option value="IT Consulting">IT Consulting & Architecture</option>
+                        <option value="Design & Branding">Design & Visual Systems</option>
+                        <option value="Community & Leadership">Community Leadership & Ecosystem</option>
+                        <option value="Volunteering">Volunteering & Mentorship Initiative</option>
                         <option value="General Inquiry">Other Inquiry</option>
                       </select>
                     </div>

@@ -21,54 +21,54 @@ export default function ExpandingEndeavors() {
 
   const endeavors: EndeavorItem[] = [
     {
-      id: "software-engineering",
-      title: "Software Development",
-      subtitle: "Web Platforms & Cloud Solutions",
-      description: "Engineering scalable web applications, robust APIs, and modern cloud architectures built for performance and high reliability.",
+      id: "software-web-engineering",
+      title: "Software & Web Dev",
+      subtitle: "Software Engineering & Architecture",
+      description: "Building scalable web applications, robust APIs, and high-performance software systems designed for reliability and speed.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
-      link: "/portfolio",
-      buttonText: "Explore Software Projects",
-      ariaLabel: "Explore Nestor Anyanwu's software engineering portfolio and web platforms",
+      link: "/projects",
+      buttonText: "Explore Engineering Projects",
+      ariaLabel: "Explore Nestor Anyanwu's software engineering and web development portfolio",
     },
     {
-      id: "tech-leadership",
-      title: "Tech Leadership",
-      subtitle: "Digital Strategy & Council Leadership",
-      description: "Directing technology council strategy, student engineering programs, and digital event logistics across tech ecosystems.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
-      link: "/about",
-      buttonText: "Read Leadership Profile",
-      ariaLabel: "Read about Nestor Anyanwu's technology leadership and digital strategy",
-    },
-    {
-      id: "designs-and-ai",
-      title: "Designs & AI",
-      subtitle: "Visual Systems & Generative AI",
-      description: "Crafting visual brand identities, conference design systems, and integrating generative AI workflows into digital experiences.",
+      id: "ai-technology",
+      title: "AI & Technology",
+      subtitle: "Artificial Intelligence & Automation",
+      description: "Integrating generative AI models, machine learning APIs, and intelligent tech workflows to solve complex real-world problems.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
       link: "/portfolio",
-      buttonText: "View Design & AI Work",
-      ariaLabel: "View Nestor Anyanwu's design systems and AI workflow portfolio",
+      buttonText: "Explore AI & Tech Work",
+      ariaLabel: "View Nestor Anyanwu's AI and technology integration projects",
     },
     {
-      id: "community-building",
-      title: "Community Growth",
-      subtitle: "Workshops & Mentorship",
-      description: "Empowering software developers and technology enthusiasts through hands-on technical workshops, hackathons, and mentorship.",
+      id: "devrel-community",
+      title: "DevRel & Community",
+      subtitle: "Developer Relations & Volunteering",
+      description: "Activating developer ecosystems, technical advocacy, workshops, and volunteering to empower the next generation of tech leaders.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden2-sUzI0wvGmZMjB5UUP911IAB6WvBM5c.jpg",
       link: "/community",
-      buttonText: "View Community Initiatives",
-      ariaLabel: "View Nestor Anyanwu's developer community initiatives and workshops",
+      buttonText: "View DevRel & Volunteering",
+      ariaLabel: "View Nestor Anyanwu's developer relations and community initiatives",
     },
     {
-      id: "technical-consulting",
-      title: "Technical Consulting",
-      subtitle: "IT Advisory & Architecture",
-      description: "Providing strategic IT advisory, technology audits, system automation, and digital transformation consulting for growing organizations.",
+      id: "product-it-consulting",
+      title: "Product & IT Consulting",
+      subtitle: "Product Management & Architecture",
+      description: "Directing product roadmaps, technical advisory, system audits, and enterprise IT consulting to drive organizational growth.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg",
       link: "/contact",
-      buttonText: "Request Technical Advisory",
-      ariaLabel: "Contact Nestor Anyanwu for technical advisory and IT consulting",
+      buttonText: "Request IT & Product Advisory",
+      ariaLabel: "Contact Nestor Anyanwu for product management and IT consulting",
+    },
+    {
+      id: "design-impact",
+      title: "Design & Impact",
+      subtitle: "Visual Systems & Creating Impact",
+      description: "Designing brand systems, user experiences, and visual communication — all with the single goal of creating real-world impact.",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
+      link: "/about",
+      buttonText: "Discover Impact Mission",
+      ariaLabel: "Discover Nestor Anyanwu's design systems and impact mission",
     },
   ]
 
@@ -78,10 +78,10 @@ export default function ExpandingEndeavors() {
       {/* Centered Section Header */}
       <div className="site-container mb-8 text-center space-y-3">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight">
-          Core Focus
+          Core Disciplines & Focus
         </h2>
-        <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto">
-          Engineering, design, and ICT leadership.
+        <p className="text-sm md:text-base text-muted-foreground font-medium leading-relaxed max-w-3xl mx-auto">
+          Technology, Design, AI, Leadership, Volunteering, IT Consulting, DevRel, Software Engineering, Web Dev, Community Building & Product Management — creating an inclusive and collaborative tech ecosystem where everyone and anyone can thrive.
         </p>
         <div className="h-1 w-16 bg-accent mx-auto mt-3" />
       </div>
@@ -125,7 +125,7 @@ export default function ExpandingEndeavors() {
 
               {/* Always Visible Action Button */}
               <Link href={item.link} className="block w-full" aria-label={item.ariaLabel}>
-                <div className="w-full bg-[#005fe6] hover:bg-[#0052cc] text-white font-extrabold text-xs tracking-wider px-6 py-4 flex items-center justify-between transition-colors">
+                <div className="w-full bg-[#0075ff] hover:bg-[#0060d0] text-white font-extrabold text-xs tracking-wider px-6 py-4 flex items-center justify-between transition-colors">
                   <span>{item.buttonText}</span>
                   <ArrowRight size={16} />
                 </div>
@@ -201,7 +201,7 @@ export default function ExpandingEndeavors() {
                     }`}
                 >
                   <Link href={item.link} className="block w-full" aria-label={item.ariaLabel}>
-                    <div className="w-full bg-[#005fe6] hover:bg-[#0052cc] text-white font-extrabold text-xs tracking-wider px-5 py-3.5 flex items-center justify-between transition-colors cursor-pointer">
+                    <div className="w-full bg-[#0075ff] hover:bg-[#0060d0] text-white font-extrabold text-xs tracking-wider px-5 py-3.5 flex items-center justify-between transition-colors cursor-pointer">
                       <span>{item.buttonText}</span>
                       <ArrowRight size={15} />
                     </div>

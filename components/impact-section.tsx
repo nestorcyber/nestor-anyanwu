@@ -24,19 +24,19 @@ export interface ImpactSectionProps {
 
 export default function ImpactSection({
   category = "Impact & Reach",
-  title = "Engineering Progress, Building Communities",
-  description = "From directing national computing initiatives to shipping production software and designing developer conference identities — every role I take on is rooted in one conviction: technology is most powerful when it serves people, not the other way around.",
-  ctaText = "Let's Collaborate",
+  title = "Engineering Progress, Leadership & Ecosystem Impact",
+  description = "From architecting software and AI solutions to tech leadership, developer relations, product management, IT consulting, and volunteering — every role I take on is driven by one conviction: creating an impact and an inclusive and collaborative tech ecosystem where everyone and anyone can thrive.",
+  ctaText = "LET'S COLLABORATE",
   ctaLink = "/contact",
-  pillarsTitle = "How I show up:",
+  pillarsTitle = "Core Focus Areas:",
   pillars = [
-    "Software Development & Delivery",
-    "National ICT Strategy & Direction",
-    "Developer Community Activation",
-    "Graphic Design & Visual Systems",
-    "Data Privacy Advocacy",
-    "Technical Mentorship & Education",
-    "IT Consulting & Digital Support",
+    "Software Engineering & Web Development",
+    "AI & Technology Workflows",
+    "Tech Leadership & Strategy",
+    "Developer Relations (DevRel)",
+    "Product Management & IT Consulting",
+    "Design & Visual Systems",
+    "Community Building & Volunteering",
   ],
   stats = [
     {
