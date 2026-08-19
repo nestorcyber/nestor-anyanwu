@@ -37,7 +37,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-slate-950 text-white border-t-2 border-slate-900 py-16 sm:py-20 font-sans">
-      <div className="container-webflow space-y-16">
+      <div className="site-container space-y-16">
 
         {/* Top Section: Gumroad-style Headline & Form (Left) + Nav Links (Right) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">

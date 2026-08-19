@@ -153,7 +153,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
   return (
     <>
       <main className="min-h-screen bg-background font-sans pt-20 md:pt-24 pb-16" id="main-content">
-        <div className="container-webflow">
+        <div className="site-container">
           
           {/* Main 2-Column Webflow Enterprise Style Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">

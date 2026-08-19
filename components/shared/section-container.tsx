@@ -20,7 +20,7 @@ export default function SectionContainer({
         pattern ? "bg-grid-pattern" : ""
       } ${className}`}
     >
-      <div className="container-webflow">{children}</div>
+      <div className="site-container">{children}</div>
     </section>
   )
 }

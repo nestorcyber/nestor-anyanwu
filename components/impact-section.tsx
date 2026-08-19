@@ -62,118 +62,114 @@ export default function ImpactSection({
   heroImageAlt = "Nestor Anyanwu at community event",
 }: ImpactSectionProps) {
   return (
-    <section id="impact" className="w-full font-sans border-y border-border/80 overflow-hidden">
-      {/* 
-        3-Column Balanced Layout:
-        - Column 1 (Left 6 cols): Navy Brand Container with category badge, balanced title, 2-column description & 7 pillars, and CTA button
-        - Column 2 (Middle 3 cols): Cohesive dark-tinted stats container with balanced numbers, labels & descriptions
-        - Column 3 (Right 3 cols): Full-height action image showcase with floating CTA button
-      */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[580px] w-full">
-        
-        {/* LEFT CONTAINER (6 cols) */}
-        <div className="lg:col-span-6 bg-[#0B1C2C] text-white relative px-4 sm:px-5 lg:px-6 py-8 sm:py-10 md:py-12 flex flex-col justify-between overflow-hidden">
-          {/* Background image overlay */}
-          <div
-            className="absolute inset-0 opacity-10 bg-cover bg-center mix-blend-overlay pointer-events-none"
-            style={{
-              backgroundImage: `url(${heroImage})`,
-            }}
-          />
+    <section id="impact" className="w-full font-sans border-y border-border/80 bg-background overflow-hidden py-4 sm:py-6">
+      <div className="site-container">
+        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[540px] w-full border border-border/60 rounded-2xl overflow-hidden shadow-sm">
+          
+          {/* LEFT CONTAINER (6 cols) */}
+          <div className="lg:col-span-6 bg-[#0B1C2C] text-white relative p-6 sm:p-8 md:p-10 flex flex-col justify-between overflow-hidden">
+            {/* Background image overlay */}
+            <div
+              className="absolute inset-0 opacity-10 bg-cover bg-center mix-blend-overlay pointer-events-none"
+              style={{
+                backgroundImage: `url(${heroImage})`,
+              }}
+            />
 
-          <div className="relative z-10 space-y-6">
-            {/* Category Subtitle */}
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-sky-400 block">
-              {category}
-            </span>
+            <div className="relative z-10 space-y-6">
+              {/* Category Subtitle */}
+              <span className="text-xs font-mono font-bold tracking-widest uppercase text-sky-400 block">
+                {category}
+              </span>
 
-            {/* Main Headline */}
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight text-white font-heading">
-              {title}
-            </h2>
+              {/* Main Headline */}
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight text-white font-heading">
+                {title}
+              </h2>
 
-            {/* 2-Column Content: Description on Left, 7 Pillars on Right */}
-            <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 pt-2">
-              {/* Description side */}
-              <div className="sm:col-span-6 space-y-3">
-                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
-                  {description}
-                </p>
-                {pillarsTitle && (
-                  <p className="text-xs sm:text-sm font-bold text-white pt-2">
-                    {pillarsTitle}
+              {/* 2-Column Content: Description on Left, 7 Pillars on Right */}
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 pt-2">
+                {/* Description side */}
+                <div className="sm:col-span-6 space-y-3">
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
+                    {description}
+                  </p>
+                  {pillarsTitle && (
+                    <p className="text-xs sm:text-sm font-bold text-white pt-2">
+                      {pillarsTitle}
+                    </p>
+                  )}
+                </div>
+
+                {/* Pillars list side */}
+                <div className="sm:col-span-6 space-y-2.5">
+                  {pillars.map((pillar, idx) => (
+                    <div key={idx} className="flex items-center gap-2.5 group">
+                      <span className="shrink-0 text-sky-400 bg-sky-400/20 rounded-full p-0.5 group-hover:scale-110 transition-transform">
+                        <CheckCircle2 className="w-4 h-4 text-sky-400" />
+                      </span>
+                      <span className="text-xs sm:text-sm font-medium tracking-wide text-slate-200 group-hover:text-white transition-colors">
+                        {pillar}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA Button */}
+              <div className="pt-3">
+                <Link href={ctaLink} className="inline-block">
+                  <button className="bg-[#005fe6] hover:bg-[#0052cc] text-white font-bold text-xs tracking-wider px-7 py-3.5 rounded-xl shadow-lg transition-all flex items-center gap-2 cursor-pointer">
+                    <span>{ctaText}</span>
+                    <ArrowUpRight className="w-4 h-4" />
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* MIDDLE STATS CONTAINER (3 cols) */}
+          <div className="lg:col-span-3 bg-[#0e2238] text-white p-6 sm:p-8 flex flex-col justify-center gap-8 border-t lg:border-t-0 lg:border-l border-white/10">
+            {stats.map((stat, idx) => (
+              <div key={idx} className="space-y-2">
+                <div className="text-4xl sm:text-5xl font-black text-sky-400 font-mono tracking-tight">
+                  {stat.value}
+                </div>
+                <div className="text-lg sm:text-xl font-bold tracking-tight text-white font-heading">
+                  {stat.label}
+                </div>
+                {stat.description && (
+                  <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                    {stat.description}
                   </p>
                 )}
               </div>
+            ))}
+          </div>
 
-              {/* Pillars list side */}
-              <div className="sm:col-span-6 space-y-2.5">
-                {pillars.map((pillar, idx) => (
-                  <div key={idx} className="flex items-center gap-2.5 group">
-                    <span className="shrink-0 text-sky-400 bg-sky-400/20 rounded-full p-0.5 group-hover:scale-110 transition-transform">
-                      <CheckCircle2 className="w-4 h-4 text-sky-400" />
-                    </span>
-                    <span className="text-xs sm:text-sm font-medium tracking-wide text-slate-200 group-hover:text-white transition-colors">
-                      {pillar}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* CTA Button */}
-            <div className="pt-3">
-              <Link href={ctaLink} className="inline-block">
-                <button className="bg-[#005fe6] hover:bg-[#0052cc] text-white font-bold text-xs tracking-wider px-7 py-3.5 rounded-xl shadow-lg transition-all flex items-center gap-2 cursor-pointer">
-                  <span>{ctaText}</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </button>
+          {/* RIGHT IMAGE CONTAINER (3 cols) */}
+          <div className="lg:col-span-3 relative min-h-[380px] lg:min-h-full w-full bg-slate-950 overflow-hidden">
+            <Image
+              src={heroImage}
+              alt={heroImageAlt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 25vw"
+              className="object-cover object-top hover:scale-105 transition-transform duration-700 ease-out"
+              priority
+            />
+            {/* Floating Action Button */}
+            <div className="absolute bottom-6 right-6 flex flex-col gap-3 z-20">
+              <Link
+                href={ctaLink}
+                aria-label="Contact Nestor Anyanwu"
+                className="w-12 h-12 rounded-2xl bg-[#005fe6] text-white hover:bg-[#0052cc] flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                <ArrowUpRight className="w-5 h-5" />
               </Link>
             </div>
           </div>
-        </div>
 
-        {/* MIDDLE STATS CONTAINER (3 cols) */}
-        <div className="lg:col-span-3 bg-[#0e2238] text-white p-8 sm:p-10 flex flex-col justify-center gap-8 border-t lg:border-t-0 lg:border-l border-white/10">
-          {stats.map((stat, idx) => (
-            <div key={idx} className="space-y-2">
-              <div className="text-4xl sm:text-5xl font-black text-sky-400 font-mono tracking-tight">
-                {stat.value}
-              </div>
-              <div className="text-lg sm:text-xl font-bold tracking-tight text-white font-heading">
-                {stat.label}
-              </div>
-              {stat.description && (
-                <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                  {stat.description}
-                </p>
-              )}
-            </div>
-          ))}
         </div>
-
-        {/* RIGHT IMAGE CONTAINER (3 cols) */}
-        <div className="lg:col-span-3 relative min-h-[380px] lg:min-h-full w-full bg-slate-950 overflow-hidden">
-          <Image
-            src={heroImage}
-            alt={heroImageAlt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 25vw"
-            className="object-cover object-top hover:scale-105 transition-transform duration-700 ease-out"
-            priority
-          />
-          {/* Floating Action Button */}
-          <div className="absolute bottom-6 right-6 flex flex-col gap-3 z-20">
-            <Link
-              href={ctaLink}
-              aria-label="Contact Nestor Anyanwu"
-              className="w-12 h-12 rounded-2xl bg-[#005fe6] text-white hover:bg-[#0052cc] flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-105"
-            >
-              <ArrowUpRight className="w-5 h-5" />
-            </Link>
-          </div>
-        </div>
-
       </div>
     </section>
   )

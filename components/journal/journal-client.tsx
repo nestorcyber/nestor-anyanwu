@@ -132,7 +132,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
         {/* Soft Ambient Glow in Lower Center (3x Boosted Intensity) */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-sky-400/60 dark:bg-[#0075ff]/60 blur-[100px] rounded-full pointer-events-none z-0" />
 
-        <div className="relative z-10 container-webflow space-y-8 sm:space-y-10 my-auto">
+        <div className="relative z-10 site-container space-y-8 sm:space-y-10 my-auto">
           
           {/* Centered Large Display Title & Subtitle */}
           <div className="text-center space-y-3 sm:space-y-4 max-w-4xl mx-auto">
@@ -212,7 +212,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
       </section>
 
       {/* ─── ALL JOURNAL ARTICLES SECTION WITH FILTERS & SEARCH ─── */}
-      <div className="w-full container-webflow space-y-8">
+      <div className="w-full site-container space-y-8">
         
         {/* Category Filters & Search Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/60 pb-6">

@@ -16,16 +16,20 @@ body {
   min-height: 100%;
 }
 
-/* ─── Standard Web Development Layout Container (Responsive Gutters & Max Width) ─── */
+/* ─── Standard Web Development Responsive Layout Container ─── */
+.site-container,
+.container-site,
 .container-webflow,
 .webflow-container {
   width: 100%;
-  max-width: 1280px; /* 80rem / max-w-7xl */
+  max-width: 1280px; /* 80rem */
   margin-inline: auto;
   padding-inline: 16px; /* Mobile gutter standard (16px) */
 }
 
 @media (min-width: 640px) {
+  .site-container,
+  .container-site,
   .container-webflow,
   .webflow-container {
     padding-inline: 20px; /* Tablet gutter standard (20px) */
@@ -33,6 +37,8 @@ body {
 }
 
 @media (min-width: 1024px) {
+  .site-container,
+  .container-site,
   .container-webflow,
   .webflow-container {
     padding-inline: 24px; /* Desktop gutter standard (24px) */

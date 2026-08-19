@@ -35,7 +35,7 @@ export default async function ProjectsPage() {
         <div>
           {/* Top Breadcrumb & Page Banner */}
           <div className="w-full bg-card/60 border-b border-border/70 py-8">
-            <div className="container-webflow space-y-4">
+            <div className="site-container space-y-4">
               <Link
                 href="/portfolio"
                 className="inline-flex items-center gap-2 text-xs font-mono font-bold text-accent hover:underline uppercase tracking-wider"
@@ -61,7 +61,7 @@ export default async function ProjectsPage() {
           </div>
 
           {/* Project Library Filterable Grid */}
-          <div className="container-webflow py-8">
+          <div className="site-container py-8">
             <ProjectLibrary projects={projects} />
           </div>
 

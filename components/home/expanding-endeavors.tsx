@@ -76,7 +76,7 @@ export default function ExpandingEndeavors() {
     <section className="w-full py-8 md:py-10 border-b border-border/60 bg-background overflow-hidden">
 
       {/* Centered Section Header */}
-      <div className="container-webflow mb-8 text-center space-y-3">
+      <div className="site-container mb-8 text-center space-y-3">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight">
           Core Focus
         </h2>
