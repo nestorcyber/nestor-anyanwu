@@ -1,6 +1,7 @@
--- Migration 004: Ensure all gallery_images columns exist and reload PostgREST schema cache
+-- Migration 004: Ensure gallery_images columns exist, enable RLS, and reload PostgREST schema cache
 -- Run this in your Supabase SQL Editor: https://supabase.com/dashboard/project/_/sql
 
+-- 1. Create table if not exists
 create table if not exists public.gallery_images (
   id uuid primary key default gen_random_uuid(),
   title text,
@@ -22,9 +23,9 @@ create table if not exists public.gallery_images (
   updated_at timestamptz not null default now()
 );
 
--- Ensure all columns exist if table was previously created with older schema
-alter table public.gallery_images add column if not exists title text;
+-- 2. Add any missing columns to existing table
 alter table public.gallery_images add column if not exists caption text;
+alter table public.gallery_images add column if not exists title text;
 alter table public.gallery_images add column if not exists image_url text;
 alter table public.gallery_images add column if not exists alt text;
 alter table public.gallery_images add column if not exists cloudinary_public_id text;
@@ -38,8 +39,27 @@ alter table public.gallery_images add column if not exists video_url text;
 alter table public.gallery_images add column if not exists video_duration text;
 alter table public.gallery_images add column if not exists featured boolean not null default false;
 alter table public.gallery_images add column if not exists sort_order int not null default 0;
-alter table public.gallery_images add column if not exists created_at timestamptz not null default now();
-alter table public.gallery_images add column if not exists updated_at timestamptz not null default now();
 
--- Reload Supabase PostgREST API schema cache
+-- 3. Enable Row Level Security (RLS)
+alter table public.gallery_images enable row level security;
+
+-- 4. Public read policy (allows website visitors to view images)
+drop policy if exists "Public read gallery" on public.gallery_images;
+create policy "Public read gallery" on public.gallery_images
+  for select using (true);
+
+-- 5. Admin write policies
+drop policy if exists "Admin insert gallery_images" on public.gallery_images;
+create policy "Admin insert gallery_images" on public.gallery_images
+  for insert with check (public.is_admin());
+
+drop policy if exists "Admin update gallery_images" on public.gallery_images;
+create policy "Admin update gallery_images" on public.gallery_images
+  for update using (public.is_admin()) with check (public.is_admin());
+
+drop policy if exists "Admin delete gallery_images" on public.gallery_images;
+create policy "Admin delete gallery_images" on public.gallery_images
+  for delete using (public.is_admin());
+
+-- 6. Refresh Supabase PostgREST schema cache
 notify pgrst, 'reload schema';
