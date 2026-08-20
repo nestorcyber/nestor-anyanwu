@@ -172,24 +172,6 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
               <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
                 Whether you have a software project to build, a web application or brand to design, an IT consulting need, a speaking invitation, or a community collaboration — let's connect.
               </p>
-
-              {/* Direct Reach Info */}
-              <div className="space-y-3 pt-4 border-t border-border/60 text-xs sm:text-sm text-muted-foreground">
-                <div className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 text-[#0075ff] shrink-0" />
-                  <a href="mailto:nestoranyanwu@gmail.com" className="text-foreground hover:text-accent font-medium hover:underline transition-colors">
-                    nestoranyanwu@gmail.com
-                  </a>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MapPin className="w-4 h-4 text-[#0075ff] shrink-0" />
-                  <span>Owerri & Lagos, Nigeria • Open to Remote & Global Work</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Clock className="w-4 h-4 text-[#0075ff] shrink-0" />
-                  <span>Typically responds within 24 hours</span>
-                </div>
-              </div>
             </div>
 
             {/* ─── 2. CONTACT FORM ─── */}
