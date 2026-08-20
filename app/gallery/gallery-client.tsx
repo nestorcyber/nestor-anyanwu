@@ -487,12 +487,12 @@ export default function GalleryPageClient({
             </div>
           ) : (
             /* Justified Rows Flow (Perfect Edge-to-Edge Fill) */
-            <div className="flex flex-col gap-1.5 sm:gap-2 w-full">
+            <div className="flex flex-col w-full" style={{ gap: `${GAP}px` }}>
               {justifiedRows.map((row, rowIdx) => (
                 <div
                   key={`row-${rowIdx}`}
-                  className="flex items-center gap-1.5 sm:gap-2 w-full overflow-hidden"
-                  style={{ height: `${row.height}px` }}
+                  className="flex items-center w-full overflow-hidden"
+                  style={{ height: `${row.height}px`, gap: `${GAP}px` }}
                 >
                   {row.images.map(({ item, width, height }) => {
                     const hasVideo = Boolean(item.videoDuration || item.videoUrl)
@@ -510,7 +510,7 @@ export default function GalleryPageClient({
                             openLightbox(item)
                           }
                         }}
-                        className="group relative overflow-hidden rounded-sm sm:rounded-md bg-neutral-900 border border-border/30 hover:border-accent/80 transition-all duration-300 cursor-pointer select-none shrink-0"
+                        className="group relative overflow-hidden rounded-[2px] bg-neutral-900 transition-all duration-300 cursor-pointer select-none shrink-0"
                         style={{
                           width: `${width}px`,
                           height: `${height}px`,
@@ -527,12 +527,12 @@ export default function GalleryPageClient({
                             const img = e.currentTarget
                             handleImageLoad(item.id, img.naturalWidth, img.naturalHeight)
                           }}
-                          className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+                          className="w-full h-full block object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                         />
 
                         {/* Top-Left Video Duration Badge (Mirrors Reference 0:03, 0:10, 0:12) */}
                         {hasVideo && (
-                          <div className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-[10px] sm:text-[11px] font-mono text-white font-semibold flex items-center gap-1 shadow-sm">
+                          <div className="absolute top-1.5 left-1.5 z-20 px-1.5 py-0.5 rounded bg-black/75 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white font-semibold flex items-center gap-1 shadow-sm">
                             <Play className="w-2.5 h-2.5 fill-white" />
                             <span>{item.videoDuration || "Video"}</span>
                           </div>
@@ -540,34 +540,34 @@ export default function GalleryPageClient({
 
                         {/* Top-Right Featured Badge */}
                         {item.featured && !hasVideo && (
-                          <div className="absolute top-2 right-2 z-20 w-6 h-6 rounded-full bg-amber-500/90 backdrop-blur-md flex items-center justify-center text-white shadow-xs">
-                            <Sparkles className="w-3 h-3" />
+                          <div className="absolute top-1.5 right-1.5 z-20 w-5 h-5 rounded-full bg-amber-500/90 backdrop-blur-md flex items-center justify-center text-white shadow-xs">
+                            <Sparkles className="w-2.5 h-2.5" />
                           </div>
                         )}
 
                         {/* Hover Quick Expand Button */}
-                        <div className="absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                          <div className="w-7 h-7 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-md">
-                            <Maximize2 className="w-3.5 h-3.5" />
+                        <div className="absolute top-1.5 right-1.5 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                          <div className="w-6 h-6 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-md">
+                            <Maximize2 className="w-3 h-3" />
                           </div>
                         </div>
 
                         {/* Hover Scrim Overlay (Editorial & Clean) */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2.5 sm:p-3 text-white">
-                          <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 space-y-1">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2 sm:p-2.5 text-white">
+                          <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 space-y-0.5">
                             {item.category && (
-                              <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-accent/90 text-white inline-block">
+                              <span className="text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-wider px-1 py-0.5 rounded bg-accent/90 text-white inline-block">
                                 {item.category}
                               </span>
                             )}
                             {item.title && (
-                              <h4 className="font-semibold text-xs sm:text-sm text-white line-clamp-1 leading-snug">
+                              <h4 className="font-semibold text-xs text-white line-clamp-1 leading-snug">
                                 {item.title}
                               </h4>
                             )}
                             {item.location && (
-                              <p className="text-[10px] text-white/80 font-light flex items-center gap-1 line-clamp-1">
-                                <MapPin className="w-2.5 h-2.5 shrink-0" />
+                              <p className="text-[9px] text-white/80 font-light flex items-center gap-1 line-clamp-1">
+                                <MapPin className="w-2 h-2 shrink-0" />
                                 {item.location}
                               </p>
                             )}
