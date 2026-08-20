@@ -11,6 +11,7 @@ import {
   skillGroups as fallbackSkillGroups,
   certificationsList as fallbackCertificationsList,
   fallbackBrandPartners,
+  fallbackGalleryImages,
 } from '@/lib/data'
 
 import { getOptimizedImageUrl } from '@/lib/cloudinary'
@@ -596,6 +597,11 @@ export type GalleryItem = {
   width: number | null
   height: number | null
   category: string | null
+  location: string | null
+  eventDate: string | null
+  externalLink: string | null
+  videoUrl: string | null
+  videoDuration: string | null
   featured: boolean
   sortOrder: number
   createdAt: string
@@ -604,51 +610,90 @@ export type GalleryItem = {
 
 export async function getStandaloneGalleryImages(): Promise<GalleryItem[]> {
   const supabase = db()
-  if (!supabase) return []
-  const { data } = await supabase
-    .from('gallery_images')
-    .select('*')
-    .order('sort_order', { ascending: true })
-    .order('created_at', { ascending: false })
+  if (supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('gallery_images')
+        .select('*')
+        .order('sort_order', { ascending: true })
+        .order('created_at', { ascending: false })
 
-  return (data ?? []).map((row: any) => ({
-    id: row.id,
-    title: row.title || null,
-    caption: row.caption || null,
-    altText: row.alt || row.title || null,
-    imageUrl: getOptimizedImageUrl(row.image_url, { width: 1200, quality: 'auto' }),
-    cloudinaryPublicId: row.cloudinary_public_id || null,
-    width: row.width || null,
-    height: row.height || null,
-    category: row.category || 'General',
-    featured: !!row.featured,
-    sortOrder: row.sort_order ?? 0,
-    createdAt: row.created_at || new Date().toISOString(),
-    updatedAt: row.updated_at || new Date().toISOString(),
+      if (!error && data && data.length > 0) {
+        return data.map((row: any) => ({
+          id: row.id,
+          title: row.title || null,
+          caption: row.caption || null,
+          altText: row.alt || row.title || null,
+          imageUrl: getOptimizedImageUrl(row.image_url, { width: 1400, quality: 'auto' }),
+          cloudinaryPublicId: row.cloudinary_public_id || null,
+          width: row.width ? Number(row.width) : null,
+          height: row.height ? Number(row.height) : null,
+          category: row.category || 'General',
+          location: row.location || null,
+          eventDate: row.event_date || null,
+          externalLink: row.external_link || null,
+          videoUrl: row.video_url || null,
+          videoDuration: row.video_duration || null,
+          featured: !!row.featured,
+          sortOrder: row.sort_order ?? 0,
+          createdAt: row.created_at || new Date().toISOString(),
+          updatedAt: row.updated_at || new Date().toISOString(),
+        }))
+      }
+    } catch {
+      // Supabase table or query failed, continue to fallback
+    }
+  }
+
+  // Return fallback gallery images
+  return (fallbackGalleryImages || []).map((img) => ({
+    id: img.id,
+    title: img.title || null,
+    caption: img.caption || null,
+    altText: img.altText || img.title || null,
+    imageUrl: img.imageUrl,
+    cloudinaryPublicId: null,
+    width: img.width || null,
+    height: img.height || null,
+    category: img.category || 'General',
+    location: img.location || null,
+    eventDate: img.eventDate || null,
+    externalLink: null,
+    videoUrl: img.videoUrl || null,
+    videoDuration: img.videoDuration || null,
+    featured: !!img.featured,
+    sortOrder: img.sortOrder ?? 0,
+    createdAt: img.createdAt || new Date().toISOString(),
+    updatedAt: img.updatedAt || new Date().toISOString(),
   }))
 }
 
 export async function getGalleryImages(): Promise<GalleryItem[]> {
-  const supabase = db()
-  if (!supabase) return []
   const [standalone, journeyItems] = await Promise.all([
     getStandaloneGalleryImages(),
     getJourneyItems(),
   ])
 
+  const existingUrls = new Set(standalone.map((item) => item.imageUrl))
+
   const fromJourney: GalleryItem[] = journeyItems.flatMap((item) =>
     (item.images ?? [])
-      .filter((url) => url && !url.includes('placeholder'))
+      .filter((url) => url && !url.includes('placeholder') && !existingUrls.has(url))
       .map((url, i) => ({
         id: `journey-${item.id}-${i}`,
         title: item.title,
         caption: item.description || null,
         altText: item.title,
-        imageUrl: getOptimizedImageUrl(url, { width: 1200, quality: 'auto' }),
+        imageUrl: getOptimizedImageUrl(url, { width: 1400, quality: 'auto' }),
         cloudinaryPublicId: null,
         width: null,
         height: null,
-        category: item.type === 'work' ? 'Leadership' : 'Volunteering',
+        category: item.type === 'work' ? 'Leadership' : 'Community',
+        location: item.organization || null,
+        eventDate: item.date || null,
+        externalLink: null,
+        videoUrl: null,
+        videoDuration: null,
         featured: false,
         sortOrder: 100 + i,
         createdAt: new Date().toISOString(),
@@ -656,7 +701,11 @@ export async function getGalleryImages(): Promise<GalleryItem[]> {
       }))
   )
 
-  return [...standalone, ...fromJourney]
+  const combined = [...standalone, ...fromJourney]
+  return combined.sort((a, b) => {
+    if (a.sortOrder !== b.sortOrder) return a.sortOrder - b.sortOrder
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  })
 }
 
 export type BrandPartner = {

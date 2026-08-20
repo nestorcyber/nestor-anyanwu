@@ -265,6 +265,11 @@ export type Database = {
           width: number | null
           height: number | null
           category: string | null
+          location: string | null
+          event_date: string | null
+          external_link: string | null
+          video_url: string | null
+          video_duration: string | null
           featured: boolean
           sort_order: number
           created_at: string

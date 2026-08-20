@@ -20,11 +20,38 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
   const [caption, setCaption] = useState(initial?.caption ?? '')
   const [imageUrl, setImageUrl] = useState(initial?.image_url ?? '')
   const [alt, setAlt] = useState(initial?.alt ?? '')
-  const [category, setCategory] = useState(initial?.category ?? 'General')
+  const [category, setCategory] = useState(initial?.category ?? 'Events')
+  const [location, setLocation] = useState(initial?.location ?? '')
+  const [eventDate, setEventDate] = useState(initial?.event_date ?? '')
+  const [externalLink, setExternalLink] = useState(initial?.external_link ?? '')
+  const [videoUrl, setVideoUrl] = useState(initial?.video_url ?? '')
+  const [videoDuration, setVideoDuration] = useState(initial?.video_duration ?? '')
+  const [width, setWidth] = useState<number | null>(initial?.width ?? null)
+  const [height, setHeight] = useState<number | null>(initial?.height ?? null)
   const [featured, setFeatured] = useState(initial?.featured ?? false)
   const [sortOrder, setSortOrder] = useState(String(initial?.sort_order ?? 0))
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+
+  // Automatically detect image dimensions whenever imageUrl changes
+  const handleImageChange = (url: string) => {
+    setImageUrl(url)
+    if (!url) {
+      setWidth(null)
+      setHeight(null)
+      return
+    }
+    if (typeof window !== 'undefined') {
+      const img = new window.Image()
+      img.onload = () => {
+        if (img.naturalWidth && img.naturalHeight) {
+          setWidth(img.naturalWidth)
+          setHeight(img.naturalHeight)
+        }
+      }
+      img.src = url
+    }
+  }
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault()
@@ -36,7 +63,14 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
       caption: caption || null,
       image_url: imageUrl,
       alt: alt || title || null,
-      category: category || 'General',
+      category: category || 'Events',
+      location: location || null,
+      event_date: eventDate || null,
+      external_link: externalLink || null,
+      video_url: videoUrl || null,
+      video_duration: videoDuration || null,
+      width: width || null,
+      height: height || null,
       featured,
       sort_order: Number(sortOrder) || 0,
     }
@@ -63,26 +97,63 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
   }
 
   return (
-    <form onSubmit={onSubmit} className="max-w-xl space-y-5">
-      <Field label="Title">
-        <TextInput value={title} onChange={(e) => setTitle(e.target.value)} placeholder="e.g. Speaking at Tech Summit 2025" />
+    <form onSubmit={onSubmit} className="max-w-2xl space-y-5">
+      <Field label="Title / Heading">
+        <TextInput value={title} onChange={(e) => setTitle(e.target.value)} placeholder="e.g. Speaking at Build with AI 2025" />
       </Field>
-      <Field label="Caption / Description">
-        <TextTextarea value={caption} onChange={(e) => setCaption(e.target.value)} placeholder="Context or details about this moment..." />
+      
+      <Field label="Caption / Moment Story">
+        <TextTextarea value={caption} onChange={(e) => setCaption(e.target.value)} placeholder="Context, background, or notable people in this photo..." rows={3} />
       </Field>
-      <ImageUpload label="Gallery Image" value={imageUrl} onChange={setImageUrl} folder="gallery" />
+
+      <ImageUpload label="Gallery Image / Photo" value={imageUrl} onChange={handleImageChange} folder="gallery" />
+
+      {width && height && (
+        <div className="flex items-center gap-3 p-3 rounded-lg bg-secondary/50 border border-border text-xs text-muted-foreground">
+          <span className="font-mono font-semibold text-foreground">Natural Dimensions:</span>
+          <span>{width}px × {height}px</span>
+          <span className="text-border">|</span>
+          <span>Aspect Ratio: {((width / height) > 1.2 ? 'Landscape' : (width / height) < 0.85 ? 'Portrait' : 'Square')} ({(width / height).toFixed(2)}:1)</span>
+        </div>
+      )}
+
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Category">
-          <TextInput value={category} onChange={(e) => setCategory(e.target.value)} placeholder="Events, Leadership, Projects..." />
+        <Field label="Category / Track">
+          <TextInput value={category} onChange={(e) => setCategory(e.target.value)} placeholder="Events, Leadership, Speaking, Community, Tech..." />
+        </Field>
+        <Field label="Event Date">
+          <TextInput type="date" value={eventDate} onChange={(e) => setEventDate(e.target.value)} />
+        </Field>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label="Location / Venue">
+          <TextInput value={location} onChange={(e) => setLocation(e.target.value)} placeholder="e.g. FUTO Auditorium, Owerri" />
+        </Field>
+        <Field label="External Link (Optional)">
+          <TextInput value={externalLink} onChange={(e) => setExternalLink(e.target.value)} placeholder="https://..." />
+        </Field>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label="Video URL (Optional Clip / Reel)">
+          <TextInput value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} placeholder="https://... (mp4 / stream)" />
+        </Field>
+        <Field label="Video Duration Badge (e.g. 0:03, 0:12)">
+          <TextInput value={videoDuration} onChange={(e) => setVideoDuration(e.target.value)} placeholder="0:12" />
+        </Field>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label="Alt text (SEO & Accessibility)">
+          <TextInput value={alt} onChange={(e) => setAlt(e.target.value)} placeholder="Describe the image content..." />
         </Field>
         <Field label="Sort order">
           <TextInput type="number" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
         </Field>
       </div>
-      <Field label="Alt text (SEO & Accessibility)">
-        <TextInput value={alt} onChange={(e) => setAlt(e.target.value)} placeholder="Describe the image content..." />
-      </Field>
-      <div className="flex gap-4 items-center">
+
+      <div className="flex gap-4 items-center pt-2">
         <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground cursor-pointer">
           <input
             type="checkbox"
@@ -90,13 +161,15 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
             onChange={(e) => setFeatured(e.target.checked)}
             className="rounded border-border"
           />
-          <span>Featured Image</span>
+          <span>Featured on Gallery Header & Top Shelf</span>
         </label>
       </div>
+
       {error ? <p className="text-sm text-red-400">{error}</p> : null}
-      <div className="flex gap-3">
+
+      <div className="flex gap-3 pt-3">
         <PrimaryButton type="submit" disabled={saving || !imageUrl}>
-          {saving ? 'Saving...' : 'Save Gallery Image'}
+          {saving ? 'Saving Media...' : 'Save Gallery Item'}
         </PrimaryButton>
         {initial ? <DangerButton type="button" onClick={onDelete}>Delete</DangerButton> : null}
       </div>

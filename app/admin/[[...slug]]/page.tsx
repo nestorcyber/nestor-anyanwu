@@ -1179,6 +1179,210 @@ export default async function AdminCatchAllPage({ params }: Props) {
     )
   }
 
+  // 6.5 Gallery & Media
+  if (section === 'gallery') {
+    if (!actionOrId) {
+      const { data: dbData } = await supabase
+        .from('gallery_images')
+        .select('*')
+        .order('sort_order', { ascending: true })
+        .order('created_at', { ascending: false })
+
+      const fallbackImages = await getGalleryImages()
+      const dbIds = new Set((dbData ?? []).map((row) => row.id))
+      const items = [
+        ...(dbData ?? []).map((img: any) => ({
+          id: img.id,
+          title: img.title || '(Untitled Moment)',
+          caption: img.caption || '',
+          imageUrl: img.image_url,
+          category: img.category || 'Events',
+          location: img.location,
+          eventDate: img.event_date,
+          videoDuration: img.video_duration,
+          width: img.width,
+          height: img.height,
+          featured: img.featured,
+          sortOrder: img.sort_order,
+        })),
+        ...fallbackImages
+          .filter((img) => !dbIds.has(img.id))
+          .map((img) => ({
+            id: img.id,
+            title: img.title || '(Untitled Moment)',
+            caption: img.caption || '',
+            imageUrl: img.imageUrl,
+            category: img.category || 'Events',
+            location: img.location,
+            eventDate: img.eventDate,
+            videoDuration: img.videoDuration,
+            width: img.width,
+            height: img.height,
+            featured: img.featured,
+            sortOrder: img.sortOrder,
+          })),
+      ]
+
+      return (
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Gallery & Visual Media</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                Manage, curate, and upload photos and video moments for your portfolio masonry wall.
+              </p>
+            </div>
+            <Link href="/admin/gallery/new">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
+                + Upload New Photo / Video
+              </button>
+            </Link>
+          </div>
+
+          {/* Quick stats / summary bar */}
+          <div className="flex flex-wrap items-center gap-4 p-4 rounded-xl bg-card border border-border text-xs text-muted-foreground">
+            <div>
+              <span className="font-bold text-foreground">{items.length}</span> total moments
+            </div>
+            <span className="text-border">•</span>
+            <div>
+              <span className="font-bold text-foreground">{items.filter((i) => i.featured).length}</span> featured
+            </div>
+            <span className="text-border">•</span>
+            <div>
+              <span className="font-bold text-foreground">{items.filter((i) => i.videoDuration).length}</span> video clips
+            </div>
+            <span className="text-border">•</span>
+            <span className="text-[11px] text-muted-foreground/80">
+              New uploads automatically detect natural aspect ratio and fit into the organic masonry layout.
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {items.map((row: any) => {
+              const title = row.title || '(Untitled Moment)'
+              return (
+                <div
+                  key={row.id}
+                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl overflow-hidden shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col justify-between"
+                >
+                  <div className="relative aspect-video w-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                    {row.imageUrl ? (
+                      <Image
+                        src={row.imageUrl}
+                        alt={title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs">
+                        No image
+                      </div>
+                    )}
+
+                    {/* Video Duration Badge */}
+                    {row.videoDuration && (
+                      <div className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-[10px] font-mono text-white font-semibold flex items-center gap-1">
+                        <span>▶</span>
+                        <span>{row.videoDuration}</span>
+                      </div>
+                    )}
+
+                    {/* Featured Badge */}
+                    {row.featured && (
+                      <div className="absolute top-2 right-2 z-10 px-2 py-0.5 rounded-full bg-amber-500/90 backdrop-blur-md text-[10px] text-white font-bold uppercase tracking-wider">
+                        Featured
+                      </div>
+                    )}
+
+                    {/* Category Overlay */}
+                    <div className="absolute bottom-2 left-2 z-10 px-2 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[10px] font-mono font-medium text-white/90">
+                      {row.category}
+                    </div>
+                  </div>
+
+                  <div className="p-4 space-y-2 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="font-bold text-sm text-foreground line-clamp-1 group-hover:text-[#0070f3] transition-colors">
+                        {title}
+                      </h3>
+                      {row.caption && (
+                        <p className="text-xs text-muted-foreground line-clamp-2 mt-1 font-light">
+                          {row.caption}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="pt-3 border-t border-border/50 flex items-center justify-between text-[11px] text-muted-foreground">
+                      <span>{row.location || row.eventDate || 'Gallery moment'}</span>
+                      <Link
+                        href={`/admin/gallery/${row.id}`}
+                        className="px-2.5 py-1 text-xs font-semibold rounded bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
+                      >
+                        Edit
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+
+            {!items.length ? (
+              <div className="col-span-full p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
+                No gallery moments added yet.
+              </div>
+            ) : null}
+          </div>
+        </div>
+      )
+    }
+
+    if (actionOrId === 'new') {
+      return (
+        <div>
+          <PageHeader title="New gallery moment" />
+          <GalleryForm />
+        </div>
+      )
+    }
+
+    let data = null
+    const { data: byId } = await supabase.from('gallery_images').select('*').eq('id', actionOrId).maybeSingle()
+    data = byId
+    if (!data) {
+      const fallbackImages = await getGalleryImages()
+      const fb = fallbackImages.find((img) => img.id === actionOrId)
+      if (fb) {
+        data = {
+          id: undefined,
+          title: fb.title,
+          caption: fb.caption,
+          image_url: fb.imageUrl,
+          alt: fb.altText,
+          category: fb.category,
+          location: fb.location,
+          event_date: fb.eventDate,
+          external_link: fb.externalLink,
+          video_url: fb.videoUrl,
+          video_duration: fb.videoDuration,
+          width: fb.width,
+          height: fb.height,
+          featured: fb.featured,
+          sort_order: fb.sortOrder,
+        } as any
+      }
+    }
+
+    if (!data) notFound()
+
+    return (
+      <div>
+        <PageHeader title="Edit gallery moment" />
+        <GalleryForm initial={data} />
+      </div>
+    )
+  }
+
   // 7. Services
   if (section === 'services') {
     if (!actionOrId) {
