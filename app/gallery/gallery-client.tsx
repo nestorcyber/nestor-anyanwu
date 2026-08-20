@@ -21,19 +21,6 @@ import {
 
 type SortOption = "newest" | "oldest" | "featured"
 
-interface JustifiedImage {
-  item: GalleryItem
-  width: number
-  height: number
-  aspectRatio: number
-}
-
-interface JustifiedRow {
-  images: JustifiedImage[]
-  height: number
-  isLastRow: boolean
-}
-
 export default function GalleryPageClient({
   initialImages = [],
 }: {
@@ -43,57 +30,15 @@ export default function GalleryPageClient({
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [sortBy, setSortBy] = useState<SortOption>("newest")
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
-  const [containerWidth, setContainerWidth] = useState<number>(1400)
-  const [targetRowHeight, setTargetRowHeight] = useState<number>(200)
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false)
-  const [loadedDimensions, setLoadedDimensions] = useState<Record<string, { width: number; height: number }>>({})
 
-  const containerRef = useRef<HTMLDivElement>(null)
   const lightboxRef = useRef<HTMLDivElement>(null)
 
   // Touch swipe handling for mobile lightbox
   const touchStartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
 
-  const GAP = 2 // Exact 2px micro-gap matching the reference photo-wall
-
-  // Measure container width and adjust target row height dynamically
-  useEffect(() => {
-    const updateDimensions = () => {
-      if (containerRef.current) {
-        const width = containerRef.current.clientWidth
-        if (width > 0) {
-          setContainerWidth(width)
-          if (width < 600) {
-            setTargetRowHeight(140) // Mobile: ~3-4 images per row
-          } else if (width < 1000) {
-            setTargetRowHeight(170) // Tablet: ~6-7 images per row
-          } else if (width < 1500) {
-            setTargetRowHeight(200) // Desktop: ~9-11 images per row matching screenshot
-          } else {
-            setTargetRowHeight(220) // Ultrawide screens
-          }
-        }
-      }
-    }
-
-    updateDimensions()
-    const resizeObserver = new ResizeObserver(() => {
-      updateDimensions()
-    })
-
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current)
-    }
-
-    window.addEventListener("resize", updateDimensions)
-    return () => {
-      resizeObserver.disconnect()
-      window.removeEventListener("resize", updateDimensions)
-    }
-  }, [])
-
-  // 2. Extract unique categories
+  // 1. Extract unique categories
   const categories = useMemo(() => {
     const set = new Set<string>()
     initialImages.forEach((img) => {
@@ -102,7 +47,7 @@ export default function GalleryPageClient({
     return ["All", ...Array.from(set)]
   }, [initialImages])
 
-  // 3. Filter & Sort images
+  // 2. Filter & Sort images
   const processedImages = useMemo(() => {
     let list = [...initialImages]
 
@@ -156,144 +101,7 @@ export default function GalleryPageClient({
     return list
   }, [initialImages, activeCategory, searchQuery, sortBy])
 
-  // Handle dynamic natural dimension discovery when images load
-  const handleImageLoad = (id: string, naturalWidth: number, naturalHeight: number) => {
-    if (naturalWidth > 0 && naturalHeight > 0) {
-      setLoadedDimensions((prev) => {
-        if (prev[id]?.width === naturalWidth && prev[id]?.height === naturalHeight) {
-          return prev
-        }
-        return {
-          ...prev,
-          [id]: { width: naturalWidth, height: naturalHeight },
-        }
-      })
-    }
-  }
-
-  // 4. Justified Layout Algorithm (Flickr / Google Photos style)
-  // Calculates row height so that every row spans 100% of container width with zero gaps
-  const justifiedRows = useMemo(() => {
-    if (containerWidth <= 0 || processedImages.length === 0) return []
-
-    const rows: JustifiedRow[] = []
-    let currentRow: { item: GalleryItem; aspectRatio: number }[] = []
-    let currentRowAspectSum = 0
-
-    const getAspectRatio = (item: GalleryItem): number => {
-      const loaded = loadedDimensions[item.id]
-      if (loaded && loaded.height > 0) {
-        return loaded.width / loaded.height
-      }
-      if (item.width && item.height && item.height > 0) {
-        return item.width / item.height
-      }
-      return 0.67 // Default portrait ratio
-    }
-
-    for (let i = 0; i < processedImages.length; i++) {
-      const item = processedImages[i]
-      const aspect = getAspectRatio(item)
-      currentRow.push({ item, aspectRatio: aspect })
-      currentRowAspectSum += aspect
-
-      const totalGaps = (currentRow.length - 1) * GAP
-      const availableWidth = containerWidth - totalGaps
-      const calculatedHeight = availableWidth / currentRowAspectSum
-
-      // If calculated row height drops below target height, finalize this row
-      if (calculatedHeight <= targetRowHeight) {
-        const rowHeight = Math.round(calculatedHeight)
-        let allocatedWidth = 0
-        const justifiedImages: JustifiedImage[] = []
-
-        for (let j = 0; j < currentRow.length; j++) {
-          const isLastInRow = j === currentRow.length - 1
-          let imgWidth: number
-
-          if (isLastInRow) {
-            // Allocate remainder pixels to ensure 100% flush right edge
-            imgWidth = availableWidth - allocatedWidth
-          } else {
-            imgWidth = Math.round(currentRow[j].aspectRatio * rowHeight)
-            allocatedWidth += imgWidth
-          }
-
-          justifiedImages.push({
-            item: currentRow[j].item,
-            width: Math.max(imgWidth, 10),
-            height: rowHeight,
-            aspectRatio: currentRow[j].aspectRatio,
-          })
-        }
-
-        rows.push({
-          images: justifiedImages,
-          height: rowHeight,
-          isLastRow: false,
-        })
-
-        currentRow = []
-        currentRowAspectSum = 0
-      }
-    }
-
-    // Handle last row
-    if (currentRow.length > 0) {
-      const totalGaps = (currentRow.length - 1) * GAP
-      const availableWidth = containerWidth - totalGaps
-      const calculatedHeight = availableWidth / currentRowAspectSum
-
-      if (calculatedHeight <= targetRowHeight * 1.35) {
-        const rowHeight = Math.round(calculatedHeight)
-        let allocatedWidth = 0
-        const justifiedImages: JustifiedImage[] = []
-
-        for (let j = 0; j < currentRow.length; j++) {
-          const isLastInRow = j === currentRow.length - 1
-          let imgWidth: number
-
-          if (isLastInRow) {
-            imgWidth = availableWidth - allocatedWidth
-          } else {
-            imgWidth = Math.round(currentRow[j].aspectRatio * rowHeight)
-            allocatedWidth += imgWidth
-          }
-
-          justifiedImages.push({
-            item: currentRow[j].item,
-            width: Math.max(imgWidth, 10),
-            height: rowHeight,
-            aspectRatio: currentRow[j].aspectRatio,
-          })
-        }
-
-        rows.push({
-          images: justifiedImages,
-          height: rowHeight,
-          isLastRow: true,
-        })
-      } else {
-        const rowHeight = targetRowHeight
-        const justifiedImages: JustifiedImage[] = currentRow.map((entry) => ({
-          item: entry.item,
-          width: Math.round(entry.aspectRatio * rowHeight),
-          height: rowHeight,
-          aspectRatio: entry.aspectRatio,
-        }))
-
-        rows.push({
-          images: justifiedImages,
-          height: rowHeight,
-          isLastRow: true,
-        })
-      }
-    }
-
-    return rows
-  }, [processedImages, containerWidth, targetRowHeight, loadedDimensions])
-
-  // 5. Lightbox Controls
+  // 3. Lightbox Controls
   const openLightbox = (item: GalleryItem) => {
     const index = processedImages.findIndex((i) => i.id === item.id)
     if (index !== -1) {
@@ -379,13 +187,13 @@ export default function GalleryPageClient({
             <div className="space-y-2">
               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-[11px] font-mono font-bold tracking-widest uppercase">
                 <Sparkles className="w-3 h-3" />
-                Justified Visual Archive
+                Visual Archive
               </div>
               <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground font-heading">
                 Gallery
               </h1>
               <p className="text-sm md:text-base text-muted-foreground font-light max-w-2xl leading-relaxed">
-                An edge-to-edge justified photo-wall preserving original aspect ratios, capturing speaking moments, developer conferences, and tech leadership milestones.
+                Moments, people, projects, and experiences from speaking engagements, conferences, and tech leadership milestones.
               </p>
             </div>
 
@@ -393,9 +201,9 @@ export default function GalleryPageClient({
             <div className="hidden lg:flex items-center gap-3 text-xs font-mono text-muted-foreground bg-card border border-border/80 px-4 py-2 rounded-xl shrink-0">
               <span className="font-bold text-foreground">{processedImages.length}</span> Moments
               <span className="text-border">•</span>
-              <span className="font-bold text-foreground">Edge-to-Edge Justified</span>
+              <span className="font-bold text-foreground">Stable Grid</span>
               <span className="text-border">•</span>
-              <span className="text-emerald-500 font-semibold">Zero Cropping</span>
+              <span className="text-emerald-500 font-semibold">Zero Distortion</span>
             </div>
           </div>
 
@@ -460,8 +268,8 @@ export default function GalleryPageClient({
           </div>
         </div>
 
-        {/* Dynamic Justified Gallery Container */}
-        <div ref={containerRef} className="site-container w-full">
+        {/* Stable 1:1 Square Grid Gallery Container */}
+        <div className="site-container w-full">
           {processedImages.length === 0 ? (
             <div className="text-center py-20 border border-dashed border-border/70 rounded-2xl bg-card/40 max-w-md mx-auto p-8 space-y-3">
               <div className="w-12 h-12 rounded-full bg-muted/40 flex items-center justify-center mx-auto text-muted-foreground">
@@ -486,98 +294,82 @@ export default function GalleryPageClient({
               )}
             </div>
           ) : (
-            /* Justified Rows Flow (Perfect Edge-to-Edge Fill) */
-            <div className="flex flex-col w-full" style={{ gap: `${GAP}px` }}>
-              {justifiedRows.map((row, rowIdx) => (
-                <div
-                  key={`row-${rowIdx}`}
-                  className="flex items-center w-full overflow-hidden"
-                  style={{ height: `${row.height}px`, gap: `${GAP}px` }}
-                >
-                  {row.images.map(({ item, width, height }) => {
-                    const hasVideo = Boolean(item.videoDuration || item.videoUrl)
+            /* Responsive Square Grid: 2 cols Mobile, 3 cols Tablet, 4 cols Desktop */
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
+              {processedImages.map((item) => {
+                const hasVideo = Boolean(item.videoDuration || item.videoUrl)
 
-                    return (
-                      <div
-                        key={item.id}
-                        onClick={() => openLightbox(item)}
-                        tabIndex={0}
-                        role="button"
-                        aria-label={`View photo: ${item.title || "Gallery moment"}`}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault()
-                            openLightbox(item)
-                          }
-                        }}
-                        className="group relative overflow-hidden rounded-[2px] bg-neutral-900 transition-all duration-300 cursor-pointer select-none shrink-0"
-                        style={{
-                          width: `${width}px`,
-                          height: `${height}px`,
-                        }}
-                      >
-                        {/* The Actual Image: Sized to exactly filled row dimensions, preserving aspect ratio */}
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={item.imageUrl}
-                          alt={item.altText || item.title || "Gallery moment"}
-                          loading="lazy"
-                          decoding="async"
-                          onLoad={(e) => {
-                            const img = e.currentTarget
-                            handleImageLoad(item.id, img.naturalWidth, img.naturalHeight)
-                          }}
-                          className="w-full h-full block object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
-                        />
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() => openLightbox(item)}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`View photo: ${item.title || "Gallery moment"}`}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault()
+                        openLightbox(item)
+                      }
+                    }}
+                    className="group relative aspect-square w-full overflow-hidden rounded-lg bg-neutral-900 border border-border/40 hover:border-accent/50 transition-all duration-300 cursor-pointer select-none flex items-center justify-center shadow-xs"
+                  >
+                    {/* The Image inside the square: object-cover dynamically fills the square container while maintaining aspect ratio */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.imageUrl}
+                      alt={item.altText || item.title || "Gallery moment"}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover block group-hover:scale-105 transition-transform duration-500 ease-out"
+                    />
 
-                        {/* Top-Left Video Duration Badge (Mirrors Reference 0:03, 0:10, 0:12) */}
-                        {hasVideo && (
-                          <div className="absolute top-1.5 left-1.5 z-20 px-1.5 py-0.5 rounded bg-black/75 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white font-semibold flex items-center gap-1 shadow-sm">
-                            <Play className="w-2.5 h-2.5 fill-white" />
-                            <span>{item.videoDuration || "Video"}</span>
-                          </div>
-                        )}
-
-                        {/* Top-Right Featured Badge */}
-                        {item.featured && !hasVideo && (
-                          <div className="absolute top-1.5 right-1.5 z-20 w-5 h-5 rounded-full bg-amber-500/90 backdrop-blur-md flex items-center justify-center text-white shadow-xs">
-                            <Sparkles className="w-2.5 h-2.5" />
-                          </div>
-                        )}
-
-                        {/* Hover Quick Expand Button */}
-                        <div className="absolute top-1.5 right-1.5 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                          <div className="w-6 h-6 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-md">
-                            <Maximize2 className="w-3 h-3" />
-                          </div>
-                        </div>
-
-                        {/* Hover Scrim Overlay (Editorial & Clean) */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2 sm:p-2.5 text-white">
-                          <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 space-y-0.5">
-                            {item.category && (
-                              <span className="text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-wider px-1 py-0.5 rounded bg-accent/90 text-white inline-block">
-                                {item.category}
-                              </span>
-                            )}
-                            {item.title && (
-                              <h4 className="font-semibold text-xs text-white line-clamp-1 leading-snug">
-                                {item.title}
-                              </h4>
-                            )}
-                            {item.location && (
-                              <p className="text-[9px] text-white/80 font-light flex items-center gap-1 line-clamp-1">
-                                <MapPin className="w-2 h-2 shrink-0" />
-                                {item.location}
-                              </p>
-                            )}
-                          </div>
-                        </div>
+                    {/* Top-Left Video Duration Badge */}
+                    {hasVideo && (
+                      <div className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded bg-black/75 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white font-semibold flex items-center gap-1 shadow-sm pointer-events-none">
+                        <Play className="w-2.5 h-2.5 fill-white" />
+                        <span>{item.videoDuration || "Video"}</span>
                       </div>
-                    )
-                  })}
-                </div>
-              ))}
+                    )}
+
+                    {/* Top-Right Featured Badge */}
+                    {item.featured && !hasVideo && (
+                      <div className="absolute top-2 right-2 z-20 w-6 h-6 rounded-full bg-amber-500/90 backdrop-blur-md flex items-center justify-center text-white shadow-xs pointer-events-none">
+                        <Sparkles className="w-3 h-3" />
+                      </div>
+                    )}
+
+                    {/* Hover Quick Expand Button */}
+                    <div className="absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                      <div className="w-7 h-7 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-md">
+                        <Maximize2 className="w-3.5 h-3.5" />
+                      </div>
+                    </div>
+
+                    {/* Hover Scrim Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2.5 sm:p-3 text-white pointer-events-none">
+                      <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 space-y-1">
+                        {item.category && (
+                          <span className="text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-accent/90 text-white inline-block">
+                            {item.category}
+                          </span>
+                        )}
+                        {item.title && (
+                          <h4 className="font-semibold text-xs sm:text-sm text-white line-clamp-1 leading-snug">
+                            {item.title}
+                          </h4>
+                        )}
+                        {item.location && (
+                          <p className="text-[9px] sm:text-[10px] text-white/80 font-light flex items-center gap-1 line-clamp-1">
+                            <MapPin className="w-2.5 h-2.5 shrink-0" />
+                            {item.location}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           )}
         </div>
@@ -629,7 +421,7 @@ export default function GalleryPageClient({
             </div>
           </div>
 
-          {/* Main Viewer Display (Zero Cropping, Natural Ratio Preserved) */}
+          {/* Main Viewer Display (Original Ratio Preserved, Zero Cropping) */}
           <div className="relative w-full flex-1 flex items-center justify-center my-auto overflow-hidden">
             {/* Previous Button */}
             <button
@@ -721,5 +513,3 @@ export default function GalleryPageClient({
     </>
   )
 }
-
-
