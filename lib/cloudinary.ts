@@ -72,8 +72,16 @@ export function getOptimizedImageUrl(
 
   const transformString = transformations.join(',')
 
-  // Replace /upload/ with /upload/{transformations}/
-  // Handles versioned and unversioned Cloudinary URLs
+  // Handle URLs that already have transformation segments or versions
+  const regex = /(https:\/\/res\.cloudinary\.com\/[^/]+\/image\/upload\/)(?:(?:(?:f_|q_|w_|h_|c_|g_|e_|b_|r_|a_|l_|u_|o_|dpr_|pg_|co_|fl_|ar_)[^/]*\/)+)?(?:(v\d+)\/)?(.+)$/
+  const match = url.match(regex)
+  if (match) {
+    const prefix = match[1]
+    const version = match[2] ? `${match[2]}/` : ''
+    const rest = match[3]
+    return `${prefix}${transformString}/${version}${rest}`
+  }
+
   if (url.includes('/upload/')) {
     return url.replace(/\/upload\/(?:v\d+\/)?/, `/upload/${transformString}/`)
   }

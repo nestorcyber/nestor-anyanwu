@@ -2,7 +2,8 @@ import type { Metadata } from "next"
 import GalleryPageClient from "./gallery-client"
 import { getGalleryImages } from "@/lib/content"
 
-export const revalidate = 60
+export const dynamic = "force-dynamic"
+export const revalidate = 0
 
 export const metadata: Metadata = {
   title: "Gallery | Nestor Anyanwu (Nestor Cyber)",

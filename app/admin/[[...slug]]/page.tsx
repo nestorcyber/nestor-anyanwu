@@ -1008,97 +1008,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
     )
   }
 
-  // 6. Gallery
-  if (section === 'gallery') {
-    if (!actionOrId) {
-      const { data: dbData } = await supabase
-        .from('gallery_images')
-        .select('*')
-        .order('sort_order', { ascending: true })
-        .order('created_at', { ascending: false })
-      const fallbackImages = await getGalleryImages()
-      const dbUrls = new Set((dbData ?? []).map((row) => row.image_url))
-      const items = [
-        ...(dbData ?? []),
-        ...fallbackImages
-          .filter((img) => !dbUrls.has(img.imageUrl))
-          .map((img) => ({
-            id: img.id,
-            title: img.title || 'Gallery Photo',
-            image_url: img.imageUrl,
-            category: img.category || 'General',
-            featured: img.featured,
-          })),
-      ]
-      return (
-        <div>
-          <PageHeader
-            title="Gallery"
-            action={
-              <Link href="/admin/gallery/new">
-                <PrimaryButton type="button">Add image</PrimaryButton>
-              </Link>
-            }
-          />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {items.map((row) => (
-              <Link key={row.id} href={`/admin/gallery/${row.id}`} className="group border border-border p-3 rounded-lg hover:border-foreground/40 bg-card transition-all flex flex-col justify-between">
-                <div className="relative aspect-video w-full overflow-hidden rounded bg-slate-950 mb-2">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={row.image_url} alt={row.title || ''} className="h-full w-full object-cover group-hover:scale-105 transition-transform" />
-                </div>
-                <div className="flex items-center justify-between gap-2">
-                  <p className="text-xs font-semibold truncate text-foreground">{row.title || 'Untitled'}</p>
-                  {row.category && (
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-muted text-muted-foreground shrink-0">
-                      {row.category}
-                    </span>
-                  )}
-                </div>
-              </Link>
-            ))}
-          </div>
-          {!items.length ? <p className="text-sm text-muted-foreground">No gallery images yet.</p> : null}
-        </div>
-      )
-    }
-    if (actionOrId === 'new') {
-      return (
-        <div>
-          <PageHeader title="Add gallery image" />
-          <GalleryForm />
-        </div>
-      )
-    }
-    let data = null
-    const { data: dbData } = await supabase.from('gallery_images').select('*').eq('id', actionOrId).maybeSingle()
-    data = dbData
-    if (!data) {
-      const fallbackImages = await getGalleryImages()
-      const fb = fallbackImages.find((img) => img.id === actionOrId)
-      if (fb) {
-        data = {
-          id: undefined,
-          title: fb.title || 'Gallery Photo',
-          caption: fb.caption || '',
-          image_url: fb.imageUrl,
-          alt: fb.altText || fb.title || '',
-          category: fb.category || 'General',
-          featured: fb.featured,
-          sort_order: fb.sortOrder || 0,
-        } as any
-      }
-    }
-    if (!data) notFound()
-    return (
-      <div>
-        <PageHeader title="Edit gallery image" />
-        <GalleryForm initial={data} />
-      </div>
-    )
-  }
-
-  // 6b. Brand Partners
+  // 6. Brand Partners
   if (section === 'brands') {
     if (!actionOrId) {
       const { data: dbData } = await supabase
@@ -1229,14 +1139,24 @@ export default async function AdminCatchAllPage({ params }: Props) {
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Gallery & Visual Media</h1>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Manage, curate, and upload photos and video moments for your portfolio masonry wall.
+                Manage, curate, and upload photos and video moments for your visual archive.
               </p>
             </div>
-            <Link href="/admin/gallery/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
-                + Upload New Photo / Video
-              </button>
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link
+                href="/gallery"
+                target="_blank"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl bg-card border border-border/80 text-foreground hover:bg-secondary/60 transition-colors shadow-2xs"
+              >
+                <span>View Live Gallery</span>
+                <ExternalLink className="w-3.5 h-3.5 text-muted-foreground" />
+              </Link>
+              <Link href="/admin/gallery/new">
+                <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
+                  + Upload New Photo / Video
+                </button>
+              </Link>
+            </div>
           </div>
 
           {/* Quick stats / summary bar */}
@@ -1254,7 +1174,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
             </div>
             <span className="text-border">•</span>
             <span className="text-[11px] text-muted-foreground/80">
-              New uploads automatically detect natural aspect ratio and fit into the organic masonry layout.
+              New uploads immediately appear in your square gallery grid.
             </span>
           </div>
 
@@ -1266,13 +1186,13 @@ export default async function AdminCatchAllPage({ params }: Props) {
                   key={row.id}
                   className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl overflow-hidden shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col justify-between"
                 >
-                  <div className="relative aspect-video w-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                  <div className="relative aspect-video w-full bg-slate-100 dark:bg-slate-800 overflow-hidden flex items-center justify-center">
                     {row.imageUrl ? (
-                      <Image
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
                         src={row.imageUrl}
                         alt={title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs">
