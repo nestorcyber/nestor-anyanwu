@@ -167,11 +167,29 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
             {/* ─── 1. HEADLINE & INTRO DESCRIPTION ─── */}
             <div className="order-1 lg:order-1 lg:col-span-5 space-y-6 pt-2">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-[1.12]">
-                Talk to Nestor about your next project or engineering initiative
+                Let's build impactful software and technology solutions together.
               </h1>
               <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
-                Whether you are looking to build scalable software, integrate AI workflows, direct product strategy, consult on IT infrastructure, or collaborate on developer relations and community initiatives — let's connect.
+                Whether you have a software project to build, a web application or brand to design, an IT consulting need, a speaking invitation, or a community collaboration — let's connect.
               </p>
+
+              {/* Direct Reach Info */}
+              <div className="space-y-3 pt-4 border-t border-border/60 text-xs sm:text-sm text-muted-foreground">
+                <div className="flex items-center gap-3">
+                  <Mail className="w-4 h-4 text-[#0075ff] shrink-0" />
+                  <a href="mailto:nestoranyanwu@gmail.com" className="text-foreground hover:text-accent font-medium hover:underline transition-colors">
+                    nestoranyanwu@gmail.com
+                  </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <MapPin className="w-4 h-4 text-[#0075ff] shrink-0" />
+                  <span>Owerri & Lagos, Nigeria • Open to Remote & Global Work</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Clock className="w-4 h-4 text-[#0075ff] shrink-0" />
+                  <span>Typically responds within 24 hours</span>
+                </div>
+              </div>
             </div>
 
             {/* ─── 2. CONTACT FORM ─── */}
@@ -183,20 +201,20 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                     Send a Message
                   </h2>
                   <p className="text-xs sm:text-sm text-muted-foreground">
-                    Fill out the form below to start a conversation about your project or initiative.
+                    Tell me about your project, contract gig, timeline, or collaboration ideas.
                   </p>
                 </div>
 
                 {submitStatus === "success" && (
                   <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center gap-3 text-sm font-medium">
                     <CheckCircle2 className="w-5 h-5 shrink-0" />
-                    <span>Thank you! Your message has been received. Nestor will get back to you shortly.</span>
+                    <span>Thank you! Your message has been received. I'll get back to you promptly.</span>
                   </div>
                 )}
 
                 {submitStatus === "error" && (
                   <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-sm font-medium">
-                    Something went wrong sending your message. Please reach out directly to{" "}
+                    Something went wrong sending your message. Please reach out directly via{" "}
                     <a href="mailto:nestoranyanwu@gmail.com" className="underline font-bold">
                       nestoranyanwu@gmail.com
                     </a>.
@@ -217,7 +235,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                         required
                         value={formData.firstName}
                         onChange={handleChange}
-                        placeholder="Enter your first name"
+                        placeholder="e.g. Alex"
                         className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
                       />
                     </div>
@@ -232,7 +250,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                         required
                         value={formData.lastName}
                         onChange={handleChange}
-                        placeholder="Enter your last name"
+                        placeholder="e.g. Smith"
                         className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
                       />
                     </div>
@@ -257,14 +275,14 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
 
                     <div className="space-y-2">
                       <label className="text-xs font-bold text-foreground block">
-                        Company / Organization
+                        Company / Brand / Project
                       </label>
                       <input
                         type="text"
                         name="organization"
                         value={formData.organization}
                         onChange={handleChange}
-                        placeholder="Organization or company name"
+                        placeholder="e.g. Startup, Agency, Personal Project"
                         className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
                       />
                     </div>
@@ -288,14 +306,14 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
 
                     <div className="space-y-2">
                       <label className="text-xs font-bold text-foreground block">
-                        Country / Location
+                        Location / Country
                       </label>
                       <input
                         type="text"
                         name="country"
                         value={formData.country}
                         onChange={handleChange}
-                        placeholder="e.g. Nigeria, United States, Remote"
+                        placeholder="e.g. Nigeria, US, UK, Remote"
                         className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
                       />
                     </div>
@@ -304,23 +322,23 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                   {/* Inquiry Type Dropdown */}
                   <div className="space-y-2">
                     <label className="text-xs font-bold text-foreground block">
-                      How can I support you? <span className="text-red-500">*</span>
+                      How can I help you? <span className="text-red-500">*</span>
                     </label>
                     <select
                       name="serviceInterest"
                       required
                       value={formData.serviceInterest}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all cursor-pointer"
                     >
-                      <option value="Software Engineering & Web Development">Software Engineering & Web Development</option>
-                      <option value="Artificial Intelligence & Emerging Tech">Artificial Intelligence & Emerging Tech</option>
-                      <option value="Developer Relations (DevRel) & Community">Developer Relations (DevRel) & Community</option>
-                      <option value="Product Strategy & IT Consulting">Product Strategy & IT Consulting</option>
-                      <option value="Ingenious Design & Brand Systems">Ingenious Design & Brand Systems</option>
-                      <option value="Tech Leadership & Volunteering">Tech Leadership & Volunteering</option>
-                      <option value="Speaking Engagement / Tech Event">Speaking Engagement / Tech Event</option>
-                      <option value="Other Inquiry / Collaboration">Other Inquiry / Collaboration</option>
+                      <option value="Software Development & Web Apps">Software Development & Web Apps</option>
+                      <option value="UI/UX Design & Brand Identity">UI/UX Design & Brand Identity</option>
+                      <option value="IT Consulting & Technical Strategy">IT Consulting & Technical Strategy</option>
+                      <option value="Speaking Engagement / Workshop">Speaking Engagement / Workshop</option>
+                      <option value="AI Workflows & Intelligent Systems">AI Workflows & Intelligent Systems</option>
+                      <option value="Developer Relations & Community">Developer Relations & Community</option>
+                      <option value="Freelance / Contract Gig">Freelance / Contract Gig</option>
+                      <option value="Other Project / Collaboration">Other Project / Collaboration</option>
                     </select>
                   </div>
 
@@ -335,7 +353,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                       required
                       value={formData.subject}
                       onChange={handleChange}
-                      placeholder="Brief summary of your project or inquiry"
+                      placeholder="Brief overview of your project or request"
                       className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
                     />
                   </div>
@@ -351,7 +369,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                       rows={5}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Describe your project, timeline, deliverables, or collaboration goals..."
+                      placeholder="Tell me about what you are building, key features, timelines, or your goals..."
                       className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all resize-y"
                     />
                   </div>
@@ -367,7 +385,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                         <span>Sending Message...</span>
                       ) : (
                         <>
-                          <span>Submit Inquiry</span>
+                          <span>Send Message</span>
                           <ArrowUpRight className="w-4.5 h-4.5" />
                         </>
                       )}
@@ -376,7 +394,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
 
                   {/* Bottom Privacy & Help Note */}
                   <p className="text-[11px] text-muted-foreground text-center pt-2">
-                    By submitting this form, you agree to direct communication regarding your inquiry.
+                    Your information is safe and will only be used to discuss your project.
                   </p>
 
                 </form>
@@ -393,98 +411,125 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
           <TrustedBrands brands={displayBrands} />
         </div>
 
-        {/* ─── Webflow-Style "Why Choose Nestor Anyanwu?" 6-Feature Grid Section ─── */}
-        <section className="w-full mt-16 md:mt-24 pt-16 md:pt-20 pb-8 border-t border-border/70 bg-slate-50/60 dark:bg-slate-900/30">
-          <div className="container-webflow space-y-12">
+        {/* ─── Webflow Enterprise-Style 6-Feature Grid Section ─── */}
+        <section className="w-full mt-16 md:mt-24 pt-16 md:pt-20 pb-16 md:pb-24 border-t border-border/70 bg-white dark:bg-background">
+          <div className="site-container">
             
-            {/* Section Heading */}
-            <div className="space-y-4 max-w-3xl">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-tight">
-                Why Collaborate With Nestor?
-              </h2>
-              <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
-                A multidisciplinary approach that unites robust software engineering, strategic design systems, and dedicated technical leadership.
-              </p>
-            </div>
-
-            {/* 6-Item Feature Grid (3x2) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
+            {/* 6-Item Feature Grid (3x2) matching reference UI */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 lg:gap-x-16 gap-y-12 lg:gap-y-16">
               
               {/* Feature 1 */}
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-full border border-blue-200 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/50 flex items-center justify-center text-[#0075ff] dark:text-sky-400 shadow-2xs">
-                  <Layers className="w-5 h-5" />
+                <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                  <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
+                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <ellipse cx="12" cy="5" rx="9" ry="3" />
+                      <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
+                      <path d="M3 19c0 1.66 4 3 9 3s9-1.34 9-3" />
+                    </svg>
+                  </div>
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-foreground font-heading tracking-tight leading-snug">
+                <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
                   Break down silos between design, code, and strategy
                 </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground font-normal leading-relaxed">
-                  Combining software engineering precision with strong visual identity design to build digital solutions that look exceptional and perform reliably.
+                <p className="text-sm text-muted-foreground font-normal leading-relaxed">
+                  Give your project greater cohesion by uniting modern software engineering, intuitive UI/UX design, and strategic tech leadership under one collaborative workflow.
                 </p>
               </div>
 
               {/* Feature 2 */}
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-full border border-blue-200 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/50 flex items-center justify-center text-[#0075ff] dark:text-sky-400 shadow-2xs">
-                  <ShieldCheck className="w-5 h-5" />
+                <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                  <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
+                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <path d="m9 12 2 2 4-4" />
+                    </svg>
+                  </div>
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-foreground font-heading tracking-tight leading-snug">
-                  Backed by enterprise-grade reliability & clean code
+                <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
+                  Backed by enterprise-grade security & clean code
                 </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground font-normal leading-relaxed">
-                  Engineered with modern frameworks, rigorous typing, and clean component architecture built for long-term scalability and security.
+                <p className="text-sm text-muted-foreground font-normal leading-relaxed">
+                  Engineered with rigorous TypeScript typing, modular Next.js architecture, and data privacy best practices built for long-term scalability and reliability.
                 </p>
               </div>
 
               {/* Feature 3 */}
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-full border border-blue-200 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/50 flex items-center justify-center text-[#0075ff] dark:text-sky-400 shadow-2xs">
-                  <Handshake className="w-5 h-5" />
+                <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                  <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
+                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                      <path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9" />
+                      <path d="m14 10 1.5 1.5" />
+                    </svg>
+                  </div>
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-foreground font-heading tracking-tight leading-snug">
-                  Dedicated partnership & transparent delivery
+                <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
+                  We'll partner with you to ensure success
                 </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground font-normal leading-relaxed">
-                  Direct collaboration with clear communication, milestone-driven sprints, and technical advisory from discovery to deployment.
+                <p className="text-sm text-muted-foreground font-normal leading-relaxed">
+                  Direct collaboration with clear communication, milestone-driven sprints, rapid turnarounds, and proactive technical guidance from discovery to deployment.
                 </p>
               </div>
 
               {/* Feature 4 */}
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-full border border-blue-200 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/50 flex items-center justify-center text-[#0075ff] dark:text-sky-400 shadow-2xs">
-                  <Code2 className="w-5 h-5" />
+                <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                  <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
+                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <rect width="18" height="18" x="3" y="3" rx="4" />
+                      <path d="m10 9-3 3 3 3" />
+                      <path d="m14 9 3 3-3 3" />
+                    </svg>
+                  </div>
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-foreground font-heading tracking-tight leading-snug">
-                  Modern full-stack engineering & APIs
+                <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
+                  Harness modern full-stack engineering & APIs
                 </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground font-normal leading-relaxed">
-                  Shipping responsive Next.js web applications, performant backend integrations, and custom software systems tailored to real-world demands.
+                <p className="text-sm text-muted-foreground font-normal leading-relaxed">
+                  Building fast, scalable web applications, custom frontend interfaces, and performant backend integrations tailored to real-world product demands.
                 </p>
               </div>
 
               {/* Feature 5 */}
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-full border border-blue-200 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/50 flex items-center justify-center text-[#0075ff] dark:text-sky-400 shadow-2xs">
-                  <CloudUpload className="w-5 h-5" />
+                <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                  <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
+                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+                      <path d="M12 12v9" />
+                      <path d="m8 16 4-4 4 4" />
+                    </svg>
+                  </div>
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-foreground font-heading tracking-tight leading-snug">
-                  Seamless cloud architecture & deployment
+                <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
+                  Publish directly to world-class hosting
                 </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground font-normal leading-relaxed">
-                  Deploying scalable digital infrastructure with automated CI/CD pipelines, modern databases, and serverless hosting.
+                <p className="text-sm text-muted-foreground font-normal leading-relaxed">
+                  Deploying scalable digital infrastructure with modern databases, serverless edge networks, and automated CI/CD pipelines.
                 </p>
               </div>
 
               {/* Feature 6 */}
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-full border border-blue-200 dark:border-blue-800/80 bg-blue-50/80 dark:bg-blue-950/50 flex items-center justify-center text-[#0075ff] dark:text-sky-400 shadow-2xs">
-                  <Zap className="w-5 h-5" />
+                <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                  <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
+                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M3.6 9h16.8" />
+                      <path d="M3.6 15h16.8" />
+                      <path d="M11.5 3a17 17 0 0 0 0 18" />
+                      <path d="M12.5 3a17 17 0 0 1 0 18" />
+                    </svg>
+                  </div>
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-foreground font-heading tracking-tight leading-snug">
-                  Obsessive performance & user experience
+                <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
+                  World-class performance & user experience
                 </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground font-normal leading-relaxed">
-                  Fast page load times, accessible interfaces, and fluid micro-interactions designed to elevate user engagement and brand credibility.
+                <p className="text-sm text-muted-foreground font-normal leading-relaxed">
+                  Fast page loads, fluid micro-interactions, and accessible designs engineered to elevate user engagement, credibility, and brand trust.
                 </p>
               </div>
 

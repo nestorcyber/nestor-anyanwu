@@ -670,43 +670,7 @@ export async function getStandaloneGalleryImages(): Promise<GalleryItem[]> {
 }
 
 export async function getGalleryImages(): Promise<GalleryItem[]> {
-  const [standalone, journeyItems] = await Promise.all([
-    getStandaloneGalleryImages(),
-    getJourneyItems(),
-  ])
-
-  const existingUrls = new Set(standalone.map((item) => item.imageUrl))
-
-  const fromJourney: GalleryItem[] = journeyItems.flatMap((item) =>
-    (item.images ?? [])
-      .filter((url) => url && !url.includes('placeholder') && !existingUrls.has(url))
-      .map((url, i) => ({
-        id: `journey-${item.id}-${i}`,
-        title: item.title,
-        caption: item.description || null,
-        altText: item.title,
-        imageUrl: getOptimizedImageUrl(url, { width: 1400, quality: 'auto' }),
-        cloudinaryPublicId: null,
-        width: null,
-        height: null,
-        category: item.type === 'work' ? 'Leadership' : 'Community',
-        location: item.organization || null,
-        eventDate: item.date || null,
-        externalLink: null,
-        videoUrl: null,
-        videoDuration: null,
-        featured: false,
-        sortOrder: 100 + i,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      }))
-  )
-
-  const combined = [...standalone, ...fromJourney]
-  return combined.sort((a, b) => {
-    if (a.sortOrder !== b.sortOrder) return a.sortOrder - b.sortOrder
-    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  })
+  return getStandaloneGalleryImages()
 }
 
 export type BrandPartner = {

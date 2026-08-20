@@ -1092,45 +1092,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
   // 6.5 Gallery & Media
   if (section === 'gallery') {
     if (!actionOrId) {
-      const { data: dbData } = await supabase
-        .from('gallery_images')
-        .select('*')
-        .order('sort_order', { ascending: true })
-        .order('created_at', { ascending: false })
-
-      let items: any[] = []
-      if (dbData && dbData.length > 0) {
-        items = dbData.map((img: any) => ({
-          id: img.id,
-          title: img.title || '(Untitled Moment)',
-          caption: img.caption || '',
-          imageUrl: img.image_url,
-          category: img.category || 'Events',
-          location: img.location,
-          eventDate: img.event_date,
-          videoDuration: img.video_duration,
-          width: img.width,
-          height: img.height,
-          featured: img.featured,
-          sortOrder: img.sort_order,
-        }))
-      } else {
-        const fallbackImages = await getGalleryImages()
-        items = fallbackImages.map((img) => ({
-          id: img.id,
-          title: img.title || '(Untitled Moment)',
-          caption: img.caption || '',
-          imageUrl: img.imageUrl,
-          category: img.category || 'Events',
-          location: img.location,
-          eventDate: img.eventDate,
-          videoDuration: img.videoDuration,
-          width: img.width,
-          height: img.height,
-          featured: img.featured,
-          sortOrder: img.sortOrder,
-        }))
-      }
+      const items = await getGalleryImages()
 
       return (
         <div className="space-y-6">
