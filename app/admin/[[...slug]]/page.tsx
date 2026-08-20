@@ -1098,10 +1098,9 @@ export default async function AdminCatchAllPage({ params }: Props) {
         .order('sort_order', { ascending: true })
         .order('created_at', { ascending: false })
 
-      const fallbackImages = await getGalleryImages()
-      const dbIds = new Set((dbData ?? []).map((row) => row.id))
-      const items = [
-        ...(dbData ?? []).map((img: any) => ({
+      let items: any[] = []
+      if (dbData && dbData.length > 0) {
+        items = dbData.map((img: any) => ({
           id: img.id,
           title: img.title || '(Untitled Moment)',
           caption: img.caption || '',
@@ -1114,24 +1113,24 @@ export default async function AdminCatchAllPage({ params }: Props) {
           height: img.height,
           featured: img.featured,
           sortOrder: img.sort_order,
-        })),
-        ...fallbackImages
-          .filter((img) => !dbIds.has(img.id))
-          .map((img) => ({
-            id: img.id,
-            title: img.title || '(Untitled Moment)',
-            caption: img.caption || '',
-            imageUrl: img.imageUrl,
-            category: img.category || 'Events',
-            location: img.location,
-            eventDate: img.eventDate,
-            videoDuration: img.videoDuration,
-            width: img.width,
-            height: img.height,
-            featured: img.featured,
-            sortOrder: img.sortOrder,
-          })),
-      ]
+        }))
+      } else {
+        const fallbackImages = await getGalleryImages()
+        items = fallbackImages.map((img) => ({
+          id: img.id,
+          title: img.title || '(Untitled Moment)',
+          caption: img.caption || '',
+          imageUrl: img.imageUrl,
+          category: img.category || 'Events',
+          location: img.location,
+          eventDate: img.eventDate,
+          videoDuration: img.videoDuration,
+          width: img.width,
+          height: img.height,
+          featured: img.featured,
+          sortOrder: img.sortOrder,
+        }))
+      }
 
       return (
         <div className="space-y-6">
@@ -1159,7 +1158,6 @@ export default async function AdminCatchAllPage({ params }: Props) {
             </div>
           </div>
 
-          {/* Quick stats / summary bar */}
           <div className="flex flex-wrap items-center gap-4 p-4 rounded-xl bg-card border border-border text-xs text-muted-foreground">
             <div>
               <span className="font-bold text-foreground">{items.length}</span> total moments
@@ -1174,7 +1172,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
             </div>
             <span className="text-border">•</span>
             <span className="text-[11px] text-muted-foreground/80">
-              New uploads immediately appear in your square gallery grid.
+              New uploads and deletions synchronize immediately with your live visual archive.
             </span>
           </div>
 
@@ -1200,7 +1198,6 @@ export default async function AdminCatchAllPage({ params }: Props) {
                       </div>
                     )}
 
-                    {/* Video Duration Badge */}
                     {row.videoDuration && (
                       <div className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-[10px] font-mono text-white font-semibold flex items-center gap-1">
                         <span>▶</span>
@@ -1208,14 +1205,12 @@ export default async function AdminCatchAllPage({ params }: Props) {
                       </div>
                     )}
 
-                    {/* Featured Badge */}
                     {row.featured && (
                       <div className="absolute top-2 right-2 z-10 px-2 py-0.5 rounded-full bg-amber-500/90 backdrop-blur-md text-[10px] text-white font-bold uppercase tracking-wider">
                         Featured
                       </div>
                     )}
 
-                    {/* Category Overlay */}
                     <div className="absolute bottom-2 left-2 z-10 px-2 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[10px] font-mono font-medium text-white/90">
                       {row.category}
                     </div>
@@ -1267,29 +1262,40 @@ export default async function AdminCatchAllPage({ params }: Props) {
     }
 
     let data = null
-    const { data: byId } = await supabase.from('gallery_images').select('*').eq('id', actionOrId).maybeSingle()
-    data = byId
+    const isUuid = Boolean(
+      actionOrId &&
+      /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(actionOrId)
+    )
+    if (isUuid) {
+      const { data: byId } = await supabase.from('gallery_images').select('*').eq('id', actionOrId).maybeSingle()
+      data = byId
+    }
     if (!data) {
       const fallbackImages = await getGalleryImages()
       const fb = fallbackImages.find((img) => img.id === actionOrId)
       if (fb) {
-        data = {
-          id: undefined,
-          title: fb.title,
-          caption: fb.caption,
-          image_url: fb.imageUrl,
-          alt: fb.altText,
-          category: fb.category,
-          location: fb.location,
-          event_date: fb.eventDate,
-          external_link: fb.externalLink,
-          video_url: fb.videoUrl,
-          video_duration: fb.videoDuration,
-          width: fb.width,
-          height: fb.height,
-          featured: fb.featured,
-          sort_order: fb.sortOrder,
-        } as any
+        const { data: byUrl } = await supabase.from('gallery_images').select('*').eq('image_url', fb.imageUrl).maybeSingle()
+        if (byUrl) {
+          data = byUrl
+        } else {
+          data = {
+            id: fb.id,
+            title: fb.title,
+            caption: fb.caption,
+            image_url: fb.imageUrl,
+            alt: fb.altText,
+            category: fb.category,
+            location: fb.location,
+            event_date: fb.eventDate,
+            external_link: fb.externalLink,
+            video_url: fb.videoUrl,
+            video_duration: fb.videoDuration,
+            width: fb.width,
+            height: fb.height,
+            featured: fb.featured,
+            sort_order: fb.sortOrder,
+          } as any
+        }
       }
     }
 

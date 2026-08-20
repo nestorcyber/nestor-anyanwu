@@ -9,8 +9,6 @@ import {
   ChevronRight,
   Maximize2,
   Minimize2,
-  Search,
-  ArrowUpDown,
   Play,
   MapPin,
   Calendar,
@@ -19,16 +17,11 @@ import {
   Image as ImageIcon,
 } from "lucide-react"
 
-type SortOption = "newest" | "oldest" | "featured"
-
 export default function GalleryPageClient({
   initialImages = [],
 }: {
   initialImages: GalleryItem[]
 }) {
-  const [activeCategory, setActiveCategory] = useState<string>("All")
-  const [searchQuery, setSearchQuery] = useState<string>("")
-  const [sortBy, setSortBy] = useState<SortOption>("newest")
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false)
 
@@ -38,70 +31,23 @@ export default function GalleryPageClient({
   const touchStartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
 
-  // 1. Extract unique categories
-  const categories = useMemo(() => {
-    const set = new Set<string>()
-    initialImages.forEach((img) => {
-      if (img.category) set.add(img.category)
+  // Sort images
+  const processedImages = useMemo(() => {
+    const list = [...initialImages]
+    list.sort((a, b) => {
+      if (a.sortOrder !== b.sortOrder) return a.sortOrder - b.sortOrder
+      if (a.eventDate && b.eventDate) {
+        return new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime()
+      }
+      return (
+        new Date(b.createdAt || 0).getTime() -
+        new Date(a.createdAt || 0).getTime()
+      )
     })
-    return ["All", ...Array.from(set)]
+    return list
   }, [initialImages])
 
-  // 2. Filter & Sort images
-  const processedImages = useMemo(() => {
-    let list = [...initialImages]
-
-    // Category filter
-    if (activeCategory !== "All") {
-      list = list.filter((img) => img.category === activeCategory)
-    }
-
-    // Search query
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase().trim()
-      list = list.filter(
-        (img) =>
-          img.title?.toLowerCase().includes(q) ||
-          img.caption?.toLowerCase().includes(q) ||
-          img.location?.toLowerCase().includes(q) ||
-          img.category?.toLowerCase().includes(q)
-      )
-    }
-
-    // Sort order
-    if (sortBy === "newest") {
-      list.sort((a, b) => {
-        if (a.eventDate && b.eventDate) {
-          return new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime()
-        }
-        return (
-          new Date(b.createdAt || 0).getTime() -
-          new Date(a.createdAt || 0).getTime() ||
-          a.sortOrder - b.sortOrder
-        )
-      })
-    } else if (sortBy === "oldest") {
-      list.sort((a, b) => {
-        if (a.eventDate && b.eventDate) {
-          return new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
-        }
-        return (
-          new Date(a.createdAt || 0).getTime() -
-          new Date(b.createdAt || 0).getTime() ||
-          a.sortOrder - b.sortOrder
-        )
-      })
-    } else if (sortBy === "featured") {
-      list.sort((a, b) => {
-        if (a.featured !== b.featured) return a.featured ? -1 : 1
-        return a.sortOrder - b.sortOrder
-      })
-    }
-
-    return list
-  }, [initialImages, activeCategory, searchQuery, sortBy])
-
-  // 3. Lightbox Controls
+  // Lightbox Controls
   const openLightbox = (item: GalleryItem) => {
     const index = processedImages.findIndex((i) => i.id === item.id)
     if (index !== -1) {
@@ -181,90 +127,16 @@ export default function GalleryPageClient({
   return (
     <>
       <main className="min-h-screen bg-background text-foreground pt-8 sm:pt-12 pb-24 font-sans">
-        {/* Header Bar */}
-        <div className="site-container mb-8 sm:mb-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/40 pb-6 sm:pb-8">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-[11px] font-mono font-bold tracking-widest uppercase">
-                <Sparkles className="w-3 h-3" />
-                Visual Archive
-              </div>
-              <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground font-heading">
-                Gallery
-              </h1>
-              <p className="text-sm md:text-base text-muted-foreground font-light max-w-2xl leading-relaxed">
-                Moments, people, projects, and experiences from speaking engagements, conferences, and tech leadership milestones.
-              </p>
-            </div>
-
-            {/* Quick Stats Pill */}
-            <div className="hidden lg:flex items-center gap-3 text-xs font-mono text-muted-foreground bg-card border border-border/80 px-4 py-2 rounded-xl shrink-0">
-              <span className="font-bold text-foreground">{processedImages.length}</span> Moments
-              <span className="text-border">•</span>
-              <span className="font-bold text-foreground">Stable Grid</span>
-              <span className="text-border">•</span>
-              <span className="text-emerald-500 font-semibold">Zero Distortion</span>
-            </div>
-          </div>
-
-          {/* Filtering & Sorting Controls Bar */}
-          <div className="mt-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-            {/* Category Pills */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer border whitespace-nowrap ${
-                    activeCategory === cat
-                      ? "bg-accent text-white border-accent shadow-xs"
-                      : "bg-card text-muted-foreground border-border/70 hover:text-foreground hover:border-border hover:bg-secondary/40"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-
-            {/* Search and Sort controls */}
-            <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
-              {/* Search Bar */}
-              <div className="relative flex-1 sm:w-60">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
-                <input
-                  type="text"
-                  placeholder="Search moments..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-8 pr-3 py-1.5 text-xs rounded-full border border-border/80 bg-card focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-all text-foreground placeholder:text-muted-foreground/70"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery("")}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground text-xs"
-                  >
-                    ×
-                  </button>
-                )}
-              </div>
-
-              {/* Sort Dropdown */}
-              <div className="relative flex items-center">
-                <div className="flex items-center gap-1.5 bg-card border border-border/80 rounded-full px-3 py-1.5 text-xs text-muted-foreground">
-                  <ArrowUpDown className="w-3 h-3 text-muted-foreground" />
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value as SortOption)}
-                    aria-label="Sort gallery items"
-                    className="bg-transparent text-foreground text-xs font-medium focus:outline-none cursor-pointer pr-1"
-                  >
-                    <option value="newest">Newest First</option>
-                    <option value="oldest">Oldest First</option>
-                    <option value="featured">Featured First</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+        {/* Centered Header Bar */}
+        <div className="site-container mb-10 sm:mb-12">
+          <div className="text-center flex flex-col items-center justify-center space-y-3 max-w-3xl mx-auto border-b border-border/40 pb-8 sm:pb-10">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground font-heading">
+              Gallery
+            </h1>
+            <p className="text-sm sm:text-base text-muted-foreground font-light max-w-2xl leading-relaxed text-center">
+              Moments, people, projects, and experiences from speaking engagements, conferences, and tech leadership milestones.
+            </p>
+            <div className="w-12 h-1 bg-accent rounded-full mt-2" />
           </div>
         </div>
 
@@ -277,21 +149,8 @@ export default function GalleryPageClient({
               </div>
               <h3 className="text-base font-semibold text-foreground">No photos found</h3>
               <p className="text-xs text-muted-foreground font-light">
-                {searchQuery
-                  ? `No moments match "${searchQuery}".`
-                  : `No gallery moments in "${activeCategory}" category.`}
+                No moments in the visual archive yet.
               </p>
-              {(searchQuery || activeCategory !== "All") && (
-                <button
-                  onClick={() => {
-                    setSearchQuery("")
-                    setActiveCategory("All")
-                  }}
-                  className="mt-2 text-xs font-semibold text-accent hover:underline cursor-pointer"
-                >
-                  Reset filters
-                </button>
-              )}
             </div>
           ) : (
             /* Responsive Square Grid: 2 cols Mobile, 3 cols Tablet, 4 cols Desktop */

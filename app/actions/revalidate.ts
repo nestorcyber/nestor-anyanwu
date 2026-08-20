@@ -25,3 +25,14 @@ export async function revalidatePortfolio(slug?: string) {
     console.error('Error revalidating portfolio cache:', err)
   }
 }
+
+export async function revalidateGallery() {
+  try {
+    revalidatePath('/')
+    revalidatePath('/gallery')
+    revalidatePath('/admin/gallery')
+  } catch (err) {
+    console.error('Error revalidating gallery cache:', err)
+  }
+}
+

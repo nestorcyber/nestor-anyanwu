@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { slugify } from '@/lib/utils/slug'
+import { revalidateGallery } from '@/app/actions/revalidate'
 import ImageUpload from '@/components/admin/image-upload'
 import {
   DangerButton,
@@ -80,18 +81,44 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
       ? await supabase.from('gallery_images').update(payload).eq('id', initialId)
       : await supabase.from('gallery_images').insert(payload)
     if (res.error) {
-      setError(res.error.message)
+      setError(`Save error: ${res.error.message}`)
       setSaving(false)
       return
     }
+    await revalidateGallery()
     router.push('/admin/gallery')
     router.refresh()
   }
 
   async function onDelete() {
-    if (!initial || !confirm('Delete image from gallery?')) return
+    if (!initial || !confirm('Delete image from gallery archive?')) return
+    setSaving(true)
+    setError('')
     const supabase = createClient()
-    await supabase.from('gallery_images').delete().eq('id', initial.id)
+    const initialId = initial.id
+    const isRealUuid = Boolean(
+      initialId &&
+      /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId)
+    )
+
+    if (isRealUuid && initialId) {
+      const res = await supabase.from('gallery_images').delete().eq('id', initialId)
+      if (res.error) {
+        setError(`Delete error: ${res.error.message}`)
+        setSaving(false)
+        return
+      }
+    } else if (imageUrl || initial.image_url) {
+      const targetUrl = imageUrl || initial.image_url
+      const res = await supabase.from('gallery_images').delete().eq('image_url', targetUrl)
+      if (res.error) {
+        setError(`Delete error: ${res.error.message}`)
+        setSaving(false)
+        return
+      }
+    }
+
+    await revalidateGallery()
     router.push('/admin/gallery')
     router.refresh()
   }

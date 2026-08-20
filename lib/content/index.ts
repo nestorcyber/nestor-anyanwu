@@ -610,7 +610,6 @@ export type GalleryItem = {
 
 export async function getStandaloneGalleryImages(): Promise<GalleryItem[]> {
   const supabase = db()
-  let dbImages: GalleryItem[] = []
 
   if (supabase) {
     try {
@@ -621,7 +620,7 @@ export async function getStandaloneGalleryImages(): Promise<GalleryItem[]> {
         .order('created_at', { ascending: false })
 
       if (!error && data && data.length > 0) {
-        dbImages = data.map((row: any) => ({
+        return data.map((row: any) => ({
           id: row.id,
           title: row.title || null,
           caption: row.caption || null,
@@ -647,33 +646,27 @@ export async function getStandaloneGalleryImages(): Promise<GalleryItem[]> {
     }
   }
 
-  const dbUrls = new Set(dbImages.map((img) => img.imageUrl))
-  const dbTitles = new Set(dbImages.map((img) => img.title).filter(Boolean))
-
-  const fallbackMapped: GalleryItem[] = (fallbackGalleryImages || [])
-    .filter((img) => !dbUrls.has(img.imageUrl) && (!img.title || !dbTitles.has(img.title)))
-    .map((img) => ({
-      id: img.id,
-      title: img.title || null,
-      caption: img.caption || null,
-      altText: img.altText || img.title || null,
-      imageUrl: img.imageUrl,
-      cloudinaryPublicId: null,
-      width: img.width || null,
-      height: img.height || null,
-      category: img.category || 'General',
-      location: img.location || null,
-      eventDate: img.eventDate || null,
-      externalLink: null,
-      videoUrl: img.videoUrl || null,
-      videoDuration: img.videoDuration || null,
-      featured: !!img.featured,
-      sortOrder: img.sortOrder ?? 0,
-      createdAt: img.createdAt || new Date().toISOString(),
-      updatedAt: img.updatedAt || new Date().toISOString(),
-    }))
-
-  return [...dbImages, ...fallbackMapped]
+  // Fallback to static gallery images when database has no images
+  return (fallbackGalleryImages || []).map((img) => ({
+    id: img.id,
+    title: img.title || null,
+    caption: img.caption || null,
+    altText: img.altText || img.title || null,
+    imageUrl: img.imageUrl,
+    cloudinaryPublicId: null,
+    width: img.width || null,
+    height: img.height || null,
+    category: img.category || 'General',
+    location: img.location || null,
+    eventDate: img.eventDate || null,
+    externalLink: null,
+    videoUrl: img.videoUrl || null,
+    videoDuration: img.videoDuration || null,
+    featured: !!img.featured,
+    sortOrder: img.sortOrder ?? 0,
+    createdAt: img.createdAt || new Date().toISOString(),
+    updatedAt: img.updatedAt || new Date().toISOString(),
+  }))
 }
 
 export async function getGalleryImages(): Promise<GalleryItem[]> {
