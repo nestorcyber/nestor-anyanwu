@@ -65,7 +65,7 @@ export default function ExpandingEndeavors() {
       title: "Volunteering & Impact",
       subtitle: "Inclusive Growth & Mentorship",
       description: "Volunteering, mentorship, and grassroots initiatives dedicated to building an inclusive tech ecosystem where everyone can thrive.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
+      image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787284547/IMG_7002_kin2gh.jpg",
       link: "/about",
       buttonText: "Discover Impact Story",
       ariaLabel: "Discover Nestor Anyanwu's volunteering and impact mission",
