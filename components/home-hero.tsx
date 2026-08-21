@@ -11,7 +11,7 @@ export default function HomeHero() {
         sizes="100vw"
         priority
         fetchPriority="high"
-        className="object-cover object-[50%_22%] sm:object-[60%_15%] md:object-center"
+        className="object-cover object-[68%_10%] sm:object-[65%_15%] md:object-center"
       />
 
       {/* Overlay gradient - clear subject portrait, strong contrast for bottom typography */}
