@@ -75,7 +75,7 @@ export default function ImpactSection({
                     alt="Nestor Anyanwu speaking at community tech event"
                     fill
                     sizes="(max-width: 768px) 60vw, 30vw"
-                    className="object-cover object-[50%_16%] group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-[50%_12%] group-hover:scale-105 transition-transform duration-500"
                     priority
                   />
                 </div>
@@ -85,11 +85,11 @@ export default function ImpactSection({
               <div className="absolute top-2 sm:top-3 right-0 w-[54%] sm:w-[56%] h-[56%] sm:h-[58%] bg-white p-2.5 sm:p-3 pb-5 sm:pb-7 rounded-sm sm:rounded-md shadow-[0_20px_40px_rgba(0,0,0,0.75)] z-20 rotate-3 hover:rotate-0 transition-transform duration-500 ease-out group">
                 <div className="relative w-full h-full overflow-hidden bg-slate-900">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg"
-                    alt="Nestor volunteering and engaging with tech builders"
+                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787284253/iee-phd-school_cszgqe.jpg"
+                    alt="Nestor at IEEE event"
                     fill
                     sizes="(max-width: 768px) 50vw, 25vw"
-                    className="object-cover object-[50%_18%] group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-[50%_20%] group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
               </div>
@@ -98,11 +98,11 @@ export default function ImpactSection({
               <div className="absolute bottom-0 right-3 sm:right-6 w-[58%] h-[58%] bg-white p-2.5 sm:p-3 pb-5 sm:pb-7 rounded-sm sm:rounded-md shadow-[0_30px_60px_rgba(0,0,0,0.9)] z-30 -rotate-1 hover:rotate-0 transition-transform duration-500 ease-out group">
                 <div className="relative w-full h-full overflow-hidden bg-slate-900">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg"
+                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966488/about_fm7rwu.jpg"
                     alt="Nestor Anyanwu executive leadership and engineering"
                     fill
                     sizes="(max-width: 768px) 55vw, 25vw"
-                    className="object-cover object-[50%_20%] group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-[50%_15%] group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
               </div>

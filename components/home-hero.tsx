@@ -5,13 +5,13 @@ export default function HomeHero() {
     <section className="relative h-[62svh] min-h-[380px] sm:h-[75svh] md:h-[calc(100svh-4rem)] md:min-h-[640px] flex flex-col justify-end overflow-hidden bg-slate-950">
       {/* Background image - edge to edge, subject nicely framed on mobile */}
       <Image
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg"
-        alt="Nestor speaking at event"
+        src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg"
+        alt="Nestor Anyanwu"
         fill
         sizes="100vw"
         priority
         fetchPriority="high"
-        className="object-cover object-[68%_10%] sm:object-[65%_15%] md:object-center"
+        className="object-cover object-[50%_12%] sm:object-[55%_18%] md:object-[60%_22%] lg:object-[65%_25%]"
       />
 
       {/* Overlay gradient - clear subject portrait, strong contrast for bottom typography */}
