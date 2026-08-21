@@ -55,15 +55,11 @@ export default function PortfolioHero({
         <div className="w-full flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8 lg:gap-12">
           
           {/* Left Typography Block */}
-          <div className="max-w-xl space-y-2 sm:space-y-4 text-white text-left">
-            <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-[54px] font-extrabold tracking-tight leading-snug sm:leading-[1.08] font-heading drop-shadow-md">
+          <div className="max-w-xl text-white text-left">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold tracking-tight leading-tight sm:leading-[1.08] font-heading drop-shadow-md">
               Strategic Engineering.<br className="hidden sm:inline" />{" "}
               Sustainable Impact.
             </h1>
-            
-            <p className="text-white/90 text-xs sm:text-sm md:text-[15px] max-w-md lg:max-w-lg leading-relaxed font-normal drop-shadow-xs">
-              Building scalable software systems, high-converting digital products, and modern web applications through hands-on engineering, intuitive UI/UX design, and proactive tech leadership.
-            </p>
           </div>
 
           {/* Right Bottom-Aligned Floating Glassmorphic Stat Card (Hidden on small mobile to keep clean portrait view, visible on sm+) */}

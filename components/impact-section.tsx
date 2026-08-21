@@ -3,7 +3,7 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { CheckCircle2, ArrowUpRight } from "lucide-react"
+import { CheckCircle2, ArrowUpRight, Sparkles } from "lucide-react"
 
 export interface ImpactSectionProps {
   category?: string
@@ -23,151 +23,156 @@ export interface ImpactSectionProps {
 }
 
 export default function ImpactSection({
-  category = "Impact & Reach",
-  title = "Engineering Progress, Leadership & Ecosystem Impact",
-  description = "From architecting software and AI solutions to tech leadership, developer relations, product management, IT consulting, and volunteering — every role I take on is driven by one conviction: creating an impact and an inclusive and collaborative tech ecosystem where everyone and anyone can thrive.",
-  ctaText = "LET'S COLLABORATE",
+  category = "GET TO KNOW",
+  title = "Engineering Progress, Strategic Leadership & Ecosystem Impact",
+  description = "From architecting software systems and AI workflows to tech leadership, developer relations, product consulting, and volunteering — every role I take on is driven by one conviction: creating real impact and an inclusive, collaborative tech ecosystem where everyone can thrive.",
+  ctaText = "Let's Collaborate",
   ctaLink = "/contact",
-  pillarsTitle = "Core Focus Areas:",
   pillars = [
-    "Software Engineering & Web Development",
-    "AI & Technology Workflows",
-    "Tech Leadership & Strategy",
-    "Developer Relations (DevRel)",
-    "Product Management & IT Consulting",
-    "Design & Visual Systems",
-    "Community Building & Volunteering",
+    "Architecting scalable software, modern web apps & intelligent AI workflows",
+    "Directing national ICT strategy, student computing & builder governance",
+    "Cultivating developer ecosystems, tech summits, bootcamps & hackathons",
+    "Delivering enterprise product strategy, tech audits & IT advisory",
   ],
   stats = [
     {
-      value: "2000+",
+      value: "2,000+",
       label: "People Reached",
-      description:
-        "Computing students, developers, and tech leaders empowered through workshops, events, and digital platforms.",
     },
     {
       value: "25+",
       label: "Projects Completed",
-      description:
-        "Production software, web apps, brand design systems, and engineering deliverables.",
     },
     {
       value: "12+",
-      label: "Organizations & Communities",
-      description:
-        "National bodies, student chapters, tech startups, and developer communities served and supported.",
+      label: "Communities & Orgs",
     },
   ],
-  heroImage = "https://res.cloudinary.com/z3wgqisj/image/upload/v1785966495/techadv1_dyclrm.jpg",
-  heroImageAlt = "Nestor Anyanwu at community event",
 }: ImpactSectionProps) {
   return (
-    <section id="impact" className="w-full font-sans border-y border-border/80 overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[480px] lg:h-[540px] w-full">
-        
-        {/* LEFT CONTAINER (6 cols) */}
-        <div className="lg:col-span-6 bg-[#0B1C2C] text-white relative p-6 sm:p-8 lg:p-10 flex flex-col justify-between overflow-hidden h-full">
-          {/* Background image overlay */}
-          <div
-            className="absolute inset-0 opacity-10 bg-cover bg-center mix-blend-overlay pointer-events-none"
-            style={{
-              backgroundImage: `url(${heroImage})`,
-            }}
-          />
+    <section id="impact" className="w-full relative overflow-hidden bg-slate-950 text-white py-16 sm:py-20 lg:py-24 border-y border-slate-800 font-sans">
+      
+      {/* Background Ambient Glow Accent */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-[#0075ff]/10 blur-[130px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-sky-500/10 blur-[110px] rounded-full pointer-events-none" />
 
-          <div className="relative z-10 space-y-4 lg:space-y-5 my-auto">
-            {/* Category Subtitle */}
-            <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-[#0075ff] dark:text-sky-400 block">
-              {category}
-            </span>
+      <div className="site-container relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+          
+          {/* ─── LEFT COLUMN: OVERLAPPING GALLERY / POLAROID PHOTO COLLAGE (5 COLS) ─── */}
+          <div className="lg:col-span-5 relative w-full flex items-center justify-center lg:justify-start">
+            
+            {/* Dot-grid ambient accent behind collage (like reference) */}
+            <div className="absolute -inset-4 bg-[radial-gradient(rgba(255,255,255,0.15)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none opacity-40" />
 
-            {/* Main Headline */}
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold leading-tight tracking-tight text-white font-heading">
-              {title}
-            </h2>
-
-            {/* 2-Column Content: Description on Left, 7 Pillars on Right */}
-            <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 pt-1">
-              {/* Description side */}
-              <div className="sm:col-span-6 space-y-2.5">
-                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
-                  {description}
-                </p>
-                {pillarsTitle && (
-                  <p className="text-xs font-bold text-white pt-1">
-                    {pillarsTitle}
-                  </p>
-                )}
+            <div className="relative w-full max-w-[420px] sm:max-w-[460px] h-[400px] sm:h-[450px] md:h-[480px] mx-auto lg:mx-0">
+              
+              {/* Photo 1 (Main Speaking Keynote - Top Left, white polaroid mat frame with subtle tilt) */}
+              <div className="absolute top-0 left-0 w-[60%] h-[68%] bg-white p-2.5 sm:p-3 pb-5 sm:pb-7 rounded-sm sm:rounded-md shadow-[0_15px_35px_rgba(0,0,0,0.6)] z-10 -rotate-2 hover:rotate-0 transition-transform duration-500 ease-out group">
+                <div className="relative w-full h-full overflow-hidden bg-slate-900">
+                  <Image
+                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966495/techadv1_dyclrm.jpg"
+                    alt="Nestor Anyanwu speaking at community tech event"
+                    fill
+                    sizes="(max-width: 768px) 60vw, 30vw"
+                    className="object-cover object-[50%_16%] group-hover:scale-105 transition-transform duration-500"
+                    priority
+                  />
+                </div>
               </div>
 
-              {/* Pillars list side */}
-              <div className="sm:col-span-6 space-y-2">
-                {pillars.map((pillar, idx) => (
-                  <div key={idx} className="flex items-center gap-2 group">
-                    <span className="shrink-0 text-sky-400 bg-sky-400/15 rounded-full p-0.5 group-hover:scale-110 transition-transform">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-sky-400" />
-                    </span>
-                    <span className="text-xs font-medium tracking-wide text-slate-200 group-hover:text-white transition-colors line-clamp-1">
-                      {pillar}
-                    </span>
-                  </div>
-                ))}
+              {/* Photo 2 (Collaboration / Builder Network - Top Right, enlarged white polaroid mat frame) */}
+              <div className="absolute top-2 sm:top-3 right-0 w-[54%] sm:w-[56%] h-[56%] sm:h-[58%] bg-white p-2.5 sm:p-3 pb-5 sm:pb-7 rounded-sm sm:rounded-md shadow-[0_20px_40px_rgba(0,0,0,0.75)] z-20 rotate-3 hover:rotate-0 transition-transform duration-500 ease-out group">
+                <div className="relative w-full h-full overflow-hidden bg-slate-900">
+                  <Image
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg"
+                    alt="Nestor volunteering and engaging with tech builders"
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-cover object-[50%_18%] group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
               </div>
+
+              {/* Photo 3 (Leadership & Engineering - Bottom Right/Front, prominent overlapping polaroid mat frame) */}
+              <div className="absolute bottom-0 right-3 sm:right-6 w-[58%] h-[58%] bg-white p-2.5 sm:p-3 pb-5 sm:pb-7 rounded-sm sm:rounded-md shadow-[0_30px_60px_rgba(0,0,0,0.9)] z-30 -rotate-1 hover:rotate-0 transition-transform duration-500 ease-out group">
+                <div className="relative w-full h-full overflow-hidden bg-slate-900">
+                  <Image
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg"
+                    alt="Nestor Anyanwu executive leadership and engineering"
+                    fill
+                    sizes="(max-width: 768px) 55vw, 25vw"
+                    className="object-cover object-[50%_20%] group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {/* ─── RIGHT COLUMN: CONTENT, PILLARS, STATS & CTAS (7 COLS) ─── */}
+          <div className="lg:col-span-7 space-y-6 lg:space-y-7">
+            
+            {/* Category header with blue bar */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-2.5">
+                <span className="w-8 h-1 bg-[#0075ff] rounded-full inline-block" />
+                <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#0075ff] dark:text-sky-400">
+                  {category}
+                </span>
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight font-heading leading-tight">
+                {title}
+              </h2>
             </div>
 
-            {/* CTA Button */}
-            <div className="pt-2">
-              <Link href={ctaLink} className="inline-block">
-                <button className="bg-[#0075ff] hover:bg-[#0060d0] text-white font-bold text-xs tracking-wider px-6 py-3 rounded-xl shadow-md active:scale-98 transition-all flex items-center gap-2 cursor-pointer">
-                  <span>{ctaText}</span>
+            {/* Paragraph description */}
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
+              {description}
+            </p>
+
+            {/* Checkmarked Core Pillars */}
+            <div className="space-y-2.5 pt-1">
+              {pillars.map((pillar, idx) => (
+                <div key={idx} className="flex items-start gap-2.5 group">
+                  <span className="shrink-0 mt-0.5 text-sky-400 bg-sky-400/15 rounded-full p-0.5 group-hover:scale-110 transition-transform">
+                    <CheckCircle2 className="w-4 h-4 text-[#0075ff] dark:text-sky-400" />
+                  </span>
+                  <span className="text-xs sm:text-sm font-semibold text-slate-200 group-hover:text-white transition-colors leading-snug">
+                    {pillar}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Stats Row */}
+            <div className="pt-3 border-t border-slate-800/80 grid grid-cols-3 gap-4 sm:gap-6">
+              {stats.map((stat, idx) => (
+                <div key={idx} className="space-y-1">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-white font-heading tracking-tight">
+                    {stat.value}
+                  </div>
+                  <div className="text-[11px] sm:text-xs text-slate-400 font-medium uppercase tracking-wider font-mono">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Single Action Button leading to About Page */}
+            <div className="pt-3">
+              <Link href={ctaLink || "/about"}>
+                <button className="bg-[#0075ff] hover:bg-[#0060d0] text-white font-extrabold text-xs tracking-wider px-7 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2 cursor-pointer active:scale-98">
+                  <span>{ctaText || "Discover More"}</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </button>
               </Link>
             </div>
+
           </div>
-        </div>
 
-        {/* MIDDLE STATS CONTAINER (3 cols) */}
-        <div className="lg:col-span-3 bg-[#081525] text-white p-6 sm:p-8 lg:p-10 flex flex-col justify-center gap-6 border-t lg:border-t-0 lg:border-l border-white/10 h-full">
-          {stats.map((stat, idx) => (
-            <div key={idx} className="space-y-1">
-              <div className="text-3xl sm:text-4xl lg:text-4xl font-black text-sky-400 font-mono tracking-tight">
-                {stat.value}
-              </div>
-              <div className="text-base sm:text-lg font-bold tracking-tight text-white font-heading">
-                {stat.label}
-              </div>
-              {stat.description && (
-                <p className="text-xs text-slate-300 leading-relaxed font-normal line-clamp-2">
-                  {stat.description}
-                </p>
-              )}
-            </div>
-          ))}
         </div>
-
-        {/* RIGHT IMAGE CONTAINER (3 cols) */}
-        <div className="lg:col-span-3 relative min-h-[300px] lg:h-full w-full bg-slate-950 overflow-hidden">
-          <Image
-            src={heroImage}
-            alt={heroImageAlt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 25vw"
-            className="object-cover object-top hover:scale-105 transition-transform duration-700 ease-out"
-            priority
-          />
-          {/* Floating Action Button */}
-          <div className="absolute bottom-5 right-5 flex flex-col gap-3 z-20">
-            <Link
-              href={ctaLink}
-              aria-label="Contact Nestor Anyanwu"
-              className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#0075ff] text-white hover:bg-[#0060d0] flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-105"
-            >
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-
       </div>
     </section>
   )

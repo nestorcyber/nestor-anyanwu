@@ -100,7 +100,7 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
                       src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg"
                       alt="Nestor volunteering at community event"
                       fill
-                      className="object-cover object-top"
+                      className="object-cover object-[50%_18%]"
                       priority
                     />
                   </div>

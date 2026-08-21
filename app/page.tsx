@@ -136,24 +136,19 @@ export default async function Home() {
 
       {/* 4. Impact & Reach */}
       <ImpactSection
-        category="Impact & Reach"
+        category="GET TO KNOW"
         title="Engineering Progress, Strategic Leadership & Ecosystem Impact"
-        description="From architecting software and AI solutions to tech leadership, developer relations, product management, IT consulting, and volunteering — every role I take on is driven by one conviction: creating real impact and an inclusive, collaborative tech ecosystem where everyone can thrive."
-        ctaText="LET'S COLLABORATE"
-        ctaLink="/contact"
-        pillarsTitle="Core Disciplines:"
+        description="From architecting scalable software and AI workflows to tech leadership, developer relations, product consulting, and volunteering — every role I take on is driven by one conviction: creating real impact and an inclusive, collaborative tech ecosystem where everyone can thrive."
+        ctaText="Discover More"
+        ctaLink="/about"
         pillars={[
-          "Software Engineering & Web Development",
-          "AI & Intelligent Systems",
-          "Tech Leadership & Strategy",
-          "Developer Relations (DevRel)",
-          "Product Management & IT Consulting",
-          "Ingenious Design & Visual Systems",
-          "Community Building & Volunteering",
+          "Architecting scalable software, modern web apps & intelligent AI workflows",
+          "Directing national ICT strategy, student computing & builder governance",
+          "Cultivating developer ecosystems, tech summits, bootcamps & hackathons",
+          "Delivering enterprise product strategy, tech audits & IT consulting",
+          "Championing voluntary outreach, mentorship & inclusive tech growth",
         ]}
         stats={formattedStats}
-        heroImage="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966495/techadv1_dyclrm.jpg"
-        heroImageAlt="Nestor Anyanwu at community event"
       />
 
       {/* 5. Core Focus */}

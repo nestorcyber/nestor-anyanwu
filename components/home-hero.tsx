@@ -20,12 +20,9 @@ export default function HomeHero() {
       {/* Content */}
       <div className="relative z-10 w-full site-container pb-6 sm:pb-12 md:pb-20">
         <div className="max-w-3xl text-left">
-          <h1 className="font-sans text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-0 leading-snug [text-shadow:_0_2px_8px_rgba(0,0,0,0.8)]">
+          <h1 className="font-sans text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-0 leading-tight [text-shadow:_0_2px_8px_rgba(0,0,0,0.8)]">
             A Journey of Innovation & Purpose
           </h1>
-          <p className="text-slate-200 text-xs sm:text-sm md:text-base font-normal mt-2 sm:mt-3 tracking-wide [text-shadow:_0_1px_4px_rgba(0,0,0,0.8)] max-w-2xl leading-relaxed">
-            Architecting software, advancing AI, and leading developer communities to build an inclusive, collaborative tech ecosystem where everyone can thrive.
-          </p>
         </div>
       </div>
     </section>

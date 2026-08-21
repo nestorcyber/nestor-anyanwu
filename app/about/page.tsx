@@ -102,29 +102,25 @@ export default function AboutPage() {
       <main className="min-h-screen bg-background pt-0 overflow-x-hidden">
         
         {/* 1. About Hero Section */}
-        <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-end justify-end md:items-center md:justify-start overflow-hidden">
+        <section className="relative h-[62svh] min-h-[380px] sm:h-[75svh] md:h-[calc(100svh-4rem)] md:min-h-[640px] flex flex-col justify-end overflow-hidden bg-slate-950">
           <Image
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg"
             alt="Nestor Anyanwu speaking"
             fill
-            className="object-cover object-[75%_20%]"
+            sizes="100vw"
             priority
+            fetchPriority="high"
+            className="object-cover object-[50%_20%] sm:object-[75%_20%] md:object-center"
           />
           {/* Overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent md:bg-gradient-to-t md:from-black/85 md:via-black/45 md:to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent sm:from-black/85 sm:via-black/35 sm:to-transparent" />
           
           {/* Content */}
-          <div className="relative z-10 w-full site-container pb-12 md:pb-0 md:pt-36 md:flex md:items-center md:justify-start md:h-full">
-            <div className="max-w-3xl">
-              <p className="text-accent text-xs md:text-sm font-bold tracking-widest mb-3 uppercase [text-shadow:_0_1px_2px_rgba(0,0,0,0.4)]">
-                EXECUTIVE PROFILE
-              </p>
-              <h1 className="font-sans text-3xl md:text-6xl lg:text-7xl font-bold text-white mb-2 leading-none tracking-tight [text-shadow:_0_2px_8px_rgba(0,0,0,0.8)]">
+          <div className="relative z-10 w-full site-container pb-6 sm:pb-12 md:pb-20">
+            <div className="max-w-3xl text-left">
+              <h1 className="font-sans text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-0 leading-tight [text-shadow:_0_2px_8px_rgba(0,0,0,0.8)]">
                 Nestor Anyanwu
               </h1>
-              <p className="text-white/90 text-sm sm:text-base md:text-lg font-medium tracking-wide [text-shadow:_0_2px_4px_rgba(0,0,0,0.6)]">
-                Technology & Leadership • AI & Software Engineering • DevRel & Community • Product & IT Consulting • Volunteering & Impact
-              </p>
             </div>
           </div>
         </section>

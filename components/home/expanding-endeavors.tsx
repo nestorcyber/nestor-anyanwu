@@ -99,7 +99,7 @@ export default function ExpandingEndeavors() {
               alt={item.title}
               fill
               sizes="100vw"
-              className="object-cover"
+              className="object-cover object-[50%_20%]"
             />
 
             {/* Dark Gradient Overlay */}
@@ -153,7 +153,7 @@ export default function ExpandingEndeavors() {
                 alt={item.title}
                 fill
                 sizes="20vw"
-                className={`object-cover transition-all duration-500 ease-out ${isHovered ? "scale-105 filter brightness-100" : "scale-100 filter brightness-75 grayscale-[20%]"
+                className={`object-cover object-[50%_20%] transition-all duration-500 ease-out ${isHovered ? "scale-105 filter brightness-100" : "scale-100 filter brightness-75 grayscale-[20%]"
                   }`}
               />
 
