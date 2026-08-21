@@ -50,13 +50,13 @@ export default function PortfolioHero({
         }}
       />
 
-      {/* 3. Bottom-Aligned Content anchored to standard site grid margin */}
-      <div className="relative z-20 w-full site-container pt-16 pb-6 sm:pb-12 lg:pb-16">
+      {/* 3. Lower-Third Content anchored to site grid */}
+      <div className="relative z-20 w-full site-container pb-8 sm:pb-14 md:pb-20 lg:pb-24">
         <div className="w-full flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8 lg:gap-12">
           
-          {/* Left Typography Block */}
+          {/* Left Typography Block in Lower Third */}
           <div className="max-w-xl text-white text-left">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold tracking-tight leading-tight sm:leading-[1.08] font-heading drop-shadow-md">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold tracking-tight leading-[1.1] sm:leading-[1.08] font-heading drop-shadow-lg">
               Strategic Engineering.<br className="hidden sm:inline" />{" "}
               Sustainable Impact.
             </h1>
