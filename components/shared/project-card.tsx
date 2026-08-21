@@ -42,7 +42,7 @@ export default function ProjectCard({
       <CardWrapper {...(wrapperProps as any)} aria-label={`View project details for ${title}`} className="flex flex-col justify-between h-full w-full">
         
         <div>
-          {/* Project Cover Image (Edge-to-edge flush top with object-cover, matching ArticleCard) */}
+          {/* Project Cover Image (Edge-to-edge flush top with object-cover) */}
           <div className="relative w-full h-[260px] sm:h-[290px] overflow-hidden bg-slate-100 dark:bg-slate-950 flex items-center justify-center">
             {image ? (
               <Image

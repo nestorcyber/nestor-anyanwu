@@ -212,7 +212,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
       </section>
 
       {/* ─── ALL JOURNAL ARTICLES SECTION WITH FILTERS & SEARCH ─── */}
-      <div className="w-full site-container space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 space-y-8">
         
         {/* Category Filters & Search Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/60 pb-6">
@@ -247,7 +247,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
 
         {/* ARTICLES GRID */}
         {filteredArticles.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
             {filteredArticles.map((article) => (
               <ArticleCard
                 key={article.slug}

@@ -7,6 +7,7 @@ import FeaturedPortfolio from "@/components/home/featured-portfolio"
 import ImpactSection from "@/components/impact-section"
 import FeaturedCommunity from "@/components/home/featured-community"
 import TestimonialsSection from "@/components/home/testimonials-section"
+import LatestJournal from "@/components/home/latest-journal"
 import TrustedBrands from "@/components/home/trusted-brands"
 import HomeCTA from "@/components/home/home-cta"
 import Footer from "@/components/footer"
@@ -166,7 +167,11 @@ export default async function Home() {
       {/* @ts-expect-error Async Server Component */}
       <FeaturedCommunity />
 
-      {/* 8. Testimonials */}
+      {/* 8. Latest Journal Articles & Essays */}
+      {/* @ts-expect-error Async Server Component */}
+      <LatestJournal />
+
+      {/* 9. Social Proof & Testimonials */}
       <TestimonialsSection />
 
       {/* 10. Featured Highlights Carousel (Moved down immediately before HomeCTA) */}

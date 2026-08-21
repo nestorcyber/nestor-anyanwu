@@ -20,7 +20,7 @@ export default async function LatestJournal() {
       {/* Soft Background Mesh Light Glow for Light and Dark Modes */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-sky-200/30 dark:bg-sky-500/10 blur-[100px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 relative z-10 space-y-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10 space-y-10">
         
         {/* Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl">
