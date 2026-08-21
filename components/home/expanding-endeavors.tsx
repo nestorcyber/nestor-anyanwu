@@ -14,6 +14,8 @@ export interface EndeavorItem {
   link: string
   buttonText: string
   ariaLabel: string
+  imageClassName?: string
+  objectPosition?: string
 }
 
 export default function ExpandingEndeavors() {
@@ -35,30 +37,35 @@ export default function ExpandingEndeavors() {
       title: "AI & Design & Software Engineering",
       subtitle: "Intelligent Systems & Visual Craft",
       description: "Building full-stack web applications, integrating AI workflows, and crafting human-centered visual design systems.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
+      image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1785966495/techadv1_dyclrm.jpg",
       link: "/projects",
       buttonText: "View Engineering & AI Work",
       ariaLabel: "View Nestor Anyanwu's AI, design, and software engineering work",
+      objectPosition: "object-[50%_15%]",
     },
     {
       id: "community-devrel",
       title: "Community & DevRel",
       subtitle: "Developer Relations & Ecosystems",
       description: "Empowering developer networks, technical advocacy, bootcamps, and hackathons to nurture the next generation of builders.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden2-sUzI0wvGmZMjB5UUP911IAB6WvBM5c.jpg",
+      image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787285712/IMG_0452_a2kkcl.jpg",
       link: "/community",
       buttonText: "Explore Community Initiatives",
       ariaLabel: "Explore Nestor Anyanwu's developer relations and community initiatives",
+      imageClassName: "scale-140 origin-[50%_15%]",
+      objectPosition: "object-[50%_10%]",
     },
     {
       id: "product-it-consulting",
       title: "Product & IT Consulting",
       subtitle: "Product Strategy & Architecture",
       description: "Managing product roadmaps, technical advisory, system audits, and enterprise IT consulting to drive sustainable scale.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg",
+      image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787285480/f3_0_2_tww32b.jpg",
       link: "/contact",
       buttonText: "Request Product Advisory",
       ariaLabel: "Request product management and IT consulting from Nestor Anyanwu",
+      imageClassName: "scale-140 origin-[50%_15%]",
+      objectPosition: "object-[50%_10%]",
     },
     {
       id: "volunteering-impact",
@@ -99,7 +106,7 @@ export default function ExpandingEndeavors() {
               alt={item.title}
               fill
               sizes="100vw"
-              className="object-cover object-[50%_20%]"
+              className={`object-cover ${item.objectPosition || "object-[50%_20%]"} ${item.imageClassName || ""}`}
             />
 
             {/* Dark Gradient Overlay */}
@@ -153,7 +160,7 @@ export default function ExpandingEndeavors() {
                 alt={item.title}
                 fill
                 sizes="20vw"
-                className={`object-cover object-[50%_20%] transition-all duration-500 ease-out ${isHovered ? "scale-105 filter brightness-100" : "scale-100 filter brightness-75 grayscale-[20%]"
+                className={`object-cover ${item.objectPosition || "object-[50%_20%]"} ${item.imageClassName || ""} transition-all duration-500 ease-out ${isHovered ? "scale-110 filter brightness-100" : "scale-100 filter brightness-75 grayscale-[20%]"
                   }`}
               />
 
