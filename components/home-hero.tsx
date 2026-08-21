@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function HomeHero() {
   return (
-    <section className="relative h-screen flex flex-col items-end justify-end md:items-center md:justify-start overflow-hidden">
+    <section className="relative h-[calc(100svh-3.5rem)] md:h-[calc(100svh-4rem)] min-h-[560px] md:min-h-[640px] flex flex-col justify-end overflow-hidden bg-slate-950">
       {/* Background image - edge to edge, face centered on mobile */}
       <Image
         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg"
@@ -11,22 +11,19 @@ export default function HomeHero() {
         sizes="100vw"
         priority
         fetchPriority="high"
-        className="object-cover object-[70%_15%] md:object-center"
+        className="object-cover object-[50%_15%] sm:object-[60%_15%] md:object-center"
       />
 
-      {/* Overlay gradient - strong contrast across all screen sizes */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent md:bg-gradient-to-t md:from-black/80 md:via-black/45 md:to-transparent"></div>
-
-      {/* Dark overlay panel for text readability on mobile and desktop */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-black/90 to-transparent md:from-black/50 md:to-transparent md:h-full"></div>
+      {/* Overlay gradient - clear subject portrait, strong contrast for bottom typography */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent sm:from-black/85 sm:via-black/35 sm:to-transparent" />
 
       {/* Content */}
-      <div className="relative z-10 w-full site-container pb-16 md:pb-0 md:pt-32 md:flex md:items-center md:justify-start md:h-full">
-        <div className="max-w-3xl">
-          <h1 className="font-sans text-2xl md:text-6xl lg:text-7xl font-bold text-white mb-0 leading-tight [text-shadow:_0_2px_8px_rgba(0,0,0,0.8)]">
+      <div className="relative z-10 w-full site-container pb-10 sm:pb-16 md:pb-20">
+        <div className="max-w-3xl text-center sm:text-left mx-auto sm:mx-0">
+          <h1 className="font-sans text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-0 leading-tight [text-shadow:_0_2px_8px_rgba(0,0,0,0.8)]">
             A Journey of Innovation & Purpose
           </h1>
-          <p className="text-slate-200 text-xs sm:text-sm md:text-base font-normal mt-3 tracking-wide [text-shadow:_0_1px_4px_rgba(0,0,0,0.8)] max-w-2xl leading-relaxed">
+          <p className="text-slate-200 text-xs sm:text-sm md:text-base font-normal mt-3 tracking-wide [text-shadow:_0_1px_4px_rgba(0,0,0,0.8)] max-w-2xl leading-relaxed mx-auto sm:mx-0">
             Architecting software, advancing AI, and leading developer communities to build an inclusive, collaborative tech ecosystem where everyone can thrive.
           </p>
         </div>

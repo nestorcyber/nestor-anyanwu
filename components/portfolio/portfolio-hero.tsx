@@ -19,14 +19,14 @@ export default function PortfolioHero({
   return (
     <section className="relative w-full h-[calc(100svh-3.5rem)] md:h-[calc(100svh-4rem)] min-h-[560px] md:min-h-[640px] max-h-[1080px] bg-slate-950 overflow-hidden flex flex-col justify-end">
       
-      {/* 1. Full-Bleed Background Image (Clear, Untinted on the Subject) */}
+      {/* 1. Full-Bleed Background Image (Centered on Mobile like Tony Elumelu, Off-center on Desktop) */}
       <div className="absolute inset-0 w-full h-full">
         <Image
           src="/devfest24-solo.jpg"
           alt={settings?.authorName || "Nestor Anyanwu"}
           fill
           priority
-          className="object-cover object-[78%_18%] sm:object-[72%_18%] md:object-[68%_20%] lg:object-[64%_22%] xl:object-[60%_25%]"
+          className="object-cover object-[50%_12%] sm:object-[68%_18%] md:object-[66%_20%] lg:object-[64%_22%] xl:object-[60%_25%]"
           sizes="100vw"
         />
       </div>
@@ -42,11 +42,11 @@ export default function PortfolioHero({
         }}
       />
 
-      {/* 2b. Mobile & Tablet Responsive Gradient (Leaves upper subject face un-tinted and darkens bottom for text legibility) */}
+      {/* 2b. Mobile & Tablet Clean Bottom-Only Vignette (Crystal clear subject portrait on top 65%, readable text on bottom) */}
       <div 
         className="absolute inset-0 z-10 pointer-events-none lg:hidden"
         style={{
-          background: `linear-gradient(180deg, rgba(11, 28, 44, 0) 0%, rgba(11, 28, 44, 0.15) 30%, rgba(11, 28, 44, 0.8) 55%, #0B1C2C 95%)`,
+          background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 65%, rgba(11, 28, 44, 0.95) 92%)`,
         }}
       />
 
@@ -54,20 +54,20 @@ export default function PortfolioHero({
       <div className="relative z-20 w-full site-container pt-24 pb-8 sm:pb-12 lg:pb-16">
         <div className="w-full flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8 lg:gap-12">
           
-          {/* Left Typography Block (Aligned to site-container edge) */}
-          <div className="max-w-xl space-y-3.5 sm:space-y-4 text-white">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold tracking-tight leading-[1.08] font-heading drop-shadow-md">
-              Strategic Engineering.<br />
+          {/* Left Typography Block (Centered on mobile matching Tony Elumelu layout, Left-aligned on tablet/desktop) */}
+          <div className="max-w-xl space-y-3 sm:space-y-4 text-white text-center sm:text-left mx-auto sm:mx-0">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold tracking-tight leading-[1.14] sm:leading-[1.08] font-heading drop-shadow-md">
+              Strategic Engineering.<br className="hidden sm:inline" />{" "}
               Sustainable Impact.
             </h1>
             
-            <p className="text-white/85 text-xs sm:text-sm md:text-[15px] max-w-md lg:max-w-lg leading-relaxed font-normal drop-shadow-xs">
+            <p className="text-white/90 text-xs sm:text-sm md:text-[15px] max-w-md lg:max-w-lg leading-relaxed font-normal drop-shadow-xs mx-auto sm:mx-0">
               Building scalable software systems, high-converting digital products, and modern web applications through hands-on engineering, intuitive UI/UX design, and proactive tech leadership.
             </p>
           </div>
 
-          {/* Right Bottom-Aligned Floating Glassmorphic Stat Card */}
-          <div className="shrink-0 self-start sm:self-auto lg:self-end">
+          {/* Right Bottom-Aligned Floating Glassmorphic Stat Card (Hidden on small mobile to keep clean portrait view, visible on sm+) */}
+          <div className="hidden sm:block shrink-0 self-auto lg:self-end">
             <div className="bg-black/40 dark:bg-black/50 backdrop-blur-xl border border-white/20 rounded-2xl p-4 sm:p-5 shadow-2xl space-y-2 sm:space-y-2.5 min-w-[170px] max-w-[220px] text-white">
               
               {/* Avatar Stack with Green Plus Badge */}
