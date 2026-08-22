@@ -940,30 +940,46 @@ export const fallbackGalleryImages = [
   },
 ]
 
-export const certificationsList = [
+export const certificationsList: CertificationItem[] = [
   {
     id: "ndpc-privacy",
     title: "Data Privacy Ambassador",
     provider: "Nigeria Data Protection Commission (NDPC)",
     date: "April 2025",
     credentialUrl: "https://ndpc.gov.ng",
+    credentialId: "NDPC-AMB-2025-084",
+    description: "Certified competence in data protection governance, NDPA compliance, user privacy frameworks, and institutional data security protocols.",
+    skills: ["Data Privacy", "NDPA Compliance", "Risk Governance", "Security Protocols"],
+    image: "/certificates/ndpc-cert.jpg",
   },
   {
     id: "aws-cloud",
     title: "AWS Cloud Community Practitioner",
     provider: "AWS Cloud Club FUTO",
     date: "September 2025",
+    credentialId: "AWS-CCF-2025-119",
+    description: "Demonstrated knowledge of AWS core infrastructure services, cloud computing fundamentals, serverless computing, and IAM security models.",
+    skills: ["AWS Cloud", "Cloud Architecture", "Serverless", "Security & IAM"],
+    image: "/certificates/aws-cert.jpg",
   },
   {
     id: "ieee-member",
     title: "IEEE Engineering Leadership Certification",
     provider: "IEEE FUTO Student Branch",
     date: "May 2026",
+    credentialId: "IEEE-SB-2026-042",
+    description: "Recognized engineering management, technical program leadership, and cross-functional team coordination across student branches.",
+    skills: ["Engineering Leadership", "Technical Coordination", "Agile Execution"],
+    image: "/certificates/ieee-cert.jpg",
   },
   {
     id: "gotni-leader",
     title: "Emerging Leaders Credential",
     provider: "Guardians of the Nation International (GOTNI)",
     date: "December 2025",
+    credentialId: "GOTNI-ELP-2025-307",
+    description: "Executive leadership training focused on strategic vision, public governance, organizational culture, and high-impact initiative delivery.",
+    skills: ["Strategic Leadership", "Public Governance", "Organizational Impact"],
+    image: "/certificates/gotni-cert.jpg",
   },
 ]
