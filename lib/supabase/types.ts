@@ -241,6 +241,8 @@ export type Database = {
           slug: string
           title: string
           provider: string
+          description: string | null
+          image_url: string | null
           date_label: string
           credential_url: string | null
           sort_order: number

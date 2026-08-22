@@ -358,12 +358,14 @@ export function StatForm({ initial }: { initial?: Tables<'portfolio_stats'> | nu
   )
 }
 
-export function CertificationForm({ initial }: { initial?: Tables<'certifications'> | null }) {
+export function CertificationForm({ initial }: { initial?: any }) {
   const router = useRouter()
   const [title, setTitle] = useState(initial?.title ?? '')
   const [slug, setSlug] = useState(initial?.slug ?? '')
   const [provider, setProvider] = useState(initial?.provider ?? '')
-  const [dateLabel, setDateLabel] = useState(initial?.date_label ?? '')
+  const [description, setDescription] = useState(initial?.description ?? '')
+  const [imageUrl, setImageUrl] = useState(initial?.image_url ?? initial?.image ?? '')
+  const [dateLabel, setDateLabel] = useState(initial?.date_label ?? initial?.issue_date ?? '')
   const [credentialUrl, setCredentialUrl] = useState(initial?.credential_url ?? '')
   const [sortOrder, setSortOrder] = useState(String(initial?.sort_order ?? 0))
   const [saving, setSaving] = useState(false)
@@ -372,12 +374,15 @@ export function CertificationForm({ initial }: { initial?: Tables<'certification
   async function onSubmit(e: FormEvent) {
     e.preventDefault()
     setSaving(true)
+    setError('')
     const supabase = createClient()
-    const payload = {
+    const payload: any = {
       title,
       slug: slug || slugify(title),
       provider,
-      date_label: dateLabel,
+      description: description || null,
+      image_url: imageUrl || null,
+      date_label: dateLabel || '',
       credential_url: credentialUrl || null,
       sort_order: Number(sortOrder) || 0,
     }
@@ -391,24 +396,29 @@ export function CertificationForm({ initial }: { initial?: Tables<'certification
       setSaving(false)
       return
     }
+    await revalidatePortfolio()
     router.push('/admin/certifications')
     router.refresh()
   }
 
   async function onDelete() {
-    if (!initial || !confirm('Delete?')) return
+    if (!initial || !confirm('Delete this certification?')) return
     const supabase = createClient()
-    await supabase.from('certifications').delete().eq('id', initial.id)
+    if (initial.id) {
+      await supabase.from('certifications').delete().eq('id', initial.id)
+    }
+    await revalidatePortfolio()
     router.push('/admin/certifications')
     router.refresh()
   }
 
   return (
     <form onSubmit={onSubmit} className="max-w-xl space-y-5">
-      <Field label="Title">
+      <Field label="Name (Certificate Title)">
         <TextInput
           required
           value={title}
+          placeholder="e.g. Data Privacy Ambassador"
           onChange={(e) => {
             setTitle(e.target.value)
             if (!initial) setSlug(slugify(e.target.value))
@@ -418,22 +428,47 @@ export function CertificationForm({ initial }: { initial?: Tables<'certification
       <Field label="Slug">
         <TextInput required value={slug} onChange={(e) => setSlug(slugify(e.target.value))} />
       </Field>
-      <Field label="Provider">
-        <TextInput value={provider} onChange={(e) => setProvider(e.target.value)} />
+      <Field label="Issued By (Provider / Organization)">
+        <TextInput
+          required
+          value={provider}
+          placeholder="e.g. Nigeria Data Protection Commission (NDPC)"
+          onChange={(e) => setProvider(e.target.value)}
+        />
       </Field>
-      <Field label="Date">
-        <TextInput value={dateLabel} onChange={(e) => setDateLabel(e.target.value)} />
+      <Field label="Description">
+        <TextTextarea
+          value={description}
+          placeholder="Summary of accredited competencies and domain skills..."
+          rows={3}
+          onChange={(e) => setDescription(e.target.value)}
+        />
       </Field>
-      <Field label="Credential URL">
-        <TextInput value={credentialUrl} onChange={(e) => setCredentialUrl(e.target.value)} />
+      <Field label="Credential URL (Linked in button)">
+        <TextInput
+          value={credentialUrl}
+          placeholder="https://..."
+          onChange={(e) => setCredentialUrl(e.target.value)}
+        />
       </Field>
-      <Field label="Sort order">
-        <TextInput type="number" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
-      </Field>
+      <ImageUpload
+        label="Certificate Document Image"
+        value={imageUrl}
+        onChange={(url) => setImageUrl(url)}
+        folder="certificates"
+      />
+      <div className="grid grid-cols-2 gap-4">
+        <Field label="Issue Date (Optional)">
+          <TextInput value={dateLabel} placeholder="e.g. April 2025" onChange={(e) => setDateLabel(e.target.value)} />
+        </Field>
+        <Field label="Sort order">
+          <TextInput type="number" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} />
+        </Field>
+      </div>
       {error ? <p className="text-sm text-red-400">{error}</p> : null}
       <div className="flex gap-3">
         <PrimaryButton type="submit" disabled={saving}>
-          Save
+          {saving ? 'Saving...' : 'Save Certification'}
         </PrimaryButton>
         {initial ? <DangerButton type="button" onClick={onDelete}>Delete</DangerButton> : null}
       </div>

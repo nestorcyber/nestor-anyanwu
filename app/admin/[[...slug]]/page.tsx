@@ -1617,13 +1617,15 @@ export default async function AdminCatchAllPage({ params }: Props) {
     if (!data) {
       const fallbackCertifications = await getCertifications()
       const index = parseInt(actionOrId.replace('cert-', ''), 10)
-      const fb = fallbackCertifications[index] || fallbackCertifications.find((c) => c.title === actionOrId)
+      const fb = fallbackCertifications[index] || fallbackCertifications.find((c) => c.title === actionOrId || c.id === actionOrId)
       if (fb) {
         data = {
           id: undefined,
           title: fb.title,
           provider: fb.provider,
-          issue_date: fb.date || null,
+          description: fb.description || '',
+          image_url: fb.image || null,
+          date_label: fb.date || '',
           credential_url: fb.credentialUrl || null,
           sort_order: !isNaN(index) ? index : 0,
         } as any
