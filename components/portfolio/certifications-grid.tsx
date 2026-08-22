@@ -20,11 +20,10 @@ export default function CertificationsGrid({
         {/* Desktop Split Layout: Text on Left (col-span-5) & 2 Cards on Right (col-span-7) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
           
-          {/* Left Column: Balanced Text Column with Accent Line Under the Sub-Heading */}
-          <div className="lg:col-span-5 flex flex-col justify-between h-full py-1">
+          {/* Left Column: Cohesive Text & Action Button Unit following web standards */}
+          <div className="lg:col-span-5 flex flex-col justify-start space-y-6 lg:sticky lg:top-28">
             
-            {/* Top / Main Content Area */}
-            <div className="space-y-4 sm:space-y-5">
+            <div className="space-y-4">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-[1.12]">
                 Licenses & Certifications
               </h2>
@@ -33,12 +32,12 @@ export default function CertificationsGrid({
                 Verified credentials, professional accreditations, and engineering qualifications that validate technical competence, industry compliance, and executive leadership standards.
               </p>
 
-              {/* Accent Line Under the Sub-Heading Write-Up */}
-              <div className="w-14 h-1 bg-accent rounded-full mt-2" />
+              {/* Accent Line Under the Sub-Heading */}
+              <div className="w-14 h-1 bg-accent rounded-full" />
             </div>
 
-            {/* Bottom Action Button */}
-            <div className="pt-6">
+            {/* Standard CTA Button Placement: Directly below the text & line */}
+            <div className="pt-2">
               <Link
                 href="/certifications"
                 className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-accent hover:bg-accent/90 text-white font-extrabold text-xs tracking-wider rounded-xl shadow-xs hover:shadow-md transition-all cursor-pointer"
