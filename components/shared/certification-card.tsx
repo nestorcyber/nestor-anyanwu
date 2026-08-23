@@ -111,6 +111,7 @@ export default function CertificationCard({ cert }: CertificationCardProps) {
             src={certImg}
             alt={`${cert.title} Certificate`}
             fill
+            unoptimized={certImg.startsWith("http") && !certImg.includes("res.cloudinary.com") && !certImg.includes("blob.vercel-storage.com")}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
           />

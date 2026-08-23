@@ -1519,7 +1519,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
   // 9. Certifications
   if (section === 'certifications') {
     if (!actionOrId) {
-      const { data: dbData } = await supabase.from('certifications').select('id, title, provider, date_label').order('sort_order')
+      const { data: dbData } = await supabase.from('certifications').select('*').order('sort_order')
       const fallbackCertifications = await getCertifications()
       const dbTitles = new Set((dbData ?? []).map((row) => row.title))
       const items = [
@@ -1528,6 +1528,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
           title: c.title,
           provider: c.provider,
           date: c.date_label || '2026',
+          image: c.image_url || c.image || null,
         })),
         ...fallbackCertifications
           .filter((c) => !dbTitles.has(c.title))
@@ -1536,21 +1537,23 @@ export default async function AdminCatchAllPage({ params }: Props) {
             title: c.title,
             provider: c.provider,
             date: c.date || '2026',
+            image: c.image || null,
           })),
       ]
       return (
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Certifications & Diplomas</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Certifications &amp; Diplomas</h1>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                 Manage, edit, and display professional credentials and achievements.
               </p>
             </div>
-            <Link href="/admin/certifications/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
-                + New Certification
-              </button>
+            <Link
+              href="/admin/certifications/new"
+              className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs inline-flex items-center"
+            >
+              + New Certification
             </Link>
           </div>
 
@@ -1565,9 +1568,20 @@ export default async function AdminCatchAllPage({ params }: Props) {
                   className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
                   <div className="flex items-center gap-4 min-w-0">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 font-serif text-3xl font-normal flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700">
-                      {initial}
-                    </div>
+                    {row.image ? (
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden shrink-0 border border-slate-200/80 dark:border-slate-700 bg-slate-100 dark:bg-slate-850 relative">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={row.image}
+                          alt={title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 font-serif text-3xl font-normal flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700">
+                        {initial}
+                      </div>
+                    )}
 
                     <div className="min-w-0 space-y-1">
                       <Link
@@ -1585,7 +1599,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
 
                     <Link
                       href={`/admin/certifications/${row.id}`}
-                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
+                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs inline-flex items-center"
                     >
                       Edit
                     </Link>
@@ -1612,8 +1626,15 @@ export default async function AdminCatchAllPage({ params }: Props) {
       )
     }
     let data = null
-    const { data: dbData } = await supabase.from('certifications').select('*').eq('id', actionOrId).maybeSingle()
-    data = dbData
+    const isRealUuid = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(actionOrId)
+    if (isRealUuid) {
+      const { data: dbData } = await supabase.from('certifications').select('*').eq('id', actionOrId).maybeSingle()
+      data = dbData
+    } else {
+      const { data: dbData } = await supabase.from('certifications').select('*').eq('slug', actionOrId).maybeSingle()
+      data = dbData
+    }
+
     if (!data) {
       const fallbackCertifications = await getCertifications()
       const index = parseInt(actionOrId.replace('cert-', ''), 10)

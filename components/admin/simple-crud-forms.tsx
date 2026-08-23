@@ -429,24 +429,22 @@ export function CertificationForm({ initial }: { initial?: any }) {
         ? await supabase.from('certifications').update(payload).eq('id', initialId)
         : await supabase.from('certifications').insert(payload)
 
-      // Fallback if remote table does not have 'description' or 'image_url' columns yet
-      if (res.error && (res.error.message.includes('column') || res.error.message.includes('schema cache'))) {
-        const fallbackPayload: any = {
-          title: payload.title,
-          slug: payload.slug,
-          provider: payload.provider,
-          date_label: payload.date_label,
-          credential_url: payload.credential_url,
-          sort_order: payload.sort_order,
-        }
+      // Check if image column is named 'image' instead of 'image_url'
+      if (res.error && res.error.message.includes('image_url')) {
+        const altPayload = { ...payload }
+        delete altPayload.image_url
+        altPayload.image = imageUrl || null
         res = (isRealUuid && initialId)
-          ? await supabase.from('certifications').update(fallbackPayload).eq('id', initialId)
-          : await supabase.from('certifications').insert(fallbackPayload)
+          ? await supabase.from('certifications').update(altPayload).eq('id', initialId)
+          : await supabase.from('certifications').insert(altPayload)
       }
 
       if (res.error) {
-        setError(res.error.message)
-        setSaving(false)
+        if (res.error.message.includes('schema cache') || res.error.message.includes('column')) {
+          setError(`Database notice: ${res.error.message}. Please run the SQL migration in Supabase to add the 'image_url' and 'description' columns to 'certifications' table.`)
+        } else {
+          setError(res.error.message)
+        }
         return
       }
 
