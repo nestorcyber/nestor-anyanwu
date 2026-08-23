@@ -5,7 +5,7 @@ import SectionContainer from "@/components/shared/section-container"
 import { ArrowUpRight, Search, FileText, Briefcase, Zap, Star, BookOpen, Users, History, Award } from "lucide-react"
 import { buildSearchIndex, searchInIndex } from "@/lib/search-index"
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Search Results | Nestor Anyanwu (Nestor Cyber)",

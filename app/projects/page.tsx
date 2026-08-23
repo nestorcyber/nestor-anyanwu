@@ -6,7 +6,7 @@ import PortfolioCTA from "@/components/portfolio/portfolio-cta"
 import { getProjectItems } from "@/lib/content"
 import { ArrowLeft, FolderKanban } from "lucide-react"
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Projects & Deliverables | Nestor Anyanwu (Nestor Cyber)",

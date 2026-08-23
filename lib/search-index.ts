@@ -76,7 +76,9 @@ const pageEntries: SearchResult[] = [
   },
 ]
 
-export async function buildSearchIndex(): Promise<SearchResult[]> {
+import { unstable_cache } from 'next/cache'
+
+async function generateSearchIndex(): Promise<SearchResult[]> {
   const [projects, services, skillGroups, journeyTimeline, certifications, articles, communityEntriesList] =
     await Promise.all([
       getProjectItems(),
@@ -173,6 +175,15 @@ export async function buildSearchIndex(): Promise<SearchResult[]> {
     ...communityEntries,
   ]
 }
+
+export const buildSearchIndex = unstable_cache(
+  async () => generateSearchIndex(),
+  ['full-search-index'],
+  {
+    revalidate: 3600,
+    tags: ['search-index'],
+  }
+)
 
 export function searchInIndex(index: SearchResult[], query: string): SearchResult[] {
   if (!query.trim()) return []

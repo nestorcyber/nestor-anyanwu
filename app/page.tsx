@@ -13,7 +13,7 @@ import HomeCTA from "@/components/home/home-cta"
 import Footer from "@/components/footer"
 import { getPortfolioStats, getBrandPartners } from "@/lib/content"
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Nestor Anyanwu | Software Engineering, AI, DevRel, Leadership, Product & Design",

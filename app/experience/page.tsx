@@ -5,7 +5,7 @@ import ExperienceClient from "@/components/experience/experience-client"
 import { getJourneyItems } from "@/lib/content"
 import { Briefcase } from "lucide-react"
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Experience & Career Journey | Nestor Anyanwu (Nestor Cyber)",

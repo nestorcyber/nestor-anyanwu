@@ -20,7 +20,7 @@ import {
   getSiteSettings,
 } from "@/lib/content"
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Portfolio & Engineering Evidence | Nestor Anyanwu (Nestor Cyber)",

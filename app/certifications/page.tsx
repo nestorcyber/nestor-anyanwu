@@ -5,7 +5,7 @@ import PortfolioCTA from "@/components/portfolio/portfolio-cta"
 import CertificationCard from "@/components/shared/certification-card"
 import { getCertifications } from "@/lib/content"
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Licenses & Certifications | Nestor Anyanwu (Nestor Cyber)",

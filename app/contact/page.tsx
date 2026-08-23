@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import ContactPage from "./contact-client"
 import { getBrandPartners } from "@/lib/content"
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Contact & Collaboration | Nestor Anyanwu (Nestor Cyber)",

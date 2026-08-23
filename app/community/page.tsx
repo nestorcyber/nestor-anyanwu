@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import CommunityPage, { type CommunityEvent } from "./community-client"
 import { getCommunityEntries, getJourneyItems } from "@/lib/content"
 
-export const revalidate = 10
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Community & Volunteering | Nestor Anyanwu (Nestor Cyber)",
