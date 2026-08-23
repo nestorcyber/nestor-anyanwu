@@ -18,6 +18,8 @@ export async function revalidatePortfolio(slug?: string) {
   try {
     revalidatePath('/')
     revalidatePath('/portfolio')
+    revalidatePath('/certifications')
+    revalidatePath('/admin/certifications')
     if (slug) {
       revalidatePath(`/portfolio/${slug}`)
     }

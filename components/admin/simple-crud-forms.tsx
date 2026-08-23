@@ -375,56 +375,91 @@ export function CertificationForm({ initial }: { initial?: any }) {
     e.preventDefault()
     setSaving(true)
     setError('')
-    const supabase = createClient()
-    const payload: any = {
-      title,
-      slug: slug || slugify(title),
-      provider,
-      description: description || null,
-      image_url: imageUrl || null,
-      date_label: dateLabel || '',
-      credential_url: credentialUrl || null,
-      sort_order: Number(sortOrder) || 0,
-    }
-    const initialId = initial?.id
-    let res = (isRealUuid && initialId)
-      ? await supabase.from('certifications').update(payload).eq('id', initialId)
-      : await supabase.from('certifications').insert(payload)
-
-    // Fallback if remote table does not have 'description' or 'image_url' columns yet
-    if (res.error && (res.error.message.includes('column') || res.error.message.includes('schema cache'))) {
-      const fallbackPayload: any = {
-        title: payload.title,
-        slug: payload.slug,
-        provider: payload.provider,
-        date_label: payload.date_label,
-        credential_url: payload.credential_url,
-        sort_order: payload.sort_order,
+    try {
+      const supabase = createClient()
+      const payload: any = {
+        title,
+        slug: slug || slugify(title),
+        provider,
+        description: description || null,
+        image_url: imageUrl || null,
+        date_label: dateLabel || '',
+        credential_url: credentialUrl || null,
+        sort_order: Number(sortOrder) || 0,
       }
-      res = (isRealUuid && initialId)
-        ? await supabase.from('certifications').update(fallbackPayload).eq('id', initialId)
-        : await supabase.from('certifications').insert(fallbackPayload)
-    }
+      const initialId = initial?.id
+      const isRealUuid = Boolean(
+        initialId &&
+        /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId)
+      )
+      let res = (isRealUuid && initialId)
+        ? await supabase.from('certifications').update(payload).eq('id', initialId)
+        : await supabase.from('certifications').insert(payload)
 
-    if (res.error) {
-      setError(res.error.message)
+      // Fallback if remote table does not have 'description' or 'image_url' columns yet
+      if (res.error && (res.error.message.includes('column') || res.error.message.includes('schema cache'))) {
+        const fallbackPayload: any = {
+          title: payload.title,
+          slug: payload.slug,
+          provider: payload.provider,
+          date_label: payload.date_label,
+          credential_url: payload.credential_url,
+          sort_order: payload.sort_order,
+        }
+        res = (isRealUuid && initialId)
+          ? await supabase.from('certifications').update(fallbackPayload).eq('id', initialId)
+          : await supabase.from('certifications').insert(fallbackPayload)
+      }
+
+      if (res.error) {
+        setError(res.error.message)
+        setSaving(false)
+        return
+      }
+
+      await revalidatePortfolio()
+      router.push('/admin/certifications')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to save certification')
+    } finally {
       setSaving(false)
-      return
     }
-    await revalidatePortfolio()
-    router.push('/admin/certifications')
-    router.refresh()
   }
 
   async function onDelete() {
     if (!initial || !confirm('Delete this certification?')) return
-    const supabase = createClient()
-    if (initial.id) {
-      await supabase.from('certifications').delete().eq('id', initial.id)
+    setSaving(true)
+    setError('')
+    try {
+      const supabase = createClient()
+      if (initial.id) {
+        const isRealUuid = Boolean(
+          initial.id &&
+          /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initial.id)
+        )
+        if (isRealUuid) {
+          const res = await supabase.from('certifications').delete().eq('id', initial.id)
+          if (res.error) {
+            setError(res.error.message)
+            return
+          }
+        } else {
+          const res = await supabase.from('certifications').delete().eq('slug', initial.slug || initial.id)
+          if (res.error) {
+            setError(res.error.message)
+            return
+          }
+        }
+      }
+      await revalidatePortfolio()
+      router.push('/admin/certifications')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to delete certification')
+    } finally {
+      setSaving(false)
     }
-    await revalidatePortfolio()
-    router.push('/admin/certifications')
-    router.refresh()
   }
 
   return (
