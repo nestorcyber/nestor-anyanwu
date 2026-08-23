@@ -19,6 +19,7 @@ export async function revalidatePortfolio(slug?: string) {
     revalidatePath('/')
     revalidatePath('/portfolio')
     revalidatePath('/certifications')
+    revalidatePath('/experience')
     revalidatePath('/admin/certifications')
     if (slug) {
       revalidatePath(`/portfolio/${slug}`)

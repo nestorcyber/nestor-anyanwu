@@ -49,6 +49,11 @@ const nextConfig = {
         destination: "/certifications",
         permanent: true,
       },
+      {
+        source: "/portfolio/experience",
+        destination: "/experience",
+        permanent: true,
+      },
     ]
   },
   async headers() {
