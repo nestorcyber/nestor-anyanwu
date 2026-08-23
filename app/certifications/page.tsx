@@ -4,7 +4,6 @@ import Footer from "@/components/footer"
 import PortfolioCTA from "@/components/portfolio/portfolio-cta"
 import CertificationCard from "@/components/shared/certification-card"
 import { getCertifications } from "@/lib/content"
-import { ArrowLeft, Award, ShieldCheck } from "lucide-react"
 
 export const revalidate = 60
 
@@ -33,30 +32,33 @@ export default async function CertificationsPage() {
       {/* Main Full-Width Content Column */}
       <main className="flex-1 w-full min-w-0 flex flex-col justify-between overflow-x-hidden">
         <div>
-          {/* Top Breadcrumb & Page Banner */}
-          <div className="w-full bg-card/60 border-b border-border/70 py-8">
+          {/* Top Hero Section */}
+          <div className="w-full bg-card/40 border-b border-border/70 py-10 md:py-16">
             <div className="site-container space-y-4">
-              <Link
-                href="/portfolio"
-                className="inline-flex items-center gap-2 text-xs font-mono font-bold text-accent hover:underline uppercase tracking-wider"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span>Back to Main Portfolio</span>
-              </Link>
+              
+              {/* Left-Aligned Heading with Verified Checkmark Beside Text */}
+              <div className="space-y-3">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight font-heading leading-[1.15] flex items-center gap-3 sm:gap-4 flex-wrap">
+                  <span>
+                    Verified <span className="text-[#0075ff]">Licenses &amp;</span> Certifications
+                  </span>
+                  <span className="inline-flex items-center justify-center text-[#0075ff] w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 shrink-0 drop-shadow-[0_4px_12px_rgba(0,117,255,0.3)]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="w-full h-full fill-current"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.79-4-4-4-.495 0-.965.084-1.4.238C14.55 2.475 13.18 1.6 11.6 1.6s-2.95.875-3.6 2.148c-.435-.154-.905-.238-1.4-.238-2.21 0-4 1.79-4 4 0 .495.084.965.238 1.4C1.575 9.55.7 10.92.7 12.5s.875 2.95 2.148 3.6c-.154.435-.238.905-.238 1.4 0 2.21 1.79 4 4 4 .495 0 .965-.084 1.4-.238.65 1.273 2.02 2.148 3.6 2.148s2.95-.875 3.6-2.148c.435.154.905.238 1.4.238 2.21 0 4-1.79 4-4 0-.495-.084-.965-.238-1.4 1.273-.65 2.148-2.02 2.148-3.6zm-12.28 4.22l-4.24-4.24 1.41-1.41 2.83 2.83 6.36-6.36 1.41 1.41-7.77 7.77z" />
+                    </svg>
+                  </span>
+                </h1>
 
-              <div className="flex items-center gap-3 pt-2">
-                <div className="w-10 h-10 rounded-2xl bg-accent/10 text-accent flex items-center justify-center font-bold">
-                  <Award className="w-5 h-5" />
-                </div>
-                <div>
-                  <h1 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight font-heading">
-                    All Licenses & Certifications
-                  </h1>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
-                    Complete archive of verified engineering accreditations, technical credentials, and leadership awards.
-                  </p>
-                </div>
+                {/* Subtitle / Description */}
+                <p className="text-sm sm:text-base md:text-lg text-muted-foreground font-normal leading-relaxed max-w-3xl">
+                  Explore verified credentials, professional engineering accreditations, industry licenses, and leadership qualifications earned by Nestor Anyanwu.
+                </p>
               </div>
+
             </div>
           </div>
 
