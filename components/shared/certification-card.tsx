@@ -17,7 +17,7 @@ export function SimpleRedRibbonOverlay() {
         viewBox="0 0 32 48"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-6 h-9 sm:w-7 sm:h-11"
+        className="w-5 h-7.5 sm:w-6 sm:h-9"
       >
         <defs>
           <linearGradient id="certSimpleRedRibbon" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -102,7 +102,7 @@ export default function CertificationCard({ cert }: CertificationCardProps) {
       >
         
         {/* Top Section: Full Nested Certificate Image filling top compartment */}
-        <div className="relative w-full h-[220px] sm:h-[240px] shrink-0 overflow-hidden bg-slate-900 border-b border-slate-200/80 dark:border-slate-800/80">
+        <div className="relative w-full h-[145px] sm:h-[165px] shrink-0 overflow-hidden bg-slate-900 border-b border-slate-200/80 dark:border-slate-800/80">
           {/* Simple Red Ribbon Overlay starting flush from top edge */}
           <SimpleRedRibbonOverlay />
 
@@ -121,37 +121,37 @@ export default function CertificationCard({ cert }: CertificationCardProps) {
         </div>
 
         {/* Bottom Section: Title, Issuer, Description, Action Button */}
-        <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 space-y-4">
+        <div className="p-4 sm:p-4.5 flex flex-col justify-between flex-1 space-y-3">
           
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             {/* 1. Certificate Name / Title */}
-            <h3 className="text-xl sm:text-2xl font-extrabold text-foreground group-hover:text-accent transition-colors font-heading tracking-tight leading-snug">
+            <h3 className="text-base sm:text-lg font-bold text-foreground group-hover:text-accent transition-colors font-heading tracking-tight leading-snug line-clamp-1">
               {cert.title}
             </h3>
 
             {/* 2. Issuer Name */}
-            <p className="text-sm sm:text-base font-semibold text-accent leading-normal">
+            <p className="text-xs sm:text-sm font-semibold text-accent leading-normal line-clamp-1">
               {cert.provider}
             </p>
 
-            {/* 3. Description */}
+            {/* 3. Description (3-line maximum) */}
             {cert.description && (
-              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-3 font-normal pt-1">
+              <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 font-normal pt-0.5">
                 {cert.description}
               </p>
             )}
           </div>
 
           {/* 4. Standard Card Action Button Linking to URL */}
-          <div className="pt-3 border-t border-border/50">
+          <div className="pt-2.5 border-t border-border/50">
             <a
               href={targetUrl}
               target={targetUrl !== "#" ? "_blank" : undefined}
               rel={targetUrl !== "#" ? "noopener noreferrer" : undefined}
-              className="w-full py-3.5 px-4 rounded-xl bg-accent hover:bg-accent/90 text-white font-extrabold text-xs tracking-wider flex items-center justify-between transition-all duration-300 shadow-xs hover:shadow-md cursor-pointer"
+              className="w-full py-2.5 px-3.5 rounded-lg bg-accent hover:bg-accent/90 text-white font-bold text-xs tracking-wider flex items-center justify-between transition-all duration-300 shadow-2xs hover:shadow-sm cursor-pointer"
             >
               <span>Show Credential</span>
-              <ExternalLink className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
+              <ExternalLink className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
             </a>
           </div>
 
