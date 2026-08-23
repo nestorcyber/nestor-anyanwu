@@ -10,7 +10,7 @@ import { ExternalLink } from "lucide-react"
  */
 export function SimpleRedRibbonOverlay() {
   return (
-    <div className="absolute -top-0.5 left-4 z-20 pointer-events-none drop-shadow-[0_4px_6px_rgba(0,0,0,0.35)] select-none">
+    <div className="absolute top-0 left-7 sm:left-8 z-20 pointer-events-none drop-shadow-[0_4px_6px_rgba(0,0,0,0.35)] select-none">
       <svg
         width="32"
         height="48"
