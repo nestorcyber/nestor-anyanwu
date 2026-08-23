@@ -64,11 +64,12 @@ export function SimpleRedRibbonOverlay() {
 export function getCertImage(cert: CertificationItem): string {
   if (cert.image) return cert.image
   const idOrTitle = (cert.id + " " + cert.title).toLowerCase()
+  if (idOrTitle.includes("google") || idOrTitle.includes("gcp")) return "/certificates/google-cert.jpg"
   if (idOrTitle.includes("privacy") || idOrTitle.includes("ndpc")) return "/certificates/ndpc-cert.jpg"
   if (idOrTitle.includes("aws") || idOrTitle.includes("cloud")) return "/certificates/aws-cert.jpg"
   if (idOrTitle.includes("ieee") || idOrTitle.includes("engineer")) return "/certificates/ieee-cert.jpg"
   if (idOrTitle.includes("gotni") || idOrTitle.includes("lead")) return "/certificates/gotni-cert.jpg"
-  return "/certificates/ndpc-cert.jpg"
+  return "/certificates/google-cert.jpg"
 }
 
 export interface CertificationCardProps {
