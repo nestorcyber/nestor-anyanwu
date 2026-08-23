@@ -16,23 +16,25 @@ export default function PortfolioCTA() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-4">
-            <Link href="/contact">
-              <button className="bg-accent hover:bg-accent/90 text-white font-extrabold text-[11px] sm:text-xs tracking-wider px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl shadow-xs active:scale-98 transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer">
-                <span>Start A Project</span>
-                <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              </button>
+            <Link
+              href="/contact"
+              className="bg-accent hover:bg-accent/90 text-white font-extrabold text-[11px] sm:text-xs tracking-wider px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl shadow-xs active:scale-98 transition-all inline-flex items-center gap-1.5 sm:gap-2 cursor-pointer"
+            >
+              <span>Start A Project</span>
+              <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </Link>
 
-            <Link href="/contact">
-              <button className="bg-card text-foreground border border-border/80 hover:bg-secondary font-extrabold text-[11px] sm:text-xs tracking-wider px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl shadow-xs active:scale-98 transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer">
-                <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span>Book Consultation</span>
-              </button>
+            <Link
+              href="/contact"
+              className="bg-card text-foreground border border-border/80 hover:bg-secondary font-extrabold text-[11px] sm:text-xs tracking-wider px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl shadow-xs active:scale-98 transition-all inline-flex items-center gap-1.5 sm:gap-2 cursor-pointer"
+            >
+              <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>Book Consultation</span>
             </Link>
 
             <a
               href="mailto:nestoranyanwu@gmail.com"
-              className="bg-card text-foreground border border-border/80 hover:bg-secondary font-extrabold text-[11px] sm:text-xs tracking-wider px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl shadow-xs active:scale-98 transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer"
+              className="bg-card text-foreground border border-border/80 hover:bg-secondary font-extrabold text-[11px] sm:text-xs tracking-wider px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl shadow-xs active:scale-98 transition-all inline-flex items-center gap-1.5 sm:gap-2 cursor-pointer"
             >
               <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               <span>Contact Me</span>

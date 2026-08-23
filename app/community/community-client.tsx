@@ -66,11 +66,12 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
 
                 {/* Primary & Secondary CTAs */}
                 <div className="flex flex-wrap items-center gap-4 pt-2">
-                  <Link href="/contact">
-                    <button className="bg-accent hover:bg-accent/90 text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3 border-2 border-slate-900 dark:border-slate-700 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-2 cursor-pointer">
-                      <Users size={15} />
-                      <span>Join The Community</span>
-                    </button>
+                  <Link
+                    href="/contact"
+                    className="bg-accent hover:bg-accent/90 text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3 border-2 border-slate-900 dark:border-slate-700 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all inline-flex items-center gap-2 cursor-pointer"
+                  >
+                    <Users size={15} />
+                    <span>Join The Community</span>
                   </Link>
 
                   <a
@@ -198,16 +199,17 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
               </p>
 
               <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-                <Link href="/contact">
-                  <button className="bg-accent hover:bg-accent/90 text-white font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-2 cursor-pointer">
-                    <Users size={15} />
-                    <span>Get Involved</span>
-                  </button>
+                <Link
+                  href="/contact"
+                  className="bg-accent hover:bg-accent/90 text-white font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all inline-flex items-center gap-2 cursor-pointer"
+                >
+                  <Users size={15} />
+                  <span>Get Involved</span>
                 </Link>
 
                 <a
                   href="mailto:nestoranyanwu@gmail.com"
-                  className="bg-card text-foreground border-2 border-slate-900 font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-2 cursor-pointer"
+                  className="bg-card text-foreground border-2 border-slate-900 font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all inline-flex items-center gap-2 cursor-pointer"
                 >
                   <Mail size={15} />
                   <span>Contact Nestor</span>

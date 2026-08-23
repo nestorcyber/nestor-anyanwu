@@ -68,27 +68,39 @@ export default function CommunityForm({ initial }: Props) {
       sort_order: Number(sortOrder) || 0,
     }
 
-    const initialId = initial?.id
-    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
-    const res = (isRealUuid && initialId)
-      ? await supabase.from('community_entries').update(payload).eq('id', initialId)
-      : await supabase.from('community_entries').insert(payload)
+    try {
+      const initialId = initial?.id
+      const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
+      const res = (isRealUuid && initialId)
+        ? await supabase.from('community_entries').update(payload).eq('id', initialId)
+        : await supabase.from('community_entries').insert(payload)
 
-    if (res.error) {
-      setError(res.error.message)
+      if (res.error) {
+        setError(res.error.message)
+        return
+      }
+      router.push('/admin/community')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to save community entry.')
+    } finally {
       setSaving(false)
-      return
     }
-    router.push('/admin/community')
-    router.refresh()
   }
 
   async function onDelete() {
     if (!initial || !confirm('Delete this entry?')) return
-    const supabase = createClient()
-    await supabase.from('community_entries').delete().eq('id', initial.id)
-    router.push('/admin/community')
-    router.refresh()
+    setSaving(true)
+    try {
+      const supabase = createClient()
+      await supabase.from('community_entries').delete().eq('id', initial.id)
+      router.push('/admin/community')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to delete community entry.')
+    } finally {
+      setSaving(false)
+    }
   }
 
   return (

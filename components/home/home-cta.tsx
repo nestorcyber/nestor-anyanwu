@@ -18,11 +18,12 @@ export default function HomeCTA() {
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-          <Link href="/contact">
-            <button className="bg-accent hover:bg-accent/90 text-white font-bold text-xs md:text-sm tracking-wide px-7 py-3.5 rounded-xl shadow-lg transition-all flex items-center gap-2 cursor-pointer">
-              <span>Start A Collaboration</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </button>
+          <Link
+            href="/contact"
+            className="bg-accent hover:bg-accent/90 text-white font-bold text-xs md:text-sm tracking-wide px-7 py-3.5 rounded-xl shadow-lg transition-all inline-flex items-center gap-2 cursor-pointer"
+          >
+            <span>Start A Collaboration</span>
+            <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
       </div>

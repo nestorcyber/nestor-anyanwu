@@ -30,15 +30,17 @@ export default function Error({
 
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
           <button
+            type="button"
             onClick={reset}
             className="text-xs font-bold uppercase tracking-widest bg-accent text-white px-8 py-3.5 transition-all hover:bg-accent/90 cursor-pointer"
           >
             Try Again
           </button>
-          <Link href="/">
-            <button className="text-xs font-bold uppercase tracking-widest border border-foreground/40 hover:border-accent hover:text-accent px-8 py-3.5 transition-all cursor-pointer text-foreground">
-              Go Home
-            </button>
+          <Link
+            href="/"
+            className="text-xs font-bold uppercase tracking-widest border border-foreground/40 hover:border-accent hover:text-accent px-8 py-3.5 transition-all cursor-pointer text-foreground inline-flex items-center justify-center"
+          >
+            Go Home
           </Link>
         </div>
       </div>

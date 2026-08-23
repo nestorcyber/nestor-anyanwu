@@ -80,44 +80,56 @@ export default function PortfolioForm({ initial }: Props) {
       sort_order: Number(sortOrder) || 0,
     }
 
-    let res
-    if (initial?.id) {
-      res = await supabase.from('portfolio_projects').update(payload).eq('id', initial.id)
-    } else if (initial?.slug) {
-      res = await supabase.from('portfolio_projects').update(payload).eq('slug', initial.slug)
-    } else {
-      res = await supabase.from('portfolio_projects').insert(payload)
-    }
+    try {
+      let res
+      if (initial?.id) {
+        res = await supabase.from('portfolio_projects').update(payload).eq('id', initial.id)
+      } else if (initial?.slug) {
+        res = await supabase.from('portfolio_projects').update(payload).eq('slug', initial.slug)
+      } else {
+        res = await supabase.from('portfolio_projects').insert(payload)
+      }
 
-    if (res.error && initial) {
-      res = await supabase.from('portfolio_projects').upsert(payload, { onConflict: 'slug' })
-    }
+      if (res.error && initial) {
+        res = await supabase.from('portfolio_projects').upsert(payload, { onConflict: 'slug' })
+      }
 
-    if (res.error) {
-      setError(res.error.message)
+      if (res.error) {
+        setError(res.error.message)
+        return
+      }
+
+      await revalidatePortfolio(targetSlug)
+      await logAdminActivity(initial ? 'Updated Project' : 'Created Project', 'portfolio_projects', initial?.id || targetSlug, `Title: ${title}`)
+
+      router.push('/admin/portfolio')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to save project.')
+    } finally {
       setSaving(false)
-      return
     }
-
-    await revalidatePortfolio(targetSlug)
-    await logAdminActivity(initial ? 'Updated Project' : 'Created Project', 'portfolio_projects', initial?.id || targetSlug, `Title: ${title}`)
-
-    router.push('/admin/portfolio')
-    router.refresh()
   }
 
   async function onDelete() {
     if (!initial || !confirm('Delete this project?')) return
-    const supabase = createClient()
-    if (initial.id) {
-      await supabase.from('portfolio_projects').delete().eq('id', initial.id)
-    } else if (initial.slug) {
-      await supabase.from('portfolio_projects').delete().eq('slug', initial.slug)
+    setSaving(true)
+    try {
+      const supabase = createClient()
+      if (initial.id) {
+        await supabase.from('portfolio_projects').delete().eq('id', initial.id)
+      } else if (initial.slug) {
+        await supabase.from('portfolio_projects').delete().eq('slug', initial.slug)
+      }
+      await revalidatePortfolio(initial.slug)
+      await logAdminActivity('Deleted Project', 'portfolio_projects', initial.id || initial.slug, `Title: ${title}`)
+      router.push('/admin/portfolio')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to delete project.')
+    } finally {
+      setSaving(false)
     }
-    await revalidatePortfolio(initial.slug)
-    await logAdminActivity('Deleted Project', 'portfolio_projects', initial.id || initial.slug, `Title: ${title}`)
-    router.push('/admin/portfolio')
-    router.refresh()
   }
 
   return (

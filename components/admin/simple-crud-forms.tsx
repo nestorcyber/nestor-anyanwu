@@ -75,52 +75,61 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
       featured,
       sort_order: Number(sortOrder) || 0,
     }
-    const initialId = initial?.id
-    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
-    const res = (isRealUuid && initialId)
-      ? await supabase.from('gallery_images').update(payload).eq('id', initialId)
-      : await supabase.from('gallery_images').insert(payload)
-    if (res.error) {
-      setError(`Save error: ${res.error.message}`)
+    try {
+      const initialId = initial?.id
+      const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
+      const res = (isRealUuid && initialId)
+        ? await supabase.from('gallery_images').update(payload).eq('id', initialId)
+        : await supabase.from('gallery_images').insert(payload)
+      if (res.error) {
+        setError(`Save error: ${res.error.message}`)
+        return
+      }
+      await revalidateGallery()
+      router.push('/admin/gallery')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to save gallery image.')
+    } finally {
       setSaving(false)
-      return
     }
-    await revalidateGallery()
-    router.push('/admin/gallery')
-    router.refresh()
   }
 
   async function onDelete() {
     if (!initial || !confirm('Delete image from gallery archive?')) return
     setSaving(true)
     setError('')
-    const supabase = createClient()
-    const initialId = initial.id
-    const isRealUuid = Boolean(
-      initialId &&
-      /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId)
-    )
+    try {
+      const supabase = createClient()
+      const initialId = initial.id
+      const isRealUuid = Boolean(
+        initialId &&
+        /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId)
+      )
 
-    if (isRealUuid && initialId) {
-      const res = await supabase.from('gallery_images').delete().eq('id', initialId)
-      if (res.error) {
-        setError(`Delete error: ${res.error.message}`)
-        setSaving(false)
-        return
+      if (isRealUuid && initialId) {
+        const res = await supabase.from('gallery_images').delete().eq('id', initialId)
+        if (res.error) {
+          setError(`Delete error: ${res.error.message}`)
+          return
+        }
+      } else if (imageUrl || initial.image_url) {
+        const targetUrl = imageUrl || initial.image_url
+        const res = await supabase.from('gallery_images').delete().eq('image_url', targetUrl)
+        if (res.error) {
+          setError(`Delete error: ${res.error.message}`)
+          return
+        }
       }
-    } else if (imageUrl || initial.image_url) {
-      const targetUrl = imageUrl || initial.image_url
-      const res = await supabase.from('gallery_images').delete().eq('image_url', targetUrl)
-      if (res.error) {
-        setError(`Delete error: ${res.error.message}`)
-        setSaving(false)
-        return
-      }
+
+      await revalidateGallery()
+      router.push('/admin/gallery')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to delete gallery image.')
+    } finally {
+      setSaving(false)
     }
-
-    await revalidateGallery()
-    router.push('/admin/gallery')
-    router.refresh()
   }
 
   return (
@@ -229,26 +238,38 @@ export function ServiceForm({ initial }: { initial?: Tables<'services'> | null }
       cta_href: ctaHref,
       sort_order: Number(sortOrder) || 0,
     }
-    const initialId = initial?.id
-    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
-    const res = (isRealUuid && initialId)
-      ? await supabase.from('services').update(payload).eq('id', initialId)
-      : await supabase.from('services').insert(payload)
-    if (res.error) {
-      setError(res.error.message)
+    try {
+      const initialId = initial?.id
+      const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
+      const res = (isRealUuid && initialId)
+        ? await supabase.from('services').update(payload).eq('id', initialId)
+        : await supabase.from('services').insert(payload)
+      if (res.error) {
+        setError(res.error.message)
+        return
+      }
+      router.push('/admin/services')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to save service.')
+    } finally {
       setSaving(false)
-      return
     }
-    router.push('/admin/services')
-    router.refresh()
   }
 
   async function onDelete() {
     if (!initial || !confirm('Delete?')) return
-    const supabase = createClient()
-    await supabase.from('services').delete().eq('id', initial.id)
-    router.push('/admin/services')
-    router.refresh()
+    setSaving(true)
+    try {
+      const supabase = createClient()
+      await supabase.from('services').delete().eq('id', initial.id)
+      router.push('/admin/services')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to delete service.')
+    } finally {
+      setSaving(false)
+    }
   }
 
   return (
@@ -311,26 +332,38 @@ export function StatForm({ initial }: { initial?: Tables<'portfolio_stats'> | nu
       description: description || null,
       sort_order: Number(sortOrder) || 0,
     }
-    const initialId = initial?.id
-    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
-    const res = (isRealUuid && initialId)
-      ? await supabase.from('portfolio_stats').update(payload).eq('id', initialId)
-      : await supabase.from('portfolio_stats').insert(payload)
-    if (res.error) {
-      setError(res.error.message)
+    try {
+      const initialId = initial?.id
+      const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
+      const res = (isRealUuid && initialId)
+        ? await supabase.from('portfolio_stats').update(payload).eq('id', initialId)
+        : await supabase.from('portfolio_stats').insert(payload)
+      if (res.error) {
+        setError(res.error.message)
+        return
+      }
+      router.push('/admin/stats')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to save portfolio stat.')
+    } finally {
       setSaving(false)
-      return
     }
-    router.push('/admin/stats')
-    router.refresh()
   }
 
   async function onDelete() {
     if (!initial || !confirm('Delete?')) return
-    const supabase = createClient()
-    await supabase.from('portfolio_stats').delete().eq('id', initial.id)
-    router.push('/admin/stats')
-    router.refresh()
+    setSaving(true)
+    try {
+      const supabase = createClient()
+      await supabase.from('portfolio_stats').delete().eq('id', initial.id)
+      router.push('/admin/stats')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to delete portfolio stat.')
+    } finally {
+      setSaving(false)
+    }
   }
 
   return (
@@ -613,31 +646,43 @@ export function BrandForm({ initial }: { initial?: Tables<'brand_partners'> | nu
       website_url: websiteUrl || null,
       sort_order: Number(sortOrder) || 0,
     }
-    const initialId = initial?.id
-    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
-    const res = (isRealUuid && initialId)
-      ? await supabase.from('brand_partners').update(payload).eq('id', initialId)
-      : await supabase.from('brand_partners').insert(payload)
+    try {
+      const initialId = initial?.id
+      const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
+      const res = (isRealUuid && initialId)
+        ? await supabase.from('brand_partners').update(payload).eq('id', initialId)
+        : await supabase.from('brand_partners').insert(payload)
 
-    if (res.error) {
-      if (res.error.message.includes('schema cache') || res.error.message.includes('brand_partners')) {
-        setError("Database table 'brand_partners' has not been created in Supabase yet. Run the SQL script from supabase/migrations/002_brand_partners.sql in your Supabase SQL Editor.")
-      } else {
-        setError(res.error.message)
+      if (res.error) {
+        if (res.error.message.includes('schema cache') || res.error.message.includes('brand_partners')) {
+          setError("Database table 'brand_partners' has not been created in Supabase yet. Run the SQL script from supabase/migrations/002_brand_partners.sql in your Supabase SQL Editor.")
+        } else {
+          setError(res.error.message)
+        }
+        return
       }
+      router.push('/admin/brands')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to save brand partner.')
+    } finally {
       setSaving(false)
-      return
     }
-    router.push('/admin/brands')
-    router.refresh()
   }
 
   async function onDelete() {
     if (!initial || !confirm('Delete brand partner?')) return
-    const supabase = createClient()
-    await supabase.from('brand_partners').delete().eq('id', initial.id)
-    router.push('/admin/brands')
-    router.refresh()
+    setSaving(true)
+    try {
+      const supabase = createClient()
+      await supabase.from('brand_partners').delete().eq('id', initial.id)
+      router.push('/admin/brands')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to delete brand partner.')
+    } finally {
+      setSaving(false)
+    }
   }
 
   return (

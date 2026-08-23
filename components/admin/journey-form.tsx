@@ -57,27 +57,39 @@ export default function JourneyForm({ initial }: Props) {
       sort_order: Number(sortOrder) || 0,
     }
 
-    const initialId = initial?.id
-    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
-    const res = (isRealUuid && initialId)
-      ? await supabase.from('journey_items').update(payload).eq('id', initialId)
-      : await supabase.from('journey_items').insert(payload)
+    try {
+      const initialId = initial?.id
+      const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
+      const res = (isRealUuid && initialId)
+        ? await supabase.from('journey_items').update(payload).eq('id', initialId)
+        : await supabase.from('journey_items').insert(payload)
 
-    if (res.error) {
-      setError(res.error.message)
+      if (res.error) {
+        setError(res.error.message)
+        return
+      }
+      router.push('/admin/journey')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to save journey item.')
+    } finally {
       setSaving(false)
-      return
     }
-    router.push('/admin/journey')
-    router.refresh()
   }
 
   async function onDelete() {
     if (!initial || !confirm('Delete this journey item?')) return
-    const supabase = createClient()
-    await supabase.from('journey_items').delete().eq('id', initial.id)
-    router.push('/admin/journey')
-    router.refresh()
+    setSaving(true)
+    try {
+      const supabase = createClient()
+      await supabase.from('journey_items').delete().eq('id', initial.id)
+      router.push('/admin/journey')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to delete journey item.')
+    } finally {
+      setSaving(false)
+    }
   }
 
   return (

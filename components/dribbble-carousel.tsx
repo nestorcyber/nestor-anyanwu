@@ -309,11 +309,10 @@ export default function DribbbleCarousel({
                         href={item.link}
                         onClick={(e) => e.stopPropagation()}
                         aria-label={`Explore details for ${item.title}`}
+                        className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-white border border-white/50 hover:border-white hover:bg-white/10 px-5 py-2.5 rounded-none transition-all cursor-pointer"
                       >
-                        <button className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-white border border-white/50 hover:border-white hover:bg-white/10 px-5 py-2.5 rounded-none transition-all cursor-pointer">
-                          <span>Explore {item.title}</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </button>
+                        <span>Explore {item.title}</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
                   )}
@@ -329,6 +328,7 @@ export default function DribbbleCarousel({
         {items.map((_, i) => (
           <button
             key={i}
+            type="button"
             onClick={() => {
               let target = i
               let diff = target - scrollPosition

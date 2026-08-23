@@ -149,6 +149,7 @@ export default function Navigation() {
 
             {/* Dynamic MENU / CLOSE Drawer Toggle Button */}
             <button
+              type="button"
               onClick={() => setIsOpen(!isOpen)}
               className="flex flex-col items-center justify-center cursor-pointer group p-1 transition-colors min-w-[50px] select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0075ff] rounded-sm"
               aria-label={isOpen ? "Close menu" : "Open menu"}
@@ -221,6 +222,7 @@ export default function Navigation() {
                 Appearance Mode
               </span>
               <button
+                type="button"
                 onClick={() => {
                   setTheme(isDark ? "light" : "dark")
                   setIsOpen(false)
@@ -293,6 +295,7 @@ export default function Navigation() {
                 Appearance Mode
               </span>
               <button
+                type="button"
                 onClick={() => {
                   setTheme(isDark ? "light" : "dark")
                   setIsOpen(false)

@@ -58,11 +58,12 @@ export default async function LatestJournal() {
 
         {/* Bottom Centered Read All Articles Button */}
         <div className="flex justify-center pt-4">
-          <Link href="/journal">
-            <button className="inline-flex items-center gap-2 text-xs font-bold tracking-wider text-foreground border border-foreground/50 hover:border-[#0075ff] hover:text-[#0075ff] px-7 py-3 rounded-xl transition-all cursor-pointer">
-              <span>Read All Articles</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+          <Link
+            href="/journal"
+            className="inline-flex items-center gap-2 text-xs font-bold tracking-wider text-foreground border border-foreground/50 hover:border-[#0075ff] hover:text-[#0075ff] px-7 py-3 rounded-xl transition-all cursor-pointer"
+          >
+            <span>Read All Articles</span>
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 

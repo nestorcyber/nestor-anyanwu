@@ -38,11 +38,12 @@ export default function SectionHeader({
       </div>
 
       {ctaText && ctaHref && (
-        <Link href={ctaHref} className="inline-block shrink-0">
-          <button className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider text-foreground hover:text-accent border-b border-foreground/40 hover:border-accent pb-1 transition-all cursor-pointer">
-            <span>{ctaText}</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </button>
+        <Link
+          href={ctaHref}
+          className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider text-foreground hover:text-accent border-b border-foreground/40 hover:border-accent pb-1 transition-all shrink-0 cursor-pointer"
+        >
+          <span>{ctaText}</span>
+          <ArrowUpRight className="w-3.5 h-3.5" />
         </Link>
       )}
     </div>

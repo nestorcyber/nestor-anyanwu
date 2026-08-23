@@ -43,11 +43,12 @@ export default async function FeaturedPortfolio() {
       )}
 
       <div className="flex justify-center mt-10">
-        <Link href="/portfolio">
-          <button className="inline-flex items-center gap-2 text-xs font-bold tracking-wider text-foreground border border-foreground/50 hover:border-accent hover:text-accent px-7 py-3 rounded-xl transition-all cursor-pointer">
-            <span>View All Portfolio</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+        <Link
+          href="/portfolio"
+          className="inline-flex items-center gap-2 text-xs font-bold tracking-wider text-foreground border border-foreground/50 hover:border-accent hover:text-accent px-7 py-3 rounded-xl transition-all cursor-pointer"
+        >
+          <span>View All Portfolio</span>
+          <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
     </SectionContainer>

@@ -76,53 +76,65 @@ export default function JournalForm({ initial }: Props) {
       content,
     }
 
-    let res
-    if (initial?.id) {
-      res = await supabase.from('journal_articles').update(payload).eq('id', initial.id)
-    } else if (initial?.slug) {
-      res = await supabase.from('journal_articles').update(payload).eq('slug', initial.slug)
-    } else {
-      res = await supabase.from('journal_articles').insert(payload)
-    }
-
-    if (res.error && initial) {
-      res = await supabase.from('journal_articles').upsert(payload, { onConflict: 'slug' })
-    }
-
-    if (res.error && res.error.message.includes('scheduled_at')) {
-      delete (payload as Record<string, unknown>).scheduled_at
+    try {
+      let res
       if (initial?.id) {
         res = await supabase.from('journal_articles').update(payload).eq('id', initial.id)
+      } else if (initial?.slug) {
+        res = await supabase.from('journal_articles').update(payload).eq('slug', initial.slug)
       } else {
+        res = await supabase.from('journal_articles').insert(payload)
+      }
+
+      if (res.error && initial) {
         res = await supabase.from('journal_articles').upsert(payload, { onConflict: 'slug' })
       }
-    }
 
-    if (res.error) {
-      setError(res.error.message)
+      if (res.error && res.error.message.includes('scheduled_at')) {
+        delete (payload as Record<string, unknown>).scheduled_at
+        if (initial?.id) {
+          res = await supabase.from('journal_articles').update(payload).eq('id', initial.id)
+        } else {
+          res = await supabase.from('journal_articles').upsert(payload, { onConflict: 'slug' })
+        }
+      }
+
+      if (res.error) {
+        setError(res.error.message)
+        return
+      }
+
+      await revalidateJournal(targetSlug)
+      await logAdminActivity(initial ? 'Updated Post' : 'Created Post', 'journal_articles', initial?.id || targetSlug, `Title: ${title}`)
+
+      router.push('/admin/journal')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to save article.')
+    } finally {
       setSaving(false)
-      return
     }
-
-    await revalidateJournal(targetSlug)
-    await logAdminActivity(initial ? 'Updated Post' : 'Created Post', 'journal_articles', initial?.id || targetSlug, `Title: ${title}`)
-
-    router.push('/admin/journal')
-    router.refresh()
   }
 
   async function onDelete() {
     if (!initial || !confirm('Delete this article?')) return
-    const supabase = createClient()
-    if (initial.id) {
-      await supabase.from('journal_articles').delete().eq('id', initial.id)
-    } else if (initial.slug) {
-      await supabase.from('journal_articles').delete().eq('slug', initial.slug)
+    setSaving(true)
+    try {
+      const supabase = createClient()
+      if (initial.id) {
+        await supabase.from('journal_articles').delete().eq('id', initial.id)
+      } else if (initial.slug) {
+        await supabase.from('journal_articles').delete().eq('slug', initial.slug)
+      }
+      await revalidateJournal(initial.slug)
+      await logAdminActivity('Deleted Post', 'journal_articles', initial.id || initial.slug, `Title: ${title}`)
+      router.push('/admin/journal')
+      router.refresh()
+    } catch (err: any) {
+      setError(err?.message || 'Failed to delete article.')
+    } finally {
+      setSaving(false)
     }
-    await revalidateJournal(initial.slug)
-    await logAdminActivity('Deleted Post', 'journal_articles', initial.id || initial.slug, `Title: ${title}`)
-    router.push('/admin/journal')
-    router.refresh()
   }
 
   async function onDuplicate() {

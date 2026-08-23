@@ -69,11 +69,12 @@ export default async function FeaturedCommunity() {
       )}
 
       <div className="flex justify-center mt-10">
-        <Link href="/community">
-          <button className="inline-flex items-center gap-2 text-xs font-extrabold tracking-wider text-white bg-[#005fe6] hover:bg-[#0052cc] px-6 py-2.5 sm:py-3.5 rounded-xl shadow-xs transition-all cursor-pointer">
-            <span>Explore All Community Work</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </button>
+        <Link
+          href="/community"
+          className="inline-flex items-center gap-2 text-xs font-extrabold tracking-wider text-white bg-[#005fe6] hover:bg-[#0052cc] px-6 py-2.5 sm:py-3.5 rounded-xl shadow-xs transition-all cursor-pointer"
+        >
+          <span>Explore All Community Work</span>
+          <ArrowUpRight className="w-3.5 h-3.5" />
         </Link>
       </div>
     </SectionContainer>

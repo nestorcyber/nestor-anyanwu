@@ -162,11 +162,12 @@ export default function ImpactSection({
 
             {/* Single Action Button leading to About Page */}
             <div className="pt-3">
-              <Link href={ctaLink || "/about"}>
-                <button className="bg-[#0075ff] hover:bg-[#0060d0] text-white font-extrabold text-xs tracking-wider px-7 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2 cursor-pointer active:scale-98">
-                  <span>{ctaText || "Discover More"}</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </button>
+              <Link
+                href={ctaLink || "/about"}
+                className="bg-[#0075ff] hover:bg-[#0060d0] text-white font-extrabold text-xs tracking-wider px-7 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2 cursor-pointer active:scale-98"
+              >
+                <span>{ctaText || "Discover More"}</span>
+                <ArrowUpRight className="w-4 h-4" />
               </Link>
             </div>
 
