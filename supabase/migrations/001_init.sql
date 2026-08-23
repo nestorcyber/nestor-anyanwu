@@ -219,6 +219,8 @@ create table if not exists public.certifications (
   slug text not null unique,
   title text not null,
   provider text not null default '',
+  description text,
+  image_url text,
   date_label text not null default '',
   credential_url text,
   sort_order int not null default 0,

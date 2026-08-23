@@ -25,8 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = await getJournalArticleBySlug(slug)
   if (!article) return { title: 'Article Not Found' }
 
-  const baseUrl = 'https://nestor.name.ng'
-  const articleUrl = `${baseUrl}/journal/${article.slug}`
+  const articleUrl = `/journal/${article.slug}`
 
   return {
     title: `${article.seoTitle || article.title} | Nestor Cyber Journal`,

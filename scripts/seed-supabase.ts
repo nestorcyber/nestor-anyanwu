@@ -235,6 +235,8 @@ async function main() {
     slug: c.id,
     title: c.title,
     provider: c.provider,
+    description: c.description ?? null,
+    image_url: c.image ?? null,
     date_label: c.date,
     credential_url: c.credentialUrl ?? null,
     sort_order: i,

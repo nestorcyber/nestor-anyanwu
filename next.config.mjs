@@ -37,10 +37,24 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/portfolio/projects",
+        destination: "/projects",
+        permanent: true,
+      },
+      {
+        source: "/portfolio/certifications",
+        destination: "/certifications",
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {
-        source: "/(.*)",
+        source: "/:path*",
         headers: [
           {
             key: "X-Content-Type-Options",
@@ -53,10 +67,6 @@ const nextConfig = {
           {
             key: "Referrer-Policy",
             value: "strict-origin-when-cross-origin",
-          },
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
           },
         ],
       },

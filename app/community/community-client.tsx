@@ -115,7 +115,7 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
                   </div>
                 </div>
 
-                <Link href="/community/g" className="block pt-2">
+                <Link href="/community/nacos-futo-ict-directorate" className="block pt-2">
                   <div className="w-full py-2.5 bg-primary text-white text-center font-extrabold text-xs uppercase tracking-wider border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-1.5 cursor-pointer">
                     <span>View Community Profile</span>
                     <ArrowUpRight size={14} />

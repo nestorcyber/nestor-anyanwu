@@ -387,10 +387,25 @@ export function CertificationForm({ initial }: { initial?: any }) {
       sort_order: Number(sortOrder) || 0,
     }
     const initialId = initial?.id
-    const isRealUuid = Boolean(initialId && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(initialId))
-    const res = (isRealUuid && initialId)
+    let res = (isRealUuid && initialId)
       ? await supabase.from('certifications').update(payload).eq('id', initialId)
       : await supabase.from('certifications').insert(payload)
+
+    // Fallback if remote table does not have 'description' or 'image_url' columns yet
+    if (res.error && (res.error.message.includes('column') || res.error.message.includes('schema cache'))) {
+      const fallbackPayload: any = {
+        title: payload.title,
+        slug: payload.slug,
+        provider: payload.provider,
+        date_label: payload.date_label,
+        credential_url: payload.credential_url,
+        sort_order: payload.sort_order,
+      }
+      res = (isRealUuid && initialId)
+        ? await supabase.from('certifications').update(fallbackPayload).eq('id', initialId)
+        : await supabase.from('certifications').insert(fallbackPayload)
+    }
+
     if (res.error) {
       setError(res.error.message)
       setSaving(false)

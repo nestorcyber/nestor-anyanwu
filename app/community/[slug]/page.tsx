@@ -24,10 +24,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const entry = await getCommunityEntryBySlug(slug)
   if (!entry) return { title: 'Community Entry Not Found' }
 
+  const url = `/community/${entry.slug}`
+
   return {
     title: `${entry.organization} | Nestor Cyber Community`,
     description: `${entry.role} — ${entry.duration}`,
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
+      title: entry.organization,
+      description: `${entry.role} — ${entry.duration}`,
+      url,
+      images: [entry.coverImage],
+    },
+    twitter: {
+      card: 'summary_large_image',
       title: entry.organization,
       description: `${entry.role} — ${entry.duration}`,
       images: [entry.coverImage],

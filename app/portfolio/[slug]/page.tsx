@@ -26,10 +26,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = await getPortfolioProjectBySlug(slug)
   if (!project) return { title: 'Project Not Found' }
 
+  const url = `/portfolio/${project.slug}`
+
   return {
     title: `${project.title} | Nestor Cyber Portfolio`,
     description: project.shortDescription,
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
+      title: project.title,
+      description: project.shortDescription,
+      url,
+      images: [project.coverImage],
+    },
+    twitter: {
+      card: 'summary_large_image',
       title: project.title,
       description: project.shortDescription,
       images: [project.coverImage],

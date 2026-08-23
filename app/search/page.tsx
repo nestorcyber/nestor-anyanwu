@@ -10,6 +10,13 @@ export const revalidate = 60
 export const metadata: Metadata = {
   title: "Search Results | Nestor Anyanwu (Nestor Cyber)",
   description: "Live search results for articles, projects, skills, services, and community work by Nestor Anyanwu.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+  alternates: {
+    canonical: "/search",
+  },
 }
 
 const categoryIcons: Record<string, React.ReactNode> = {
