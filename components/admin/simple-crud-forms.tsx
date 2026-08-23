@@ -4,7 +4,7 @@ import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { slugify } from '@/lib/utils/slug'
-import { revalidateGallery } from '@/app/actions/revalidate'
+import { revalidateGallery, revalidatePortfolio } from '@/app/actions/revalidate'
 import ImageUpload from '@/components/admin/image-upload'
 import {
   DangerButton,
