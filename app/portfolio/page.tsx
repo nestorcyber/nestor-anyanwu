@@ -7,6 +7,7 @@ import FeaturedProjectsShowcase from "@/components/portfolio/featured-projects-s
 import SkillsMatrix from "@/components/portfolio/skills-matrix"
 import ProfessionalExperience from "@/components/portfolio/professional-experience"
 import CertificationsGrid from "@/components/portfolio/certifications-grid"
+import MembershipsSection from "@/components/portfolio/memberships-section"
 import TestimonialsCarousel from "@/components/portfolio/testimonials-carousel"
 import PortfolioCTA from "@/components/portfolio/portfolio-cta"
 import Footer from "@/components/footer"
@@ -63,6 +64,7 @@ export default async function PortfolioPage() {
           <FeaturedProjectsShowcase projects={projects} />
           <ProfessionalExperience journeyTimeline={journeyTimeline} />
           <CertificationsGrid certificationsList={certificationsList} />
+          <MembershipsSection />
           <TestimonialsCarousel />
           <PortfolioCTA />
         </div>

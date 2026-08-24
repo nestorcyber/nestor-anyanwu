@@ -1,6 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { ArrowUpRight } from "lucide-react"
 import type { CertificationItem } from "@/lib/content"
 import { getCertImage } from "@/components/shared/certification-card"
 

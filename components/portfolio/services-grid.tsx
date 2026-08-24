@@ -35,6 +35,8 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
       description:
         "Building production-grade web applications, robust APIs, and custom software architectures tailored for performance, high throughput, and long-term enterprise maintainability.",
       iconName: "Code",
+      ctaText: "Start a Project",
+      ctaHref: "/contact",
     },
     {
       id: "web-development",
@@ -42,6 +44,8 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
       description:
         "Crafting responsive, high-performance web platforms and digital interfaces using Next.js, React, and modern TypeScript. Fast, secure, accessible, and optimized for conversion.",
       iconName: "Globe",
+      ctaText: "Start a Project",
+      ctaHref: "/contact",
     },
     {
       id: "ai-workflows",
@@ -49,6 +53,8 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
       description:
         "Designing intelligent AI-assisted workflows, data integration pipelines, and custom digital tools that eliminate operational bottlenecks and dramatically accelerate business velocity.",
       iconName: "Zap",
+      ctaText: "Start a Project",
+      ctaHref: "/contact",
     },
     {
       id: "brand-design",
@@ -56,6 +62,8 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
       description:
         "Engineering cohesive visual design systems, UI/UX frameworks, digital assets, and marketing collateral with precise typography and visual hierarchy that command brand authority.",
       iconName: "Palette",
+      ctaText: "Start a Project",
+      ctaHref: "/contact",
     },
     {
       id: "it-consulting",
@@ -63,6 +71,8 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
       description:
         "Providing strategic technology audits, system architecture advisory, and infrastructure consulting to guide startups and enterprise organizations toward optimal stack decisions.",
       iconName: "Shield",
+      ctaText: "Book Consultation",
+      ctaHref: "/contact",
     },
     {
       id: "devrel-community",
@@ -70,6 +80,8 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
       description:
         "Driving developer advocacy, technical workshops, hands-on volunteering, and high-impact ecosystem programs that mentor talent and foster thriving engineering communities.",
       iconName: "Users",
+      ctaText: "Partner Up",
+      ctaHref: "/contact",
     },
   ]
 

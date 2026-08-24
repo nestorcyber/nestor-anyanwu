@@ -20,10 +20,12 @@ export default function HomeCTA() {
         <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
           <Link
             href="/contact"
-            className="bg-accent hover:bg-accent/90 text-white font-bold text-xs md:text-sm tracking-wide px-7 py-3.5 rounded-xl shadow-lg transition-all inline-flex items-center gap-2 cursor-pointer"
+            className="bg-accent hover:bg-accent/90 text-white font-bold text-xs md:text-sm tracking-wider uppercase pl-7 pr-3 py-2.5 rounded-xl shadow-lg transition-all inline-flex items-center gap-3 cursor-pointer group"
           >
             <span>Start A Collaboration</span>
-            <ArrowUpRight className="w-4 h-4" />
+            <span className="w-8 h-8 rounded-lg bg-black/25 dark:bg-black/40 text-white flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105">
+              <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </span>
           </Link>
         </div>
       </div>
