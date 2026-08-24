@@ -578,7 +578,7 @@ export async function getCertifications(): Promise<CertificationItem[]> {
       .order('sort_order', { ascending: true })
 
     if (!error && data && data.length > 0) {
-      return data.map((row) => {
+      return data.map((row: any) => {
         const fallback = fallbackCertificationsList.find(
           (c) => c.id === row.slug || c.id === row.id || c.title?.toLowerCase() === row.title?.toLowerCase()
         )
@@ -586,7 +586,7 @@ export async function getCertifications(): Promise<CertificationItem[]> {
           id: row.slug || row.id,
           title: row.title,
           provider: row.provider,
-          date: row.date_label || row.date,
+          date: row.date_label || row.date || '',
           credentialUrl: row.credential_url || fallback?.credentialUrl,
           credentialId: row.credential_id || fallback?.credentialId,
           description: row.description || fallback?.description,

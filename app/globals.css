@@ -676,3 +676,54 @@ h6 {
 .animate-marquee-reverse:hover {
   animation-play-state: paused;
 }
+
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes marquee-vertical-reverse {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.animate-marquee-vertical {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  animation: marquee-vertical 24s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-vertical-slow {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  animation: marquee-vertical 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-vertical-reverse {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  animation: marquee-vertical-reverse 26s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-vertical:hover,
+.animate-marquee-vertical-slow:hover,
+.animate-marquee-vertical-reverse:hover,
+.animate-marquee-vertical:active,
+.animate-marquee-vertical-slow:active,
+.animate-marquee-vertical-reverse:active {
+  animation-play-state: paused;
+}

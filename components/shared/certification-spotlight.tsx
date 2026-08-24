@@ -26,22 +26,22 @@ export default function CertificationSpotlight({
   className = "",
 }: CertificationSpotlightProps) {
   const cert: CertificationItem = featuredCert || {
-    id: "google-cloud-architect",
-    title: "Google Cloud Certified Professional",
-    provider: "Google for Developers / Google Cloud",
-    date: "October 2024",
-    credentialUrl: "https://cloud.google.com/certification",
-    credentialId: "GCP-NA-7839201",
+    id: "ndpc-privacy",
+    title: "Data Privacy Ambassador",
+    provider: "Nigeria Data Protection Commission (NDPC)",
+    date: "April 2025",
+    credentialUrl: "https://ndpc.gov.ng",
+    credentialId: "NDPC-AMB-2025-084",
     description:
-      "Certified competence in designing, developing, and managing robust, secure, scalable, and highly available cloud architecture and AI solutions.",
-    skills: ["Google Cloud", "Cloud Architecture", "Enterprise Security", "AI Solutions"],
-    image: "/certificates/google-cert.jpg",
+      "Certified competence in data protection governance, NDPA compliance, user privacy frameworks, and institutional data security protocols.",
+    skills: ["Data Privacy", "NDPA Compliance", "Risk Governance", "Security Protocols"],
+    image: "/certificates/ndpc-cert.jpg",
   }
 
   const certImg = getCertImage(cert)
 
   return (
-    <section className={`w-full pt-16 sm:pt-20 md:pt-28 pb-0 bg-white dark:bg-background border-b border-border/70 overflow-hidden relative ${className}`}>
+    <section className={`w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] py-16 sm:py-20 md:py-24 border-b border-border/70 bg-white dark:bg-background overflow-hidden relative flex flex-col justify-center ${className}`}>
       
       {/* Background ambient lighting */}
       <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#0075ff]/5 dark:bg-[#0075ff]/10 rounded-full blur-3xl pointer-events-none" />

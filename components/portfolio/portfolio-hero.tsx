@@ -17,7 +17,7 @@ export default function PortfolioHero({
   const statLabel = primaryStat?.label || "Projects & solutions delivered world-wide."
 
   return (
-    <section className="relative w-full h-[62svh] min-h-[380px] sm:h-[75svh] md:h-[calc(100svh-4rem)] md:min-h-[640px] max-h-[1080px] bg-slate-950 overflow-hidden flex flex-col justify-end">
+    <section className="relative w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto bg-slate-950 overflow-hidden flex flex-col justify-end">
       
       {/* 1. Full-Bleed Background Image (Centered on Mobile like Tony Elumelu, Off-center on Desktop) */}
       <div className="absolute inset-0 w-full h-full">

@@ -386,6 +386,10 @@ export interface CertificationItem {
   provider: string
   date: string
   credentialUrl?: string
+  credentialId?: string
+  description?: string
+  skills?: string[]
+  image?: string
 }
 
 export interface BrandPartnerItem {
@@ -941,17 +945,6 @@ export const fallbackGalleryImages = [
 ]
 
 export const certificationsList: CertificationItem[] = [
-  {
-    id: "google-cloud-architect",
-    title: "Google Cloud Certified Professional",
-    provider: "Google for Developers / Google Cloud",
-    date: "October 2024",
-    credentialUrl: "https://cloud.google.com/certification",
-    credentialId: "GCP-NA-7839201",
-    description: "Certified competence in designing, developing, and managing robust, secure, scalable, and highly available cloud architecture and AI solutions.",
-    skills: ["Google Cloud", "Cloud Architecture", "Enterprise Security", "AI Solutions"],
-    image: "/certificates/google-cert.jpg",
-  },
   {
     id: "ndpc-privacy",
     title: "Data Privacy Ambassador",

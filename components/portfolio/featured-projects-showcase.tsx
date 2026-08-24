@@ -9,7 +9,7 @@ export default function FeaturedProjectsShowcase({ projects }: { projects: Proje
   const featuredList = featuredOnly.length > 0 ? featuredOnly.slice(0, 3) : projects.slice(0, 3)
 
   return (
-    <section id="featured" className="w-full py-8 md:py-10 border-b border-border/70 bg-background">
+    <section id="featured" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-background flex flex-col justify-center">
       <div className="container-webflow space-y-8">
         
         {/* Centered Image-Matching Section Header */}

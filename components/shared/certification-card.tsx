@@ -64,12 +64,11 @@ export function SimpleRedRibbonOverlay() {
 export function getCertImage(cert: CertificationItem): string {
   if (cert.image) return cert.image
   const idOrTitle = (cert.id + " " + cert.title).toLowerCase()
-  if (idOrTitle.includes("google") || idOrTitle.includes("gcp")) return "/certificates/google-cert.jpg"
   if (idOrTitle.includes("privacy") || idOrTitle.includes("ndpc")) return "/certificates/ndpc-cert.jpg"
   if (idOrTitle.includes("aws") || idOrTitle.includes("cloud")) return "/certificates/aws-cert.jpg"
   if (idOrTitle.includes("ieee") || idOrTitle.includes("engineer")) return "/certificates/ieee-cert.jpg"
   if (idOrTitle.includes("gotni") || idOrTitle.includes("lead")) return "/certificates/gotni-cert.jpg"
-  return "/certificates/google-cert.jpg"
+  return "/certificates/ndpc-cert.jpg"
 }
 
 export interface CertificationCardProps {
@@ -102,12 +101,12 @@ export default function CertificationCard({ cert }: CertificationCardProps) {
         className="relative flex flex-col justify-between h-full bg-white dark:bg-slate-900 shadow-sm group-hover:shadow-2xl transition-all duration-300 z-10"
       >
         
-        {/* Top Section: Full Nested Certificate Image filling top compartment */}
-        <div className="relative w-full h-[145px] sm:h-[165px] shrink-0 overflow-hidden bg-slate-900 border-b border-slate-200/80 dark:border-slate-800/80">
+        {/* Top Section: 4:3 Landscape Certificate Image */}
+        <div className="relative w-full aspect-[4/3] shrink-0 overflow-hidden bg-slate-950 border-b border-slate-200/80 dark:border-slate-800/80">
           {/* Simple Red Ribbon Overlay starting flush from top edge */}
           <SimpleRedRibbonOverlay />
 
-          {/* Nested Certificate Image filling entire top area */}
+          {/* Nested Certificate Image filling entire 4:3 compartment */}
           <Image
             src={certImg}
             alt={`${cert.title} Certificate`}
@@ -118,7 +117,7 @@ export default function CertificationCard({ cert }: CertificationCardProps) {
           />
 
           {/* Subtle bottom gradient shadow for depth */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
         </div>
 
         {/* Bottom Section: Title, Issuer, Description, Action Button */}

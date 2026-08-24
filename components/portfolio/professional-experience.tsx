@@ -1,99 +1,178 @@
 import React from "react"
 import Link from "next/link"
 import type { JourneyItem } from "@/lib/content"
-import { Briefcase, Calendar, Building2, ArrowRight } from "lucide-react"
+import {
+  ArrowRight,
+  Code2,
+  Cpu,
+  Globe,
+  Play,
+  Layers,
+  Sparkles,
+} from "lucide-react"
 
 export default function ProfessionalExperience({
   journeyTimeline,
-  limit = 4,
 }: {
-  journeyTimeline: JourneyItem[]
-  limit?: number
-}) {
-  const workExperience = journeyTimeline.length
-    ? journeyTimeline.filter(
-        (item) =>
-          !item.type ||
-          item.type.toLowerCase().includes("work") ||
-          item.type.toLowerCase().includes("exp") ||
-          item.type.toLowerCase().includes("role") ||
-          item.type.toLowerCase().includes("career")
-      )
-    : []
-  const allItems = workExperience.length ? workExperience : journeyTimeline
-  const displayItems = limit && limit > 0 ? allItems.slice(0, limit) : allItems
+  journeyTimeline?: JourneyItem[]
+} = {}) {
+  // Professional milestones integrating Software Engineering, DevRel, Tech Leadership, Design, and Impact
+  const coreExperiences: JourneyItem[] = [
+    {
+      id: "1",
+      title: "Lead Full-Stack Engineer & System Architect",
+      organization: "Software Engineering & Digital Platforms",
+      role: "Lead Full-Stack Engineer",
+      date: "2025 - Present",
+      description:
+        "Architecting resilient full-stack web applications, scalable backend API systems, and AI automation pipelines with a focus on type safety, high throughput, and enterprise-grade performance.",
+      type: "work",
+      details: ["Software Engineering", "Web Development", "AI Workflows", "API Architecture"],
+    },
+    {
+      id: "2",
+      title: "Director of Technology & Developer Relations (DevRel)",
+      organization: "Technology Strategy & Community Programs",
+      role: "Director of ICT & DevRel Lead",
+      date: "2024 - Present",
+      description:
+        "Directing technological infrastructure, digital strategy, and ecosystem developer relations—leading hands-on workshops, hackathons, and high-impact tech community initiatives.",
+      type: "work",
+      details: ["DevRel", "Community Building", "IT Consulting", "Impact & Volunteering"],
+    },
+  ]
+
+  const displayItems = coreExperiences
+
+  const getSpineIcon = (index: number) => {
+    switch (index) {
+      case 0:
+        return <Cpu className="w-5 h-5 text-slate-200" />
+      case 1:
+        return <Globe className="w-5 h-5 text-slate-200" />
+      default:
+        return <Code2 className="w-5 h-5 text-slate-200" />
+    }
+  }
 
   return (
-    <section id="experience" className="w-full py-12 md:py-16 border-b border-border/70 bg-slate-50/60 dark:bg-slate-900/30">
-      <div className="container-webflow space-y-8">
+    <section
+      id="experience"
+      className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-white dark:bg-background relative overflow-hidden flex flex-col justify-center"
+    >
+      <div className="site-container relative z-10 space-y-12">
         
         {/* Centered Section Header */}
-        <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
+        <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Experience
+            Career <span className="text-[#0075ff]">Roadmap</span> &amp; Experience
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            Engineering and leadership track record.
+            Verified engineering track record, technical directorship, and full-stack software delivery.
           </p>
-          <div className="w-14 h-1 bg-accent rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-1" />
         </div>
 
-        {/* Timeline Experience Items (Limited to 4) */}
-        <div className="divide-y divide-border/60">
-          {displayItems.map((exp, idx) => (
-            <div key={exp.id || idx} className="py-6 first:pt-0 last:pb-0 flex gap-4 sm:gap-5 items-start">
-              
-              {/* Organization Icon Avatar */}
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-secondary border border-border shrink-0 flex items-center justify-center text-accent font-bold text-base shadow-2xs">
-                <Building2 className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
+        {/* Connected Roadmap Timeline Track */}
+        <div className="relative max-w-5xl mx-auto pt-4 pb-2">
+          
+          {/* Continuous Central Roadmap Spine Line (Desktop) */}
+          <div className="absolute left-6 md:left-1/2 top-4 bottom-8 w-[2px] -translate-x-1/2 bg-slate-300 dark:bg-slate-700 pointer-events-none hidden md:block" />
 
-              {/* Experience Info Content */}
-              <div className="space-y-1.5 sm:space-y-2 flex-1">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="text-base sm:text-lg font-bold text-foreground font-heading">
-                    {exp.title}
-                  </h3>
-                  <span className="text-xs font-mono text-muted-foreground flex items-center gap-1">
-                    <Calendar size={13} />
-                    {exp.date}
-                  </span>
-                </div>
+          {/* Continuous Left-Aligned Spine Line (Mobile) */}
+          <div className="absolute left-6 top-4 bottom-8 w-[2px] bg-slate-300 dark:bg-slate-700 pointer-events-none md:hidden" />
 
-                <p className="text-xs sm:text-sm font-semibold text-accent">
-                  {exp.organization} {exp.role ? `• ${exp.role}` : ""}
-                </p>
+          {/* Roadmap Milestone Items */}
+          <div className="space-y-12 md:space-y-16">
+            {displayItems.map((item, idx) => {
+              const isEven = idx % 2 === 0
 
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed pt-1 max-w-4xl line-clamp-3">
-                  {exp.description}
-                </p>
+              return (
+                <div
+                  key={item.id || idx}
+                  className={`relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-14 ${
+                    isEven ? "md:flex-row" : "md:flex-row-reverse"
+                  }`}
+                >
+                  {/* 1. Milestone Roadmap Card Content */}
+                  <div className="w-full md:w-[calc(50%-2.5rem)] pl-14 sm:pl-16 md:pl-0">
+                    <article className="group relative bg-white dark:bg-card border border-slate-200/90 dark:border-slate-800 hover:border-[#0075ff]/60 rounded-2xl sm:rounded-3xl p-6 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-xl transition-all duration-300 space-y-4">
+                      
+                      {/* Speech Bubble Notch pointing to center spine on Desktop */}
+                      {isEven ? (
+                        <div className="hidden md:block absolute -right-2.5 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[9px] border-y-transparent border-l-[10px] border-l-white dark:border-l-card" />
+                      ) : (
+                        <div className="hidden md:block absolute -left-2.5 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[9px] border-y-transparent border-r-[10px] border-r-white dark:border-r-card" />
+                      )}
 
-                {exp.details && exp.details.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-2">
-                    {exp.details.map((d, i) => (
-                      <span
-                        key={i}
-                        className="text-[11px] sm:text-xs font-medium px-2.5 sm:px-3 py-0.5 sm:py-1 bg-secondary text-foreground rounded-full border border-border/70"
-                      >
-                        {d}
-                      </span>
-                    ))}
+                      {/* Header Block: Title & Domain */}
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-foreground font-heading tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors">
+                          {item.title}
+                        </h3>
+                        <p className="text-sm sm:text-base font-semibold text-slate-500 dark:text-slate-400 mt-1">
+                          {item.organization}
+                        </p>
+                      </div>
+
+                      {/* Description Bullet Point */}
+                      <div className="pt-1">
+                        <div className="flex items-start gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                          <Play className="w-2.5 h-2.5 mt-1.5 fill-slate-700 dark:fill-slate-300 text-slate-700 dark:text-slate-300 shrink-0" />
+                          <span>{item.description}</span>
+                        </div>
+                      </div>
+
+                      {/* Skills / Focus Tag Chips */}
+                      {item.details && item.details.length > 0 && (
+                        <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+                          {item.details.map((tag, tIdx) => (
+                            <span
+                              key={tIdx}
+                              className="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 text-xs font-semibold"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                    </article>
                   </div>
-                )}
-              </div>
 
-            </div>
-          ))}
+                  {/* 2. Central Node Icon Badge on Spine */}
+                  <div className="absolute left-6 md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 -translate-y-0 md:-translate-y-1/2 z-20">
+                    <div className="w-12 h-12 rounded-full bg-[#0d1424] text-white flex items-center justify-center shadow-lg border-2 border-white dark:border-slate-900 transition-transform duration-300 hover:scale-110">
+                      {getSpineIcon(idx)}
+                    </div>
+                  </div>
+
+                  {/* 3. Opposite Side Date Timestamp (Desktop) */}
+                  <div
+                    className={`hidden md:flex w-[calc(50%-2.5rem)] items-center ${
+                      isEven ? "justify-start pl-6" : "justify-end pr-6 text-right"
+                    }`}
+                  >
+                    <span className="text-sm font-bold font-mono text-slate-500 dark:text-slate-400 tracking-wide">
+                      {item.date}
+                    </span>
+                  </div>
+
+                </div>
+              )
+            })}
+          </div>
+
         </div>
 
-        {/* View All Experiences Button */}
-        <div className="flex justify-center pt-6 border-t border-border/60">
+        {/* View All Experience Button */}
+        <div className="flex justify-center pt-4">
           <Link
             href="/experience"
-            className="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3 sm:py-3.5 bg-accent hover:bg-accent/90 text-white font-extrabold text-xs tracking-wider rounded-xl shadow-xs hover:shadow-md transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent hover:bg-accent/90 text-white font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
           >
-            <span>Explore Full Experience History</span>
-            <ArrowRight className="w-4 h-4 shrink-0" />
+            <span>View All Experience</span>
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
