@@ -1,75 +1,145 @@
 import type { Metadata } from "next"
-import CommunityPage, { type CommunityEvent } from "./community-client"
-import { getCommunityEntries, getJourneyItems } from "@/lib/content"
+import CommunityHero from "@/components/community/community-hero"
+import ImpactSnapshot from "@/components/community/impact-snapshot"
+import FeaturedExperiences, { type FeaturedExperienceItem } from "@/components/community/featured-experiences"
+import CommunityTimeline from "@/components/community/community-timeline"
+import OrganizationsGrid from "@/components/community/organizations-grid"
+import ContributionPillars from "@/components/community/contribution-pillars"
+import CommunityStories, { type CommunityStoryItem } from "@/components/community/community-stories"
+import VolunteeringGallery, { type GalleryPhoto } from "@/components/community/volunteering-gallery"
+import CommunitySkills from "@/components/community/community-skills"
+import CommunityCTA from "@/components/community/community-cta"
+import Footer from "@/components/footer"
+import {
+  getCommunityEntries,
+  getJourneyItems,
+  getGalleryImages,
+  getJournalArticles,
+} from "@/lib/content"
 
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "Community & Volunteering | Nestor Anyanwu (Nestor Cyber)",
-  description: "Learn about Nestor Anyanwu's (Nestor Cyber) community building, tech advocacy, and volunteering efforts with NACOS, IEEE, and Google Developer Groups.",
+  title: "Volunteering & Community Impact Portfolio | Nestor Anyanwu (Nestor Cyber)",
+  description:
+    "Explore Nestor Anyanwu's (Nestor Cyber) volunteering journey, grassroots leadership, developer relations, event operations, and community impact.",
   alternates: {
     canonical: "/community",
   },
   openGraph: {
-    title: "Community & Volunteering | Nestor Anyanwu (Nestor Cyber)",
-    description: "Learn about Nestor Anyanwu's (Nestor Cyber) community building, tech advocacy, and volunteering efforts with NACOS, IEEE, and Google Developer Groups.",
+    title: "Volunteering & Community Impact Portfolio | Nestor Anyanwu (Nestor Cyber)",
+    description:
+      "Explore Nestor Anyanwu's (Nestor Cyber) volunteering journey, grassroots leadership, developer relations, event operations, and community impact.",
     url: "/community",
   },
   twitter: {
-    title: "Community & Volunteering | Nestor Anyanwu (Nestor Cyber)",
-    description: "Learn about Nestor Anyanwu's (Nestor Cyber) community building, tech advocacy, and volunteering efforts with NACOS, IEEE, and Google Developer Groups.",
+    title: "Volunteering & Community Impact Portfolio | Nestor Anyanwu (Nestor Cyber)",
+    description:
+      "Explore Nestor Anyanwu's (Nestor Cyber) volunteering journey, grassroots leadership, developer relations, event operations, and community impact.",
   },
 }
 
-const ACCENTS = [
-  "#2563eb",
-  "#7c3aed",
-  "#0891b2",
-  "#d97706",
-  "#059669",
-  "#4f46e5",
-  "#b45309",
-  "#0075ff",
-  "#f59e0b",
-  "#10b981",
-  "#6366f1",
-  "#ec4899",
-  "#0ea5e9",
-]
+export default async function CommunityPage() {
+  const [entries, journey, galleryImages, journalArticles] = await Promise.all([
+    getCommunityEntries(),
+    getJourneyItems(),
+    getGalleryImages(),
+    getJournalArticles(),
+  ])
 
-export default async function Page() {
-  const [entries, journey] = await Promise.all([getCommunityEntries(), getJourneyItems()])
+  // Filter volunteer items for the timeline
+  const volunteerJourney = journey.filter((item) => item.type === "volunteer")
 
-  const fromEntries: CommunityEvent[] = entries.map((entry, i) => ({
-    id: entry.id,
-    title: entry.organization,
-    role: entry.role,
-    date: entry.duration,
-    category: entry.tags[0] || "Community",
-    description: entry.achievements[0] || entry.organization,
-    tags: entry.tags,
-    images: [entry.coverImage, ...entry.gallery].filter(
-      (url) => url && !url.includes("placeholder")
-    ),
-    accent: ACCENTS[i % ACCENTS.length],
-    href: `/community/${entry.slug}`,
+  // Map featured experiences from database entries or fallback to rich curated list
+  const mappedExperiences: FeaturedExperienceItem[] = entries.map((e) => ({
+    id: e.id,
+    title: e.organization,
+    organization: e.organization,
+    role: e.role,
+    date: e.duration,
+    coverImage: e.coverImage,
+    description: e.description || (e.achievements?.[0] ?? ""),
+    contributions: e.achievements && e.achievements.length > 0 ? e.achievements : [e.description],
+    skills: e.tags && e.tags.length > 0 ? e.tags : ["Community", "Leadership", "Volunteering"],
+    slug: e.slug,
   }))
 
-  const fromJourney: CommunityEvent[] = journey
-    .filter((item) => item.type === "volunteer")
-    .map((item, i) => ({
-      id: item.id,
-      title: item.organization || item.title,
-      role: item.role || item.title,
-      date: item.date,
-      category: item.details?.[0] || "Volunteer",
-      description: item.description,
-      tags: item.details || [],
-      images: (item.images || []).filter((url) => url && !url.includes("placeholder")),
-      accent: ACCENTS[(fromEntries.length + i) % ACCENTS.length],
+  // Map gallery photos from gallery table
+  const mappedPhotos: GalleryPhoto[] = galleryImages.map((g) => ({
+    id: g.id,
+    imageUrl: g.imageUrl,
+    title: g.title || "Community Event",
+    caption: g.caption || undefined,
+    category: g.category || undefined,
+    location: g.location || undefined,
+    date: g.eventDate || undefined,
+  }))
+
+  // Map community stories from relevant journal posts
+  const mappedStories: CommunityStoryItem[] = journalArticles
+    .filter(
+      (a) =>
+        a.category.toLowerCase().includes("community") ||
+        a.category.toLowerCase().includes("leadership") ||
+        a.category.toLowerCase().includes("event") ||
+        a.tags.some((t) => t.toLowerCase().includes("community") || t.toLowerCase().includes("gdg"))
+    )
+    .slice(0, 3)
+    .map((a) => ({
+      id: a.id,
+      title: a.title,
+      excerpt: a.excerpt,
+      coverImage: a.coverImage,
+      date: a.publishedDate,
+      organization: a.category,
+      journalSlug: a.slug,
+      readTime: "4 min read",
     }))
 
-  const events = fromEntries.length ? [...fromEntries, ...fromJourney] : fromJourney
+  return (
+    <div className="min-h-screen bg-background flex flex-col w-full">
+      {/* Main Full-Width Content Column */}
+      <main className="flex-1 w-full min-w-0 flex flex-col justify-between overflow-x-hidden">
+        <div className="w-full">
+          {/* 1. Hero */}
+          <CommunityHero />
 
-  return <CommunityPage events={events} />
+          {/* 2. Impact Snapshot */}
+          <ImpactSnapshot
+            organizationCount={8}
+            eventCount={15}
+            volunteerCount={volunteerJourney.length > 0 ? volunteerJourney.length : 12}
+            peopleReached="3,500+"
+          />
+
+          {/* 3. Featured Experiences */}
+          <FeaturedExperiences experiences={mappedExperiences.length > 0 ? mappedExperiences : undefined} />
+
+          {/* 4. Volunteering Timeline */}
+          <CommunityTimeline timeline={volunteerJourney.length > 0 ? volunteerJourney : undefined} />
+
+          {/* 5. Organizations & Communities */}
+          <OrganizationsGrid />
+
+          {/* 6. How I Contribute */}
+          <ContributionPillars />
+
+          {/* 7. Community Stories & Reflections */}
+          <CommunityStories stories={mappedStories.length > 0 ? mappedStories : undefined} />
+
+          {/* 8. Volunteering Gallery with Lightbox */}
+          <VolunteeringGallery photos={mappedPhotos.length > 0 ? mappedPhotos : undefined} />
+
+          {/* 9. Skills Gained Through Volunteering */}
+          <CommunitySkills />
+
+          {/* 10. Call to Action */}
+          <CommunityCTA />
+        </div>
+
+        {/* Global Footer */}
+        <Footer />
+      </main>
+    </div>
+  )
 }
