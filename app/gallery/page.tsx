@@ -5,19 +5,19 @@ import { getGalleryImages } from "@/lib/content"
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "Gallery | Nestor Anyanwu (Nestor Cyber)",
-  description: "Moments, people, projects, and experiences from my journey.",
+  title: "Visual Gallery | Nestor Anyanwu (Nestor Cyber)",
+  description: "A visual archive documenting moments, speaking engagements, technical conferences, hackathons, engineering sessions, community gatherings, and hands-on workshops.",
   alternates: {
     canonical: "/gallery",
   },
   openGraph: {
-    title: "Gallery | Nestor Anyanwu (Nestor Cyber)",
-    description: "Moments, people, projects, and experiences from my journey.",
+    title: "Visual Gallery | Nestor Anyanwu (Nestor Cyber)",
+    description: "A visual archive documenting moments, speaking engagements, technical conferences, hackathons, engineering sessions, community gatherings, and hands-on workshops.",
     url: "/gallery",
   },
   twitter: {
-    title: "Gallery | Nestor Anyanwu (Nestor Cyber)",
-    description: "Moments, people, projects, and experiences from my journey.",
+    title: "Visual Gallery | Nestor Anyanwu (Nestor Cyber)",
+    description: "A visual archive documenting moments, speaking engagements, technical conferences, hackathons, engineering sessions, community gatherings, and hands-on workshops.",
   },
 }
 

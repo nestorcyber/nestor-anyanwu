@@ -2,7 +2,16 @@
 
 import React, { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
-import { X, ChevronLeft, ChevronRight, Maximize2, MapPin, Calendar, Sparkles } from "lucide-react"
+import Link from "next/link"
+import {
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Maximize2,
+  MapPin,
+  Images,
+  ArrowRight,
+} from "lucide-react"
 
 export interface GalleryPhoto {
   id: string
@@ -18,68 +27,46 @@ export interface GalleryPhoto {
 const DEFAULT_GALLERY: GalleryPhoto[] = [
   {
     id: "gal-1",
-    imageUrl: "/devfest24-solo.jpg",
-    title: "DevFest Owerri 2025 Keynote Staging",
-    caption: "Lead Brand Designer & Technical Support managing visual cues for 1,500+ attendees.",
-    category: "Conferences",
-    location: "Owerri, Nigeria",
-    date: "Nov 2025",
-    aspectRatio: "portrait",
-  },
-  {
-    id: "gal-2",
     imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
     title: "NACOS FUTO Student Leadership Delegation",
     caption: "Director of ICT leading digital strategy and tech mentorship for computing students.",
     category: "Leadership",
     location: "FUTO ICT Complex",
     date: "Dec 2025",
-    aspectRatio: "wide",
   },
   {
-    id: "gal-3",
-    imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fle3%280%29-CFKUWQDj8dfMZ5zkDTF9IEEXC6zDID.jpg",
-    title: "FLE Global Leadership Conference Setup",
-    caption: "Managing multi-track staging and guest hospitality operations.",
-    category: "Events",
-    location: "FLE Global Summit",
-    date: "Nov 2025",
-    aspectRatio: "square",
-  },
-  {
-    id: "gal-4",
-    imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f4%280%29-e7Yahcsw3qQbcQLNweaiCS5rzoAVvv.jpg",
-    title: "FUTO Alumni Homecoming Session",
-    caption: "Capturing networking roundtables and legacy awards with the media team.",
-    category: "Media",
-    location: "FUTO Campus",
-    date: "Aug 2025",
-    aspectRatio: "square",
-  },
-  {
-    id: "gal-5",
-    imageUrl: "/aws-me.jpg",
-    title: "AWS Cloud Club Practitioners Session",
-    caption: "Engaging student developers in serverless fundamentals and cloud pathways.",
-    category: "Workshops",
-    location: "AWS Cloud Club FUTO",
-    date: "Sep 2025",
-    aspectRatio: "portrait",
-  },
-  {
-    id: "gal-6",
+    id: "gal-2",
     imageUrl: "/gida-large-group.jpg",
-    title: "Grassroots Community Gathering",
+    title: "Grassroots Community Gathering & Innovators Meet",
     caption: "Uniting tech innovators, open-source contributors, and community advocates.",
     category: "Community",
     location: "Innovation Hub",
     date: "Aug 2025",
-    aspectRatio: "wide",
+  },
+  {
+    id: "gal-3",
+    imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f4%280%29-e7Yahcsw3qQbcQLNweaiCS5rzoAVvv.jpg",
+    title: "FUTO Alumni Homecoming Operations Team",
+    caption: "Capturing networking roundtables and legacy awards with the media team.",
+    category: "Media",
+    location: "FUTO Campus",
+    date: "Aug 2025",
+  },
+  {
+    id: "gal-4",
+    imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fle3%280%29-CFKUWQDj8dfMZ5zkDTF9IEEXC6zDID.jpg",
+    title: "FLE Global Leadership Conference Setup Team",
+    caption: "Managing multi-track staging and guest hospitality operations.",
+    category: "Events",
+    location: "FLE Global Summit",
+    date: "Nov 2025",
   },
 ]
 
 export default function VolunteeringGallery({ photos = DEFAULT_GALLERY }: { photos?: GalleryPhoto[] }) {
-  const displayPhotos = photos && photos.length > 0 ? photos : DEFAULT_GALLERY
+  // Use curated few community group pictures for the community page preview
+  const allPhotos = photos && photos.length > 0 ? photos : DEFAULT_GALLERY
+  const displayPhotos = allPhotos.slice(0, 4)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   const activePhoto = lightboxIndex !== null ? displayPhotos[lightboxIndex] : null
@@ -111,7 +98,7 @@ export default function VolunteeringGallery({ photos = DEFAULT_GALLERY }: { phot
 
   return (
     <section id="gallery" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-slate-50/60 dark:bg-slate-900/30 flex flex-col justify-center">
-      <div className="site-container space-y-12">
+      <div className="site-container space-y-10 sm:space-y-12">
         
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
@@ -119,35 +106,35 @@ export default function VolunteeringGallery({ photos = DEFAULT_GALLERY }: { phot
             Volunteering <span className="text-[#0075ff]">Gallery</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            Moments from conferences, team hackathons, campus workshops, and on-ground volunteer operations.
+            Selected community group moments from developer conferences, student leadership summits, and on-ground volunteer operations.
           </p>
           <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-2" />
         </div>
 
         {/* Responsive Grid with Fixed Aspect Ratio Containers (Zero Layout Shift) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {displayPhotos.map((photo, index) => {
             return (
               <div
                 key={photo.id || index}
                 onClick={() => setLightboxIndex(index)}
-                className="group relative aspect-[4/3] rounded-3xl overflow-hidden bg-slate-900 border border-border/80 hover:border-[#0075ff] cursor-pointer shadow-xs hover:shadow-xl transition-all duration-300"
+                className="group relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-900 border border-border/80 hover:border-[#0075ff] cursor-pointer shadow-xs hover:shadow-xl transition-all duration-300"
               >
                 <Image
                   src={photo.imageUrl}
                   alt={photo.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
                 />
                 
                 {/* Subtle Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-5 text-white">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-5 text-white">
                   
                   {/* Top Category Badge & Maximize Icon */}
                   <div className="flex items-center justify-between">
                     {photo.category ? (
-                      <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-[#0075ff] text-white">
+                      <span className="px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-mono font-bold bg-[#0075ff] text-white">
                         {photo.category}
                       </span>
                     ) : <span />}
@@ -159,11 +146,11 @@ export default function VolunteeringGallery({ photos = DEFAULT_GALLERY }: { phot
 
                   {/* Bottom Captions */}
                   <div className="space-y-1">
-                    <h4 className="text-sm font-bold text-white font-heading leading-snug">
+                    <h4 className="text-xs sm:text-sm font-bold text-white font-heading leading-snug line-clamp-2">
                       {photo.title}
                     </h4>
                     {photo.location && (
-                      <p className="text-[11px] font-mono text-slate-300 flex items-center gap-1">
+                      <p className="text-[10px] sm:text-[11px] font-mono text-slate-300 flex items-center gap-1">
                         <MapPin className="w-3 h-3 text-[#0075ff]" />
                         {photo.location}
                       </p>
@@ -174,6 +161,18 @@ export default function VolunteeringGallery({ photos = DEFAULT_GALLERY }: { phot
               </div>
             )
           })}
+        </div>
+
+        {/* Action Button: View All Volunteer Pictures */}
+        <div className="flex items-center justify-center pt-2">
+          <Link
+            href="/community/gallery"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#0075ff] hover:bg-blue-600 text-white font-extrabold text-xs tracking-wider uppercase flex items-center justify-center gap-2.5 transition-all shadow-md hover:shadow-lg duration-200 cursor-pointer group"
+          >
+            <Images className="w-4 h-4" />
+            <span>View All Volunteer Pictures</span>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </div>
 
       </div>
@@ -225,7 +224,7 @@ export default function VolunteeringGallery({ photos = DEFAULT_GALLERY }: { phot
           {/* Image & Caption Card */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-4xl w-full max-h-[85vh] flex flex-col items-center bg-slate-950 rounded-3xl overflow-hidden border border-white/15 shadow-2xl"
+            className="relative max-w-4xl w-full max-h-[85vh] flex flex-col items-center bg-slate-950 rounded-2xl overflow-hidden border border-white/15 shadow-2xl"
           >
             <div className="relative w-full h-[55vh] sm:h-[65vh] bg-black">
               <Image

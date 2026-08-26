@@ -15,7 +15,7 @@ export default function CertificationsGrid({
       headlinePrefix="Licenses &"
       headlineHighlight="Certifications"
       headlineSuffix=""
-      description="Explore verified credentials, professional engineering accreditations, industry licenses, and leadership qualifications earned across national and global institutions — validating technical rigor and compliance."
+      description="Explore verified credentials, professional engineering accreditations, industry licenses, and leadership qualifications earned across national and global institutions, validating technical rigor and compliance."
       primaryButtonText="View all certifications"
       primaryButtonLink="/certifications"
       featuredCert={featuredCert}

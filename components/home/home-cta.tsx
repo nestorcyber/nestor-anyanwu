@@ -14,7 +14,7 @@ export default function HomeCTA() {
         </h2>
 
         <p className="text-primary-foreground/80 text-sm md:text-lg font-light leading-relaxed max-w-2xl mx-auto">
-          Whether you're looking to build software, integrate AI, direct product strategy, consult on IT architecture, or collaborate on developer relations and community initiatives — let's connect.
+          Whether you're looking to build software, integrate AI, direct product strategy, consult on IT architecture, or collaborate on developer relations and community initiatives, let's connect.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4 pt-4">

@@ -13,7 +13,7 @@ import Footer from "@/components/footer"
 import {
   getCommunityEntries,
   getJourneyItems,
-  getGalleryImages,
+  getVolunteeringImages,
   getJournalArticles,
 } from "@/lib/content"
 
@@ -40,10 +40,10 @@ export const metadata: Metadata = {
 }
 
 export default async function CommunityPage() {
-  const [entries, journey, galleryImages, journalArticles] = await Promise.all([
+  const [entries, journey, volunteerPhotos, journalArticles] = await Promise.all([
     getCommunityEntries(),
     getJourneyItems(),
-    getGalleryImages(),
+    getVolunteeringImages(),
     getJournalArticles(),
   ])
 
@@ -64,8 +64,8 @@ export default async function CommunityPage() {
     slug: e.slug,
   }))
 
-  // Map gallery photos from gallery table
-  const mappedPhotos: GalleryPhoto[] = galleryImages.map((g) => ({
+  // Map gallery photos from gallery table where Volunteering = true
+  const mappedPhotos: GalleryPhoto[] = volunteerPhotos.map((g) => ({
     id: g.id,
     imageUrl: g.imageUrl,
     title: g.title || "Community Event",

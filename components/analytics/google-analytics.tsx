@@ -2,7 +2,7 @@
 
 import Script from "next/script"
 
-// Env-gated GA4 component — only renders when NEXT_PUBLIC_GA_ID is set
+// Env-gated GA4 component: only renders when NEXT_PUBLIC_GA_ID is set
 // Set NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX in .env.local to activate
 export default function GoogleAnalytics() {
   const gaId = process.env.NEXT_PUBLIC_GA_ID

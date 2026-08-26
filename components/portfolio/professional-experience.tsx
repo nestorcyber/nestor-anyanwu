@@ -35,7 +35,7 @@ export default function ProfessionalExperience({
       role: "Director of ICT & DevRel Lead",
       date: "2024 - Present",
       description:
-        "Directing technological infrastructure, digital strategy, and ecosystem developer relations—leading hands-on workshops, hackathons, and high-impact tech community initiatives.",
+        "Directing technological infrastructure, digital strategy, and ecosystem developer relations, leading hands-on workshops, hackathons, and high-impact tech community initiatives.",
       type: "work",
       details: ["DevRel", "Community Building", "IT Consulting", "Impact & Volunteering"],
     },

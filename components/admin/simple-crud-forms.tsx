@@ -21,7 +21,28 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
   const [caption, setCaption] = useState(initial?.caption ?? '')
   const [imageUrl, setImageUrl] = useState(initial?.image_url ?? '')
   const [alt, setAlt] = useState(initial?.alt ?? '')
-  const [category, setCategory] = useState(initial?.category ?? 'Events')
+  
+  // Parse initial categories
+  const initialCategoryParts = (initial?.category ?? 'Gallery')
+    .split(',')
+    .map((c) => c.trim().toLowerCase())
+    .filter(Boolean)
+
+  const isInitiallyInGallery = initial
+    ? initialCategoryParts.includes('gallery') ||
+      (!initialCategoryParts.includes('volunteering') && !initialCategoryParts.includes('volunteer'))
+    : true
+
+  const isInitiallyInVolunteering = initial
+    ? initialCategoryParts.includes('volunteering') ||
+      initialCategoryParts.includes('volunteer') ||
+      initialCategoryParts.includes('community')
+    : false
+
+  const [inGallery, setInGallery] = useState<boolean>(isInitiallyInGallery)
+  const [inVolunteering, setInVolunteering] = useState<boolean>(isInitiallyInVolunteering)
+  const [featured, setFeatured] = useState<boolean>(initial?.featured ?? false)
+
   const [location, setLocation] = useState(initial?.location ?? '')
   const [eventDate, setEventDate] = useState(initial?.event_date ?? '')
   const [externalLink, setExternalLink] = useState(initial?.external_link ?? '')
@@ -29,7 +50,6 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
   const [videoDuration, setVideoDuration] = useState(initial?.video_duration ?? '')
   const [width, setWidth] = useState<number | null>(initial?.width ?? null)
   const [height, setHeight] = useState<number | null>(initial?.height ?? null)
-  const [featured, setFeatured] = useState(initial?.featured ?? false)
   const [sortOrder, setSortOrder] = useState(String(initial?.sort_order ?? 0))
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
@@ -59,12 +79,19 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
     setSaving(true)
     setError('')
     const supabase = createClient()
+
+    // Build category list from checkboxes
+    const categories: string[] = []
+    if (inGallery) categories.push('Gallery')
+    if (inVolunteering) categories.push('Volunteering')
+    const categoryString = categories.length > 0 ? categories.join(', ') : 'Gallery'
+
     const payload = {
       title: title || null,
       caption: caption || null,
       image_url: imageUrl,
       alt: alt || title || null,
-      category: category || 'Events',
+      category: categoryString,
       location: location || null,
       event_date: eventDate || null,
       external_link: externalLink || null,
@@ -153,21 +180,70 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
         </div>
       )}
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Category / Track">
-          <TextInput value={category} onChange={(e) => setCategory(e.target.value)} placeholder="Events, Leadership, Speaking, Community, Tech..." />
-        </Field>
-        <Field label="Event Date">
-          <TextInput type="date" value={eventDate} onChange={(e) => setEventDate(e.target.value)} />
-        </Field>
+      {/* Category & Section Checkboxes */}
+      <div className="space-y-4 p-4 rounded-xl bg-card border border-border/80 shadow-2xs">
+        <div>
+          <label className="text-xs font-bold uppercase tracking-wider text-foreground">
+            Image Categories
+          </label>
+          <p className="text-[11px] text-muted-foreground mt-0.5">
+            Select the sections on the website where this image should appear.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+          <label className="flex items-center gap-3 p-3 rounded-lg border border-border/70 bg-secondary/30 hover:bg-secondary/60 cursor-pointer transition-colors">
+            <input
+              type="checkbox"
+              checked={inGallery}
+              onChange={(e) => setInGallery(e.target.checked)}
+              className="w-4 h-4 rounded border-border text-[#0070f3] focus:ring-[#0070f3]"
+            />
+            <div>
+              <span className="text-xs font-semibold text-foreground">Gallery</span>
+              <p className="text-[10px] text-muted-foreground">Appears in main Gallery page (/gallery)</p>
+            </div>
+          </label>
+
+          <label className="flex items-center gap-3 p-3 rounded-lg border border-border/70 bg-secondary/30 hover:bg-secondary/60 cursor-pointer transition-colors">
+            <input
+              type="checkbox"
+              checked={inVolunteering}
+              onChange={(e) => setInVolunteering(e.target.checked)}
+              className="w-4 h-4 rounded border-border text-[#0070f3] focus:ring-[#0070f3]"
+            />
+            <div>
+              <span className="text-xs font-semibold text-foreground">Volunteering</span>
+              <p className="text-[10px] text-muted-foreground">Appears in Volunteering section (/community)</p>
+            </div>
+          </label>
+        </div>
+
+        <div className="pt-3 border-t border-border/50">
+          <label className="text-xs font-bold uppercase tracking-wider text-foreground block mb-2">
+            Other Properties
+          </label>
+          <label className="flex items-center gap-3 p-3 rounded-lg border border-border/70 bg-secondary/30 hover:bg-secondary/60 cursor-pointer transition-colors">
+            <input
+              type="checkbox"
+              checked={featured}
+              onChange={(e) => setFeatured(e.target.checked)}
+              className="w-4 h-4 rounded border-border text-[#0070f3] focus:ring-[#0070f3]"
+            />
+            <div>
+              <span className="text-xs font-semibold text-foreground">Featured</span>
+              <p className="text-[10px] text-muted-foreground">Highlighted on top shelf and featured visual showcases</p>
+            </div>
+          </label>
+        </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Location / Venue">
           <TextInput value={location} onChange={(e) => setLocation(e.target.value)} placeholder="e.g. FUTO Auditorium, Owerri" />
         </Field>
-        <Field label="External Link (Optional)">
-          <TextInput value={externalLink} onChange={(e) => setExternalLink(e.target.value)} placeholder="https://..." />
+        <Field label="Event Date">
+          <TextInput type="date" value={eventDate} onChange={(e) => setEventDate(e.target.value)} />
         </Field>
       </div>
 
@@ -189,17 +265,9 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
         </Field>
       </div>
 
-      <div className="flex gap-4 items-center pt-2">
-        <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground cursor-pointer">
-          <input
-            type="checkbox"
-            checked={featured}
-            onChange={(e) => setFeatured(e.target.checked)}
-            className="rounded border-border"
-          />
-          <span>Featured on Gallery Header & Top Shelf</span>
-        </label>
-      </div>
+      <Field label="External Link (Optional)">
+        <TextInput value={externalLink} onChange={(e) => setExternalLink(e.target.value)} placeholder="https://..." />
+      </Field>
 
       {error ? <p className="text-sm text-red-400">{error}</p> : null}
 

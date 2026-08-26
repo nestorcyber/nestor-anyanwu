@@ -21,6 +21,9 @@ import {
   getCertifications,
   getCommunityEntries,
   getGalleryImages,
+  getAllMediaImages,
+  getVolunteeringImages,
+  isImageInCategory,
   getJournalArticles,
   getJourneyItems,
   getPortfolioProjects,
@@ -1092,15 +1095,15 @@ export default async function AdminCatchAllPage({ params }: Props) {
   // 6.5 Gallery & Media
   if (section === 'gallery') {
     if (!actionOrId) {
-      const items = await getGalleryImages()
+      const items = await getAllMediaImages()
 
       return (
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Gallery & Visual Media</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Media Library & Photos</h1>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Manage, curate, and upload photos and video moments for your visual archive.
+                Centralized photo and video management. Select categories to control where each image appears across the website.
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -1126,21 +1129,28 @@ export default async function AdminCatchAllPage({ params }: Props) {
             </div>
             <span className="text-border">•</span>
             <div>
-              <span className="font-bold text-foreground">{items.filter((i) => i.featured).length}</span> featured
+              <span className="font-bold text-foreground">{items.filter((i) => isImageInCategory(i.category, 'gallery')).length}</span> in Gallery
             </div>
             <span className="text-border">•</span>
             <div>
-              <span className="font-bold text-foreground">{items.filter((i) => i.videoDuration).length}</span> video clips
+              <span className="font-bold text-foreground">{items.filter((i) => isImageInCategory(i.category, 'volunteering')).length}</span> in Volunteering
+            </div>
+            <span className="text-border">•</span>
+            <div>
+              <span className="font-bold text-foreground">{items.filter((i) => i.featured).length}</span> featured
             </div>
             <span className="text-border">•</span>
             <span className="text-[11px] text-muted-foreground/80">
-              New uploads and deletions synchronize immediately with your live visual archive.
+              Assigned categories determine where each image appears automatically on the site.
             </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {items.map((row: any) => {
               const title = row.title || '(Untitled Moment)'
+              const hasGallery = isImageInCategory(row.category, 'gallery')
+              const hasVolunteering = isImageInCategory(row.category, 'volunteering')
+
               return (
                 <div
                   key={row.id}
@@ -1173,8 +1183,22 @@ export default async function AdminCatchAllPage({ params }: Props) {
                       </div>
                     )}
 
-                    <div className="absolute bottom-2 left-2 z-10 px-2 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[10px] font-mono font-medium text-white/90">
-                      {row.category}
+                    <div className="absolute bottom-2 left-2 z-10 flex flex-wrap gap-1">
+                      {hasGallery && (
+                        <span className="px-1.5 py-0.5 rounded bg-blue-600/90 backdrop-blur-sm text-[9px] font-mono font-bold text-white shadow-xs">
+                          Gallery
+                        </span>
+                      )}
+                      {hasVolunteering && (
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-600/90 backdrop-blur-sm text-[9px] font-mono font-bold text-white shadow-xs">
+                          Volunteering
+                        </span>
+                      )}
+                      {!hasGallery && !hasVolunteering && row.category && (
+                        <span className="px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[9px] font-mono font-medium text-white/90">
+                          {row.category}
+                        </span>
+                      )}
                     </div>
                   </div>
 

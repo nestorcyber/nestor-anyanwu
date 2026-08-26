@@ -1,19 +1,19 @@
 // Modular analytics abstraction layer
-// All call sites use these functions — swap provider implementations without changing pages
+// All call sites use these functions - swap provider implementations without changing pages
 
 type Properties = Record<string, string | number | boolean | undefined>
 
-// ─── Core track function ───────────────────────────────────────────────────────
+// --- Core track function -------------------------------------------------------
 // Currently dispatches to Vercel Analytics (already installed)
 // Add GA4 / Plausible / Clarity calls here when IDs are configured
 export function track(event: string, properties?: Properties): void {
   try {
-    // Vercel Analytics — available globally via <Analytics /> in layout
+    // Vercel Analytics - available globally via <Analytics /> in layout
     if (typeof window !== "undefined" && (window as any).va) {
       ;(window as any).va("event", { name: event, ...properties })
     }
 
-    // Google Analytics 4 — activates when NEXT_PUBLIC_GA_ID is set
+    // Google Analytics 4: activates when NEXT_PUBLIC_GA_ID is set
     if (typeof window !== "undefined" && (window as any).gtag) {
       ;(window as any).gtag("event", event, properties)
     }
@@ -23,7 +23,7 @@ export function track(event: string, properties?: Properties): void {
       console.log(`[Analytics] ${event}`, properties)
     }
   } catch {
-    // Silently fail — analytics must never break UX
+    // Silently fail - analytics must never break UX
   }
 }
 

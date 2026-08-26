@@ -17,19 +17,19 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Nestor Anyanwu | Software Engineering, AI, DevRel, Leadership, Product & Design",
-  description: "Official portfolio of Nestor Anyanwu (Nestor Cyber). Software Engineer, AI Enthusiast, and Tech Leader with expertise spanning Developer Relations, Product Management, IT Consulting, and Design — dedicated to building impactful digital solutions and an inclusive, collaborative tech ecosystem where everyone can thrive.",
+  description: "Official portfolio of Nestor Anyanwu (Nestor Cyber). Software Engineer, AI Enthusiast, and Tech Leader with expertise spanning Developer Relations, Product Management, IT Consulting, and Design, dedicated to building impactful digital solutions and an inclusive, collaborative tech ecosystem where everyone can thrive.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Nestor Anyanwu | Software Engineering, AI, DevRel, Leadership, Product & Design",
-    description: "Official portfolio of Nestor Anyanwu (Nestor Cyber). Software Engineer, AI Enthusiast, and Tech Leader with expertise spanning Developer Relations, Product Management, IT Consulting, and Design — dedicated to building impactful digital solutions and an inclusive, collaborative tech ecosystem where everyone can thrive.",
+    description: "Official portfolio of Nestor Anyanwu (Nestor Cyber). Software Engineer, AI Enthusiast, and Tech Leader with expertise spanning Developer Relations, Product Management, IT Consulting, and Design, dedicated to building impactful digital solutions and an inclusive, collaborative tech ecosystem where everyone can thrive.",
     url: "/",
     siteName: "Nestor Anyanwu",
   },
   twitter: {
     title: "Nestor Anyanwu | Software Engineering, AI, DevRel, Leadership, Product & Design",
-    description: "Official portfolio of Nestor Anyanwu (Nestor Cyber). Software Engineer, AI Enthusiast, and Tech Leader with expertise spanning Developer Relations, Product Management, IT Consulting, and Design — dedicated to building impactful digital solutions and an inclusive, collaborative tech ecosystem where everyone can thrive.",
+    description: "Official portfolio of Nestor Anyanwu (Nestor Cyber). Software Engineer, AI Enthusiast, and Tech Leader with expertise spanning Developer Relations, Product Management, IT Consulting, and Design, dedicated to building impactful digital solutions and an inclusive, collaborative tech ecosystem where everyone can thrive.",
   },
 }
 
@@ -43,7 +43,7 @@ export default async function Home() {
     {
       id: "portfolio",
       title: "Featured Projects & Portfolio",
-      subtitle: "Production software, web apps, brand design systems, and engineering evidence — all in one place.",
+      subtitle: "Production software, web apps, brand design systems, and engineering evidence, all in one place.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
       link: "/portfolio",
       accentColor: "#0ea5e9",
@@ -61,7 +61,7 @@ export default async function Home() {
     {
       id: "community",
       title: "Community & Leadership",
-      subtitle: "ICT strategy, developer event logistics, and technical community leadership for NACOS, IEEE, and GDG.",
+      subtitle: "ICT strategy, developer event logistics, tech bootcamps, and grassroots community leadership.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
       link: "/community",
       accentColor: "#7c3aed",
@@ -138,7 +138,7 @@ export default async function Home() {
       <ImpactSection
         category="GET TO KNOW"
         title="Engineering Progress, Strategic Leadership & Ecosystem Impact"
-        description="From architecting scalable software and AI workflows to tech leadership, developer relations, product consulting, and volunteering — every role I take on is driven by one conviction: creating real impact and an inclusive, collaborative tech ecosystem where everyone can thrive."
+        description="From architecting scalable software and AI workflows to tech leadership, developer relations, product consulting, and volunteering: every role I take on is driven by one conviction: creating real impact and an inclusive, collaborative tech ecosystem where everyone can thrive."
         ctaText="Discover More"
         ctaLink="/about"
         pillars={[

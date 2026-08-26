@@ -108,7 +108,7 @@ export default function Navigation() {
               href="/"
               onClick={() => setIsOpen(false)}
               className="hover:opacity-90 transition-opacity flex items-center h-8"
-              aria-label="Nestor Anyanwu — Home"
+              aria-label="Nestor Anyanwu Home"
             >
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo-YsxkUMGzk3nZcZJmumGcRLhbwVu9Fq.png"

@@ -85,18 +85,14 @@ export default function CommunitySkills() {
             return (
               <div
                 key={skill.id}
-                className="p-7 rounded-3xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0075ff] transition-all duration-300 group flex flex-col justify-between space-y-4 shadow-xs hover:shadow-xl"
+                className="p-7 rounded-2xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0075ff] transition-all duration-300 group flex flex-col justify-between space-y-4 shadow-xs hover:shadow-xl"
               >
                 <div className="space-y-4">
-                  {/* Top Icon & Level Badge */}
-                  <div className="flex items-center justify-between">
+                  {/* Top Icon */}
+                  <div>
                     <div className="w-12 h-12 rounded-2xl bg-[#0B1C2C] text-[#0075ff] flex items-center justify-center shadow-md border border-[#0075ff]/30 transition-transform duration-300 group-hover:scale-105 group-hover:border-[#0075ff]">
                       <Icon className="w-6 h-6 stroke-[2]" />
                     </div>
-
-                    <span className="px-2.5 py-1 rounded-full text-[11px] font-mono font-bold bg-[#0075ff]/10 text-[#0075ff] border border-[#0075ff]/20">
-                      {skill.level}
-                    </span>
                   </div>
 
                   {/* Title & Description */}

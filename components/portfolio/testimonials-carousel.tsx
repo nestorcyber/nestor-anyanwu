@@ -18,7 +18,7 @@ export default function TestimonialsCarousel() {
       type: "Partner",
     },
     {
-      quote: "Nestor brings rare versatility—combining rigorous software engineering precision with strategic visual design intuition. He delivered beyond expectations on our enterprise IT consulting engagement.",
+      quote: "Nestor brings rare versatility, combining rigorous software engineering precision with strategic visual design intuition. He delivered beyond expectations on our enterprise IT consulting engagement.",
       author: "Dr. K. Nobel",
       role: "Principal Partner",
       organization: "Nobelton Consults",

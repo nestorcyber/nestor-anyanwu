@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react"
 import Footer from "@/components/footer"
 import type { GalleryItem } from "@/lib/content"
+import Link from "next/link"
 import {
   X,
   ChevronLeft,
@@ -14,13 +15,22 @@ import {
   Calendar,
   ExternalLink,
   Sparkles,
+  ArrowLeft,
   Image as ImageIcon,
 } from "lucide-react"
 
 export default function GalleryPageClient({
   initialImages = [],
+  title = "Gallery",
+  description = "Moments, people, projects, and experiences from speaking engagements, conferences, and tech leadership milestones.",
+  backLink,
+  backLabel,
 }: {
   initialImages: GalleryItem[]
+  title?: string
+  description?: string
+  backLink?: string
+  backLabel?: string
 }) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false)
@@ -129,12 +139,23 @@ export default function GalleryPageClient({
       <main className="min-h-screen bg-background text-foreground pt-8 sm:pt-12 pb-24 font-sans">
         {/* Centered Header Bar */}
         <div className="site-container mb-10 sm:mb-12">
+          {backLink && (
+            <div className="mb-4">
+              <Link
+                href={backLink}
+                className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors group"
+              >
+                <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" />
+                <span>{backLabel || "Back"}</span>
+              </Link>
+            </div>
+          )}
           <div className="text-center flex flex-col items-center justify-center space-y-3 max-w-3xl mx-auto border-b border-border/40 pb-8 sm:pb-10">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground font-heading">
-              Gallery
+              {title}
             </h1>
             <p className="text-sm sm:text-base text-muted-foreground font-light max-w-2xl leading-relaxed text-center">
-              Moments, people, projects, and experiences from speaking engagements, conferences, and tech leadership milestones.
+              {description}
             </p>
             <div className="w-12 h-1 bg-accent rounded-full mt-2" />
           </div>

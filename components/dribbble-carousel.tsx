@@ -66,7 +66,7 @@ export default function DribbbleCarousel({
     targetPosition.current = Math.round(currentTarget - 1)
   }, [scrollPosition])
 
-  // Click handler for peeking slides — navigates if active, snaps center if not
+  // Click handler for peeking slides: navigates if active, snaps center if not
   const handleCardClick = (index: number, dist: number, item: CarouselItem, e: React.MouseEvent) => {
     if (isDragging.current || dragDistance.current > 5) {
       e.preventDefault()

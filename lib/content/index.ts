@@ -682,8 +682,50 @@ export async function getStandaloneGalleryImages(): Promise<GalleryItem[]> {
   }))
 }
 
-export async function getGalleryImages(): Promise<GalleryItem[]> {
+export function isImageInCategory(
+  categoryString: string | null | undefined,
+  targetCategory: 'gallery' | 'volunteering'
+): boolean {
+  if (!categoryString) {
+    return targetCategory === 'gallery'
+  }
+  const parts = categoryString
+    .split(',')
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean)
+
+  if (targetCategory === 'gallery') {
+    if (parts.includes('gallery')) return true
+    if (parts.includes('volunteering') || parts.includes('volunteer')) {
+      return parts.includes('gallery')
+    }
+    // Legacy generic categories count as Gallery
+    return true
+  }
+
+  if (targetCategory === 'volunteering') {
+    return (
+      parts.includes('volunteering') ||
+      parts.includes('volunteer') ||
+      parts.includes('community')
+    )
+  }
+
+  return parts.includes(targetCategory)
+}
+
+export async function getAllMediaImages(): Promise<GalleryItem[]> {
   return getStandaloneGalleryImages()
+}
+
+export async function getGalleryImages(): Promise<GalleryItem[]> {
+  const all = await getStandaloneGalleryImages()
+  return all.filter((item) => isImageInCategory(item.category, 'gallery'))
+}
+
+export async function getVolunteeringImages(): Promise<GalleryItem[]> {
+  const all = await getStandaloneGalleryImages()
+  return all.filter((item) => isImageInCategory(item.category, 'volunteering'))
 }
 
 export type BrandPartner = {

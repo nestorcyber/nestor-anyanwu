@@ -164,364 +164,354 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
           {/* Main 2-Column Responsive Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
-            {/* ─── 1. HEADLINE & INTRO DESCRIPTION ─── */}
-            <div className="order-1 lg:order-1 lg:col-span-5 space-y-6 pt-2">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-[1.12]">
-                Let's build impactful software and technology solutions together.
-              </h1>
-              <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
-                Whether you have a software project to build, a web application or brand to design, an IT consulting need, a speaking invitation, or a community collaboration — let's connect.
-              </p>
-            </div>
-
-            {/* ─── 2. CONTACT FORM ─── */}
-            <div className="order-2 lg:order-2 lg:col-span-7">
-              <div className="bg-card border border-border/80 rounded-3xl p-6 sm:p-8 md:p-10 shadow-lg space-y-6">
-                
-                <div className="space-y-1 pb-2">
-                  <h2 className="text-xl sm:text-2xl font-extrabold text-foreground font-heading">
-                    Send a Message
-                  </h2>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
-                    Tell me about your project, contract gig, timeline, or collaboration ideas.
+              {/* ─── 1. HEADLINE & INTRO DESCRIPTION ─── */}
+              <div className="order-1 lg:order-1 lg:col-span-5 space-y-8 pt-2">
+                <div className="space-y-4">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-[1.12]">
+                    Let&apos;s build something great and create real impact together.
+                  </h1>
+                  <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
+                    I work directly with founders, creators, developers, student groups, and community organizers. Whether you want to build a web application, design a brand identity, get IT advice, invite me to speak, or partner on a community event, I&apos;d love to hear from you.
                   </p>
                 </div>
 
-                {submitStatus === "success" && (
-                  <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center gap-3 text-sm font-medium">
-                    <CheckCircle2 className="w-5 h-5 shrink-0" />
-                    <span>Thank you! Your message has been received. I'll get back to you promptly.</span>
-                  </div>
-                )}
+              </div>
 
-                {submitStatus === "error" && (
-                  <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-sm font-medium">
-                    Something went wrong sending your message. Please reach out directly via{" "}
-                    <a href="mailto:nestoranyanwu@gmail.com" className="underline font-bold">
-                      nestoranyanwu@gmail.com
-                    </a>.
-                  </div>
-                )}
-
-                <form onSubmit={handleSubmit} className="space-y-5">
+              {/* ─── 2. CONTACT FORM ─── */}
+              <div className="order-2 lg:order-2 lg:col-span-7">
+                <div className="bg-card border border-border/80 rounded-3xl p-6 sm:p-8 md:p-10 shadow-lg space-y-6">
                   
-                  {/* Name Fields (2 cols) */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1 pb-2">
+                    <h2 className="text-xl sm:text-2xl font-extrabold text-foreground font-heading">
+                      Send Me a Message
+                    </h2>
+                    <p className="text-xs sm:text-sm text-muted-foreground">
+                      Tell me about what you&apos;re working on, what you need help with, or your collaboration ideas.
+                    </p>
+                  </div>
+
+                  {submitStatus === "success" && (
+                    <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center gap-3 text-sm font-medium">
+                      <CheckCircle2 className="w-5 h-5 shrink-0" />
+                      <span>Thank you! Your message has been sent. I&apos;ll reply to you as soon as possible.</span>
+                    </div>
+                  )}
+
+                  {submitStatus === "error" && (
+                    <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-sm font-medium">
+                      Something went wrong sending your message. Please reach out directly to me at{" "}
+                      <a href="mailto:nestoranyanwu@gmail.com" className="underline font-bold">
+                        nestoranyanwu@gmail.com
+                      </a>.
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    
+                    {/* Name Fields (2 cols) */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-foreground block">
+                          First Name <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="firstName"
+                          required
+                          value={formData.firstName}
+                          onChange={handleChange}
+                          placeholder="e.g. Alex"
+                          className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-foreground block">
+                          Last Name <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="lastName"
+                          required
+                          value={formData.lastName}
+                          onChange={handleChange}
+                          placeholder="e.g. Smith"
+                          className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Email & Organization (2 cols) */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-foreground block">
+                          Email Address <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          required
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="your.email@example.com"
+                          className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-foreground block">
+                          Project / Brand / Community (Optional)
+                        </label>
+                        <input
+                          type="text"
+                          name="organization"
+                          value={formData.organization}
+                          onChange={handleChange}
+                          placeholder="e.g. Personal Project, Startup, or Community"
+                          className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Phone & Country (2 cols) */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-foreground block">
+                          Phone Number
+                        </label>
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          placeholder="+234 800 000 0000"
+                          className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-foreground block">
+                          Location / Country
+                        </label>
+                        <input
+                          type="text"
+                          name="country"
+                          value={formData.country}
+                          onChange={handleChange}
+                          placeholder="e.g. Nigeria, US, UK, Remote"
+                          className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Inquiry Type Dropdown */}
                     <div className="space-y-2">
                       <label className="text-xs font-bold text-foreground block">
-                        First Name <span className="text-red-500">*</span>
+                        What would you like to discuss? <span className="text-red-500">*</span>
                       </label>
-                      <input
-                        type="text"
-                        name="firstName"
+                      <select
+                        name="serviceInterest"
                         required
-                        value={formData.firstName}
+                        value={formData.serviceInterest}
                         onChange={handleChange}
-                        placeholder="e.g. Alex"
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
-                      />
+                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all cursor-pointer"
+                      >
+                        <option value="Software Development & Web Apps">Software &amp; Web App Development</option>
+                        <option value="UI/UX Design & Brand Identity">UI/UX Design &amp; Brand Systems</option>
+                        <option value="IT Consulting & Technical Strategy">IT Advisory &amp; Technical Consulting</option>
+                        <option value="AI Workflows & Automation">AI Workflows &amp; Process Automation</option>
+                        <option value="Speaking Engagement / Workshop">Speaking Engagement &amp; Technical Workshop</option>
+                        <option value="Developer Relations & Hackathons">Developer Relations &amp; Hackathons</option>
+                        <option value="Community Mentorship & Volunteering">Community Mentorship &amp; Volunteering</option>
+                        <option value="Freelance / Contract Gig">Freelance / Full-Stack Contract Gig</option>
+                        <option value="Other Project / Collaboration">Other Project / Partnership</option>
+                      </select>
                     </div>
 
+                    {/* Subject Line */}
                     <div className="space-y-2">
                       <label className="text-xs font-bold text-foreground block">
-                        Last Name <span className="text-red-500">*</span>
+                        Subject <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
-                        name="lastName"
+                        name="subject"
                         required
-                        value={formData.lastName}
+                        value={formData.subject}
                         onChange={handleChange}
-                        placeholder="e.g. Smith"
+                        placeholder="Brief summary of your project, idea, or request"
                         className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
                       />
                     </div>
-                  </div>
 
-                  {/* Email & Organization (2 cols) */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Message Field */}
                     <div className="space-y-2">
                       <label className="text-xs font-bold text-foreground block">
-                        Email Address <span className="text-red-500">*</span>
+                        Details &amp; Message <span className="text-red-500">*</span>
                       </label>
-                      <input
-                        type="email"
-                        name="email"
+                      <textarea
+                        name="message"
                         required
-                        value={formData.email}
+                        rows={5}
+                        value={formData.message}
                         onChange={handleChange}
-                        placeholder="name@company.com"
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
+                        placeholder="Tell me about what you are building, your ideas, timeline, or how I can help..."
+                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all resize-y"
                       />
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-foreground block">
-                        Company / Brand / Project
-                      </label>
-                      <input
-                        type="text"
-                        name="organization"
-                        value={formData.organization}
-                        onChange={handleChange}
-                        placeholder="e.g. Startup, Agency, Personal Project"
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Phone & Country (2 cols) */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-foreground block">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+234 800 000 0000"
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
-                      />
+                    {/* Submit Button */}
+                    <div className="pt-2">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full py-4 px-8 rounded-xl bg-[#0075ff] hover:bg-blue-600 text-white font-extrabold text-xs tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
+                      >
+                        {isSubmitting ? (
+                          <span>Sending Message...</span>
+                        ) : (
+                          <>
+                            <span>Send Message</span>
+                            <ArrowUpRight className="w-4.5 h-4.5" />
+                          </>
+                        )}
+                      </button>
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-foreground block">
-                        Location / Country
-                      </label>
-                      <input
-                        type="text"
-                        name="country"
-                        value={formData.country}
-                        onChange={handleChange}
-                        placeholder="e.g. Nigeria, US, UK, Remote"
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
-                      />
-                    </div>
-                  </div>
+                    {/* Bottom Privacy & Help Note */}
+                    <p className="text-[11px] text-muted-foreground text-center pt-2">
+                      Your information is private and will only be used to reply directly to you.
+                    </p>
 
-                  {/* Inquiry Type Dropdown */}
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold text-foreground block">
-                      How can I help you? <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      name="serviceInterest"
-                      required
-                      value={formData.serviceInterest}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all cursor-pointer"
-                    >
-                      <option value="Software Development & Web Apps">Software Development & Web Apps</option>
-                      <option value="UI/UX Design & Brand Identity">UI/UX Design & Brand Identity</option>
-                      <option value="IT Consulting & Technical Strategy">IT Consulting & Technical Strategy</option>
-                      <option value="Speaking Engagement / Workshop">Speaking Engagement / Workshop</option>
-                      <option value="AI Workflows & Intelligent Systems">AI Workflows & Intelligent Systems</option>
-                      <option value="Developer Relations & Community">Developer Relations & Community</option>
-                      <option value="Freelance / Contract Gig">Freelance / Contract Gig</option>
-                      <option value="Other Project / Collaboration">Other Project / Collaboration</option>
-                    </select>
-                  </div>
+                  </form>
 
-                  {/* Subject Line */}
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold text-foreground block">
-                      Subject <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="subject"
-                      required
-                      value={formData.subject}
-                      onChange={handleChange}
-                      placeholder="Brief overview of your project or request"
-                      className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all"
-                    />
-                  </div>
-
-                  {/* Message Field */}
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold text-foreground block">
-                      Project Details / Message <span className="text-red-500">*</span>
-                    </label>
-                    <textarea
-                      name="message"
-                      required
-                      rows={5}
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Tell me about what you are building, key features, timelines, or your goals..."
-                      className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0075ff] focus:border-transparent transition-all resize-y"
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-4 px-8 rounded-xl bg-[#0075ff] hover:bg-blue-600 text-white font-extrabold text-xs tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
-                    >
-                      {isSubmitting ? (
-                        <span>Sending Message...</span>
-                      ) : (
-                        <>
-                          <span>Send Message</span>
-                          <ArrowUpRight className="w-4.5 h-4.5" />
-                        </>
-                      )}
-                    </button>
-                  </div>
-
-                  {/* Bottom Privacy & Help Note */}
-                  <p className="text-[11px] text-muted-foreground text-center pt-2">
-                    Your information is safe and will only be used to discuss your project.
-                  </p>
-
-                </form>
-
+                </div>
               </div>
+
             </div>
 
           </div>
 
-        </div>
+          {/* ─── Trusted Brand Partners Infinite Marquee Carousel ─── */}
+          <div className="mt-16 md:mt-20">
+            <TrustedBrands brands={displayBrands} />
+          </div>
 
-        {/* ─── Trusted Brand Partners Infinite Marquee Carousel ─── */}
-        <div className="mt-16 md:mt-20">
-          <TrustedBrands brands={displayBrands} />
-        </div>
-
-        {/* ─── Webflow Enterprise-Style 6-Feature Grid Section ─── */}
-        <section className="w-full mt-16 md:mt-24 pt-16 md:pt-20 pb-16 md:pb-24 border-t border-border/70 bg-white dark:bg-background">
-          <div className="site-container">
-            
-            {/* 6-Item Feature Grid (3x2) matching reference UI */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 lg:gap-x-16 gap-y-12 lg:gap-y-16">
+          {/* ─── 6-Pillar Skill & Execution Grid Section ─── */}
+          <section className="w-full mt-16 md:mt-24 pt-16 md:pt-20 pb-16 md:pb-24 border-t border-border/70 bg-white dark:bg-background">
+            <div className="site-container">
               
-              {/* Feature 1 */}
-              <div className="space-y-4">
-                <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
-                  <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
-                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <ellipse cx="12" cy="5" rx="9" ry="3" />
-                      <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
-                      <path d="M3 19c0 1.66 4 3 9 3s9-1.34 9-3" />
-                    </svg>
-                  </div>
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
-                  Break down silos between design, code, and strategy
-                </h3>
-                <p className="text-sm text-muted-foreground font-normal leading-relaxed">
-                  Give your project greater cohesion by uniting modern software engineering, intuitive UI/UX design, and strategic tech leadership under one collaborative workflow.
+              {/* Section Header */}
+              <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl mb-14">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-foreground tracking-tight font-heading">
+                  What I Bring to Every Project &amp; Initiative
+                </h2>
+                <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
+                  A hands-on, multi-disciplinary skillset combining modern software engineering, clean design, practical tech strategy, and passionate community leadership.
                 </p>
+                <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-1" />
               </div>
 
-              {/* Feature 2 */}
-              <div className="space-y-4">
-                <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
-                  <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
-                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                      <path d="m9 12 2 2 4-4" />
-                    </svg>
+              {/* 6-Item Feature Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 lg:gap-x-16 gap-y-12 lg:gap-y-16">
+                
+                {/* Feature 1: Software & Web Development */}
+                <div className="space-y-4">
+                  <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                    <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
+                      <Code2 className="w-6 h-6 stroke-[1.75]" />
+                    </div>
                   </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
+                    Full-Stack Software &amp; Web Development
+                  </h3>
+                  <p className="text-sm text-muted-foreground font-normal leading-relaxed">
+                    I build fast, responsive web applications and reliable backends using Next.js, React, TypeScript, Python, and modern APIs with clean code and high performance.
+                  </p>
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
-                  Backed by enterprise-grade security & clean code
-                </h3>
-                <p className="text-sm text-muted-foreground font-normal leading-relaxed">
-                  Engineered with rigorous TypeScript typing, modular Next.js architecture, and data privacy best practices built for long-term scalability and reliability.
-                </p>
-              </div>
 
-              {/* Feature 3 */}
-              <div className="space-y-4">
-                <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
-                  <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
-                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                      <path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9" />
-                      <path d="m14 10 1.5 1.5" />
-                    </svg>
+                {/* Feature 2: UI/UX & Brand Design */}
+                <div className="space-y-4">
+                  <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                    <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
+                      <Layers className="w-6 h-6 stroke-[1.75]" />
+                    </div>
                   </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
+                    UI/UX Design &amp; Visual Identity
+                  </h3>
+                  <p className="text-sm text-muted-foreground font-normal leading-relaxed">
+                    I design intuitive interfaces and user experiences in Figma, alongside cohesive brand graphics, typography, and visual assets that make projects look polished and modern.
+                  </p>
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
-                  We'll partner with you to ensure success
-                </h3>
-                <p className="text-sm text-muted-foreground font-normal leading-relaxed">
-                  Direct collaboration with clear communication, milestone-driven sprints, rapid turnarounds, and proactive technical guidance from discovery to deployment.
-                </p>
-              </div>
 
-              {/* Feature 4 */}
-              <div className="space-y-4">
-                <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
-                  <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
-                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <rect width="18" height="18" x="3" y="3" rx="4" />
-                      <path d="m10 9-3 3 3 3" />
-                      <path d="m14 9 3 3-3 3" />
-                    </svg>
+                {/* Feature 3: IT Advisory & Technical Strategy */}
+                <div className="space-y-4">
+                  <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                    <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
+                      <ShieldCheck className="w-6 h-6 stroke-[1.75]" />
+                    </div>
                   </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
+                    IT Consulting &amp; Technical Advisory
+                  </h3>
+                  <p className="text-sm text-muted-foreground font-normal leading-relaxed">
+                    I provide actionable technology consulting, system architecture guidance, and ICT leadership to help you make well-informed tech decisions without unnecessary complexity.
+                  </p>
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
-                  Harness modern full-stack engineering & APIs
-                </h3>
-                <p className="text-sm text-muted-foreground font-normal leading-relaxed">
-                  Building fast, scalable web applications, custom frontend interfaces, and performant backend integrations tailored to real-world product demands.
-                </p>
-              </div>
 
-              {/* Feature 5 */}
-              <div className="space-y-4">
-                <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
-                  <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
-                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
-                      <path d="M12 12v9" />
-                      <path d="m8 16 4-4 4 4" />
-                    </svg>
+                {/* Feature 4: AI Workflows & Automation */}
+                <div className="space-y-4">
+                  <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                    <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
+                      <Zap className="w-6 h-6 stroke-[1.75]" />
+                    </div>
                   </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
+                    AI Integration &amp; Workflow Automation
+                  </h3>
+                  <p className="text-sm text-muted-foreground font-normal leading-relaxed">
+                    I set up practical AI-driven tools, automated data flows, and productivity workflows to help you build faster and streamline daily operations.
+                  </p>
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
-                  Publish directly to world-class hosting
-                </h3>
-                <p className="text-sm text-muted-foreground font-normal leading-relaxed">
-                  Deploying scalable digital infrastructure with modern databases, serverless edge networks, and automated CI/CD pipelines.
-                </p>
-              </div>
 
-              {/* Feature 6 */}
-              <div className="space-y-4">
-                <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
-                  <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
-                    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="9" />
-                      <path d="M3.6 9h16.8" />
-                      <path d="M3.6 15h16.8" />
-                      <path d="M11.5 3a17 17 0 0 0 0 18" />
-                      <path d="M12.5 3a17 17 0 0 1 0 18" />
-                    </svg>
+                {/* Feature 5: DevRel, Speaking & Workshops */}
+                <div className="space-y-4">
+                  <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                    <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
+                      <Handshake className="w-6 h-6 stroke-[1.75]" />
+                    </div>
                   </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
+                    Speaking, Workshops &amp; DevRel
+                  </h3>
+                  <p className="text-sm text-muted-foreground font-normal leading-relaxed">
+                    I speak at tech events, run hands-on coding workshops, advocate for developer tools, and teach practical concepts to students and budding engineers.
+                  </p>
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
-                  World-class performance & user experience
-                </h3>
-                <p className="text-sm text-muted-foreground font-normal leading-relaxed">
-                  Fast page loads, fluid micro-interactions, and accessible designs engineered to elevate user engagement, credibility, and brand trust.
-                </p>
+
+                {/* Feature 6: Community Leadership & Impact */}
+                <div className="space-y-4">
+                  <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                    <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0075ff] dark:text-sky-400">
+                      <Clock className="w-6 h-6 stroke-[1.75]" />
+                    </div>
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight leading-snug">
+                    Community Leadership &amp; Volunteering
+                  </h3>
+                  <p className="text-sm text-muted-foreground font-normal leading-relaxed">
+                    I actively lead and volunteer with tech communities (NACOS, GDG, IEEE, Cowrywise), coordinate large tech conferences, and mentor the next generation of builders.
+                  </p>
+                </div>
+
               </div>
 
             </div>
+          </section>
+        </main>
 
-          </div>
-        </section>
-      </main>
-
-      <Footer />
-    </>
-  )
+        <Footer />
+      </>
+    )
 }

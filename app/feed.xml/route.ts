@@ -25,7 +25,7 @@ export async function GET() {
   const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Nestor Anyanwu (Nestor Cyber) — Journal & Writing</title>
+    <title>Nestor Anyanwu (Nestor Cyber) | Journal & Writing</title>
     <link>${baseUrl}/journal</link>
     <description>Technical essays, thought leadership, AI ethics, and insights on technology and community advocacy.</description>
     <language>en-us</language>

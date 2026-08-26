@@ -27,7 +27,7 @@ export default function CommunityCTA() {
             </h2>
 
             <p className="text-slate-300 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto">
-              Whether you are organizing a developer conference, spearheading a grassroots tech chapter, looking for a technical workshop speaker, or launching a community impact initiative — I am always open to meaningful collaborations.
+              Whether you are organizing a developer conference, spearheading a grassroots tech chapter, looking for a technical workshop speaker, or launching a community impact initiative, I am always open to meaningful collaborations.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4">

@@ -21,7 +21,7 @@ const pageEntries: SearchResult[] = [
   {
     id: "page-home",
     title: "Home Page",
-    description: "Nestor Anyanwu's portfolio home page — software engineer, tech leader, and community builder.",
+    description: "Nestor Anyanwu's portfolio home page: software engineer, tech leader, and community builder.",
     category: "Page",
     href: "/",
     keywords: ["nestor", "cyber", "home", "nestor cyber", "nestor anyanwu", "main", "hero"],
@@ -40,23 +40,23 @@ const pageEntries: SearchResult[] = [
     description: "Full directory of software projects, web apps, brand design systems, and engineering deliverables.",
     category: "Page",
     href: "/portfolio",
-    keywords: ["portfolio", "projects", "work", "engineering", "design", "deliverables", "showcase", "library"],
+    keywords: ["projects", "portfolio", "work", "apps", "code", "design", "case studies", "engineering"],
   },
   {
     id: "page-community",
-    title: "Community & Leadership",
-    description: "ICT leadership at NACOS, IEEE, GDG Owerri, Cowrywise, and developer community impact.",
+    title: "Community & Impact",
+    description: "Volunteering, developer relations, student leadership, and tech community empowerment.",
     category: "Page",
     href: "/community",
-    keywords: ["community", "nacos", "ieee", "gdg", "leadership", "volunteer", "owerri", "impact", "advocacy"],
+    keywords: ["community", "volunteering", "devrel", "gdg", "nacos", "ieee", "leadership", "impact"],
   },
   {
     id: "page-journal",
-    title: "Journal & Technical Essays",
-    description: "Technical essays, thought leadership, AI ethics, and insights on technology and design.",
+    title: "Journal & Essays",
+    description: "Technical writing, engineering reflections, tech policy, and leadership thoughts.",
     category: "Page",
     href: "/journal",
-    keywords: ["journal", "articles", "blog", "essays", "writing", "tech writing", "thoughts", "publications"],
+    keywords: ["journal", "blog", "articles", "writing", "essays", "thoughts"],
   },
   {
     id: "page-gallery",
@@ -69,10 +69,10 @@ const pageEntries: SearchResult[] = [
   {
     id: "page-contact",
     title: "Contact & Collaboration",
-    description: "Start a project, business inquiry, speaking invitation, or community partnership.",
+    description: "Get in touch with Nestor Anyanwu for projects, consulting, speaking, or collaborations.",
     category: "Page",
     href: "/contact",
-    keywords: ["contact", "collaborate", "hire", "email", "project", "speaking", "work together", "whatsapp"],
+    keywords: ["contact", "hire", "collaborate", "email", "reach", "message", "consulting"],
   },
 ]
 
@@ -116,7 +116,7 @@ async function generateSearchIndex(): Promise<SearchResult[]> {
     group.skills.map((skill) => ({
       id: `skill-${skill.name.toLowerCase().replace(/\s+/g, "-")}`,
       title: skill.name,
-      description: `${group.category} — ${skill.experienceLevel || "Proficient"} (${skill.years || "Active"})`,
+      description: `${group.category} | ${skill.experienceLevel || "Proficient"} (${skill.years || "Active"})`,
       category: "Skill" as const,
       href: "/portfolio",
       keywords: [skill.name.toLowerCase(), group.category.toLowerCase(), "stack", "tool", "expertise"],
@@ -125,7 +125,7 @@ async function generateSearchIndex(): Promise<SearchResult[]> {
 
   const journeyEntries: SearchResult[] = journeyTimeline.map((j) => ({
     id: `journey-${j.id}`,
-    title: `${j.title} — ${j.organization}`,
+    title: `${j.title} | ${j.organization}`,
     description: `${j.description} (${j.date})`,
     category: "Experience" as const,
     href: "/portfolio",
@@ -157,7 +157,7 @@ async function generateSearchIndex(): Promise<SearchResult[]> {
 
   const communityEntries: SearchResult[] = communityEntriesList.map((c) => ({
     id: `community-${c.slug}`,
-    title: `${c.organization} — ${c.role}`,
+    title: `${c.organization} | ${c.role}`,
     description: c.description || `${c.organization} community impact and leadership role.`,
     category: "Community" as const,
     href: `/community/${c.slug}`,

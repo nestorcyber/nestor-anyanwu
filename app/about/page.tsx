@@ -136,7 +136,7 @@ export default function AboutPage() {
               <div className="flex items-center gap-3">
                 <span className="h-0.5 w-8 bg-accent"></span>
                 <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground font-mono">
-                  Nestor Anyanwu — Mission & Vision Statement
+                  Nestor Anyanwu | Mission & Vision Statement
                 </span>
               </div>
             </div>

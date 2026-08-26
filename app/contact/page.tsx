@@ -6,18 +6,18 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Contact & Collaboration | Nestor Anyanwu (Nestor Cyber)",
-  description: "Get in touch with Nestor Anyanwu for software engineering projects, web development, UI/UX design, speaking engagements, and tech collaborations.",
+  description: "Get in touch with Nestor Anyanwu for full-stack software engineering, web development, UI/UX design, IT consulting, AI workflows, DevRel, speaking engagements, and community initiatives.",
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
     title: "Contact & Collaboration | Nestor Anyanwu (Nestor Cyber)",
-    description: "Get in touch with Nestor Anyanwu for software engineering projects, web development, UI/UX design, speaking engagements, and tech collaborations.",
+    description: "Get in touch with Nestor Anyanwu for full-stack software engineering, web development, UI/UX design, IT consulting, AI workflows, DevRel, speaking engagements, and community initiatives.",
     url: "/contact",
   },
   twitter: {
     title: "Contact & Collaboration | Nestor Anyanwu (Nestor Cyber)",
-    description: "Get in touch with Nestor Anyanwu for software engineering projects, web development, UI/UX design, speaking engagements, and tech collaborations.",
+    description: "Get in touch with Nestor Anyanwu for full-stack software engineering, web development, UI/UX design, IT consulting, AI workflows, DevRel, speaking engagements, and community initiatives.",
   },
 }
 
