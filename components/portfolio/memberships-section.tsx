@@ -1,5 +1,6 @@
 import React from "react"
 import { ShieldCheck, Globe, Cpu, Award, Network, Building2 } from "lucide-react"
+import type { JourneyItem } from "@/lib/content"
 
 interface MembershipItem {
   id: string
@@ -12,7 +13,7 @@ interface MembershipItem {
   icon: React.ElementType
 }
 
-const MEMBERSHIPS: MembershipItem[] = [
+const DEFAULT_MEMBERSHIPS: MembershipItem[] = [
   {
     id: "ncs",
     organization: "Nigeria Computer Society",
@@ -81,7 +82,48 @@ const MEMBERSHIPS: MembershipItem[] = [
   },
 ]
 
-export default function MembershipsSection() {
+function getMembershipIcon(org: string, details: string[] = []): React.ElementType {
+  const text = `${org} ${details.join(" ")}`.toLowerCase()
+  if (text.includes("ai") || text.includes("intelligence") || text.includes("machine") || text.includes("aaai")) return Cpu
+  if (text.includes("privacy") || text.includes("security") || text.includes("protection") || text.includes("nira") || text.includes("ndpc")) return ShieldCheck
+  if (text.includes("internet") || text.includes("isoc") || text.includes("web") || text.includes("domain") || text.includes("global")) return Globe
+  if (text.includes("fintech") || text.includes("finance") || text.includes("payment") || text.includes("invest") || text.includes("asset")) return Network
+  if (text.includes("society") || text.includes("ncs") || text.includes("nacos") || text.includes("association") || text.includes("institution")) return Building2
+  return Award
+}
+
+function extractAcronym(org: string): string {
+  const parenMatch = org.match(/\(([^)]+)\)/)
+  if (parenMatch && parenMatch[1]) return parenMatch[1]
+  const words = org.split(" ").filter((w) => w.length > 0 && w[0] === w[0].toUpperCase())
+  if (words.length >= 2 && words.length <= 5) {
+    return words.map((w) => w[0]).join("")
+  }
+  return "Affiliation"
+}
+
+interface MembershipsSectionProps {
+  membershipsList?: JourneyItem[]
+}
+
+export default function MembershipsSection({ membershipsList }: MembershipsSectionProps) {
+  const displayItems: MembershipItem[] =
+    membershipsList && membershipsList.length > 0
+      ? membershipsList.map((item) => {
+          const org = item.organization || item.title
+          return {
+            id: String(item.id),
+            organization: org,
+            acronym: extractAcronym(org),
+            role: item.role || item.title || "Member",
+            date: item.date || "2025 - Present",
+            description: item.description,
+            focus: item.details && item.details.length > 0 ? item.details : ["Professional Council", "Governance", "Technology"],
+            icon: getMembershipIcon(org, item.details),
+          }
+        })
+      : DEFAULT_MEMBERSHIPS
+
   return (
     <section
       id="memberships"
@@ -91,7 +133,6 @@ export default function MembershipsSection() {
       <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#0075ff]/5 dark:bg-[#0075ff]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="site-container relative z-10 space-y-12">
-        
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
@@ -103,19 +144,19 @@ export default function MembershipsSection() {
           <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-2" />
         </div>
 
-        {/* 6 Memberships Grid */}
+        {/* Memberships Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {MEMBERSHIPS.map((item) => {
+          {displayItems.map((item) => {
             const Icon = item.icon
             return (
               <div
                 key={item.id}
-                className="p-6 sm:p-7 bg-white dark:bg-card border border-slate-200/90 dark:border-slate-800 rounded-3xl flex flex-col justify-between hover:border-[#0075ff] hover:shadow-xl transition-all duration-300 group shadow-xs min-h-[320px]"
+                className="p-6 sm:p-7 bg-white dark:bg-card border border-slate-200/90 dark:border-slate-800 rounded-2xl flex flex-col justify-between hover:border-[#0075ff] hover:shadow-xl transition-all duration-300 group shadow-xs min-h-[320px]"
               >
                 <div className="space-y-4">
                   {/* Top Row: Icon badge & Status */}
                   <div className="flex items-center justify-between gap-2">
-                    <div className="w-12 h-12 rounded-2xl bg-[#0B1C2C] text-[#0075ff] flex items-center justify-center shadow-md border border-[#0075ff]/30 transition-transform duration-300 group-hover:scale-105 group-hover:border-[#0075ff]">
+                    <div className="w-12 h-12 rounded-xl bg-[#0B1C2C] text-[#0075ff] flex items-center justify-center shadow-md border border-[#0075ff]/30 transition-transform duration-300 group-hover:scale-105 group-hover:border-[#0075ff]">
                       <Icon className="w-6 h-6 stroke-[2]" />
                     </div>
 
@@ -155,7 +196,6 @@ export default function MembershipsSection() {
             )
           })}
         </div>
-
       </div>
     </section>
   )

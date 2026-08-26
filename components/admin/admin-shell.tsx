@@ -13,6 +13,7 @@ import {
   Briefcase,
   Wrench,
   Award,
+  ShieldCheck,
   BarChart3,
   Activity,
   Settings,
@@ -42,37 +43,38 @@ const NAV_GROUPS: NavGroup[] = [
     items: [{ href: '/admin', label: 'Dashboard Overview', icon: LayoutDashboard }],
   },
   {
-    title: 'PORTFOLIO PAGE',
+    title: 'PORTFOLIO & WORK',
     items: [
       { href: '/admin/portfolio', label: 'Projects & Case Studies', icon: FolderKanban },
       { href: '/admin/services', label: 'Services Offered', icon: Briefcase },
       { href: '/admin/skills', label: 'Skills Matrix', icon: Wrench },
       { href: '/admin/certifications', label: 'Certifications', icon: Award },
+      { href: '/admin/memberships', label: 'Memberships & Affiliations', icon: ShieldCheck },
       { href: '/admin/stats', label: 'Impact Statistics', icon: BarChart3 },
     ],
   },
   {
-    title: 'COMMUNITY & TIMELINE',
+    title: 'CAREER & ROADMAP',
+    items: [
+      { href: '/admin/journey', label: 'Career Milestones', icon: Milestone },
+    ],
+  },
+  {
+    title: 'COMMUNITY & ADVOCACY',
     items: [
       { href: '/admin/community', label: 'Community & Advocacy', icon: Users },
-      { href: '/admin/journey', label: 'Timeline & Milestones', icon: Milestone },
       { href: '/admin/brands', label: 'Brand Partners', icon: Briefcase },
     ],
   },
   {
-    title: 'JOURNAL PAGE',
+    title: 'CONTENT & MEDIA',
     items: [
       { href: '/admin/journal', label: 'Journal Articles & Writing', icon: BookOpen },
-    ],
-  },
-  {
-    title: 'GALLERY & MEDIA PAGE',
-    items: [
       { href: '/admin/gallery', label: 'Media Library & Photos', icon: ImageIcon },
     ],
   },
   {
-    title: 'SYSTEM & LOGS',
+    title: 'SYSTEM & SETTINGS',
     items: [
       { href: '/admin/activity', label: 'Activity Logs', icon: Activity },
       { href: '/admin/settings', label: 'Site Settings', icon: Settings },

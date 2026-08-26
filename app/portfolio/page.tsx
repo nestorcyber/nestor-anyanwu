@@ -52,6 +52,8 @@ export default async function PortfolioPage() {
       getSiteSettings(),
     ])
 
+  const membershipsList = journeyTimeline.filter((j) => j.type === "membership")
+
   return (
     <div className="min-h-screen bg-background flex flex-col w-full">
       {/* Main Full-Width Content Column */}
@@ -64,7 +66,7 @@ export default async function PortfolioPage() {
           <FeaturedProjectsShowcase projects={projects} />
           <ProfessionalExperience journeyTimeline={journeyTimeline} />
           <CertificationsGrid certificationsList={certificationsList} />
-          <MembershipsSection />
+          <MembershipsSection membershipsList={membershipsList} />
           <TestimonialsCarousel />
           <PortfolioCTA />
         </div>

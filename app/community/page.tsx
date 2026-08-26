@@ -5,7 +5,6 @@ import FeaturedExperiences, { type FeaturedExperienceItem } from "@/components/c
 import CommunityTimeline from "@/components/community/community-timeline"
 import OrganizationsGrid from "@/components/community/organizations-grid"
 import ContributionPillars from "@/components/community/contribution-pillars"
-import CommunityStories, { type CommunityStoryItem } from "@/components/community/community-stories"
 import VolunteeringGallery, { type GalleryPhoto } from "@/components/community/volunteering-gallery"
 import CommunitySkills from "@/components/community/community-skills"
 import CommunityCTA from "@/components/community/community-cta"
@@ -14,7 +13,6 @@ import {
   getCommunityEntries,
   getJourneyItems,
   getVolunteeringImages,
-  getJournalArticles,
 } from "@/lib/content"
 
 export const revalidate = 3600
@@ -40,11 +38,10 @@ export const metadata: Metadata = {
 }
 
 export default async function CommunityPage() {
-  const [entries, journey, volunteerPhotos, journalArticles] = await Promise.all([
+  const [entries, journey, volunteerPhotos] = await Promise.all([
     getCommunityEntries(),
     getJourneyItems(),
     getVolunteeringImages(),
-    getJournalArticles(),
   ])
 
   // Filter volunteer items for the timeline
@@ -75,27 +72,6 @@ export default async function CommunityPage() {
     date: g.eventDate || undefined,
   }))
 
-  // Map community stories from relevant journal posts
-  const mappedStories: CommunityStoryItem[] = journalArticles
-    .filter(
-      (a) =>
-        a.category.toLowerCase().includes("community") ||
-        a.category.toLowerCase().includes("leadership") ||
-        a.category.toLowerCase().includes("event") ||
-        a.tags.some((t) => t.toLowerCase().includes("community") || t.toLowerCase().includes("gdg"))
-    )
-    .slice(0, 3)
-    .map((a) => ({
-      id: a.id,
-      title: a.title,
-      excerpt: a.excerpt,
-      coverImage: a.coverImage,
-      date: a.publishedDate,
-      organization: a.category,
-      journalSlug: a.slug,
-      readTime: "4 min read",
-    }))
-
   return (
     <div className="min-h-screen bg-background flex flex-col w-full">
       {/* Main Full-Width Content Column */}
@@ -124,16 +100,13 @@ export default async function CommunityPage() {
           {/* 6. How I Contribute */}
           <ContributionPillars />
 
-          {/* 7. Community Stories & Reflections */}
-          <CommunityStories stories={mappedStories.length > 0 ? mappedStories : undefined} />
-
-          {/* 8. Volunteering Gallery with Lightbox */}
-          <VolunteeringGallery photos={mappedPhotos.length > 0 ? mappedPhotos : undefined} />
-
-          {/* 9. Skills Gained Through Volunteering */}
+          {/* 7. Skills Gained Through Volunteering */}
           <CommunitySkills />
 
-          {/* 10. Call to Action */}
+          {/* 8. Volunteering Gallery with Lightbox (Before CTA) */}
+          <VolunteeringGallery photos={mappedPhotos.length > 0 ? mappedPhotos : undefined} />
+
+          {/* 9. Call to Action */}
           <CommunityCTA />
         </div>
 

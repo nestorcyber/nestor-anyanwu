@@ -482,6 +482,11 @@ export async function getJourneyItems(): Promise<JourneyItem[]> {
   }))
 }
 
+export async function getMemberships(): Promise<JourneyItem[]> {
+  const all = await getJourneyItems()
+  return all.filter((item) => item.type === 'membership')
+}
+
 export async function getPortfolioStats(): Promise<PortfolioStat[]> {
   const supabase = db()
   if (supabase) {

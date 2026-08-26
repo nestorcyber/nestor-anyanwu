@@ -860,7 +860,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
     )
   }
 
-  // 5. Journey / Career Milestones
+  // 5. Journey / Career Milestones (Work & Career Roadmap Only)
   if (section === 'journey') {
     if (!actionOrId) {
       const { data: dbData } = await supabase
@@ -869,7 +869,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
         .order('sort_order', { ascending: true })
       const fallbackJourney = await getJourneyItems()
       const dbTitles = new Set((dbData ?? []).map((row) => row.title))
-      const items = [
+      const allItems = [
         ...(dbData ?? []).map((j: any) => ({
           id: j.id,
           title: j.title,
@@ -889,18 +889,22 @@ export default async function AdminCatchAllPage({ params }: Props) {
             tags: [j.organization, j.type],
           })),
       ]
+
+      // Strictly Career & Work Roadmap Milestones (excluding volunteer & membership)
+      const items = allItems.filter((j) => j.type === 'work' || j.type === 'milestone')
+
       return (
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Timeline & Milestones</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Career &amp; Professional Milestones</h1>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Manage career roadmap entries, voluntary community advocacy, engineering milestones, and leadership roles.
+                Manage career roadmap entries, engineering positions, and professional milestones.
               </p>
             </div>
             <Link href="/admin/journey/new">
               <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
-                + New Milestone
+                + New Career Milestone
               </button>
             </Link>
           </div>
@@ -935,11 +939,6 @@ export default async function AdminCatchAllPage({ params }: Props) {
                         <span className="text-slate-500 dark:text-slate-400 font-medium">{row.dateLabel}</span>
 
                         <div className="flex items-center ml-1">
-                          {rowType === 'volunteer' && (
-                            <span className="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                              Volunteer &amp; Community
-                            </span>
-                          )}
                           {rowType === 'work' && (
                             <span className="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
                               Professional Work
@@ -948,11 +947,6 @@ export default async function AdminCatchAllPage({ params }: Props) {
                           {rowType === 'milestone' && (
                             <span className="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">
                               Key Milestone
-                            </span>
-                          )}
-                          {rowType === 'membership' && (
-                            <span className="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
-                              Membership &amp; Fellowship
                             </span>
                           )}
                         </div>
@@ -986,8 +980,8 @@ export default async function AdminCatchAllPage({ params }: Props) {
     if (actionOrId === 'new') {
       return (
         <div>
-          <PageHeader title="New journey item" />
-          <JourneyForm />
+          <PageHeader title="New Career Milestone" />
+          <JourneyForm initial={{ type: 'work' } as any} />
         </div>
       )
     }
@@ -1015,7 +1009,150 @@ export default async function AdminCatchAllPage({ params }: Props) {
     if (!data) notFound()
     return (
       <div>
-        <PageHeader title="Edit journey item" />
+        <PageHeader title="Edit Career Milestone" />
+        <JourneyForm initial={data} />
+      </div>
+    )
+  }
+
+  // 5b. Professional Memberships & Affiliations
+  if (section === 'memberships') {
+    if (!actionOrId) {
+      const { data: dbData } = await supabase
+        .from('journey_items')
+        .select('id, title, organization, role, date_label, type, details')
+        .eq('type', 'membership')
+        .order('sort_order', { ascending: true })
+      const fallbackJourney = await getJourneyItems()
+      const dbTitles = new Set((dbData ?? []).map((row) => row.title))
+      const items = [
+        ...(dbData ?? []).map((j: any) => ({
+          id: j.id,
+          title: j.title,
+          organization: j.organization,
+          role: j.role || j.title || 'Member',
+          dateLabel: j.date_label || '2025 - Present',
+          type: 'membership',
+          details: j.details || ['Professional Council'],
+        })),
+        ...fallbackJourney
+          .filter((j) => j.type === 'membership' && !dbTitles.has(j.title))
+          .map((j) => ({
+            id: j.id,
+            title: j.title,
+            organization: j.organization,
+            role: j.role || j.title || 'Member',
+            dateLabel: j.date,
+            type: 'membership',
+            details: j.details || ['Professional Council'],
+          })),
+      ]
+
+      return (
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Professional Memberships &amp; Affiliations</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                Manage accredited memberships, industry councils, and professional associations contributing to national technology policy and governance.
+              </p>
+            </div>
+            <Link href="/admin/memberships/new">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
+                + New Membership
+              </button>
+            </Link>
+          </div>
+
+          <div className="space-y-3.5">
+            {items.map((row: any) => {
+              const orgName = row.organization || row.title || '(Untitled)'
+              const initial = orgName.replace(/[^a-zA-Z0-9]/g, '')[0]?.toUpperCase() || 'M'
+
+              return (
+                <div
+                  key={row.id}
+                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                >
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-[#0B1C2C] text-[#0075ff] font-serif text-2xl font-bold flex items-center justify-center shrink-0 border border-[#0075ff]/30 shadow-xs">
+                      {initial}
+                    </div>
+
+                    <div className="min-w-0 space-y-1.5">
+                      <Link
+                        href={`/admin/memberships/${row.id}`}
+                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
+                      >
+                        {orgName}
+                      </Link>
+
+                      <div className="flex flex-wrap items-center gap-2 text-xs">
+                        <span className="font-semibold text-slate-600 dark:text-slate-300">{row.role}</span>
+                        <span className="text-slate-300 dark:text-slate-600">•</span>
+                        <span className="text-slate-500 dark:text-slate-400 font-mono">{row.dateLabel}</span>
+
+                        <span className="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-[#0075ff]/10 text-[#0075ff] border border-[#0075ff]/20 ml-1">
+                          Accredited Membership
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
+                    <Link
+                      href={`/admin/memberships/${row.id}`}
+                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
+                    >
+                      Edit
+                    </Link>
+                  </div>
+                </div>
+              )
+            })}
+
+            {!items.length ? (
+              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
+                No memberships added yet.
+              </div>
+            ) : null}
+          </div>
+        </div>
+      )
+    }
+    if (actionOrId === 'new') {
+      return (
+        <div>
+          <PageHeader title="New Professional Membership &amp; Affiliation" />
+          <JourneyForm initial={{ type: 'membership' } as any} />
+        </div>
+      )
+    }
+    let data = null
+    const { data: byId } = await supabase.from('journey_items').select('*').eq('id', actionOrId).maybeSingle()
+    data = byId
+    if (!data) {
+      const all = await getJourneyItems()
+      const fb = all.find((j) => String(j.id) === String(actionOrId))
+      if (fb) {
+        data = {
+          id: undefined,
+          title: fb.title,
+          organization: fb.organization,
+          role: fb.role,
+          date_label: fb.date,
+          description: fb.description,
+          type: 'membership',
+          details: fb.details,
+          images: fb.images,
+          sort_order: 0,
+        } as any
+      }
+    }
+    if (!data) notFound()
+    return (
+      <div>
+        <PageHeader title="Edit Professional Membership" />
         <JourneyForm initial={data} />
       </div>
     )
