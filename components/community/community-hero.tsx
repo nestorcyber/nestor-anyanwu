@@ -76,7 +76,7 @@ export default function CommunityHero() {
                   </span>
                 </div>
                 <p className="text-xs text-slate-200 font-medium leading-snug">
-                  Lead Designer &amp; Technical Branding for 1,500+ attendees
+                  Lead Designer &amp; Technical Branding for 1,500+ attendees.
                 </p>
               </div>
             </div>

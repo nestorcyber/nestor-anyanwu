@@ -3,10 +3,8 @@ import CommunityHero from "@/components/community/community-hero"
 import ImpactSnapshot from "@/components/community/impact-snapshot"
 import FeaturedExperiences, { type FeaturedExperienceItem } from "@/components/community/featured-experiences"
 import CommunityTimeline from "@/components/community/community-timeline"
-import OrganizationsGrid from "@/components/community/organizations-grid"
 import ContributionPillars from "@/components/community/contribution-pillars"
 import VolunteeringGallery, { type GalleryPhoto } from "@/components/community/volunteering-gallery"
-import CommunitySkills from "@/components/community/community-skills"
 import CommunityCTA from "@/components/community/community-cta"
 import Footer from "@/components/footer"
 import {
@@ -94,19 +92,13 @@ export default async function CommunityPage() {
           {/* 4. Volunteering Timeline */}
           <CommunityTimeline timeline={volunteerJourney.length > 0 ? volunteerJourney : undefined} />
 
-          {/* 5. Organizations & Communities */}
-          <OrganizationsGrid />
-
-          {/* 6. How I Contribute */}
+          {/* 5. How I Contribute & Skills Gained (Integrated) */}
           <ContributionPillars />
 
-          {/* 7. Skills Gained Through Volunteering */}
-          <CommunitySkills />
-
-          {/* 8. Volunteering Gallery with Lightbox (Before CTA) */}
+          {/* 6. Volunteering Gallery with Lightbox (Before CTA) */}
           <VolunteeringGallery photos={mappedPhotos.length > 0 ? mappedPhotos : undefined} />
 
-          {/* 9. Call to Action */}
+          {/* 7. Call to Action */}
           <CommunityCTA />
         </div>
 
