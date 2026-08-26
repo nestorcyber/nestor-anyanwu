@@ -87,14 +87,16 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
     lastName: "",
     email: "",
     organization: "",
-    serviceInterest: "Software Development",
+    serviceInterest: "Software & Web App Development",
     phone: "",
     country: "",
     subject: "",
     message: "",
+    hp_field: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+  const [errorMessage, setErrorMessage] = useState<string>("")
 
   const displayBrands = brands && brands.length > 0 ? brands : defaultBrandLogos
 
@@ -109,30 +111,22 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitStatus("idle")
+    setErrorMessage("")
 
     try {
-      const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ID
-        ? `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`
-        : null
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
 
-      if (endpoint) {
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            name: `${formData.firstName} ${formData.lastName}`.trim(),
-            email: formData.email,
-            organization: formData.organization,
-            serviceInterest: formData.serviceInterest,
-            phone: formData.phone,
-            country: formData.country,
-            subject: formData.subject,
-            message: formData.message,
-          }),
-        })
-        if (!res.ok) throw new Error("Submission failed")
-      } else {
-        await new Promise((r) => setTimeout(r, 800))
+      const data = await res.json()
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Something went wrong while sending your message. Please try again.")
       }
 
       trackContact(formData.serviceInterest)
@@ -142,14 +136,16 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
         lastName: "",
         email: "",
         organization: "",
-        serviceInterest: "Software Development",
+        serviceInterest: "Software & Web App Development",
         phone: "",
         country: "",
         subject: "",
         message: "",
+        hp_field: "",
       })
       setTimeout(() => setSubmitStatus("idle"), 6000)
-    } catch {
+    } catch (err: any) {
+      setErrorMessage(err?.message || "Something went wrong while sending your message. Please try again.")
       setSubmitStatus("error")
     } finally {
       setIsSubmitting(false)
@@ -193,20 +189,38 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                   {submitStatus === "success" && (
                     <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center gap-3 text-sm font-medium">
                       <CheckCircle2 className="w-5 h-5 shrink-0" />
-                      <span>Thank you! Your message has been sent. I&apos;ll reply to you as soon as possible.</span>
+                      <span>Your message has been sent successfully. I&apos;ll reply to you as soon as possible.</span>
                     </div>
                   )}
 
                   {submitStatus === "error" && (
                     <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-sm font-medium">
-                      Something went wrong sending your message. Please reach out directly to me at{" "}
-                      <a href="mailto:nestoranyanwu@gmail.com" className="underline font-bold">
-                        nestoranyanwu@gmail.com
-                      </a>.
+                      {errorMessage || "Something went wrong while sending your message. Please try again."}
                     </div>
                   )}
 
                   <form onSubmit={handleSubmit} className="space-y-5">
+                    {/* Honeypot hidden input for spam bots */}
+                    <input
+                      type="text"
+                      name="hp_field"
+                      value={formData.hp_field}
+                      onChange={handleChange}
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      style={{
+                        display: "none",
+                        opacity: 0,
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        height: 0,
+                        width: 0,
+                        zIndex: -1,
+                        pointerEvents: "none",
+                      }}
+                    />
                     
                     {/* Name Fields (2 cols) */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
