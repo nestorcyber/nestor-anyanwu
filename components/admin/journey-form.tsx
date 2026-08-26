@@ -3,6 +3,7 @@
 import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { revalidateCommunity, revalidatePortfolio } from '@/app/actions/revalidate'
 import ImageUpload from '@/components/admin/image-upload'
 import MarkdownEditor from '@/components/admin/markdown-editor'
 import {
@@ -68,6 +69,8 @@ export default function JourneyForm({ initial }: Props) {
         setError(res.error.message)
         return
       }
+      await revalidateCommunity()
+      await revalidatePortfolio()
       router.push('/admin/journey')
       router.refresh()
     } catch (err: any) {
@@ -83,6 +86,8 @@ export default function JourneyForm({ initial }: Props) {
     try {
       const supabase = createClient()
       await supabase.from('journey_items').delete().eq('id', initial.id)
+      await revalidateCommunity()
+      await revalidatePortfolio()
       router.push('/admin/journey')
       router.refresh()
     } catch (err: any) {
@@ -94,24 +99,24 @@ export default function JourneyForm({ initial }: Props) {
 
   return (
     <form onSubmit={onSubmit} className="max-w-3xl space-y-5">
-      <Field label="Title">
-        <TextInput required value={title} onChange={(e) => setTitle(e.target.value)} />
+      <Field label="Title / Position">
+        <TextInput required value={title} onChange={(e) => setTitle(e.target.value)} placeholder="e.g. Lead Brand Designer &amp; Technical Support" />
       </Field>
-      <Field label="Organization">
-        <TextInput value={organization} onChange={(e) => setOrganization(e.target.value)} />
+      <Field label="Organization / Event">
+        <TextInput value={organization} onChange={(e) => setOrganization(e.target.value)} placeholder="e.g. Google Developer Groups (GDG) Owerri" />
       </Field>
-      <Field label="Role">
-        <TextInput value={role} onChange={(e) => setRole(e.target.value)} />
+      <Field label="Specific Role (Optional)">
+        <TextInput value={role} onChange={(e) => setRole(e.target.value)} placeholder="e.g. Technical Coordinator" />
       </Field>
-      <Field label="Date label">
-        <TextInput value={dateLabel} onChange={(e) => setDateLabel(e.target.value)} placeholder="Dec 2025 - Present" />
+      <Field label="Date Label">
+        <TextInput value={dateLabel} onChange={(e) => setDateLabel(e.target.value)} placeholder="e.g. Oct 2025 - Nov 2025" />
       </Field>
-      <Field label="Type">
+      <Field label="Milestone Category / Type">
         <TextSelect value={type} onChange={(e) => setType(e.target.value as typeof type)}>
-          <option value="work">work</option>
-          <option value="volunteer">volunteer</option>
-          <option value="membership">membership</option>
-          <option value="milestone">milestone</option>
+          <option value="volunteer">Volunteer &amp; Community Advocacy</option>
+          <option value="work">Work / Professional Experience</option>
+          <option value="milestone">Key Milestone / Leadership Milestone</option>
+          <option value="membership">Membership &amp; Fellowship</option>
         </TextSelect>
       </Field>
       <Field label="Description">

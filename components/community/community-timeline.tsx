@@ -128,10 +128,10 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            My Community <span className="text-[#0075ff]">Journey</span>
+            Community &amp; Volunteering <span className="text-[#0075ff]">Milestones</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            A chronological roadmap of community service, technical volunteer engagements, and grassroots leadership.
+            A chronological roadmap of community service, technical volunteer engagements, and grassroots advocacy.
           </p>
           <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-2" />
         </div>

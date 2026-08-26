@@ -52,11 +52,11 @@ const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
-    title: 'HOME & ABOUT PAGES',
+    title: 'COMMUNITY & TIMELINE',
     items: [
       { href: '/admin/community', label: 'Community & Advocacy', icon: Users },
+      { href: '/admin/journey', label: 'Timeline & Milestones', icon: Milestone },
       { href: '/admin/brands', label: 'Brand Partners', icon: Briefcase },
-      { href: '/admin/journey', label: 'Career Journey / Milestones', icon: Milestone },
     ],
   },
   {

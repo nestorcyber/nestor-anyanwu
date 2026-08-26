@@ -21,7 +21,10 @@ export async function revalidatePortfolio(slug?: string) {
     revalidatePath('/portfolio')
     revalidatePath('/certifications')
     revalidatePath('/experience')
+    revalidatePath('/community')
+    revalidatePath('/admin/portfolio')
     revalidatePath('/admin/certifications')
+    revalidatePath('/admin/journey')
     revalidateTag('search-index')
     if (slug) {
       revalidatePath(`/portfolio/${slug}`)
@@ -31,11 +34,28 @@ export async function revalidatePortfolio(slug?: string) {
   }
 }
 
+export async function revalidateCommunity(slug?: string) {
+  try {
+    revalidatePath('/')
+    revalidatePath('/community')
+    revalidatePath('/community/gallery')
+    revalidatePath('/admin/community')
+    revalidatePath('/admin/journey')
+    revalidateTag('search-index')
+    if (slug) {
+      revalidatePath(`/community/${slug}`)
+    }
+  } catch (err) {
+    console.error('Error revalidating community cache:', err)
+  }
+}
+
 export async function revalidateGallery() {
   try {
     revalidatePath('/')
     revalidatePath('/gallery')
     revalidatePath('/community')
+    revalidatePath('/community/gallery')
     revalidatePath('/admin/gallery')
   } catch (err) {
     console.error('Error revalidating gallery cache:', err)

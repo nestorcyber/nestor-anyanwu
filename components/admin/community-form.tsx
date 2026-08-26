@@ -3,6 +3,7 @@
 import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { revalidateCommunity } from '@/app/actions/revalidate'
 import { slugify } from '@/lib/utils/slug'
 import ImageUpload from '@/components/admin/image-upload'
 import MarkdownEditor from '@/components/admin/markdown-editor'
@@ -52,9 +53,10 @@ export default function CommunityForm({ initial }: Props) {
     }
 
     const supabase = createClient()
+    const targetSlug = slug || slugify(organization)
     const payload = {
       organization,
-      slug: slug || slugify(organization),
+      slug: targetSlug,
       role,
       duration,
       cover_image: coverImage || null,
@@ -79,6 +81,7 @@ export default function CommunityForm({ initial }: Props) {
         setError(res.error.message)
         return
       }
+      await revalidateCommunity(targetSlug)
       router.push('/admin/community')
       router.refresh()
     } catch (err: any) {
@@ -94,6 +97,7 @@ export default function CommunityForm({ initial }: Props) {
     try {
       const supabase = createClient()
       await supabase.from('community_entries').delete().eq('id', initial.id)
+      await revalidateCommunity(initial.slug)
       router.push('/admin/community')
       router.refresh()
     } catch (err: any) {
