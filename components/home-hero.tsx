@@ -5,7 +5,7 @@ export default function HomeHero() {
     <section className="relative h-[62svh] min-h-[380px] sm:h-[75svh] md:h-[calc(100svh-4rem)] md:min-h-[640px] flex flex-col justify-end overflow-hidden bg-slate-950">
       {/* Background image - edge to edge */}
       <Image
-        src="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966490/Hero_dnkxet.jpg"
+        src="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966490/nestor/hero/Hero_dnkxet.jpg"
         alt="Nestor Anyanwu"
         fill
         sizes="100vw"

@@ -6,7 +6,7 @@ export default function CommunityHero() {
     <section className="relative h-[62svh] min-h-[380px] sm:h-[75svh] md:h-[calc(100svh-4rem)] md:min-h-[640px] flex flex-col justify-end overflow-hidden bg-slate-950">
       {/* Background image - edge to edge */}
       <Image
-        src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787285712/IMG_0452_a2kkcl.jpg"
+        src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787285712/nestor/gallery/IMG_0452_a2kkcl.jpg"
         alt="Nestor Anyanwu Community Volunteering & Impact"
         fill
         sizes="100vw"

@@ -27,7 +27,7 @@ export default function ImpactSnapshot({ stats }: ImpactSnapshotProps) {
             const Icon = DEFAULT_ICONS[idx % DEFAULT_ICONS.length]
             return (
               <div
-                key={stat.id || idx}
+                key={idx}
                 className="p-6 rounded-2xl bg-white/5 dark:bg-card/60 border border-white/10 dark:border-slate-800 hover:border-[#0075ff]/60 transition-all duration-300 group flex flex-col justify-between space-y-4 shadow-sm"
               >
                 <div className="flex items-center justify-between">

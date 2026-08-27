@@ -22,7 +22,7 @@ export default function PortfolioHero({
       {/* 1. Full-Bleed Background Image (Centered on Mobile like Tony Elumelu, Off-center on Desktop) */}
       <div className="absolute inset-0 w-full h-full">
         <Image
-          src="/devfest24-solo.jpg"
+          src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837104/nestor/gallery/devfest24-solo.jpg"
           alt={settings?.authorName || "Nestor Anyanwu"}
           fill
           priority
@@ -70,7 +70,7 @@ export default function PortfolioHero({
               <div className="flex items-center -space-x-2">
                 <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-slate-900 overflow-hidden relative shadow-xs shrink-0">
                   <Image
-                    src="/bwai-i.jpg"
+                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837081/nestor/gallery/bwai-i.jpg"
                     alt="Client avatar"
                     fill
                     className="object-cover"
@@ -79,7 +79,7 @@ export default function PortfolioHero({
                 </div>
                 <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-slate-900 overflow-hidden relative shadow-xs shrink-0">
                   <Image
-                    src="/devfest24-duo.jpg"
+                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837095/nestor/gallery/devfest24-duo.jpg"
                     alt="Partner avatar"
                     fill
                     className="object-cover"
@@ -88,7 +88,7 @@ export default function PortfolioHero({
                 </div>
                 <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-slate-900 overflow-hidden relative shadow-xs shrink-0">
                   <Image
-                    src="/gire-solo.jpg"
+                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837150/nestor/gallery/gire-solo.jpg"
                     alt="Builder avatar"
                     fill
                     className="object-cover"

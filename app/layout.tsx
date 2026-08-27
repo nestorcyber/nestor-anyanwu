@@ -63,7 +63,7 @@ export const metadata: Metadata = {
         type: "image/x-icon",
       },
       {
-        url: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg",
+        url: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/nestor/hero/DSC_5940_1_2_ee43kp.jpg",
         sizes: "any",
       },
     ],
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
         type: "image/png",
       },
       {
-        url: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg",
+        url: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/nestor/hero/DSC_5940_1_2_ee43kp.jpg",
         sizes: "180x180",
       },
     ],
@@ -201,7 +201,7 @@ export default function RootLayout({
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png" />
-        <link rel="apple-touch-icon" href="https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg" />
+        <link rel="apple-touch-icon" href="https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/nestor/hero/DSC_5940_1_2_ee43kp.jpg" />
         <meta name="application-name" content="Anyanwu Nestor Ifeanyi" />
         <script
           id="schema-org-person"

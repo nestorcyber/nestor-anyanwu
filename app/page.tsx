@@ -5,6 +5,7 @@ import PersonalPhilosophy from "@/components/home/personal-philosophy"
 import ExpandingEndeavors from "@/components/home/expanding-endeavors"
 import FeaturedPortfolio from "@/components/home/featured-portfolio"
 import ImpactSection from "@/components/impact-section"
+import HomeStats from "@/components/home/home-stats"
 import FeaturedCommunity from "@/components/home/featured-community"
 import LatestJournal from "@/components/home/latest-journal"
 import TestimonialsSection from "@/components/home/testimonials-section"
@@ -134,7 +135,7 @@ export default async function Home() {
       {/* 3. Personal Philosophy ("Why I Build") */}
       <PersonalPhilosophy />
 
-      {/* 4. Impact & Reach */}
+      {/* 4. Get To Know & Profile Overview */}
       <ImpactSection
         category="GET TO KNOW"
         title="Engineering Progress, Strategic Leadership & Ecosystem Impact"
@@ -148,28 +149,30 @@ export default async function Home() {
           "Delivering enterprise product strategy, tech audits & IT consulting",
           "Championing voluntary outreach, mentorship & inclusive tech growth",
         ]}
-        stats={formattedStats}
       />
 
-      {/* 5. Core Focus */}
+      {/* 5. Key Verified Metrics & Impact Stats */}
+      <HomeStats stats={formattedStats} />
+
+      {/* 6. Core Focus */}
       <ExpandingEndeavors />
 
-      {/* 6. Selected Work & Engineering */}
+      {/* 7. Selected Work & Engineering */}
       {/* @ts-expect-error Async Server Component */}
       <FeaturedPortfolio />
 
-      {/* 7. Featured Community Work */}
+      {/* 8. Featured Community Work */}
       {/* @ts-expect-error Async Server Component */}
       <FeaturedCommunity />
 
-      {/* 8. Latest Journal Articles & Essays */}
+      {/* 9. Latest Journal Articles & Essays */}
       {/* @ts-expect-error Async Server Component */}
       <LatestJournal />
 
-      {/* 9. Social Proof & Testimonials */}
+      {/* 10. Social Proof & Testimonials */}
       <TestimonialsSection />
 
-      {/* 10. Featured Highlights Carousel (Moved down immediately before HomeCTA) */}
+      {/* 11. Featured Highlights Carousel (Moved down immediately before HomeCTA) */}
       <section className="w-full border-b border-border/60 bg-background py-8 md:py-10">
         <div className="site-container text-center mb-8 space-y-3">
           <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight">
@@ -183,10 +186,10 @@ export default async function Home() {
         <DribbbleCarousel items={carouselItems} />
       </section>
 
-      {/* 11. Call To Action */}
+      {/* 12. Call To Action */}
       <HomeCTA />
 
-      {/* 12. Footer */}
+      {/* 13. Footer */}
       <Footer />
     </main>
   )

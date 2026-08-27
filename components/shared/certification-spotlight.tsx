@@ -36,7 +36,7 @@ export default function CertificationSpotlight({
     description:
       "Certified competence in data protection governance, NDPA compliance, user privacy frameworks, and institutional data security protocols.",
     skills: ["Data Privacy", "NDPA Compliance", "Risk Governance", "Security Protocols"],
-    image: "/certificates/ndpc-cert.jpg",
+    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837064/nestor/certificates/ndpc-cert.jpg",
   }
 
   const certImg = getCertImage(cert)

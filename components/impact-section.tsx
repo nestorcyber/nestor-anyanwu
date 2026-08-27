@@ -13,11 +13,6 @@ export interface ImpactSectionProps {
   ctaLink?: string
   pillarsTitle?: string
   pillars?: string[]
-  stats?: Array<{
-    value: string
-    label: string
-    description?: string
-  }>
   heroImage?: string
   heroImageAlt?: string
 }
@@ -33,20 +28,6 @@ export default function ImpactSection({
     "Directing national ICT strategy, student computing & builder governance",
     "Cultivating developer ecosystems, tech summits, bootcamps & hackathons",
     "Delivering enterprise product strategy, tech audits & IT advisory",
-  ],
-  stats = [
-    {
-      value: "2,000+",
-      label: "People Reached",
-    },
-    {
-      value: "25+",
-      label: "Projects Completed",
-    },
-    {
-      value: "12+",
-      label: "Communities & Orgs",
-    },
   ],
 }: ImpactSectionProps) {
   return (
@@ -71,7 +52,7 @@ export default function ImpactSection({
               <div className="absolute top-0 left-0 w-[60%] h-[68%] bg-white p-2.5 sm:p-3 pb-5 sm:pb-7 rounded-sm sm:rounded-md shadow-[0_15px_35px_rgba(0,0,0,0.6)] z-10 -rotate-2 hover:rotate-0 transition-transform duration-500 ease-out group">
                 <div className="relative w-full h-full overflow-hidden bg-slate-900">
                   <Image
-                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966495/techadv1_dyclrm.jpg"
+                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966495/nestor/gallery/techadv1_dyclrm.jpg"
                     alt="Nestor Anyanwu speaking at community tech event"
                     fill
                     sizes="(max-width: 768px) 60vw, 30vw"
@@ -85,7 +66,7 @@ export default function ImpactSection({
               <div className="absolute -top-9 sm:-top-12 right-0 w-[54%] sm:w-[56%] h-[56%] sm:h-[58%] bg-white p-2.5 sm:p-3 pb-5 sm:pb-7 rounded-sm sm:rounded-md shadow-[0_20px_40px_rgba(0,0,0,0.75)] z-20 rotate-3 hover:rotate-0 transition-transform duration-500 ease-out group">
                 <div className="relative w-full h-full overflow-hidden bg-slate-900">
                   <Image
-                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787284951/IMG_20260520_182757_818_dptwte.jpg"
+                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787284951/nestor/gallery/IMG_20260520_182757_818_dptwte.jpg"
                     alt="Nestor Anyanwu community and leadership event"
                     fill
                     sizes="(max-width: 768px) 50vw, 25vw"
@@ -98,7 +79,7 @@ export default function ImpactSection({
               <div className="absolute bottom-0 right-3 sm:right-6 w-[58%] h-[58%] bg-white p-2.5 sm:p-3 pb-5 sm:pb-7 rounded-sm sm:rounded-md shadow-[0_30px_60px_rgba(0,0,0,0.9)] z-30 -rotate-1 hover:rotate-0 transition-transform duration-500 ease-out group">
                 <div className="relative w-full h-full overflow-hidden bg-slate-900">
                   <Image
-                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966488/about_fm7rwu.jpg"
+                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966488/nestor/about/about_fm7rwu.jpg"
                     alt="Nestor Anyanwu executive leadership and engineering"
                     fill
                     sizes="(max-width: 768px) 55vw, 25vw"
@@ -110,7 +91,7 @@ export default function ImpactSection({
             </div>
           </div>
 
-          {/* ─── RIGHT COLUMN: CONTENT, PILLARS, STATS & CTAS (7 COLS) ─── */}
+          {/* ─── RIGHT COLUMN: CONTENT, PILLARS & CTAS (7 COLS) ─── */}
           <div className="lg:col-span-7 space-y-6 lg:space-y-7">
             
             {/* Category header with blue bar */}
@@ -146,22 +127,8 @@ export default function ImpactSection({
               ))}
             </div>
 
-            {/* Stats Row */}
-            <div className="pt-3 border-t border-slate-800/80 grid grid-cols-3 gap-4 sm:gap-6">
-              {stats.map((stat, idx) => (
-                <div key={idx} className="space-y-1">
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-white font-heading tracking-tight">
-                    {stat.value}
-                  </div>
-                  <div className="text-[11px] sm:text-xs text-slate-400 font-medium uppercase tracking-wider font-mono">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-
             {/* Single Action Button leading to About Page */}
-            <div className="pt-3">
+            <div className="pt-2">
               <Link
                 href={ctaLink || "/about"}
                 className="bg-[#0075ff] hover:bg-[#0060d0] text-white font-extrabold text-xs tracking-wider px-7 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2 cursor-pointer active:scale-98"

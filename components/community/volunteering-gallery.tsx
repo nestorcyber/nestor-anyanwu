@@ -36,7 +36,7 @@ const DEFAULT_GALLERY: GalleryPhoto[] = [
   },
   {
     id: "gal-2",
-    imageUrl: "/gida-large-group.jpg",
+    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837144/nestor/gallery/gida-large-group.jpg",
     title: "Grassroots Community Gathering & Innovators Meet",
     caption: "Uniting tech innovators, open-source contributors, and community advocates.",
     category: "Community",
