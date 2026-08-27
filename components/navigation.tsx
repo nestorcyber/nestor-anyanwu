@@ -106,20 +106,21 @@ export default function Navigation() {
       >
         <div className="site-container flex items-center justify-between h-14 md:h-16">
           
-          {/* LEFT SIDE: Brand Logo */}
+          {/* LEFT SIDE: Brand Logo Image */}
           <div className="flex items-center shrink-0">
             <Link
               href="/"
               onClick={() => setIsOpen(false)}
-              className="hover:opacity-90 transition-opacity flex items-center h-8"
+              className="hover:opacity-90 transition-opacity flex items-center h-8 group"
               aria-label="Nestor Anyanwu Home"
             >
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo-YsxkUMGzk3nZcZJmumGcRLhbwVu9Fq.png"
+                src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787870276/nestor/branding/logo.png"
                 alt="Nestor Anyanwu Logo"
-                width={140}
-                height={32}
-                className="h-5 md:h-6 w-auto brightness-0 dark:brightness-0 dark:invert"
+                width={160}
+                height={36}
+                priority
+                className="h-6 sm:h-7 w-auto object-contain brightness-0 dark:brightness-0 dark:invert transition-all duration-200"
               />
             </Link>
           </div>

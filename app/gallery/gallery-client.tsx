@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo, useRef } from "react"
 import Footer from "@/components/footer"
+import PortfolioCTA from "@/components/portfolio/portfolio-cta"
 import type { GalleryItem } from "@/lib/content"
 import Link from "next/link"
 import {
@@ -388,6 +389,14 @@ export default function GalleryPageClient({
           </div>
         </div>
       )}
+
+      {/* Gallery Tailored CTA */}
+      <PortfolioCTA
+        title="Invite Nestor to Speak or Cover Your Next Tech Event"
+        description="Looking for an engaging speaker, workshop facilitator, or technical organizer for your upcoming conference, hackathon, or university summit?"
+        buttonText="Get In Touch"
+        buttonHref="/contact"
+      />
 
       <Footer />
     </>

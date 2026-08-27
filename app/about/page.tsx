@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Footer from "@/components/footer"
 import Image from "next/image"
+import PortfolioCTA from "@/components/portfolio/portfolio-cta"
 import { Award, Cpu, Users, Briefcase, HeartHandshake } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -242,7 +243,7 @@ export default function AboutPage() {
             </div>
             <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg border border-border/80">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg"
+                src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg"
                 alt="Nestor Anyanwu volunteering"
                 fill
                 className="object-cover"
@@ -250,6 +251,14 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
+        {/* 5. About Page Tailored CTA */}
+        <PortfolioCTA
+          title="Let's Create Meaningful Impact Together"
+          description="Whether you are interested in technical advisory, speaking engagements, or building inclusive tech communities, I'd love to connect."
+          buttonText="Start A Conversation"
+          buttonHref="/contact"
+        />
 
       </main>
       <Footer />

@@ -17,30 +17,30 @@ async function main() {
   const sampleBrands = [
     {
       name: 'NACOS FUTO',
-      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg',
+      logo_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg',
       website_url: 'https://nacos.org.ng',
       sort_order: 0,
     },
     {
       name: 'GDG Owerri',
-      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg',
+      logo_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1787837107/nestor/gallery/devfest25-1.jpg',
       website_url: 'https://gdg.community.dev',
       sort_order: 1,
     },
     {
       name: 'IEEE FUTO SB',
-      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg',
+      logo_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1785966488/nestor/about/about_fm7rwu.jpg',
       website_url: 'https://ieee.org',
       sort_order: 2,
     },
     {
       name: 'Build With AI',
-      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg',
+      logo_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1785966488/nestor/about/about_fm7rwu.jpg',
       sort_order: 3,
     },
     {
       name: 'DevFest Owerri',
-      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg',
+      logo_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1787837107/nestor/gallery/devfest25-1.jpg',
       sort_order: 4,
     },
   ]

@@ -68,7 +68,12 @@ export default async function PortfolioPage() {
           <CertificationsGrid certificationsList={certificationsList} />
           <MembershipsSection membershipsList={membershipsList} />
           <TestimonialsCarousel />
-          <PortfolioCTA />
+          <PortfolioCTA
+            title="Have a Project or Product in Mind?"
+            description="Let's turn your vision into high-impact software, scalable web applications, and enterprise design systems that command credibility."
+            buttonText="Start A Project"
+            buttonHref="/contact"
+          />
         </div>
 
         {/* Global Footer */}

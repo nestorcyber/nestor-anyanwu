@@ -78,7 +78,12 @@ export default async function CertificationsPage() {
             )}
           </div>
 
-          <PortfolioCTA />
+          <PortfolioCTA
+            title="Partner with an Accredited Engineer & Tech Leader"
+            description="Leverage verified accreditations in cloud infrastructure, cybersecurity governance, data privacy frameworks, and executive leadership for your milestone."
+            buttonText="Inquire For Advisory"
+            buttonHref="/contact"
+          />
         </div>
 
         {/* Global Footer */}

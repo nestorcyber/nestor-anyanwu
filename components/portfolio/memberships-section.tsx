@@ -9,68 +9,62 @@ const DEFAULT_MEMBERSHIPS: MembershipCardItem[] = [
   {
     id: "ncs",
     organization: "Nigeria Computer Society",
-    acronym: "NCS",
     role: "Professional Member",
     date: "2025 - Present",
     description:
       "Active member of Nigeria's premier ICT professional authority, contributing to technology policy advocacy, computing ethics, and industry development.",
     focus: ["ICT Professionalism", "Technology Policy", "Computing Standards"],
-    icon: Building2,
+    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg",
   },
   {
     id: "aaai",
     organization: "Association for the Advancement of Artificial Intelligence",
-    acronym: "AAAI",
     role: "Member",
     date: "2024 - Present",
     description:
       "Engaged with Africa's AI advocacy chapter, participating in machine intelligence research, technical symposiums, and ethical AI development frameworks.",
     focus: ["AI Research", "Machine Intelligence", "Ethics in AI"],
-    icon: Cpu,
+    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837087/nestor/gallery/bwai-team.jpg",
   },
   {
     id: "isoc",
     organization: "Internet Society, Nigeria Chapter",
-    acronym: "ISOC",
     role: "Member",
     date: "2025 - Present",
     description:
       "Advocating for open internet accessibility, digital rights, global network governance, and technological infrastructure resilience.",
     focus: ["Internet Governance", "Digital Rights", "Infrastructure"],
-    icon: Globe,
+    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837096/nestor/gallery/devfest24-friends.jpg",
   },
   {
     id: "fintech-ngr",
     organization: "Fintech Association of Nigeria",
-    acronym: "FintechNGR",
     role: "Member",
     date: "2024 - Present",
     description:
       "Contributing to financial technology innovation, digital asset infrastructure, payments regulation, and ecosystem collaboration.",
     focus: ["Digital Finance", "Fintech Innovation", "Payments Architecture"],
-    icon: Network,
+    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837148/nestor/gallery/gire-hall.jpg",
   },
   {
     id: "nira",
     organization: "Nigeria Internet Registration Association",
-    acronym: "NiRA",
     role: "Member",
     date: "2025 - Present",
     description:
       "Participating in top-level domain governance, national DNS architecture, and sovereign digital namespace development.",
     focus: ["DNS Architecture", "Namespace Policy", "Cyber Governance"],
-    icon: ShieldCheck,
+    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837148/nestor/gallery/gire-hall.jpg",
   },
   {
     id: "ndpc",
     organization: "Nigeria Data Protection Commission",
-    acronym: "NDPC",
     role: "Data Privacy Ambassador",
     date: "2025 - Present",
     description:
       "Appointed advocate promoting NDPA compliance, user data governance frameworks, security best practices, and institutional privacy awareness.",
     focus: ["NDPA Compliance", "Data Privacy", "Risk Governance"],
-    icon: Award,
+    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837064/nestor/certificates/ndpc-cert.jpg",
   },
 ]
 

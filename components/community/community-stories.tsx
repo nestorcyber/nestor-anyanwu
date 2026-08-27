@@ -24,7 +24,7 @@ const DEFAULT_STORIES: CommunityStoryItem[] = [
     title: "Behind the Scenes of DevFest Owerri: Building Stage Identity for 1,500+ Attendees",
     excerpt:
       "A deep dive into the design systems, stage LED screen resolutions, and visual branding challenges solved while volunteering as Lead Brand Designer for South-East Nigeria's largest tech gathering.",
-    coverImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
+    coverImage: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837107/nestor/gallery/devfest25-1.jpg",
     date: "Dec 2025",
     organization: "GDG Owerri",
     journalSlug: "devfest-owerri-2025-branding-case-study",
@@ -35,7 +35,7 @@ const DEFAULT_STORIES: CommunityStoryItem[] = [
     title: "Scaling University Tech Communities: Lessons from Directing ICT at NACOS FUTO",
     excerpt:
       "How open-source bootcamps, structured student mentorship, and modern web portals can bridge the gap between academic theory and industry software engineering standards.",
-    coverImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
+    coverImage: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg",
     date: "Jan 2026",
     organization: "NACOS FUTO",
     journalSlug: "building-digital-infrastructure-for-computing-students",
@@ -46,7 +46,7 @@ const DEFAULT_STORIES: CommunityStoryItem[] = [
     title: "Grassroots Operations: Logistics and Crisis Resolution at Multi-Track Conferences",
     excerpt:
       "Real-world takeaways from coordinating ground logistics, audiovisual equipment, and speaker flows across hospitality and leadership summits.",
-    coverImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fle3%280%29-CFKUWQDj8dfMZ5zkDTF9IEEXC6zDID.jpg",
+    coverImage: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837090/nestor/gallery/conference-crowd.jpg",
     date: "Nov 2025",
     organization: "FLE Global",
     journalSlug: "event-logistics-leadership-summit-takeaways",

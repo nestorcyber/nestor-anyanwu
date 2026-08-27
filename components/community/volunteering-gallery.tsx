@@ -27,7 +27,7 @@ export interface GalleryPhoto {
 const DEFAULT_GALLERY: GalleryPhoto[] = [
   {
     id: "gal-1",
-    imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
+    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg",
     title: "NACOS FUTO Student Leadership Delegation",
     caption: "Director of ICT leading digital strategy and tech mentorship for computing students.",
     category: "Leadership",
@@ -45,7 +45,7 @@ const DEFAULT_GALLERY: GalleryPhoto[] = [
   },
   {
     id: "gal-3",
-    imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f4%280%29-e7Yahcsw3qQbcQLNweaiCS5rzoAVvv.jpg",
+    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837136/nestor/gallery/futo-4.jpg",
     title: "FUTO Alumni Homecoming Operations Team",
     caption: "Capturing networking roundtables and legacy awards with the media team.",
     category: "Media",
@@ -54,7 +54,7 @@ const DEFAULT_GALLERY: GalleryPhoto[] = [
   },
   {
     id: "gal-4",
-    imageUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fle3%280%29-CFKUWQDj8dfMZ5zkDTF9IEEXC6zDID.jpg",
+    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837090/nestor/gallery/conference-crowd.jpg",
     title: "FLE Global Leadership Conference Setup Team",
     caption: "Managing multi-track staging and guest hospitality operations.",
     category: "Events",

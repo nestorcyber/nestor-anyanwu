@@ -65,7 +65,12 @@ export default async function ProjectsPage() {
             <ProjectLibrary projects={projects} />
           </div>
 
-          <PortfolioCTA />
+          <PortfolioCTA
+            title="Need Production-Ready Software or Web Development?"
+            description="From architecture design and full-stack development to deployment, let's build scalable digital solutions that deliver measurable value."
+            buttonText="Discuss Your Project"
+            buttonHref="/contact"
+          />
         </div>
 
         {/* Global Footer */}

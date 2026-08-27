@@ -60,8 +60,13 @@ export default async function ExperiencePage() {
           {/* Interactive Filterable Timeline Content */}
           <ExperienceClient initialItems={journeyTimeline} />
 
-          {/* Portfolio CTA */}
-          <PortfolioCTA />
+          {/* Experience CTA */}
+          <PortfolioCTA
+            title="Ready to Add Proven Technical Leadership to Your Team?"
+            description="Explore engineering advisory, full-stack software development, or ICT leadership engagements tailored to your organization's roadmap."
+            buttonText="Get In Touch"
+            buttonHref="/contact"
+          />
         </div>
 
         {/* Global Footer */}

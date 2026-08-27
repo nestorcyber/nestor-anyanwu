@@ -1,5 +1,5 @@
 export interface JourneyItem {
-  id: number
+  id: string | number
   title: string
   organization: string
   role?: string
@@ -28,6 +28,74 @@ export interface ProjectItem {
 }
 
 export const journeyTimeline: JourneyItem[] = [
+
+  // ── Professional Memberships & Affiliations ──
+  {
+    id: "ncs",
+    title: "Professional Member",
+    organization: "Nigeria Computer Society",
+    role: "Professional Member",
+    date: "2025 - Present",
+    description: "Active member of Nigeria's premier ICT professional authority, contributing to technology policy advocacy, computing ethics, and industry development.",
+    type: "membership",
+    details: ["ICT Professionalism", "Technology Policy", "Computing Standards"],
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg"]
+  },
+  {
+    id: "aaai",
+    title: "Member",
+    organization: "Association for the Advancement of Artificial Intelligence",
+    role: "Member",
+    date: "2024 - Present",
+    description: "Engaged with Africa's AI advocacy chapter, participating in machine intelligence research, technical symposiums, and ethical AI development frameworks.",
+    type: "membership",
+    details: ["AI Research", "Machine Intelligence", "Ethics in AI"],
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837087/nestor/gallery/bwai-team.jpg"]
+  },
+  {
+    id: "isoc",
+    title: "Member",
+    organization: "Internet Society, Nigeria Chapter",
+    role: "Member",
+    date: "2025 - Present",
+    description: "Advocating for open internet accessibility, digital rights, global network governance, and technological infrastructure resilience.",
+    type: "membership",
+    details: ["Internet Governance", "Digital Rights", "Infrastructure"],
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837096/nestor/gallery/devfest24-friends.jpg"]
+  },
+  {
+    id: "fintech-ngr",
+    title: "Member",
+    organization: "Fintech Association of Nigeria",
+    role: "Member",
+    date: "2024 - Present",
+    description: "Contributing to financial technology innovation, digital asset infrastructure, payments regulation, and ecosystem collaboration.",
+    type: "membership",
+    details: ["Digital Finance", "Fintech Innovation", "Payments Architecture"],
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837148/nestor/gallery/gire-hall.jpg"]
+  },
+  {
+    id: "nira",
+    title: "Member",
+    organization: "Nigeria Internet Registration Association",
+    role: "Member",
+    date: "2025 - Present",
+    description: "Participating in top-level domain governance, national DNS architecture, and sovereign digital namespace development.",
+    type: "membership",
+    details: ["DNS Architecture", "Namespace Policy", "Cyber Governance"],
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837148/nestor/gallery/gire-hall.jpg"]
+  },
+  {
+    id: "ndpc",
+    title: "Data Privacy Ambassador",
+    organization: "Nigeria Data Protection Commission",
+    role: "Data Privacy Ambassador",
+    date: "2025 - Present",
+    description: "Appointed advocate promoting NDPA compliance, user data governance frameworks, security best practices, and institutional privacy awareness.",
+    type: "membership",
+    details: ["NDPA Compliance", "Data Privacy", "Risk Governance"],
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837064/nestor/certificates/ndpc-cert.jpg"]
+  },
 
   // ── May 2026 ──
   {
@@ -61,7 +129,7 @@ export const journeyTimeline: JourneyItem[] = [
     description: "Leading digital strategy and technological infrastructure for the Nigeria Association of Computing Students chapter at FUTO, overseeing digital initiatives and community engagement.",
     type: "work",
     details: ["ICT Strategy & Management", "Community Engagement", "Digital Infrastructure"],
-    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg"]
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg"]
   },
   {
     id: 2,
@@ -99,7 +167,7 @@ export const journeyTimeline: JourneyItem[] = [
     date: "Dec 2025",
     description: "Served on the Media Team for the Emerging Leaders Conference, capturing impactful moments and supporting the digital documentation of this leadership event.",
     type: "volunteer",
-    images: ["/placeholder.svg?height=600&width=800"]
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837090/nestor/gallery/conference-crowd.jpg"]
   },
 
   // ── Nov 2025 ──
@@ -112,10 +180,10 @@ export const journeyTimeline: JourneyItem[] = [
     description: "Contributed to the success of the Edensprime Hospitality Summit through dedicated event setup and coordination.",
     type: "volunteer",
     images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden2-sUzI0wvGmZMjB5UUP911IAB6WvBM5c.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden3%280%29-Md3eT61Brp60MhmfTcGcfxvEaFIHqs.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden5-LDykBdjx1JiJvGYDIdliITuBi0V8Ke.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden1-iePEIbrkoW7wba4cbBoCLfkFEsqQTU.jpg"
+      "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837153/nestor/gallery/hospitality-event.jpg",
+      "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837150/nestor/gallery/gire-table.jpg",
+      "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837152/nestor/gallery/gire-work.jpg",
+      "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837153/nestor/gallery/hospitality-event.jpg"
     ]
   },
   {
@@ -127,10 +195,10 @@ export const journeyTimeline: JourneyItem[] = [
     description: "Supported the FLE Conference by managing event setup logistics. Worked behind the scenes to create a seamless environment for leadership and entrepreneurship discussions.",
     type: "volunteer",
     images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fle3%280%29-CFKUWQDj8dfMZ5zkDTF9IEEXC6zDID.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fle2%280%29-FfRbgx2cSla1HuEuvaPzlOe8rKfEcm.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fle4-n7IdoFLGvctWYMK2ZspbSaqYEJz6n7.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fle1%280%29-RFztiDFA8wlZ5TUikrNKon6EVYY0te.jpg"
+      "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837090/nestor/gallery/conference-crowd.jpg",
+      "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837141/nestor/gallery/gida-group-photo.jpg",
+      "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837146/nestor/gallery/gida-team-moment.jpg",
+      "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837138/nestor/gallery/gida-casual-moment.jpg"
     ]
   },
   {
@@ -141,7 +209,7 @@ export const journeyTimeline: JourneyItem[] = [
     date: "Nov 2025",
     description: "Supported the largest developer festival in South-East Nigeria through major design contributions and event logistics. Collaborated with the team to craft visual assets and manage event organization.",
     type: "volunteer",
-    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg"]
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837107/nestor/gallery/devfest25-1.jpg"]
   },
   {
     id: 13,
@@ -163,10 +231,10 @@ export const journeyTimeline: JourneyItem[] = [
     description: "Captured the memorable moments from FUTO Alumni Homecoming 2025 through professional media and photography, documenting networking panels and reunions.",
     type: "volunteer",
     images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f4%280%29-e7Yahcsw3qQbcQLNweaiCS5rzoAVvv.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f3%280%29-0OUNedcByaDnTaTWc7tAWWQQ2E60ff.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f2%280%29-pBS7ttoTwcS5IQq7BxPQga9W14pDXS.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f1%280%29-wdxseBoOzK6wN6TpiXjYnUVh67MS1C.jpg"
+      "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837136/nestor/gallery/futo-4.jpg",
+      "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837130/nestor/gallery/futo-3.jpg",
+      "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837129/nestor/gallery/futo-2.jpg",
+      "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg"
     ]
   },
   {
@@ -245,7 +313,7 @@ export const journeyTimeline: JourneyItem[] = [
     description: "Creating compelling visual designs and brand assets for Google Developer Group initiatives, helping shape the visual identity of community events and communications.",
     type: "work",
     details: ["Visual Design", "Brand Identity", "Event Graphics"],
-    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg"]
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837107/nestor/gallery/devfest25-1.jpg"]
   },
   {
     id: 22,
@@ -403,30 +471,30 @@ export const fallbackBrandPartners: BrandPartnerItem[] = [
   {
     id: "nacos-futo",
     name: "NACOS FUTO",
-    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
+    logoUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg",
     websiteUrl: "https://nacos.org.ng",
   },
   {
     id: "gdg-owerri",
     name: "GDG Owerri",
-    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
+    logoUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837107/nestor/gallery/devfest25-1.jpg",
     websiteUrl: "https://gdg.community.dev",
   },
   {
     id: "ieee-futo",
     name: "IEEE FUTO SB",
-    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
+    logoUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1785966488/nestor/about/about_fm7rwu.jpg",
     websiteUrl: "https://ieee.org",
   },
   {
     id: "build-with-ai",
     name: "Build With AI",
-    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
+    logoUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1785966488/nestor/about/about_fm7rwu.jpg",
   },
   {
     id: "devfest-owerri",
     name: "DevFest Owerri",
-    logoUrl: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
+    logoUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837107/nestor/gallery/devfest25-1.jpg",
   },
 ]
 
@@ -457,7 +525,7 @@ export const projects: ProjectItem[] = [
     description: "Major design contributor for South-East Nigeria's largest developer festival. Supported visual branding, event creative assets, and logistical design systems.",
     technologies: ["Visual Design", "Brand Identity", "Event Systems", "Figma"],
     role: "Lead Graphic Designer",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
+    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837107/nestor/gallery/devfest25-1.jpg",
     status: "Completed",
     links: {
       demo: "https://www.behance.net/nestorcyber",
@@ -472,7 +540,7 @@ export const projects: ProjectItem[] = [
     description: "Empowering developers and creators with AI-driven workflows and resources. Engineered platform design and community tools for rapid AI integration.",
     technologies: ["Next.js", "AI Integration", "Tailwind CSS", "Developer Experience"],
     role: "Software Developer & Designer",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
+    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1785966488/nestor/about/about_fm7rwu.jpg",
     status: "Active",
     links: {
       demo: "https://github.com/nestorcyber",
@@ -488,7 +556,7 @@ export const projects: ProjectItem[] = [
     description: "Centralized ICT digital infrastructure and student engagement portal for the Nigeria Association of Computing Students across higher institutions.",
     technologies: ["React", "TypeScript", "Node.js", "ICT Strategy"],
     role: "Director of ICT",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
+    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg",
     status: "Production",
     links: {
       demo: "https://nacos.org.ng",
@@ -857,7 +925,7 @@ export const fallbackGalleryImages = [
     title: "South-East Developer Summit",
     caption: "Networking with regional tech founders and engineering leaders.",
     altText: "Developer conference audience and auditorium view",
-    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837093/nestor/gallery/developer-conference.jpg",
+    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837096/nestor/gallery/devfest24-friends.jpg",
     width: 1200,
     height: 800,
     category: "Events",
@@ -875,7 +943,7 @@ export const fallbackGalleryImages = [
     title: "Youth Tech Empowerment Program",
     caption: "Mentoring upcoming student developers in frontend engineering and design systems.",
     altText: "Youth empowerment workshop participants",
-    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837177/nestor/gallery/youth-empowerment-program.jpg",
+    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837144/nestor/gallery/gida-large-group.jpg",
     width: 1200,
     height: 800,
     category: "Community",
@@ -893,7 +961,7 @@ export const fallbackGalleryImages = [
     title: "Emerging Leaders Conference - GOTNI",
     caption: "Documenting high-impact leadership discussions with national delegates.",
     altText: "Leadership conference stage and auditorium",
-    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837161/nestor/gallery/leadership-conference.jpg",
+    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837059/nestor/certificates/gotni-cert.jpg",
     width: 1200,
     height: 750,
     category: "Leadership",

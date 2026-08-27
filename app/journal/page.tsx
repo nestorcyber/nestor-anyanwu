@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import Footer from "@/components/footer"
+import PortfolioCTA from "@/components/portfolio/portfolio-cta"
 import { getJournalArticles } from "@/lib/content"
 import JournalClient, { JournalArticleItem } from "@/components/journal/journal-client"
 
@@ -42,6 +43,12 @@ export default async function JournalPage() {
       <main className="min-h-screen bg-background pb-16 bg-grid-pattern">
         <JournalClient articles={articles} />
       </main>
+      <PortfolioCTA
+        title="Have a Technical Topic or Case Study to Discuss?"
+        description="Interested in collaborating on technical writing, technology policy essays, or engineering thought leadership? Let's connect."
+        buttonText="Reach Out"
+        buttonHref="/contact"
+      />
       <Footer />
     </>
   )

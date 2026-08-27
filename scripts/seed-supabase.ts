@@ -245,7 +245,7 @@ async function main() {
     {
       title: 'DevFest Owerri 2025 Tech Summit',
       caption: 'Directing visual design and logistics for South-East Nigeria largest developer festival.',
-      image_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg',
+      image_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1787837107/nestor/gallery/devfest25-1.jpg',
       alt: 'DevFest Owerri 2025',
       category: 'Events',
       featured: true,
@@ -254,7 +254,7 @@ async function main() {
     {
       title: 'Build With AI 2025',
       caption: 'Facilitating AI developer workshops and prompt engineering sessions for FUTO students.',
-      image_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg',
+      image_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1785966488/nestor/about/about_fm7rwu.jpg',
       alt: 'Build With AI 2025 Workshop',
       category: 'Workshops',
       featured: true,
@@ -263,7 +263,7 @@ async function main() {
     {
       title: 'NACOS FUTO Leadership Directorate',
       caption: 'Directing chapter digital infrastructure and student engagement initiatives across campus.',
-      image_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg',
+      image_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg',
       alt: 'NACOS FUTO Leadership',
       category: 'Leadership',
       featured: true,
@@ -272,7 +272,7 @@ async function main() {
     {
       title: 'Tech Nexus FUTO Summit',
       caption: 'Connecting computing students with industry mentors and technology engineering leaders.',
-      image_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden2-sUzI0wvGmZMjB5UUP911IAB6WvBM5c.jpg',
+      image_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1787837153/nestor/gallery/hospitality-event.jpg',
       alt: 'Tech Nexus FUTO',
       category: 'Community',
       featured: false,
@@ -281,7 +281,7 @@ async function main() {
     {
       title: 'Cowrywise Campus Fintech Advocacy',
       caption: 'Empowering university students with financial literacy and digital career skills.',
-      image_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg',
+      image_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1785966490/nestor/hero/Hero_dnkxet.jpg',
       alt: 'Cowrywise Campus Advocacy',
       category: 'Volunteering',
       featured: false,
@@ -299,30 +299,30 @@ async function main() {
   const sampleBrands = [
     {
       name: 'NACOS FUTO',
-      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg',
+      logo_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg',
       website_url: 'https://nacos.org.ng',
       sort_order: 0,
     },
     {
       name: 'GDG Owerri',
-      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg',
+      logo_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1787837107/nestor/gallery/devfest25-1.jpg',
       website_url: 'https://gdg.community.dev',
       sort_order: 1,
     },
     {
       name: 'IEEE FUTO SB',
-      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg',
+      logo_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1785966488/nestor/about/about_fm7rwu.jpg',
       website_url: 'https://ieee.org',
       sort_order: 2,
     },
     {
       name: 'Build With AI',
-      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg',
+      logo_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1785966488/nestor/about/about_fm7rwu.jpg',
       sort_order: 3,
     },
     {
       name: 'DevFest Owerri',
-      logo_url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg',
+      logo_url: 'https://res.cloudinary.com/z3wgqisj/image/upload/v1787837107/nestor/gallery/devfest25-1.jpg',
       sort_order: 4,
     },
   ]
