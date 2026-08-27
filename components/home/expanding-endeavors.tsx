@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, ArrowUpRight } from "lucide-react"
 
 export interface EndeavorItem {
   id: string
@@ -27,7 +27,7 @@ export default function ExpandingEndeavors() {
       title: "Technology & Leadership",
       subtitle: "Strategic Direction & Advocacy",
       description: "Directing technology council strategy, student engineering initiatives, and digital transformation across the ecosystem.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
+      image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1785966488/nestor/about/about_fm7rwu.jpg",
       link: "/about",
       buttonText: "Explore Leadership Profile",
       ariaLabel: "Explore Nestor Anyanwu's technology leadership profile",
@@ -93,12 +93,14 @@ export default function ExpandingEndeavors() {
         <div className="h-1 w-16 bg-accent mx-auto mt-3" />
       </div>
 
-      {/* MOBILE LAYOUT: Full-width edge-to-edge stacked cards */}
+      {/* MOBILE LAYOUT: Full-width edge-to-edge stacked cards with overlay buttons */}
       <div className="md:hidden w-full flex flex-col gap-0 border-y border-border/60 bg-slate-950">
         {endeavors.map((item) => (
-          <div
+          <Link
             key={`mobile-${item.id}`}
-            className="relative w-full h-[360px] overflow-hidden border-b border-slate-800/60 last:border-b-0 flex flex-col justify-between"
+            href={item.link}
+            aria-label={item.ariaLabel}
+            className="group relative w-full h-[360px] overflow-hidden border-b border-slate-800/60 last:border-b-0 flex flex-col justify-between p-6 text-white cursor-pointer active:scale-[0.99] transition-transform"
           >
             {/* Full Card Cover Image */}
             <Image
@@ -106,39 +108,34 @@ export default function ExpandingEndeavors() {
               alt={item.title}
               fill
               sizes="100vw"
-              className={`object-cover ${item.objectPosition || "object-[50%_20%]"} ${item.imageClassName || ""}`}
+              className={`object-cover ${item.objectPosition || "object-[50%_20%]"} ${item.imageClassName || ""} transition-transform duration-500 group-hover:scale-105`}
             />
 
             {/* Dark Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/75 to-slate-950/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/75 to-slate-950/20 group-hover:opacity-95 transition-opacity" />
 
-            {/* Top Spacer */}
-            <div className="relative z-10 p-4" />
-
-            {/* Bottom Details & Button */}
-            <div className="relative z-10 flex flex-col justify-end">
-              <div className="p-5 space-y-2 text-white">
-                <h3 className="text-xl font-extrabold tracking-tight text-white font-heading">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-accent font-semibold uppercase tracking-wider">
-                  {item.subtitle}
-                </p>
-                <div className="h-0.5 w-10 bg-accent my-2" />
-                <p className="text-xs text-slate-200 font-light leading-relaxed">
-                  {item.description}
-                </p>
+            {/* Top Row: Floating Arrow Button Overlay */}
+            <div className="relative z-10 flex items-center justify-end">
+              {/* Arrow Button Overlay (like in ArticleCard) */}
+              <div className="w-10 h-10 rounded-xl border border-white/20 bg-slate-900/90 text-white group-hover:bg-[#0075ff] group-hover:border-[#0075ff] group-hover:text-white flex items-center justify-center shrink-0 transition-all duration-300 shadow-md group-hover:scale-110 active:scale-95">
+                <ArrowUpRight className="w-5 h-5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
-
-              {/* Always Visible Action Button */}
-              <Link href={item.link} className="block w-full" aria-label={item.ariaLabel}>
-                <div className="w-full bg-[#0075ff] hover:bg-[#0060d0] text-white font-extrabold text-xs tracking-wider px-6 py-4 flex items-center justify-between transition-colors">
-                  <span>{item.buttonText}</span>
-                  <ArrowRight size={16} />
-                </div>
-              </Link>
             </div>
-          </div>
+
+            {/* Bottom Content Area */}
+            <div className="relative z-10 space-y-1.5 text-white pb-1">
+              <h3 className="text-xl font-extrabold tracking-tight text-white font-heading group-hover:text-[#0075ff] transition-colors leading-tight">
+                {item.title}
+              </h3>
+              <p className="text-xs text-accent font-semibold uppercase tracking-wider">
+                {item.subtitle}
+              </p>
+              <div className="h-0.5 w-10 bg-[#0075ff] my-1.5" />
+              <p className="text-xs text-slate-200 font-light leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+          </Link>
         ))}
       </div>
 

@@ -88,6 +88,16 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/certifications" className="hover:text-[#0075ff] transition-colors">
+                    Certifications
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/memberships" className="hover:text-[#0075ff] transition-colors">
+                    Memberships
+                  </Link>
+                </li>
+                <li>
                   <Link href="/journal" className="hover:text-[#0075ff] transition-colors">
                     Journal
                   </Link>

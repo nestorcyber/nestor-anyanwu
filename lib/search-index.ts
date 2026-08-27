@@ -12,7 +12,7 @@ export interface SearchResult {
   id: string
   title: string
   description: string
-  category: "Page" | "Project" | "Service" | "Skill" | "Journal" | "Community" | "Experience" | "Certification"
+  category: "Page" | "Project" | "Service" | "Skill" | "Journal" | "Community" | "Experience" | "Certification" | "Membership"
   href: string
   keywords?: string[]
 }
@@ -41,6 +41,22 @@ const pageEntries: SearchResult[] = [
     category: "Page",
     href: "/portfolio",
     keywords: ["projects", "portfolio", "work", "apps", "code", "design", "case studies", "engineering"],
+  },
+  {
+    id: "page-certifications",
+    title: "Licenses & Certifications",
+    description: "Verified licenses, engineering accreditations, and technical credentials earned by Nestor Anyanwu.",
+    category: "Page",
+    href: "/certifications",
+    keywords: ["certifications", "licenses", "credentials", "aws", "ieee", "gotni", "ndpc", "data privacy"],
+  },
+  {
+    id: "page-memberships",
+    title: "Memberships & Affiliations",
+    description: "Accredited professional memberships, industry councils, and associations contributing to technology policy and governance.",
+    category: "Page",
+    href: "/memberships",
+    keywords: ["memberships", "affiliations", "ncs", "aaai", "isoc", "fintechngr", "nira", "ndpc", "councils", "associations"],
   },
   {
     id: "page-community",
@@ -78,7 +94,7 @@ const pageEntries: SearchResult[] = [
 
 import { unstable_cache } from 'next/cache'
 
-async function generateSearchIndex(): Promise<SearchResult[]> {
+export async function getSearchIndex(): Promise<SearchResult[]> {
   const [projects, services, skillGroups, journeyTimeline, certifications, articles, communityEntriesList] =
     await Promise.all([
       getProjectItems(),
@@ -91,20 +107,21 @@ async function generateSearchIndex(): Promise<SearchResult[]> {
     ])
 
   const projectEntries: SearchResult[] = projects.map((p) => ({
-    id: `project-${p.id || p.title.toLowerCase().replace(/\s+/g, "-")}`,
+    id: `project-${p.id || p.slug}`,
     title: p.title,
-    description: `${p.description} (Role: ${p.role || "Developer"}, Technologies: ${p.technologies.join(", ")})`,
+    description: p.description,
     category: "Project",
-    href: p.slug ? `/portfolio/${p.slug}` : "/portfolio",
+    href: `/portfolio/${p.slug}`,
     keywords: [
       p.title.toLowerCase(),
+      p.category ? p.category.toLowerCase() : "",
       ...(p.technologies || []).map((t) => t.toLowerCase()),
-      p.category?.toLowerCase() || "portfolio",
-    ],
+      p.role ? p.role.toLowerCase() : "",
+    ].filter(Boolean),
   }))
 
   const serviceEntries: SearchResult[] = services.map((s) => ({
-    id: `service-${s.id}`,
+    id: `service-${s.id || s.title.toLowerCase().replace(/\s+/g, "-")}`,
     title: s.title,
     description: s.description,
     category: "Service",
@@ -117,32 +134,35 @@ async function generateSearchIndex(): Promise<SearchResult[]> {
       id: `skill-${skill.name.toLowerCase().replace(/\s+/g, "-")}`,
       title: skill.name,
       description: `${group.category} | ${skill.experienceLevel || "Proficient"} (${skill.years || "Active"})`,
-      category: "Skill" as const,
+      category: "Skill",
       href: "/portfolio",
       keywords: [skill.name.toLowerCase(), group.category.toLowerCase(), "stack", "tool", "expertise"],
     }))
   )
 
-  const journeyEntries: SearchResult[] = journeyTimeline.map((j) => ({
-    id: `journey-${j.id}`,
-    title: `${j.title} | ${j.organization}`,
-    description: `${j.description} (${j.date})`,
-    category: "Experience" as const,
-    href: "/portfolio",
-    keywords: [
-      j.title.toLowerCase(),
-      j.organization.toLowerCase(),
-      ...(j.details || []).map((d) => d.toLowerCase()),
-      j.type,
-    ],
-  }))
+  const journeyEntries: SearchResult[] = journeyTimeline.map((j) => {
+    const isMembership = j.type === "membership"
+    return {
+      id: `journey-${j.id}`,
+      title: `${j.title} | ${j.organization}`,
+      description: `${j.description} (${j.date})`,
+      category: isMembership ? "Membership" : "Experience",
+      href: isMembership ? "/memberships" : "/experience",
+      keywords: [
+        j.title.toLowerCase(),
+        j.organization.toLowerCase(),
+        ...(j.details || []).map((d) => d.toLowerCase()),
+        j.type,
+      ],
+    }
+  })
 
   const certEntries: SearchResult[] = certifications.map((c) => ({
     id: `cert-${c.id}`,
     title: c.title,
     description: `Issued by ${c.provider} (${c.date})`,
-    category: "Certification" as const,
-    href: "/about",
+    category: "Certification",
+    href: "/certifications",
     keywords: [c.title.toLowerCase(), c.provider.toLowerCase(), "certification", "credential"],
   }))
 
@@ -177,7 +197,7 @@ async function generateSearchIndex(): Promise<SearchResult[]> {
 }
 
 export const buildSearchIndex = unstable_cache(
-  async () => generateSearchIndex(),
+  async () => getSearchIndex(),
   ['full-search-index'],
   {
     revalidate: 3600,

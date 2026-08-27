@@ -54,6 +54,16 @@ const nextConfig = {
         destination: "/experience",
         permanent: true,
       },
+      {
+        source: "/portfolio/memberships",
+        destination: "/memberships",
+        permanent: true,
+      },
+      {
+        source: "/affiliations",
+        destination: "/memberships",
+        permanent: true,
+      },
     ]
   },
   async headers() {

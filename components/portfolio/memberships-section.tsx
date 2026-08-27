@@ -1,19 +1,11 @@
 import React from "react"
-import { ShieldCheck, Globe, Cpu, Award, Network, Building2 } from "lucide-react"
+import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
 import type { JourneyItem } from "@/lib/content"
+import MembershipCard, { mapJourneyToMembership, type MembershipCardItem } from "@/components/shared/membership-card"
+import { ShieldCheck, Globe, Cpu, Award, Network, Building2 } from "lucide-react"
 
-interface MembershipItem {
-  id: string
-  organization: string
-  acronym: string
-  role: string
-  date: string
-  description: string
-  focus: string[]
-  icon: React.ElementType
-}
-
-const DEFAULT_MEMBERSHIPS: MembershipItem[] = [
+const DEFAULT_MEMBERSHIPS: MembershipCardItem[] = [
   {
     id: "ncs",
     organization: "Nigeria Computer Society",
@@ -82,46 +74,14 @@ const DEFAULT_MEMBERSHIPS: MembershipItem[] = [
   },
 ]
 
-function getMembershipIcon(org: string, details: string[] = []): React.ElementType {
-  const text = `${org} ${details.join(" ")}`.toLowerCase()
-  if (text.includes("ai") || text.includes("intelligence") || text.includes("machine") || text.includes("aaai")) return Cpu
-  if (text.includes("privacy") || text.includes("security") || text.includes("protection") || text.includes("nira") || text.includes("ndpc")) return ShieldCheck
-  if (text.includes("internet") || text.includes("isoc") || text.includes("web") || text.includes("domain") || text.includes("global")) return Globe
-  if (text.includes("fintech") || text.includes("finance") || text.includes("payment") || text.includes("invest") || text.includes("asset")) return Network
-  if (text.includes("society") || text.includes("ncs") || text.includes("nacos") || text.includes("association") || text.includes("institution")) return Building2
-  return Award
-}
-
-function extractAcronym(org: string): string {
-  const parenMatch = org.match(/\(([^)]+)\)/)
-  if (parenMatch && parenMatch[1]) return parenMatch[1]
-  const words = org.split(" ").filter((w) => w.length > 0 && w[0] === w[0].toUpperCase())
-  if (words.length >= 2 && words.length <= 5) {
-    return words.map((w) => w[0]).join("")
-  }
-  return "Affiliation"
-}
-
 interface MembershipsSectionProps {
   membershipsList?: JourneyItem[]
 }
 
 export default function MembershipsSection({ membershipsList }: MembershipsSectionProps) {
-  const displayItems: MembershipItem[] =
+  const displayItems: MembershipCardItem[] =
     membershipsList && membershipsList.length > 0
-      ? membershipsList.map((item) => {
-          const org = item.organization || item.title
-          return {
-            id: String(item.id),
-            organization: org,
-            acronym: extractAcronym(org),
-            role: item.role || item.title || "Member",
-            date: item.date || "2025 - Present",
-            description: item.description,
-            focus: item.details && item.details.length > 0 ? item.details : ["Professional Council", "Governance", "Technology"],
-            icon: getMembershipIcon(org, item.details),
-          }
-        })
+      ? membershipsList.map(mapJourneyToMembership)
       : DEFAULT_MEMBERSHIPS
 
   return (
@@ -132,7 +92,7 @@ export default function MembershipsSection({ membershipsList }: MembershipsSecti
       {/* Background ambient lighting */}
       <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#0075ff]/5 dark:bg-[#0075ff]/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="site-container relative z-10 space-y-12">
+      <div className="site-container relative z-10 space-y-10">
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
@@ -145,56 +105,21 @@ export default function MembershipsSection({ membershipsList }: MembershipsSecti
         </div>
 
         {/* Memberships Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {displayItems.map((item) => {
-            const Icon = item.icon
-            return (
-              <div
-                key={item.id}
-                className="p-6 sm:p-7 bg-white dark:bg-card border border-slate-200/90 dark:border-slate-800 rounded-2xl flex flex-col justify-between hover:border-[#0075ff] hover:shadow-xl transition-all duration-300 group shadow-xs min-h-[320px]"
-              >
-                <div className="space-y-4">
-                  {/* Top Row: Icon badge & Status */}
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="w-12 h-12 rounded-xl bg-[#0B1C2C] text-[#0075ff] flex items-center justify-center shadow-md border border-[#0075ff]/30 transition-transform duration-300 group-hover:scale-105 group-hover:border-[#0075ff]">
-                      <Icon className="w-6 h-6 stroke-[2]" />
-                    </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+          {displayItems.map((item) => (
+            <MembershipCard key={item.id} membership={item} />
+          ))}
+        </div>
 
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold font-mono bg-[#0075ff]/10 text-[#0075ff] border border-[#0075ff]/20">
-                      {item.role}
-                    </span>
-                  </div>
-
-                  {/* Organization & Details */}
-                  <div className="space-y-1">
-                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-foreground font-heading tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors">
-                      {item.organization}
-                    </h3>
-                    <p className="text-xs font-mono font-semibold text-slate-500 dark:text-slate-400">
-                      {item.acronym} • {item.date}
-                    </p>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-muted-foreground leading-relaxed font-normal">
-                    {item.description}
-                  </p>
-                </div>
-
-                {/* Focus Skill Chips */}
-                <div className="flex flex-wrap items-center gap-1.5 pt-4 border-t border-slate-100 dark:border-slate-800/80">
-                  {item.focus.map((tag, idx) => (
-                    <span
-                      key={idx}
-                      className="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px] font-medium"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )
-          })}
+        {/* Dedicated Page Link CTA */}
+        <div className="flex justify-center pt-4">
+          <Link
+            href="/memberships"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-card border border-border/80 text-foreground hover:border-[#0075ff] hover:text-[#0075ff] font-bold text-xs tracking-wider transition-all shadow-2xs hover:shadow-sm group"
+          >
+            <span>View Dedicated Memberships Page</span>
+            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
         </div>
       </div>
     </section>

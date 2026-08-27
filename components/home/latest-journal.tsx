@@ -25,9 +25,6 @@ export default async function LatestJournal() {
         {/* Section Header: Left Heading + Top Right "View All" Button */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
           <div className="text-left space-y-2 max-w-2xl">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#0055cc] dark:text-sky-400 block">
-              Latest Journal
-            </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-tight">
               Articles & News
             </h2>
