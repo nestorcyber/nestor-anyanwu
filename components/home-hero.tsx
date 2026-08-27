@@ -3,15 +3,15 @@ import Image from "next/image"
 export default function HomeHero() {
   return (
     <section className="relative h-[62svh] min-h-[380px] sm:h-[75svh] md:h-[calc(100svh-4rem)] md:min-h-[640px] flex flex-col justify-end overflow-hidden bg-slate-950">
-      {/* Background image - edge to edge, subject nicely framed on mobile */}
+      {/* Background image - edge to edge */}
       <Image
-        src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/DSC_5940_1_2_ee43kp.jpg"
+        src="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966490/Hero_dnkxet.jpg"
         alt="Nestor Anyanwu"
         fill
         sizes="100vw"
         priority
         fetchPriority="high"
-        className="object-cover object-[50%_12%] sm:object-[55%_18%] md:object-[60%_22%] lg:object-[65%_25%]"
+        className="object-cover object-[70%_20%] sm:object-[70%_20%] md:object-[68%_20%] lg:object-[65%_20%]"
       />
 
       {/* Overlay gradient - clear subject portrait, strong contrast for bottom typography */}

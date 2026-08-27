@@ -124,7 +124,7 @@ export default function Navigation() {
           <div className="flex items-center gap-5 md:gap-7">
             
             {/* Desktop Header Links */}
-            <div className="hidden md:flex items-center gap-2 lg:gap-3 text-xs md:text-sm font-semibold">
+            <div className="hidden md:flex items-center gap-4 lg:gap-6 text-xs md:text-sm font-semibold">
               {desktopNavItems.map((item) => {
                 const isActive =
                   item.href === "/"
@@ -135,13 +135,16 @@ export default function Navigation() {
                   <Link
                     key={item.label}
                     href={item.href}
-                    className={`transition-all uppercase tracking-wider ${
+                    className={`relative pb-0.5 text-xs md:text-[13px] font-bold uppercase tracking-wider transition-colors ${
                       isActive
-                        ? "px-3.5 py-1 text-xs font-bold rounded-xl bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 shadow-xs"
-                        : "px-2.5 py-1 text-slate-700 dark:text-slate-200 hover:text-[#0075ff] dark:hover:text-[#0075ff]"
+                        ? "text-foreground dark:text-white"
+                        : "text-slate-600 dark:text-slate-300 hover:text-[#0075ff] dark:hover:text-[#0075ff]"
                     }`}
                   >
-                    {item.label}
+                    <span>{item.label}</span>
+                    {isActive && (
+                      <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#0075ff] rounded-full shadow-xs" />
+                    )}
                   </Link>
                 )
               })}

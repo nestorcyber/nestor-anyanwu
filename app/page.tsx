@@ -69,7 +69,7 @@ export default async function Home() {
     },
     {
       id: "journal",
-      title: "Articles & Technical Essays",
+      title: "Articles & News",
       subtitle: "Thoughts on technology leadership, software engineering, digital inclusion, and community building.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg",
       link: "/journal",

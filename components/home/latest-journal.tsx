@@ -22,18 +22,29 @@ export default async function LatestJournal() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10 space-y-10">
         
-        {/* Section Header */}
-        <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl">
-          <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#0055cc] dark:text-sky-400 block">
-            Latest Journal
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-tight">
-            Articles & Technical Essays
-          </h2>
-          <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            Insights on software engineering, technology leadership, and design systems.
-          </p>
-          <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-2" />
+        {/* Section Header: Left Heading + Top Right "View All" Button */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+          <div className="text-left space-y-2 max-w-2xl">
+            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#0055cc] dark:text-sky-400 block">
+              Latest Journal
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-tight">
+              Articles & News
+            </h2>
+            <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
+              Insights on software engineering, technology leadership, and design systems.
+            </p>
+          </div>
+
+          <div className="shrink-0 self-start sm:self-end">
+            <Link
+              href="/journal"
+              className="inline-flex items-center gap-2 text-xs font-bold tracking-wider bg-slate-900 text-white dark:bg-white dark:text-slate-950 hover:bg-[#0075ff] dark:hover:bg-[#0075ff] dark:hover:text-white px-5 py-2.5 rounded-xl transition-all cursor-pointer shadow-md hover:shadow-lg hover:-translate-y-0.5"
+            >
+              <span>View All Articles</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
 
         {/* 3-Column Article Card Grid */}
@@ -46,6 +57,8 @@ export default async function LatestJournal() {
                 image={article.coverImage}
                 date={article.publishedDate}
                 summary={article.excerpt}
+                category={article.category}
+                tags={article.tags}
                 slug={`/journal/${article.slug}`}
               />
             ))}
@@ -55,17 +68,6 @@ export default async function LatestJournal() {
             No published journal entries to display.
           </div>
         )}
-
-        {/* Bottom Centered Read All Articles Button */}
-        <div className="flex justify-center pt-4">
-          <Link
-            href="/journal"
-            className="inline-flex items-center gap-2 text-xs font-bold tracking-wider text-foreground border border-foreground/50 hover:border-[#0075ff] hover:text-[#0075ff] px-7 py-3 rounded-xl transition-all cursor-pointer"
-          >
-            <span>Read All Articles</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
 
       </div>
     </section>
