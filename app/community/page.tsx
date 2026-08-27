@@ -11,6 +11,7 @@ import {
   getCommunityEntries,
   getJourneyItems,
   getVolunteeringImages,
+  getPortfolioStats,
 } from "@/lib/content"
 
 export const revalidate = 3600
@@ -36,10 +37,11 @@ export const metadata: Metadata = {
 }
 
 export default async function CommunityPage() {
-  const [entries, journey, volunteerPhotos] = await Promise.all([
+  const [entries, journey, volunteerPhotos, stats] = await Promise.all([
     getCommunityEntries(),
     getJourneyItems(),
     getVolunteeringImages(),
+    getPortfolioStats(),
   ])
 
   // Filter volunteer items for the timeline
@@ -79,12 +81,7 @@ export default async function CommunityPage() {
           <CommunityHero />
 
           {/* 2. Impact Snapshot */}
-          <ImpactSnapshot
-            organizationCount={8}
-            eventCount={15}
-            volunteerCount={volunteerJourney.length > 0 ? volunteerJourney.length : 12}
-            peopleReached="3,500+"
-          />
+          <ImpactSnapshot stats={stats} />
 
           {/* 3. Featured Experiences */}
           <FeaturedExperiences experiences={mappedExperiences.length > 0 ? mappedExperiences : undefined} />

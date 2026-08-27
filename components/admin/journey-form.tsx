@@ -16,9 +16,12 @@ import {
 } from '@/components/admin/field'
 import type { Tables } from '@/lib/supabase/types'
 
-type Props = { initial?: Tables<'journey_items'> | null }
+type Props = {
+  initial?: Tables<'journey_items'> | null
+  returnTo?: string
+}
 
-export default function JourneyForm({ initial }: Props) {
+export default function JourneyForm({ initial, returnTo }: Props) {
   const router = useRouter()
   const [title, setTitle] = useState(initial?.title ?? '')
   const [organization, setOrganization] = useState(initial?.organization ?? '')
@@ -32,6 +35,8 @@ export default function JourneyForm({ initial }: Props) {
   const [sortOrder, setSortOrder] = useState(String(initial?.sort_order ?? 0))
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+
+  const redirectPath = returnTo || (type === 'membership' || initial?.type === 'membership' ? '/admin/memberships' : '/admin/journey')
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault()
@@ -71,7 +76,7 @@ export default function JourneyForm({ initial }: Props) {
       }
       await revalidateCommunity()
       await revalidatePortfolio()
-      router.push('/admin/journey')
+      router.push(redirectPath)
       router.refresh()
     } catch (err: any) {
       setError(err?.message || 'Failed to save journey item.')
@@ -81,17 +86,17 @@ export default function JourneyForm({ initial }: Props) {
   }
 
   async function onDelete() {
-    if (!initial || !confirm('Delete this journey item?')) return
+    if (!initial || !confirm('Delete this item?')) return
     setSaving(true)
     try {
       const supabase = createClient()
       await supabase.from('journey_items').delete().eq('id', initial.id)
       await revalidateCommunity()
       await revalidatePortfolio()
-      router.push('/admin/journey')
+      router.push(redirectPath)
       router.refresh()
     } catch (err: any) {
-      setError(err?.message || 'Failed to delete journey item.')
+      setError(err?.message || 'Failed to delete item.')
     } finally {
       setSaving(false)
     }

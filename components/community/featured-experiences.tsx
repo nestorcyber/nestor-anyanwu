@@ -103,10 +103,10 @@ export default function FeaturedExperiences({ experiences = DEFAULT_EXPERIENCES 
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Featured <span className="text-[#0075ff]">Experiences</span>
+            Latest <span className="text-[#0075ff]">Community Activity</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            In-depth case studies of major conferences, community leadership mandates, and volunteer programs where I delivered verified deliverables.
+            In-depth highlights of recent conferences, technical leadership initiatives, community programs, and verified deliverables.
           </p>
           <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-2" />
         </div>

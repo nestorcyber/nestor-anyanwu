@@ -1124,7 +1124,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
       return (
         <div>
           <PageHeader title="New Professional Membership &amp; Affiliation" />
-          <JourneyForm initial={{ type: 'membership' } as any} />
+          <JourneyForm initial={{ type: 'membership' } as any} returnTo="/admin/memberships" />
         </div>
       )
     }
@@ -1153,7 +1153,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
     return (
       <div>
         <PageHeader title="Edit Professional Membership" />
-        <JourneyForm initial={data} />
+        <JourneyForm initial={data} returnTo="/admin/memberships" />
       </div>
     )
   }
