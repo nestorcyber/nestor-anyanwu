@@ -156,8 +156,6 @@ export default async function Home() {
       <QuoteSection
         quote="Keep Rolling The Dice Even When The Odds Are Against You."
         authorName="Nestor Anyanwu"
-        authorRole="Software Engineer & Tech Leader"
-        authorOrg="Director of ICT, NACOS National"
       />
 
       {/* 5. Key Verified Metrics & Impact Stats */}

@@ -105,6 +105,17 @@ body {
   --sidebar-ring: oklch(0.708 0 0);
   --nav-bg: rgba(248, 250, 252, 0.75);
   /* Semi-transparent light for glassmorphism */
+  --btn-height: 44px;
+  --btn-height-sm: 36px;
+  --btn-height-lg: 50px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --btn-height: 48px;
+    --btn-height-sm: 40px;
+    --btn-height-lg: 54px;
+  }
 }
 
 .dark {
@@ -726,4 +737,27 @@ h6 {
 .animate-marquee-vertical-slow:active,
 .animate-marquee-vertical-reverse:active {
   animation-play-state: paused;
+}
+
+/* ─── Global Unified Button Styles & Heights ─── */
+.btn-global,
+.btn-standard {
+  height: var(--btn-height);
+  min-height: var(--btn-height);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.btn-global-sm {
+  height: var(--btn-height-sm);
+  min-height: var(--btn-height-sm);
+}
+
+.btn-global-lg {
+  height: var(--btn-height-lg);
+  min-height: var(--btn-height-lg);
 }

@@ -43,7 +43,7 @@ export default function CommunityCTA({
             <div className="flex items-center justify-center pt-3">
               <Link
                 href={buttonHref}
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-accent hover:bg-accent/90 text-white font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 cursor-pointer"
+                className="h-11 sm:h-12 inline-flex items-center gap-2 px-6 sm:px-8 rounded-xl bg-accent hover:bg-accent/90 text-white font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 cursor-pointer"
               >
                 <span>{buttonText}</span>
                 <ArrowRight className="w-4 h-4" />

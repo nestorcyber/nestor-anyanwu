@@ -88,7 +88,7 @@ export default function FeaturedCommunity() {
             <div className="pt-3 flex justify-start">
               <Link
                 href="/community"
-                className="bg-[#0070f3] hover:bg-blue-600 text-white font-extrabold text-xs sm:text-sm tracking-wide px-7 sm:px-9 py-3.5 sm:py-4 rounded-xl shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center gap-2 cursor-pointer group"
+                className="h-11 sm:h-12 bg-[#0070f3] hover:bg-blue-600 text-white font-extrabold text-xs sm:text-sm tracking-wide px-6 sm:px-8 rounded-xl shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center gap-2 cursor-pointer group"
               >
                 <span>Explore Community Work</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

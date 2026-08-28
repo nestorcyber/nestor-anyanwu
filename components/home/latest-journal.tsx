@@ -36,7 +36,7 @@ export default async function LatestJournal() {
           <div className="shrink-0 self-start sm:self-end">
             <Link
               href="/journal"
-              className="inline-flex items-center gap-2 text-xs font-bold tracking-wider bg-slate-900 text-white dark:bg-white dark:text-slate-950 hover:bg-[#0075ff] dark:hover:bg-[#0075ff] dark:hover:text-white px-5 py-2.5 rounded-xl transition-all cursor-pointer shadow-md hover:shadow-lg hover:-translate-y-0.5"
+              className="h-11 sm:h-12 inline-flex items-center gap-2 text-xs font-bold tracking-wider bg-slate-900 text-white dark:bg-white dark:text-slate-950 hover:bg-[#0075ff] dark:hover:bg-[#0075ff] dark:hover:text-white px-5 sm:px-6 rounded-xl transition-all cursor-pointer shadow-md hover:shadow-lg hover:-translate-y-0.5"
             >
               <span>View All Articles</span>
               <ArrowRight className="w-4 h-4" />

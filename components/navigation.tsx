@@ -68,8 +68,6 @@ export default function Navigation() {
 
   // Desktop drawer items
   const desktopDrawerItems = [
-    { label: "Certifications", href: "/certifications" },
-    { label: "Memberships", href: "/memberships" },
     { label: "Gallery", href: "/gallery" },
     { label: "Contact", href: "/contact" },
   ]
@@ -79,8 +77,6 @@ export default function Navigation() {
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Portfolio", href: "/portfolio" },
-    { label: "Certifications", href: "/certifications" },
-    { label: "Memberships", href: "/memberships" },
     { label: "Community", href: "/community" },
     { label: "Journal", href: "/journal" },
     { label: "Gallery", href: "/gallery" },

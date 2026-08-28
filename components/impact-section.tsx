@@ -131,7 +131,7 @@ export default function ImpactSection({
             <div className="pt-2">
               <Link
                 href={ctaLink || "/about"}
-                className="bg-[#0075ff] hover:bg-[#0060d0] text-white font-extrabold text-xs tracking-wider px-7 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2 cursor-pointer active:scale-98"
+                className="h-11 sm:h-12 bg-[#0075ff] hover:bg-[#0060d0] text-white font-extrabold text-xs tracking-wider px-6 sm:px-7 rounded-xl shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2 cursor-pointer active:scale-98"
               >
                 <span>{ctaText || "Discover More"}</span>
                 <ArrowUpRight className="w-4 h-4" />

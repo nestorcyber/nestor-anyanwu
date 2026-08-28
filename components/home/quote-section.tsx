@@ -12,16 +12,16 @@ interface QuoteSectionProps {
 export default function QuoteSection({
   quote = "Keep Rolling The Dice Even When The Odds Are Against You.",
   authorName = "Nestor Anyanwu",
-  authorRole = "Software Engineer & Tech Leader",
-  authorOrg = "Director of ICT, NACOS National",
+  authorRole,
+  authorOrg,
   authorImage = "https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/nestor/hero/DSC_5940_1_2_ee43kp.jpg",
 }: QuoteSectionProps) {
   return (
-    <section className="w-full py-20 sm:py-24 md:py-32 bg-background border-b border-border/60 relative overflow-hidden">
+    <section className="w-full py-16 sm:py-20 md:py-28 bg-background border-b border-border/60 relative overflow-hidden">
       {/* Subtle Background Glow Accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[#0075ff]/5 dark:bg-[#0075ff]/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="site-container relative z-10 max-w-5xl mx-auto text-center space-y-8 sm:space-y-10">
+      <div className="site-container relative z-10 max-w-5xl mx-auto text-center space-y-7 sm:space-y-9">
         
         {/* Large Centered Quotation Mark Icon */}
         <div className="flex justify-center">
@@ -42,7 +42,7 @@ export default function QuoteSection({
         </blockquote>
 
         {/* Author Details */}
-        <div className="pt-2 sm:pt-4 flex flex-col items-center justify-center space-y-3">
+        <div className="pt-2 sm:pt-3 flex flex-col items-center justify-center space-y-2">
           {/* Avatar */}
           <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-slate-900/10 dark:border-white/20 shadow-md">
             <Image
@@ -54,16 +54,18 @@ export default function QuoteSection({
             />
           </div>
 
-          {/* Name and Titles */}
-          <div className="space-y-0.5">
+          {/* Author Name */}
+          <div>
             <h4 className="text-sm sm:text-base font-bold text-foreground font-heading">
               {authorName}
             </h4>
-            <p className="text-xs sm:text-[13px] text-muted-foreground font-medium">
-              {authorRole}
-            </p>
+            {authorRole && (
+              <p className="text-xs sm:text-[13px] text-muted-foreground font-medium mt-0.5">
+                {authorRole}
+              </p>
+            )}
             {authorOrg && (
-              <p className="text-[11px] sm:text-xs text-muted-foreground/80 font-mono">
+              <p className="text-[11px] sm:text-xs text-muted-foreground/80 font-mono mt-0.5">
                 {authorOrg}
               </p>
             )}

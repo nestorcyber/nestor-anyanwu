@@ -38,7 +38,7 @@ export default function PortfolioCTA({
             <div className="flex items-center justify-center pt-3">
               <Link
                 href={buttonHref}
-                className="bg-accent hover:bg-accent/90 text-white font-bold text-xs md:text-sm tracking-wider uppercase pl-7 pr-3 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 inline-flex items-center gap-3 cursor-pointer group"
+                className="h-11 sm:h-12 bg-accent hover:bg-accent/90 text-white font-bold text-xs md:text-sm tracking-wider uppercase pl-6 sm:pl-7 pr-2.5 sm:pr-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 inline-flex items-center gap-2.5 sm:gap-3 cursor-pointer group"
               >
                 <span>{buttonText}</span>
                 <span className="w-8 h-8 rounded-lg bg-black/25 dark:bg-black/40 text-white flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105">
