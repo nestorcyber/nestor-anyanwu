@@ -32,6 +32,7 @@ import {
   getBrandPartners,
 } from '@/lib/content'
 import { servicesList as fallbackServices } from '@/lib/data'
+import { getMembershipImage } from '@/components/shared/membership-card'
 
 export const dynamic = 'force-dynamic'
 
@@ -365,16 +366,15 @@ export default async function AdminCatchAllPage({ params }: Props) {
                 >
                   {/* Left Side: Thumbnail / Initial Avatar + Title & Meta & Tags */}
                   <div className="flex items-center gap-4 min-w-0">
-                    {/* Thumbnail Image or Large Initial Square Box */}
-                    {row.coverImage ? (
-                      <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
-                        <Image src={row.coverImage} alt={title} fill className="object-cover" />
-                      </div>
-                    ) : (
-                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 font-serif text-3xl font-normal flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700">
-                        {initial}
-                      </div>
-                    )}
+                    {/* Main Cover Image */}
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
+                      <Image
+                        src={row.coverImage || "https://res.cloudinary.com/z3wgqisj/image/upload/v1785954620/nestor/journal/rd2b3dve5ae5qnicxhsj.jpg"}
+                        alt={title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
 
                     {/* Title & Meta Subline (Draft/Published, Date, Tag Pills) */}
                     <div className="min-w-0 space-y-1.5">
@@ -565,15 +565,15 @@ export default async function AdminCatchAllPage({ params }: Props) {
                   className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
                   <div className="flex items-center gap-4 min-w-0">
-                    {row.coverImage ? (
-                      <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
-                        <Image src={row.coverImage} alt={title} fill className="object-cover" />
-                      </div>
-                    ) : (
-                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 font-serif text-3xl font-normal flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700">
-                        {initial}
-                      </div>
-                    )}
+                    {/* Main Cover Image */}
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
+                      <Image
+                        src={row.coverImage || "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837175/nestor/gallery/tech-nexus-team.jpg"}
+                        alt={title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
 
                     <div className="min-w-0 space-y-1.5">
                       <Link
@@ -748,15 +748,15 @@ export default async function AdminCatchAllPage({ params }: Props) {
                   className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
                   <div className="flex items-center gap-4 min-w-0">
-                    {row.coverImage ? (
-                      <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
-                        <Image src={row.coverImage} alt={title} fill className="object-cover" />
-                      </div>
-                    ) : (
-                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 font-serif text-3xl font-normal flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700">
-                        {initial}
-                      </div>
-                    )}
+                    {/* Main Cover Image */}
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
+                      <Image
+                        src={row.coverImage || "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837146/nestor/gallery/gida-team-moment.jpg"}
+                        alt={title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
 
                     <div className="min-w-0 space-y-1.5">
                       <Link
@@ -865,7 +865,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
     if (!actionOrId) {
       const { data: dbData } = await supabase
         .from('journey_items')
-        .select('id, title, organization, role, date_label, type')
+        .select('id, title, organization, role, date_label, type, images')
         .order('sort_order', { ascending: true })
       const fallbackJourney = await getJourneyItems()
       const dbTitles = new Set((dbData ?? []).map((row) => row.title))
@@ -876,6 +876,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
           organization: j.organization,
           dateLabel: j.date_label || '2026',
           type: j.type || 'milestone',
+          image: (j.images && j.images.length > 0 ? j.images[0] : null) || getMembershipImage({ organization: j.organization, title: j.title }),
           tags: [j.organization, j.type],
         })),
         ...fallbackJourney
@@ -886,6 +887,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
             organization: j.organization,
             dateLabel: j.date,
             type: j.type || 'milestone',
+            image: (j.images && j.images.length > 0 ? j.images[0] : null) || getMembershipImage({ organization: j.organization, title: j.title }),
             tags: [j.organization, j.type],
           })),
       ]
@@ -912,8 +914,8 @@ export default async function AdminCatchAllPage({ params }: Props) {
           <div className="space-y-3.5">
             {items.map((row: any) => {
               const title = row.title || '(Untitled)'
-              const initial = title.replace(/[^a-zA-Z0-9]/g, '')[0]?.toUpperCase() || 'M'
               const rowType = (row.type || 'milestone').toLowerCase()
+              const rowImage = row.image || getMembershipImage({ organization: row.organization, title })
 
               return (
                 <div
@@ -921,8 +923,13 @@ export default async function AdminCatchAllPage({ params }: Props) {
                   className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
                   <div className="flex items-center gap-4 min-w-0">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 font-serif text-3xl font-normal flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700">
-                      {initial}
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
+                      <Image
+                        src={rowImage}
+                        alt={title}
+                        fill
+                        className="object-cover"
+                      />
                     </div>
 
                     <div className="min-w-0 space-y-1.5">
@@ -1020,7 +1027,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
     if (!actionOrId) {
       const { data: dbData } = await supabase
         .from('journey_items')
-        .select('id, title, organization, role, date_label, type, details')
+        .select('id, title, organization, role, date_label, type, details, images')
         .eq('type', 'membership')
         .order('sort_order', { ascending: true })
       const fallbackJourney = await getJourneyItems()
@@ -1033,6 +1040,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
           role: j.role || j.title || 'Member',
           dateLabel: j.date_label || '2025 - Present',
           type: 'membership',
+          image: (j.images && j.images.length > 0 ? j.images[0] : null) || getMembershipImage({ organization: j.organization, title: j.title }),
           details: j.details || ['Professional Council'],
         })),
         ...fallbackJourney
@@ -1044,6 +1052,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
             role: j.role || j.title || 'Member',
             dateLabel: j.date,
             type: 'membership',
+            image: (j.images && j.images.length > 0 ? j.images[0] : null) || getMembershipImage({ organization: j.organization, title: j.title }),
             details: j.details || ['Professional Council'],
           })),
       ]
@@ -1067,7 +1076,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
           <div className="space-y-3.5">
             {items.map((row: any) => {
               const orgName = row.organization || row.title || '(Untitled)'
-              const initial = orgName.replace(/[^a-zA-Z0-9]/g, '')[0]?.toUpperCase() || 'M'
+              const rowImage = row.image || getMembershipImage({ organization: orgName, title: row.title })
 
               return (
                 <div
@@ -1075,8 +1084,13 @@ export default async function AdminCatchAllPage({ params }: Props) {
                   className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
                   <div className="flex items-center gap-4 min-w-0">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-[#0B1C2C] text-[#0075ff] font-serif text-2xl font-bold flex items-center justify-center shrink-0 border border-[#0075ff]/30 shadow-xs">
-                      {initial}
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
+                      <Image
+                        src={rowImage}
+                        alt={orgName}
+                        fill
+                        className="object-cover"
+                      />
                     </div>
 
                     <div className="min-w-0 space-y-1.5">
@@ -1739,20 +1753,14 @@ export default async function AdminCatchAllPage({ params }: Props) {
                   className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
                   <div className="flex items-center gap-4 min-w-0">
-                    {row.image ? (
-                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden shrink-0 border border-slate-200/80 dark:border-slate-700 bg-slate-100 dark:bg-slate-850 relative">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={row.image}
-                          alt={title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 font-serif text-3xl font-normal flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700">
-                        {initial}
-                      </div>
-                    )}
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
+                      <Image
+                        src={row.image || "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837064/nestor/certificates/ndpc-cert.jpg"}
+                        alt={title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
 
                     <div className="min-w-0 space-y-1">
                       <Link

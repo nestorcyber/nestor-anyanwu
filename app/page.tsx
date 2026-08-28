@@ -5,6 +5,7 @@ import PersonalPhilosophy from "@/components/home/personal-philosophy"
 import ExpandingEndeavors from "@/components/home/expanding-endeavors"
 import FeaturedPortfolio from "@/components/home/featured-portfolio"
 import ImpactSection from "@/components/impact-section"
+import QuoteSection from "@/components/home/quote-section"
 import HomeStats from "@/components/home/home-stats"
 import FeaturedCommunity from "@/components/home/featured-community"
 import LatestJournal from "@/components/home/latest-journal"
@@ -151,6 +152,14 @@ export default async function Home() {
         ]}
       />
 
+      {/* 4b. Featured Quote */}
+      <QuoteSection
+        quote="Keep Rolling The Dice Even When The Odds Are Against You."
+        authorName="Nestor Anyanwu"
+        authorRole="Software Engineer & Tech Leader"
+        authorOrg="Director of ICT, NACOS National"
+      />
+
       {/* 5. Key Verified Metrics & Impact Stats */}
       <HomeStats stats={formattedStats} />
 
@@ -162,7 +171,6 @@ export default async function Home() {
       <FeaturedPortfolio />
 
       {/* 8. Featured Community Work */}
-      {/* @ts-expect-error Async Server Component */}
       <FeaturedCommunity />
 
       {/* 9. Latest Journal Articles & Essays */}
