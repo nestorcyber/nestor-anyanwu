@@ -45,7 +45,32 @@ export default async function CommunityPage() {
   ])
 
   // Filter volunteer items for the timeline
-  const volunteerJourney = journey.filter((item) => item.type === "volunteer")
+  const volunteerJourney = journey.filter(
+    (item) => item.type === "volunteer" || item.type === "milestone"
+  )
+
+  // Merge any extra community entries from dashboard into the roadmap timeline preview
+  const existingTimelineKeys = new Set(
+    volunteerJourney.map((i) => `${i.title.toLowerCase()} ${i.organization.toLowerCase()}`)
+  )
+  const extraCommunityToTimeline: typeof volunteerJourney = entries
+    .filter((e) => {
+      const key = `${e.organization.toLowerCase()} ${e.role.toLowerCase()}`
+      return !existingTimelineKeys.has(key) && !existingTimelineKeys.has(e.organization.toLowerCase())
+    })
+    .map((e) => ({
+      id: e.id,
+      title: e.organization,
+      organization: e.organization,
+      role: e.role || "Community Lead",
+      date: e.duration || "Ongoing",
+      description: e.description || e.achievements?.[0] || "",
+      type: "volunteer",
+      details: e.tags && e.tags.length > 0 ? e.tags : ["Community", "Leadership"],
+      images: e.coverImage && !e.coverImage.includes("placeholder") ? [e.coverImage] : (e.gallery || []),
+    }))
+
+  const combinedVolunteerTimeline = [...volunteerJourney, ...extraCommunityToTimeline]
 
   // Map featured experiences from database entries or fallback to rich curated list
   const mappedExperiences: FeaturedExperienceItem[] = entries.map((e) => ({
@@ -89,7 +114,7 @@ export default async function CommunityPage() {
           <FeaturedExperiences experiences={mappedExperiences.length > 0 ? mappedExperiences : undefined} />
 
           {/* 4. Volunteering Timeline */}
-          <CommunityTimeline timeline={volunteerJourney.length > 0 ? volunteerJourney : undefined} />
+          <CommunityTimeline timeline={combinedVolunteerTimeline.length > 0 ? combinedVolunteerTimeline : undefined} />
 
           {/* 5. How I Contribute & Skills Gained (Integrated) */}
           <ContributionPillars />

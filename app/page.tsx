@@ -154,7 +154,7 @@ export default async function Home() {
 
       {/* 4b. Featured Quote */}
       <QuoteSection
-        quote="Keep Rolling The Dice Even When The Odds Are Against You."
+        quote="Part of my dream is to build a tech ecosystem that is truly accessible, Inclusive, and Collaborative where anyone can Thrive."
         authorName="Nestor Anyanwu"
       />
 

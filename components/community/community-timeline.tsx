@@ -1,5 +1,8 @@
+"use client"
+
 import React from "react"
 import Image from "next/image"
+import Link from "next/link"
 import type { JourneyItem } from "@/lib/content"
 import {
   Calendar,
@@ -10,6 +13,8 @@ import {
   Code2,
   Users2,
   CalendarCheck2,
+  ArrowRight,
+  Compass,
 } from "lucide-react"
 
 interface CommunityTimelineProps {
@@ -58,7 +63,7 @@ const DEFAULT_TIMELINE: JourneyItem[] = [
       "Leading technological modernization, digital portals, and developer workshops for the student computing body.",
     type: "volunteer",
     details: ["ICT Strategy", "Web Systems", "Community Leadership"],
-    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg"],
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg"],
   },
   {
     id: "8",
@@ -81,7 +86,7 @@ const DEFAULT_TIMELINE: JourneyItem[] = [
       "Contributed to event venue setup, audio visual flow, and delegate coordination for hospitality leaders.",
     type: "volunteer",
     details: ["Event Setup", "Logistics", "Operations"],
-    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden2-sUzI0wvGmZMjB5UUP911IAB6WvBM5c.jpg"],
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837090/nestor/gallery/conference-crowd.jpg"],
   },
   {
     id: "11",
@@ -93,7 +98,7 @@ const DEFAULT_TIMELINE: JourneyItem[] = [
       "Managed setup logistics and stage management, ensuring seamless execution across multi-speaker panels.",
     type: "volunteer",
     details: ["Stage Operations", "Speaker Relations", "Logistics"],
-    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fle3%280%29-CFKUWQDj8dfMZ5zkDTF9IEEXC6zDID.jpg"],
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837146/nestor/gallery/gida-team-moment.jpg"],
   },
   {
     id: "12",
@@ -105,7 +110,7 @@ const DEFAULT_TIMELINE: JourneyItem[] = [
       "Engineered comprehensive event visual identity, keynote slides, and promotional assets for 1,500+ attendees.",
     type: "volunteer",
     details: ["Visual Design", "Developer Relations", "Event Staging"],
-    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg"],
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837107/nestor/gallery/devfest25-1.jpg"],
   },
   {
     id: "10",
@@ -117,7 +122,7 @@ const DEFAULT_TIMELINE: JourneyItem[] = [
       "Captured milestone moments, networking roundtables, and leadership honors for global alumni delegations.",
     type: "volunteer",
     details: ["Photography", "Media Coverage", "Alumni Relations"],
-    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f4%280%29-e7Yahcsw3qQbcQLNweaiCS5rzoAVvv.jpg"],
+    images: ["https://res.cloudinary.com/z3wgqisj/image/upload/v1787837136/nestor/gallery/futo-4.jpg"],
   },
   {
     id: "24",
@@ -219,14 +224,15 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
 
                       {/* Role if distinct from Title */}
                       {item.role && item.role !== item.title && (
-                        <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">
-                          Role: <span className="text-foreground">{item.role}</span>
+                        <p className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                          <span className="text-slate-400 font-mono text-[11px]">Role:</span>
+                          <span className="text-[#0075ff]">{item.role}</span>
                         </p>
                       )}
 
-                      {/* Photo if available */}
+                      {/* Optional Photo Attachment */}
                       {hasImage && (
-                        <div className="relative aspect-[16/9] max-h-[300px] rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-slate-800">
+                        <div className="relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-slate-800">
                           <Image
                             src={item.images![0]}
                             alt={item.title}
@@ -262,6 +268,19 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
             })}
           </div>
         </div>
+
+        {/* Action Button: Explore Full Roadmap Page */}
+        <div className="flex items-center justify-center pt-6">
+          <Link
+            href="/community/roadmap"
+            className="h-11 sm:h-12 w-full sm:w-auto px-7 sm:px-9 rounded-xl bg-[#0070f3] hover:bg-blue-600 text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center justify-center gap-2.5 cursor-pointer group"
+          >
+            <Compass className="w-4 h-4" />
+            <span>Explore Complete Roadmap &amp; Archive</span>
+            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+          </Link>
+        </div>
+
       </div>
     </section>
   )

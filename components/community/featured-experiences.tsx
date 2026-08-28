@@ -1,7 +1,9 @@
+"use client"
+
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { MapPin, Calendar, ArrowRight, ExternalLink, CheckCircle2, Sparkles } from "lucide-react"
+import { MapPin, Calendar, ArrowRight, ExternalLink, CheckCircle2, Sparkles, Compass } from "lucide-react"
 
 export interface FeaturedExperienceItem {
   id: string
@@ -30,7 +32,7 @@ const DEFAULT_EXPERIENCES: FeaturedExperienceItem[] = [
     role: "Major Designer & Events Support",
     date: "Oct 2025 - Nov 2025",
     location: "Owerri, Imo State",
-    coverImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
+    coverImage: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837107/nestor/gallery/devfest25-1.jpg",
     description:
       "Directed end-to-end technical visual systems, stage production graphics, and marketing collateral for South-East Nigeria's premier developer gathering, serving 1,500+ attendees.",
     contributions: [
@@ -48,7 +50,7 @@ const DEFAULT_EXPERIENCES: FeaturedExperienceItem[] = [
     role: "Director of ICT",
     date: "Dec 2025 - Present",
     location: "FUTO, Owerri",
-    coverImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
+    coverImage: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg",
     description:
       "Spearheading digital modernization, portal architecture, and technical workshops for computing students, creating direct pathways to software engineering mentorship.",
     contributions: [
@@ -65,7 +67,7 @@ const DEFAULT_EXPERIENCES: FeaturedExperienceItem[] = [
     role: "Event Operations & Setup Lead",
     date: "Nov 2025",
     location: "Owerri, Nigeria",
-    coverImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fle3%280%29-CFKUWQDj8dfMZ5zkDTF9IEEXC6zDID.jpg",
+    coverImage: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837090/nestor/gallery/conference-crowd.jpg",
     description:
       "Managed setup logistics and ground coordination for a high-profile gathering of entrepreneurs, industry executives, and emerging leaders.",
     contributions: [
@@ -81,7 +83,7 @@ const DEFAULT_EXPERIENCES: FeaturedExperienceItem[] = [
     role: "Media and Technical Documentation",
     date: "Aug 2025",
     location: "FUTO Engineering Complex",
-    coverImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f4%280%29-e7Yahcsw3qQbcQLNweaiCS5rzoAVvv.jpg",
+    coverImage: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837136/nestor/gallery/futo-4.jpg",
     description:
       "Led digital documentation, photography, and session recording for distinguished alumni reunions, networking panels, and university development sessions.",
     contributions: [
@@ -98,87 +100,105 @@ export default function FeaturedExperiences({ experiences = DEFAULT_EXPERIENCES 
 
   return (
     <section id="experiences" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-white dark:bg-background flex flex-col justify-center">
-      <div className="site-container space-y-12">
+      <div className="site-container space-y-12 sm:space-y-16">
         
-        {/* Centered Section Header */}
-        <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Latest <span className="text-[#0075ff]">Community Activity</span>
+        {/* Section Header */}
+        <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0075ff]/10 border border-[#0075ff]/20 text-xs font-mono font-semibold text-[#0075ff]">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>COMMUNITY HIGHLIGHTS</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-foreground tracking-tight font-heading">
+            Featured Volunteer <span className="text-[#0075ff]">Experiences</span>
           </h2>
-          <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            In-depth highlights of recent conferences, technical leadership initiatives, community programs, and verified deliverables.
+
+          <p className="text-sm sm:text-base text-slate-600 dark:text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
+            Selected case studies where technical leadership, event production, and developer advocacy created measurable impact across student communities and tech summits.
           </p>
+
           <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-2" />
         </div>
 
-        {/* 1. Large Asymmetric Lead Case Study Card */}
+        {/* 1. Lead Featured Case Study (Split Hero Card) */}
         {leadItem && (
-          <article className="group rounded-3xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0075ff] p-6 sm:p-8 lg:p-10 shadow-sm hover:shadow-xl transition-all duration-300">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <article className="rounded-3xl bg-slate-900 text-white overflow-hidden border border-slate-800 shadow-2xl transition-all duration-300 hover:border-[#0075ff]/60 group">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
               
-              {/* Lead Image Container */}
-              <div className="lg:col-span-6 relative aspect-[16/10] sm:aspect-[16/9] rounded-2xl overflow-hidden bg-slate-900 border border-border/60">
+              {/* Left Media (7 cols) */}
+              <div className="lg:col-span-7 relative aspect-[16/10] lg:aspect-auto lg:min-h-[440px] overflow-hidden bg-slate-950">
                 <Image
                   src={leadItem.coverImage}
                   alt={leadItem.title}
                   fill
+                  priority
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 600px"
+                  sizes="(max-width: 1024px) 100vw, 60vw"
                 />
-                <div className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#0075ff] text-white shadow-md">
-                  FEATURED ENGAGEMENT
+                <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-slate-950 via-slate-950/40 to-transparent" />
+                
+                {/* Badge Overlay */}
+                <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
+                  <span className="px-3 py-1 rounded-full bg-[#0075ff] text-white text-xs font-bold font-mono tracking-wider shadow-md">
+                    FEATURED CASE STUDY
+                  </span>
                 </div>
               </div>
 
-              {/* Lead Content */}
-              <div className="lg:col-span-6 space-y-5">
-                <div className="space-y-2">
-                  <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-500 dark:text-slate-400">
-                    <span className="inline-flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5 text-[#0075ff]" />
-                      {leadItem.date}
-                    </span>
-                    {leadItem.location && (
-                      <span className="inline-flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-[#0075ff]" />
-                        {leadItem.location}
+              {/* Right Content (5 cols) */}
+              <div className="lg:col-span-5 p-6 sm:p-8 md:p-10 flex flex-col justify-between space-y-6">
+                <div className="space-y-4">
+                  <div className="space-y-1">
+                    <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-sky-400">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3.5 h-3.5 text-[#0075ff]" />
+                        {leadItem.date}
                       </span>
-                    )}
+                      {leadItem.location && (
+                        <span className="flex items-center gap-1">
+                          <MapPin className="w-3.5 h-3.5 text-[#0075ff]" />
+                          {leadItem.location}
+                        </span>
+                      )}
+                    </div>
+
+                    <h3 className="text-2xl sm:text-3xl font-black font-heading tracking-tight text-white group-hover:text-sky-300 transition-colors">
+                      {leadItem.title}
+                    </h3>
+
+                    <p className="text-xs sm:text-sm font-semibold text-slate-300">
+                      {leadItem.role} &bull; <span className="text-sky-400">{leadItem.organization}</span>
+                    </p>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-foreground font-heading tracking-tight leading-tight group-hover:text-[#0075ff] transition-colors">
-                    {leadItem.title}
-                  </h3>
-
-                  <p className="text-sm sm:text-base font-bold text-[#0075ff]">
-                    {leadItem.role} &bull; {leadItem.organization}
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
+                    {leadItem.description}
                   </p>
+
+                  {/* Bullet Contributions */}
+                  <div className="space-y-2 pt-2">
+                    <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">
+                      Key Impact Deliverables
+                    </h4>
+                    <ul className="space-y-1.5">
+                      {leadItem.contributions.map((c, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-200">
+                          <CheckCircle2 className="w-4 h-4 text-[#0075ff] shrink-0 mt-0.5" />
+                          <span>{c}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
 
-                <p className="text-sm sm:text-base text-slate-600 dark:text-muted-foreground leading-relaxed font-normal">
-                  {leadItem.description}
-                </p>
-
-                {/* Key Contributions */}
-                <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800">
-                  <span className="text-xs font-mono font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider">
-                    Key Deliverables:
-                  </span>
-                  <ul className="space-y-1.5">
-                    {leadItem.contributions.map((bullet, bIdx) => (
-                      <li key={bIdx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                        <CheckCircle2 className="w-4 h-4 text-[#0075ff] shrink-0 mt-0.5" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Skills Pills & External Link */}
-                <div className="flex flex-wrap items-center justify-between gap-4 pt-3">
-                  <div className="flex flex-wrap items-center gap-1.5">
+                {/* Footer Tag list & Link */}
+                <div className="space-y-4 pt-4 border-t border-slate-800">
+                  <div className="flex flex-wrap gap-1.5">
                     {leadItem.skills.map((skill, sIdx) => (
-                      <span key={sIdx} className="px-2.5 py-1 rounded-md bg-[#0075ff]/10 text-[#0075ff] text-xs font-semibold">
+                      <span
+                        key={sIdx}
+                        className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[11px] font-mono text-slate-300 font-medium"
+                      >
                         {skill}
                       </span>
                     ))}
@@ -188,10 +208,10 @@ export default function FeaturedExperiences({ experiences = DEFAULT_EXPERIENCES 
                     <a
                       href={leadItem.externalUrl}
                       target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0075ff] hover:underline"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0075ff] hover:text-sky-300 transition-colors pt-1 cursor-pointer"
                     >
-                      <span>Learn More</span>
+                      <span>View Organization Portal</span>
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   )}
@@ -261,6 +281,18 @@ export default function FeaturedExperiences({ experiences = DEFAULT_EXPERIENCES 
               </div>
             </article>
           ))}
+        </div>
+
+        {/* 3. Action Button: View Full Experience Roadmap */}
+        <div className="flex items-center justify-center pt-4 sm:pt-6">
+          <Link
+            href="/community/roadmap"
+            className="h-11 sm:h-12 w-full sm:w-auto px-7 sm:px-9 rounded-xl bg-[#0070f3] hover:bg-blue-600 text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center justify-center gap-2.5 cursor-pointer group"
+          >
+            <Compass className="w-4 h-4" />
+            <span>View Full Community Roadmap</span>
+            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+          </Link>
         </div>
 
       </div>
