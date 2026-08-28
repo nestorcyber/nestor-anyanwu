@@ -27,47 +27,53 @@ export interface GalleryPhoto {
 const DEFAULT_GALLERY: GalleryPhoto[] = [
   {
     id: "gal-1",
-    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg",
-    title: "NACOS FUTO Student Leadership Delegation",
-    caption: "Director of ICT leading digital strategy and tech mentorship for computing students.",
-    category: "Leadership",
-    location: "FUTO ICT Complex",
-    date: "Dec 2025",
-  },
-  {
-    id: "gal-2",
-    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837144/nestor/gallery/gida-large-group.jpg",
-    title: "Grassroots Community Gathering & Innovators Meet",
-    caption: "Uniting tech innovators, open-source contributors, and community advocates.",
+    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837146/nestor/gallery/gida-team-moment.jpg",
+    title: "GIDA Tech Community Leadership",
+    caption: "Grassroots organizing and developer ecosystem summit with fellow tech leaders.",
     category: "Community",
     location: "Innovation Hub",
     date: "Aug 2025",
   },
   {
+    id: "gal-2",
+    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837102/nestor/gallery/devfest24-group.jpg",
+    title: "DevFest Regional Community Gathering",
+    caption: "Google Developer Groups community summit, tech panels, and software developer mentoring.",
+    category: "Volunteering",
+    location: "DevFest Arena",
+    date: "Nov 2024",
+  },
+  {
     id: "gal-3",
-    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837136/nestor/gallery/futo-4.jpg",
-    title: "FUTO Alumni Homecoming Operations Team",
-    caption: "Capturing networking roundtables and legacy awards with the media team.",
-    category: "Media",
-    location: "FUTO Campus",
-    date: "Aug 2025",
+    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg",
+    title: "NACOS Student Leadership Delegation",
+    caption: "Director of ICT leading digital strategy and tech mentorship for student engineers.",
+    category: "Leadership",
+    location: "FUTO ICT Complex",
+    date: "Dec 2025",
   },
   {
     id: "gal-4",
-    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837090/nestor/gallery/conference-crowd.jpg",
-    title: "FLE Global Leadership Conference Setup Team",
-    caption: "Managing multi-track staging and guest hospitality operations.",
-    category: "Events",
-    location: "FLE Global Summit",
-    date: "Nov 2025",
+    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837078/nestor/gallery/aws-team.jpg",
+    title: "AWS Community Builders & Mentors",
+    caption: "Empowering university students with cloud computing architectures and serverless workflows.",
+    category: "Advocacy",
+    location: "AWS Cloud Club",
+    date: "Sep 2025",
   },
 ]
 
 export default function VolunteeringGallery({ photos = DEFAULT_GALLERY }: { photos?: GalleryPhoto[] }) {
-  // Use curated few community group pictures for the community page preview
-  const allPhotos = photos && photos.length > 0 ? photos : DEFAULT_GALLERY
+  // Use verified community group pictures for the community page preview
+  const rawPhotos = photos && photos.length > 0 ? photos : DEFAULT_GALLERY
+  const validPhotos = rawPhotos.filter(
+    (p) => p.imageUrl && p.imageUrl.trim().length > 0 && !p.imageUrl.includes("placeholder")
+  )
+  const allPhotos = validPhotos.length > 0 ? validPhotos : DEFAULT_GALLERY
   const displayPhotos = allPhotos.slice(0, 4)
+
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const [imageErrorMap, setImageErrorMap] = useState<Record<string, boolean>>({})
 
   const activePhoto = lightboxIndex !== null ? displayPhotos[lightboxIndex] : null
 
@@ -114,6 +120,10 @@ export default function VolunteeringGallery({ photos = DEFAULT_GALLERY }: { phot
         {/* Responsive Grid with Fixed Aspect Ratio Containers (Zero Layout Shift) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {displayPhotos.map((photo, index) => {
+            const hasError = imageErrorMap[photo.id || String(index)]
+            const fallbackSrc = DEFAULT_GALLERY[index % DEFAULT_GALLERY.length].imageUrl
+            const currentSrc = hasError ? fallbackSrc : (photo.imageUrl || fallbackSrc)
+
             return (
               <div
                 key={photo.id || index}
@@ -121,11 +131,14 @@ export default function VolunteeringGallery({ photos = DEFAULT_GALLERY }: { phot
                 className="group relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-900 border border-border/80 hover:border-[#0075ff] cursor-pointer shadow-xs hover:shadow-xl transition-all duration-300"
               >
                 <Image
-                  src={photo.imageUrl}
+                  src={currentSrc}
                   alt={photo.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
+                  onError={() => {
+                    setImageErrorMap((prev) => ({ ...prev, [photo.id || String(index)]: true }))
+                  }}
                 />
                 
                 {/* Subtle Gradient Overlay */}
@@ -167,7 +180,7 @@ export default function VolunteeringGallery({ photos = DEFAULT_GALLERY }: { phot
         <div className="flex items-center justify-center pt-2">
           <Link
             href="/community/gallery"
-            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#0075ff] hover:bg-blue-600 text-white font-extrabold text-xs tracking-wider uppercase flex items-center justify-center gap-2.5 transition-all shadow-md hover:shadow-lg duration-200 cursor-pointer group"
+            className="h-11 sm:h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-[#0075ff] hover:bg-blue-600 text-white font-extrabold text-xs tracking-wider uppercase flex items-center justify-center gap-2.5 transition-all shadow-md hover:shadow-lg duration-200 cursor-pointer group"
           >
             <Images className="w-4 h-4" />
             <span>View All Volunteer Pictures</span>
@@ -228,7 +241,11 @@ export default function VolunteeringGallery({ photos = DEFAULT_GALLERY }: { phot
           >
             <div className="relative w-full h-[55vh] sm:h-[65vh] bg-black">
               <Image
-                src={activePhoto.imageUrl}
+                src={
+                  imageErrorMap[activePhoto.id || ""]
+                    ? DEFAULT_GALLERY[0].imageUrl
+                    : activePhoto.imageUrl
+                }
                 alt={activePhoto.title}
                 fill
                 priority

@@ -62,15 +62,17 @@ export default async function CommunityPage() {
   }))
 
   // Map gallery photos from gallery table where Volunteering = true
-  const mappedPhotos: GalleryPhoto[] = volunteerPhotos.map((g) => ({
-    id: g.id,
-    imageUrl: g.imageUrl,
-    title: g.title || "Community Event",
-    caption: g.caption || undefined,
-    category: g.category || undefined,
-    location: g.location || undefined,
-    date: g.eventDate || undefined,
-  }))
+  const mappedPhotos: GalleryPhoto[] = volunteerPhotos
+    .filter((g) => g.imageUrl && g.imageUrl.trim().length > 0 && !g.imageUrl.includes("placeholder"))
+    .map((g) => ({
+      id: g.id,
+      imageUrl: g.imageUrl,
+      title: g.title || "Community Event",
+      caption: g.caption || undefined,
+      category: g.category || undefined,
+      location: g.location || undefined,
+      date: g.eventDate || undefined,
+    }))
 
   return (
     <div className="min-h-screen bg-background flex flex-col w-full">
