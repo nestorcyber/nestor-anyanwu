@@ -9,8 +9,8 @@ interface MembershipsSectionProps {
 }
 
 export default function MembershipsSection({ membershipsList = [] }: MembershipsSectionProps) {
-  // Directly map live items from the database
-  const displayItems: MembershipCardItem[] = membershipsList.map(mapJourneyToMembership)
+  // Show top 3 professional organization cards in this section
+  const displayItems: MembershipCardItem[] = membershipsList.slice(0, 3).map(mapJourneyToMembership)
 
   return (
     <section
@@ -49,9 +49,9 @@ export default function MembershipsSection({ membershipsList = [] }: Memberships
         <div className="flex justify-center pt-4">
           <Link
             href="/memberships"
-            className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-6 rounded-xl bg-card border border-border/80 text-foreground hover:border-[#0075ff] hover:text-[#0075ff] font-bold text-xs sm:text-sm tracking-wider transition-all shadow-2xs hover:shadow-sm group cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-6 rounded-xl bg-[#0075ff] hover:bg-[#0062d6] text-white font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 group cursor-pointer"
           >
-            <span>View Dedicated Memberships Page</span>
+            <span>View All Memberships</span>
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </div>
