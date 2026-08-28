@@ -4,97 +4,32 @@ import Footer from "@/components/footer"
 import PortfolioCTA from "@/components/portfolio/portfolio-cta"
 import MembershipCard, { mapJourneyToMembership, type MembershipCardItem } from "@/components/shared/membership-card"
 import { getMemberships } from "@/lib/content"
-import { ShieldCheck, Award, Building2, Cpu, Globe, Network } from "lucide-react"
 
 export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Professional Memberships & Affiliations | Nestor Anyanwu (Nestor Cyber)",
-  description: "Explore accredited memberships, industry councils, and professional associations contributing to national technology policy, AI research, and digital governance.",
+  description:
+    "Explore accredited memberships, industry councils, and professional associations contributing to national technology policy, AI research, and digital governance.",
   alternates: {
     canonical: "/memberships",
   },
   openGraph: {
     title: "Professional Memberships & Affiliations | Nestor Anyanwu (Nestor Cyber)",
-    description: "Explore accredited memberships, industry councils, and professional associations contributing to national technology policy, AI research, and digital governance.",
+    description:
+      "Explore accredited memberships, industry councils, and professional associations contributing to national technology policy, AI research, and digital governance.",
     url: "/memberships",
   },
   twitter: {
     title: "Professional Memberships & Affiliations | Nestor Anyanwu (Nestor Cyber)",
-    description: "Explore accredited memberships, industry councils, and professional associations contributing to national technology policy, AI research, and digital governance.",
+    description:
+      "Explore accredited memberships, industry councils, and professional associations contributing to national technology policy, AI research, and digital governance.",
   },
 }
 
-const DEFAULT_MEMBERSHIPS: MembershipCardItem[] = [
-  {
-    id: "ncs",
-    organization: "Nigeria Computer Society",
-    role: "Professional Member",
-    date: "2025 - Present",
-    description:
-      "Active member of Nigeria's premier ICT professional authority, contributing to technology policy advocacy, computing ethics, and industry development.",
-    focus: ["ICT Professionalism", "Technology Policy", "Computing Standards"],
-    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg",
-  },
-  {
-    id: "aaai",
-    organization: "Association for the Advancement of Artificial Intelligence",
-    role: "Member",
-    date: "2024 - Present",
-    description:
-      "Engaged with Africa's AI advocacy chapter, participating in machine intelligence research, technical symposiums, and ethical AI development frameworks.",
-    focus: ["AI Research", "Machine Intelligence", "Ethics in AI"],
-    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837087/nestor/gallery/bwai-team.jpg",
-  },
-  {
-    id: "isoc",
-    organization: "Internet Society, Nigeria Chapter",
-    role: "Member",
-    date: "2025 - Present",
-    description:
-      "Advocating for open internet accessibility, digital rights, global network governance, and technological infrastructure resilience.",
-    focus: ["Internet Governance", "Digital Rights", "Infrastructure"],
-    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837096/nestor/gallery/devfest24-friends.jpg",
-  },
-  {
-    id: "fintech-ngr",
-    organization: "Fintech Association of Nigeria",
-    role: "Member",
-    date: "2024 - Present",
-    description:
-      "Contributing to financial technology innovation, digital asset infrastructure, payments regulation, and ecosystem collaboration.",
-    focus: ["Digital Finance", "Fintech Innovation", "Payments Architecture"],
-    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837148/nestor/gallery/gire-hall.jpg",
-  },
-  {
-    id: "nira",
-    organization: "Nigeria Internet Registration Association",
-    role: "Member",
-    date: "2025 - Present",
-    description:
-      "Participating in top-level domain governance, national DNS architecture, and sovereign digital namespace development.",
-    focus: ["DNS Architecture", "Namespace Policy", "Cyber Governance"],
-    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837148/nestor/gallery/gire-hall.jpg",
-  },
-  {
-    id: "ndpc",
-    organization: "Nigeria Data Protection Commission",
-    role: "Data Privacy Ambassador",
-    date: "2025 - Present",
-    description:
-      "Appointed advocate promoting NDPA compliance, user data governance frameworks, security best practices, and institutional privacy awareness.",
-    focus: ["NDPA Compliance", "Data Privacy", "Risk Governance"],
-    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837064/nestor/certificates/ndpc-cert.jpg",
-  },
-]
-
 export default async function MembershipsPage() {
   const dbMemberships = await getMemberships()
-
-  const membershipsList: MembershipCardItem[] =
-    dbMemberships && dbMemberships.length > 0
-      ? dbMemberships.map(mapJourneyToMembership)
-      : DEFAULT_MEMBERSHIPS
+  const membershipsList: MembershipCardItem[] = (dbMemberships || []).map(mapJourneyToMembership)
 
   return (
     <div className="min-h-screen bg-background flex flex-col w-full">
@@ -133,14 +68,14 @@ export default async function MembershipsPage() {
           {/* Memberships 3-in-a-Row Grid Container */}
           <div className="site-container py-10 sm:py-14">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-              {membershipsList.map((membership) => (
-                <MembershipCard key={membership.id} membership={membership} />
+              {membershipsList.map((membership, idx) => (
+                <MembershipCard key={membership.id || idx} membership={membership} index={idx} />
               ))}
             </div>
 
             {membershipsList.length === 0 && (
-              <div className="p-12 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-2xl">
-                No memberships found.
+              <div className="p-12 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-2xl max-w-md mx-auto">
+                No memberships added yet. Add them in the Admin Dashboard at /admin/memberships.
               </div>
             )}
           </div>

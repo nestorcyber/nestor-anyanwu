@@ -379,7 +379,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-4 px-8 rounded-xl bg-[#0075ff] hover:bg-blue-600 text-white font-extrabold text-xs tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
+                        className="w-full h-11 sm:h-12 px-8 rounded-xl bg-[#0075ff] hover:bg-blue-600 text-white font-extrabold text-xs sm:text-sm tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
                       >
                         {isSubmitting ? (
                           <span>Sending Message...</span>

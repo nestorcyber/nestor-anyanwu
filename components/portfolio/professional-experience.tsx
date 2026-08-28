@@ -30,42 +30,68 @@ export default function ProfessionalExperience({
     },
     {
       id: "2",
-      title: "Director of Technology & Developer Relations (DevRel)",
-      organization: "Technology Strategy & Community Programs",
-      role: "Director of ICT & DevRel Lead",
-      date: "2024 - Present",
+      title: "Director of Information Communication Technology",
+      organization: "Nigeria Association of Computing Students (NACOS)",
+      role: "Director of ICT",
+      date: "Dec 2025 - Present",
       description:
-        "Directing technological infrastructure, digital strategy, and ecosystem developer relations, leading hands-on workshops, hackathons, and high-impact tech community initiatives.",
+        "Directing national and chapter digital infrastructure, technical workshops, and engineering initiatives serving over 5,000 computing students across South-East Nigeria.",
       type: "work",
-      details: ["DevRel", "Community Building", "IT Consulting", "Impact & Volunteering"],
+      details: ["ICT Directorship", "Tech Leadership", "Ecosystem Strategy", "Developer Programs"],
+    },
+    {
+      id: "3",
+      title: "Information Technology Consultant",
+      organization: "Nobelton Consults",
+      role: "IT Consultant",
+      date: "May 2024 - Present",
+      description:
+        "Providing strategic IT consulting, enterprise technology audits, web systems delivery, and digital transformation advisory for high-growth ventures and commercial clients.",
+      type: "work",
+      details: ["IT Consulting", "Infrastructure Audits", "Systems Strategy", "Corporate Training"],
+    },
+    {
+      id: "4",
+      title: "Developer Relations & Visual Design Lead",
+      organization: "Google Developer Groups (GDG) Owerri",
+      role: "Lead Designer & Events Support",
+      date: "Sep 2024 - Present",
+      description:
+        "Leading brand systems, keynote visual assets, developer relations, and stage production graphics for 1,500+ engineers at South-East Nigeria's largest developer conferences.",
+      type: "work",
+      details: ["Developer Relations", "Visual Systems", "Community Advocacy", "Event Staging"],
     },
   ]
 
-  const displayItems = coreExperiences
+  const displayItems =
+    journeyTimeline && journeyTimeline.length > 0
+      ? journeyTimeline.filter((j) => j.type === "work").slice(0, 4)
+      : coreExperiences
 
   const getSpineIcon = (index: number) => {
-    switch (index) {
+    switch (index % 4) {
       case 0:
-        return <Cpu className="w-5 h-5 text-[#0075ff]" />
+        return <Code2 className="w-5 h-5" />
       case 1:
-        return <Globe className="w-5 h-5 text-[#0075ff]" />
+        return <Globe className="w-5 h-5" />
+      case 2:
+        return <Cpu className="w-5 h-5" />
+      case 3:
+        return <Briefcase className="w-5 h-5" />
       default:
-        return <Code2 className="w-5 h-5 text-[#0075ff]" />
+        return <Code2 className="w-5 h-5" />
     }
   }
 
   return (
-    <section
-      id="experience"
-      className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-white dark:bg-background relative overflow-hidden flex flex-col justify-center"
-    >
-      {/* Background ambient lighting in brand electric blue */}
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#0075ff]/5 dark:bg-[#0075ff]/10 rounded-full blur-3xl pointer-events-none" />
+    <section id="experience" className="w-full py-16 md:py-24 border-b border-border/70 bg-card/20 relative overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-[#0075ff]/5 dark:bg-[#0075ff]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="site-container relative z-10 space-y-12">
         
-        {/* Centered Section Header */}
-        <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl">
+        {/* Section Header */}
+        <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
             Career <span className="text-[#0075ff]">Roadmap</span> &amp; Experience
           </h2>
@@ -171,7 +197,7 @@ export default function ProfessionalExperience({
         <div className="flex justify-center pt-4">
           <Link
             href="/experience"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent hover:bg-accent/90 text-white font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-6 rounded-xl bg-accent hover:bg-accent/90 text-white font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
           >
             <span>View All Experience</span>
             <ArrowRight className="w-4 h-4" />

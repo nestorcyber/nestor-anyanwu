@@ -3,80 +3,14 @@ import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import type { JourneyItem } from "@/lib/content"
 import MembershipCard, { mapJourneyToMembership, type MembershipCardItem } from "@/components/shared/membership-card"
-import { ShieldCheck, Globe, Cpu, Award, Network, Building2 } from "lucide-react"
-
-const DEFAULT_MEMBERSHIPS: MembershipCardItem[] = [
-  {
-    id: "ncs",
-    organization: "Nigeria Computer Society",
-    role: "Professional Member",
-    date: "2025 - Present",
-    description:
-      "Active member of Nigeria's premier ICT professional authority, contributing to technology policy advocacy, computing ethics, and industry development.",
-    focus: ["ICT Professionalism", "Technology Policy", "Computing Standards"],
-    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg",
-  },
-  {
-    id: "aaai",
-    organization: "Association for the Advancement of Artificial Intelligence",
-    role: "Member",
-    date: "2024 - Present",
-    description:
-      "Engaged with Africa's AI advocacy chapter, participating in machine intelligence research, technical symposiums, and ethical AI development frameworks.",
-    focus: ["AI Research", "Machine Intelligence", "Ethics in AI"],
-    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837087/nestor/gallery/bwai-team.jpg",
-  },
-  {
-    id: "isoc",
-    organization: "Internet Society, Nigeria Chapter",
-    role: "Member",
-    date: "2025 - Present",
-    description:
-      "Advocating for open internet accessibility, digital rights, global network governance, and technological infrastructure resilience.",
-    focus: ["Internet Governance", "Digital Rights", "Infrastructure"],
-    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837096/nestor/gallery/devfest24-friends.jpg",
-  },
-  {
-    id: "fintech-ngr",
-    organization: "Fintech Association of Nigeria",
-    role: "Member",
-    date: "2024 - Present",
-    description:
-      "Contributing to financial technology innovation, digital asset infrastructure, payments regulation, and ecosystem collaboration.",
-    focus: ["Digital Finance", "Fintech Innovation", "Payments Architecture"],
-    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837148/nestor/gallery/gire-hall.jpg",
-  },
-  {
-    id: "nira",
-    organization: "Nigeria Internet Registration Association",
-    role: "Member",
-    date: "2025 - Present",
-    description:
-      "Participating in top-level domain governance, national DNS architecture, and sovereign digital namespace development.",
-    focus: ["DNS Architecture", "Namespace Policy", "Cyber Governance"],
-    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837148/nestor/gallery/gire-hall.jpg",
-  },
-  {
-    id: "ndpc",
-    organization: "Nigeria Data Protection Commission",
-    role: "Data Privacy Ambassador",
-    date: "2025 - Present",
-    description:
-      "Appointed advocate promoting NDPA compliance, user data governance frameworks, security best practices, and institutional privacy awareness.",
-    focus: ["NDPA Compliance", "Data Privacy", "Risk Governance"],
-    image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837064/nestor/certificates/ndpc-cert.jpg",
-  },
-]
 
 interface MembershipsSectionProps {
   membershipsList?: JourneyItem[]
 }
 
-export default function MembershipsSection({ membershipsList }: MembershipsSectionProps) {
-  const displayItems: MembershipCardItem[] =
-    membershipsList && membershipsList.length > 0
-      ? membershipsList.map(mapJourneyToMembership)
-      : DEFAULT_MEMBERSHIPS
+export default function MembershipsSection({ membershipsList = [] }: MembershipsSectionProps) {
+  // Directly map live items from the database
+  const displayItems: MembershipCardItem[] = membershipsList.map(mapJourneyToMembership)
 
   return (
     <section
@@ -100,16 +34,22 @@ export default function MembershipsSection({ membershipsList }: MembershipsSecti
 
         {/* Memberships Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-          {displayItems.map((item) => (
-            <MembershipCard key={item.id} membership={item} />
+          {displayItems.map((item, idx) => (
+            <MembershipCard key={item.id || idx} membership={item} index={idx} />
           ))}
         </div>
+
+        {displayItems.length === 0 && (
+          <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-2xl max-w-md mx-auto">
+            No memberships added yet. Add them in the Admin Dashboard at /admin/memberships.
+          </div>
+        )}
 
         {/* Dedicated Page Link CTA */}
         <div className="flex justify-center pt-4">
           <Link
             href="/memberships"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-card border border-border/80 text-foreground hover:border-[#0075ff] hover:text-[#0075ff] font-bold text-xs tracking-wider transition-all shadow-2xs hover:shadow-sm group"
+            className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-6 rounded-xl bg-card border border-border/80 text-foreground hover:border-[#0075ff] hover:text-[#0075ff] font-bold text-xs sm:text-sm tracking-wider transition-all shadow-2xs hover:shadow-sm group cursor-pointer"
           >
             <span>View Dedicated Memberships Page</span>
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

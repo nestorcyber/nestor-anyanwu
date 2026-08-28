@@ -2,14 +2,12 @@ import type { Metadata } from "next"
 import CommunityHero from "@/components/community/community-hero"
 import ImpactSnapshot from "@/components/community/impact-snapshot"
 import FeaturedExperiences, { type FeaturedExperienceItem } from "@/components/community/featured-experiences"
-import CommunityTimeline from "@/components/community/community-timeline"
 import ContributionPillars from "@/components/community/contribution-pillars"
 import VolunteeringGallery, { type GalleryPhoto } from "@/components/community/volunteering-gallery"
 import CommunityCTA from "@/components/community/community-cta"
 import Footer from "@/components/footer"
 import {
   getCommunityEntries,
-  getJourneyItems,
   getVolunteeringImages,
   getPortfolioStats,
 } from "@/lib/content"
@@ -37,40 +35,11 @@ export const metadata: Metadata = {
 }
 
 export default async function CommunityPage() {
-  const [entries, journey, volunteerPhotos, stats] = await Promise.all([
+  const [entries, volunteerPhotos, stats] = await Promise.all([
     getCommunityEntries(),
-    getJourneyItems(),
     getVolunteeringImages(),
     getPortfolioStats(),
   ])
-
-  // Filter volunteer items for the timeline
-  const volunteerJourney = journey.filter(
-    (item) => item.type === "volunteer" || item.type === "milestone"
-  )
-
-  // Merge any extra community entries from dashboard into the roadmap timeline preview
-  const existingTimelineKeys = new Set(
-    volunteerJourney.map((i) => `${i.title.toLowerCase()} ${i.organization.toLowerCase()}`)
-  )
-  const extraCommunityToTimeline: typeof volunteerJourney = entries
-    .filter((e) => {
-      const key = `${e.organization.toLowerCase()} ${e.role.toLowerCase()}`
-      return !existingTimelineKeys.has(key) && !existingTimelineKeys.has(e.organization.toLowerCase())
-    })
-    .map((e) => ({
-      id: e.id,
-      title: e.organization,
-      organization: e.organization,
-      role: e.role || "Community Lead",
-      date: e.duration || "Ongoing",
-      description: e.description || e.achievements?.[0] || "",
-      type: "volunteer",
-      details: e.tags && e.tags.length > 0 ? e.tags : ["Community", "Leadership"],
-      images: e.coverImage && !e.coverImage.includes("placeholder") ? [e.coverImage] : (e.gallery || []),
-    }))
-
-  const combinedVolunteerTimeline = [...volunteerJourney, ...extraCommunityToTimeline]
 
   // Map featured experiences from database entries or fallback to rich curated list
   const mappedExperiences: FeaturedExperienceItem[] = entries.map((e) => ({
@@ -110,19 +79,16 @@ export default async function CommunityPage() {
           {/* 2. Impact Snapshot */}
           <ImpactSnapshot stats={stats} />
 
-          {/* 3. Featured Experiences */}
+          {/* 3. Featured Experiences (With Button to /community/roadmap) */}
           <FeaturedExperiences experiences={mappedExperiences.length > 0 ? mappedExperiences : undefined} />
 
-          {/* 4. Volunteering Timeline */}
-          <CommunityTimeline timeline={combinedVolunteerTimeline.length > 0 ? combinedVolunteerTimeline : undefined} />
-
-          {/* 5. How I Contribute & Skills Gained (Integrated) */}
+          {/* 4. How I Contribute & Skills Gained */}
           <ContributionPillars />
 
-          {/* 6. Volunteering Gallery with Lightbox (Before CTA) */}
+          {/* 5. Volunteering Gallery with Lightbox */}
           <VolunteeringGallery photos={mappedPhotos.length > 0 ? mappedPhotos : undefined} />
 
-          {/* 7. Call to Action */}
+          {/* 6. Call to Action */}
           <CommunityCTA />
         </div>
 

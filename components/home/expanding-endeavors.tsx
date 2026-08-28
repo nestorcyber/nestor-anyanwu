@@ -205,7 +205,7 @@ export default function ExpandingEndeavors() {
                     }`}
                 >
                   <Link href={item.link} className="block w-full" aria-label={item.ariaLabel}>
-                    <div className="w-full bg-[#0075ff] hover:bg-[#0060d0] text-white font-extrabold text-xs tracking-wider px-5 py-3.5 flex items-center justify-between transition-colors cursor-pointer">
+                    <div className="w-full h-11 sm:h-12 bg-[#0075ff] hover:bg-[#0060d0] text-white font-extrabold text-xs tracking-wider px-5 flex items-center justify-between transition-colors cursor-pointer rounded-none">
                       <span>{item.buttonText}</span>
                       <ArrowRight size={15} />
                     </div>

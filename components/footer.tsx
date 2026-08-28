@@ -60,12 +60,12 @@ export default function Footer() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
                   required
-                  className="flex-1 bg-slate-900/90 text-white border-2 border-slate-800 px-4 py-3.5 text-sm placeholder:text-slate-500 rounded-none focus:outline-none focus:border-accent transition-colors"
+                  className="flex-1 h-11 sm:h-12 bg-slate-900/90 text-white border-2 border-slate-800 px-4 text-sm placeholder:text-slate-500 rounded-none focus:outline-none focus:border-accent transition-colors"
                 />
                 <button
                   type="submit"
                   aria-label="Subscribe"
-                  className="bg-[#0075ff] hover:bg-blue-600 text-white font-extrabold px-5 py-3.5 border-2 border-slate-950 rounded-none transition-all shadow-[2px_2px_0px_0px_rgba(255,255,255,0.9)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none flex items-center justify-center cursor-pointer shrink-0"
+                  className="h-11 sm:h-12 bg-[#0075ff] hover:bg-blue-600 text-white font-extrabold px-5 border-2 border-slate-950 rounded-none transition-all shadow-[2px_2px_0px_0px_rgba(255,255,255,0.9)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none flex items-center justify-center cursor-pointer shrink-0"
                 >
                   <ArrowRight className="w-5 h-5 text-slate-950" />
                 </button>

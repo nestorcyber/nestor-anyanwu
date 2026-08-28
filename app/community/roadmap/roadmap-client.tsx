@@ -11,17 +11,13 @@ import {
   Palette,
   Code2,
   Users2,
-  CalendarCheck2,
+  Truck,
+  LayoutGrid,
   ArrowLeft,
   Search,
-  Filter,
   CheckCircle2,
-  Sparkles,
-  ExternalLink,
   X,
   Maximize2,
-  Award,
-  Layers,
 } from "lucide-react"
 import type { CommunityEntry } from "@/lib/content"
 import Footer from "@/components/footer"
@@ -31,68 +27,69 @@ interface RoadmapClientProps {
   entries: CommunityEntry[]
 }
 
-function getInitiativeIcon(entry: CommunityEntry) {
+const PILLAR_CATEGORIES = [
+  "All",
+  "Community & DevRel",
+  "Technical & Systems",
+  "Design & Brand Staging",
+  "Media & Documentation",
+  "Logistics & Hospitality",
+  "Event Setup & Staging",
+] as const
+
+type PillarCategory = typeof PILLAR_CATEGORIES[number]
+
+function getInitiativeCategory(entry: CommunityEntry): PillarCategory {
   const text = `${entry.organization} ${entry.role} ${entry.tags?.join(" ") || ""} ${entry.description}`.toLowerCase()
-  if (text.includes("media") || text.includes("photo") || text.includes("camera") || text.includes("video")) {
-    return Camera
+  if (text.includes("media") || text.includes("photo") || text.includes("camera") || text.includes("press") || text.includes("video") || text.includes("documentation")) {
+    return "Media & Documentation"
   }
-  if (text.includes("design") || text.includes("brand") || text.includes("visual") || text.includes("graphic")) {
-    return Palette
+  if (text.includes("design") || text.includes("brand") || text.includes("visual") || text.includes("graphic") || text.includes("collateral")) {
+    return "Design & Brand Staging"
   }
-  if (text.includes("ict") || text.includes("tech") || text.includes("code") || text.includes("developer") || text.includes("web") || text.includes("software") || text.includes("cloud")) {
-    return Code2
+  if (text.includes("ict") || text.includes("tech") || text.includes("code") || text.includes("developer") || text.includes("web") || text.includes("software") || text.includes("systems") || text.includes("infrastructure")) {
+    return "Technical & Systems"
   }
-  if (text.includes("logistics") || text.includes("setup") || text.includes("event") || text.includes("summit") || text.includes("conference") || text.includes("stage")) {
-    return CalendarCheck2
+  if (text.includes("logistics") || text.includes("front desk") || text.includes("hospitality") || text.includes("check-in") || text.includes("protocol") || text.includes("welfare")) {
+    return "Logistics & Hospitality"
   }
-  if (text.includes("lead") || text.includes("director") || text.includes("ambassador") || text.includes("president")) {
-    return Users2
+  if (text.includes("setup") || text.includes("staging") || text.includes("stage") || text.includes("hall") || text.includes("venue")) {
+    return "Event Setup & Staging"
   }
-  return HeartHandshake
+  return "Community & DevRel"
+}
+
+function getInitiativeIcon(category: PillarCategory) {
+  switch (category) {
+    case "Media & Documentation":
+      return Camera
+    case "Design & Brand Staging":
+      return Palette
+    case "Technical & Systems":
+      return Code2
+    case "Logistics & Hospitality":
+      return Truck
+    case "Event Setup & Staging":
+      return LayoutGrid
+    case "Community & DevRel":
+    default:
+      return Users2
+  }
 }
 
 export default function RoadmapClient({ entries }: RoadmapClientProps) {
   const [searchQuery, setSearchQuery] = useState("")
-  const [selectedYear, setSelectedYear] = useState<string>("all")
-  const [selectedTag, setSelectedTag] = useState<string>("all")
+  const [selectedCategory, setSelectedCategory] = useState<string>("All")
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
-  // Extract distinct years from durations (e.g., "Dec 2025 - Present", "Nov 2025", "2024")
-  const years = useMemo(() => {
-    const set = new Set<string>()
-    entries.forEach((item) => {
-      const match = item.duration.match(/20\d{2}/g)
-      if (match) {
-        match.forEach((y) => set.add(y))
-      }
-    })
-    return Array.from(set).sort((a, b) => Number(b) - Number(a))
-  }, [entries])
-
-  // Extract distinct tags across all community initiatives
-  const allTags = useMemo(() => {
-    const set = new Set<string>()
-    entries.forEach((item) => {
-      if (item.tags && Array.isArray(item.tags)) {
-        item.tags.forEach((t) => set.add(t.trim()))
-      }
-    })
-    return ["All", ...Array.from(set)]
-  }, [entries])
-
-  // Filter items based on search, year, and tag
+  // Filter items based on search and contribution category
   const filteredEntries = useMemo(() => {
     return entries.filter((item) => {
-      // Year filter
-      if (selectedYear !== "all") {
-        if (!item.duration.includes(selectedYear)) {
-          return false
-        }
-      }
+      const category = getInitiativeCategory(item)
 
-      // Tag filter
-      if (selectedTag !== "all" && selectedTag !== "All") {
-        if (!item.tags || !item.tags.includes(selectedTag)) {
+      // Category filter matching How I Contribute
+      if (selectedCategory !== "All") {
+        if (category !== selectedCategory) {
           return false
         }
       }
@@ -108,167 +105,110 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
 
       return true
     })
-  }, [entries, selectedYear, selectedTag, searchQuery])
-
-  const totalInitiatives = entries.length
+  }, [entries, selectedCategory, searchQuery])
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col w-full font-sans">
       
-      {/* ─── Hero Header & Breadcrumb ─── */}
-      <header className="relative w-full bg-slate-950 text-white pt-24 sm:pt-28 pb-16 sm:pb-20 border-b border-slate-800 overflow-hidden">
-        {/* Background glow ambience */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#0075ff]/15 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute -bottom-10 right-10 w-[400px] h-[300px] bg-sky-500/10 rounded-full blur-[100px] pointer-events-none" />
-
-        <div className="site-container relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 space-y-6">
+      {/* ─── Simple Clean Hero Header (Matching Certifications Style) ─── */}
+      <div className="w-full bg-card/40 border-b border-border/70 py-10 md:py-16">
+        <div className="site-container max-w-7xl mx-auto px-4 sm:px-6 md:px-8 space-y-4">
           
           {/* Breadcrumb Navigation */}
-          <div className="flex items-center gap-2 text-xs sm:text-sm font-mono text-slate-400">
+          <div className="flex items-center gap-2 text-xs sm:text-sm font-mono text-muted-foreground">
             <Link
               href="/community"
-              className="inline-flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer group"
+              className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer group"
             >
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 text-[#0075ff]" />
               <span>Back to Community</span>
             </Link>
             <span>/</span>
-            <span className="text-sky-400 font-semibold">Community &amp; Advocacy Roadmap</span>
+            <span className="text-[#0075ff] font-semibold">Community Roadmap</span>
           </div>
 
-          {/* Headline & Subtitle */}
-          <div className="space-y-4 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0075ff]/15 border border-[#0075ff]/30 text-xs font-mono font-bold text-sky-400">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>COMMUNITY &amp; ADVOCACY INITIATIVES</span>
-            </div>
-
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-heading tracking-tight leading-[1.12] text-white">
-              Community &amp; Volunteering <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0075ff] via-sky-400 to-indigo-300">
+          {/* Left-Aligned Heading with Verified Icon */}
+          <div className="space-y-3">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight font-heading leading-[1.18]">
+              Community &amp; <span className="text-[#0075ff]">Volunteering</span>{" "}
+              <span className="inline-flex items-center gap-2 sm:gap-3 whitespace-nowrap">
                 Roadmap
+                <span className="inline-flex items-center justify-center text-[#0075ff] w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 shrink-0 drop-shadow-[0_4px_12px_rgba(0,117,255,0.3)] align-middle">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="w-full h-full fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.79-4-4-4-.495 0-.965.084-1.4.238C14.55 2.475 13.18 1.6 11.6 1.6s-2.95.875-3.6 2.148c-.435-.154-.905-.238-1.4-.238-2.21 0-4 1.79-4 4 0 .495.084.965.238 1.4C1.575 9.55.7 10.92.7 12.5s.875 2.95 2.148 3.6c-.154.435-.238.905-.238 1.4 0 2.21 1.79 4 4 4 .495 0 .965-.084 1.4-.238.65 1.273 2.02 2.148 3.6 2.148s2.95-.875 3.6-2.148c.435.154.905.238 1.4.238 2.21 0 4-1.79 4-4 0-.495-.084-.965-.238-1.4 1.273-.65 2.148-2.02 2.148-3.6zm-12.28 4.22l-4.24-4.24 1.41-1.41 2.83 2.83 6.36-6.36 1.41 1.41-7.77 7.77z" />
+                  </svg>
+                </span>
               </span>
             </h1>
 
-            <p className="text-sm sm:text-base md:text-lg text-slate-300 font-light leading-relaxed">
-              Live chronological archive of community leadership initiatives, student engineering mentorship, tech summit operations, and grassroots advocacy programs.
+            {/* Subtitle / Description */}
+            <p className="text-sm sm:text-base md:text-lg text-muted-foreground font-normal leading-relaxed max-w-3xl">
+              Explore a chronological roadmap documenting grassroots tech leadership, student engineering chapters, developer conferences, and community advocacy initiatives.
             </p>
           </div>
 
-          {/* Stat Metric Badges */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm space-y-1">
-              <p className="text-2xl sm:text-3xl font-black font-heading text-white">{totalInitiatives}+</p>
-              <p className="text-xs text-slate-400 font-mono">Published Initiatives</p>
-            </div>
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm space-y-1">
-              <p className="text-2xl sm:text-3xl font-black font-heading text-[#0075ff]">5,000+</p>
-              <p className="text-xs text-slate-400 font-mono">Students &amp; Delegates</p>
-            </div>
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm space-y-1">
-              <p className="text-2xl sm:text-3xl font-black font-heading text-sky-400">100%</p>
-              <p className="text-xs text-slate-400 font-mono">Dashboard Synced</p>
-            </div>
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm space-y-1">
-              <p className="text-2xl sm:text-3xl font-black font-heading text-indigo-400">Active</p>
-              <p className="text-xs text-slate-400 font-mono">Grassroots Advocacy</p>
-            </div>
-          </div>
-
         </div>
-      </header>
+      </div>
 
-      {/* ─── Search, Filter Bar & Road Timeline ─── */}
-      <main className="flex-1 w-full relative py-12 sm:py-16 md:py-20">
-        <div className="site-container max-w-7xl mx-auto px-4 sm:px-6 md:px-8 space-y-10">
+      {/* ─── Main Content Section ─── */}
+      <main className="flex-1 w-full relative py-10 sm:py-14 md:py-16">
+        <div className="site-container max-w-7xl mx-auto px-4 sm:px-6 md:px-8 space-y-8">
           
-          {/* Controls: Search & Filters */}
-          <div className="bg-card border border-border/80 rounded-2xl p-4 sm:p-6 shadow-sm space-y-4">
+          {/* ─── Simple Search & Category Filter Bar (Matching Journal Style) ─── */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/60 pb-6">
             
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-              {/* Search Bar */}
-              <div className="relative w-full md:max-w-md">
-                <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                <input
-                  type="text"
-                  placeholder="Search by initiative, chapter, role, or impact..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-secondary/60 border border-border/80 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#0075ff]"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery("")}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
-                  >
-                    <X className="w-3.5 h-3.5" />
-                  </button>
-                )}
-              </div>
-
-              {/* Year Select Chips */}
-              <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 no-scrollbar">
+            {/* Category Filter Buttons (How I Contribute Pillars) */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 no-scrollbar">
+              {PILLAR_CATEGORIES.map((cat) => (
                 <button
-                  onClick={() => setSelectedYear("all")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
-                    selectedYear === "all"
-                      ? "bg-[#0075ff] text-white shadow-xs"
-                      : "bg-secondary text-muted-foreground hover:text-foreground"
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-4 py-2 text-xs font-semibold rounded-xl border transition-all cursor-pointer whitespace-nowrap ${
+                    selectedCategory === cat
+                      ? "bg-[#0075ff] text-white border-[#0075ff] shadow-xs font-bold"
+                      : "bg-secondary/70 text-muted-foreground border-border/80 hover:bg-secondary hover:text-foreground"
                   }`}
                 >
-                  All Years
+                  {cat}
                 </button>
-                {years.map((year) => (
-                  <button
-                    key={year}
-                    onClick={() => setSelectedYear(year)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
-                      selectedYear === year
-                        ? "bg-[#0075ff] text-white shadow-xs"
-                        : "bg-secondary text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    {year}
-                  </button>
-                ))}
-              </div>
+              ))}
             </div>
 
-            {/* Tag Filter Chips */}
-            {allTags.length > 1 && (
-              <div className="flex items-center gap-1.5 flex-wrap pt-2 border-t border-border/50">
-                <span className="text-xs font-mono font-bold text-muted-foreground mr-1 flex items-center gap-1">
-                  <Filter className="w-3 h-3" />
-                  Focus Area:
-                </span>
-                {allTags.map((tag) => (
-                  <button
-                    key={tag}
-                    onClick={() => setSelectedTag(tag)}
-                    className={`px-3 py-1 rounded-md text-xs font-medium transition-all cursor-pointer ${
-                      selectedTag === tag
-                        ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-xs"
-                        : "bg-secondary/60 hover:bg-secondary text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    {tag}
-                  </button>
-                ))}
-              </div>
-            )}
+            {/* Simple Search Input Box */}
+            <div className="relative w-full sm:w-72 shrink-0">
+              <Search className="w-4 h-4 text-muted-foreground absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search initiatives..."
+                className="w-full pl-10 pr-9 py-2 text-xs sm:text-sm bg-secondary/70 border border-border/80 rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#0075ff]"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
 
           </div>
 
-          {/* Filter Status Text */}
+          {/* Filter Status */}
           <div className="flex items-center justify-between text-xs font-mono text-muted-foreground px-1">
             <span>
-              Showing {filteredEntries.length} of {totalInitiatives} Community &amp; Advocacy Initiatives
+              Showing {filteredEntries.length} of {entries.length} initiatives
             </span>
-            {(selectedYear !== "all" || selectedTag !== "all" || searchQuery) && (
+            {(selectedCategory !== "All" || searchQuery) && (
               <button
                 onClick={() => {
-                  setSelectedYear("all")
-                  setSelectedTag("all")
+                  setSelectedCategory("All")
                   setSearchQuery("")
                 }}
                 className="text-[#0075ff] hover:underline cursor-pointer font-bold"
@@ -278,9 +218,9 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
             )}
           </div>
 
-          {/* ─── The Complete Road Timeline Track ─── */}
+          {/* ─── Road Timeline Track ─── */}
           {filteredEntries.length > 0 ? (
-            <div className="relative max-w-4xl mx-auto pt-6 pb-4">
+            <div className="relative max-w-4xl mx-auto pt-4 pb-4">
               
               {/* Vertical Highway Road Track (Left Side) */}
               <div className="absolute left-5 sm:left-7 md:left-9 top-4 bottom-8 w-6 sm:w-7 md:w-8 -translate-x-1/2 bg-slate-900 dark:bg-slate-950 border-x-2 border-slate-700/80 dark:border-slate-800 rounded-full shadow-inner flex items-center justify-center pointer-events-none overflow-hidden z-0">
@@ -291,7 +231,8 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
               {/* Road Milestones Items */}
               <div className="space-y-10 sm:space-y-12 relative z-10">
                 {filteredEntries.map((item, idx) => {
-                  const InitiativeIcon = getInitiativeIcon(item)
+                  const category = getInitiativeCategory(item)
+                  const InitiativeIcon = getInitiativeIcon(category)
                   const hasImage = item.coverImage && !item.coverImage.includes("placeholder")
                   const coverSrc = hasImage ? item.coverImage : (item.gallery && item.gallery[0] ? item.gallery[0] : null)
 
@@ -319,6 +260,14 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                           {/* Header Row */}
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-2 border-b border-border/60">
                             <div className="space-y-0.5">
+                              <div className="flex flex-wrap items-center gap-2">
+                                <span className="text-[11px] font-mono font-bold text-[#0075ff] uppercase tracking-wider">
+                                  {item.organization}
+                                </span>
+                                <span className="px-2 py-0.5 rounded-md bg-secondary text-[10px] font-mono text-muted-foreground font-semibold">
+                                  {category}
+                                </span>
+                              </div>
                               <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight group-hover:text-[#0075ff] transition-colors">
                                 {item.organization}
                               </h3>
@@ -416,11 +365,10 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
           ) : (
             <div className="text-center py-16 bg-card rounded-2xl border border-border/80 space-y-3">
               <p className="text-base font-bold text-foreground">No matching community initiatives found.</p>
-              <p className="text-xs text-muted-foreground">Try clearing your search query or selecting a different year/filter.</p>
+              <p className="text-xs text-muted-foreground">Try clearing your search query or selecting a different category filter.</p>
               <button
                 onClick={() => {
-                  setSelectedYear("all")
-                  setSelectedTag("all")
+                  setSelectedCategory("All")
                   setSearchQuery("")
                 }}
                 className="mt-2 text-xs font-bold text-[#0075ff] underline cursor-pointer"
