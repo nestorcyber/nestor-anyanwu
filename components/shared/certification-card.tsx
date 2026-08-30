@@ -219,25 +219,6 @@ function getCertVisuals(cert: CertificationItem, index: number) {
   return { GraphicComp, palette }
 }
 
-// 12-point Scalloped Rosette Seal with Star
-function PosterRosetteSeal({ fill = "#0075ff" }: { fill?: string }) {
-  return (
-    <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 z-20 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center drop-shadow-md">
-      <svg
-        viewBox="0 0 100 100"
-        className="w-full h-full"
-        style={{ fill }}
-      >
-        <path d="M50 0 L58 14 L74 8 L76 25 L93 25 L88 41 L100 50 L88 59 L93 75 L76 75 L74 92 L58 86 L50 100 L42 86 L26 92 L24 75 L7 75 L12 59 L0 50 L12 41 L7 25 L24 25 L26 8 L42 14 Z" />
-      </svg>
-      {/* Centered White Star */}
-      <span className="absolute inset-0 flex items-center justify-center text-white text-[11px] font-black pointer-events-none">
-        ★
-      </span>
-    </div>
-  )
-}
-
 export interface CertificationCardProps {
   cert: CertificationItem
   index?: number
@@ -246,7 +227,15 @@ export interface CertificationCardProps {
 export default function CertificationCard({ cert, index = 0 }: CertificationCardProps) {
   const [modalOpen, setModalOpen] = useState(false)
   const certImg = getCertImage(cert)
-  const targetUrl = cert.credentialUrl || "#"
+  
+  // Clean credential link check
+  const rawUrl = cert.credentialUrl?.trim()
+  const hasValidLink = Boolean(
+    rawUrl &&
+    rawUrl !== "#" &&
+    (rawUrl.startsWith("http://") || rawUrl.startsWith("https://") || rawUrl.startsWith("/"))
+  )
+  const targetUrl = hasValidLink ? rawUrl : null
 
   // Pick unique illustration & palette
   const { GraphicComp, palette } = getCertVisuals(cert, index)
@@ -265,10 +254,7 @@ export default function CertificationCard({ cert, index = 0 }: CertificationCard
 
         {/* ─── Top-Right Flush 4:3 Landscape Certificate Compartment ─── */}
         <div className="absolute top-0 right-0 w-[46%] sm:w-[48%] max-w-[200px] z-10">
-          <div className="relative w-full rounded-bl-3xl bg-slate-900 dark:bg-slate-950 p-1.5 pb-2 pl-2 shadow-md border-b border-l border-border/60 overflow-visible">
-            {/* Rosette Seal with Star Overlay */}
-            <PosterRosetteSeal fill={palette.sealFill} />
-
+          <div className="relative w-full rounded-bl-3xl bg-slate-900 dark:bg-slate-950 p-1.5 pb-2 pl-2 shadow-md border-b border-l border-border/60 overflow-hidden">
             {/* 4:3 Landscape Ratio Certificate Container */}
             <div className="relative w-full aspect-[4/3] rounded-bl-2xl rounded-tr-2xl overflow-hidden bg-slate-950 border border-slate-700/60 shadow-xs group-hover:brightness-105 transition-all">
               <Image
@@ -282,23 +268,30 @@ export default function CertificationCard({ cert, index = 0 }: CertificationCard
           </div>
         </div>
 
-        {/* ─── Card Inner Content ─── */}
+        {/* ─── Card Inner Content (Exact Left Alignment with Text Baseline) ─── */}
         <div className="p-6 sm:p-8 flex flex-col justify-between h-full w-full relative z-10">
           
-          {/* ─── Top Row: Verified Tag ─── */}
-          <div className="flex items-start justify-between">
-            <div className="space-y-1 max-w-[50%] pt-0.5">
-              <span className={`inline-flex items-center gap-1.5 text-xs font-bold ${palette.issuerColor}`}>
-                <CheckCircle2 className="w-3.5 h-3.5 fill-current text-white dark:text-slate-950" />
-                <span>Verified Credential</span>
+          {/* ─── Top-Left: Rosette Star Seal Overlay ─── */}
+          <div className="flex items-start">
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center drop-shadow-md">
+              <svg
+                viewBox="0 0 100 100"
+                className="w-full h-full"
+                style={{ fill: palette.sealFill }}
+              >
+                <path d="M50 0 L58 14 L74 8 L76 25 L93 25 L88 41 L100 50 L88 59 L93 75 L76 75 L74 92 L58 86 L50 100 L42 86 L26 92 L24 75 L7 75 L12 59 L0 50 L12 41 L7 25 L24 25 L26 8 L42 14 Z" />
+              </svg>
+              {/* Centered White Star */}
+              <span className="absolute inset-0 flex items-center justify-center text-white text-xs sm:text-sm font-black pointer-events-none">
+                ★
               </span>
             </div>
           </div>
 
           {/* ─── Middle Section: Certificate Name First, Followed by Issuer in Title Case ─── */}
-          <div className="space-y-1.5 my-auto w-full pr-2 pt-3 sm:pt-4">
+          <div className="space-y-1.5 my-auto w-full max-w-[82%] pt-2">
             {/* 1. Certificate Title */}
-            <h3 className="text-base sm:text-lg md:text-[20px] font-bold text-slate-900 dark:text-white tracking-tight font-heading leading-snug group-hover:text-[#0075ff] dark:group-hover:text-sky-400 transition-colors line-clamp-3">
+            <h3 className="text-lg sm:text-xl md:text-[22px] font-bold text-slate-900 dark:text-white tracking-tight font-heading leading-tight group-hover:text-[#0075ff] dark:group-hover:text-sky-400 transition-colors line-clamp-3">
               {cert.title}
             </h3>
 
@@ -308,16 +301,34 @@ export default function CertificationCard({ cert, index = 0 }: CertificationCard
             </p>
           </div>
 
-          {/* ─── Bottom Row: Recipient & Journal-Style Button Overlay (Right) ─── */}
+          {/* ─── Bottom Row: Recipient & Direct Open-in-New-Tab Button Overlay ─── */}
           <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
             <p className="text-xs sm:text-sm font-normal text-slate-500 dark:text-slate-400">
               Nestor Anyanwu
             </p>
 
             {/* Journal-Style Button Overlay */}
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-900 text-white dark:bg-white dark:text-slate-900 group-hover:bg-[#0075ff] group-hover:border-[#0075ff] group-hover:text-white dark:group-hover:bg-[#0075ff] dark:group-hover:border-[#0075ff] dark:group-hover:text-white flex items-center justify-center shrink-0 transition-all duration-300 shadow-md group-hover:scale-105">
-              <ArrowUpRight className="w-5 h-5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </div>
+            {targetUrl ? (
+              <a
+                href={targetUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                title={`Verify ${cert.title} at ${cert.provider}`}
+                aria-label={`Verify ${cert.title} at ${cert.provider}`}
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-900 text-white dark:bg-white dark:text-slate-900 group-hover:bg-[#0075ff] group-hover:border-[#0075ff] group-hover:text-white dark:group-hover:bg-[#0075ff] dark:group-hover:border-[#0075ff] dark:group-hover:text-white flex items-center justify-center shrink-0 transition-all duration-300 shadow-md group-hover:scale-105 cursor-pointer"
+              >
+                <ArrowUpRight className="w-5 h-5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            ) : (
+              <div
+                onClick={(e) => e.stopPropagation()}
+                aria-hidden="true"
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/40 text-slate-400 dark:text-slate-600 flex items-center justify-center shrink-0 transition-all duration-300 opacity-40 cursor-default select-none pointer-events-none"
+              >
+                <ArrowUpRight className="w-5 h-5 stroke-[2]" />
+              </div>
+            )}
           </div>
 
         </div>
@@ -385,7 +396,7 @@ export default function CertificationCard({ cert, index = 0 }: CertificationCard
               </p>
 
               <div className="flex items-center gap-3">
-                {targetUrl && targetUrl !== "#" && (
+                {targetUrl && (
                   <a
                     href={targetUrl}
                     target="_blank"
