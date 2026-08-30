@@ -460,6 +460,20 @@ export interface CertificationItem {
   image?: string
 }
 
+export function getCertImage(cert: CertificationItem): string {
+  if (cert.image) return cert.image
+  const idOrTitle = (cert.id + " " + cert.title).toLowerCase()
+  if (idOrTitle.includes("privacy") || idOrTitle.includes("ndpc"))
+    return "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837064/nestor/certificates/ndpc-cert.jpg"
+  if (idOrTitle.includes("aws") || idOrTitle.includes("cloud"))
+    return "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837055/nestor/certificates/aws-cert.jpg"
+  if (idOrTitle.includes("ieee") || idOrTitle.includes("engineer"))
+    return "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837061/nestor/certificates/ieee-cert.jpg"
+  if (idOrTitle.includes("gotni") || idOrTitle.includes("lead"))
+    return "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837059/nestor/certificates/gotni-cert.jpg"
+  return "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837064/nestor/certificates/ndpc-cert.jpg"
+}
+
 export interface BrandPartnerItem {
   id: string
   name: string
