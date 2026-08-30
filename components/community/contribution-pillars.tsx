@@ -52,19 +52,6 @@ const VOLUNTEER_UNITS = [
     ],
   },
   {
-    id: "community",
-    icon: Users2,
-    title: "Community Management & DevRel",
-    subtitle: "Advocacy, Student Mentorship & Growth",
-    description:
-      "Empowering emerging engineers through inclusive mentorship, community advocacy, ecosystem partnerships, and creating active spaces for collaboration.",
-    points: [
-      "Developer chapter advocacy & outreach.",
-      "Student tech mentorship & career guidance.",
-      "Cross-chapter partnerships & hackathon support.",
-    ],
-  },
-  {
     id: "logistics",
     icon: Truck,
     title: "Logistics & Front Desk Operations",
@@ -88,6 +75,19 @@ const VOLUNTEER_UNITS = [
       "Stage setup, lighting & acoustic flow.",
       "Hall layout, seat planning & signage placement.",
       "Backstage speaker readiness & cue management.",
+    ],
+  },
+  {
+    id: "community",
+    icon: Users2,
+    title: "Community Management & DevRel",
+    subtitle: "Advocacy, Student Mentorship & Growth",
+    description:
+      "Empowering emerging engineers through inclusive mentorship, community advocacy, ecosystem partnerships, and creating active spaces for collaboration.",
+    points: [
+      "Developer chapter advocacy & outreach.",
+      "Student tech mentorship & career guidance.",
+      "Cross-chapter partnerships & hackathon support.",
     ],
   },
 ]

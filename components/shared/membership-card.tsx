@@ -297,15 +297,15 @@ export default function MembershipCard({
         )}
       </div>
 
-      {/* ─── Middle Section: Role & Organization Name (Exact Reference Placement) ─── */}
-      <div className="relative z-10 space-y-1.5 my-auto max-w-[80%] pt-4">
+      {/* ─── Middle Section: Role & Organization Name (Full Names Across 2-3 Lines) ─── */}
+      <div className="relative z-10 space-y-1.5 my-auto w-full pr-2 pt-3 sm:pt-4">
         {/* Role Subtitle */}
-        <p className="text-xs sm:text-sm font-normal text-slate-500 dark:text-slate-400">
+        <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#0075ff] dark:text-sky-400 font-mono line-clamp-2 leading-snug">
           {membership.role || "Member"}
         </p>
 
         {/* Organization Name */}
-        <h3 className="text-lg sm:text-xl md:text-[22px] font-bold text-slate-900 dark:text-white tracking-tight font-heading leading-tight group-hover:text-[#0075ff] dark:group-hover:text-sky-400 transition-colors line-clamp-2">
+        <h3 className="text-lg sm:text-xl md:text-[22px] font-bold text-slate-900 dark:text-white tracking-tight font-heading leading-snug group-hover:text-[#0075ff] dark:group-hover:text-sky-400 transition-colors line-clamp-3">
           {membership.organization}
         </h3>
       </div>

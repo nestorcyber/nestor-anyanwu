@@ -63,11 +63,11 @@ export default async function CertificationsPage() {
             </div>
           </div>
 
-          {/* All Certifications 3-in-a-Row Grid Container */}
-          <div className="site-container py-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
-              {certificationsList.map((cert) => (
-                <CertificationCard key={cert.id} cert={cert} />
+          {/* All Certifications 3-in-a-Row Square Cards Grid Container */}
+          <div className="site-container py-10 md:py-14">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {certificationsList.map((cert, idx) => (
+                <CertificationCard key={cert.id} cert={cert} index={idx} />
               ))}
             </div>
 
