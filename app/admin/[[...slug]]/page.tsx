@@ -9,6 +9,7 @@ import PortfolioForm from '@/components/admin/portfolio-form'
 import CommunityForm from '@/components/admin/community-form'
 import JourneyForm from '@/components/admin/journey-form'
 import SkillsManager from '@/components/admin/skills-manager'
+import SortableList, { SortableItem } from '@/components/admin/sortable-list'
 import {
   CertificationForm,
   GalleryForm,
@@ -537,102 +538,35 @@ export default async function AdminCatchAllPage({ params }: Props) {
             client: p.client || 'Nestor Cyber',
           })),
       ]
+      const sortableItems: SortableItem[] = items.map((p) => ({
+        id: p.id,
+        title: p.title,
+        subtitle: p.client,
+        dateLabel: `/${p.slug}`,
+        badge: p.draft ? 'Draft' : 'Published',
+        image: p.coverImage || 'https://res.cloudinary.com/z3wgqisj/image/upload/v1787837175/nestor/gallery/tech-nexus-team.jpg',
+        tags: Array.isArray(p.tags) ? p.tags : [p.category],
+        editUrl: `/admin/portfolio/${p.id}`,
+        viewUrl: `/portfolio/${p.slug}`,
+      }))
+
       return (
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Projects & Portfolio</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Projects &amp; Portfolio</h1>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Manage, edit, and organize your portfolio deliverables and case studies.
+                Manage, edit, and drag to reorder your portfolio deliverables and case studies.
               </p>
             </div>
             <Link href="/admin/portfolio/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
                 + New Project
               </button>
             </Link>
           </div>
 
-          <div className="space-y-3.5">
-            {items.map((row: any) => {
-              const title = row.title || '(Untitled)'
-              const initial = title.replace(/[^a-zA-Z0-9]/g, '')[0]?.toUpperCase() || 'P'
-              const tagList = Array.isArray(row.tags) && row.tags.length > 0 ? row.tags : [row.category]
-
-              return (
-                <div
-                  key={row.id}
-                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-                >
-                  <div className="flex items-center gap-4 min-w-0">
-                    {/* Main Cover Image */}
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
-                      <Image
-                        src={row.coverImage || "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837175/nestor/gallery/tech-nexus-team.jpg"}
-                        alt={title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-
-                    <div className="min-w-0 space-y-1.5">
-                      <Link
-                        href={`/admin/portfolio/${row.id}`}
-                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
-                      >
-                        {title}
-                      </Link>
-
-                      <div className="flex flex-wrap items-center gap-2 text-xs">
-                        {row.draft ? (
-                          <span className="font-bold text-amber-600 dark:text-amber-500">Draft</span>
-                        ) : (
-                          <span className="font-semibold text-slate-500 dark:text-slate-400">Published</span>
-                        )}
-                        <span className="text-slate-300 dark:text-slate-600">•</span>
-                        <span className="text-slate-500 dark:text-slate-400 font-medium font-mono">/{row.slug}</span>
-
-                        {tagList.length > 0 && (
-                          <div className="flex flex-wrap items-center gap-1.5 ml-1">
-                            {tagList.map((tag: string, i: number) => (
-                              <span
-                                key={i}
-                                className="px-2.5 py-0.5 text-[11px] font-medium rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">{row.client}</span>
-                      <div className="w-5 h-5 rounded-full bg-[#0070f3] text-white text-[10px] font-bold flex items-center justify-center shadow-2xs">
-                        {row.client[0]?.toUpperCase() || 'N'}
-                      </div>
-                    </div>
-
-                    <Link
-                      href={`/admin/portfolio/${row.id}`}
-                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
-                    >
-                      Edit
-                    </Link>
-                  </div>
-                </div>
-              )
-            })}
-
-            {!items.length ? (
-              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
-                No projects added yet.
-              </div>
-            ) : null}
-          </div>
+          <SortableList initialItems={sortableItems} table="portfolio_projects" emptyMessage="No projects added yet." />
         </div>
       )
     }
@@ -720,97 +654,35 @@ export default async function AdminCatchAllPage({ params }: Props) {
             tags: e.tags || ['Community'],
           })),
       ]
+      const sortableItems: SortableItem[] = items.map((row) => ({
+        id: row.id,
+        title: row.title || '(Untitled)',
+        subtitle: row.subTitle,
+        dateLabel: `/${row.slug}`,
+        badge: row.draft ? 'Draft' : 'Published',
+        image: row.coverImage || 'https://res.cloudinary.com/z3wgqisj/image/upload/v1787837146/nestor/gallery/gida-team-moment.jpg',
+        tags: Array.isArray(row.tags) ? row.tags : ['Community'],
+        editUrl: `/admin/community/${row.id}`,
+        viewUrl: `/community/roadmap`,
+      }))
+
       return (
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Community & Advocacy Initiatives</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Community &amp; Advocacy Initiatives</h1>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Manage, edit, and organize community leadership initiatives, advocacy case studies, and volunteer programs.
+                Manage, edit, and drag to reorder community leadership initiatives, advocacy case studies, and volunteer programs.
               </p>
             </div>
             <Link href="/admin/community/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
                 + New Community Entry
               </button>
             </Link>
           </div>
 
-          <div className="space-y-3.5">
-            {items.map((row: any) => {
-              const title = row.title || '(Untitled)'
-              const initial = title.replace(/[^a-zA-Z0-9]/g, '')[0]?.toUpperCase() || 'C'
-              const tagList = Array.isArray(row.tags) && row.tags.length > 0 ? row.tags : ['Community']
-
-              return (
-                <div
-                  key={row.id}
-                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-                >
-                  <div className="flex items-center gap-4 min-w-0">
-                    {/* Main Cover Image */}
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
-                      <Image
-                        src={row.coverImage || "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837146/nestor/gallery/gida-team-moment.jpg"}
-                        alt={title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-
-                    <div className="min-w-0 space-y-1.5">
-                      <Link
-                        href={`/admin/community/${row.id}`}
-                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
-                      >
-                        {title}
-                      </Link>
-
-                      <div className="flex flex-wrap items-center gap-2 text-xs">
-                        {row.draft ? (
-                          <span className="font-bold text-amber-600 dark:text-amber-500">Draft</span>
-                        ) : (
-                          <span className="font-semibold text-slate-500 dark:text-slate-400">Published</span>
-                        )}
-                        <span className="text-slate-300 dark:text-slate-600">•</span>
-                        <span className="text-slate-500 dark:text-slate-400 font-medium font-mono">/{row.slug}</span>
-
-                        {tagList.length > 0 && (
-                          <div className="flex flex-wrap items-center gap-1.5 ml-1">
-                            {tagList.map((tag: string, i: number) => (
-                              <span
-                                key={i}
-                                className="px-2.5 py-0.5 text-[11px] font-medium rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
-                    <span className="text-xs font-medium text-muted-foreground">{row.subTitle}</span>
-
-                    <Link
-                      href={`/admin/community/${row.id}`}
-                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
-                    >
-                      Edit
-                    </Link>
-                  </div>
-                </div>
-              )
-            })}
-
-            {!items.length ? (
-              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
-                No community entries added yet.
-              </div>
-            ) : null}
-          </div>
+          <SortableList initialItems={sortableItems} table="community_entries" emptyMessage="No community entries added yet." />
         </div>
       )
     }
@@ -865,7 +737,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
     if (!actionOrId) {
       const { data: dbData } = await supabase
         .from('journey_items')
-        .select('id, title, organization, role, date_label, type, images')
+        .select('id, title, organization, role, date_label, type, details, images')
         .order('sort_order', { ascending: true })
       const fallbackJourney = await getJourneyItems()
       const dbTitles = new Set((dbData ?? []).map((row) => row.title))
@@ -875,7 +747,8 @@ export default async function AdminCatchAllPage({ params }: Props) {
           title: j.title,
           organization: j.organization,
           dateLabel: j.date_label || '2026',
-          type: j.type || 'milestone',
+          type: j.type || 'work',
+          details: j.details || [],
           image: (j.images && j.images.length > 0 ? j.images[0] : null) || getMembershipImage({ organization: j.organization, title: j.title }),
           tags: [j.organization, j.type],
         })),
@@ -886,14 +759,36 @@ export default async function AdminCatchAllPage({ params }: Props) {
             title: j.title,
             organization: j.organization,
             dateLabel: j.date,
-            type: j.type || 'milestone',
+            type: j.type || 'work',
+            details: j.details || [],
             image: (j.images && j.images.length > 0 ? j.images[0] : null) || getMembershipImage({ organization: j.organization, title: j.title }),
             tags: [j.organization, j.type],
           })),
       ]
 
-      // Strictly Career & Work Roadmap Milestones (excluding volunteer & membership)
-      const items = allItems.filter((j) => j.type === 'work' || j.type === 'milestone')
+      // Filter for all items tagged with work, milestone, or professional experience
+      const items = allItems.filter((j) => {
+        const t = (j.type || '').toLowerCase()
+        const d = Array.isArray(j.details) ? j.details.map((x: string) => x.toLowerCase()) : []
+        const isExplicitWork =
+          t === 'work' ||
+          t === 'milestone' ||
+          d.some((x: string) => x.includes('work') || x.includes('professional') || x.includes('milestone') || x.includes('career'))
+        if (isExplicitWork) return true
+        return t !== 'volunteer' && t !== 'membership'
+      })
+
+      const sortableItems: SortableItem[] = items.map((row) => ({
+        id: row.id,
+        title: row.title || '(Untitled)',
+        subtitle: row.organization,
+        dateLabel: row.dateLabel,
+        image: row.image,
+        badge: (row.type || 'work') === 'work' ? 'Professional Work' : (row.type === 'milestone' ? 'Key Milestone' : 'Career Milestone'),
+        tags: row.tags,
+        editUrl: `/admin/journey/${row.id}`,
+        viewUrl: '/experience',
+      }))
 
       return (
         <div className="space-y-6">
@@ -901,86 +796,17 @@ export default async function AdminCatchAllPage({ params }: Props) {
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Career &amp; Professional Milestones</h1>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Manage career roadmap entries, engineering positions, and professional milestones.
+                Manage career roadmap entries, engineering positions, and drag to reorder.
               </p>
             </div>
             <Link href="/admin/journey/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
                 + New Career Milestone
               </button>
             </Link>
           </div>
 
-          <div className="space-y-3.5">
-            {items.map((row: any) => {
-              const title = row.title || '(Untitled)'
-              const rowType = (row.type || 'milestone').toLowerCase()
-              const rowImage = row.image || getMembershipImage({ organization: row.organization, title })
-
-              return (
-                <div
-                  key={row.id}
-                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-                >
-                  <div className="flex items-center gap-4 min-w-0">
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
-                      <Image
-                        src={rowImage}
-                        alt={title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-
-                    <div className="min-w-0 space-y-1.5">
-                      <Link
-                        href={`/admin/journey/${row.id}`}
-                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
-                      >
-                        {title}
-                      </Link>
-
-                      <div className="flex flex-wrap items-center gap-2 text-xs">
-                        <span className="font-semibold text-slate-500 dark:text-slate-400">{row.organization}</span>
-                        <span className="text-slate-300 dark:text-slate-600">•</span>
-                        <span className="text-slate-500 dark:text-slate-400 font-medium">{row.dateLabel}</span>
-
-                        <div className="flex items-center ml-1">
-                          {rowType === 'work' && (
-                            <span className="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
-                              Professional Work
-                            </span>
-                          )}
-                          {rowType === 'milestone' && (
-                            <span className="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">
-                              Key Milestone
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
-                    <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">{row.type}</span>
-
-                    <Link
-                      href={`/admin/journey/${row.id}`}
-                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
-                    >
-                      Edit
-                    </Link>
-                  </div>
-                </div>
-              )
-            })}
-
-            {!items.length ? (
-              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
-                No career milestones added yet.
-              </div>
-            ) : null}
-          </div>
+          <SortableList initialItems={sortableItems} table="journey_items" emptyMessage="No career milestones added yet." />
         </div>
       )
     }
@@ -1057,80 +883,39 @@ export default async function AdminCatchAllPage({ params }: Props) {
           })),
       ]
 
+      const sortableItems: SortableItem[] = items.map((row: any) => {
+        const orgName = row.organization || row.title || '(Untitled)'
+        const rowImage = row.image || getMembershipImage({ organization: orgName, title: row.title })
+        return {
+          id: row.id,
+          title: orgName,
+          subtitle: row.role,
+          dateLabel: row.dateLabel,
+          image: rowImage,
+          badge: 'Accredited Membership',
+          tags: Array.isArray(row.details) ? row.details : [],
+          editUrl: `/admin/memberships/${row.id}`,
+          viewUrl: '/memberships',
+        }
+      })
+
       return (
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Professional Memberships &amp; Affiliations</h1>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Manage accredited memberships, industry councils, and professional associations contributing to national technology policy and governance.
+                Manage accredited memberships, industry councils, and drag to reorder.
               </p>
             </div>
             <Link href="/admin/memberships/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
                 + New Membership
               </button>
             </Link>
           </div>
 
-          <div className="space-y-3.5">
-            {items.map((row: any) => {
-              const orgName = row.organization || row.title || '(Untitled)'
-              const rowImage = row.image || getMembershipImage({ organization: orgName, title: row.title })
-
-              return (
-                <div
-                  key={row.id}
-                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-                >
-                  <div className="flex items-center gap-4 min-w-0">
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
-                      <Image
-                        src={rowImage}
-                        alt={orgName}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-
-                    <div className="min-w-0 space-y-1.5">
-                      <Link
-                        href={`/admin/memberships/${row.id}`}
-                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
-                      >
-                        {orgName}
-                      </Link>
-
-                      <div className="flex flex-wrap items-center gap-2 text-xs">
-                        <span className="font-semibold text-slate-600 dark:text-slate-300">{row.role}</span>
-                        <span className="text-slate-300 dark:text-slate-600">•</span>
-                        <span className="text-slate-500 dark:text-slate-400 font-mono">{row.dateLabel}</span>
-
-                        <span className="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-[#0075ff]/10 text-[#0075ff] border border-[#0075ff]/20 ml-1">
-                          Accredited Membership
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
-                    <Link
-                      href={`/admin/memberships/${row.id}`}
-                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
-                    >
-                      Edit
-                    </Link>
-                  </div>
-                </div>
-              )
-            })}
-
-            {!items.length ? (
-              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
-                No memberships added yet.
-              </div>
-            ) : null}
-          </div>
+          <SortableList initialItems={sortableItems} table="journey_items" emptyMessage="No memberships added yet." />
         </div>
       )
     }
@@ -1192,31 +977,31 @@ export default async function AdminCatchAllPage({ params }: Props) {
             website_url: b.websiteUrl,
           })),
       ]
+      const sortableItems: SortableItem[] = items.map((row) => ({
+        id: row.id,
+        title: row.name,
+        subtitle: row.website_url || undefined,
+        image: row.logo_url,
+        editUrl: `/admin/brands/${row.id}`,
+      }))
+
       return (
-        <div>
-          <PageHeader
-            title="Brand Partners"
-            action={
-              <Link href="/admin/brands/new">
-                <PrimaryButton type="button">Add brand</PrimaryButton>
-              </Link>
-            }
-          />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {items.map((row) => (
-              <Link key={row.id} href={`/admin/brands/${row.id}`} className="group border border-border p-4 rounded-lg hover:border-foreground/40 bg-card transition-all flex flex-col justify-between">
-                <div className="relative aspect-video w-full overflow-hidden rounded bg-slate-950/80 mb-3 flex items-center justify-center p-4 border border-border/40">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={row.logo_url} alt={row.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform" />
-                </div>
-                <div className="flex items-center justify-between gap-2">
-                  <p className="text-xs font-semibold truncate text-foreground">{row.name}</p>
-                  <span className="text-[10px] font-mono text-muted-foreground">Edit</span>
-                </div>
-              </Link>
-            ))}
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Brand Partners &amp; Ecosystem</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                Manage, edit, and drag to reorder featured brand partners and logos.
+              </p>
+            </div>
+            <Link href="/admin/brands/new">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
+                + Add Brand Partner
+              </button>
+            </Link>
           </div>
-          {!items.length ? <p className="text-sm text-muted-foreground">No brand partners added yet.</p> : null}
+
+          <SortableList initialItems={sortableItems} table="brand_partners" emptyMessage="No brand partners added yet." />
         </div>
       )
     }
@@ -1476,68 +1261,31 @@ export default async function AdminCatchAllPage({ params }: Props) {
             slug: s.id,
           })),
       ]
+      const sortableItems: SortableItem[] = items.map((row: any) => ({
+        id: row.id,
+        title: row.title || '(Untitled Service)',
+        subtitle: row.description,
+        dateLabel: `/${row.slug}`,
+        editUrl: `/admin/services/${row.id}`,
+      }))
+
       return (
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Services & Offerings</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Services &amp; Offerings</h1>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Manage, edit, and publish your professional engineering and design services.
+                Manage, edit, and drag to reorder your professional engineering and design services.
               </p>
             </div>
             <Link href="/admin/services/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
                 + New Service
               </button>
             </Link>
           </div>
 
-          <div className="space-y-3.5">
-            {items.map((row: any) => {
-              const title = row.title || '(Untitled Service)'
-              const initial = title.replace(/[^a-zA-Z0-9]/g, '')[0]?.toUpperCase() || 'S'
-
-              return (
-                <div
-                  key={row.id}
-                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-                >
-                  <div className="flex items-center gap-4 min-w-0">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-400 dark:text-slate-500 font-serif text-3xl font-normal flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700">
-                      {initial}
-                    </div>
-
-                    <div className="min-w-0 space-y-1">
-                      <Link
-                        href={`/admin/services/${row.id}`}
-                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
-                      >
-                        {title}
-                      </Link>
-                      <p className="text-xs text-muted-foreground line-clamp-1">{row.description}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
-                    <span className="text-xs font-mono text-muted-foreground">/{row.slug}</span>
-
-                    <Link
-                      href={`/admin/services/${row.id}`}
-                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
-                    >
-                      Edit
-                    </Link>
-                  </div>
-                </div>
-              )
-            })}
-
-            {!items.length ? (
-              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
-                No services added yet.
-              </div>
-            ) : null}
-          </div>
+          <SortableList initialItems={sortableItems} table="services" emptyMessage="No services added yet." />
         </div>
       )
     }
@@ -1602,68 +1350,31 @@ export default async function AdminCatchAllPage({ params }: Props) {
             description: s.description || '',
           })),
       ]
+
+      const sortableItems: SortableItem[] = items.map((row: any) => ({
+        id: row.id,
+        title: `${row.value} — ${row.label}`,
+        subtitle: row.description,
+        editUrl: `/admin/stats/${row.id}`,
+      }))
+
       return (
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Impact & Portfolio Metrics</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Impact Metrics &amp; Stats</h1>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Manage, edit, and display home page impact statistics.
+                Manage, edit, and drag to reorder key statistics and performance indicators across the website.
               </p>
             </div>
             <Link href="/admin/stats/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
                 + New Metric
               </button>
             </Link>
           </div>
 
-          <div className="space-y-3.5">
-            {items.map((row: any) => {
-              const label = row.label || '(Untitled Stat)'
-              const initial = row.value || '#'
-
-              return (
-                <div
-                  key={row.id}
-                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-                >
-                  <div className="flex items-center gap-4 min-w-0">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-[#0070f3] font-bold text-xl sm:text-2xl flex items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-700 font-mono">
-                      {initial}
-                    </div>
-
-                    <div className="min-w-0 space-y-1">
-                      <Link
-                        href={`/admin/stats/${row.id}`}
-                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
-                      >
-                        {label}
-                      </Link>
-                      {row.description ? <p className="text-xs text-muted-foreground line-clamp-1">{row.description}</p> : null}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
-                    <span className="text-xs font-mono font-bold text-[#0070f3]">{row.value}</span>
-
-                    <Link
-                      href={`/admin/stats/${row.id}`}
-                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
-                    >
-                      Edit
-                    </Link>
-                  </div>
-                </div>
-              )
-            })}
-
-            {!items.length ? (
-              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
-                No impact stats added yet.
-              </div>
-            ) : null}
-          </div>
+          <SortableList initialItems={sortableItems} table="portfolio_stats" emptyMessage="No impact statistics added yet." />
         </div>
       )
     }
@@ -1725,74 +1436,35 @@ export default async function AdminCatchAllPage({ params }: Props) {
             image: c.image || null,
           })),
       ]
+      const sortableItems: SortableItem[] = items.map((row: any) => ({
+        id: row.id,
+        title: row.title || '(Untitled Certification)',
+        subtitle: row.provider,
+        dateLabel: row.date,
+        image: row.image || 'https://res.cloudinary.com/z3wgqisj/image/upload/v1787837064/nestor/certificates/ndpc-cert.jpg',
+        badge: 'Verified Credential',
+        editUrl: `/admin/certifications/${row.id}`,
+        viewUrl: '/certifications',
+      }))
+
       return (
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Certifications &amp; Diplomas</h1>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                Manage, edit, and display professional credentials and achievements.
+                Manage, edit, and drag to reorder professional credentials and achievements.
               </p>
             </div>
             <Link
               href="/admin/certifications/new"
-              className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs inline-flex items-center"
+              className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs inline-flex items-center cursor-pointer"
             >
               + New Certification
             </Link>
           </div>
 
-          <div className="space-y-3.5">
-            {items.map((row: any) => {
-              const title = row.title || '(Untitled Certification)'
-              const initial = title.replace(/[^a-zA-Z0-9]/g, '')[0]?.toUpperCase() || 'C'
-
-              return (
-                <div
-                  key={row.id}
-                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-                >
-                  <div className="flex items-center gap-4 min-w-0">
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
-                      <Image
-                        src={row.image || "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837064/nestor/certificates/ndpc-cert.jpg"}
-                        alt={title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-
-                    <div className="min-w-0 space-y-1">
-                      <Link
-                        href={`/admin/certifications/${row.id}`}
-                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
-                      >
-                        {title}
-                      </Link>
-                      <p className="text-xs text-muted-foreground">{row.provider} • {row.date}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
-                    <span className="text-xs font-medium text-slate-600 dark:text-slate-400">{row.provider}</span>
-
-                    <Link
-                      href={`/admin/certifications/${row.id}`}
-                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs inline-flex items-center"
-                    >
-                      Edit
-                    </Link>
-                  </div>
-                </div>
-              )
-            })}
-
-            {!items.length ? (
-              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
-                No certifications added yet.
-              </div>
-            ) : null}
-          </div>
+          <SortableList initialItems={sortableItems} table="certifications" emptyMessage="No certifications added yet." />
         </div>
       )
     }

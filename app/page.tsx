@@ -6,14 +6,13 @@ import ExpandingEndeavors from "@/components/home/expanding-endeavors"
 import FeaturedPortfolio from "@/components/home/featured-portfolio"
 import ImpactSection from "@/components/impact-section"
 import QuoteSection from "@/components/home/quote-section"
-import HomeStats from "@/components/home/home-stats"
 import FeaturedCommunity from "@/components/home/featured-community"
 import LatestJournal from "@/components/home/latest-journal"
 import TestimonialsSection from "@/components/home/testimonials-section"
 import TrustedBrands from "@/components/home/trusted-brands"
 import HomeCTA from "@/components/home/home-cta"
 import Footer from "@/components/footer"
-import { getPortfolioStats, getBrandPartners } from "@/lib/content"
+import { getBrandPartners } from "@/lib/content"
 
 export const revalidate = 3600
 
@@ -36,94 +35,73 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-  const [dbStats, brandPartners] = await Promise.all([
-    getPortfolioStats(),
-    getBrandPartners(),
-  ])
+  const brandPartners = await getBrandPartners()
 
   const carouselItems: CarouselItem[] = [
     {
-      id: "portfolio",
-      title: "Featured Projects & Portfolio",
-      subtitle: "Production software, web apps, brand design systems, and engineering evidence, all in one place.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dev-nnewBVnGcwatonVCQKc9zTtMdshDoM.jpg",
-      link: "/portfolio",
-      accentColor: "#0ea5e9",
-      badge: "Portfolio"
+      id: "about",
+      title: "Profile, Leadership & Vision",
+      subtitle: "A chronicle of professional milestones, university leadership positions, and engineering growth.",
+      image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1785966488/nestor/about/about_fm7rwu.jpg",
+      link: "/about",
+      accentColor: "#f59e0b",
+      badge: "About",
     },
     {
-      id: "about",
-      title: "Profile & Vision",
-      subtitle: "A chronicle of professional milestones, leadership roles, university positions, and engineering growth.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
-      link: "/about",
-      accentColor: "#d97706",
-      badge: "About"
+      id: "portfolio",
+      title: "Featured Projects & Case Studies",
+      subtitle: "Production software systems, web applications, enterprise design architectures, and technical delivery.",
+      image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1785966495/nestor/gallery/techadv1_dyclrm.jpg",
+      link: "/portfolio",
+      accentColor: "#0075ff",
+      badge: "Portfolio",
     },
     {
       id: "community",
-      title: "Community & Leadership",
-      subtitle: "ICT strategy, developer event logistics, tech bootcamps, and grassroots community leadership.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg",
+      title: "Volunteering & Community Impact",
+      subtitle: "Developer relations, hackathons, technical advocacy, and grassroots initiatives empowering builders.",
+      image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787285712/nestor/gallery/IMG_0452_a2kkcl.jpg",
       link: "/community",
       accentColor: "#7c3aed",
-      badge: "Community"
+      badge: "Community",
     },
     {
       id: "journal",
-      title: "Articles & News",
-      subtitle: "Thoughts on technology leadership, software engineering, digital inclusion, and community building.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hero-jwNXILOOhWA26ePzvza9GudcffKa9R.jpg",
+      title: "Articles, Insights & Perspectives",
+      subtitle: "In-depth thoughts on software engineering, AI workflows, digital inclusion, and tech leadership.",
+      image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837171/nestor/gallery/tech-nexus-me.jpg",
       link: "/journal",
       accentColor: "#e11d48",
-      badge: "Journal"
+      badge: "Journal",
     },
     {
       id: "gallery",
-      title: "Visual Gallery Highlights",
-      subtitle: "Visual moments captured from tech summits, hackathons, leadership conferences, and community events.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eden2-sUzI0wvGmZMjB5UUP911IAB6WvBM5c.jpg",
+      title: "Visual Moments & Event Highlights",
+      subtitle: "A visual archive documenting developer conferences, tech summits, workshops, and milestones.",
+      image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837144/nestor/gallery/gida-large-group.jpg",
       link: "/gallery",
       accentColor: "#059669",
-      badge: "Gallery"
+      badge: "Gallery",
     },
     {
-      id: "contact",
-      title: "Start a Collaboration",
-      subtitle: "Looking to build a digital product, partner on community tech programs, or invite Nestor for a speaking engagement.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg",
-      link: "/contact",
-      accentColor: "#f59e0b",
-      badge: "Contact"
-    }
-  ]
-
-  // Default fallback stats if none in DB
-  const defaultImpactStats = [
-    {
-      value: "2000+",
-      label: "People Reached",
-      description: "Computing students, developers, and tech leaders empowered through workshops, events, and digital platforms.",
+      id: "memberships",
+      title: "Professional Memberships & Affiliations",
+      subtitle: "Accredited memberships, industry councils, and professional associations shaping tech policy & AI.",
+      image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg",
+      link: "/memberships",
+      accentColor: "#8b5cf6",
+      badge: "Memberships",
     },
     {
-      value: "25+",
-      label: "Projects Completed",
-      description: "Production software, web apps, brand design systems, and engineering deliverables.",
-    },
-    {
-      value: "12+",
-      label: "Organizations & Communities",
-      description: "National bodies, student chapters, tech startups, and developer communities served and supported.",
+      id: "certifications",
+      title: "Licenses & Certifications",
+      subtitle: "Verified credentials, technical certifications, and specialized proficiencies in AI and software engineering.",
+      image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837061/nestor/certificates/ieee-cert.jpg",
+      link: "/certifications",
+      accentColor: "#0284c7",
+      badge: "Certifications",
     },
   ]
-
-  const formattedStats = dbStats.length > 0
-    ? dbStats.map((s) => ({
-        value: s.value,
-        label: s.label,
-        description: s.description || "",
-      }))
-    : defaultImpactStats
 
   return (
     <main className="min-h-screen bg-background">
@@ -158,10 +136,7 @@ export default async function Home() {
         authorName="Nestor Anyanwu"
       />
 
-      {/* 5. Key Verified Metrics & Impact Stats */}
-      <HomeStats stats={formattedStats} />
-
-      {/* 6. Core Focus */}
+      {/* 5. Core Focus */}
       <ExpandingEndeavors />
 
       {/* 7. Selected Work & Engineering */}

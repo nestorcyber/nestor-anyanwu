@@ -24,15 +24,22 @@ export default function ExperienceClient({
 }) {
   const [searchQuery, setSearchQuery] = useState("")
 
-  // Filter out any volunteer items strictly to display only professional work, engineering, and leadership track records
+  // Filter items to display professional work, engineering, and leadership track records
   const professionalItems = useMemo(() => {
     return initialItems.filter((item) => {
-      const isVolunteer =
-        item.type === "volunteer" ||
-        item.title?.toLowerCase().includes("volunteer") ||
-        item.role?.toLowerCase().includes("volunteer") ||
-        item.description?.toLowerCase().includes("volunteer")
-      return !isVolunteer
+      const t = (item.type || '').toLowerCase()
+      const d = Array.isArray(item.details) ? item.details.map((x) => x.toLowerCase()) : []
+      const isExplicitWork =
+        t === 'work' ||
+        t === 'milestone' ||
+        d.some((x) => x.includes('work') || x.includes('professional') || x.includes('milestone') || x.includes('career'))
+
+      if (isExplicitWork) return true
+
+      // If it's pure membership or pure volunteer with no work tag, filter out from career experience
+      const isPureVolunteer = t === 'volunteer' && !d.some((x) => x.includes('work'))
+      const isPureMembership = t === 'membership' && !d.some((x) => x.includes('work'))
+      return !isPureVolunteer && !isPureMembership
     })
   }, [initialItems])
 
