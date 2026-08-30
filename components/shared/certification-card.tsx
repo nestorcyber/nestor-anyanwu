@@ -301,7 +301,7 @@ export default function CertificationCard({ cert, index = 0 }: CertificationCard
             </p>
           </div>
 
-          {/* ─── Bottom Row: Recipient & Direct Open-in-New-Tab Button Overlay ─── */}
+          {/* ─── Bottom Row: Recipient & Journal-Style Button Overlay (Right) ─── */}
           <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
             <p className="text-xs sm:text-sm font-normal text-slate-500 dark:text-slate-400">
               Nestor Anyanwu
