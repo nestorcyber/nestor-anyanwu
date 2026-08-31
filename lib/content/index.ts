@@ -396,9 +396,6 @@ export async function getProjectItems(): Promise<ProjectItem[]> {
 
 export async function getCommunityEntries(): Promise<CommunityEntry[]> {
   const supabase = db()
-  let dbEntries: CommunityEntry[] = []
-  const dbAllSlugs = new Set<string>()
-
   if (supabase) {
     const { data, error } = await supabase
       .from('community_entries')
@@ -406,15 +403,14 @@ export async function getCommunityEntries(): Promise<CommunityEntry[]> {
       .order('sort_order', { ascending: true })
       .order('created_at', { ascending: false })
 
-    if (!error && data) {
-      data.forEach((row: any) => dbAllSlugs.add(row.slug))
-      dbEntries = data.filter((row: any) => !row.draft).map(mapCommunity)
+    if (!error && data && data.length > 0) {
+      return data.filter((row: any) => !row.draft).map(mapCommunity)
     }
   }
 
-  // Fallback to local MDX
+  // Fallback to local MDX only when database has 0 records or is unreachable
   const localFiles = readLocalMdxDir('content/community')
-  const localEntries: CommunityEntry[] = localFiles
+  return localFiles
     .filter(({ data }) => !data.draft)
     .map(({ slug, data, content }) => ({
       id: slug,
@@ -430,16 +426,22 @@ export async function getCommunityEntries(): Promise<CommunityEntry[]> {
       tags: data.tags ?? [],
       description: content || data.description || '',
     }))
-
-  const combined = [
-    ...dbEntries,
-    ...localEntries.filter((e) => !dbAllSlugs.has(e.slug)),
-  ]
-
-  return combined
 }
 
 export async function getCommunityEntryBySlug(slug: string): Promise<CommunityEntry | null> {
+  const supabase = db()
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('community_entries')
+      .select('*')
+      .eq('slug', slug)
+      .maybeSingle()
+
+    if (!error && data) {
+      return mapCommunity(data)
+    }
+  }
+
   const entries = await getCommunityEntries()
   return entries.find((e) => e.slug === slug) || null
 }

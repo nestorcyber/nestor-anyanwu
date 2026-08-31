@@ -14,6 +14,7 @@ import {
   Truck,
   LayoutGrid,
   ArrowLeft,
+  ArrowRight,
   Search,
   CheckCircle2,
   X,
@@ -269,7 +270,13 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                                 </span>
                               </div>
                               <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight group-hover:text-[#0075ff] transition-colors">
-                                {item.organization}
+                                {item.slug ? (
+                                  <Link href={`/community/${item.slug}`} className="hover:underline">
+                                    {item.organization}
+                                  </Link>
+                                ) : (
+                                  item.organization
+                                )}
                               </h3>
                               {item.role && (
                                 <p className="text-xs sm:text-sm font-semibold text-[#0075ff]">
@@ -340,19 +347,33 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                             </div>
                           )}
 
-                          {/* Detail / Skills Tag Chips */}
-                          {item.tags && item.tags.length > 0 && (
-                            <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-border/60">
-                              {item.tags.map((tag, tIdx) => (
-                                <span
-                                  key={tIdx}
-                                  className="px-2.5 py-0.5 rounded-md bg-secondary text-muted-foreground text-[11px] font-medium"
+                          {/* Detail / Skills Tag Chips & Detail Link */}
+                          <div className="space-y-3 pt-2 border-t border-border/60">
+                            {item.tags && item.tags.length > 0 && (
+                              <div className="flex flex-wrap items-center gap-1.5">
+                                {item.tags.map((tag, tIdx) => (
+                                  <span
+                                    key={tIdx}
+                                    className="px-2.5 py-0.5 rounded-md bg-secondary text-muted-foreground text-[11px] font-medium"
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+
+                            {item.slug && (
+                              <div>
+                                <Link
+                                  href={`/community/${item.slug}`}
+                                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0075ff] hover:underline cursor-pointer"
                                 >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                          )}
+                                  <span>View Full Case Study</span>
+                                  <ArrowRight className="w-3.5 h-3.5" />
+                                </Link>
+                              </div>
+                            )}
+                          </div>
 
                         </article>
                       </div>

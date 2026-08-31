@@ -2,56 +2,87 @@ import React from "react"
 import Image from "next/image"
 import { Users } from "lucide-react"
 
-export default function CommunityHero() {
-  const showcaseCards = [
-    {
-      src: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837102/nestor/gallery/devfest24-group.jpg",
-      alt: "DevFest Community Gathering",
-      rotation: "-rotate-6 sm:-rotate-8",
-      zIndex: "z-10",
-      marginTop: "mt-6 sm:mt-10 md:mt-12",
-      hideOnMobile: "hidden sm:block",
-    },
-    {
-      src: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837078/nestor/gallery/aws-team.jpg",
-      alt: "AWS Community Team & Builders",
-      rotation: "-rotate-3 sm:-rotate-4",
-      zIndex: "z-15",
-      marginTop: "mt-3 sm:mt-5 md:mt-6",
-      hideOnMobile: "",
-    },
-    {
-      src: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837146/nestor/gallery/gida-team-moment.jpg",
-      alt: "Developer Community Team Moment",
-      rotation: "rotate-0",
-      zIndex: "z-20",
-      marginTop: "mt-0",
-      hideOnMobile: "",
-    },
-    {
-      src: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837144/nestor/gallery/gida-large-group.jpg",
-      alt: "Community Summit & Hackathon",
-      rotation: "rotate-3 sm:rotate-4",
-      zIndex: "z-15",
-      marginTop: "mt-3 sm:mt-5 md:mt-6",
-      hideOnMobile: "",
-    },
-    {
-      src: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837090/nestor/gallery/conference-crowd.jpg",
-      alt: "Tech Conference Keynote Crowd",
-      rotation: "rotate-6 sm:rotate-8",
-      zIndex: "z-10",
-      marginTop: "mt-6 sm:mt-10 md:mt-12",
-      hideOnMobile: "hidden sm:block",
-    },
+interface CommunityHeroProps {
+  photos?: { imageUrl: string; title?: string }[]
+  entries?: { coverImage?: string; organization?: string }[]
+}
+
+const CARD_CONFIGS = [
+  {
+    rotation: "-rotate-6 sm:-rotate-8",
+    zIndex: "z-10",
+    marginTop: "mt-6 sm:mt-10 md:mt-12",
+    hideOnMobile: "hidden sm:block",
+  },
+  {
+    rotation: "-rotate-3 sm:-rotate-4",
+    zIndex: "z-15",
+    marginTop: "mt-3 sm:mt-5 md:mt-6",
+    hideOnMobile: "",
+  },
+  {
+    rotation: "rotate-0",
+    zIndex: "z-20",
+    marginTop: "mt-0",
+    hideOnMobile: "",
+  },
+  {
+    rotation: "rotate-3 sm:rotate-4",
+    zIndex: "z-15",
+    marginTop: "mt-3 sm:mt-5 md:mt-6",
+    hideOnMobile: "",
+  },
+  {
+    rotation: "rotate-6 sm:rotate-8",
+    zIndex: "z-10",
+    marginTop: "mt-6 sm:mt-10 md:mt-12",
+    hideOnMobile: "hidden sm:block",
+  },
+]
+
+export default function CommunityHero({ photos = [], entries = [] }: CommunityHeroProps) {
+  // Collect unique valid images from dashboard volunteering photos and community entries
+  const dynamicItems: { src: string; alt: string }[] = []
+
+  photos.forEach((p) => {
+    if (p.imageUrl && !p.imageUrl.includes("placeholder") && !dynamicItems.some((d) => d.src === p.imageUrl)) {
+      dynamicItems.push({ src: p.imageUrl, alt: p.title || "Community Event" })
+    }
+  })
+
+  entries.forEach((e) => {
+    if (e.coverImage && !e.coverImage.includes("placeholder") && !dynamicItems.some((d) => d.src === e.coverImage)) {
+      dynamicItems.push({ src: e.coverImage, alt: e.organization || "Community Leadership" })
+    }
+  })
+
+  const fallbackDefaults = [
+    { src: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837102/nestor/gallery/devfest24-group.jpg", alt: "Community Gathering" },
+    { src: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837078/nestor/gallery/aws-team.jpg", alt: "Tech Community Team" },
+    { src: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837146/nestor/gallery/gida-team-moment.jpg", alt: "Developer Community Moment" },
+    { src: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837144/nestor/gallery/gida-large-group.jpg", alt: "Community Summit" },
+    { src: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837090/nestor/gallery/conference-crowd.jpg", alt: "Tech Conference Crowd" },
   ]
+
+  const pool = dynamicItems.length > 0 ? dynamicItems : fallbackDefaults
+
+  const showcaseCards = CARD_CONFIGS.map((config, idx) => {
+    const item = pool[idx % pool.length]
+    return {
+      ...config,
+      src: item.src,
+      alt: item.alt,
+    }
+  })
+
+  const heroBgImage = pool[0]?.src || "https://res.cloudinary.com/z3wgqisj/image/upload/v1787285712/nestor/gallery/IMG_0452_a2kkcl.jpg"
 
   return (
     <section className="relative w-full h-[70svh] min-h-[480px] sm:h-[78svh] md:h-[calc(100svh-4rem)] md:min-h-[620px] md:max-h-[740px] flex flex-col justify-between overflow-hidden bg-slate-950 text-white pt-14 sm:pt-16 md:pt-20 pb-0 border-b border-border/40">
       
       {/* 1. Full Hero Background Image (Edge-to-Edge) */}
       <Image
-        src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787285712/nestor/gallery/IMG_0452_a2kkcl.jpg"
+        src={heroBgImage}
         alt="Nestor Anyanwu Community Volunteering & Impact"
         fill
         sizes="100vw"

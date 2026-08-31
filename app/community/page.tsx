@@ -41,7 +41,7 @@ export default async function CommunityPage() {
     getPortfolioStats(),
   ])
 
-  // Map featured experiences from database entries or fallback to rich curated list
+  // Map featured experiences from database entries
   const mappedExperiences: FeaturedExperienceItem[] = entries.map((e) => ({
     id: e.id,
     title: e.organization,
@@ -50,8 +50,8 @@ export default async function CommunityPage() {
     date: e.duration,
     coverImage: e.coverImage,
     description: e.description || (e.achievements?.[0] ?? ""),
-    contributions: e.achievements && e.achievements.length > 0 ? e.achievements : [e.description],
-    skills: e.tags && e.tags.length > 0 ? e.tags : ["Community", "Leadership", "Volunteering"],
+    contributions: e.achievements && e.achievements.length > 0 ? e.achievements : (e.description ? [e.description] : []),
+    skills: e.tags && e.tags.length > 0 ? e.tags : [],
     slug: e.slug,
   }))
 
@@ -74,19 +74,19 @@ export default async function CommunityPage() {
       <main className="flex-1 w-full min-w-0 flex flex-col justify-between overflow-x-hidden">
         <div className="w-full">
           {/* 1. Hero */}
-          <CommunityHero />
+          <CommunityHero photos={mappedPhotos} entries={entries} />
 
           {/* 2. Impact Snapshot */}
           <ImpactSnapshot stats={stats} />
 
           {/* 3. Featured Experiences (With Button to /community/roadmap) */}
-          <FeaturedExperiences experiences={mappedExperiences.length > 0 ? mappedExperiences : undefined} />
+          <FeaturedExperiences experiences={mappedExperiences} />
 
           {/* 4. How I Contribute & Skills Gained */}
           <ContributionPillars />
 
           {/* 5. Volunteering Gallery with Lightbox */}
-          <VolunteeringGallery photos={mappedPhotos.length > 0 ? mappedPhotos : undefined} />
+          <VolunteeringGallery photos={mappedPhotos} />
 
           {/* 6. Call to Action */}
           <CommunityCTA />

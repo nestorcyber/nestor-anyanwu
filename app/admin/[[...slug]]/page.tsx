@@ -628,10 +628,10 @@ export default async function AdminCatchAllPage({ params }: Props) {
         .from('community_entries')
         .select('id, organization, role, slug, draft, featured, cover_image, tags')
         .order('sort_order', { ascending: true })
-      const fallbackEntries = await getCommunityEntries()
-      const dbSlugs = new Set((dbData ?? []).map((row) => row.slug))
-      const items = [
-        ...(dbData ?? []).map((e: any) => ({
+      
+      let items: any[] = []
+      if (dbData && dbData.length > 0) {
+        items = dbData.map((e: any) => ({
           id: e.id,
           title: e.organization,
           subTitle: e.role || 'Community Leader',
@@ -640,20 +640,20 @@ export default async function AdminCatchAllPage({ params }: Props) {
           featured: e.featured ?? false,
           coverImage: e.cover_image,
           tags: e.tags || ['Community'],
-        })),
-        ...fallbackEntries
-          .filter((e) => !dbSlugs.has(e.slug))
-          .map((e) => ({
-            id: e.slug,
-            title: e.organization,
-            subTitle: e.role || 'Community Leader',
-            slug: e.slug,
-            draft: false,
-            featured: e.featured,
-            coverImage: e.coverImage,
-            tags: e.tags || ['Community'],
-          })),
-      ]
+        }))
+      } else {
+        const fallbackEntries = await getCommunityEntries()
+        items = fallbackEntries.map((e) => ({
+          id: e.slug,
+          title: e.organization,
+          subTitle: e.role || 'Community Leader',
+          slug: e.slug,
+          draft: false,
+          featured: e.featured,
+          coverImage: e.coverImage,
+          tags: e.tags || ['Community'],
+        }))
+      }
       const sortableItems: SortableItem[] = items.map((row) => ({
         id: row.id,
         title: row.title || '(Untitled)',

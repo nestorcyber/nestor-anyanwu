@@ -24,53 +24,13 @@ export interface GalleryPhoto {
   aspectRatio?: "video" | "square" | "portrait" | "wide"
 }
 
-const DEFAULT_GALLERY: GalleryPhoto[] = [
-  {
-    id: "gal-1",
-    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837146/nestor/gallery/gida-team-moment.jpg",
-    title: "GIDA Tech Community Leadership",
-    caption: "Grassroots organizing and developer ecosystem summit with fellow tech leaders.",
-    category: "Community",
-    location: "Innovation Hub",
-    date: "Aug 2025",
-  },
-  {
-    id: "gal-2",
-    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837102/nestor/gallery/devfest24-group.jpg",
-    title: "DevFest Regional Community Gathering",
-    caption: "Google Developer Groups community summit, tech panels, and software developer mentoring.",
-    category: "Volunteering",
-    location: "DevFest Arena",
-    date: "Nov 2024",
-  },
-  {
-    id: "gal-3",
-    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg",
-    title: "NACOS Student Leadership Delegation",
-    caption: "Director of ICT leading digital strategy and tech mentorship for student engineers.",
-    category: "Leadership",
-    location: "FUTO ICT Complex",
-    date: "Dec 2025",
-  },
-  {
-    id: "gal-4",
-    imageUrl: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787837078/nestor/gallery/aws-team.jpg",
-    title: "AWS Community Builders & Mentors",
-    caption: "Empowering university students with cloud computing architectures and serverless workflows.",
-    category: "Advocacy",
-    location: "AWS Cloud Club",
-    date: "Sep 2025",
-  },
-]
-
-export default function VolunteeringGallery({ photos = DEFAULT_GALLERY }: { photos?: GalleryPhoto[] }) {
-  // Use verified community group pictures for the community page preview
-  const rawPhotos = photos && photos.length > 0 ? photos : DEFAULT_GALLERY
-  const validPhotos = rawPhotos.filter(
+export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[] }) {
+  const validPhotos = (photos ?? []).filter(
     (p) => p.imageUrl && p.imageUrl.trim().length > 0 && !p.imageUrl.includes("placeholder")
   )
-  const allPhotos = validPhotos.length > 0 ? validPhotos : DEFAULT_GALLERY
-  const displayPhotos = allPhotos.slice(0, 4)
+  if (validPhotos.length === 0) return null
+
+  const displayPhotos = validPhotos.slice(0, 4)
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const [imageErrorMap, setImageErrorMap] = useState<Record<string, boolean>>({})

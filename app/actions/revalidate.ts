@@ -38,6 +38,7 @@ export async function revalidateCommunity(slug?: string) {
   try {
     revalidatePath('/')
     revalidatePath('/community')
+    revalidatePath('/community/roadmap')
     revalidatePath('/community/gallery')
     revalidatePath('/admin/community')
     revalidatePath('/admin/journey')
