@@ -40,7 +40,7 @@ export default async function JournalPage() {
 
   return (
     <>
-      <main className="min-h-screen bg-background pb-16 bg-grid-pattern">
+      <main className="min-h-screen bg-background bg-grid-pattern">
         <JournalClient articles={articles} />
       </main>
       <PortfolioCTA

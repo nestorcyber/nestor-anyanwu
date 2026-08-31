@@ -16,37 +16,33 @@ export default function PortfolioCTA({
   buttonHref = "/contact",
 }: PortfolioCTAProps) {
   return (
-    <section className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] py-16 md:py-24 bg-background flex flex-col justify-center">
-      <div className="site-container">
-        <div className="bg-[#0B1C2C] text-white border border-border/80 rounded-3xl shadow-xl p-8 sm:p-12 md:p-16 text-center space-y-6 relative overflow-hidden">
-          {/* Blueprint grid lines */}
-          <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
+    <section className="w-full py-16 md:py-24 bg-[#0B1C2C] text-white border-b border-border/60 relative overflow-hidden">
+      {/* Blueprint grid lines overlay */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
 
-          {/* Ambient Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] bg-[#0075ff]/15 rounded-full blur-3xl pointer-events-none" />
+      {/* Ambient Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#0075ff]/15 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-heading leading-tight text-white">
-              {title}
-            </h2>
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 relative z-10 text-center space-y-6">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-3xl mx-auto font-heading">
+          {title}
+        </h2>
 
-            <p className="text-slate-300 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto">
-              {description}
-            </p>
+        <p className="text-slate-200 sm:text-slate-300 text-sm sm:text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto">
+          {description}
+        </p>
 
-            {/* Exactly ONE CTA Button */}
-            <div className="flex items-center justify-center pt-3">
-              <Link
-                href={buttonHref}
-                className="h-11 sm:h-12 bg-accent hover:bg-accent/90 text-white font-bold text-xs md:text-sm tracking-wider uppercase pl-6 sm:pl-7 pr-2.5 sm:pr-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 inline-flex items-center gap-2.5 sm:gap-3 cursor-pointer group"
-              >
-                <span>{buttonText}</span>
-                <span className="w-8 h-8 rounded-lg bg-black/25 dark:bg-black/40 text-white flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105">
-                  <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
-              </Link>
-            </div>
-          </div>
+        {/* Action Button */}
+        <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+          <Link
+            href={buttonHref}
+            className="h-11 sm:h-12 bg-accent hover:bg-accent/90 text-white font-bold text-xs md:text-sm tracking-wider uppercase pl-6 sm:pl-7 pr-2.5 sm:pr-3 rounded-xl shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2.5 sm:gap-3 cursor-pointer group"
+          >
+            <span>{buttonText}</span>
+            <span className="w-8 h-8 rounded-lg bg-black/25 dark:bg-black/40 text-white flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105">
+              <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </span>
+          </Link>
         </div>
       </div>
     </section>
