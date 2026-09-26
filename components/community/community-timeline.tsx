@@ -154,18 +154,18 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
   return (
     <section id="timeline" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-slate-50/60 dark:bg-slate-900/30 flex flex-col justify-center relative overflow-hidden">
       {/* Background ambient light */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-[#0075ff]/5 dark:bg-[#0075ff]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-[#0056D2]/5 dark:bg-[#0056D2]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="site-container relative z-10 space-y-12">
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Community &amp; Volunteering <span className="text-[#0075ff]">Roadmap</span>
+            Community &amp; Volunteering <span className="text-[#0056D2]">Roadmap</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             A continuous chronological roadmap tracking grassroots leadership, technical volunteer engagements, and on-ground impact.
           </p>
-          <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
         </div>
 
         {/* Road Timeline Container */}
@@ -173,7 +173,7 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
           {/* Vertical Highway Road Track (Left Side) */}
           <div className="absolute left-5 sm:left-7 md:left-9 top-4 bottom-8 w-6 sm:w-7 md:w-8 -translate-x-1/2 bg-slate-900 dark:bg-slate-950 border-x-2 border-slate-700/80 dark:border-slate-800 rounded-full shadow-inner flex items-center justify-center pointer-events-none overflow-hidden z-0">
             {/* Road Center Dashed Lane Divider */}
-            <div className="w-[2px] h-full bg-[repeating-linear-gradient(to_bottom,#0075ff_0,#0075ff_14px,transparent_14px,transparent_28px)] opacity-80" />
+            <div className="w-[2px] h-full bg-[repeating-linear-gradient(to_bottom,#0056D2_0,#0056D2_14px,transparent_14px,transparent_28px)] opacity-80" />
           </div>
 
           {/* Road Milestones Items */}
@@ -189,33 +189,33 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
                 >
                   {/* Road Milestone Waypoint Node (Centered on Left Road Track) */}
                   <div className="absolute left-5 sm:left-7 md:left-9 -translate-x-1/2 top-4 z-20">
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#0B1C2C] text-[#0075ff] flex items-center justify-center shadow-[0_0_18px_rgba(0,117,255,0.45)] border-2 border-[#0075ff] transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#0075ff] group-hover:text-white">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#0B1C2C] text-[#0056D2] flex items-center justify-center shadow-[0_0_18px_rgba(0,86,210,0.45)] border-2 border-[#0056D2] transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#0056D2] group-hover:text-white">
                       <MilestoneIcon className="w-5 h-5 stroke-[2]" />
                     </div>
                   </div>
 
                   {/* Horizontal Connector Branch (from road to card) */}
-                  <div className="absolute left-5 sm:left-7 md:left-9 top-9 w-8 sm:w-10 md:w-12 h-[2px] bg-gradient-to-r from-[#0075ff] to-[#0075ff]/40 pointer-events-none z-10" />
+                  <div className="absolute left-5 sm:left-7 md:left-9 top-9 w-8 sm:w-10 md:w-12 h-[2px] bg-gradient-to-r from-[#0056D2] to-[#0056D2]/40 pointer-events-none z-10" />
 
                   {/* Milestone Card Container (Aligned on the Right of Road) */}
                   <div className="w-full pl-14 sm:pl-18 md:pl-22">
-                    <article className="bg-white dark:bg-card border border-slate-200/90 dark:border-slate-800/90 hover:border-[#0075ff] rounded-2xl p-5 sm:p-6 shadow-xs hover:shadow-xl transition-all duration-300 space-y-4 relative">
+                    <article className="bg-white dark:bg-card border border-slate-200/90 dark:border-slate-800/90 hover:border-[#0056D2] rounded-2xl p-5 sm:p-6 shadow-xs hover:shadow-xl transition-all duration-300 space-y-4 relative">
                       {/* Left pointer notch pointing to the road */}
                       <div className="hidden sm:block absolute -left-2 top-4 w-0 h-0 border-y-[6px] border-y-transparent border-r-[8px] border-r-slate-200 dark:border-r-slate-800" />
 
                       {/* Header Row: Organization, Role, Date */}
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-1 border-b border-slate-100 dark:border-slate-800/80">
                         <div className="space-y-0.5">
-                          <span className="text-[11px] font-mono font-bold text-[#0075ff] uppercase tracking-wider block">
+                          <span className="text-[11px] font-mono font-bold text-[#0056D2] uppercase tracking-wider block">
                             {item.organization}
                           </span>
-                          <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-foreground font-heading tracking-tight group-hover:text-[#0075ff] transition-colors">
+                          <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-foreground font-heading tracking-tight group-hover:text-[#0056D2] transition-colors">
                             {item.title}
                           </h3>
                         </div>
 
                         <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
-                          <span className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-[#0075ff] px-2.5 py-1 rounded-md bg-[#0075ff]/10 border border-[#0075ff]/20 whitespace-nowrap">
+                          <span className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-[#0056D2] px-2.5 py-1 rounded-md bg-[#0056D2]/10 border border-[#0056D2]/20 whitespace-nowrap">
                             <Calendar className="w-3 h-3" />
                             <span>{item.date}</span>
                           </span>
@@ -226,7 +226,7 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
                       {item.role && item.role !== item.title && (
                         <p className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                           <span className="text-slate-400 font-mono text-[11px]">Role:</span>
-                          <span className="text-[#0075ff]">{item.role}</span>
+                          <span className="text-[#0056D2]">{item.role}</span>
                         </p>
                       )}
 
@@ -273,7 +273,7 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
         <div className="flex items-center justify-center pt-6">
           <Link
             href="/community/roadmap"
-            className="h-11 sm:h-12 w-full sm:w-auto px-7 sm:px-9 rounded-xl bg-[#0070f3] hover:bg-blue-600 text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center justify-center gap-2.5 cursor-pointer group"
+            className="h-11 sm:h-12 w-full sm:w-auto px-7 sm:px-9 rounded-xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center justify-center gap-2.5 cursor-pointer group"
           >
             <Compass className="w-4 h-4" />
             <span>Explore Complete Roadmap &amp; Archive</span>

@@ -69,26 +69,24 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Volunteering <span className="text-[#0075ff]">Gallery</span>
+            Volunteering <span className="text-[#0056D2]">Gallery</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             Selected community group moments from developer conferences, student leadership summits, and on-ground volunteer operations.
           </p>
-          <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
         </div>
 
         {/* Responsive Grid with Fixed Aspect Ratio Containers (Zero Layout Shift) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {displayPhotos.map((photo, index) => {
-            const hasError = imageErrorMap[photo.id || String(index)]
-            const fallbackSrc = DEFAULT_GALLERY[index % DEFAULT_GALLERY.length].imageUrl
-            const currentSrc = hasError ? fallbackSrc : (photo.imageUrl || fallbackSrc)
+            const currentSrc = photo.imageUrl
 
             return (
               <div
                 key={photo.id || index}
                 onClick={() => setLightboxIndex(index)}
-                className="group relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-900 border border-border/80 hover:border-[#0075ff] cursor-pointer shadow-xs hover:shadow-xl transition-all duration-300"
+                className="group relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-900 border border-border/80 hover:border-[#0056D2] cursor-pointer shadow-xs hover:shadow-xl transition-all duration-300"
               >
                 <Image
                   src={currentSrc}
@@ -107,7 +105,7 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
                   {/* Top Category Badge & Maximize Icon */}
                   <div className="flex items-center justify-between">
                     {photo.category ? (
-                      <span className="px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-mono font-bold bg-[#0075ff] text-white">
+                      <span className="px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-mono font-bold bg-[#0056D2] text-white">
                         {photo.category}
                       </span>
                     ) : <span />}
@@ -124,7 +122,7 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
                     </h4>
                     {photo.location && (
                       <p className="text-[10px] sm:text-[11px] font-mono text-slate-300 flex items-center gap-1">
-                        <MapPin className="w-3 h-3 text-[#0075ff]" />
+                        <MapPin className="w-3 h-3 text-[#0056D2]" />
                         {photo.location}
                       </p>
                     )}
@@ -140,7 +138,7 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
         <div className="flex items-center justify-center pt-2">
           <Link
             href="/community/gallery"
-            className="h-11 sm:h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-[#0075ff] hover:bg-blue-600 text-white font-extrabold text-xs tracking-wider uppercase flex items-center justify-center gap-2.5 transition-all shadow-md hover:shadow-lg duration-200 cursor-pointer group"
+            className="h-11 sm:h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs tracking-wider uppercase flex items-center justify-center gap-2.5 transition-all shadow-md hover:shadow-lg duration-200 cursor-pointer group"
           >
             <Images className="w-4 h-4" />
             <span>View All Volunteer Pictures</span>
@@ -201,11 +199,7 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
           >
             <div className="relative w-full h-[55vh] sm:h-[65vh] bg-black">
               <Image
-                src={
-                  imageErrorMap[activePhoto.id || ""]
-                    ? DEFAULT_GALLERY[0].imageUrl
-                    : activePhoto.imageUrl
-                }
+                src={activePhoto.imageUrl}
                 alt={activePhoto.title}
                 fill
                 priority
@@ -216,7 +210,7 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
 
             {/* Caption Bar */}
             <div className="w-full p-5 bg-slate-900 border-t border-white/10 text-white space-y-1">
-              <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-[#0075ff]">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-[#0056D2]">
                 <span className="font-bold">{activePhoto.title}</span>
                 {activePhoto.date && <span>{activePhoto.date}</span>}
               </div>

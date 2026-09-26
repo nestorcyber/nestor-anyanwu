@@ -68,7 +68,7 @@ export default function ArticleCard({
                 {displayTags.slice(0, 2).map((tag, idx) => (
                   <span
                     key={idx}
-                    className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#0055cc] dark:text-sky-400"
+                    className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#0056D2] dark:text-sky-400"
                   >
                     {tag}
                   </span>
@@ -88,11 +88,11 @@ export default function ArticleCard({
 
             {/* Title & Upright Arrow Button */}
             <div className="flex items-start justify-between gap-3">
-              <h3 className="text-base sm:text-lg md:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors font-heading line-clamp-2 flex-1">
+              <h3 className="text-base sm:text-lg md:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0056D2] transition-colors font-heading line-clamp-2 flex-1">
                 {title}
               </h3>
 
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-900 text-white dark:bg-white dark:text-slate-900 group-hover:bg-[#0075ff] group-hover:border-[#0075ff] group-hover:text-white dark:group-hover:bg-[#0075ff] dark:group-hover:border-[#0075ff] dark:group-hover:text-white flex items-center justify-center shrink-0 transition-all duration-300 shadow-md group-hover:scale-105 mt-0.5">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-900 text-white dark:bg-white dark:text-slate-900 group-hover:bg-[#0056D2] group-hover:border-[#0056D2] group-hover:text-white dark:group-hover:bg-[#0056D2] dark:group-hover:border-[#0056D2] dark:group-hover:text-white flex items-center justify-center shrink-0 transition-all duration-300 shadow-md group-hover:scale-105 mt-0.5">
                 <ArrowUpRight className="w-4.5 h-4.5 sm:w-5 sm:h-5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </div>

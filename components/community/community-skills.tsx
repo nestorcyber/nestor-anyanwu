@@ -70,12 +70,12 @@ export default function CommunitySkills() {
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Skills Gained Through <span className="text-[#0075ff]">Service</span>
+            Skills Gained Through <span className="text-[#0056D2]">Service</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             Practical leadership, communication, operational rigor, and technical mastery honed through real-world community execution.
           </p>
-          <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
         </div>
 
         {/* Visual Skills Grid */}
@@ -85,19 +85,19 @@ export default function CommunitySkills() {
             return (
               <div
                 key={skill.id}
-                className="p-7 rounded-2xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0075ff] transition-all duration-300 group flex flex-col justify-between space-y-4 shadow-xs hover:shadow-xl"
+                className="p-7 rounded-2xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0056D2] transition-all duration-300 group flex flex-col justify-between space-y-4 shadow-xs hover:shadow-xl"
               >
                 <div className="space-y-4">
                   {/* Top Icon */}
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-[#0B1C2C] text-[#0075ff] flex items-center justify-center shadow-md border border-[#0075ff]/30 transition-transform duration-300 group-hover:scale-105 group-hover:border-[#0075ff]">
+                    <div className="w-12 h-12 rounded-2xl bg-[#0B1C2C] text-[#0056D2] flex items-center justify-center shadow-md border border-[#0056D2]/30 transition-transform duration-300 group-hover:scale-105 group-hover:border-[#0056D2]">
                       <Icon className="w-6 h-6 stroke-[2]" />
                     </div>
                   </div>
 
                   {/* Title & Description */}
                   <div className="space-y-1.5">
-                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-foreground font-heading tracking-tight group-hover:text-[#0075ff] transition-colors">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-foreground font-heading tracking-tight group-hover:text-[#0056D2] transition-colors">
                       {skill.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-600 dark:text-muted-foreground leading-relaxed font-normal">

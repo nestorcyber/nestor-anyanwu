@@ -111,12 +111,12 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Services &amp; <span className="text-[#0075ff]">Expertise</span>
+            Services &amp; <span className="text-[#0056D2]">Expertise</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             Comprehensive full-stack engineering, AI automation, visual design systems, IT consulting, and developer ecosystem leadership engineered for measurable impact.
           </p>
-          <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-1" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-1" />
         </div>
 
         {/* 6 Services Grid */}
@@ -126,16 +126,16 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
             return (
               <div
                 key={service.id}
-                className="p-7 sm:p-8 bg-card border border-border/70 rounded-3xl flex flex-col justify-between hover:border-[#0075ff] hover:shadow-xl transition-all duration-300 group shadow-xs min-h-[340px] sm:min-h-[360px]"
+                className="p-7 sm:p-8 bg-card border border-border/70 rounded-3xl flex flex-col justify-between hover:border-[#0056D2] hover:shadow-xl transition-all duration-300 group shadow-xs min-h-[340px] sm:min-h-[360px]"
               >
                 <div>
                   {/* Dark Rounded Squircle Icon Badge */}
-                  <div className="w-14 h-14 bg-slate-950 dark:bg-slate-800 text-white rounded-2xl flex items-center justify-center p-3.5 shadow-md border border-slate-800/80 mb-6 group-hover:scale-105 group-hover:bg-[#0075ff] transition-all duration-300">
+                  <div className="w-14 h-14 bg-slate-950 dark:bg-slate-800 text-white rounded-2xl flex items-center justify-center p-3.5 shadow-md border border-slate-800/80 mb-6 group-hover:scale-105 group-hover:bg-[#0056D2] transition-all duration-300">
                     {getIcon(service.iconName)}
                   </div>
 
                   {/* Main Card Heading */}
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-foreground font-heading tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors mb-1.5">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-foreground font-heading tracking-tight leading-snug group-hover:text-[#0056D2] transition-colors mb-1.5">
                     {service.title}
                   </h3>
 

@@ -166,7 +166,7 @@ const GRAPHIC_COMPONENTS = [
 
 // Distinct brand palette for logo boxes & corner graphics
 const BRAND_PALETTES = [
-  { logoBg: "bg-[#0075ff] text-white", graphicColor: "text-[#0075ff]" },
+  { logoBg: "bg-[#0056D2] text-white", graphicColor: "text-[#0056D2]" },
   { logoBg: "bg-[#8b5cf6] text-white", graphicColor: "text-[#8b5cf6]" },
   { logoBg: "bg-[#eab308] text-slate-950", graphicColor: "text-[#eab308]" },
   { logoBg: "bg-[#10b981] text-white", graphicColor: "text-[#10b981]" },
@@ -256,7 +256,7 @@ export default function MembershipCard({
   const FallbackIcon = getOrgFallbackIcon(membership.organization)
 
   return (
-    <article className="group relative flex flex-col justify-between aspect-square w-full bg-white dark:bg-[#0E1724] text-slate-900 dark:text-white border border-slate-200/90 dark:border-slate-800/90 hover:border-[#0075ff]/80 rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden select-none">
+    <article className="group relative flex flex-col justify-between aspect-square w-full bg-white dark:bg-[#0E1724] text-slate-900 dark:text-white border border-slate-200/90 dark:border-slate-800/90 hover:border-[#0056D2]/80 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden select-none">
       
       {/* ─── Bottom-Right Decorative Generative Pattern Graphic (Matching Reference Image) ─── */}
       <div className="absolute right-0 bottom-0 w-36 h-36 sm:w-44 sm:h-44 pointer-events-none transition-transform duration-500 group-hover:scale-105 overflow-hidden">
@@ -268,7 +268,7 @@ export default function MembershipCard({
         
         {/* Logo Badge Container: Significantly enlarged for maximum legibility */}
         <div
-          className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl ${
+          className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl ${
             hasValidLogo
               ? "bg-white border border-slate-200/90 dark:border-slate-700/80 shadow-xs"
               : palette.logoBg + " shadow-sm"
@@ -300,12 +300,12 @@ export default function MembershipCard({
       {/* ─── Middle Section: Role & Organization Name (Full Names Across 2-3 Lines) ─── */}
       <div className="relative z-10 space-y-1.5 my-auto w-full pr-2 pt-3 sm:pt-4">
         {/* Role Subtitle */}
-        <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#0075ff] dark:text-sky-400 font-mono line-clamp-2 leading-snug">
+        <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#0056D2] dark:text-sky-400 font-mono line-clamp-2 leading-snug">
           {membership.role || "Member"}
         </p>
 
         {/* Organization Name */}
-        <h3 className="text-lg sm:text-xl md:text-[22px] font-bold text-slate-900 dark:text-white tracking-tight font-heading leading-snug group-hover:text-[#0075ff] dark:group-hover:text-sky-400 transition-colors line-clamp-3">
+        <h3 className="text-lg sm:text-xl md:text-[22px] font-bold text-slate-900 dark:text-white tracking-tight font-heading leading-snug group-hover:text-[#0056D2] dark:group-hover:text-sky-400 transition-colors line-clamp-3">
           {membership.organization}
         </h3>
       </div>

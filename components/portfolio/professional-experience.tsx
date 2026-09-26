@@ -86,29 +86,29 @@ export default function ProfessionalExperience({
   return (
     <section id="experience" className="w-full py-16 md:py-24 border-b border-border/70 bg-card/20 relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-[#0075ff]/5 dark:bg-[#0075ff]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-[#0056D2]/5 dark:bg-[#0056D2]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="site-container relative z-10 space-y-12">
         
         {/* Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Career <span className="text-[#0075ff]">Roadmap</span> &amp; Experience
+            Career <span className="text-[#0056D2]">Roadmap</span> &amp; Experience
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             Verified engineering track record, technical directorship, and full-stack software delivery.
           </p>
-          <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-1" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-1" />
         </div>
 
         {/* Connected Roadmap Timeline Track */}
         <div className="relative max-w-5xl mx-auto pt-4 pb-2">
           
           {/* Continuous Central Glowing Roadmap Spine Line in Brand Electric Blue (Desktop) */}
-          <div className="absolute left-6 md:left-1/2 top-4 bottom-8 w-[2px] -translate-x-1/2 bg-gradient-to-b from-[#0075ff] via-[#0075ff]/60 to-transparent pointer-events-none hidden md:block" />
+          <div className="absolute left-6 md:left-1/2 top-4 bottom-8 w-[2px] -translate-x-1/2 bg-gradient-to-b from-[#0056D2] via-[#0056D2]/60 to-transparent pointer-events-none hidden md:block" />
 
           {/* Continuous Left-Aligned Glowing Spine Line (Mobile) */}
-          <div className="absolute left-6 top-4 bottom-8 w-[2px] bg-gradient-to-b from-[#0075ff] via-[#0075ff]/60 to-transparent pointer-events-none md:hidden" />
+          <div className="absolute left-6 top-4 bottom-8 w-[2px] bg-gradient-to-b from-[#0056D2] via-[#0056D2]/60 to-transparent pointer-events-none md:hidden" />
 
           {/* Roadmap Milestone Items */}
           <div className="space-y-12 md:space-y-16">
@@ -124,7 +124,7 @@ export default function ProfessionalExperience({
                 >
                   {/* 1. Milestone Roadmap Card Content */}
                   <div className="w-full md:w-[calc(50%-2.5rem)] pl-14 sm:pl-16 md:pl-0">
-                    <article className="group relative bg-white dark:bg-card border border-slate-200/90 dark:border-slate-800 hover:border-[#0075ff] rounded-2xl sm:rounded-3xl p-6 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_10px_30px_rgba(0,117,255,0.12)] transition-all duration-300 space-y-4">
+                    <article className="group relative bg-white dark:bg-card border border-slate-200/90 dark:border-slate-800 hover:border-[#0056D2] rounded-2xl sm:rounded-3xl p-6 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_10px_30px_rgba(0,86,210,0.12)] transition-all duration-300 space-y-4">
                       
                       {/* Speech Bubble Notch pointing to center spine on Desktop */}
                       {isEven ? (
@@ -135,10 +135,10 @@ export default function ProfessionalExperience({
 
                       {/* Header Block: Title & Domain */}
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-foreground font-heading tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors">
+                        <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-foreground font-heading tracking-tight leading-snug group-hover:text-[#0056D2] transition-colors">
                           {item.title}
                         </h3>
-                        <p className="text-sm sm:text-base font-semibold text-[#0075ff] mt-1">
+                        <p className="text-sm sm:text-base font-semibold text-[#0056D2] mt-1">
                           {item.organization}
                         </p>
                       </div>
@@ -146,7 +146,7 @@ export default function ProfessionalExperience({
                       {/* Description Bullet Point */}
                       <div className="pt-1">
                         <div className="flex items-start gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-                          <Play className="w-2.5 h-2.5 mt-1.5 fill-[#0075ff] text-[#0075ff] shrink-0" />
+                          <Play className="w-2.5 h-2.5 mt-1.5 fill-[#0056D2] text-[#0056D2] shrink-0" />
                           <span>{item.description}</span>
                         </div>
                       </div>
@@ -157,7 +157,7 @@ export default function ProfessionalExperience({
                           {item.details.map((tag, tIdx) => (
                             <span
                               key={tIdx}
-                              className="px-3 py-1 rounded-lg bg-[#0075ff]/10 text-[#0075ff] border border-[#0075ff]/20 text-xs font-semibold"
+                              className="px-3 py-1 rounded-lg bg-[#0056D2]/10 text-[#0056D2] border border-[#0056D2]/20 text-xs font-semibold"
                             >
                               {tag}
                             </span>
@@ -170,7 +170,7 @@ export default function ProfessionalExperience({
 
                   {/* 2. Central Glowing Node Icon Badge on Spine */}
                   <div className="absolute left-6 md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 -translate-y-0 md:-translate-y-1/2 z-20">
-                    <div className="w-12 h-12 rounded-full bg-[#0B1C2C] text-[#0075ff] flex items-center justify-center shadow-[0_0_18px_rgba(0,117,255,0.35)] border-2 border-[#0075ff]/70 transition-all duration-300 hover:scale-110 hover:border-[#0075ff] hover:shadow-[0_0_24px_rgba(0,117,255,0.55)]">
+                    <div className="w-12 h-12 rounded-full bg-[#0B1C2C] text-[#0056D2] flex items-center justify-center shadow-[0_0_18px_rgba(0,86,210,0.35)] border-2 border-[#0056D2]/70 transition-all duration-300 hover:scale-110 hover:border-[#0056D2] hover:shadow-[0_0_24px_rgba(0,86,210,0.55)]">
                       {getSpineIcon(idx)}
                     </div>
                   </div>
@@ -181,7 +181,7 @@ export default function ProfessionalExperience({
                       isEven ? "justify-start pl-6" : "justify-end pr-6 text-right"
                     }`}
                   >
-                    <span className="text-sm font-bold font-mono text-[#0075ff] tracking-wide px-3 py-1 rounded-md bg-[#0075ff]/5 border border-[#0075ff]/15">
+                    <span className="text-sm font-bold font-mono text-[#0056D2] tracking-wide px-3 py-1 rounded-md bg-[#0056D2]/5 border border-[#0056D2]/15">
                       {item.date}
                     </span>
                   </div>

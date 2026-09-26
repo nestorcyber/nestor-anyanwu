@@ -31,7 +31,7 @@ export default function PortfolioAboutSection({ settings }: { settings?: SiteSet
       className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 sm:py-20 md:py-28 border-b border-border/70 bg-white dark:bg-background overflow-hidden relative flex flex-col justify-center"
     >
       {/* Ambient background lighting */}
-      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#0075ff]/5 dark:bg-[#0075ff]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#0056D2]/5 dark:bg-[#0056D2]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="site-container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 xl:gap-20 items-center">
@@ -46,7 +46,7 @@ export default function PortfolioAboutSection({ settings }: { settings?: SiteSet
                 <br className="hidden sm:inline" />
                 Precision &amp;{" "}
                 <br className="hidden sm:inline" />
-                <span className="text-[#0075ff]">Human Impact</span>
+                <span className="text-[#0056D2]">Human Impact</span>
               </h2>
 
               <p className="text-base sm:text-lg text-slate-600 dark:text-muted-foreground font-normal leading-relaxed max-w-md">
@@ -57,7 +57,7 @@ export default function PortfolioAboutSection({ settings }: { settings?: SiteSet
             <div className="pt-2">
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 text-sm sm:text-base font-bold text-[#0075ff] hover:text-[#005cd9] transition-colors group cursor-pointer"
+                className="inline-flex items-center gap-2 text-sm sm:text-base font-bold text-[#0056D2] hover:text-[#0044a8] transition-colors group cursor-pointer"
               >
                 <span>Explore Full Story &amp; Vision</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -74,7 +74,7 @@ export default function PortfolioAboutSection({ settings }: { settings?: SiteSet
               return (
                 <div key={idx} className="flex items-start gap-4 sm:gap-5 group">
                   {/* Clean Electric Blue Outline Icon */}
-                  <div className="mt-1 shrink-0 text-[#0075ff]">
+                  <div className="mt-1 shrink-0 text-[#0056D2]">
                     <Icon className="w-6 h-6 sm:w-7 sm:h-7 stroke-[2.2] transition-transform duration-300 group-hover:scale-110" />
                   </div>
 

@@ -121,20 +121,20 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
               href="/community"
               className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer group"
             >
-              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 text-[#0075ff]" />
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 text-[#0056D2]" />
               <span>Back to Community</span>
             </Link>
             <span>/</span>
-            <span className="text-[#0075ff] font-semibold">Community Roadmap</span>
+            <span className="text-[#0056D2] font-semibold">Community Roadmap</span>
           </div>
 
           {/* Left-Aligned Heading with Verified Icon */}
           <div className="space-y-3">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight font-heading leading-[1.18]">
-              Community &amp; <span className="text-[#0075ff]">Volunteering</span>{" "}
+              Community &amp; <span className="text-[#0056D2]">Volunteering</span>{" "}
               <span className="inline-flex items-center gap-2 sm:gap-3 whitespace-nowrap">
                 Roadmap
-                <span className="inline-flex items-center justify-center text-[#0075ff] w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 shrink-0 drop-shadow-[0_4px_12px_rgba(0,117,255,0.3)] align-middle">
+                <span className="inline-flex items-center justify-center text-[#0056D2] w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 shrink-0 drop-shadow-[0_4px_12px_rgba(0,86,210,0.3)] align-middle">
                   <svg
                     viewBox="0 0 24 24"
                     className="w-full h-full fill-current"
@@ -170,7 +170,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-4 py-2 text-xs font-semibold rounded-xl border transition-all cursor-pointer whitespace-nowrap ${
                     selectedCategory === cat
-                      ? "bg-[#0075ff] text-white border-[#0075ff] shadow-xs font-bold"
+                      ? "bg-[#0056D2] text-white border-[#0056D2] shadow-xs font-bold"
                       : "bg-secondary/70 text-muted-foreground border-border/80 hover:bg-secondary hover:text-foreground"
                   }`}
                 >
@@ -187,7 +187,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search initiatives..."
-                className="w-full pl-10 pr-9 py-2 text-xs sm:text-sm bg-secondary/70 border border-border/80 rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#0075ff]"
+                className="w-full pl-10 pr-9 py-2 text-xs sm:text-sm bg-secondary/70 border border-border/80 rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#0056D2]"
               />
               {searchQuery && (
                 <button
@@ -212,7 +212,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                   setSelectedCategory("All")
                   setSearchQuery("")
                 }}
-                className="text-[#0075ff] hover:underline cursor-pointer font-bold"
+                className="text-[#0056D2] hover:underline cursor-pointer font-bold"
               >
                 Reset Filters
               </button>
@@ -226,7 +226,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
               {/* Vertical Highway Road Track (Left Side) */}
               <div className="absolute left-5 sm:left-7 md:left-9 top-4 bottom-8 w-6 sm:w-7 md:w-8 -translate-x-1/2 bg-slate-900 dark:bg-slate-950 border-x-2 border-slate-700/80 dark:border-slate-800 rounded-full shadow-inner flex items-center justify-center pointer-events-none overflow-hidden z-0">
                 {/* Center Road Dashed Lane Divider */}
-                <div className="w-[2px] h-full bg-[repeating-linear-gradient(to_bottom,#0075ff_0,#0075ff_14px,transparent_14px,transparent_28px)] opacity-80" />
+                <div className="w-[2px] h-full bg-[repeating-linear-gradient(to_bottom,#0056D2_0,#0056D2_14px,transparent_14px,transparent_28px)] opacity-80" />
               </div>
 
               {/* Road Milestones Items */}
@@ -244,17 +244,17 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                     >
                       {/* Waypoint Node (Centered on Left Road Track) */}
                       <div className="absolute left-5 sm:left-7 md:left-9 -translate-x-1/2 top-4 z-20">
-                        <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#0B1C2C] text-[#0075ff] flex items-center justify-center shadow-[0_0_18px_rgba(0,117,255,0.45)] border-2 border-[#0075ff] transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#0075ff] group-hover:text-white">
+                        <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#0B1C2C] text-[#0056D2] flex items-center justify-center shadow-[0_0_18px_rgba(0,86,210,0.45)] border-2 border-[#0056D2] transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#0056D2] group-hover:text-white">
                           <InitiativeIcon className="w-5 h-5 stroke-[2]" />
                         </div>
                       </div>
 
                       {/* Horizontal Connector Branch */}
-                      <div className="absolute left-5 sm:left-7 md:left-9 top-9 w-8 sm:w-10 md:w-12 h-[2px] bg-gradient-to-r from-[#0075ff] to-[#0075ff]/40 pointer-events-none z-10" />
+                      <div className="absolute left-5 sm:left-7 md:left-9 top-9 w-8 sm:w-10 md:w-12 h-[2px] bg-gradient-to-r from-[#0056D2] to-[#0056D2]/40 pointer-events-none z-10" />
 
                       {/* Milestone Card Container */}
                       <div className="w-full pl-14 sm:pl-18 md:pl-22">
-                        <article className="bg-card border border-border/80 hover:border-[#0075ff] rounded-2xl p-5 sm:p-7 shadow-xs hover:shadow-xl transition-all duration-300 space-y-4 relative">
+                        <article className="bg-card border border-border/80 hover:border-[#0056D2] rounded-2xl p-5 sm:p-7 shadow-xs hover:shadow-xl transition-all duration-300 space-y-4 relative">
                           {/* Pointer notch */}
                           <div className="hidden sm:block absolute -left-2 top-4 w-0 h-0 border-y-[6px] border-y-transparent border-r-[8px] border-r-border" />
 
@@ -262,14 +262,14 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-2 border-b border-border/60">
                             <div className="space-y-0.5">
                               <div className="flex flex-wrap items-center gap-2">
-                                <span className="text-[11px] font-mono font-bold text-[#0075ff] uppercase tracking-wider">
+                                <span className="text-[11px] font-mono font-bold text-[#0056D2] uppercase tracking-wider">
                                   {item.organization}
                                 </span>
                                 <span className="px-2 py-0.5 rounded-md bg-secondary text-[10px] font-mono text-muted-foreground font-semibold">
                                   {category}
                                 </span>
                               </div>
-                              <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight group-hover:text-[#0075ff] transition-colors">
+                              <h3 className="text-lg sm:text-xl font-bold text-foreground font-heading tracking-tight group-hover:text-[#0056D2] transition-colors">
                                 {item.slug ? (
                                   <Link href={`/community/${item.slug}`} className="hover:underline">
                                     {item.organization}
@@ -279,14 +279,14 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                                 )}
                               </h3>
                               {item.role && (
-                                <p className="text-xs sm:text-sm font-semibold text-[#0075ff]">
+                                <p className="text-xs sm:text-sm font-semibold text-[#0056D2]">
                                   {item.role}
                                 </p>
                               )}
                             </div>
 
                             <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
-                              <span className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-[#0075ff] px-2.5 py-1 rounded-md bg-[#0075ff]/10 border border-[#0075ff]/20 whitespace-nowrap">
+                              <span className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-[#0056D2] px-2.5 py-1 rounded-md bg-[#0056D2]/10 border border-[#0056D2]/20 whitespace-nowrap">
                                 <Calendar className="w-3 h-3" />
                                 <span>{item.duration}</span>
                               </span>
@@ -327,7 +327,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                               <ul className="space-y-1.5">
                                 {item.achievements.map((achieve, aIdx) => (
                                   <li key={aIdx} className="flex items-start gap-2 text-xs sm:text-sm text-foreground/90">
-                                    <CheckCircle2 className="w-3.5 h-3.5 text-[#0075ff] shrink-0 mt-0.5" />
+                                    <CheckCircle2 className="w-3.5 h-3.5 text-[#0056D2] shrink-0 mt-0.5" />
                                     <span>{achieve}</span>
                                   </li>
                                 ))}
@@ -340,7 +340,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2">
                               {item.impactStats.map((stat, sIdx) => (
                                 <div key={sIdx} className="p-2.5 rounded-xl bg-secondary/70 border border-border/50 text-center space-y-0.5">
-                                  <p className="text-sm font-black font-heading text-[#0075ff]">{stat.value}</p>
+                                  <p className="text-sm font-black font-heading text-[#0056D2]">{stat.value}</p>
                                   <p className="text-[10px] font-mono text-muted-foreground">{stat.label}</p>
                                 </div>
                               ))}
@@ -366,7 +366,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                               <div>
                                 <Link
                                   href={`/community/${item.slug}`}
-                                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0075ff] hover:underline cursor-pointer"
+                                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0056D2] hover:underline cursor-pointer"
                                 >
                                   <span>View Full Case Study</span>
                                   <ArrowRight className="w-3.5 h-3.5" />
@@ -392,7 +392,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                   setSelectedCategory("All")
                   setSearchQuery("")
                 }}
-                className="mt-2 text-xs font-bold text-[#0075ff] underline cursor-pointer"
+                className="mt-2 text-xs font-bold text-[#0056D2] underline cursor-pointer"
               >
                 Clear all filters
               </button>

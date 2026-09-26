@@ -105,7 +105,7 @@ export default function RichTextEditor({
       LinkExtension.configure({
         openOnClick: false,
         HTMLAttributes: {
-          class: 'text-[#0070f3] underline font-semibold hover:text-blue-600 transition-colors',
+          class: 'text-[#0056D2] underline font-semibold hover:text-blue-600 transition-colors',
           target: '_blank',
           rel: 'noopener noreferrer',
         },
@@ -254,7 +254,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().toggleBold().run()}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive('bold')
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Bold (Ctrl+B)"
@@ -266,7 +266,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().toggleItalic().run()}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive('italic')
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Italic (Ctrl+I)"
@@ -278,7 +278,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().toggleUnderline().run()}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive('underline')
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Underline (Ctrl+U)"
@@ -290,7 +290,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().toggleStrike().run()}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive('strike')
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Strikethrough"
@@ -302,7 +302,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().toggleCode().run()}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive('code')
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Inline Code"
@@ -318,7 +318,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().setParagraph().run()}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive('paragraph') && !editor.isActive('heading')
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Normal Paragraph"
@@ -330,7 +330,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
             className={`p-1.5 rounded-lg text-xs font-extrabold transition-all ${
               editor.isActive('heading', { level: 1 })
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Heading 1"
@@ -342,7 +342,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
             className={`p-1.5 rounded-lg text-xs font-extrabold transition-all ${
               editor.isActive('heading', { level: 2 })
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Heading 2"
@@ -354,7 +354,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
             className={`p-1.5 rounded-lg text-xs font-extrabold transition-all ${
               editor.isActive('heading', { level: 3 })
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Heading 3"
@@ -366,7 +366,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
             className={`p-1.5 rounded-lg text-xs font-extrabold transition-all ${
               editor.isActive('heading', { level: 4 })
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Heading 4"
@@ -382,7 +382,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().toggleBulletList().run()}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive('bulletList')
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Bullet List"
@@ -394,7 +394,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().toggleOrderedList().run()}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive('orderedList')
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Numbered List"
@@ -406,7 +406,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().toggleBlockquote().run()}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive('blockquote')
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Blockquote"
@@ -418,7 +418,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().toggleCodeBlock().run()}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive('codeBlock')
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Code Block"
@@ -442,7 +442,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().setTextAlign('left').run()}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive({ textAlign: 'left' })
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Align Left"
@@ -454,7 +454,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().setTextAlign('center').run()}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive({ textAlign: 'center' })
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Align Center"
@@ -466,7 +466,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().setTextAlign('right').run()}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive({ textAlign: 'right' })
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Align Right"
@@ -478,7 +478,7 @@ export default function RichTextEditor({
             onClick={() => editor.chain().focus().setTextAlign('justify').run()}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive({ textAlign: 'justify' })
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Justify Text"
@@ -498,7 +498,7 @@ export default function RichTextEditor({
             }}
             className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
               editor.isActive('link')
-                ? 'bg-[#0070f3] text-white shadow-xs'
+                ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
             }`}
             title="Insert Link"
@@ -524,7 +524,7 @@ export default function RichTextEditor({
             className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-2.5 py-1.5 text-xs font-bold text-foreground hover:bg-secondary transition-colors shadow-2xs cursor-pointer ml-1"
             title="Upload image directly to article body"
           >
-            <Upload className="w-3.5 h-3.5 text-[#0070f3]" />
+            <Upload className="w-3.5 h-3.5 text-[#0056D2]" />
             <span>Upload Image</span>
           </button>
 
@@ -563,14 +563,14 @@ export default function RichTextEditor({
       {/* Cloudinary Progress & Errors */}
       {isUploading && (
         <div className="flex items-center gap-3 p-3 rounded-xl border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs">
-          <Loader2 className="h-4 w-4 animate-spin shrink-0 text-[#0070f3]" />
+          <Loader2 className="h-4 w-4 animate-spin shrink-0 text-[#0056D2]" />
           <div className="flex-1 space-y-1">
             <div className="flex items-center justify-between font-semibold">
               <span>Uploading image to Cloudinary…</span>
               <span>{uploadProgress}%</span>
             </div>
             <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden">
-              <div className="h-full bg-[#0070f3] transition-all duration-200" style={{ width: `${uploadProgress}%` }} />
+              <div className="h-full bg-[#0056D2] transition-all duration-200" style={{ width: `${uploadProgress}%` }} />
             </div>
           </div>
         </div>
@@ -593,12 +593,12 @@ export default function RichTextEditor({
             placeholder="https://example.com"
             value={linkUrl}
             onChange={(e) => setLinkUrl(e.target.value)}
-            className="flex-1 px-3 py-1.5 text-xs rounded-lg border border-border bg-background text-foreground focus:outline-none focus:border-[#0070f3]"
+            className="flex-1 px-3 py-1.5 text-xs rounded-lg border border-border bg-background text-foreground focus:outline-none focus:border-[#0056D2]"
           />
           <button
             type="button"
             onClick={setLink}
-            className="px-3 py-1.5 text-xs font-bold bg-[#0070f3] text-white rounded-lg hover:bg-blue-600 transition-colors"
+            className="px-3 py-1.5 text-xs font-bold bg-[#0056D2] text-white rounded-lg hover:bg-[#0044a8] transition-colors"
           >
             Apply Link
           </button>
@@ -649,7 +649,7 @@ export default function RichTextEditor({
           margin-bottom: 0.5rem;
         }
         .article-editor-content blockquote {
-          border-left: 4px solid #0070f3;
+          border-left: 4px solid #0056D2;
           padding-left: 1rem;
           font-style: italic;
           margin-top: 1.25rem;

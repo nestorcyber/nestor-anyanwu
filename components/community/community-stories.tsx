@@ -64,12 +64,12 @@ export default function CommunityStories({ stories = DEFAULT_STORIES }: Communit
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Community <span className="text-[#0075ff]">Stories</span> &amp; Reflections
+            Community <span className="text-[#0056D2]">Stories</span> &amp; Reflections
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             First-hand reflections, operational breakdowns, and technical case studies written during my volunteer journey.
           </p>
-          <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
         </div>
 
         {/* Stories Card Grid */}
@@ -79,7 +79,7 @@ export default function CommunityStories({ stories = DEFAULT_STORIES }: Communit
             return (
               <article
                 key={story.id}
-                className="group rounded-3xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0075ff] overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-xl transition-all duration-300"
+                className="group rounded-3xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0056D2] overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-xl transition-all duration-300"
               >
                 <div>
                   {/* Fixed Aspect Ratio Image Container */}
@@ -92,7 +92,7 @@ export default function CommunityStories({ stories = DEFAULT_STORIES }: Communit
                       sizes="(max-width: 768px) 100vw, 400px"
                     />
                     {story.organization && (
-                      <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-[#0075ff] text-white shadow-xs">
+                      <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-[#0056D2] text-white shadow-xs">
                         {story.organization}
                       </div>
                     )}
@@ -102,13 +102,13 @@ export default function CommunityStories({ stories = DEFAULT_STORIES }: Communit
                   <div className="p-6 space-y-3">
                     <div className="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
                       <span className="inline-flex items-center gap-1">
-                        <Calendar className="w-3.5 h-3.5 text-[#0075ff]" />
+                        <Calendar className="w-3.5 h-3.5 text-[#0056D2]" />
                         {story.date}
                       </span>
                       {story.readTime && <span>{story.readTime}</span>}
                     </div>
 
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-foreground font-heading tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors line-clamp-2">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-foreground font-heading tracking-tight leading-snug group-hover:text-[#0056D2] transition-colors line-clamp-2">
                       {story.title}
                     </h3>
 
@@ -122,7 +122,7 @@ export default function CommunityStories({ stories = DEFAULT_STORIES }: Communit
                 <div className="p-6 pt-0">
                   <Link
                     href={destination}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0075ff] hover:text-[#005cd9] transition-colors group-hover:translate-x-0.5 transition-transform"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0056D2] hover:text-[#0044a8] transition-colors group-hover:translate-x-0.5 transition-transform"
                   >
                     <span>Read Full Story</span>
                     <ArrowRight className="w-3.5 h-3.5" />

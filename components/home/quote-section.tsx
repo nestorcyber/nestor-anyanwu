@@ -19,7 +19,7 @@ export default function QuoteSection({
   return (
     <section className="w-full py-16 sm:py-20 md:py-28 bg-background border-b border-border/60 relative overflow-hidden">
       {/* Subtle Background Glow Accent */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[#0075ff]/5 dark:bg-[#0075ff]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[#0056D2]/5 dark:bg-[#0056D2]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="site-container relative z-10 max-w-5xl mx-auto text-center space-y-7 sm:space-y-9">
         

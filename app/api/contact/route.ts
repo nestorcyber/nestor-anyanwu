@@ -101,18 +101,18 @@ export async function POST(req: NextRequest) {
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #1e293b; background-color: #f8fafc; margin: 0; padding: 20px; }
     .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
-    .header { background: #0B1C2C; color: #ffffff; padding: 24px 30px; border-bottom: 3px solid #0075ff; }
+    .header { background: #0B1C2C; color: #ffffff; padding: 24px 30px; border-bottom: 3px solid #0056D2; }
     .header h1 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: #ffffff; }
     .header p { margin: 4px 0 0 0; font-size: 13px; color: #94a3b8; }
     .content { padding: 30px; }
-    .section-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #0075ff; margin-top: 24px; margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 6px; }
+    .section-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #0056D2; margin-top: 24px; margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 6px; }
     .section-title:first-child { margin-top: 0; }
     .field-row { margin-bottom: 10px; display: flex; font-size: 14px; }
     .field-label { font-weight: 700; color: #475569; width: 180px; flex-shrink: 0; }
     .field-value { color: #0f172a; flex: 1; word-break: break-word; }
     .message-box { background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-top: 10px; font-size: 14px; color: #1e293b; white-space: pre-wrap; word-break: break-word; }
     .footer { background-color: #f8fafc; padding: 16px 30px; border-top: 1px solid #e2e8f0; font-size: 12px; color: #64748b; text-align: center; }
-    .reply-badge { display: inline-block; background-color: #eff6ff; color: #0075ff; border: 1px solid #bfdbfe; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; margin-top: 6px; }
+    .reply-badge { display: inline-block; background-color: #eff6ff; color: #0056D2; border: 1px solid #bfdbfe; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; margin-top: 6px; }
   </style>
 </head>
 <body>
@@ -129,7 +129,7 @@ export async function POST(req: NextRequest) {
       </div>
       <div class="field-row">
         <span class="field-label">Email Address:</span>
-        <span class="field-value"><a href="mailto:${escapeHtml(email)}" style="color: #0075ff; text-decoration: none; font-weight: 600;">${escapeHtml(email)}</a></span>
+        <span class="field-value"><a href="mailto:${escapeHtml(email)}" style="color: #0056D2; text-decoration: none; font-weight: 600;">${escapeHtml(email)}</a></span>
       </div>
       ${phone ? `
       <div class="field-row">

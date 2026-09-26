@@ -194,11 +194,11 @@ export default function JourneyForm({ initial, returnTo }: Props) {
                 type="checkbox"
                 checked={inWork}
                 onChange={(e) => setInWork(e.target.checked)}
-                className="mt-0.5 w-4 h-4 rounded text-[#0075ff] focus:ring-[#0075ff]"
+                className="mt-0.5 w-4 h-4 rounded text-[#0056D2] focus:ring-[#0056D2]"
               />
               <div className="space-y-0.5">
                 <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm text-foreground">
-                  <Briefcase className="w-4 h-4 text-[#0075ff]" />
+                  <Briefcase className="w-4 h-4 text-[#0056D2]" />
                   <span>Professional Work Experience</span>
                 </div>
                 <p className="text-[11px] text-muted-foreground leading-relaxed">

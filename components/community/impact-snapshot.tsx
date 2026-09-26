@@ -28,13 +28,13 @@ export default function ImpactSnapshot({ stats }: ImpactSnapshotProps) {
             return (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-white/5 dark:bg-card/60 border border-white/10 dark:border-slate-800 hover:border-[#0075ff]/60 transition-all duration-300 group flex flex-col justify-between space-y-4 shadow-sm"
+                className="p-6 rounded-2xl bg-white/5 dark:bg-card/60 border border-white/10 dark:border-slate-800 hover:border-[#0056D2]/60 transition-all duration-300 group flex flex-col justify-between space-y-4 shadow-sm"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl sm:text-4xl font-black font-heading text-white tracking-tight group-hover:text-[#0075ff] transition-colors">
+                  <span className="text-3xl sm:text-4xl font-black font-heading text-white tracking-tight group-hover:text-[#0056D2] transition-colors">
                     {stat.value}
                   </span>
-                  <div className="w-10 h-10 rounded-xl bg-white/10 dark:bg-slate-800 text-[#0075ff] flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-white/10 dark:bg-slate-800 text-[#0056D2] flex items-center justify-center">
                     <Icon className="w-5 h-5" />
                   </div>
                 </div>

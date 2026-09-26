@@ -37,7 +37,7 @@ export function Markdown({ content }: { content: string }) {
   const formattedContent = formatMarkdownSpacing(content)
 
   return (
-    <div className="article-content prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-extrabold prose-headings:mt-10 prose-headings:mb-4 prose-p:my-6 prose-p:leading-relaxed md:prose-p:leading-loose prose-a:text-[#0070f3] prose-[#0070f3]">
+    <div className="article-content prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-extrabold prose-headings:mt-10 prose-headings:mb-4 prose-p:my-6 prose-p:leading-relaxed md:prose-p:leading-loose prose-a:text-[#0056D2] prose-[#0056D2]">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{

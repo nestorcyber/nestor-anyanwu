@@ -16,7 +16,7 @@ export default function FeaturedCommunity() {
     <section id="community-work" className="w-full relative overflow-hidden bg-background py-16 sm:py-20 md:py-28 border-b border-border/60">
       
       {/* Background Soft Glow Ambience */}
-      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#0075ff]/5 dark:bg-[#0075ff]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#0056D2]/5 dark:bg-[#0056D2]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="site-container relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         
@@ -60,7 +60,7 @@ export default function FeaturedCommunity() {
             {/* Standard Heading Size */}
             <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight leading-tight font-heading">
               Community &amp; <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0070f3] via-sky-500 to-indigo-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0056D2] via-sky-500 to-indigo-500">
                 Volunteer Impact
               </span>
             </h2>
@@ -74,7 +74,7 @@ export default function FeaturedCommunity() {
             <div className="space-y-3 pt-1">
               {highlights.map((point, index) => (
                 <div key={index} className="flex items-start gap-3">
-                  <div className="p-1 rounded-full bg-[#0070f3]/10 text-[#0070f3] shrink-0 mt-0.5">
+                  <div className="p-1 rounded-full bg-[#0056D2]/10 text-[#0056D2] shrink-0 mt-0.5">
                     <CheckCircle2 className="w-4 h-4" />
                   </div>
                   <span className="text-xs sm:text-sm text-foreground/90 font-medium leading-normal">
@@ -88,7 +88,7 @@ export default function FeaturedCommunity() {
             <div className="pt-3 flex justify-start">
               <Link
                 href="/community"
-                className="h-11 sm:h-12 bg-[#0070f3] hover:bg-blue-600 text-white font-extrabold text-xs sm:text-sm tracking-wide px-6 sm:px-8 rounded-xl shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center gap-2 cursor-pointer group"
+                className="h-11 sm:h-12 bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs sm:text-sm tracking-wide px-6 sm:px-8 rounded-xl shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center gap-2 cursor-pointer group"
               >
                 <span>Explore Community Work</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

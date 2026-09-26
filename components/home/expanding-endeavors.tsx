@@ -117,20 +117,20 @@ export default function ExpandingEndeavors() {
             {/* Top Row: Floating Arrow Button Overlay */}
             <div className="relative z-10 flex items-center justify-end">
               {/* Arrow Button Overlay (like in ArticleCard) */}
-              <div className="w-10 h-10 rounded-xl border border-white/20 bg-slate-900/90 text-white group-hover:bg-[#0075ff] group-hover:border-[#0075ff] group-hover:text-white flex items-center justify-center shrink-0 transition-all duration-300 shadow-md group-hover:scale-110 active:scale-95">
+              <div className="w-10 h-10 rounded-xl border border-white/20 bg-slate-900/90 text-white group-hover:bg-[#0056D2] group-hover:border-[#0056D2] group-hover:text-white flex items-center justify-center shrink-0 transition-all duration-300 shadow-md group-hover:scale-110 active:scale-95">
                 <ArrowUpRight className="w-5 h-5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </div>
 
             {/* Bottom Content Area */}
             <div className="relative z-10 space-y-1.5 text-white pb-1">
-              <h3 className="text-xl font-extrabold tracking-tight text-white font-heading group-hover:text-[#0075ff] transition-colors leading-tight">
+              <h3 className="text-xl font-extrabold tracking-tight text-white font-heading group-hover:text-[#0056D2] transition-colors leading-tight">
                 {item.title}
               </h3>
               <p className="text-xs text-accent font-semibold uppercase tracking-wider">
                 {item.subtitle}
               </p>
-              <div className="h-0.5 w-10 bg-[#0075ff] my-1.5" />
+              <div className="h-0.5 w-10 bg-[#0056D2] my-1.5" />
               <p className="text-xs text-slate-200 font-light leading-relaxed">
                 {item.description}
               </p>
@@ -205,7 +205,7 @@ export default function ExpandingEndeavors() {
                     }`}
                 >
                   <Link href={item.link} className="block w-full" aria-label={item.ariaLabel}>
-                    <div className="w-full h-11 sm:h-12 bg-[#0075ff] hover:bg-[#0060d0] text-white font-extrabold text-xs tracking-wider px-5 flex items-center justify-between transition-colors cursor-pointer rounded-none">
+                    <div className="w-full h-11 sm:h-12 bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs tracking-wider px-5 flex items-center justify-between transition-colors cursor-pointer rounded-none">
                       <span>{item.buttonText}</span>
                       <ArrowRight size={15} />
                     </div>

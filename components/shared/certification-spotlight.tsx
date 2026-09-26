@@ -44,7 +44,7 @@ export default function CertificationSpotlight({
     <section className={`w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] py-16 sm:py-20 md:py-24 border-b border-border/70 bg-white dark:bg-background overflow-hidden relative flex flex-col justify-center ${className}`}>
       
       {/* Background ambient lighting */}
-      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#0075ff]/5 dark:bg-[#0075ff]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#0056D2]/5 dark:bg-[#0056D2]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="site-container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
@@ -58,7 +58,7 @@ export default function CertificationSpotlight({
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-foreground tracking-tight font-heading leading-[1.06]">
                 {headlinePrefix}{" "}
                 <br className="hidden sm:inline" />
-                <span className="text-[#0075ff] inline-block">
+                <span className="text-[#0056D2] inline-block">
                   {headlineHighlight}
                 </span>{" "}
                 {headlineSuffix}
@@ -73,7 +73,7 @@ export default function CertificationSpotlight({
             <div className="pt-2">
               <Link
                 href={primaryButtonLink}
-                className="inline-flex items-center justify-center px-8 py-3.5 rounded-lg bg-[#0075ff] hover:bg-[#0062d6] text-white font-bold text-sm sm:text-base tracking-wide transition-all duration-200 shadow-[0_4px_14px_rgba(0,117,255,0.35)] hover:shadow-[0_6px_20px_rgba(0,117,255,0.45)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                className="inline-flex items-center justify-center px-8 py-3.5 rounded-lg bg-[#0056D2] hover:bg-[#0044a8] text-white font-bold text-sm sm:text-base tracking-wide transition-all duration-200 shadow-[0_4px_14px_rgba(0,86,210,0.35)] hover:shadow-[0_6px_20px_rgba(0,86,210,0.45)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
                 <span>{primaryButtonText}</span>
               </Link>

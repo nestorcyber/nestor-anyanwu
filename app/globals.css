@@ -52,9 +52,9 @@ body {
 }
 
 @theme {
-  --font-sans: "Avenir Next", "Avenir", var(--font-body-fallback, "Inter"), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-heading: "Graphik", "Circular", var(--font-heading-fallback, "Plus Jakarta Sans"), system-ui, -apple-system, sans-serif;
-  --font-display: "Graphik", "Circular", var(--font-heading-fallback, "Plus Jakarta Sans"), system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-sans), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-heading), "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-heading), "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -79,7 +79,7 @@ body {
   /* Slate 700 - high contrast muted */
   --muted-foreground: #334155;
   /* Slate 700 - high contrast WCAG AAA (7.2:1 against light background) */
-  --accent: #0075ff;
+  --accent: #0056D2;
   /* Vibrant Electric Blue Accent from screenshot */
   --accent-foreground: #FFFFFF;
   --destructive: oklch(0.577 0.245 27.325);
@@ -87,14 +87,14 @@ body {
   --border: #E2E8F0;
   /* Slate 200 - clean thin borders */
   --input: #F1F5F9;
-  --ring: #0075ff;
+  --ring: #0056D2;
   --chart-1: oklch(0.55 0.15 240);
   --chart-2: oklch(0.65 0.12 160);
   --chart-3: oklch(0.6 0.118 184.704);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0rem;
-  /* Sharp architectural card edges */
+  --radius: 1rem;
+  /* Universal 16px rounded-2xl corner radius */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -136,7 +136,7 @@ body {
   /* Slate 300 - high contrast dark mode muted */
   --muted-foreground: #CBD5E1;
   /* Slate 300 - >7:1 WCAG contrast against slate-950/slate-900 */
-  --accent: #0075ff;
+  --accent: #0056D2;
   /* Electric Blue Accent from screenshot */
   --accent-foreground: #FFFFFF;
   --destructive: oklch(0.396 0.141 25.723);
@@ -144,7 +144,7 @@ body {
   --border: #1E293B;
   /* Slate 800 border */
   --input: #0F172A;
-  --ring: #0075ff;
+  --ring: #0056D2;
   --chart-1: oklch(0.7 0.15 240);
   --chart-2: oklch(0.75 0.12 160);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -167,10 +167,9 @@ body {
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
-  --font-sans: "Avenir Next", "Avenir", var(--font-body-fallback, "Inter"), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-heading: "Graphik", "Circular", var(--font-heading-fallback, "Plus Jakarta Sans"), system-ui, -apple-system, sans-serif;
-  --font-display: "Graphik", "Circular", var(--font-heading-fallback, "Plus Jakarta Sans"), system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-sans), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-heading), "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-heading), "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -418,7 +417,7 @@ h6 {
 }
 
 .article-content blockquote {
-  border-left: 4px solid #0070f3;
+  border-left: 4px solid #0056D2;
   padding-left: 1.25rem;
   font-style: italic;
   margin-top: 1.75rem;
@@ -606,7 +605,7 @@ h6 {
 
 .ProseMirror blockquote,
 .article-editor-content blockquote {
-  border-left: 4px solid #0070f3 !important;
+  border-left: 4px solid #0056D2 !important;
   padding-left: 1.25rem !important;
   font-style: italic !important;
   margin-top: 1.5rem !important;

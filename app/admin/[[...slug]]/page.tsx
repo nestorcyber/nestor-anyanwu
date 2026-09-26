@@ -344,7 +344,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/journal/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs">
                 + New Article
               </button>
             </Link>
@@ -381,7 +381,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
                     <div className="min-w-0 space-y-1.5">
                       <Link
                         href={`/admin/journal/${row.id}`}
-                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0070f3] dark:hover:text-[#0070f3] transition-colors truncate block font-heading"
+                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0056D2] dark:hover:text-[#0056D2] transition-colors truncate block font-heading"
                       >
                         {title}
                       </Link>
@@ -416,7 +416,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
                   <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">{authorName}</span>
-                      <div className="w-5 h-5 rounded-full bg-[#0070f3] text-white text-[10px] font-bold flex items-center justify-center shadow-2xs">
+                      <div className="w-5 h-5 rounded-full bg-[#0056D2] text-white text-[10px] font-bold flex items-center justify-center shadow-2xs">
                         {authorName[0]?.toUpperCase() || 'N'}
                       </div>
                     </div>
@@ -437,7 +437,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
 
                     <Link
                       href={`/admin/journal/${row.id}`}
-                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-2xs"
+                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-2xs"
                     >
                       Edit
                     </Link>
@@ -560,7 +560,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/portfolio/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                 + New Project
               </button>
             </Link>
@@ -676,7 +676,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/community/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                 + New Community Entry
               </button>
             </Link>
@@ -800,7 +800,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/journey/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                 + New Career Milestone
               </button>
             </Link>
@@ -909,7 +909,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/memberships/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                 + New Membership
               </button>
             </Link>
@@ -995,7 +995,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/brands/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                 + Add Brand Partner
               </button>
             </Link>
@@ -1062,7 +1062,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
                 <ExternalLink className="w-3.5 h-3.5 text-muted-foreground" />
               </Link>
               <Link href="/admin/gallery/new">
-                <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
+                <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                   + Upload New Photo / Video
                 </button>
               </Link>
@@ -1150,7 +1150,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
 
                   <div className="p-4 space-y-2 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="font-bold text-sm text-foreground line-clamp-1 group-hover:text-[#0070f3] transition-colors">
+                      <h3 className="font-bold text-sm text-foreground line-clamp-1 group-hover:text-[#0056D2] transition-colors">
                         {title}
                       </h3>
                       {row.caption && (
@@ -1279,7 +1279,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/services/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                 + New Service
               </button>
             </Link>
@@ -1368,7 +1368,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/stats/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs cursor-pointer">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                 + New Metric
               </button>
             </Link>
@@ -1458,7 +1458,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
             </div>
             <Link
               href="/admin/certifications/new"
-              className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0070f3] text-white hover:bg-blue-600 transition-colors shadow-xs inline-flex items-center cursor-pointer"
+              className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs inline-flex items-center cursor-pointer"
             >
               + New Certification
             </Link>

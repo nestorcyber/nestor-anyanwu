@@ -68,19 +68,19 @@ export default function Navigation() {
 
   // Desktop drawer items
   const desktopDrawerItems = [
-    { label: "Gallery", href: "/gallery" },
-    { label: "Contact", href: "/contact" },
+    { label: "GALLERY", href: "/gallery" },
+    { label: "CONTACT", href: "/contact" },
   ]
 
   // Mobile drawer items (All site links)
   const mobileDrawerItems = [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Portfolio", href: "/portfolio" },
-    { label: "Community", href: "/community" },
-    { label: "Journal", href: "/journal" },
-    { label: "Gallery", href: "/gallery" },
-    { label: "Contact", href: "/contact" },
+    { label: "HOME", href: "/" },
+    { label: "ABOUT", href: "/about" },
+    { label: "PORTFOLIO", href: "/portfolio" },
+    { label: "COMMUNITY", href: "/community" },
+    { label: "JOURNAL", href: "/journal" },
+    { label: "GALLERY", href: "/gallery" },
+    { label: "CONTACT", href: "/contact" },
   ]
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -122,10 +122,10 @@ export default function Navigation() {
           </div>
 
           {/* RIGHT SIDE: Desktop Nav Links + Dynamic MENU / CLOSE Drawer Toggle Button */}
-          <div className="flex items-center gap-5 md:gap-7">
+          <div className="flex items-center gap-3 sm:gap-5 md:gap-6">
             
-            {/* Desktop Header Links */}
-            <div className="hidden md:flex items-center gap-4 lg:gap-6 text-xs md:text-sm font-semibold">
+            {/* Desktop Header Links - Upskill Hub Style Formatting (Caps & Bold) */}
+            <div className="hidden md:flex items-center gap-1 lg:gap-2">
               {desktopNavItems.map((item) => {
                 const isActive =
                   item.href === "/"
@@ -136,15 +136,15 @@ export default function Navigation() {
                   <Link
                     key={item.label}
                     href={item.href}
-                    className={`relative pb-0.5 text-xs md:text-[13px] font-bold uppercase tracking-wider transition-colors ${
+                    className={`relative px-3.5 py-1.5 text-sm lg:text-[15px] font-bold uppercase tracking-wider transition-all duration-200 rounded-[5px] ${
                       isActive
-                        ? "text-foreground dark:text-white"
-                        : "text-slate-600 dark:text-slate-300 hover:text-[#0075ff] dark:hover:text-[#0075ff]"
+                        ? "text-[#0056D2] dark:text-[#38bdf8]"
+                        : "text-foreground/90 hover:text-[#0056D2] dark:hover:text-[#38bdf8] hover:bg-slate-100/70 dark:hover:bg-slate-800/60"
                     }`}
                   >
                     <span>{item.label}</span>
                     {isActive && (
-                      <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#0075ff] rounded-full shadow-xs" />
+                      <span className="absolute bottom-0 left-3 right-3 h-[2.5px] bg-[#0056D2] dark:bg-[#38bdf8] rounded-full shadow-xs" />
                     )}
                   </Link>
                 )
@@ -155,26 +155,26 @@ export default function Navigation() {
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
-              className="flex flex-col items-center justify-center cursor-pointer group p-1 transition-colors min-w-[50px] select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0075ff] rounded-sm"
+              className="flex flex-col items-center justify-center cursor-pointer group p-1.5 transition-colors min-w-[50px] select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0056D2] rounded-[5px] hover:bg-slate-100/70 dark:hover:bg-slate-800/60"
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
               aria-controls="main-drawer"
             >
               {isOpen ? (
-                <div className="flex flex-col items-center justify-center text-foreground/80 group-hover:text-[#0075ff] transition-colors">
-                  <span className="text-[11px] uppercase tracking-[0.18em] font-light leading-none mb-[3px]">
+                <div className="flex flex-col items-center justify-center text-foreground/80 group-hover:text-[#0056D2] transition-colors">
+                  <span className="text-[11px] uppercase tracking-[0.16em] font-bold leading-none mb-[3px]">
                     CLOSE
                   </span>
-                  <X size={19} className="stroke-[1.3] transition-colors" />
+                  <X size={18} className="stroke-[2] transition-colors" />
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-center text-foreground/80 group-hover:text-[#0075ff] transition-colors">
-                  <span className="text-[11px] uppercase tracking-[0.18em] font-light leading-none mb-[4px]">
+                <div className="flex flex-col items-center justify-center text-foreground/80 group-hover:text-[#0056D2] transition-colors">
+                  <span className="text-[11px] uppercase tracking-[0.16em] font-bold leading-none mb-[4px]">
                     MENU
                   </span>
-                  <div className="flex flex-col gap-[4px] w-9 items-center">
-                    <span className="w-full h-[1.2px] bg-foreground/80 group-hover:bg-[#0075ff] transition-colors" />
-                    <span className="w-full h-[1.2px] bg-foreground/80 group-hover:bg-[#0075ff] transition-colors" />
+                  <div className="flex flex-col gap-[3.5px] w-7 items-center">
+                    <span className="w-full h-[1.6px] bg-foreground/80 group-hover:bg-[#0056D2] transition-colors rounded-full" />
+                    <span className="w-full h-[1.6px] bg-foreground/80 group-hover:bg-[#0056D2] transition-colors rounded-full" />
                   </div>
                 </div>
               )}
@@ -209,7 +209,7 @@ export default function Navigation() {
             <button
               type="submit"
               disabled={!searchQuery.trim()}
-              className="absolute right-3 px-3 py-1 bg-[#0075ff] text-white text-xs font-mono font-bold uppercase tracking-wider rounded disabled:opacity-40 cursor-pointer transition-opacity"
+              className="absolute right-3 px-3 py-1 bg-[#0056D2] text-white text-xs font-mono font-bold uppercase tracking-wider rounded disabled:opacity-40 cursor-pointer transition-opacity"
             >
               Search
             </button>
@@ -231,7 +231,7 @@ export default function Navigation() {
                   setTheme(isDark ? "light" : "dark")
                   setIsOpen(false)
                 }}
-                className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-card text-foreground font-bold text-xs tracking-wider flex items-center gap-2 shadow-2xs hover:border-[#0075ff] transition-all cursor-pointer"
+                className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-card text-foreground font-bold text-xs tracking-wider flex items-center gap-2 shadow-2xs hover:border-[#0056D2] transition-all cursor-pointer"
                 aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {isDark ? (
@@ -250,7 +250,7 @@ export default function Navigation() {
           )}
 
           {/* DESKTOP DRAWER LINKS LIST (ONLY GALLERY & CONTACT) */}
-          <nav className="hidden md:flex flex-col gap-6 pt-4">
+          <nav className="hidden md:flex flex-col gap-5 pt-4">
             {desktopDrawerItems.map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
 
@@ -259,8 +259,8 @@ export default function Navigation() {
                   key={item.label}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className={`transition-all font-light text-4xl lg:text-5xl tracking-[0.15em] py-3 cursor-pointer block border-b border-border/20 ${
-                    isActive ? "text-[#0075ff] font-bold" : "text-foreground hover:text-[#0075ff]"
+                  className={`transition-all font-bold uppercase text-3xl lg:text-4xl tracking-[0.12em] py-3 cursor-pointer block border-b border-border/20 ${
+                    isActive ? "text-[#0056D2]" : "text-foreground hover:text-[#0056D2]"
                   }`}
                 >
                   {item.label}
@@ -282,8 +282,8 @@ export default function Navigation() {
                   key={item.label}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className={`transition-all font-light text-xl tracking-[0.12em] py-2.5 cursor-pointer block border-b border-border/15 ${
-                    isActive ? "text-[#0075ff] font-bold" : "text-foreground hover:text-[#0075ff]"
+                  className={`transition-all font-bold uppercase text-lg tracking-[0.08em] py-3 cursor-pointer block border-b border-border/15 ${
+                    isActive ? "text-[#0056D2]" : "text-foreground hover:text-[#0056D2]"
                   }`}
                 >
                   {item.label}
@@ -304,7 +304,7 @@ export default function Navigation() {
                   setTheme(isDark ? "light" : "dark")
                   setIsOpen(false)
                 }}
-                className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-card text-foreground font-bold text-xs tracking-wider flex items-center gap-2 shadow-2xs hover:border-[#0075ff] transition-all cursor-pointer"
+                className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-card text-foreground font-bold text-xs tracking-wider flex items-center gap-2 shadow-2xs hover:border-[#0056D2] transition-all cursor-pointer"
                 aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {isDark ? (

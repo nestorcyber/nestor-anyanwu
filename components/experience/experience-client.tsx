@@ -63,7 +63,7 @@ export default function ExperienceClient({
       {/* Top Roadmap Controls & Milestone Stats Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-card/60 border border-border/80 shadow-2xs backdrop-blur-xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#0075ff]/10 text-[#0075ff] flex items-center justify-center font-bold shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-[#0056D2]/10 text-[#0056D2] flex items-center justify-center font-bold shrink-0">
             <Milestone className="w-5 h-5" />
           </div>
           <div>
@@ -84,7 +84,7 @@ export default function ExperienceClient({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search role, stack, or organization..."
-            className="w-full bg-background border border-border/80 text-foreground placeholder:text-muted-foreground/60 text-xs pl-9 pr-8 py-2 rounded-xl focus:outline-none focus:border-[#0075ff] transition-all"
+            className="w-full bg-background border border-border/80 text-foreground placeholder:text-muted-foreground/60 text-xs pl-9 pr-8 py-2 rounded-xl focus:outline-none focus:border-[#0056D2] transition-all"
           />
           {searchQuery && (
             <button
@@ -102,10 +102,10 @@ export default function ExperienceClient({
       <div className="relative">
         
         {/* Continuous Central Glowing Roadmap Spine Line */}
-        <div className="absolute left-4 sm:left-8 md:left-1/2 top-4 bottom-8 w-0.5 -translate-x-1/2 bg-gradient-to-b from-[#0075ff] via-[#0075ff]/60 to-transparent pointer-events-none hidden md:block" />
+        <div className="absolute left-4 sm:left-8 md:left-1/2 top-4 bottom-8 w-0.5 -translate-x-1/2 bg-gradient-to-b from-[#0056D2] via-[#0056D2]/60 to-transparent pointer-events-none hidden md:block" />
         
         {/* Mobile Left-Aligned Spine Line */}
-        <div className="absolute left-6 top-4 bottom-8 w-0.5 bg-gradient-to-b from-[#0075ff] via-[#0075ff]/60 to-transparent pointer-events-none md:hidden" />
+        <div className="absolute left-6 top-4 bottom-8 w-0.5 bg-gradient-to-b from-[#0056D2] via-[#0056D2]/60 to-transparent pointer-events-none md:hidden" />
 
         {/* Roadmap Nodes & Milestone Cards */}
         <div className="space-y-12 md:space-y-16">
@@ -122,26 +122,26 @@ export default function ExperienceClient({
                 
                 {/* 1. Milestone Roadmap Card Content (Half width on desktop) */}
                 <div className="w-full md:w-[calc(50%-3rem)] pl-14 sm:pl-16 md:pl-0">
-                  <article className="group relative bg-card/80 dark:bg-card border border-border/80 hover:border-[#0075ff]/60 rounded-2xl p-5 sm:p-7 shadow-xs hover:shadow-xl transition-all duration-300 space-y-4">
+                  <article className="group relative bg-card/80 dark:bg-card border border-border/80 hover:border-[#0056D2]/60 rounded-2xl p-5 sm:p-7 shadow-xs hover:shadow-xl transition-all duration-300 space-y-4">
                     
                     {/* Top Tag & Date Row */}
                     <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/40 pb-3">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] uppercase font-mono font-extrabold px-2.5 py-1 rounded-md bg-[#0075ff]/10 text-[#0075ff] border border-[#0075ff]/20 flex items-center gap-1.5">
+                        <span className="text-[10px] uppercase font-mono font-extrabold px-2.5 py-1 rounded-md bg-[#0056D2]/10 text-[#0056D2] border border-[#0056D2]/20 flex items-center gap-1.5">
                           <Briefcase className="w-3 h-3" />
                           <span>Professional Role</span>
                         </span>
                       </div>
 
                       <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-muted-foreground">
-                        <Calendar size={13} className="text-[#0075ff]" />
+                        <Calendar size={13} className="text-[#0056D2]" />
                         <span>{item.date}</span>
                       </div>
                     </div>
 
                     {/* Role Title & Organization */}
                     <div className="space-y-1">
-                      <h3 className="text-lg sm:text-xl font-extrabold text-foreground group-hover:text-[#0075ff] transition-colors font-heading tracking-tight leading-snug">
+                      <h3 className="text-lg sm:text-xl font-extrabold text-foreground group-hover:text-[#0056D2] transition-colors font-heading tracking-tight leading-snug">
                         {item.title}
                       </h3>
                       
@@ -171,7 +171,7 @@ export default function ExperienceClient({
                             key={i}
                             className="text-[11px] sm:text-xs font-medium px-2.5 py-0.5 rounded-md bg-secondary text-foreground border border-border/70 flex items-center gap-1"
                           >
-                            <CheckCircle2 className="w-3 h-3 text-[#0075ff] shrink-0" />
+                            <CheckCircle2 className="w-3 h-3 text-[#0056D2] shrink-0" />
                             <span>{detail}</span>
                           </span>
                         ))}
@@ -215,7 +215,7 @@ export default function ExperienceClient({
 
                 {/* 2. Central Roadmap Checkpoint Node on the Spine */}
                 <div className="absolute left-6 md:left-1/2 top-6 md:top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background border-2 border-[#0075ff] shadow-[0_0_15px_rgba(0,117,255,0.4)] flex items-center justify-center text-[#0075ff]">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background border-2 border-[#0056D2] shadow-[0_0_15px_rgba(0,86,210,0.4)] flex items-center justify-center text-[#0056D2]">
                     <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
                 </div>
@@ -236,7 +236,7 @@ export default function ExperienceClient({
           <button
             type="button"
             onClick={() => setSearchQuery("")}
-            className="px-4 py-2 bg-[#0075ff] text-white text-xs font-bold rounded-xl cursor-pointer"
+            className="px-4 py-2 bg-[#0056D2] text-white text-xs font-bold rounded-xl cursor-pointer"
           >
             Clear Search
           </button>

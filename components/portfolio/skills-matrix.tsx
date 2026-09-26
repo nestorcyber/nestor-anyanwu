@@ -71,7 +71,7 @@ export default function SkillsMatrix({
       className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 sm:py-20 md:py-24 border-b border-border/70 bg-background overflow-hidden relative flex flex-col justify-center"
     >
       {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#0075ff]/5 dark:bg-[#0075ff]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#0056D2]/5 dark:bg-[#0056D2]/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* ========================================================================= */}
       {/* DESKTOP VIEW (lg and up): 3 Continuous Infinite Flowing Columns           */}
@@ -132,7 +132,7 @@ export default function SkillsMatrix({
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-foreground tracking-tight font-heading leading-[1.06]">
                 Technologies &amp;{" "}
                 <br className="hidden sm:inline" />
-                <span className="text-[#0075ff] inline-block">
+                <span className="text-[#0056D2] inline-block">
                   Tools
                 </span>
               </h2>
@@ -152,7 +152,7 @@ export default function SkillsMatrix({
           {/* Mobile Top Content */}
           <div className="space-y-3.5 max-w-xl mx-auto sm:mx-0">
             <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-foreground tracking-tight font-heading leading-tight">
-              Technologies &amp; <span className="text-[#0075ff]">Tools</span>
+              Technologies &amp; <span className="text-[#0056D2]">Tools</span>
             </h2>
 
             <p className="text-sm sm:text-base text-slate-600 dark:text-muted-foreground font-normal leading-relaxed">

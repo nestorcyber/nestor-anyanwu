@@ -59,7 +59,7 @@ export default function ProjectCard({
         className={`relative flex flex-col justify-between h-full w-full bg-white dark:bg-slate-900 transition-all duration-300 ${
           isFolderTab
             ? "shadow-sm group-hover:shadow-2xl"
-            : "border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#0075ff]/80"
+            : "border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#0056D2]/80"
         }`}
       >
         {/* Crisp vector border for folder-tab silhouette */}
@@ -73,7 +73,7 @@ export default function ProjectCard({
               d="M 0,9.3 C 0,7.2 2.2,5.5 5,5.5 L 55,5.5 C 62,5.5 62,0 69,0 L 95,0 C 97.8,0 100,1.7 100,3.8 L 100,96.2 C 100,98.3 97.8,100 95,100 L 5,100 C 2.2,100 0,98.3 0,96.2 Z"
               fill="none"
               vectorEffect="non-scaling-stroke"
-              className="stroke-slate-200 dark:stroke-slate-800 group-hover:stroke-[#0075ff] transition-colors duration-300 stroke-[1.5]"
+              className="stroke-slate-200 dark:stroke-slate-800 group-hover:stroke-[#0056D2] transition-colors duration-300 stroke-[1.5]"
             />
           </svg>
         )}
@@ -99,7 +99,7 @@ export default function ProjectCard({
 
             {/* Title & Short Description */}
             <div className="p-6 space-y-3">
-              <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0075ff] transition-colors font-heading line-clamp-2">
+              <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-[#0056D2] transition-colors font-heading line-clamp-2">
                 {title}
               </h3>
               {description && (
@@ -112,7 +112,7 @@ export default function ProjectCard({
 
           {/* Standard Full-Width Action Button with ArrowUpRight Icon */}
           <div className="px-6 pb-6 pt-2">
-            <div className="w-full h-11 sm:h-12 px-5 rounded-xl bg-[#005fe6] text-white group-hover:bg-[#0052cc] font-extrabold text-xs tracking-wider flex items-center justify-between transition-all duration-300 shadow-md group-hover:shadow-lg">
+            <div className="w-full h-11 sm:h-12 px-5 rounded-xl bg-[#0056D2] text-white group-hover:bg-[#0044a8] font-extrabold text-xs tracking-wider flex items-center justify-between transition-all duration-300 shadow-md group-hover:shadow-lg">
               <span>View Project</span>
               <ArrowUpRight className="w-4.5 h-4.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 shrink-0" />
             </div>

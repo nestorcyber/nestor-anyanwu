@@ -117,12 +117,12 @@ export default function SortableList({
       {/* Top Status Hint */}
       <div className="flex items-center justify-between px-1 text-xs text-muted-foreground">
         <span className="flex items-center gap-1.5 font-medium">
-          <GripVertical className="w-3.5 h-3.5 text-[#0075ff]" />
+          <GripVertical className="w-3.5 h-3.5 text-[#0056D2]" />
           Drag items or use the arrows to reorder. Sort order numbers update dynamically.
         </span>
 
         {saving && (
-          <span className="inline-flex items-center gap-1.5 text-[#0075ff] font-bold animate-pulse">
+          <span className="inline-flex items-center gap-1.5 text-[#0056D2] font-bold animate-pulse">
             <Loader2 className="w-3 h-3 animate-spin" /> Saving order…
           </span>
         )}
@@ -154,9 +154,9 @@ export default function SortableList({
               onDrop={() => handleDrop(idx)}
               className={`group bg-white dark:bg-card border rounded-2xl p-3.5 sm:p-4 shadow-2xs transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 select-none ${
                 isDragging
-                  ? "opacity-40 scale-[0.99] border-dashed border-[#0075ff]"
+                  ? "opacity-40 scale-[0.99] border-dashed border-[#0056D2]"
                   : isOver
-                  ? "border-[#0075ff] bg-blue-50/50 dark:bg-blue-950/20 translate-y-0.5"
+                  ? "border-[#0056D2] bg-blue-50/50 dark:bg-blue-950/20 translate-y-0.5"
                   : "border-slate-200 dark:border-border/80 hover:border-slate-300 dark:hover:border-border hover:shadow-xs"
               }`}
             >
@@ -166,7 +166,7 @@ export default function SortableList({
                 {/* Drag Handle & Up/Down Arrows */}
                 <div className="flex items-center gap-1 shrink-0">
                   <div
-                    className="p-1.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-[#0075ff] hover:bg-slate-100 dark:hover:bg-slate-800 cursor-grab active:cursor-grabbing transition-colors"
+                    className="p-1.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-[#0056D2] hover:bg-slate-100 dark:hover:bg-slate-800 cursor-grab active:cursor-grabbing transition-colors"
                     title="Drag to reorder"
                   >
                     <GripVertical className="w-4 h-4" />
@@ -177,7 +177,7 @@ export default function SortableList({
                       type="button"
                       disabled={idx === 0 || saving}
                       onClick={() => moveItem(idx, "up")}
-                      className="p-1 rounded text-slate-400 dark:text-slate-500 hover:text-[#0075ff] hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 disabled:hover:bg-transparent disabled:hover:text-slate-400 cursor-pointer transition-colors"
+                      className="p-1 rounded text-slate-400 dark:text-slate-500 hover:text-[#0056D2] hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 disabled:hover:bg-transparent disabled:hover:text-slate-400 cursor-pointer transition-colors"
                       title="Move Up"
                     >
                       <ArrowUp className="w-3 h-3" />
@@ -186,7 +186,7 @@ export default function SortableList({
                       type="button"
                       disabled={idx === items.length - 1 || saving}
                       onClick={() => moveItem(idx, "down")}
-                      className="p-1 rounded text-slate-400 dark:text-slate-500 hover:text-[#0075ff] hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 disabled:hover:bg-transparent disabled:hover:text-slate-400 cursor-pointer transition-colors"
+                      className="p-1 rounded text-slate-400 dark:text-slate-500 hover:text-[#0056D2] hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 disabled:hover:bg-transparent disabled:hover:text-slate-400 cursor-pointer transition-colors"
                       title="Move Down"
                     >
                       <ArrowDown className="w-3 h-3" />
@@ -199,7 +199,7 @@ export default function SortableList({
                   className="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 text-[11px] sm:text-xs font-mono font-bold text-slate-700 dark:text-slate-300 shrink-0 text-center min-w-[58px]"
                   title={`Current position: #${orderNumber} (sort_order: ${idx})`}
                 >
-                  <span className="text-[#0075ff] font-extrabold">#{orderNumber}</span>
+                  <span className="text-[#0056D2] font-extrabold">#{orderNumber}</span>
                 </div>
 
                 {/* Thumbnail Image if Available */}
@@ -220,13 +220,13 @@ export default function SortableList({
                   <div className="flex items-center gap-2 flex-wrap">
                     <Link
                       href={item.editUrl}
-                      className="text-sm sm:text-base font-bold text-slate-900 dark:text-foreground hover:text-[#0075ff] dark:hover:text-[#0075ff] transition-colors truncate block font-heading"
+                      className="text-sm sm:text-base font-bold text-slate-900 dark:text-foreground hover:text-[#0056D2] dark:hover:text-[#0056D2] transition-colors truncate block font-heading"
                     >
                       {item.title}
                     </Link>
 
                     {item.badge && (
-                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-[#0075ff]/10 text-[#0075ff] border border-[#0075ff]/20">
+                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-[#0056D2]/10 text-[#0056D2] border border-[#0056D2]/20">
                         {item.badge}
                       </span>
                     )}
@@ -266,7 +266,7 @@ export default function SortableList({
 
                 <Link
                   href={item.editUrl}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-[#0075ff] hover:text-white dark:hover:bg-[#0075ff] dark:hover:text-white transition-all shadow-2xs"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-[#0056D2] hover:text-white dark:hover:bg-[#0056D2] dark:hover:text-white transition-all shadow-2xs"
                 >
                   <Edit className="w-3.5 h-3.5" />
                   <span>Edit</span>

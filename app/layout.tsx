@@ -9,15 +9,18 @@ import "./globals.css"
 
 const headingFont = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-heading-fallback",
+  variable: "--font-heading",
   display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
 })
 
 const bodyFont = Inter({
   subsets: ["latin"],
-  variable: "--font-body-fallback",
+  variable: "--font-sans",
   display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
 })
+
 
 export const metadata: Metadata = {
   title: {
@@ -197,25 +200,21 @@ export default function RootLayout({
         <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link rel="dns-prefetch" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/icon.png" />
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png" />
-        <link rel="apple-touch-icon" href="https://res.cloudinary.com/z3wgqisj/image/upload/v1787007449/nestor/hero/DSC_5940_1_2_ee43kp.jpg" />
-        <meta name="application-name" content="Anyanwu Nestor Ifeanyi" />
+      </head>
+      <body className="font-sans antialiased overflow-x-hidden" suppressHydrationWarning>
         <script
           id="schema-org-person"
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson) }}
         />
         <script
           id="schema-org-website"
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }}
         />
-      </head>
-      <body className="font-sans antialiased overflow-x-hidden" suppressHydrationWarning>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <SiteShell>{children}</SiteShell>
           <Analytics />
           <GoogleAnalytics />

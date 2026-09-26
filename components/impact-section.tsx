@@ -34,7 +34,7 @@ export default function ImpactSection({
     <section id="impact" className="w-full relative overflow-hidden bg-slate-950 text-white py-16 sm:py-20 lg:py-24 border-y border-slate-800 font-sans">
       
       {/* Background Ambient Glow Accent */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-[#0075ff]/10 blur-[130px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-[#0056D2]/10 blur-[130px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-sky-500/10 blur-[110px] rounded-full pointer-events-none" />
 
       <div className="site-container relative z-10">
@@ -94,19 +94,10 @@ export default function ImpactSection({
           {/* ─── RIGHT COLUMN: CONTENT, PILLARS & CTAS (7 COLS) ─── */}
           <div className="lg:col-span-7 space-y-6 lg:space-y-7">
             
-            {/* Category header with blue bar */}
-            <div className="space-y-2">
-              <div className="flex items-center gap-2.5">
-                <span className="w-8 h-1 bg-[#0075ff] rounded-full inline-block" />
-                <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#0075ff] dark:text-sky-400">
-                  {category}
-                </span>
-              </div>
-
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight font-heading leading-tight">
-                {title}
-              </h2>
-            </div>
+            {/* Heading */}
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight font-heading leading-tight">
+              {title}
+            </h2>
 
             {/* Paragraph description */}
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
@@ -118,7 +109,7 @@ export default function ImpactSection({
               {pillars.map((pillar, idx) => (
                 <div key={idx} className="flex items-start gap-2.5 group">
                   <span className="shrink-0 mt-0.5 text-sky-400 bg-sky-400/15 rounded-full p-0.5 group-hover:scale-110 transition-transform">
-                    <CheckCircle2 className="w-4 h-4 text-[#0075ff] dark:text-sky-400" />
+                    <CheckCircle2 className="w-4 h-4 text-[#0056D2] dark:text-sky-400" />
                   </span>
                   <span className="text-xs sm:text-sm font-semibold text-slate-200 group-hover:text-white transition-colors leading-snug">
                     {pillar}
@@ -131,7 +122,7 @@ export default function ImpactSection({
             <div className="pt-2">
               <Link
                 href={ctaLink || "/about"}
-                className="h-11 sm:h-12 bg-[#0075ff] hover:bg-[#0060d0] text-white font-extrabold text-xs tracking-wider px-6 sm:px-7 rounded-xl shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2 cursor-pointer active:scale-98"
+                className="h-11 sm:h-12 bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs tracking-wider px-6 sm:px-7 rounded-xl shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2 cursor-pointer active:scale-98"
               >
                 <span>{ctaText || "Discover More"}</span>
                 <ArrowUpRight className="w-4 h-4" />

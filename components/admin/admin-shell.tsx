@@ -151,7 +151,7 @@ function SidebarNav({
                     collapsed ? 'justify-center px-2 py-2.5' : 'gap-3 px-3.5 py-2.5'
                   } rounded-xl text-xs font-semibold transition-all ${
                     active
-                      ? 'bg-[#0070f3] text-white shadow-sm'
+                      ? 'bg-[#0056D2] text-white shadow-sm'
                       : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
                   }`}
                 >
@@ -258,7 +258,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
 
           {/* Brand Logo & CMS Title */}
           <Link href="/admin" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#0070f3] text-white font-extrabold text-sm flex items-center justify-center font-mono shadow-xs">
+            <div className="w-8 h-8 rounded-lg bg-[#0056D2] text-white font-extrabold text-sm flex items-center justify-center font-mono shadow-xs">
               N
             </div>
             <div className="hidden sm:block">
@@ -285,7 +285,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
               placeholder="Search posts, projects & content..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-9 pl-9 pr-4 bg-secondary/60 text-xs text-foreground placeholder:text-muted-foreground rounded-full border border-border/80 focus:outline-none focus:border-[#0070f3] focus:ring-1 focus:ring-[#0070f3] transition-all"
+              className="w-full h-9 pl-9 pr-4 bg-secondary/60 text-xs text-foreground placeholder:text-muted-foreground rounded-full border border-border/80 focus:outline-none focus:border-[#0056D2] focus:ring-1 focus:ring-[#0056D2] transition-all"
             />
           </form>
         </div>

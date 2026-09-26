@@ -113,12 +113,12 @@ export default function OrganizationsGrid() {
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Organizations &amp; <span className="text-[#0075ff]">Communities</span>
+            Organizations &amp; <span className="text-[#0056D2]">Communities</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             A curated list of technology associations, student chapters, non-profits, and global networks where I have served and contributed.
           </p>
-          <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
         </div>
 
         {/* Responsive Grid */}
@@ -128,12 +128,12 @@ export default function OrganizationsGrid() {
             return (
               <div
                 key={org.id}
-                className="p-6 rounded-2xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0075ff] transition-all duration-300 group flex flex-col justify-between space-y-4 shadow-xs hover:shadow-lg"
+                className="p-6 rounded-2xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0056D2] transition-all duration-300 group flex flex-col justify-between space-y-4 shadow-xs hover:shadow-lg"
               >
                 <div className="space-y-3">
                   {/* Top Badge */}
                   <div className="flex items-center justify-between">
-                    <div className="w-10 h-10 rounded-xl bg-[#0B1C2C] text-[#0075ff] flex items-center justify-center shadow-xs">
+                    <div className="w-10 h-10 rounded-xl bg-[#0B1C2C] text-[#0056D2] flex items-center justify-center shadow-xs">
                       <Icon className="w-5 h-5" />
                     </div>
                     <span className="text-[11px] font-mono font-bold text-slate-500 dark:text-slate-400">
@@ -143,10 +143,10 @@ export default function OrganizationsGrid() {
 
                   {/* Name & Role */}
                   <div>
-                    <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-foreground font-heading tracking-tight group-hover:text-[#0075ff] transition-colors">
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-foreground font-heading tracking-tight group-hover:text-[#0056D2] transition-colors">
                       {org.name}
                     </h3>
-                    <p className="text-xs font-semibold text-[#0075ff] mt-0.5">
+                    <p className="text-xs font-semibold text-[#0056D2] mt-0.5">
                       {org.role}
                     </p>
                   </div>
@@ -167,7 +167,7 @@ export default function OrganizationsGrid() {
                       href={org.link}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[#0075ff] hover:underline inline-flex items-center gap-0.5 font-bold text-[11px]"
+                      className="text-[#0056D2] hover:underline inline-flex items-center gap-0.5 font-bold text-[11px]"
                     >
                       <span>Visit</span>
                       <ArrowUpRight className="w-3 h-3" />

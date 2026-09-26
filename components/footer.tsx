@@ -65,7 +65,7 @@ export default function Footer() {
                 <button
                   type="submit"
                   aria-label="Subscribe"
-                  className="h-11 sm:h-12 bg-[#0075ff] hover:bg-blue-600 text-white font-extrabold px-5 border-2 border-slate-950 rounded-none transition-all shadow-[2px_2px_0px_0px_rgba(255,255,255,0.9)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none flex items-center justify-center cursor-pointer shrink-0"
+                  className="h-11 sm:h-12 bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold px-5 border-2 border-slate-950 rounded-none transition-all shadow-[2px_2px_0px_0px_rgba(255,255,255,0.9)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none flex items-center justify-center cursor-pointer shrink-0"
                 >
                   <ArrowRight className="w-5 h-5 text-slate-950" />
                 </button>
@@ -83,37 +83,37 @@ export default function Footer() {
               </h3>
               <ul className="space-y-2.5 font-medium text-slate-200">
                 <li>
-                  <Link href="/portfolio" className="hover:text-[#0075ff] transition-colors">
+                  <Link href="/portfolio" className="hover:text-[#0056D2] transition-colors">
                     Portfolio
                   </Link>
                 </li>
                 <li>
-                  <Link href="/certifications" className="hover:text-[#0075ff] transition-colors">
+                  <Link href="/certifications" className="hover:text-[#0056D2] transition-colors">
                     Certifications
                   </Link>
                 </li>
                 <li>
-                  <Link href="/memberships" className="hover:text-[#0075ff] transition-colors">
+                  <Link href="/memberships" className="hover:text-[#0056D2] transition-colors">
                     Memberships
                   </Link>
                 </li>
                 <li>
-                  <Link href="/journal" className="hover:text-[#0075ff] transition-colors">
+                  <Link href="/journal" className="hover:text-[#0056D2] transition-colors">
                     Journal
                   </Link>
                 </li>
                 <li>
-                  <Link href="/community" className="hover:text-[#0075ff] transition-colors">
+                  <Link href="/community" className="hover:text-[#0056D2] transition-colors">
                     Community
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about" className="hover:text-[#0075ff] transition-colors">
+                  <Link href="/about" className="hover:text-[#0056D2] transition-colors">
                     About
                   </Link>
                 </li>
                 <li>
-                  <Link href="/gallery" className="hover:text-[#0075ff] transition-colors">
+                  <Link href="/gallery" className="hover:text-[#0056D2] transition-colors">
                     Gallery
                   </Link>
                 </li>
@@ -127,27 +127,27 @@ export default function Footer() {
               </h3>
               <ul className="space-y-2.5 font-medium text-slate-200">
                 <li>
-                  <Link href="/contact" className="hover:text-[#0075ff] transition-colors">
+                  <Link href="/contact" className="hover:text-[#0056D2] transition-colors">
                     Contact Me
                   </Link>
                 </li>
                 <li>
-                  <a href="https://linkedin.com/in/nestoranyanwu" target="_blank" rel="noopener noreferrer" className="hover:text-[#0075ff] transition-colors">
+                  <a href="https://linkedin.com/in/nestoranyanwu" target="_blank" rel="noopener noreferrer" className="hover:text-[#0056D2] transition-colors">
                     LinkedIn
                   </a>
                 </li>
                 <li>
-                  <a href="https://github.com/nestorcyber" target="_blank" rel="noopener noreferrer" className="hover:text-[#0075ff] transition-colors">
+                  <a href="https://github.com/nestorcyber" target="_blank" rel="noopener noreferrer" className="hover:text-[#0056D2] transition-colors">
                     GitHub
                   </a>
                 </li>
                 <li>
-                  <a href="https://twitter.com/nestorcyber" target="_blank" rel="noopener noreferrer" className="hover:text-[#0075ff] transition-colors">
+                  <a href="https://twitter.com/nestorcyber" target="_blank" rel="noopener noreferrer" className="hover:text-[#0056D2] transition-colors">
                     Twitter / X
                   </a>
                 </li>
                 <li>
-                  <a href="https://wa.me/message/GJIXLHQQPYDIE1" target="_blank" rel="noopener noreferrer" className="hover:text-[#0075ff] transition-colors">
+                  <a href="https://wa.me/message/GJIXLHQQPYDIE1" target="_blank" rel="noopener noreferrer" className="hover:text-[#0056D2] transition-colors">
                     WhatsApp
                   </a>
                 </li>

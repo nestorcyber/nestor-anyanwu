@@ -56,7 +56,7 @@ export default function FeaturedPortfolioShowcase({
       </svg>
 
       {/* Background Soft Glow */}
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#0075ff]/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#0056D2]/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="site-container relative z-10">
         
@@ -73,7 +73,7 @@ export default function FeaturedPortfolioShowcase({
                 <span>Look</span>
                 
                 {/* Cyan / Light Blue Asterisk Pill */}
-                <span className="inline-flex items-center justify-center gap-1.5 px-5 py-1 sm:px-6 sm:py-1.5 rounded-full border border-sky-300/80 dark:border-sky-500/40 bg-sky-100/70 dark:bg-sky-950/40 text-[#0075ff] dark:text-sky-400 text-2xl sm:text-3xl md:text-4xl">
+                <span className="inline-flex items-center justify-center gap-1.5 px-5 py-1 sm:px-6 sm:py-1.5 rounded-full border border-sky-300/80 dark:border-sky-500/40 bg-sky-100/70 dark:bg-sky-950/40 text-[#0056D2] dark:text-sky-400 text-2xl sm:text-3xl md:text-4xl">
                   <span>✦</span>
                   <span>✦</span>
                   <span>✦</span>
@@ -83,7 +83,7 @@ export default function FeaturedPortfolioShowcase({
               {/* Line 2: [➔ Blue Arrow Pill] beyond */}
               <div className="flex flex-wrap items-center gap-3 sm:gap-4 font-heading font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.98] text-foreground">
                 {/* Brand Electric Blue Circle with Arrow */}
-                <span className="inline-flex items-center justify-center w-13 h-13 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-full border-3 sm:border-4 border-[#0075ff]/80 bg-[#0075ff]/15 text-[#0075ff] dark:text-[#38bdf8] shadow-sm shrink-0">
+                <span className="inline-flex items-center justify-center w-13 h-13 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-full border-3 sm:border-4 border-[#0056D2]/80 bg-[#0056D2]/15 text-[#0056D2] dark:text-[#38bdf8] shadow-sm shrink-0">
                   <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 stroke-[3]" />
                 </span>
                 <span>beyond</span>
@@ -141,7 +141,7 @@ export default function FeaturedPortfolioShowcase({
             <div className="pt-2 flex flex-wrap items-center gap-4">
               <Link
                 href="/portfolio"
-                className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#0075ff] text-white font-bold text-sm sm:text-base shadow-md hover:bg-[#0060df] hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group cursor-pointer"
+                className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-[#0056D2] text-white font-bold text-sm sm:text-base shadow-md hover:bg-[#0044a8] hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group cursor-pointer"
               >
                 <span>Explore Full Portfolio</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1.5 transition-transform" />
@@ -179,7 +179,7 @@ export default function FeaturedPortfolioShowcase({
               {/* ── Top-Right Brand Blue Circle Button (↗) Linking to Portfolio Page ── */}
               <Link
                 href="/portfolio"
-                className="absolute top-0 right-0 w-15 h-15 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full bg-[#0075ff] text-white flex items-center justify-center shadow-xl hover:scale-105 hover:bg-[#0060df] transition-all duration-300 z-30 cursor-pointer"
+                className="absolute top-0 right-0 w-15 h-15 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full bg-[#0056D2] text-white flex items-center justify-center shadow-xl hover:scale-105 hover:bg-[#0044a8] transition-all duration-300 z-30 cursor-pointer"
                 aria-label="Go to Portfolio Page"
               >
                 <ArrowUpRight className="w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10 stroke-[2.5]" />

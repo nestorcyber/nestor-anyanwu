@@ -197,7 +197,7 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
               type="checkbox"
               checked={inGallery}
               onChange={(e) => setInGallery(e.target.checked)}
-              className="w-4 h-4 rounded border-border text-[#0070f3] focus:ring-[#0070f3]"
+              className="w-4 h-4 rounded border-border text-[#0056D2] focus:ring-[#0056D2]"
             />
             <div>
               <span className="text-xs font-semibold text-foreground">Gallery</span>
@@ -210,7 +210,7 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
               type="checkbox"
               checked={inVolunteering}
               onChange={(e) => setInVolunteering(e.target.checked)}
-              className="w-4 h-4 rounded border-border text-[#0070f3] focus:ring-[#0070f3]"
+              className="w-4 h-4 rounded border-border text-[#0056D2] focus:ring-[#0056D2]"
             />
             <div>
               <span className="text-xs font-semibold text-foreground">Volunteering</span>
@@ -228,7 +228,7 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
               type="checkbox"
               checked={featured}
               onChange={(e) => setFeatured(e.target.checked)}
-              className="w-4 h-4 rounded border-border text-[#0070f3] focus:ring-[#0070f3]"
+              className="w-4 h-4 rounded border-border text-[#0056D2] focus:ring-[#0056D2]"
             />
             <div>
               <span className="text-xs font-semibold text-foreground">Featured</span>

@@ -37,7 +37,7 @@ export default function TestimonialsCarousel() {
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             Verified feedback from enterprise clients, partners, and community leaders.
           </p>
-          <div className="w-14 h-1 bg-[#0075ff] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

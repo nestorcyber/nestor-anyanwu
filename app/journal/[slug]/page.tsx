@@ -115,11 +115,11 @@ export default async function JournalDetailPage({ params }: Props) {
 
             <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-border/40 text-xs text-muted-foreground font-mono">
               <span className="flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5 text-[#0075ff]" />
+                <User className="w-3.5 h-3.5 text-[#0056D2]" />
                 {article.author || 'Nestor Anyanwu'}
               </span>
               <span className="flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-[#0075ff]" />
+                <Calendar className="w-3.5 h-3.5 text-[#0056D2]" />
                 {new Date(article.publishedDate).toLocaleDateString('en-US', {
                   month: 'long',
                   day: 'numeric',
@@ -158,7 +158,7 @@ export default async function JournalDetailPage({ params }: Props) {
                 </h3>
                 <Link
                   href="/journal"
-                  className="text-xs font-mono font-bold text-[#0075ff] hover:underline uppercase tracking-wider flex items-center gap-1"
+                  className="text-xs font-mono font-bold text-[#0056D2] hover:underline uppercase tracking-wider flex items-center gap-1"
                 >
                   <span>All Articles</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -170,7 +170,7 @@ export default async function JournalDetailPage({ params }: Props) {
                   <Link
                     key={rel.slug}
                     href={`/journal/${rel.slug}`}
-                    className="group relative w-full h-[190px] sm:h-[210px] rounded-2xl overflow-hidden border-2 border-slate-900/30 dark:border-slate-800 bg-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0075ff] flex flex-col justify-end p-5 transition-all cursor-pointer"
+                    className="group relative w-full h-[190px] sm:h-[210px] rounded-2xl overflow-hidden border-2 border-slate-900/30 dark:border-slate-800 bg-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.95)] hover:border-[#0056D2] flex flex-col justify-end p-5 transition-all cursor-pointer"
                   >
                     {rel.coverImage ? (
                       <Image
@@ -190,12 +190,12 @@ export default async function JournalDetailPage({ params }: Props) {
                         <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300 block">
                           {rel.publishedDate}
                         </span>
-                        <h4 className="text-sm sm:text-base font-extrabold text-white leading-snug group-hover:text-[#0075ff] transition-colors line-clamp-2 font-heading">
+                        <h4 className="text-sm sm:text-base font-extrabold text-white leading-snug group-hover:text-[#0056D2] transition-colors line-clamp-2 font-heading">
                           {rel.title}
                         </h4>
                       </div>
 
-                      <div className="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-md border-2 border-white/40 flex items-center justify-center text-white group-hover:bg-[#0075ff] transition-all shrink-0">
+                      <div className="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-md border-2 border-white/40 flex items-center justify-center text-white group-hover:bg-[#0056D2] transition-all shrink-0">
                         <ArrowUpRight className="w-4 h-4" />
                       </div>
                     </div>
