@@ -72,7 +72,7 @@ export default async function CommunityDetailPage({ params }: Props) {
         {/* Header */}
         <div className="space-y-4 max-w-4xl mb-12">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30">
+            <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-2xl bg-[#0056D2]/10 text-[#0056D2] dark:bg-[#0056D2]/25 dark:text-[#F1F5F9] border border-[#0056D2]/30">
               Community Leadership
             </span>
             <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-1">

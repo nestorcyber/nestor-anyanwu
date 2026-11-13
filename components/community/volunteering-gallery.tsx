@@ -28,22 +28,20 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
   const validPhotos = (photos ?? []).filter(
     (p) => p.imageUrl && p.imageUrl.trim().length > 0 && !p.imageUrl.includes("placeholder")
   )
-  if (validPhotos.length === 0) return null
-
-  const displayPhotos = validPhotos.slice(0, 4)
+  const displayPhotos = validPhotos.slice(0, 6)
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
-  const [imageErrorMap, setImageErrorMap] = useState<Record<string, boolean>>({})
+  const [, setImageErrorMap] = useState<Record<string, boolean>>({})
 
   const activePhoto = lightboxIndex !== null ? displayPhotos[lightboxIndex] : null
 
   const handlePrev = useCallback(() => {
-    if (lightboxIndex === null) return
+    if (lightboxIndex === null || displayPhotos.length === 0) return
     setLightboxIndex((prev) => (prev! > 0 ? prev! - 1 : displayPhotos.length - 1))
   }, [lightboxIndex, displayPhotos.length])
 
   const handleNext = useCallback(() => {
-    if (lightboxIndex === null) return
+    if (lightboxIndex === null || displayPhotos.length === 0) return
     setLightboxIndex((prev) => (prev! < displayPhotos.length - 1 ? prev! + 1 : 0))
   }, [lightboxIndex, displayPhotos.length])
 
@@ -62,8 +60,10 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [lightboxIndex, handleClose, handlePrev, handleNext])
 
+  if (validPhotos.length === 0) return null
+
   return (
-    <section id="gallery" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-slate-50/60 dark:bg-slate-900/30 flex flex-col justify-center">
+    <section id="gallery" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-slate-50/60 dark:bg-card/30 flex flex-col justify-center">
       <div className="site-container space-y-10 sm:space-y-12">
         
         {/* Centered Section Header */}
@@ -74,11 +74,11 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             Selected community group moments from developer conferences, student leadership summits, and on-ground volunteer operations.
           </p>
-          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-2xl mt-2" />
         </div>
 
-        {/* Responsive Grid with Fixed Aspect Ratio Containers (Zero Layout Shift) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+        {/* Clean 3-Column Uniform Grid with Tight Hairline Gaps */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-1 sm:gap-1.5">
           {displayPhotos.map((photo, index) => {
             const currentSrc = photo.imageUrl
 
@@ -86,31 +86,31 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
               <div
                 key={photo.id || index}
                 onClick={() => setLightboxIndex(index)}
-                className="group relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-900 border border-border/80 hover:border-[#0056D2] cursor-pointer shadow-xs hover:shadow-xl transition-all duration-300"
+                className="group relative aspect-[5/4] rounded-2xl overflow-hidden bg-secondary dark:bg-card cursor-pointer"
               >
                 <Image
                   src={currentSrc}
                   alt={photo.title}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
+                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                  sizes="(max-width: 768px) 50vw, 420px"
                   onError={() => {
                     setImageErrorMap((prev) => ({ ...prev, [photo.id || String(index)]: true }))
                   }}
                 />
                 
                 {/* Subtle Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-5 text-white">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-3 sm:p-4 text-white">
                   
                   {/* Top Category Badge & Maximize Icon */}
                   <div className="flex items-center justify-between">
                     {photo.category ? (
-                      <span className="px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-mono font-bold bg-[#0056D2] text-white">
+                      <span className="px-2.5 py-1 rounded-2xl text-[10px] sm:text-[11px] font-mono font-bold bg-[#0056D2] text-white">
                         {photo.category}
                       </span>
                     ) : <span />}
 
-                    <div className="w-8 h-8 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white">
+                    <div className="w-8 h-8 rounded-2xl bg-black/50 backdrop-blur-md flex items-center justify-center text-white">
                       <Maximize2 className="w-4 h-4" />
                     </div>
                   </div>
@@ -138,7 +138,7 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
         <div className="flex items-center justify-center pt-2">
           <Link
             href="/community/gallery"
-            className="h-11 sm:h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs tracking-wider uppercase flex items-center justify-center gap-2.5 transition-all shadow-md hover:shadow-lg duration-200 cursor-pointer group"
+            className="h-11 sm:h-12 w-full sm:w-auto px-6 sm:px-8 rounded-2xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs tracking-wider uppercase flex items-center justify-center gap-2.5 transition-all shadow-md hover:shadow-lg duration-200 cursor-pointer group"
           >
             <Images className="w-4 h-4" />
             <span>View All Volunteer Pictures</span>
@@ -162,7 +162,7 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
               e.stopPropagation()
               handleClose()
             }}
-            className="absolute top-5 right-5 z-50 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+            className="absolute top-5 right-5 z-50 w-11 h-11 rounded-2xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
             aria-label="Close Lightbox"
           >
             <X className="w-6 h-6" />
@@ -174,7 +174,7 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
               e.stopPropagation()
               handlePrev()
             }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-50 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-50 w-11 h-11 rounded-2xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
             aria-label="Previous image"
           >
             <ChevronLeft className="w-6 h-6" />
@@ -186,7 +186,7 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
               e.stopPropagation()
               handleNext()
             }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-50 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-50 w-11 h-11 rounded-2xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
             aria-label="Next image"
           >
             <ChevronRight className="w-6 h-6" />
@@ -195,9 +195,9 @@ export default function VolunteeringGallery({ photos }: { photos?: GalleryPhoto[
           {/* Image & Caption Card */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-4xl w-full max-h-[85vh] flex flex-col items-center bg-slate-950 rounded-2xl overflow-hidden border border-white/15 shadow-2xl"
+            className="relative max-w-4xl w-full max-h-[85vh] flex flex-col items-center bg-[#0F172A] rounded-2xl overflow-hidden border border-[#1E293B] shadow-2xl"
           >
-            <div className="relative w-full h-[55vh] sm:h-[65vh] bg-black">
+            <div className="relative w-full h-[55vh] sm:h-[65vh] bg-[#020617]">
               <Image
                 src={activePhoto.imageUrl}
                 alt={activePhoto.title}

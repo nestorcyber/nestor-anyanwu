@@ -27,7 +27,7 @@ export default function QuoteSection({
         <div className="flex justify-center">
           <span className="inline-flex items-center justify-center text-foreground/80 dark:text-foreground/90 select-none">
             <svg
-              className="w-12 h-12 sm:w-16 sm:h-16 fill-current text-slate-900 dark:text-white opacity-90"
+              className="w-12 h-12 sm:w-16 sm:h-16 fill-current text-foreground opacity-90"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -44,7 +44,7 @@ export default function QuoteSection({
         {/* Author Details */}
         <div className="pt-2 sm:pt-3 flex flex-col items-center justify-center space-y-2">
           {/* Avatar */}
-          <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-slate-900/10 dark:border-white/20 shadow-md">
+          <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-border shadow-md">
             <Image
               src={authorImage}
               alt={authorName}

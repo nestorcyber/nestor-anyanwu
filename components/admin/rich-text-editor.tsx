@@ -116,7 +116,7 @@ export default function RichTextEditor({
       ImageExtension.configure({
         inline: false,
         HTMLAttributes: {
-          class: 'rounded-xl max-w-full my-6 border border-border/80 shadow-md mx-auto block',
+          class: 'rounded-2xl max-w-full my-6 border border-border/80 shadow-md mx-auto block',
         },
       }),
     ],
@@ -237,7 +237,7 @@ export default function RichTextEditor({
 
   if (!editor) {
     return (
-      <div className="flex min-h-[300px] items-center justify-center border border-border bg-background text-sm text-muted-foreground rounded-xl">
+      <div className="flex min-h-[300px] items-center justify-center border border-border bg-background text-sm text-muted-foreground rounded-2xl">
         Loading editor…
       </div>
     )
@@ -246,13 +246,13 @@ export default function RichTextEditor({
   return (
     <div className="space-y-3">
       {/* Sticky Rich Text Formatting Toolbar */}
-      <div className="sticky top-28 z-10 flex flex-wrap items-center gap-1 p-2 rounded-xl border border-border/90 bg-card/95 backdrop-blur shadow-2xs">
+      <div className="sticky top-28 z-10 flex flex-wrap items-center gap-1 p-2 rounded-2xl border border-border/90 bg-card/95 backdrop-blur shadow-2xs">
         {/* Text Formatting Group */}
         <div className="flex items-center gap-0.5 border-r border-border/70 pr-1.5 mr-1">
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleBold().run()}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive('bold')
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -264,7 +264,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleItalic().run()}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive('italic')
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -276,7 +276,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleUnderline().run()}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive('underline')
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -288,7 +288,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleStrike().run()}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive('strike')
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -300,7 +300,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleCode().run()}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive('code')
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -316,7 +316,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().setParagraph().run()}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive('paragraph') && !editor.isActive('heading')
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -328,7 +328,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-            className={`p-1.5 rounded-lg text-xs font-extrabold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-extrabold transition-all ${
               editor.isActive('heading', { level: 1 })
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -340,7 +340,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-            className={`p-1.5 rounded-lg text-xs font-extrabold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-extrabold transition-all ${
               editor.isActive('heading', { level: 2 })
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -352,7 +352,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-            className={`p-1.5 rounded-lg text-xs font-extrabold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-extrabold transition-all ${
               editor.isActive('heading', { level: 3 })
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -364,7 +364,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-            className={`p-1.5 rounded-lg text-xs font-extrabold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-extrabold transition-all ${
               editor.isActive('heading', { level: 4 })
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -380,7 +380,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleBulletList().run()}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive('bulletList')
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -392,7 +392,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleOrderedList().run()}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive('orderedList')
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -404,7 +404,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleBlockquote().run()}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive('blockquote')
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -416,7 +416,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive('codeBlock')
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -428,7 +428,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().setHorizontalRule().run()}
-            className="p-1.5 rounded-lg text-xs font-bold text-muted-foreground hover:bg-secondary hover:text-foreground transition-all"
+            className="p-1.5 rounded-2xl text-xs font-bold text-muted-foreground hover:bg-secondary hover:text-foreground transition-all"
             title="Horizontal Divider Line"
           >
             <Minus className="w-4 h-4" />
@@ -440,7 +440,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().setTextAlign('left').run()}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive({ textAlign: 'left' })
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -452,7 +452,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().setTextAlign('center').run()}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive({ textAlign: 'center' })
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -464,7 +464,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().setTextAlign('right').run()}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive({ textAlign: 'right' })
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -476,7 +476,7 @@ export default function RichTextEditor({
           <button
             type="button"
             onClick={() => editor.chain().focus().setTextAlign('justify').run()}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive({ textAlign: 'justify' })
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -496,7 +496,7 @@ export default function RichTextEditor({
               setLinkUrl(previousUrl || '')
               setShowLinkModal(true)
             }}
-            className={`p-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`p-1.5 rounded-2xl text-xs font-bold transition-all ${
               editor.isActive('link')
                 ? 'bg-[#0056D2] text-white shadow-xs'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -510,7 +510,7 @@ export default function RichTextEditor({
             <button
               type="button"
               onClick={() => editor.chain().focus().unsetLink().run()}
-              className="p-1.5 rounded-lg text-xs font-bold text-muted-foreground hover:bg-red-500/10 hover:text-red-500 transition-all"
+              className="p-1.5 rounded-2xl text-xs font-bold text-muted-foreground hover:bg-red-500/10 hover:text-red-500 transition-all"
               title="Remove Link"
             >
               <Unlink className="w-4 h-4" />
@@ -521,7 +521,7 @@ export default function RichTextEditor({
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={isUploading}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-2.5 py-1.5 text-xs font-bold text-foreground hover:bg-secondary transition-colors shadow-2xs cursor-pointer ml-1"
+            className="inline-flex items-center gap-1.5 rounded-2xl border border-border bg-card px-2.5 py-1.5 text-xs font-bold text-foreground hover:bg-secondary transition-colors shadow-2xs cursor-pointer ml-1"
             title="Upload image directly to article body"
           >
             <Upload className="w-3.5 h-3.5 text-[#0056D2]" />
@@ -543,7 +543,7 @@ export default function RichTextEditor({
             type="button"
             onClick={() => editor.chain().focus().undo().run()}
             disabled={!editor.can().undo()}
-            className="p-1.5 rounded-lg text-xs text-muted-foreground hover:bg-secondary hover:text-foreground disabled:opacity-30 transition-all"
+            className="p-1.5 rounded-2xl text-xs text-muted-foreground hover:bg-secondary hover:text-foreground disabled:opacity-30 transition-all"
             title="Undo"
           >
             <Undo className="w-4 h-4" />
@@ -552,7 +552,7 @@ export default function RichTextEditor({
             type="button"
             onClick={() => editor.chain().focus().redo().run()}
             disabled={!editor.can().redo()}
-            className="p-1.5 rounded-lg text-xs text-muted-foreground hover:bg-secondary hover:text-foreground disabled:opacity-30 transition-all"
+            className="p-1.5 rounded-2xl text-xs text-muted-foreground hover:bg-secondary hover:text-foreground disabled:opacity-30 transition-all"
             title="Redo"
           >
             <Redo className="w-4 h-4" />
@@ -562,14 +562,14 @@ export default function RichTextEditor({
 
       {/* Cloudinary Progress & Errors */}
       {isUploading && (
-        <div className="flex items-center gap-3 p-3 rounded-xl border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs">
+        <div className="flex items-center gap-3 p-3 rounded-2xl border border-[#0056D2]/30 bg-[#0056D2]/10 text-[#0056D2] dark:text-foreground text-xs">
           <Loader2 className="h-4 w-4 animate-spin shrink-0 text-[#0056D2]" />
           <div className="flex-1 space-y-1">
             <div className="flex items-center justify-between font-semibold">
               <span>Uploading image to Cloudinary…</span>
               <span>{uploadProgress}%</span>
             </div>
-            <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden">
+            <div className="h-1.5 w-full bg-secondary rounded-2xl overflow-hidden">
               <div className="h-full bg-[#0056D2] transition-all duration-200" style={{ width: `${uploadProgress}%` }} />
             </div>
           </div>
@@ -577,7 +577,7 @@ export default function RichTextEditor({
       )}
 
       {uploadError && (
-        <div className="p-3 rounded-xl border border-red-500/30 bg-red-500/10 text-red-500 text-xs flex items-center justify-between">
+        <div className="p-3 rounded-2xl border border-red-500/30 bg-red-500/10 text-red-500 text-xs flex items-center justify-between">
           <span>Upload error: {uploadError}</span>
           <button type="button" onClick={() => setUploadError('')} className="text-red-400 hover:text-red-300">
             <X className="w-4 h-4" />
@@ -587,18 +587,18 @@ export default function RichTextEditor({
 
       {/* Link Input Modal */}
       {showLinkModal && (
-        <div className="p-3 rounded-xl border border-border bg-card shadow-lg flex items-center gap-2 max-w-md">
+        <div className="p-3 rounded-2xl border border-border bg-card shadow-lg flex items-center gap-2 max-w-md">
           <input
             type="url"
             placeholder="https://example.com"
             value={linkUrl}
             onChange={(e) => setLinkUrl(e.target.value)}
-            className="flex-1 px-3 py-1.5 text-xs rounded-lg border border-border bg-background text-foreground focus:outline-none focus:border-[#0056D2]"
+            className="flex-1 px-3 py-1.5 text-xs rounded-2xl border border-border bg-background text-foreground focus:outline-none focus:border-[#0056D2]"
           />
           <button
             type="button"
             onClick={setLink}
-            className="px-3 py-1.5 text-xs font-bold bg-[#0056D2] text-white rounded-lg hover:bg-[#0044a8] transition-colors"
+            className="px-3 py-1.5 text-xs font-bold bg-[#0056D2] text-white rounded-2xl hover:bg-[#0044a8] transition-colors"
           >
             Apply Link
           </button>
@@ -670,7 +670,7 @@ export default function RichTextEditor({
           background-color: rgba(15, 23, 42, 0.9);
           color: #f8fafc;
           padding: 1rem;
-          border-radius: 0.75rem;
+          border-radius: var(--radius);
           font-family: monospace;
           margin-top: 1.25rem;
           margin-bottom: 1.25rem;

@@ -38,7 +38,7 @@ export default function ExpandingEndeavors() {
       subtitle: "Intelligent Systems & Visual Craft",
       description: "Building full-stack web applications, integrating AI workflows, and crafting human-centered visual design systems.",
       image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1785966495/nestor/gallery/techadv1_dyclrm.jpg",
-      link: "/projects",
+      link: "/portfolio",
       buttonText: "View Engineering & AI Work",
       ariaLabel: "View Nestor Anyanwu's AI, design, and software engineering work",
       objectPosition: "object-[50%_15%]",
@@ -73,7 +73,7 @@ export default function ExpandingEndeavors() {
       subtitle: "Inclusive Growth & Mentorship",
       description: "Volunteering, mentorship, and grassroots initiatives dedicated to building an inclusive tech ecosystem where everyone can thrive.",
       image: "https://res.cloudinary.com/z3wgqisj/image/upload/v1787284547/nestor/gallery/IMG_7002_kin2gh.jpg",
-      link: "/about",
+      link: "/community",
       buttonText: "Discover Impact Story",
       ariaLabel: "Discover Nestor Anyanwu's volunteering and impact mission",
     },
@@ -112,26 +112,26 @@ export default function ExpandingEndeavors() {
             />
 
             {/* Dark Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/75 to-slate-950/20 group-hover:opacity-95 transition-opacity" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/75 to-[#020617]/20 group-hover:opacity-95 transition-opacity" />
 
             {/* Top Row: Floating Arrow Button Overlay */}
             <div className="relative z-10 flex items-center justify-end">
-              {/* Arrow Button Overlay (like in ArticleCard) */}
-              <div className="w-10 h-10 rounded-xl border border-white/20 bg-slate-900/90 text-white group-hover:bg-[#0056D2] group-hover:border-[#0056D2] group-hover:text-white flex items-center justify-center shrink-0 transition-all duration-300 shadow-md group-hover:scale-110 active:scale-95">
+              {/* Arrow Button Overlay */}
+              <div className="w-10 h-10 rounded-2xl border border-white/20 bg-[#0F172A]/90 text-[#F1F5F9] group-hover:bg-[#0056D2] group-hover:border-[#0056D2] group-hover:text-white flex items-center justify-center shrink-0 transition-all duration-300 shadow-md group-hover:scale-110 active:scale-95">
                 <ArrowUpRight className="w-5 h-5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </div>
 
             {/* Bottom Content Area */}
-            <div className="relative z-10 space-y-1.5 text-white pb-1">
-              <h3 className="text-xl font-extrabold tracking-tight text-white font-heading group-hover:text-[#0056D2] transition-colors leading-tight">
+            <div className="relative z-10 space-y-1.5 text-[#F1F5F9] pb-1">
+              <h3 className="text-xl font-extrabold tracking-tight text-[#F1F5F9] font-heading group-hover:text-[#0056D2] transition-colors leading-tight">
                 {item.title}
               </h3>
               <p className="text-xs text-accent font-semibold uppercase tracking-wider">
                 {item.subtitle}
               </p>
               <div className="h-0.5 w-10 bg-[#0056D2] my-1.5" />
-              <p className="text-xs text-slate-200 font-light leading-relaxed">
+              <p className="text-xs text-[#CBD5E1] font-light leading-relaxed">
                 {item.description}
               </p>
             </div>
@@ -140,16 +140,18 @@ export default function ExpandingEndeavors() {
       </div>
 
       {/* DESKTOP LAYOUT: 5 Equal Width Columns */}
-      <div className="hidden md:flex w-full h-[500px] border-y border-border/60 bg-slate-950 overflow-hidden">
+      <div className="hidden md:flex w-full h-[500px] border-y border-border/60 bg-[#020617] overflow-hidden">
         {endeavors.map((item) => {
           const isHovered = hoveredId === item.id
 
           return (
-            <div
+            <Link
               key={`desktop-${item.id}`}
+              href={item.link}
+              aria-label={item.ariaLabel}
               onMouseEnter={() => setHoveredId(item.id)}
               onMouseLeave={() => setHoveredId(null)}
-              className="relative flex-1 h-full border-r border-slate-800/80 last:border-r-0 overflow-hidden group flex flex-col justify-between transition-all duration-300"
+              className="relative flex-1 h-full border-r border-[#1E293B] last:border-r-0 overflow-hidden group flex flex-col justify-between transition-all duration-300 cursor-pointer"
             >
               {/* Background Image */}
               <Image
@@ -163,7 +165,7 @@ export default function ExpandingEndeavors() {
 
               {/* Dark Gradient Overlay */}
               <div
-                className={`absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent transition-opacity duration-300 ${isHovered ? "opacity-95" : "opacity-85"
+                className={`absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/70 to-transparent transition-opacity duration-300 ${isHovered ? "opacity-95" : "opacity-85"
                   }`}
               />
 
@@ -172,14 +174,14 @@ export default function ExpandingEndeavors() {
 
               {/* Bottom Content Area */}
               <div className="relative z-10 flex flex-col justify-end h-full">
-                <div className="p-6 space-y-3 text-white">
+                <div className="p-6 space-y-3 text-[#F1F5F9]">
 
                   {/* Title & Subtitle */}
                   <div>
-                    <h3 className="text-xl lg:text-2xl font-extrabold tracking-tight text-white transition-colors">
+                    <h3 className="text-xl lg:text-2xl font-extrabold tracking-tight text-[#F1F5F9] transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-xs text-slate-300 font-medium mt-1">
+                    <p className="text-xs text-[#CBD5E1] font-medium mt-1">
                       {item.subtitle}
                     </p>
                   </div>
@@ -192,7 +194,7 @@ export default function ExpandingEndeavors() {
                       }`}
                   >
                     <div className="h-0.5 w-10 bg-accent my-2" />
-                    <p className="text-xs text-slate-200 font-light leading-relaxed">
+                    <p className="text-xs text-[#CBD5E1] font-light leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -204,16 +206,14 @@ export default function ExpandingEndeavors() {
                   className={`transition-all duration-300 ${isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
                     }`}
                 >
-                  <Link href={item.link} className="block w-full" aria-label={item.ariaLabel}>
-                    <div className="w-full h-11 sm:h-12 bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs tracking-wider px-5 flex items-center justify-between transition-colors cursor-pointer rounded-none">
-                      <span>{item.buttonText}</span>
-                      <ArrowRight size={15} />
-                    </div>
-                  </Link>
+                  <div className="w-full h-11 sm:h-12 bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs tracking-wider px-5 flex items-center justify-between transition-colors rounded-2xl">
+                    <span>{item.buttonText}</span>
+                    <ArrowRight size={15} />
+                  </div>
                 </div>
 
               </div>
-            </div>
+            </Link>
           )
         })}
       </div>

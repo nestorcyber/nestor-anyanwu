@@ -39,10 +39,10 @@ export default async function ExperiencePage() {
               {/* Left-Aligned Heading with Briefcase Icon Beside Text */}
               <div className="space-y-3">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight font-heading leading-[1.18]">
-                  Career <span className="text-[#0075ff]">Roadmap</span>{" "}
+                  Career <span className="text-[#0056D2]">Roadmap</span>{" "}
                   <span className="inline-flex items-center gap-2 sm:gap-3 whitespace-nowrap">
                     &amp; Experience
-                    <span className="inline-flex items-center justify-center text-[#0075ff] w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 shrink-0 drop-shadow-[0_4px_12px_rgba(0,117,255,0.3)] align-middle">
+                    <span className="inline-flex items-center justify-center text-[#0056D2] w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 shrink-0 drop-shadow-[0_4px_12px_rgba(0,86,210,0.3)] align-middle">
                       <Briefcase className="w-full h-full" />
                     </span>
                   </span>

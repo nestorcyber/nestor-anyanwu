@@ -132,7 +132,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
           <Link
             href="/"
             target="_blank"
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-accent text-accent-foreground hover:bg-accent/90 transition-colors shrink-0 shadow-xs"
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-2xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shrink-0 shadow-xs"
           >
             <span>Preview Website</span>
           </Link>
@@ -143,7 +143,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
           {statCards.map((card) => (
             <div
               key={card.label}
-              className="bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-4 flex flex-col justify-between"
+              className="bg-card border border-border/80 rounded-2xl p-5 shadow-2xs space-y-4 flex flex-col justify-between"
             >
               <div>
                 <p className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">{card.count}</p>
@@ -160,32 +160,32 @@ export default async function AdminCatchAllPage({ params }: Props) {
         </div>
 
         {/* Quick Action Bar */}
-        <div className="bg-card border border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs space-y-3">
+        <div className="bg-card border border-border/80 rounded-2xl p-4 sm:p-5 shadow-2xs space-y-3">
           <p className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">
             Quick Actions
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
               href="/admin/journal/new"
-              className="px-4 py-2 text-xs font-semibold rounded-lg bg-accent text-accent-foreground hover:bg-accent/90 transition-colors shadow-2xs"
+              className="px-4 py-2 text-xs font-semibold rounded-2xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-2xs"
             >
               + New Journal Post
             </Link>
             <Link
               href="/admin/portfolio/new"
-              className="px-4 py-2 text-xs font-semibold rounded-lg border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
+              className="px-4 py-2 text-xs font-semibold rounded-2xl border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
             >
               + New Project
             </Link>
             <Link
               href="/admin/gallery"
-              className="px-4 py-2 text-xs font-semibold rounded-lg border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
+              className="px-4 py-2 text-xs font-semibold rounded-2xl border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
             >
               + Upload Media
             </Link>
             <Link
               href="/admin/settings"
-              className="px-4 py-2 text-xs font-semibold rounded-lg border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
+              className="px-4 py-2 text-xs font-semibold rounded-2xl border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
             >
               Manage Site Settings
             </Link>
@@ -195,7 +195,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
         {/* Content Activity Grid: Recent Journal Posts & Admin Activity Log */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left Column (Col 1-7): Recent Journal Posts Table */}
-          <div className="lg:col-span-7 bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-4">
+          <div className="lg:col-span-7 bg-card border border-border/80 rounded-2xl p-5 shadow-2xs space-y-4">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-base font-bold text-foreground">Recent Journal Posts</h3>
@@ -206,7 +206,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </Link>
             </div>
 
-            <div className="border border-border/70 rounded-lg overflow-hidden">
+            <div className="border border-border/70 rounded-2xl overflow-hidden">
               <table className="w-full text-left text-xs">
                 <thead className="bg-secondary/60 text-muted-foreground font-semibold uppercase tracking-wider text-[10px] border-b border-border/70">
                   <tr>
@@ -223,11 +223,11 @@ export default async function AdminCatchAllPage({ params }: Props) {
                         <td className="p-3 font-medium text-foreground max-w-[180px] truncate">{item.title}</td>
                         <td className="p-3">
                           {item.draft ? (
-                            <span className="px-2 py-0.5 text-[10px] font-semibold rounded border bg-amber-500/10 text-amber-500 border-amber-500/20">
+                            <span className="px-2 py-0.5 text-[10px] font-semibold rounded-2xl border bg-amber-500/10 text-amber-500 border-amber-500/20">
                               Draft
                             </span>
                           ) : (
-                            <span className="px-2 py-0.5 text-[10px] font-semibold rounded border bg-emerald-500/10 text-emerald-500 border-emerald-500/20">
+                            <span className="px-2 py-0.5 text-[10px] font-semibold rounded-2xl border bg-emerald-500/10 text-emerald-500 border-emerald-500/20">
                               Published
                             </span>
                           )}
@@ -256,7 +256,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
           </div>
 
           {/* Right Column (Col 8-12): Recent Admin Activity Feed */}
-          <div className="lg:col-span-5 bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-4">
+          <div className="lg:col-span-5 bg-card border border-border/80 rounded-2xl p-5 shadow-2xs space-y-4">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-base font-bold text-foreground">Recent Activity</h3>
@@ -268,7 +268,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
             </div>
 
             {recentLogs && recentLogs.length > 0 ? (
-              <div className="border border-border/70 rounded-lg divide-y divide-border/60">
+              <div className="border border-border/70 rounded-2xl divide-y divide-border/60">
                 {recentLogs.map((log: any) => (
                   <div key={log.id} className="p-3 text-xs space-y-1">
                     <div className="flex items-center justify-between gap-2">
@@ -282,7 +282,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
                 ))}
               </div>
             ) : (
-              <p className="p-6 text-center text-xs text-muted-foreground border border-dashed border-border/70 rounded-lg">
+              <p className="p-6 text-center text-xs text-muted-foreground border border-dashed border-border/70 rounded-2xl">
                 No recent activity recorded.
               </p>
             )}
@@ -344,7 +344,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/journal/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-2xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs">
                 + New Article
               </button>
             </Link>
@@ -363,12 +363,12 @@ export default async function AdminCatchAllPage({ params }: Props) {
               return (
                 <div
                   key={row.id}
-                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                  className="group bg-card border border-border/80 rounded-2xl p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
                   {/* Left Side: Thumbnail / Initial Avatar + Title & Meta & Tags */}
                   <div className="flex items-center gap-4 min-w-0">
                     {/* Main Cover Image */}
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700">
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden bg-secondary shrink-0 border border-border">
                       <Image
                         src={row.coverImage || "https://res.cloudinary.com/z3wgqisj/image/upload/v1785954620/nestor/journal/rd2b3dve5ae5qnicxhsj.jpg"}
                         alt={title}
@@ -381,7 +381,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
                     <div className="min-w-0 space-y-1.5">
                       <Link
                         href={`/admin/journal/${row.id}`}
-                        className="text-base sm:text-lg font-bold text-slate-800 dark:text-foreground hover:text-[#0056D2] dark:hover:text-[#0056D2] transition-colors truncate block font-heading"
+                        className="text-base sm:text-lg font-bold text-foreground hover:text-[#0056D2] transition-colors truncate block font-heading"
                       >
                         {title}
                       </Link>
@@ -390,18 +390,18 @@ export default async function AdminCatchAllPage({ params }: Props) {
                         {isDraft ? (
                           <span className="font-bold text-amber-600 dark:text-amber-500">Draft</span>
                         ) : (
-                          <span className="font-semibold text-slate-500 dark:text-slate-400">Published</span>
+                          <span className="font-semibold text-muted-foreground">Published</span>
                         )}
-                        <span className="text-slate-300 dark:text-slate-600">•</span>
-                        <span className="text-slate-500 dark:text-slate-400 font-medium">{formattedDate}</span>
+                        <span className="text-border">•</span>
+                        <span className="text-muted-foreground font-medium">{formattedDate}</span>
 
-                        {/* Tag Pills */}
+                        {/* Tags */}
                         {tagList.length > 0 && (
                           <div className="flex flex-wrap items-center gap-1.5 ml-1">
                             {tagList.map((tag: string, i: number) => (
                               <span
                                 key={i}
-                                className="px-2.5 py-0.5 text-[11px] font-medium rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                                className="px-2.5 py-0.5 text-[11px] font-medium rounded-2xl bg-secondary text-foreground/80 border border-border"
                               >
                                 {tag}
                               </span>
@@ -413,16 +413,16 @@ export default async function AdminCatchAllPage({ params }: Props) {
                   </div>
 
                   {/* Right Side: Author Avatar & Name + Stat Icons + Edit Button */}
-                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center justify-between sm:justify-end gap-5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">{authorName}</span>
-                      <div className="w-5 h-5 rounded-full bg-[#0056D2] text-white text-[10px] font-bold flex items-center justify-center shadow-2xs">
+                      <span className="text-xs font-semibold text-foreground/80">{authorName}</span>
+                      <div className="w-5 h-5 rounded-2xl bg-[#0056D2] text-white text-[10px] font-bold flex items-center justify-center shadow-2xs">
                         {authorName[0]?.toUpperCase() || 'N'}
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 text-slate-400 dark:text-slate-500 text-xs">
-                      <button title="Share" className="hover:text-slate-700 dark:hover:text-slate-200 transition-colors">
+                    <div className="flex items-center gap-3 text-muted-foreground text-xs">
+                      <button title="Share" className="hover:text-foreground transition-colors">
                         <Share2 className="w-4 h-4" />
                       </button>
                       <span className="flex items-center gap-1" title="Comments">
@@ -437,7 +437,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
 
                     <Link
                       href={`/admin/journal/${row.id}`}
-                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-lg bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-2xs"
+                      className="px-3.5 py-1.5 text-xs font-extrabold rounded-2xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-2xs"
                     >
                       Edit
                     </Link>
@@ -447,7 +447,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
             })}
 
             {!items.length ? (
-              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
+              <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-2xl">
                 No articles published yet.
               </div>
             ) : null}
@@ -560,7 +560,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/portfolio/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-2xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                 + New Project
               </button>
             </Link>
@@ -676,7 +676,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/community/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-2xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                 + New Community Entry
               </button>
             </Link>
@@ -800,7 +800,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/journey/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-2xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                 + New Career Milestone
               </button>
             </Link>
@@ -909,7 +909,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/memberships/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-2xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                 + New Membership
               </button>
             </Link>
@@ -995,7 +995,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/brands/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-2xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                 + Add Brand Partner
               </button>
             </Link>
@@ -1056,20 +1056,20 @@ export default async function AdminCatchAllPage({ params }: Props) {
               <Link
                 href="/gallery"
                 target="_blank"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl bg-card border border-border/80 text-foreground hover:bg-secondary/60 transition-colors shadow-2xs"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-2xl bg-card border border-border/80 text-foreground hover:bg-secondary/60 transition-colors shadow-2xs"
               >
                 <span>View Live Gallery</span>
                 <ExternalLink className="w-3.5 h-3.5 text-muted-foreground" />
               </Link>
               <Link href="/admin/gallery/new">
-                <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
+                <button className="px-4 py-2 text-xs font-extrabold rounded-2xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                   + Upload New Photo / Video
                 </button>
               </Link>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 p-4 rounded-xl bg-card border border-border text-xs text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-4 p-4 rounded-2xl bg-card border border-border text-xs text-muted-foreground">
             <div>
               <span className="font-bold text-foreground">{items.length}</span> total moments
             </div>
@@ -1100,9 +1100,9 @@ export default async function AdminCatchAllPage({ params }: Props) {
               return (
                 <div
                   key={row.id}
-                  className="group bg-white dark:bg-card border border-slate-200 dark:border-border/80 rounded-xl overflow-hidden shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col justify-between"
+                  className="group bg-card border border-border/80 rounded-2xl overflow-hidden shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col justify-between"
                 >
-                  <div className="relative aspect-video w-full bg-slate-100 dark:bg-slate-800 overflow-hidden flex items-center justify-center">
+                  <div className="relative aspect-video w-full bg-secondary overflow-hidden flex items-center justify-center">
                     {row.imageUrl ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img
@@ -1111,37 +1111,37 @@ export default async function AdminCatchAllPage({ params }: Props) {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs">
+                      <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs">
                         No image
                       </div>
                     )}
 
                     {row.videoDuration && (
-                      <div className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-[10px] font-mono text-white font-semibold flex items-center gap-1">
+                      <div className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-2xl bg-[#020617]/80 backdrop-blur-md border border-white/20 text-[10px] font-mono text-white font-semibold flex items-center gap-1">
                         <span>▶</span>
                         <span>{row.videoDuration}</span>
                       </div>
                     )}
 
                     {row.featured && (
-                      <div className="absolute top-2 right-2 z-10 px-2 py-0.5 rounded-full bg-amber-500/90 backdrop-blur-md text-[10px] text-white font-bold uppercase tracking-wider">
+                      <div className="absolute top-2 right-2 z-10 px-2 py-0.5 rounded-2xl bg-amber-500/90 backdrop-blur-md text-[10px] text-white font-bold uppercase tracking-wider">
                         Featured
                       </div>
                     )}
 
                     <div className="absolute bottom-2 left-2 z-10 flex flex-wrap gap-1">
                       {hasGallery && (
-                        <span className="px-1.5 py-0.5 rounded bg-blue-600/90 backdrop-blur-sm text-[9px] font-mono font-bold text-white shadow-xs">
+                        <span className="px-1.5 py-0.5 rounded-2xl bg-[#0056D2]/90 backdrop-blur-sm text-[9px] font-mono font-bold text-white shadow-xs">
                           Gallery
                         </span>
                       )}
                       {hasVolunteering && (
-                        <span className="px-1.5 py-0.5 rounded bg-emerald-600/90 backdrop-blur-sm text-[9px] font-mono font-bold text-white shadow-xs">
+                        <span className="px-1.5 py-0.5 rounded-2xl bg-emerald-600/90 backdrop-blur-sm text-[9px] font-mono font-bold text-white shadow-xs">
                           Volunteering
                         </span>
                       )}
                       {!hasGallery && !hasVolunteering && row.category && (
-                        <span className="px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[9px] font-mono font-medium text-white/90">
+                        <span className="px-1.5 py-0.5 rounded-2xl bg-[#020617]/75 backdrop-blur-sm text-[9px] font-mono font-medium text-white/90">
                           {row.category}
                         </span>
                       )}
@@ -1164,7 +1164,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
                       <span>{row.location || row.eventDate || 'Gallery moment'}</span>
                       <Link
                         href={`/admin/gallery/${row.id}`}
-                        className="px-2.5 py-1 text-xs font-semibold rounded bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
+                        className="px-2.5 py-1 text-xs font-semibold rounded-2xl bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
                       >
                         Edit
                       </Link>
@@ -1175,7 +1175,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
             })}
 
             {!items.length ? (
-              <div className="col-span-full p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
+              <div className="col-span-full p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-2xl">
                 No gallery moments added yet.
               </div>
             ) : null}
@@ -1279,7 +1279,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/services/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-2xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                 + New Service
               </button>
             </Link>
@@ -1368,7 +1368,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
               </p>
             </div>
             <Link href="/admin/stats/new">
-              <button className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
+              <button className="px-4 py-2 text-xs font-extrabold rounded-2xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs cursor-pointer">
                 + New Metric
               </button>
             </Link>
@@ -1458,7 +1458,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
             </div>
             <Link
               href="/admin/certifications/new"
-              className="px-4 py-2 text-xs font-extrabold rounded-xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs inline-flex items-center cursor-pointer"
+              className="px-4 py-2 text-xs font-extrabold rounded-2xl bg-[#0056D2] text-white hover:bg-[#0044a8] transition-colors shadow-xs inline-flex items-center cursor-pointer"
             >
               + New Certification
             </Link>
@@ -1557,7 +1557,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
     return (
       <div className="space-y-4">
         <PageHeader title="Activity Logs" />
-        <div className="border border-border bg-card rounded-sm overflow-hidden">
+        <div className="border border-border bg-card rounded-2xl overflow-hidden">
           {logs && logs.length > 0 ? (
             <div className="divide-y divide-border">
               {logs.map((log: any) => (
@@ -1565,7 +1565,7 @@ export default async function AdminCatchAllPage({ params }: Props) {
                   <div className="space-y-0.5">
                     <div className="flex items-center gap-2">
                       <span className="font-semibold text-sm text-foreground">{log.action}</span>
-                      <span className="text-xs px-2 py-0.5 rounded border border-border bg-secondary/50 font-mono text-muted-foreground">
+                      <span className="text-xs px-2 py-0.5 rounded-2xl border border-border bg-secondary/50 font-mono text-muted-foreground">
                         {log.resource}
                       </span>
                     </div>

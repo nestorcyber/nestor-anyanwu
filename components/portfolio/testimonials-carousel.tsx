@@ -27,7 +27,7 @@ export default function TestimonialsCarousel() {
   ]
 
   return (
-    <section id="testimonials" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/60 bg-slate-50/60 dark:bg-slate-900/30 flex flex-col justify-center">
+    <section id="testimonials" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/60 bg-slate-50/60 dark:bg-card/30 flex flex-col justify-center">
       <div className="container-webflow space-y-12">
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
@@ -37,7 +37,7 @@ export default function TestimonialsCarousel() {
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             Verified feedback from enterprise clients, partners, and community leaders.
           </p>
-          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-2xl mt-2" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

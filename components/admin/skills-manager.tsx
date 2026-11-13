@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { logAdminActivity } from '@/lib/admin-activity'
+import { revalidatePortfolio } from '@/app/actions/revalidate'
 import { DangerButton, Field, PrimaryButton, TextInput } from '@/components/admin/field'
 import type { Tables } from '@/lib/supabase/types'
 import { Edit2, Check, X, Search, Loader2 } from 'lucide-react'
@@ -108,6 +110,8 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
     setGroups((g) => [...g, { ...data, skills: [] }])
     setCategory('')
     setSkillGroupId(data.id)
+    await revalidatePortfolio()
+    await logAdminActivity('Created Skill Group', 'skill_groups', data.id, `Category: ${data.category}`)
     router.refresh()
   }
 
@@ -133,6 +137,8 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
       prev.map((g) => (g.id === groupId ? { ...g, category: editCategoryName.trim() } : g))
     )
     setEditingGroupId(null)
+    await revalidatePortfolio()
+    await logAdminActivity('Updated Skill Group', 'skill_groups', groupId, `Category: ${editCategoryName.trim()}`)
     router.refresh()
   }
 
@@ -177,6 +183,8 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
     setYears('')
     setSelectedIcon(null)
     setIconQuery('')
+    await revalidatePortfolio()
+    await logAdminActivity('Created Skill', 'skills', data.id, `Skill: ${data.name}`)
     router.refresh()
   }
 
@@ -258,6 +266,8 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
     setEditingSkillId(null)
     setEditSelectedIcon(null)
     setEditIconQuery('')
+    await revalidatePortfolio()
+    await logAdminActivity('Updated Skill', 'skills', skillId, `Skill: ${editSkillName.trim()}`)
     router.refresh()
   }
 
@@ -266,6 +276,8 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
     const supabase = createClient()
     await supabase.from('skill_groups').delete().eq('id', id)
     setGroups((g) => g.filter((x) => x.id !== id))
+    await revalidatePortfolio()
+    await logAdminActivity('Deleted Skill Group', 'skill_groups', id)
     router.refresh()
   }
 
@@ -275,6 +287,8 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
     setGroups((prev) =>
       prev.map((g) => (g.id === groupId ? { ...g, skills: g.skills.filter((s) => s.id !== id) } : g))
     )
+    await revalidatePortfolio()
+    await logAdminActivity('Deleted Skill', 'skills', id)
     router.refresh()
   }
 
@@ -284,7 +298,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
       {/* Skill Groups & Skills List */}
       <div className="space-y-6">
         {groups.map((group) => (
-          <div key={group.id} className="bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-4">
+          <div key={group.id} className="bg-card border border-border/80 rounded-2xl p-5 shadow-2xs space-y-4">
             
             {/* Group Category Header with Inline Editing */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border/60 pb-3">
@@ -299,7 +313,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                   <button
                     type="button"
                     onClick={() => saveEditGroup(group.id)}
-                    className="p-2 bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20"
+                    className="p-2 bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 rounded-2xl hover:bg-emerald-500/20"
                     title="Save"
                   >
                     <Check className="w-4 h-4" />
@@ -307,7 +321,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                   <button
                     type="button"
                     onClick={() => setEditingGroupId(null)}
-                    className="p-2 bg-secondary text-muted-foreground border border-border rounded-lg hover:text-foreground"
+                    className="p-2 bg-secondary text-muted-foreground border border-border rounded-2xl hover:text-foreground"
                     title="Cancel"
                   >
                     <X className="w-4 h-4" />
@@ -319,7 +333,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                   <button
                     type="button"
                     onClick={() => startEditGroup(group)}
-                    className="p-1.5 text-muted-foreground hover:text-accent rounded-md hover:bg-secondary transition-colors"
+                    className="p-1.5 text-muted-foreground hover:text-accent rounded-2xl hover:bg-secondary transition-colors"
                     title="Edit group category name"
                   >
                     <Edit2 className="w-3.5 h-3.5" />
@@ -335,7 +349,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
             {/* Skills List under Group */}
             <ul className="space-y-2.5">
               {group.skills.map((skill) => (
-                <li key={skill.id} className="p-3 bg-secondary/40 border border-border/60 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <li key={skill.id} className="p-3 bg-secondary/40 border border-border/60 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   {editingSkillId === skill.id ? (
                     <div className="space-y-3 flex-1">
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
@@ -358,12 +372,12 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                       </div>
 
                       {/* Icon Selector in Edit Mode */}
-                      <div className="p-3 bg-card border border-border/60 rounded-lg space-y-2">
+                      <div className="p-3 bg-card border border-border/60 rounded-2xl space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="text-xs font-semibold text-foreground">Skill Icon</span>
                           {editSelectedIcon ? (
                             <div className="flex items-center gap-2">
-                              <div className="w-6 h-6 p-1 bg-secondary rounded border border-border flex items-center justify-center">
+                              <div className="w-6 h-6 p-1 bg-secondary rounded-2xl border border-border flex items-center justify-center">
                                 <SkillIcon provider={editSelectedIcon.provider} name={editSelectedIcon.name} rawUrl={editSelectedIcon.svgUrl} className="w-4 h-4 object-contain" />
                               </div>
                               <span className="text-xs font-mono font-bold text-accent">{editSelectedIcon.title}</span>
@@ -388,7 +402,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                             value={editIconQuery}
                             onChange={(e) => setEditIconQuery(e.target.value)}
                             placeholder="🔍 Search icons (e.g. React, Next.js)..."
-                            className="w-full pl-8 pr-3 py-1.5 bg-background border border-border/80 rounded-md text-xs text-foreground focus:outline-none focus:border-accent"
+                            className="w-full pl-8 pr-3 py-1.5 bg-background border border-border/80 rounded-2xl text-xs text-foreground focus:outline-none focus:border-accent"
                           />
                         </div>
 
@@ -404,13 +418,13 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                                 key={idx}
                                 type="button"
                                 onClick={() => setEditSelectedIcon(iconOption)}
-                                className={`p-2 rounded-lg border text-left flex items-center gap-2 text-xs transition-all cursor-pointer ${
+                                className={`p-2 rounded-2xl border text-left flex items-center gap-2 text-xs transition-all cursor-pointer ${
                                   editSelectedIcon?.name === iconOption.name
                                     ? 'bg-accent/10 border-accent text-accent font-bold'
                                     : 'bg-secondary/40 border-border/60 hover:bg-secondary hover:border-accent/50'
                                 }`}
                               >
-                                <div className="w-5 h-5 p-0.5 bg-secondary/80 rounded border border-border/50 flex items-center justify-center shrink-0">
+                                <div className="w-5 h-5 p-0.5 bg-secondary/80 rounded-2xl border border-border/50 flex items-center justify-center shrink-0">
                                   <SkillIcon provider={iconOption.provider} name={iconOption.name} rawUrl={iconOption.svgUrl} className="w-3.5 h-3.5 object-contain" />
                                 </div>
                                 <span className="truncate text-[11px]">{iconOption.title}</span>
@@ -425,7 +439,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                               type="button"
                               onClick={() => saveEditSkill(skill.id, group.id)}
                               disabled={savingSkillId === skill.id}
-                              className="bg-accent hover:bg-accent/90 text-white font-semibold text-xs px-5 py-2 rounded-lg flex items-center gap-2 shadow-xs transition-all cursor-pointer disabled:opacity-50"
+                              className="bg-accent hover:bg-accent/90 text-white font-semibold text-xs px-5 py-2 rounded-2xl flex items-center gap-2 shadow-xs transition-all cursor-pointer disabled:opacity-50"
                             >
                               {savingSkillId === skill.id ? (
                                 <>
@@ -443,7 +457,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                               type="button"
                               onClick={() => setEditingSkillId(null)}
                               disabled={savingSkillId === skill.id}
-                              className="bg-secondary hover:bg-secondary/80 text-muted-foreground border border-border text-xs px-4 py-2 rounded-lg transition-all cursor-pointer"
+                              className="bg-secondary hover:bg-secondary/80 text-muted-foreground border border-border text-xs px-4 py-2 rounded-2xl transition-all cursor-pointer"
                             >
                               Cancel
                             </button>
@@ -455,7 +469,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                   ) : (
                     <div className="text-xs font-semibold text-foreground flex items-center gap-3">
                       {/* Icon Preview Badge */}
-                      <div className="w-8 h-8 rounded-lg bg-secondary/80 border border-border/60 flex items-center justify-center p-1.5 shrink-0">
+                      <div className="w-8 h-8 rounded-2xl bg-secondary/80 border border-border/60 flex items-center justify-center p-1.5 shrink-0">
                         <SkillIcon
                           provider={skill.icon_provider || undefined}
                           name={skill.icon_name || undefined}
@@ -468,12 +482,12 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="font-bold text-sm text-foreground">{skill.name}</span>
                         {skill.experience_level && (
-                          <span className="text-[10px] text-muted-foreground font-normal px-2 py-0.5 bg-secondary rounded border border-border/50">
+                          <span className="text-[10px] text-muted-foreground font-normal px-2 py-0.5 bg-secondary rounded-2xl border border-border/50">
                             {skill.experience_level}
                           </span>
                         )}
                         {skill.years && (
-                          <span className="text-[10px] font-mono text-accent font-bold px-2 py-0.5 bg-accent/10 rounded border border-accent/20">
+                          <span className="text-[10px] font-mono text-accent font-bold px-2 py-0.5 bg-accent/10 rounded-2xl border border-accent/20">
                             {skill.years}
                           </span>
                         )}
@@ -515,7 +529,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Add Group Form */}
-        <form onSubmit={addGroup} className="bg-card border border-border/80 rounded-xl p-5 space-y-4 shadow-2xs">
+        <form onSubmit={addGroup} className="bg-card border border-border/80 rounded-2xl p-5 space-y-4 shadow-2xs">
           <h3 className="text-sm font-bold text-foreground border-b border-border/60 pb-2">Add Skill Group</h3>
           <Field label="Group Category Name">
             <TextInput required value={category} onChange={(e) => setCategory(e.target.value)} placeholder="e.g. Software Engineering & Web" />
@@ -524,12 +538,12 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
         </form>
 
         {/* Add Skill Form with Dynamic Icon Picker */}
-        <form onSubmit={addSkill} className="bg-card border border-border/80 rounded-xl p-5 space-y-4 shadow-2xs">
+        <form onSubmit={addSkill} className="bg-card border border-border/80 rounded-2xl p-5 space-y-4 shadow-2xs">
           <h3 className="text-sm font-bold text-foreground border-b border-border/60 pb-2">Add Skill to Group</h3>
           
           <Field label="Target Skill Group">
             <select
-              className="w-full border border-border bg-secondary/50 text-foreground px-3 py-2 text-xs rounded-lg font-medium focus:outline-none focus:border-accent"
+              className="w-full border border-border bg-secondary/50 text-foreground px-3 py-2 text-xs rounded-2xl font-medium focus:outline-none focus:border-accent"
               value={skillGroupId}
               onChange={(e) => setSkillGroupId(e.target.value)}
             >
@@ -546,12 +560,12 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
           </Field>
 
           {/* Icon Picker Section */}
-          <div className="p-3 bg-secondary/30 border border-border/60 rounded-xl space-y-3">
+          <div className="p-3 bg-secondary/30 border border-border/60 rounded-2xl space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-foreground">Select Skill Icon</span>
               {selectedIcon ? (
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 p-1 bg-card rounded border border-border flex items-center justify-center">
+                  <div className="w-6 h-6 p-1 bg-card rounded-2xl border border-border flex items-center justify-center">
                     <SkillIcon provider={selectedIcon.provider} name={selectedIcon.name} rawUrl={selectedIcon.svgUrl} className="w-4 h-4 object-contain" />
                   </div>
                   <span className="text-xs font-mono font-bold text-accent">{selectedIcon.title}</span>
@@ -576,7 +590,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                 value={iconQuery}
                 onChange={(e) => setIconQuery(e.target.value)}
                 placeholder="🔍 Search icons (e.g. React, Next.js, Docker)..."
-                className="w-full pl-9 pr-3 py-1.5 bg-background border border-border/80 rounded-lg text-xs text-foreground focus:outline-none focus:border-accent"
+                className="w-full pl-9 pr-3 py-1.5 bg-background border border-border/80 rounded-2xl text-xs text-foreground focus:outline-none focus:border-accent"
               />
             </div>
 
@@ -597,13 +611,13 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
                       key={idx}
                       type="button"
                       onClick={() => setSelectedIcon(iconOption)}
-                      className={`p-2 rounded-lg border text-left flex items-center gap-2 text-xs transition-all cursor-pointer ${
+                      className={`p-2 rounded-2xl border text-left flex items-center gap-2 text-xs transition-all cursor-pointer ${
                         selectedIcon?.name === iconOption.name
                           ? 'bg-accent/10 border-accent text-accent font-bold'
                           : 'bg-card border-border/60 hover:bg-secondary hover:border-accent/50'
                       }`}
                     >
-                      <div className="w-6 h-6 p-1 bg-secondary/80 rounded border border-border/50 flex items-center justify-center shrink-0">
+                      <div className="w-6 h-6 p-1 bg-secondary/80 rounded-2xl border border-border/50 flex items-center justify-center shrink-0">
                         <SkillIcon provider={iconOption.provider} name={iconOption.name} rawUrl={iconOption.svgUrl} className="w-4 h-4 object-contain" />
                       </div>
                       <span className="truncate text-xs">{iconOption.title}</span>

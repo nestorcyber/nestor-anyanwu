@@ -11,7 +11,7 @@ export default function PortfolioStats({ stats }: { stats: PortfolioStat[] }) {
           {stats.map((stat, idx) => (
             <div
               key={idx}
-              className="p-5 bg-card border border-border/80 rounded-xl shadow-2xs hover:border-accent/60 transition-all space-y-1.5"
+              className="p-5 bg-card border border-border/80 rounded-2xl shadow-2xs hover:border-accent/60 transition-all space-y-1.5"
             >
               <div className="text-3xl sm:text-4xl font-extrabold text-accent font-heading tracking-tight">
                 {stat.value}

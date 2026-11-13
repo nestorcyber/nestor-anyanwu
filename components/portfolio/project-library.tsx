@@ -30,7 +30,7 @@ export default function ProjectLibrary({
       {/* Optional Section Header */}
       {showTitleHeader && (
         <div className="flex items-center gap-3 border-b border-border/60 pb-4">
-          <div className="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center font-bold">
+          <div className="w-9 h-9 rounded-2xl bg-accent/10 text-accent flex items-center justify-center font-bold">
             <FolderKanban className="w-5 h-5" />
           </div>
           <div>
@@ -46,9 +46,9 @@ export default function ProjectLibrary({
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-4 py-2 text-xs font-semibold rounded-xl border transition-all cursor-pointer ${
+            className={`px-4 py-2 text-xs font-semibold rounded-2xl border transition-all cursor-pointer ${
               activeCategory === cat
-                ? "bg-accent text-white border-accent shadow-xs font-bold"
+                ? "bg-[#0056D2] text-white border-[#0056D2] shadow-xs font-bold"
                 : "bg-secondary/70 text-muted-foreground border-border/80 hover:bg-secondary hover:text-foreground"
             }`}
           >
@@ -59,10 +59,11 @@ export default function ProjectLibrary({
 
       {/* Filtered Grid Container */}
       {filteredProjects.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch pt-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch pt-2">
           {filteredProjects.map((project, idx) => (
             <ProjectCard
               key={project.id || idx}
+              index={idx}
               title={project.title}
               category={project.category || "DEVELOPMENT"}
               description={project.description}
@@ -74,7 +75,7 @@ export default function ProjectLibrary({
           ))}
         </div>
       ) : (
-        <div className="p-8 text-center border border-dashed border-border rounded-xl text-xs text-muted-foreground">
+        <div className="p-8 text-center border border-dashed border-border rounded-2xl text-xs text-muted-foreground">
           No projects found in this category.
         </div>
       )}

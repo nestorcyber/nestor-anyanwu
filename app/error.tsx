@@ -22,7 +22,7 @@ export default function Error({
             An error occurred while loading this page. This has been noted. Try refreshing or return home.
           </p>
           {process.env.NODE_ENV === "development" && error?.message && (
-            <pre className="text-left text-xs bg-card border border-border p-3 mt-4 overflow-auto text-red-500 max-h-32">
+            <pre className="text-left text-xs rounded-2xl bg-card border border-border p-3 mt-4 overflow-auto text-red-500 max-h-32">
               {error.message}
             </pre>
           )}
@@ -32,13 +32,13 @@ export default function Error({
           <button
             type="button"
             onClick={reset}
-            className="text-xs font-bold uppercase tracking-widest bg-accent text-white px-8 py-3.5 transition-all hover:bg-accent/90 cursor-pointer"
+            className="text-xs font-bold uppercase tracking-widest rounded-2xl bg-[#0056D2] text-white px-8 py-3.5 transition-all hover:bg-[#0044a8] cursor-pointer"
           >
             Try Again
           </button>
           <Link
             href="/"
-            className="text-xs font-bold uppercase tracking-widest border border-foreground/40 hover:border-accent hover:text-accent px-8 py-3.5 transition-all cursor-pointer text-foreground inline-flex items-center justify-center"
+            className="text-xs font-bold uppercase tracking-widest rounded-2xl border border-foreground/40 hover:border-[#0056D2] hover:text-[#0056D2] px-8 py-3.5 transition-all cursor-pointer text-foreground inline-flex items-center justify-center"
           >
             Go Home
           </Link>

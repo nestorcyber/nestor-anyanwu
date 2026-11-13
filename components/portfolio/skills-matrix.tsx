@@ -17,7 +17,7 @@ function SkillSquircleTile({
     <div className="flex flex-col items-center gap-1.5 shrink-0 group cursor-pointer select-none">
       <div
         title={skill.name}
-        className={`w-20 h-20 sm:w-22 sm:h-22 md:w-24 md:h-24 rounded-2xl sm:rounded-3xl bg-white text-slate-950 dark:bg-white dark:text-slate-950 border border-slate-200/90 shadow-[0_8px_24px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_24px_rgba(255,255,255,0.12)] hover:shadow-xl group-hover:scale-105 group-hover:-translate-y-1 transition-all duration-300 flex items-center justify-center p-3.5 sm:p-4 shrink-0 ${className}`}
+        className={`w-20 h-20 sm:w-22 sm:h-22 md:w-24 md:h-24 rounded-2xl bg-white text-slate-950 dark:bg-[#F8FAFC] dark:text-[#020617] border border-slate-200/90 dark:border-[#1E293B] shadow-[0_8px_24px_rgba(15,23,42,0.08)] dark:shadow-[0_8px_24px_rgba(0,86,210,0.18)] hover:shadow-xl group-hover:scale-105 group-hover:-translate-y-1 transition-all duration-300 flex items-center justify-center p-3.5 sm:p-4 shrink-0 ${className}`}
       >
         <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 flex items-center justify-center pointer-events-none transition-transform duration-300 group-hover:scale-110">
           <SkillIcon

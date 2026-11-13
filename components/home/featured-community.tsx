@@ -26,8 +26,8 @@ export default function FeaturedCommunity() {
           {/* Left Column: Layered Overlapping Images with Sharp Edges & Thin Stroke */}
           <div className="lg:col-span-6 relative pb-10 sm:pb-14 pr-4 sm:pr-8">
             
-            {/* Main Primary Image Card (Sharp Edges) */}
-            <div className="relative w-full aspect-[4/3.8] sm:aspect-[4/3.5] overflow-hidden bg-card border border-border/80 shadow-[0_16px_45px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.6)] group">
+            {/* Main Primary Image Card */}
+            <div className="relative w-full aspect-[4/3.8] sm:aspect-[4/3.5] rounded-2xl overflow-hidden bg-card border border-border shadow-xl group">
               <Image
                 src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837146/nestor/gallery/gida-team-moment.jpg"
                 alt="Community Leadership Team"
@@ -35,12 +35,12 @@ export default function FeaturedCommunity() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/50 via-transparent to-transparent opacity-60" />
             </div>
 
-            {/* Overlapping Secondary Accent Image Card (Sharp Edges & Thin Stroke) */}
-            <div className="absolute -bottom-2 sm:-bottom-4 right-0 sm:right-2 w-[60%] sm:w-[54%] aspect-[4/3] overflow-hidden bg-card p-0.5 sm:p-1 border border-white/90 dark:border-slate-800 shadow-[0_20px_50px_rgba(0,0,0,0.22)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.8)] z-20 group">
-              <div className="relative w-full h-full overflow-hidden bg-slate-900">
+            {/* Overlapping Secondary Accent Image Card */}
+            <div className="absolute -bottom-2 sm:-bottom-4 right-0 sm:right-2 w-[60%] sm:w-[54%] aspect-[4/3] rounded-2xl overflow-hidden bg-card p-1 border border-border shadow-2xl z-20 group">
+              <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#0F172A]">
                 <Image
                   src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837078/nestor/gallery/aws-team.jpg"
                   alt="AWS Community Team & Builders"
@@ -48,7 +48,7 @@ export default function FeaturedCommunity() {
                   sizes="(max-width: 1024px) 60vw, 30vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-108"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-50" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/40 via-transparent to-transparent opacity-50" />
               </div>
             </div>
 
@@ -60,7 +60,7 @@ export default function FeaturedCommunity() {
             {/* Standard Heading Size */}
             <h2 className="text-3xl md:text-5xl font-extrabold text-foreground tracking-tight leading-tight font-heading">
               Community &amp; <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0056D2] via-sky-500 to-indigo-500">
+              <span className="text-[#0056D2]">
                 Volunteer Impact
               </span>
             </h2>
@@ -74,7 +74,7 @@ export default function FeaturedCommunity() {
             <div className="space-y-3 pt-1">
               {highlights.map((point, index) => (
                 <div key={index} className="flex items-start gap-3">
-                  <div className="p-1 rounded-full bg-[#0056D2]/10 text-[#0056D2] shrink-0 mt-0.5">
+                  <div className="p-1 rounded-2xl bg-[#0056D2]/10 text-[#0056D2] shrink-0 mt-0.5">
                     <CheckCircle2 className="w-4 h-4" />
                   </div>
                   <span className="text-xs sm:text-sm text-foreground/90 font-medium leading-normal">
@@ -88,7 +88,7 @@ export default function FeaturedCommunity() {
             <div className="pt-3 flex justify-start">
               <Link
                 href="/community"
-                className="h-11 sm:h-12 bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs sm:text-sm tracking-wide px-6 sm:px-8 rounded-xl shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center gap-2 cursor-pointer group"
+                className="h-11 sm:h-12 bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs sm:text-sm tracking-wide px-6 sm:px-8 rounded-2xl shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center gap-2 cursor-pointer group"
               >
                 <span>Explore Community Work</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

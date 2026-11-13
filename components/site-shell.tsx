@@ -9,10 +9,22 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
     return <>{children}</>
   }
 
+  const fullBleedRoutes = [
+    "/",
+    "/about",
+    "/portfolio",
+    "/community",
+    "/journal",
+    "/contact",
+    "/gallery",
+    "/community/gallery",
+  ]
+  const isFullBleed = fullBleedRoutes.includes(pathname || "")
+
   return (
     <>
       <Navigation />
-      <div className="pt-14 md:pt-16">{children}</div>
+      <div className={isFullBleed ? "pt-0" : "pt-20 sm:pt-24"}>{children}</div>
     </>
   )
 }

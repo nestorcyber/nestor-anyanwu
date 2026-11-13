@@ -118,7 +118,7 @@ export default function OrganizationsGrid() {
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             A curated list of technology associations, student chapters, non-profits, and global networks where I have served and contributed.
           </p>
-          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-2xl mt-2" />
         </div>
 
         {/* Responsive Grid */}
@@ -133,10 +133,10 @@ export default function OrganizationsGrid() {
                 <div className="space-y-3">
                   {/* Top Badge */}
                   <div className="flex items-center justify-between">
-                    <div className="w-10 h-10 rounded-xl bg-[#0B1C2C] text-[#0056D2] flex items-center justify-center shadow-xs">
+                    <div className="w-10 h-10 rounded-2xl bg-[#0B1C2C] dark:bg-secondary text-[#0056D2] flex items-center justify-center shadow-xs border border-[#0056D2]/25">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="text-[11px] font-mono font-bold text-slate-500 dark:text-slate-400">
+                    <span className="text-[11px] font-mono font-bold text-slate-500 dark:text-muted-foreground">
                       {org.period}
                     </span>
                   </div>
@@ -158,8 +158,8 @@ export default function OrganizationsGrid() {
                 </div>
 
                 {/* Footer Tag / Link */}
-                <div className="flex items-center justify-between pt-3 border-t border-slate-200 dark:border-slate-800 text-xs">
-                  <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
+                <div className="flex items-center justify-between pt-3 border-t border-border text-xs">
+                  <span className="text-[11px] font-medium text-slate-500 dark:text-muted-foreground">
                     {org.type}
                   </span>
                   {org.link && (

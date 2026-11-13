@@ -17,101 +17,90 @@ export default function PortfolioHero({
   const statLabel = primaryStat?.label || "Projects & solutions delivered world-wide."
 
   return (
-    <section className="relative w-full h-[62svh] min-h-[420px] sm:h-[75svh] md:h-[calc(100svh-4rem)] md:min-h-[640px] max-h-[1080px] bg-slate-950 overflow-hidden flex flex-col justify-end">
+    <section className="relative w-full h-screen min-h-screen h-[100dvh] min-h-[100dvh] bg-slate-950 overflow-hidden flex flex-col items-center justify-center">
       
-      {/* 1. Full-Bleed Background Image (Centered on Mobile like Tony Elumelu, Off-center on Desktop) */}
+      {/* 1. Full-Bleed Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <Image
           src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837104/nestor/gallery/devfest24-solo.jpg"
           alt={settings?.authorName || "Nestor Anyanwu"}
           fill
           priority
-          className="object-cover object-[50%_20%] sm:object-[68%_18%] md:object-[66%_20%] lg:object-[64%_22%] xl:object-[60%_25%]"
+          className="object-cover object-[50%_20%] sm:object-[62%_20%] md:object-center"
           sizes="100vw"
         />
       </div>
 
-      {/* 2. Desktop Left-Side Organic Fluid Gradient (Confined to bottom-left so main picture stays clear) */}
+      {/* 2. Balanced Center-Contrast Scrim & Brand Blue Vignette */}
       <div 
-        className="absolute inset-0 z-10 pointer-events-none hidden lg:block"
+        className="absolute inset-0 z-10 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 60% 80% at 0% 100%, rgba(0, 85, 255, 0.96) 0%, rgba(0, 117, 255, 0.85) 35%, rgba(11, 28, 44, 0.65) 60%, transparent 80%),
-            radial-gradient(circle 480px at 0% 65%, rgba(0, 117, 255, 0.85) 0%, rgba(11, 28, 44, 0.45) 50%, transparent 75%)
+            radial-gradient(circle at center, rgba(0, 86, 210, 0.25) 0%, rgba(2, 6, 23, 0.58) 55%, rgba(2, 6, 23, 0.85) 100%)
           `,
         }}
       />
+      <div className="absolute inset-0 z-10 bg-black/30 pointer-events-none" />
 
-      {/* 2b. Mobile & Tablet Clean Bottom-Only Vignette (Crystal clear subject portrait on top, readable text on bottom) */}
-      <div 
-        className="absolute inset-0 z-10 pointer-events-none lg:hidden"
-        style={{
-          background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.5) 60%, rgba(11, 28, 44, 0.95) 95%)`,
-        }}
-      />
+      {/* 3. Dead-Center Giant Display Headline & Subtext */}
+      <div className="relative z-20 w-full site-container flex flex-col items-center justify-center text-center space-y-4 sm:space-y-5">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] font-black tracking-tight leading-[1.05] font-heading text-white text-center max-w-6xl mx-auto [text-shadow:_0_6px_32px_rgba(0,0,0,0.85)]">
+          Strategic Engineering.
+          <br />
+          Sustainable Impact.
+        </h1>
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium tracking-wide text-slate-200/95 max-w-2xl mx-auto [text-shadow:_0_2px_16px_rgba(0,0,0,0.85)]">
+          5+ Years of Delivering Excellence Across Industries
+        </p>
+      </div>
 
-      {/* 3. Lower-Third Content anchored to site grid */}
-      <div className="relative z-20 w-full site-container pb-8 sm:pb-14 md:pb-20 lg:pb-24">
-        <div className="w-full flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8 lg:gap-12">
+      {/* 4. Bottom-Right Floating Glassmorphic Stat Card (Anchored at bottom so centered headline stays dead-center) */}
+      <div className="hidden sm:block absolute bottom-6 right-6 md:bottom-10 md:right-10 z-20">
+        <div className="bg-[#0F172A]/85 backdrop-blur-xl border border-[#1E293B] rounded-2xl p-4 sm:p-5 shadow-2xl space-y-2 sm:space-y-2.5 min-w-[170px] max-w-[220px] text-[#F1F5F9]">
           
-          {/* Left Typography Block in Lower Third */}
-          <div className="max-w-xl text-white text-left">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold tracking-tight leading-[1.1] sm:leading-[1.08] font-heading drop-shadow-lg">
-              Strategic Engineering.<br className="hidden sm:inline" />{" "}
-              Sustainable Impact.
-            </h1>
-          </div>
-
-          {/* Right Bottom-Aligned Floating Glassmorphic Stat Card (Hidden on small mobile to keep clean portrait view, visible on sm+) */}
-          <div className="hidden sm:block shrink-0 self-auto lg:self-end">
-            <div className="bg-black/40 dark:bg-black/50 backdrop-blur-xl border border-white/20 rounded-2xl p-4 sm:p-5 shadow-2xl space-y-2 sm:space-y-2.5 min-w-[170px] max-w-[220px] text-white">
-              
-              {/* Avatar Stack with Green Plus Badge */}
-              <div className="flex items-center -space-x-2">
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-slate-900 overflow-hidden relative shadow-xs shrink-0">
-                  <Image
-                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837081/nestor/gallery/bwai-i.jpg"
-                    alt="Client avatar"
-                    fill
-                    className="object-cover"
-                    sizes="32px"
-                  />
-                </div>
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-slate-900 overflow-hidden relative shadow-xs shrink-0">
-                  <Image
-                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837095/nestor/gallery/devfest24-duo.jpg"
-                    alt="Partner avatar"
-                    fill
-                    className="object-cover"
-                    sizes="32px"
-                  />
-                </div>
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-slate-900 overflow-hidden relative shadow-xs shrink-0">
-                  <Image
-                    src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837150/nestor/gallery/gire-solo.jpg"
-                    alt="Builder avatar"
-                    fill
-                    className="object-cover"
-                    sizes="32px"
-                  />
-                </div>
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-slate-900 bg-[#22c55e] text-white flex items-center justify-center shadow-xs shrink-0">
-                  <Plus className="w-3.5 h-3.5 stroke-[3]" />
-                </div>
-              </div>
-
-              {/* Big Stat Number */}
-              <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-heading">
-                {statValue}
-              </div>
-
-              {/* Stat Subtitle */}
-              <p className="text-[11px] sm:text-xs text-white/80 leading-snug font-normal">
-                {statLabel}
-              </p>
-
+          {/* Avatar Stack with Brand Plus Badge */}
+          <div className="flex items-center -space-x-2">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#0F172A] overflow-hidden relative shadow-xs shrink-0">
+              <Image
+                src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837081/nestor/gallery/bwai-i.jpg"
+                alt="Client avatar"
+                fill
+                className="object-cover"
+                sizes="32px"
+              />
+            </div>
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#0F172A] overflow-hidden relative shadow-xs shrink-0">
+              <Image
+                src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837095/nestor/gallery/devfest24-duo.jpg"
+                alt="Partner avatar"
+                fill
+                className="object-cover"
+                sizes="32px"
+              />
+            </div>
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#0F172A] overflow-hidden relative shadow-xs shrink-0">
+              <Image
+                src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837150/nestor/gallery/gire-solo.jpg"
+                alt="Builder avatar"
+                fill
+                className="object-cover"
+                sizes="32px"
+              />
+            </div>
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#0F172A] bg-[#0056D2] text-white flex items-center justify-center shadow-xs shrink-0">
+              <Plus className="w-3.5 h-3.5 stroke-[3]" />
             </div>
           </div>
+
+          {/* Big Stat Number */}
+          <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-heading">
+            {statValue}
+          </div>
+
+          {/* Stat Subtitle */}
+          <p className="text-[11px] sm:text-xs text-white/80 leading-snug font-normal">
+            {statLabel}
+          </p>
 
         </div>
       </div>

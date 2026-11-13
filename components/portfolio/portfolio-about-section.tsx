@@ -1,6 +1,5 @@
 import React from "react"
-import Link from "next/link"
-import { ArrowRight, Code2, Users, Cpu, ShieldCheck } from "lucide-react"
+import { Code2, Users, Cpu } from "lucide-react"
 import type { SiteSettings } from "@/lib/content"
 
 export default function PortfolioAboutSection({ settings }: { settings?: SiteSettings }) {
@@ -37,7 +36,7 @@ export default function PortfolioAboutSection({ settings }: { settings?: SiteSet
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 xl:gap-20 items-center">
           
           {/* ========================================================================= */}
-          {/* LEFT COLUMN: Large Heading, Subtitle & Action Link                        */}
+          {/* LEFT COLUMN: Large Heading & Subtitle                                     */}
           {/* ========================================================================= */}
           <div className="lg:col-span-5 flex flex-col justify-center space-y-6 text-left">
             <div className="space-y-4">
@@ -52,16 +51,6 @@ export default function PortfolioAboutSection({ settings }: { settings?: SiteSet
               <p className="text-base sm:text-lg text-slate-600 dark:text-muted-foreground font-normal leading-relaxed max-w-md">
                 Operating at the nexus of full-stack software development, AI automation, developer relations, and strategic IT consulting to build solutions that scale.
               </p>
-            </div>
-
-            <div className="pt-2">
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 text-sm sm:text-base font-bold text-[#0056D2] hover:text-[#0044a8] transition-colors group cursor-pointer"
-              >
-                <span>Explore Full Story &amp; Vision</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Link>
             </div>
           </div>
 

@@ -14,6 +14,7 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100%;
+  font-family: var(--font-global);
 }
 
 /* ─── Standard Web Development Responsive Layout Container ─── */
@@ -51,16 +52,137 @@ body {
   }
 }
 
+/* ─── TWK Everett Font Family Declarations (Controlled via --font-global in globals.css) ─── */
+@font-face {
+  font-family: 'TWK Everett';
+  src: url('https://cdn.jsdelivr.net/gh/matthewelsom/font-TWKEverett@main/TWKEverett-Regular.ttf') format('truetype'),
+       url('https://db.onlinewebfonts.com/t/543092172c7d9a62dc51fa0fc510b6cf.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TWK Everett';
+  src: url('https://cdn.jsdelivr.net/gh/matthewelsom/font-TWKEverett@main/TWKEverett-Light.ttf') format('truetype'),
+       url('https://db.onlinewebfonts.com/t/5e624c1a80facb169c62c1d1cbdeb88c.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TWK Everett';
+  src: url('https://cdn.jsdelivr.net/gh/matthewelsom/font-TWKEverett@main/TWKEverett-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TWK Everett';
+  src: url('https://cdn.jsdelivr.net/gh/matthewelsom/font-TWKEverett@main/TWKEverett-Bold.ttf') format('truetype');
+  font-weight: 600 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Twkeverett';
+  src: url('https://cdn.jsdelivr.net/gh/matthewelsom/font-TWKEverett@main/TWKEverett-Regular.ttf') format('truetype'),
+       url('https://db.onlinewebfonts.com/t/543092172c7d9a62dc51fa0fc510b6cf.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Twkeverett';
+  src: url('https://cdn.jsdelivr.net/gh/matthewelsom/font-TWKEverett@main/TWKEverett-Light.ttf') format('truetype'),
+       url('https://db.onlinewebfonts.com/t/5e624c1a80facb169c62c1d1cbdeb88c.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Twkeverett';
+  src: url('https://cdn.jsdelivr.net/gh/matthewelsom/font-TWKEverett@main/TWKEverett-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Twkeverett';
+  src: url('https://cdn.jsdelivr.net/gh/matthewelsom/font-TWKEverett@main/TWKEverett-Bold.ttf') format('truetype');
+  font-weight: 600 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Everett';
+  src: url('https://cdn.jsdelivr.net/gh/matthewelsom/font-TWKEverett@main/TWKEverett-Regular.ttf') format('truetype'),
+       url('https://db.onlinewebfonts.com/t/543092172c7d9a62dc51fa0fc510b6cf.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Everett';
+  src: url('https://cdn.jsdelivr.net/gh/matthewelsom/font-TWKEverett@main/TWKEverett-Light.ttf') format('truetype'),
+       url('https://db.onlinewebfonts.com/t/5e624c1a80facb169c62c1d1cbdeb88c.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Everett';
+  src: url('https://cdn.jsdelivr.net/gh/matthewelsom/font-TWKEverett@main/TWKEverett-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Everett';
+  src: url('https://cdn.jsdelivr.net/gh/matthewelsom/font-TWKEverett@main/TWKEverett-Bold.ttf') format('truetype');
+  font-weight: 600 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  --font-sans: var(--font-sans), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-heading: var(--font-heading), "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  --font-display: var(--font-heading), "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-global);
+  --font-heading: var(--font-global);
+  --font-display: var(--font-global);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* ==========================================================================
+     GLOBAL SITE TYPOGRAPHY - SINGLE SOURCE OF TRUTH
+     ==========================================================================
+     To change the font family across the ENTIRE project, modify '--font-global' below.
+     Headings, subheadings, sections, body, cards, navigation, and dialogs will ALL
+     automatically adapt and synchronize to this exact font family.
+     ========================================================================== */
+  --font-global: "TWK Everett", "Twkeverett", "Everett", var(--font-heading-fallback), var(--font-sans-fallback), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: var(--font-global);
+  --font-heading: var(--font-global);
+  --font-display: var(--font-global);
+
+  /* Brand Blue strictly rgb(0, 86, 210) / #0056D2 */
+  --brand-blue: rgb(0, 86, 210);
+  --brand-blue-hover: #0044a8;
+  --brand-blue-light: rgba(0, 86, 210, 0.1);
+  --brand-blue-light-border: rgba(0, 86, 210, 0.25);
+  --brand-blue-glow: rgba(0, 86, 210, 0.15);
   --background: #F8FAFC;
   /* Slate 50 - clean off-white */
   --foreground: #0F172A;
@@ -93,8 +215,8 @@ body {
   --chart-3: oklch(0.6 0.118 184.704);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 1rem;
-  /* Universal 16px rounded-2xl corner radius */
+  --radius: 5px;
+  /* Universal 5px (rounded-2xl) corner radius */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -137,7 +259,12 @@ body {
   --muted-foreground: #CBD5E1;
   /* Slate 300 - >7:1 WCAG contrast against slate-950/slate-900 */
   --accent: #0056D2;
-  /* Electric Blue Accent from screenshot */
+  /* Brand Blue strictly rgb(0, 86, 210) */
+  --brand-blue: rgb(0, 86, 210);
+  --brand-blue-hover: #0044a8;
+  --brand-blue-light: rgba(0, 86, 210, 0.2);
+  --brand-blue-light-border: rgba(0, 86, 210, 0.4);
+  --brand-blue-glow: rgba(0, 86, 210, 0.25);
   --accent-foreground: #FFFFFF;
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
@@ -150,14 +277,14 @@ body {
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --sidebar: #020617;
+  --sidebar-foreground: #F1F5F9;
+  --sidebar-primary: #0056D2;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #1E293B;
+  --sidebar-accent-foreground: #F1F5F9;
+  --sidebar-border: #1E293B;
+  --sidebar-ring: #0056D2;
   --nav-bg: rgba(2, 6, 23, 0.9);
   /* Glassmorphic footer dark blue */
 }
@@ -167,9 +294,13 @@ body {
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
-  --font-sans: var(--font-sans), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-heading: var(--font-heading), "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  --font-display: var(--font-heading), "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-global);
+  --font-heading: var(--font-global);
+  --font-display: var(--font-global);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-hover: var(--brand-blue-hover);
+  --color-brand-blue-light: var(--brand-blue-light);
+  --color-brand-blue-border: var(--brand-blue-light-border);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -195,10 +326,13 @@ body {
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 2px);
+  --radius-xs: var(--radius);
+  --radius-sm: var(--radius);
   --radius-md: var(--radius);
-  --radius-lg: calc(var(--radius) + 2px);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: var(--radius);
+  --radius-2xl: var(--radius);
+  --radius-3xl: var(--radius);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -236,6 +370,14 @@ body {
   .font-heading,
   .font-display {
     font-family: var(--font-heading);
+  }
+
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font-family: inherit;
   }
 
   p {
@@ -301,10 +443,35 @@ body {
 }
 
 .dark .glass-card {
-  background: rgba(17, 26, 46, 0.7);
+  background: rgba(15, 23, 42, 0.78);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(30, 41, 59, 0.8);
+}
+
+/* Prominent Elevated Card Shadow (Resting & Pull-Forward Hover) */
+.elevated-card-shadow {
+  box-shadow:
+    0 12px 30px -6px rgba(15, 23, 42, 0.16),
+    0 4px 12px -2px rgba(15, 23, 42, 0.10);
+}
+
+.elevated-card-shadow:hover {
+  box-shadow:
+    0 32px 68px -8px rgba(15, 23, 42, 0.34),
+    0 16px 32px -6px rgba(15, 23, 42, 0.22);
+}
+
+.dark .elevated-card-shadow {
+  box-shadow:
+    0 12px 32px -4px rgba(2, 6, 23, 0.72),
+    0 4px 14px -2px rgba(2, 6, 23, 0.55);
+}
+
+.dark .elevated-card-shadow:hover {
+  box-shadow:
+    0 32px 72px -8px rgba(2, 6, 23, 0.92),
+    0 16px 36px -6px rgba(0, 86, 210, 0.35);
 }
 
 @keyframes marqueeLoop {
@@ -448,7 +615,7 @@ h6 {
   background-color: #0f172a;
   color: #f8fafc;
   padding: 1.25rem;
-  border-radius: 0.85rem;
+  border-radius: var(--radius);
   font-family: var(--font-mono);
   font-size: 0.875rem;
   margin-top: 1.5rem;
@@ -460,7 +627,7 @@ h6 {
   font-family: var(--font-mono);
   background-color: var(--secondary);
   padding: 0.2rem 0.4rem;
-  border-radius: 0.35rem;
+  border-radius: var(--radius);
   font-size: 0.875em;
 }
 
@@ -478,7 +645,7 @@ h6 {
 }
 
 .article-content img {
-  border-radius: 1rem;
+  border-radius: var(--radius);
   max-width: 100%;
   height: auto;
   margin-top: 2rem;
@@ -514,14 +681,7 @@ h6 {
 .article-editor-content strong,
 .article-editor-content b {
   font-weight: 800 !important;
-  color: #000000 !important;
-}
-
-.dark .ProseMirror strong,
-.dark .ProseMirror b,
-.dark .article-editor-content strong,
-.dark .article-editor-content b {
-  color: #ffffff !important;
+  color: var(--foreground) !important;
 }
 
 .ProseMirror em,
@@ -618,7 +778,7 @@ h6 {
   background-color: #0f172a !important;
   color: #f8fafc !important;
   padding: 1rem 1.25rem !important;
-  border-radius: 0.75rem !important;
+  border-radius: var(--radius) !important;
   font-family: var(--font-mono) !important;
   font-size: 0.875rem !important;
   margin-top: 1.25rem !important;
@@ -630,7 +790,7 @@ h6 {
   font-family: var(--font-mono) !important;
   background-color: var(--secondary) !important;
   padding: 0.2rem 0.4rem !important;
-  border-radius: 0.35rem !important;
+  border-radius: var(--radius) !important;
   font-size: 0.875em !important;
 }
 
@@ -746,7 +906,7 @@ h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.75rem;
+  border-radius: var(--radius);
   font-weight: 700;
   line-height: 1;
 }

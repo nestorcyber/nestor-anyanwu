@@ -3,6 +3,7 @@
 import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { logAdminActivity } from '@/lib/admin-activity'
 import { revalidateCommunity, revalidatePortfolio } from '@/app/actions/revalidate'
 import ImageUpload from '@/components/admin/image-upload'
 import MarkdownEditor from '@/components/admin/markdown-editor'
@@ -139,6 +140,12 @@ export default function JourneyForm({ initial, returnTo }: Props) {
       }
       await revalidateCommunity()
       await revalidatePortfolio()
+      await logAdminActivity(
+        initial ? (isMembership ? 'Updated Membership' : 'Updated Journey Milestone') : (isMembership ? 'Created Membership' : 'Created Journey Milestone'),
+        'journey_items',
+        initial?.id || title,
+        `Title: ${title} (${organization})`
+      )
       router.push(redirectPath)
       router.refresh()
     } catch (err: any) {
@@ -156,6 +163,12 @@ export default function JourneyForm({ initial, returnTo }: Props) {
       await supabase.from('journey_items').delete().eq('id', initial.id)
       await revalidateCommunity()
       await revalidatePortfolio()
+      await logAdminActivity(
+        initial ? (isMembership ? 'Updated Membership' : 'Updated Journey Milestone') : (isMembership ? 'Created Membership' : 'Created Journey Milestone'),
+        'journey_items',
+        initial?.id || title,
+        `Title: ${title} (${organization})`
+      )
       router.push(redirectPath)
       router.refresh()
     } catch (err: any) {
@@ -184,9 +197,9 @@ export default function JourneyForm({ initial, returnTo }: Props) {
             
             {/* 1. Professional Work */}
             <label
-              className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer ${
+              className={`flex items-start gap-3 p-4 rounded-2xl border transition-all cursor-pointer ${
                 inWork
-                  ? 'bg-blue-500/10 border-blue-500/40 text-foreground shadow-xs'
+                  ? 'bg-[#0056D2]/10 border-[#0056D2]/40 text-foreground shadow-xs'
                   : 'bg-background/50 border-border/70 hover:border-border text-muted-foreground'
               }`}
             >
@@ -194,7 +207,7 @@ export default function JourneyForm({ initial, returnTo }: Props) {
                 type="checkbox"
                 checked={inWork}
                 onChange={(e) => setInWork(e.target.checked)}
-                className="mt-0.5 w-4 h-4 rounded text-[#0056D2] focus:ring-[#0056D2]"
+                className="mt-0.5 w-4 h-4 rounded-2xl text-[#0056D2] focus:ring-[#0056D2]"
               />
               <div className="space-y-0.5">
                 <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm text-foreground">
@@ -209,7 +222,7 @@ export default function JourneyForm({ initial, returnTo }: Props) {
 
             {/* 2. Volunteering & Community Advocacy */}
             <label
-              className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer ${
+              className={`flex items-start gap-3 p-4 rounded-2xl border transition-all cursor-pointer ${
                 inVolunteer
                   ? 'bg-emerald-500/10 border-emerald-500/40 text-foreground shadow-xs'
                   : 'bg-background/50 border-border/70 hover:border-border text-muted-foreground'
@@ -219,7 +232,7 @@ export default function JourneyForm({ initial, returnTo }: Props) {
                 type="checkbox"
                 checked={inVolunteer}
                 onChange={(e) => setInVolunteer(e.target.checked)}
-                className="mt-0.5 w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500"
+                className="mt-0.5 w-4 h-4 rounded-2xl text-emerald-600 focus:ring-emerald-500"
               />
               <div className="space-y-0.5">
                 <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm text-foreground">

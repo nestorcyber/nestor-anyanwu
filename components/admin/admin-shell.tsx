@@ -95,7 +95,7 @@ function ThemeToggle() {
       <button
         type="button"
         aria-label="Toggle theme"
-        className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border text-muted-foreground"
+        className="inline-flex h-8 w-8 items-center justify-center rounded-2xl border border-border text-muted-foreground"
       >
         <Sun className="h-4 w-4" />
       </button>
@@ -109,7 +109,7 @@ function ThemeToggle() {
       type="button"
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border text-foreground hover:bg-secondary transition-colors"
+      className="inline-flex h-8 w-8 items-center justify-center rounded-2xl border border-border text-foreground hover:bg-secondary transition-colors"
     >
       {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
     </button>
@@ -149,7 +149,7 @@ function SidebarNav({
                   title={item.label}
                   className={`group flex items-center ${
                     collapsed ? 'justify-center px-2 py-2.5' : 'gap-3 px-3.5 py-2.5'
-                  } rounded-xl text-xs font-semibold transition-all ${
+                  } rounded-2xl text-xs font-semibold transition-all ${
                     active
                       ? 'bg-[#0056D2] text-white shadow-sm'
                       : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
@@ -240,7 +240,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             type="button"
             aria-label="Toggle navigation drawer"
             onClick={() => setOpen((prev) => !prev)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border text-foreground hover:bg-secondary md:hidden transition-colors"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-2xl border border-border text-foreground hover:bg-secondary md:hidden transition-colors"
           >
             <Menu className="h-5 w-5" />
           </button>
@@ -250,7 +250,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             type="button"
             aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             onClick={toggleCollapsed}
-            className="hidden md:inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border text-foreground hover:bg-secondary transition-colors"
+            className="hidden md:inline-flex h-9 w-9 items-center justify-center rounded-2xl border border-border text-foreground hover:bg-secondary transition-colors"
             title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
             {collapsed ? <PanelLeftOpen className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}
@@ -258,7 +258,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
 
           {/* Brand Logo & CMS Title */}
           <Link href="/admin" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#0056D2] text-white font-extrabold text-sm flex items-center justify-center font-mono shadow-xs">
+            <div className="w-8 h-8 rounded-2xl bg-[#0056D2] text-white font-extrabold text-sm flex items-center justify-center font-mono shadow-xs">
               N
             </div>
             <div className="hidden sm:block">
@@ -285,7 +285,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
               placeholder="Search posts, projects & content..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-9 pl-9 pr-4 bg-secondary/60 text-xs text-foreground placeholder:text-muted-foreground rounded-full border border-border/80 focus:outline-none focus:border-[#0056D2] focus:ring-1 focus:ring-[#0056D2] transition-all"
+              className="w-full h-9 pl-9 pr-4 bg-secondary/60 text-xs text-foreground placeholder:text-muted-foreground rounded-2xl border border-border/80 focus:outline-none focus:border-[#0056D2] focus:ring-1 focus:ring-[#0056D2] transition-all"
             />
           </form>
         </div>
@@ -296,13 +296,13 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           <Link
             href="/"
             target="_blank"
-            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
+            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-2xl border border-border bg-secondary hover:bg-secondary/80 text-foreground transition-colors"
           >
             <span>View Site</span>
             <ExternalLink className="w-3.5 h-3.5 text-muted-foreground" />
           </Link>
 
-          <div className="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 flex items-center justify-center text-xs font-bold font-mono">
+          <div className="w-8 h-8 rounded-2xl bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 flex items-center justify-center text-xs font-bold font-mono">
             NA
           </div>
         </div>
@@ -333,11 +333,11 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
 
           {/* Sidebar Footer User Info */}
           <div className="pt-3 border-t border-border mt-auto">
-            <div className={`flex items-center ${collapsed ? 'justify-center p-1.5' : 'justify-between p-2'} rounded-xl bg-secondary/50 border border-border/50`}>
+            <div className={`flex items-center ${collapsed ? 'justify-center p-1.5' : 'justify-between p-2'} rounded-2xl bg-secondary/50 border border-border/50`}>
               {!collapsed ? (
                 <>
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-7 h-7 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 flex items-center justify-center shrink-0">
+                    <div className="w-7 h-7 rounded-2xl bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 flex items-center justify-center shrink-0">
                       <UserCheck className="w-3.5 h-3.5" />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -349,7 +349,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                     type="button"
                     onClick={logout}
                     title="Sign out"
-                    className="p-1.5 text-muted-foreground hover:text-red-500 transition-colors rounded-md"
+                    className="p-1.5 text-muted-foreground hover:text-red-500 transition-colors rounded-2xl"
                   >
                     <LogOut className="h-4 w-4" />
                   </button>
@@ -359,7 +359,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                   type="button"
                   onClick={logout}
                   title="Sign out"
-                  className="p-2 text-muted-foreground hover:text-red-500 transition-colors rounded-md"
+                  className="p-2 text-muted-foreground hover:text-red-500 transition-colors rounded-2xl"
                 >
                   <LogOut className="h-4 w-4" />
                 </button>

@@ -1,10 +1,8 @@
 import { Metadata } from "next"
-import Link from "next/link"
 import ProjectLibrary from "@/components/portfolio/project-library"
 import Footer from "@/components/footer"
 import PortfolioCTA from "@/components/portfolio/portfolio-cta"
 import { getProjectItems } from "@/lib/content"
-import { ArrowLeft, FolderKanban } from "lucide-react"
 
 export const revalidate = 3600
 
@@ -33,30 +31,15 @@ export default async function ProjectsPage() {
       {/* Main Full-Width Content Column */}
       <main className="flex-1 w-full min-w-0 flex flex-col justify-between overflow-x-hidden">
         <div>
-          {/* Top Breadcrumb & Page Banner */}
-          <div className="w-full bg-card/60 border-b border-border/70 py-8">
-            <div className="site-container space-y-4">
-              <Link
-                href="/portfolio"
-                className="inline-flex items-center gap-2 text-xs font-mono font-bold text-accent hover:underline uppercase tracking-wider"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span>Back to Main Portfolio</span>
-              </Link>
-
-              <div className="flex items-center gap-3 pt-2">
-                <div className="w-10 h-10 rounded-2xl bg-accent/10 text-accent flex items-center justify-center font-bold">
-                  <FolderKanban className="w-5 h-5" />
-                </div>
-                <div>
-                  <h1 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight font-heading">
-                    All Projects & Deliverables
-                  </h1>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
-                    Complete production index of web apps, software infrastructure, brand systems, and engineering deliverables.
-                  </p>
-                </div>
-              </div>
+          {/* Top Page Banner */}
+          <div className="w-full bg-card/40 border-b border-border/70 py-10 md:py-14">
+            <div className="site-container space-y-3">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-[1.15]">
+                All Projects &amp; Deliverables
+              </h1>
+              <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed max-w-3xl">
+                Complete production index of web apps, software infrastructure, brand systems, and engineering deliverables.
+              </p>
             </div>
           </div>
 

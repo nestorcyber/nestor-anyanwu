@@ -154,11 +154,12 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
 
   return (
     <>
-      <main className="min-h-screen bg-background font-sans pt-20 md:pt-24 pb-16" id="main-content">
-        <div className="site-container">
+      <main className="min-h-screen bg-background font-sans pt-0 pb-16" id="main-content">
+        <section className="w-full min-h-screen min-h-[100dvh] flex flex-col justify-center pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 relative overflow-hidden bg-gradient-to-b from-[#0056D2]/[0.05] via-background to-background dark:from-[#0056D2]/10 dark:via-background dark:to-background border-b border-border/40">
+          <div className="site-container relative z-10">
           
-          {/* Main 2-Column Responsive Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            {/* Main 2-Column Responsive Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
               {/* ─── 1. HEADLINE & INTRO DESCRIPTION ─── */}
               <div className="order-1 lg:order-1 lg:col-span-5 space-y-8 pt-2">
@@ -175,7 +176,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
 
               {/* ─── 2. CONTACT FORM ─── */}
               <div className="order-2 lg:order-2 lg:col-span-7">
-                <div className="bg-card border border-border/80 rounded-3xl p-6 sm:p-8 md:p-10 shadow-lg space-y-6">
+                <div className="bg-card border border-border/80 rounded-2xl p-6 sm:p-8 md:p-10 shadow-lg space-y-6">
                   
                   <div className="space-y-1 pb-2">
                     <h2 className="text-xl sm:text-2xl font-extrabold text-foreground font-heading">
@@ -187,14 +188,14 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                   </div>
 
                   {submitStatus === "success" && (
-                    <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center gap-3 text-sm font-medium">
+                    <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center gap-3 text-sm font-medium">
                       <CheckCircle2 className="w-5 h-5 shrink-0" />
                       <span>Your message has been sent successfully. I&apos;ll reply to you as soon as possible.</span>
                     </div>
                   )}
 
                   {submitStatus === "error" && (
-                    <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-sm font-medium">
+                    <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-sm font-medium">
                       {errorMessage || "Something went wrong while sending your message. Please try again."}
                     </div>
                   )}
@@ -235,7 +236,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                           value={formData.firstName}
                           onChange={handleChange}
                           placeholder="e.g. Alex"
-                          className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all"
+                          className="w-full px-4 py-3 rounded-2xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all"
                         />
                       </div>
 
@@ -250,7 +251,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                           value={formData.lastName}
                           onChange={handleChange}
                           placeholder="e.g. Smith"
-                          className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all"
+                          className="w-full px-4 py-3 rounded-2xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all"
                         />
                       </div>
                     </div>
@@ -268,7 +269,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="your.email@example.com"
-                          className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all"
+                          className="w-full px-4 py-3 rounded-2xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all"
                         />
                       </div>
 
@@ -282,7 +283,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                           value={formData.organization}
                           onChange={handleChange}
                           placeholder="e.g. Personal Project, Startup, or Community"
-                          className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all"
+                          className="w-full px-4 py-3 rounded-2xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all"
                         />
                       </div>
                     </div>
@@ -299,7 +300,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                           value={formData.phone}
                           onChange={handleChange}
                           placeholder="+234 800 000 0000"
-                          className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all"
+                          className="w-full px-4 py-3 rounded-2xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all"
                         />
                       </div>
 
@@ -313,7 +314,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                           value={formData.country}
                           onChange={handleChange}
                           placeholder="e.g. Nigeria, US, UK, Remote"
-                          className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all"
+                          className="w-full px-4 py-3 rounded-2xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all"
                         />
                       </div>
                     </div>
@@ -328,7 +329,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                         required
                         value={formData.serviceInterest}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all cursor-pointer"
+                        className="w-full px-4 py-3 rounded-2xl bg-background border border-border/80 text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all cursor-pointer"
                       >
                         <option value="Software Development & Web Apps">Software &amp; Web App Development</option>
                         <option value="UI/UX Design & Brand Identity">UI/UX Design &amp; Brand Systems</option>
@@ -354,7 +355,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                         value={formData.subject}
                         onChange={handleChange}
                         placeholder="Brief summary of your project, idea, or request"
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 rounded-2xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all"
                       />
                     </div>
 
@@ -370,7 +371,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                         value={formData.message}
                         onChange={handleChange}
                         placeholder="Tell me about what you are building, your ideas, timeline, or how I can help..."
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all resize-y"
+                        className="w-full px-4 py-3 rounded-2xl bg-background border border-border/80 text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-[#0056D2] focus:border-transparent transition-all resize-y"
                       />
                     </div>
 
@@ -379,7 +380,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full h-11 sm:h-12 px-8 rounded-xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs sm:text-sm tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
+                        className="w-full h-11 sm:h-12 px-8 rounded-2xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs sm:text-sm tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
                       >
                         {isSubmitting ? (
                           <span>Sending Message...</span>
@@ -405,6 +406,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
             </div>
 
           </div>
+        </section>
 
           {/* ─── Trusted Brand Partners Infinite Marquee Carousel ─── */}
           <div className="mt-16 md:mt-20">
@@ -412,7 +414,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
           </div>
 
           {/* ─── 6-Pillar Skill & Execution Grid Section ─── */}
-          <section className="w-full mt-16 md:mt-24 pt-16 md:pt-20 pb-16 md:pb-24 border-t border-border/70 bg-white dark:bg-background">
+          <section className="w-full mt-16 md:mt-24 pt-16 md:pt-20 pb-16 md:pb-24 border-t border-border/70 bg-background">
             <div className="site-container">
               
               {/* Section Header */}
@@ -423,7 +425,7 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                 <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
                   A hands-on, multi-disciplinary skillset combining modern software engineering, clean design, practical tech strategy, and passionate community leadership.
                 </p>
-                <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-1" />
+                <div className="w-14 h-1 bg-[#0056D2] rounded-2xl mt-1" />
               </div>
 
               {/* 6-Item Feature Grid */}
@@ -431,8 +433,8 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
                 
                 {/* Feature 1: Software & Web Development */}
                 <div className="space-y-4">
-                  <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
-                    <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0056D2] dark:text-sky-400">
+                  <div className="w-14 h-14 rounded-2xl border border-border bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                    <div className="w-full h-full rounded-2xl border border-border/80 flex items-center justify-center text-[#0056D2]">
                       <Code2 className="w-6 h-6 stroke-[1.75]" />
                     </div>
                   </div>
@@ -446,8 +448,8 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
 
                 {/* Feature 2: UI/UX & Brand Design */}
                 <div className="space-y-4">
-                  <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
-                    <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0056D2] dark:text-sky-400">
+                  <div className="w-14 h-14 rounded-2xl border border-border bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                    <div className="w-full h-full rounded-2xl border border-border/80 flex items-center justify-center text-[#0056D2]">
                       <Layers className="w-6 h-6 stroke-[1.75]" />
                     </div>
                   </div>
@@ -461,8 +463,8 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
 
                 {/* Feature 3: IT Advisory & Technical Strategy */}
                 <div className="space-y-4">
-                  <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
-                    <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0056D2] dark:text-sky-400">
+                  <div className="w-14 h-14 rounded-2xl border border-border bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                    <div className="w-full h-full rounded-2xl border border-border/80 flex items-center justify-center text-[#0056D2]">
                       <ShieldCheck className="w-6 h-6 stroke-[1.75]" />
                     </div>
                   </div>
@@ -476,8 +478,8 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
 
                 {/* Feature 4: AI Workflows & Automation */}
                 <div className="space-y-4">
-                  <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
-                    <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0056D2] dark:text-sky-400">
+                  <div className="w-14 h-14 rounded-2xl border border-border bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                    <div className="w-full h-full rounded-2xl border border-border/80 flex items-center justify-center text-[#0056D2]">
                       <Zap className="w-6 h-6 stroke-[1.75]" />
                     </div>
                   </div>
@@ -491,8 +493,8 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
 
                 {/* Feature 5: DevRel, Speaking & Workshops */}
                 <div className="space-y-4">
-                  <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
-                    <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0056D2] dark:text-sky-400">
+                  <div className="w-14 h-14 rounded-2xl border border-border bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                    <div className="w-full h-full rounded-2xl border border-border/80 flex items-center justify-center text-[#0056D2]">
                       <Handshake className="w-6 h-6 stroke-[1.75]" />
                     </div>
                   </div>
@@ -506,8 +508,8 @@ export default function ContactPage({ brands = [] }: { brands?: BrandPartner[] }
 
                 {/* Feature 6: Community Leadership & Impact */}
                 <div className="space-y-4">
-                  <div className="w-14 h-14 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-card flex items-center justify-center p-2.5 shadow-2xs">
-                    <div className="w-full h-full rounded-xl border border-slate-100 dark:border-slate-800/80 flex items-center justify-center text-[#0056D2] dark:text-sky-400">
+                  <div className="w-14 h-14 rounded-2xl border border-border bg-card flex items-center justify-center p-2.5 shadow-2xs">
+                    <div className="w-full h-full rounded-2xl border border-border/80 flex items-center justify-center text-[#0056D2]">
                       <Clock className="w-6 h-6 stroke-[1.75]" />
                     </div>
                   </div>

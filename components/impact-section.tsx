@@ -35,7 +35,7 @@ export default function ImpactSection({
       
       {/* Background Ambient Glow Accent */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-[#0056D2]/10 blur-[130px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-sky-500/10 blur-[110px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#0056D2]/10 blur-[110px] rounded-full pointer-events-none" />
 
       <div className="site-container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
@@ -49,8 +49,8 @@ export default function ImpactSection({
             <div className="relative w-full max-w-[420px] sm:max-w-[460px] h-[400px] sm:h-[450px] md:h-[480px] mx-auto lg:mx-0">
               
               {/* Photo 1 (Main Speaking Keynote - Top Left, white polaroid mat frame with subtle tilt) */}
-              <div className="absolute top-0 left-0 w-[60%] h-[68%] bg-white p-2.5 sm:p-3 pb-5 sm:pb-7 rounded-sm sm:rounded-md shadow-[0_15px_35px_rgba(0,0,0,0.6)] z-10 -rotate-2 hover:rotate-0 transition-transform duration-500 ease-out group">
-                <div className="relative w-full h-full overflow-hidden bg-slate-900">
+              <div className="absolute top-0 left-0 w-[60%] h-[68%] bg-white p-2.5 sm:p-3 pb-5 sm:pb-7 rounded-2xl shadow-[0_15px_35px_rgba(2,6,23,0.6)] z-10 -rotate-2 hover:rotate-0 transition-transform duration-500 ease-out group">
+                <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#0F172A]">
                   <Image
                     src="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966495/nestor/gallery/techadv1_dyclrm.jpg"
                     alt="Nestor Anyanwu speaking at community tech event"
@@ -63,8 +63,8 @@ export default function ImpactSection({
               </div>
 
               {/* Photo 2 (Collaboration / Builder Network - Top Right, enlarged white polaroid mat frame elevated higher) */}
-              <div className="absolute -top-9 sm:-top-12 right-0 w-[54%] sm:w-[56%] h-[56%] sm:h-[58%] bg-white p-2.5 sm:p-3 pb-5 sm:pb-7 rounded-sm sm:rounded-md shadow-[0_20px_40px_rgba(0,0,0,0.75)] z-20 rotate-3 hover:rotate-0 transition-transform duration-500 ease-out group">
-                <div className="relative w-full h-full overflow-hidden bg-slate-900">
+              <div className="absolute -top-9 sm:-top-12 right-0 w-[54%] sm:w-[56%] h-[56%] sm:h-[58%] bg-white p-2.5 sm:p-3 pb-5 sm:pb-7 rounded-2xl shadow-[0_20px_40px_rgba(2,6,23,0.75)] z-20 rotate-3 hover:rotate-0 transition-transform duration-500 ease-out group">
+                <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#0F172A]">
                   <Image
                     src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787964409/IMG_20251205_150131_451_-664809251_fhbpwd.jpg"
                     alt="Nestor Anyanwu community and leadership event"
@@ -76,8 +76,8 @@ export default function ImpactSection({
               </div>
 
               {/* Photo 3 (Leadership & Engineering - Bottom Right/Front, prominent overlapping polaroid mat frame) */}
-              <div className="absolute bottom-0 right-3 sm:right-6 w-[58%] h-[58%] bg-white p-2.5 sm:p-3 pb-5 sm:pb-7 rounded-sm sm:rounded-md shadow-[0_30px_60px_rgba(0,0,0,0.9)] z-30 -rotate-1 hover:rotate-0 transition-transform duration-500 ease-out group">
-                <div className="relative w-full h-full overflow-hidden bg-slate-900">
+              <div className="absolute bottom-0 right-3 sm:right-6 w-[58%] h-[58%] bg-white p-2.5 sm:p-3 pb-5 sm:pb-7 rounded-2xl shadow-[0_30px_60px_rgba(2,6,23,0.9)] z-30 -rotate-1 hover:rotate-0 transition-transform duration-500 ease-out group">
+                <div className="relative w-full h-full rounded-2xl overflow-hidden bg-[#0F172A]">
                   <Image
                     src="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966488/nestor/about/about_fm7rwu.jpg"
                     alt="Nestor Anyanwu executive leadership and engineering"
@@ -95,12 +95,12 @@ export default function ImpactSection({
           <div className="lg:col-span-7 space-y-6 lg:space-y-7">
             
             {/* Heading */}
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight font-heading leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#F1F5F9] tracking-tight font-heading leading-tight">
               {title}
             </h2>
 
             {/* Paragraph description */}
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
+            <p className="text-[#CBD5E1] text-sm sm:text-base leading-relaxed font-normal">
               {description}
             </p>
 
@@ -108,10 +108,10 @@ export default function ImpactSection({
             <div className="space-y-2.5 pt-1">
               {pillars.map((pillar, idx) => (
                 <div key={idx} className="flex items-start gap-2.5 group">
-                  <span className="shrink-0 mt-0.5 text-sky-400 bg-sky-400/15 rounded-full p-0.5 group-hover:scale-110 transition-transform">
-                    <CheckCircle2 className="w-4 h-4 text-[#0056D2] dark:text-sky-400" />
+                  <span className="shrink-0 mt-0.5 text-[#0056D2] bg-[#0056D2]/15 rounded-2xl p-0.5 group-hover:scale-110 transition-transform">
+                    <CheckCircle2 className="w-4 h-4 text-[#0056D2]" />
                   </span>
-                  <span className="text-xs sm:text-sm font-semibold text-slate-200 group-hover:text-white transition-colors leading-snug">
+                  <span className="text-xs sm:text-sm font-semibold text-[#F1F5F9]/90 group-hover:text-white transition-colors leading-snug">
                     {pillar}
                   </span>
                 </div>
@@ -122,7 +122,7 @@ export default function ImpactSection({
             <div className="pt-2">
               <Link
                 href={ctaLink || "/about"}
-                className="h-11 sm:h-12 bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs tracking-wider px-6 sm:px-7 rounded-xl shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2 cursor-pointer active:scale-98"
+                className="h-11 sm:h-12 bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs tracking-wider px-6 sm:px-7 rounded-2xl shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2 cursor-pointer active:scale-98"
               >
                 <span>{ctaText || "Discover More"}</span>
                 <ArrowUpRight className="w-4 h-4" />

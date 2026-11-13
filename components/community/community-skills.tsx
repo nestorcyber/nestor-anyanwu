@@ -75,7 +75,7 @@ export default function CommunitySkills() {
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             Practical leadership, communication, operational rigor, and technical mastery honed through real-world community execution.
           </p>
-          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-2xl mt-2" />
         </div>
 
         {/* Visual Skills Grid */}
@@ -85,12 +85,12 @@ export default function CommunitySkills() {
             return (
               <div
                 key={skill.id}
-                className="p-7 rounded-2xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0056D2] transition-all duration-300 group flex flex-col justify-between space-y-4 shadow-xs hover:shadow-xl"
+                className="p-7 rounded-2xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0056D2] transition-all duration-300 group flex flex-col justify-between space-y-4 elevated-card-shadow"
               >
                 <div className="space-y-4">
                   {/* Top Icon */}
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-[#0B1C2C] text-[#0056D2] flex items-center justify-center shadow-md border border-[#0056D2]/30 transition-transform duration-300 group-hover:scale-105 group-hover:border-[#0056D2]">
+                    <div className="w-12 h-12 rounded-2xl bg-[#0B1C2C] dark:bg-secondary text-[#0056D2] flex items-center justify-center shadow-md border border-[#0056D2]/30 transition-transform duration-300 group-hover:scale-105 group-hover:border-[#0056D2]">
                       <Icon className="w-6 h-6 stroke-[2]" />
                     </div>
                   </div>

@@ -180,8 +180,8 @@ export default function ImageUpload({
 
       {value ? (
         // SUCCESS & PREVIEW STATE
-        <div className="group relative overflow-hidden rounded-md border border-border bg-card p-2 transition-all">
-          <div className="relative aspect-video w-full max-h-56 overflow-hidden rounded border border-border/50 bg-neutral-900/50 flex items-center justify-center">
+        <div className="group relative overflow-hidden rounded-2xl border border-border bg-card p-2 transition-all">
+          <div className="relative aspect-video w-full max-h-56 overflow-hidden rounded-2xl border border-border/50 bg-[#020617]/70 flex items-center justify-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={previewUrl}
@@ -200,7 +200,7 @@ export default function ImageUpload({
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 disabled={uploading}
-                className="inline-flex items-center gap-1.5 rounded px-2.5 py-1 text-xs font-medium text-foreground bg-secondary hover:bg-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="inline-flex items-center gap-1.5 rounded-2xl px-2.5 py-1 text-xs font-medium text-foreground bg-secondary hover:bg-secondary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 title="Replace image"
               >
                 <RefreshCw className="h-3.5 w-3.5" />
@@ -210,7 +210,7 @@ export default function ImageUpload({
                 type="button"
                 onClick={handleRemove}
                 disabled={uploading}
-                className="inline-flex items-center gap-1.5 rounded px-2.5 py-1 text-xs font-medium text-destructive bg-destructive/10 hover:bg-destructive/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="inline-flex items-center gap-1.5 rounded-2xl px-2.5 py-1 text-xs font-medium text-destructive bg-destructive/10 hover:bg-destructive/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 title="Remove image"
               >
                 <X className="h-3.5 w-3.5" />
@@ -233,7 +233,7 @@ export default function ImageUpload({
               fileInputRef.current?.click()
             }
           }}
-          className={`group relative flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 text-center cursor-pointer transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+          className={`group relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center cursor-pointer transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
             isDragOver
               ? 'border-primary bg-primary/10 scale-[1.01]'
               : 'border-border/60 hover:border-primary/60 bg-muted/20 hover:bg-muted/40'
@@ -245,7 +245,7 @@ export default function ImageUpload({
                 <span>Uploading to Cloudinary…</span>
                 <span>{progress}%</span>
               </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-secondary">
+              <div className="h-2 w-full overflow-hidden rounded-2xl bg-secondary">
                 <div
                   className="h-full bg-primary transition-all duration-300 ease-out"
                   style={{ width: `${progress}%` }}
@@ -254,7 +254,7 @@ export default function ImageUpload({
             </div>
           ) : (
             <>
-              <div className="mb-2 rounded-full bg-primary/10 p-3 text-primary group-hover:scale-110 transition-transform">
+              <div className="mb-2 rounded-2xl bg-primary/10 p-3 text-primary group-hover:scale-110 transition-transform">
                 <Upload className="h-6 w-6" />
               </div>
               <p className="text-sm font-medium text-foreground">
@@ -288,7 +288,7 @@ export default function ImageUpload({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder="https://res.cloudinary.com/..."
-          className="w-full rounded border border-border/50 bg-background px-2.5 py-1 text-xs font-mono text-foreground placeholder:text-muted-foreground/60 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          className="w-full rounded-2xl border border-border/50 bg-background px-2.5 py-1 text-xs font-mono text-foreground placeholder:text-muted-foreground/60 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
         />
       </div>
 
@@ -303,14 +303,14 @@ export default function ImageUpload({
             value={altText}
             onChange={(e) => onAltTextChange?.(e.target.value)}
             placeholder="Describe the image..."
-            className="w-full rounded border border-border bg-background px-2.5 py-1 text-xs text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            className="w-full rounded-2xl border border-border bg-background px-2.5 py-1 text-xs text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
           />
         </div>
       )}
 
       {/* Error Message Display */}
       {error ? (
-        <div className="flex items-center gap-2 text-xs text-destructive bg-destructive/10 p-2.5 rounded border border-destructive/20">
+        <div className="flex items-center gap-2 text-xs text-destructive bg-destructive/10 p-2.5 rounded-2xl border border-destructive/20">
           <AlertCircle className="h-4 w-4 shrink-0" />
           <span>{error}</span>
         </div>

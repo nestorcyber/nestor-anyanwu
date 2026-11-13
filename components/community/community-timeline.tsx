@@ -152,7 +152,7 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
   const displayItems = timeline && timeline.length > 0 ? timeline : DEFAULT_TIMELINE
 
   return (
-    <section id="timeline" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-slate-50/60 dark:bg-slate-900/30 flex flex-col justify-center relative overflow-hidden">
+    <section id="timeline" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-slate-50/60 dark:bg-card/30 flex flex-col justify-center relative overflow-hidden">
       {/* Background ambient light */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-[#0056D2]/5 dark:bg-[#0056D2]/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -165,13 +165,13 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             A continuous chronological roadmap tracking grassroots leadership, technical volunteer engagements, and on-ground impact.
           </p>
-          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-2xl mt-2" />
         </div>
 
         {/* Road Timeline Container */}
         <div className="relative max-w-4xl mx-auto pt-4 pb-2">
           {/* Vertical Highway Road Track (Left Side) */}
-          <div className="absolute left-5 sm:left-7 md:left-9 top-4 bottom-8 w-6 sm:w-7 md:w-8 -translate-x-1/2 bg-slate-900 dark:bg-slate-950 border-x-2 border-slate-700/80 dark:border-slate-800 rounded-full shadow-inner flex items-center justify-center pointer-events-none overflow-hidden z-0">
+          <div className="absolute left-5 sm:left-7 md:left-9 top-4 bottom-8 w-6 sm:w-7 md:w-8 -translate-x-1/2 bg-[#0F172A] border-x-2 border-[#1E293B] rounded-2xl shadow-inner flex items-center justify-center pointer-events-none overflow-hidden z-0">
             {/* Road Center Dashed Lane Divider */}
             <div className="w-[2px] h-full bg-[repeating-linear-gradient(to_bottom,#0056D2_0,#0056D2_14px,transparent_14px,transparent_28px)] opacity-80" />
           </div>
@@ -189,7 +189,7 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
                 >
                   {/* Road Milestone Waypoint Node (Centered on Left Road Track) */}
                   <div className="absolute left-5 sm:left-7 md:left-9 -translate-x-1/2 top-4 z-20">
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#0B1C2C] text-[#0056D2] flex items-center justify-center shadow-[0_0_18px_rgba(0,86,210,0.45)] border-2 border-[#0056D2] transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#0056D2] group-hover:text-white">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#020617] text-[#0056D2] flex items-center justify-center shadow-[0_0_18px_rgba(0,86,210,0.45)] border-2 border-[#0056D2] transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#0056D2] group-hover:text-white">
                       <MilestoneIcon className="w-5 h-5 stroke-[2]" />
                     </div>
                   </div>
@@ -199,12 +199,12 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
 
                   {/* Milestone Card Container (Aligned on the Right of Road) */}
                   <div className="w-full pl-14 sm:pl-18 md:pl-22">
-                    <article className="bg-white dark:bg-card border border-slate-200/90 dark:border-slate-800/90 hover:border-[#0056D2] rounded-2xl p-5 sm:p-6 shadow-xs hover:shadow-xl transition-all duration-300 space-y-4 relative">
+                    <article className="bg-white dark:bg-card border border-slate-200/90 dark:border-border hover:border-[#0056D2] rounded-2xl p-5 sm:p-6 elevated-card-shadow transition-all duration-300 space-y-4 relative">
                       {/* Left pointer notch pointing to the road */}
-                      <div className="hidden sm:block absolute -left-2 top-4 w-0 h-0 border-y-[6px] border-y-transparent border-r-[8px] border-r-slate-200 dark:border-r-slate-800" />
+                      <div className="hidden sm:block absolute -left-2 top-4 w-0 h-0 border-y-[6px] border-y-transparent border-r-[8px] border-r-border" />
 
                       {/* Header Row: Organization, Role, Date */}
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-1 border-b border-slate-100 dark:border-slate-800/80">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-1 border-b border-border/60">
                         <div className="space-y-0.5">
                           <span className="text-[11px] font-mono font-bold text-[#0056D2] uppercase tracking-wider block">
                             {item.organization}
@@ -215,7 +215,7 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
                         </div>
 
                         <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
-                          <span className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-[#0056D2] px-2.5 py-1 rounded-md bg-[#0056D2]/10 border border-[#0056D2]/20 whitespace-nowrap">
+                          <span className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-[#0056D2] px-2.5 py-1 rounded-2xl bg-[#0056D2]/10 border border-[#0056D2]/20 whitespace-nowrap">
                             <Calendar className="w-3 h-3" />
                             <span>{item.date}</span>
                           </span>
@@ -224,15 +224,15 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
 
                       {/* Role if distinct from Title */}
                       {item.role && item.role !== item.title && (
-                        <p className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                          <span className="text-slate-400 font-mono text-[11px]">Role:</span>
+                        <p className="text-xs font-semibold text-slate-700 dark:text-muted-foreground flex items-center gap-1.5">
+                          <span className="text-muted-foreground font-mono text-[11px]">Role:</span>
                           <span className="text-[#0056D2]">{item.role}</span>
                         </p>
                       )}
 
                       {/* Optional Photo Attachment */}
                       {hasImage && (
-                        <div className="relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-slate-800">
+                        <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-[#020617] border border-border">
                           <Image
                             src={item.images![0]}
                             alt={item.title}
@@ -244,17 +244,17 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
                       )}
 
                       {/* Description */}
-                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                      <p className="text-xs sm:text-sm text-slate-600 dark:text-muted-foreground leading-relaxed font-normal">
                         {item.description}
                       </p>
 
                       {/* Details / Skills Tag Chips */}
                       {item.details && item.details.length > 0 && (
-                        <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100 dark:border-slate-800/80">
+                        <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-border/60">
                           {item.details.map((tag, tIdx) => (
                             <span
                               key={tIdx}
-                              className="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 text-[11px] font-medium"
+                              className="px-2.5 py-0.5 rounded-2xl bg-secondary text-slate-600 dark:text-muted-foreground text-[11px] font-medium"
                             >
                               {tag}
                             </span>
@@ -273,7 +273,7 @@ export default function CommunityTimeline({ timeline = DEFAULT_TIMELINE }: Commu
         <div className="flex items-center justify-center pt-6">
           <Link
             href="/community/roadmap"
-            className="h-11 sm:h-12 w-full sm:w-auto px-7 sm:px-9 rounded-xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center justify-center gap-2.5 cursor-pointer group"
+            className="h-11 sm:h-12 w-full sm:w-auto px-7 sm:px-9 rounded-2xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center justify-center gap-2.5 cursor-pointer group"
           >
             <Compass className="w-4 h-4" />
             <span>Explore Complete Roadmap &amp; Archive</span>

@@ -152,7 +152,7 @@ export default function JournalForm({ initial }: Props) {
             <button
               type="button"
               onClick={onDuplicate}
-              className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-border bg-card hover:bg-secondary text-foreground transition-colors cursor-pointer shadow-2xs"
+              className="px-3 py-1.5 text-xs font-semibold rounded-2xl border border-border bg-card hover:bg-secondary text-foreground transition-colors cursor-pointer shadow-2xs"
             >
               Duplicate
             </button>
@@ -161,7 +161,7 @@ export default function JournalForm({ initial }: Props) {
             <button
               type="button"
               onClick={onDelete}
-              className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-red-500/30 bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors cursor-pointer shadow-2xs"
+              className="px-3 py-1.5 text-xs font-semibold rounded-2xl border border-red-500/30 bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors cursor-pointer shadow-2xs"
             >
               Delete
             </button>
@@ -176,7 +176,7 @@ export default function JournalForm({ initial }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column (Col 1-8): Main Content & Editor */}
         <div className="lg:col-span-8 space-y-6">
-          <div className="bg-card border border-border/80 rounded-xl p-5 sm:p-6 shadow-2xs space-y-5">
+          <div className="bg-card border border-border/80 rounded-2xl p-5 sm:p-6 shadow-2xs space-y-5">
             <Field label="Title">
               <TextInput
                 required
@@ -216,13 +216,13 @@ export default function JournalForm({ initial }: Props) {
         {/* Right Column (Col 9-12): Publishing, Media, Category, & SEO */}
         <div className="lg:col-span-4 space-y-6">
           {/* Cover Media Panel */}
-          <div className="bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-4">
+          <div className="bg-card border border-border/80 rounded-2xl p-5 shadow-2xs space-y-4">
             <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">Featured Cover Image</h3>
             <ImageUpload label="Cover Image" value={coverImage} onChange={setCoverImage} folder="journal" />
           </div>
 
           {/* Publishing Settings */}
-          <div className="bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-4">
+          <div className="bg-card border border-border/80 rounded-2xl p-5 shadow-2xs space-y-4">
             <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">Publishing & Taxonomy</h3>
             
             <Field label="Category">
@@ -259,7 +259,7 @@ export default function JournalForm({ initial }: Props) {
           </div>
 
           {/* SEO Metadata */}
-          <div className="bg-card border border-border/80 rounded-xl p-5 shadow-2xs space-y-4">
+          <div className="bg-card border border-border/80 rounded-2xl p-5 shadow-2xs space-y-4">
             <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground">Search Engine Optimization</h3>
             
             <Field label="SEO Title (Fallback: Post Title)">

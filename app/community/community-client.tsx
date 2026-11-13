@@ -34,7 +34,7 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
       <main className="min-h-screen bg-background overflow-x-hidden">
 
         {/* 1. HERO SECTION: DESKTOP SPLIT / MOBILE STACK */}
-        <section className="w-full pt-20 md:pt-24 pb-12 md:pb-16 border-b-2 border-slate-900 dark:border-slate-800 bg-background relative">
+        <section className="w-full pt-20 md:pt-24 pb-12 md:pb-16 border-b border-border bg-background relative">
           <div className="site-container space-y-8">
             
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
@@ -42,21 +42,21 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
               {/* Left Column: Hero Headline, Role Tags & CTAs (lg:col-span-7) */}
               <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
                 <div className="space-y-4">
-                  {/* Category Pills */}
+                  {/* Category Tags */}
                   <div className="flex flex-wrap gap-2 text-[11px] font-mono font-bold uppercase tracking-wider">
-                    <span className="px-2.5 py-1 bg-accent text-white border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    <span className="px-3 py-1 rounded-2xl bg-[#0056D2] text-white border border-[#0056D2] shadow-xs">
                       NACOS FUTO
                     </span>
-                    <span className="px-2.5 py-1 bg-card text-foreground border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.8)]">
+                    <span className="px-3 py-1 rounded-2xl bg-card text-foreground border border-border shadow-xs">
                       IEEE Student Branch
                     </span>
-                    <span className="px-2.5 py-1 bg-card text-foreground border-2 border-slate-900 dark:border-slate-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.8)]">
+                    <span className="px-3 py-1 rounded-2xl bg-card text-foreground border border-border shadow-xs">
                       GDG Owerri
                     </span>
                   </div>
 
                   <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight uppercase leading-tight font-heading">
-                    Community & Tech Advocacy
+                    Community &amp; Tech Advocacy
                   </h1>
 
                   <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-2xl font-light">
@@ -68,7 +68,7 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
                 <div className="flex flex-wrap items-center gap-4 pt-2">
                   <Link
                     href="/contact"
-                    className="bg-accent hover:bg-accent/90 text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3 border-2 border-slate-900 dark:border-slate-700 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all inline-flex items-center gap-2 cursor-pointer"
+                    className="bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3 rounded-2xl border border-[#0056D2] shadow-sm transition-all inline-flex items-center gap-2 cursor-pointer"
                   >
                     <Users size={15} />
                     <span>Join The Community</span>
@@ -76,7 +76,7 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
 
                   <a
                     href="#community-grid"
-                    className="bg-card hover:bg-secondary text-foreground border-2 border-slate-900 dark:border-slate-700 font-extrabold text-xs uppercase tracking-wider px-6 py-3 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,0.8)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-2 cursor-pointer"
+                    className="bg-card hover:bg-secondary text-foreground border border-border rounded-2xl font-extrabold text-xs uppercase tracking-wider px-6 py-3 shadow-sm transition-all flex items-center gap-2 cursor-pointer"
                   >
                     <span>Explore Initiatives</span>
                     <ArrowUpRight size={15} />
@@ -85,10 +85,10 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
               </div>
 
               {/* Right Column: Integrated Featured Community Highlight Card (lg:col-span-5) */}
-              <div className="lg:col-span-5 border-2 border-slate-900 dark:border-slate-800 bg-card p-5 shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.9)] flex flex-col justify-between space-y-4">
+              <div className="lg:col-span-5 rounded-2xl border border-border bg-card p-5 shadow-md flex flex-col justify-between space-y-4">
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between border-b-2 border-slate-900/10 dark:border-slate-800 pb-2">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-accent">
+                  <div className="flex items-center justify-between border-b border-border pb-2">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0056D2]">
                       FEATURED HIGHLIGHT
                     </span>
                     <span className="text-[10px] font-mono text-muted-foreground uppercase">
@@ -96,7 +96,7 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
                     </span>
                   </div>
 
-                  <div className="relative w-full h-[180px] sm:h-[220px] overflow-hidden border-2 border-slate-900/20 dark:border-slate-800 bg-slate-950">
+                  <div className="relative w-full h-[180px] sm:h-[220px] rounded-2xl overflow-hidden border border-border bg-[#020617]">
                     <Image
                       src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vol-ehxuFInSlnE81JZZijj6Bgoz9s2kcW.jpeg"
                       alt="Nestor volunteering at community event"
@@ -117,7 +117,7 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
                 </div>
 
                 <Link href="/community/nacos-futo-ict-directorate" className="block pt-2">
-                  <div className="w-full py-2.5 bg-primary text-white text-center font-extrabold text-xs uppercase tracking-wider border-2 border-slate-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                  <div className="w-full py-2.5 rounded-2xl bg-[#0056D2] hover:bg-[#0044a8] text-white text-center font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer">
                     <span>View Community Profile</span>
                     <ArrowUpRight size={14} />
                   </div>
@@ -132,10 +132,10 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
 
 
         {/* 3. SEGMENTED FILTER BAR & CARDS GRID */}
-        <section id="community-grid" className="w-full py-12 md:py-16 border-b-2 border-slate-900 dark:border-slate-800 bg-background">
+        <section id="community-grid" className="w-full py-12 md:py-16 border-b border-border bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             
-            <div className="flex items-center justify-between border-b-2 border-slate-900/10 dark:border-slate-800 pb-4">
+            <div className="flex items-center justify-between border-b border-border pb-4">
               <h2 className="text-xs font-bold uppercase tracking-widest text-foreground font-heading">
                 All Community Initiatives
               </h2>
@@ -144,16 +144,16 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
               </span>
             </div>
 
-            {/* Segmented Neubrutalist Filter Bar */}
-            <div className="p-1 bg-card border-2 border-slate-900 dark:border-slate-800 shadow-[3px_3px_0px_0px_rgba(15,23,42,0.9)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.9)] flex flex-wrap gap-1">
+            {/* Segmented Filter Bar */}
+            <div className="p-1.5 rounded-2xl bg-card border border-border shadow-sm flex flex-wrap gap-1.5">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer select-none rounded-none border-2 ${
+                  className={`px-4 py-2 text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer select-none rounded-2xl border ${
                     activeCategory === cat
-                      ? "bg-accent text-white border-slate-900 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
-                      : "bg-transparent text-muted-foreground border-transparent hover:text-foreground hover:border-slate-900/30"
+                      ? "bg-[#0056D2] text-white border-[#0056D2]"
+                      : "bg-transparent text-muted-foreground border-transparent hover:text-foreground hover:bg-secondary/60"
                   }`}
                 >
                   {cat}
@@ -185,19 +185,19 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
         {/* 4. FINAL CALL TO ACTION */}
         <section className="w-full py-16 md:py-24 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-[#0B1C2C] text-white border-2 border-slate-900 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] dark:border-slate-800 p-8 sm:p-12 md:p-16 text-center space-y-6">
+            <div className="bg-[#0B1C2C] dark:bg-[#0F172A] text-[#F1F5F9] rounded-2xl border border-border shadow-xl p-8 sm:p-12 md:p-16 text-center space-y-6">
               <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight uppercase max-w-3xl mx-auto font-heading leading-snug">
-                Let's Build Stronger Tech Ecosystems Together
+                Let&apos;s Build Stronger Tech Ecosystems Together
               </h2>
 
-              <p className="text-slate-300 text-sm sm:text-base font-light leading-relaxed max-w-2xl mx-auto">
+              <p className="text-[#CBD5E1] text-sm sm:text-base font-light leading-relaxed max-w-2xl mx-auto">
                 Interested in inviting Nestor for technical keynotes, community mentorship, student hackathon organization, or developer advocacy partnerships?
               </p>
 
               <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
                 <Link
                   href="/contact"
-                  className="bg-accent hover:bg-accent/90 text-white font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all inline-flex items-center gap-2 cursor-pointer"
+                  className="bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 rounded-2xl shadow-md transition-all inline-flex items-center gap-2 cursor-pointer"
                 >
                   <Users size={15} />
                   <span>Get Involved</span>
@@ -205,7 +205,7 @@ export default function CommunityPage({ events }: { events: CommunityEvent[] }) 
 
                 <a
                   href="mailto:nestoranyanwu@gmail.com"
-                  className="bg-card text-foreground border-2 border-slate-900 font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all inline-flex items-center gap-2 cursor-pointer"
+                  className="bg-[#020617] hover:bg-[#1E293B] text-[#F1F5F9] border border-[#1E293B] rounded-2xl font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 transition-all inline-flex items-center gap-2 cursor-pointer"
                 >
                   <Mail size={15} />
                   <span>Contact Nestor</span>
@@ -235,20 +235,20 @@ function EventCard({
 
   return (
     <div
-      className="group border-2 border-slate-900/20 dark:border-slate-800 bg-card rounded-none p-5 flex flex-col justify-between h-full transition-all shadow-[3px_3px_0px_0px_rgba(15,23,42,0.8)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent hover:-translate-y-1 cursor-pointer"
+      className="group border border-border bg-card rounded-2xl p-5 flex flex-col justify-between h-full transition-all shadow-sm hover:shadow-lg hover:border-[#0056D2] hover:-translate-y-1 cursor-pointer"
       onClick={onToggle}
     >
       <div className="space-y-4">
         {/* Cover Image Container */}
         {hasImages ? (
-          <div className="relative aspect-video w-full rounded-none overflow-hidden bg-slate-950 border-2 border-slate-900/10 dark:border-slate-800">
+          <div className="relative aspect-video w-full rounded-2xl overflow-hidden bg-[#020617] border border-border">
             <Image
               src={event.images[imgIdx]}
               alt={event.title}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
             />
-            <span className="absolute top-2 left-2 text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-accent text-white border border-slate-900 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+            <span className="absolute top-2 left-2 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-2xl bg-[#0056D2] text-white shadow-xs">
               {event.category}
             </span>
 
@@ -258,18 +258,18 @@ function EventCard({
                   <button
                     key={i}
                     onClick={(e) => { e.stopPropagation(); setImgIdx(i) }}
-                    className={`w-2 h-2 rounded-none transition-all border border-black ${i === imgIdx ? "bg-accent" : "bg-white/80"}`}
+                    className={`w-2 h-2 rounded-full transition-all border border-[#020617] ${i === imgIdx ? "bg-[#0056D2]" : "bg-white/80"}`}
                   />
                 ))}
               </div>
             )}
           </div>
         ) : (
-          <div className="h-20 bg-secondary flex items-center justify-between px-4 border-2 border-slate-900/10 dark:border-slate-800">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-accent text-white border border-slate-900">
+          <div className="h-20 rounded-2xl bg-secondary flex items-center justify-between px-4 border border-border">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-2xl bg-[#0056D2] text-white">
               {event.category}
             </span>
-            <Users className="w-5 h-5 text-accent" />
+            <Users className="w-5 h-5 text-[#0056D2]" />
           </div>
         )}
 

@@ -18,23 +18,23 @@ export default function NotFound() {
         <div className="-mt-8 space-y-3">
           <span className="text-xs font-bold uppercase tracking-widest text-accent block">Page Not Found</span>
           <h1 className="text-2xl md:text-4xl font-extrabold text-foreground tracking-tight">
-            This page doesn't exist
+            This page doesn&apos;t exist
           </h1>
           <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mx-auto">
-            The link you followed may be broken, or the page may have been removed. Let's get you back on track.
+            The link you followed may be broken, or the page may have been removed. Let&apos;s get you back on track.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
           <Link
             href="/"
-            className="text-xs font-bold uppercase tracking-widest bg-accent text-white px-8 py-3.5 transition-all hover:bg-accent/90 cursor-pointer inline-flex items-center justify-center"
+            className="text-xs font-bold uppercase tracking-widest rounded-2xl bg-[#0056D2] text-white px-8 py-3.5 transition-all hover:bg-[#0044a8] cursor-pointer inline-flex items-center justify-center"
           >
             Go Home
           </Link>
           <Link
             href="/portfolio"
-            className="text-xs font-bold uppercase tracking-widest border border-foreground/40 hover:border-accent hover:text-accent px-8 py-3.5 transition-all cursor-pointer text-foreground inline-flex items-center justify-center"
+            className="text-xs font-bold uppercase tracking-widest rounded-2xl border border-foreground/40 hover:border-[#0056D2] hover:text-[#0056D2] px-8 py-3.5 transition-all cursor-pointer text-foreground inline-flex items-center justify-center"
           >
             View Portfolio
           </Link>
@@ -42,7 +42,7 @@ export default function NotFound() {
 
         <div className="pt-4 text-xs text-muted-foreground">
           Or use{" "}
-          <kbd className="border border-border px-1.5 py-0.5 font-mono text-[10px]">⌘K</kbd>{" "}
+          <kbd className="rounded-2xl border border-border px-1.5 py-0.5 font-mono text-[10px]">⌘K</kbd>{" "}
           to search the site
         </div>
       </div>

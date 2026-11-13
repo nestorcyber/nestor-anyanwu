@@ -73,7 +73,7 @@ export default function CertificationSpotlight({
             <div className="pt-2">
               <Link
                 href={primaryButtonLink}
-                className="inline-flex items-center justify-center px-8 py-3.5 rounded-lg bg-[#0056D2] hover:bg-[#0044a8] text-white font-bold text-sm sm:text-base tracking-wide transition-all duration-200 shadow-[0_4px_14px_rgba(0,86,210,0.35)] hover:shadow-[0_6px_20px_rgba(0,86,210,0.45)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                className="inline-flex items-center justify-center px-8 py-3.5 rounded-2xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-bold text-sm sm:text-base tracking-wide transition-all duration-200 shadow-[0_4px_14px_rgba(0,86,210,0.35)] hover:shadow-[0_6px_20px_rgba(0,86,210,0.45)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
                 <span>{primaryButtonText}</span>
               </Link>
@@ -89,26 +89,26 @@ export default function CertificationSpotlight({
             {/* Simple Certificate Frame Container */}
             <div className="relative w-full lg:w-[115%] xl:w-[120%] lg:-mr-12 xl:-mr-20 translate-y-4 sm:translate-y-6 lg:translate-y-8 select-none">
               
-              <div className="relative rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-none bg-slate-900 border-t border-l border-r lg:border-r-0 border-slate-700/80 shadow-[0_20px_60px_rgba(0,0,0,0.25)] overflow-hidden">
+              <div className="relative rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-none bg-[#0F172A] border-t border-l border-r lg:border-r-0 border-[#1E293B] shadow-[0_20px_60px_rgba(2,6,23,0.45)] overflow-hidden">
                 
                 {/* Window Top Minimal Bar */}
-                <div className="flex items-center justify-between bg-slate-950/90 border-b border-slate-800 px-4 py-3 text-xs text-slate-400">
+                <div className="flex items-center justify-between bg-[#020617]/95 border-b border-[#1E293B] px-4 py-3 text-xs text-[#CBD5E1]">
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                    <span className="text-[11px] font-semibold text-slate-300 pl-2 border-l border-slate-800">
+                    <span className="text-[11px] font-semibold text-[#F1F5F9] pl-2 border-l border-[#1E293B]">
                       {cert.title}
                     </span>
                   </div>
 
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">
+                  <span className="px-2 py-0.5 rounded-2xl bg-[#0056D2]/20 text-[#F1F5F9] border border-[#0056D2]/40 font-bold text-[10px]">
                     VERIFIED
                   </span>
                 </div>
 
                 {/* Certificate Image Canvas */}
-                <div className="relative w-full h-[320px] sm:h-[400px] md:h-[460px] lg:h-[480px] bg-slate-950 overflow-hidden group">
+                <div className="relative w-full h-[320px] sm:h-[400px] md:h-[460px] lg:h-[480px] bg-[#020617] overflow-hidden group">
                   <Image
                     src={certImg}
                     alt={`${cert.title} Certificate`}

@@ -19,10 +19,10 @@ export default function HomeStats({ stats = [] }: HomeStatsProps) {
   if (!stats || stats.length === 0) return null
 
   return (
-    <section id="key-metrics" aria-label="Impact and Key Metrics" className="w-full relative py-12 md:py-16 bg-slate-950 text-white border-b border-slate-800/80 overflow-hidden font-sans">
+    <section id="key-metrics" aria-label="Impact and Key Metrics" className="w-full relative py-12 md:py-16 bg-[#020617] text-[#F1F5F9] border-b border-[#1E293B] overflow-hidden font-sans">
       {/* Ambient background lighting */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#0056D2]/10 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-sky-500/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#0056D2]/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="site-container relative z-10">
         <div
@@ -42,36 +42,36 @@ export default function HomeStats({ stats = [] }: HomeStatsProps) {
             return (
               <div
                 key={idx}
-                className="group relative p-6 sm:p-7 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-[#0056D2]/50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,86,210,0.12)] flex flex-col justify-between"
+                className="group relative p-6 sm:p-7 rounded-2xl bg-[#0F172A]/80 border border-[#1E293B] hover:border-[#0056D2]/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,86,210,0.12)] flex flex-col justify-between"
               >
                 {/* Top accent bar on hover */}
                 <div className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-[#0056D2] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 <div>
                   <div className="flex items-center justify-between gap-4 mb-4">
-                    <span className="text-3xl sm:text-4xl lg:text-5xl font-black font-heading text-white tracking-tight group-hover:text-[#0056D2] transition-colors">
+                    <span className="text-3xl sm:text-4xl lg:text-5xl font-black font-heading text-[#F1F5F9] tracking-tight group-hover:text-[#0056D2] transition-colors">
                       {stat.value}
                     </span>
-                    <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 text-[#0056D2] group-hover:bg-[#0056D2]/15 group-hover:border-[#0056D2]/30 flex items-center justify-center shrink-0 transition-all duration-300">
+                    <div className="w-11 h-11 rounded-2xl bg-[#020617]/60 border border-[#1E293B] text-[#0056D2] group-hover:bg-[#0056D2]/15 group-hover:border-[#0056D2]/40 flex items-center justify-center shrink-0 transition-all duration-300">
                       <Icon className="w-5 h-5 transition-transform group-hover:scale-110" />
                     </div>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-bold text-slate-100 tracking-tight mb-2">
+                  <h3 className="text-base sm:text-lg font-bold text-[#F1F5F9] tracking-tight mb-2">
                     {stat.label}
                   </h3>
 
                   {stat.description && (
-                    <p className="text-xs sm:text-sm text-slate-400 font-normal leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#CBD5E1] font-normal leading-relaxed">
                       {stat.description}
                     </p>
                   )}
                 </div>
 
                 {/* Subtle indicator dot/line */}
-                <div className="mt-5 pt-4 border-t border-slate-800/60 flex items-center gap-2">
+                <div className="mt-5 pt-4 border-t border-[#1E293B] flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#0056D2]" />
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-medium">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-[#CBD5E1]/75 font-medium">
                     Verified Milestone
                   </span>
                 </div>

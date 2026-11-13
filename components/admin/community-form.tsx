@@ -3,6 +3,7 @@
 import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { logAdminActivity } from '@/lib/admin-activity'
 import { revalidateCommunity } from '@/app/actions/revalidate'
 import { slugify } from '@/lib/utils/slug'
 import ImageUpload from '@/components/admin/image-upload'
@@ -82,6 +83,12 @@ export default function CommunityForm({ initial }: Props) {
         return
       }
       await revalidateCommunity(targetSlug)
+      await logAdminActivity(
+        initial ? 'Updated Community Entry' : 'Created Community Entry',
+        'community_entries',
+        initial?.id || targetSlug,
+        `Organization: ${organization}`
+      )
       router.push('/admin/community')
       router.refresh()
     } catch (err: any) {
@@ -98,6 +105,12 @@ export default function CommunityForm({ initial }: Props) {
       const supabase = createClient()
       await supabase.from('community_entries').delete().eq('id', initial.id)
       await revalidateCommunity(initial.slug)
+      await logAdminActivity(
+        'Deleted Community Entry',
+        'community_entries',
+        initial.id || initial.slug,
+        `Organization: ${organization}`
+      )
       router.push('/admin/community')
       router.refresh()
     } catch (err: any) {

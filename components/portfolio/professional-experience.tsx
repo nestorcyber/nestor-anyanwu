@@ -1,21 +1,14 @@
 import React from "react"
 import Link from "next/link"
 import type { JourneyItem } from "@/lib/content"
-import {
-  ArrowRight,
-  Code2,
-  Cpu,
-  Globe,
-  Play,
-  Briefcase,
-} from "lucide-react"
+import { ArrowRight } from "lucide-react"
+import ExperienceSplitCard from "@/components/shared/experience-card"
 
 export default function ProfessionalExperience({
   journeyTimeline,
 }: {
   journeyTimeline?: JourneyItem[]
 } = {}) {
-  // Professional milestones integrating Software Engineering, DevRel, Tech Leadership, Design, and Impact
   const coreExperiences: JourneyItem[] = [
     {
       id: "1",
@@ -68,142 +61,65 @@ export default function ProfessionalExperience({
       ? journeyTimeline.filter((j) => j.type === "work").slice(0, 4)
       : coreExperiences
 
-  const getSpineIcon = (index: number) => {
-    switch (index % 4) {
-      case 0:
-        return <Code2 className="w-5 h-5" />
-      case 1:
-        return <Globe className="w-5 h-5" />
-      case 2:
-        return <Cpu className="w-5 h-5" />
-      case 3:
-        return <Briefcase className="w-5 h-5" />
-      default:
-        return <Code2 className="w-5 h-5" />
-    }
-  }
-
   return (
-    <section id="experience" className="w-full py-16 md:py-24 border-b border-border/70 bg-card/20 relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-[#0056D2]/5 dark:bg-[#0056D2]/10 rounded-full blur-3xl pointer-events-none" />
+    <section id="experience" className="w-full py-16 md:py-24 border-b border-border/70 bg-card/20 relative">
+      {/* Contained ambient glow layer (isolated from section so sticky lapping works) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-[#0056D2]/5 dark:bg-[#0056D2]/10 rounded-full blur-3xl" />
+      </div>
 
-      <div className="site-container relative z-10 space-y-12">
-        
+      <div className="site-container relative z-10 space-y-12 md:space-y-14">
         {/* Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Career <span className="text-[#0056D2]">Roadmap</span> &amp; Experience
+            Experience
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             Verified engineering track record, technical directorship, and full-stack software delivery.
           </p>
-          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-1" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-2xl mt-2" />
         </div>
 
-        {/* Connected Roadmap Timeline Track */}
-        <div className="relative max-w-5xl mx-auto pt-4 pb-2">
-          
-          {/* Continuous Central Glowing Roadmap Spine Line in Brand Electric Blue (Desktop) */}
-          <div className="absolute left-6 md:left-1/2 top-4 bottom-8 w-[2px] -translate-x-1/2 bg-gradient-to-b from-[#0056D2] via-[#0056D2]/60 to-transparent pointer-events-none hidden md:block" />
+        {/* Lapped Visible Card Stack (Stepped Sticky Deck) */}
+        <div className="relative max-w-5xl mx-auto flex flex-col gap-12 sm:gap-16 lg:gap-20 pb-8 lg:pb-10">
+          {displayItems.map((item, idx) => {
+            const total = displayItems.length
+            const stepPx = 24
+            const bottomStepCount = total - 1 - idx
+            const deckScale = 1 - bottomStepCount * 0.015
 
-          {/* Continuous Left-Aligned Glowing Spine Line (Mobile) */}
-          <div className="absolute left-6 top-4 bottom-8 w-[2px] bg-gradient-to-b from-[#0056D2] via-[#0056D2]/60 to-transparent pointer-events-none md:hidden" />
-
-          {/* Roadmap Milestone Items */}
-          <div className="space-y-12 md:space-y-16">
-            {displayItems.map((item, idx) => {
-              const isEven = idx % 2 === 0
-
-              return (
-                <div
-                  key={item.id || idx}
-                  className={`relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-14 ${
-                    isEven ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  {/* 1. Milestone Roadmap Card Content */}
-                  <div className="w-full md:w-[calc(50%-2.5rem)] pl-14 sm:pl-16 md:pl-0">
-                    <article className="group relative bg-white dark:bg-card border border-slate-200/90 dark:border-slate-800 hover:border-[#0056D2] rounded-2xl sm:rounded-3xl p-6 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_10px_30px_rgba(0,86,210,0.12)] transition-all duration-300 space-y-4">
-                      
-                      {/* Speech Bubble Notch pointing to center spine on Desktop */}
-                      {isEven ? (
-                        <div className="hidden md:block absolute -right-2.5 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[9px] border-y-transparent border-l-[10px] border-l-white dark:border-l-card" />
-                      ) : (
-                        <div className="hidden md:block absolute -left-2.5 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[9px] border-y-transparent border-r-[10px] border-r-white dark:border-r-card" />
-                      )}
-
-                      {/* Header Block: Title & Domain */}
-                      <div>
-                        <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-foreground font-heading tracking-tight leading-snug group-hover:text-[#0056D2] transition-colors">
-                          {item.title}
-                        </h3>
-                        <p className="text-sm sm:text-base font-semibold text-[#0056D2] mt-1">
-                          {item.organization}
-                        </p>
-                      </div>
-
-                      {/* Description Bullet Point */}
-                      <div className="pt-1">
-                        <div className="flex items-start gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-                          <Play className="w-2.5 h-2.5 mt-1.5 fill-[#0056D2] text-[#0056D2] shrink-0" />
-                          <span>{item.description}</span>
-                        </div>
-                      </div>
-
-                      {/* Brand Colored Skills / Focus Tag Chips */}
-                      {item.details && item.details.length > 0 && (
-                        <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-slate-100 dark:border-slate-800/80">
-                          {item.details.map((tag, tIdx) => (
-                            <span
-                              key={tIdx}
-                              className="px-3 py-1 rounded-lg bg-[#0056D2]/10 text-[#0056D2] border border-[#0056D2]/20 text-xs font-semibold"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-
-                    </article>
-                  </div>
-
-                  {/* 2. Central Glowing Node Icon Badge on Spine */}
-                  <div className="absolute left-6 md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 -translate-y-0 md:-translate-y-1/2 z-20">
-                    <div className="w-12 h-12 rounded-full bg-[#0B1C2C] text-[#0056D2] flex items-center justify-center shadow-[0_0_18px_rgba(0,86,210,0.35)] border-2 border-[#0056D2]/70 transition-all duration-300 hover:scale-110 hover:border-[#0056D2] hover:shadow-[0_0_24px_rgba(0,86,210,0.55)]">
-                      {getSpineIcon(idx)}
-                    </div>
-                  </div>
-
-                  {/* 3. Opposite Side Date Timestamp (Desktop) in Brand Color */}
-                  <div
-                    className={`hidden md:flex w-[calc(50%-2.5rem)] items-center ${
-                      isEven ? "justify-start pl-6" : "justify-end pr-6 text-right"
-                    }`}
-                  >
-                    <span className="text-sm font-bold font-mono text-[#0056D2] tracking-wide px-3 py-1 rounded-md bg-[#0056D2]/5 border border-[#0056D2]/15">
-                      {item.date}
-                    </span>
-                  </div>
-
-                </div>
-              )
-            })}
-          </div>
-
+            return (
+              <div
+                key={item.id || idx}
+                style={{
+                  zIndex: idx + 1,
+                  top: `calc(5.5rem + ${idx * stepPx}px)`,
+                  paddingBottom: `${bottomStepCount * stepPx}px`,
+                  marginBottom: `-${bottomStepCount * stepPx}px`,
+                }}
+                className="sticky pointer-events-none"
+              >
+                <ExperienceSplitCard
+                  item={item}
+                  index={idx}
+                  scale={deckScale}
+                  elevatedStackShadow
+                />
+              </div>
+            )
+          })}
         </div>
 
         {/* View All Experience Button */}
-        <div className="flex justify-center pt-4">
+        <div className="flex justify-center pt-2">
           <Link
             href="/experience"
-            className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-6 rounded-xl bg-accent hover:bg-accent/90 text-white font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-6 rounded-2xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
           >
             <span>View All Experience</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-
       </div>
     </section>
   )

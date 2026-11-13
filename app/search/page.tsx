@@ -31,14 +31,14 @@ const categoryIcons: Record<string, React.ReactNode> = {
 }
 
 const categoryColors: Record<string, string> = {
-  Page: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30",
-  Project: "bg-purple-500/15 text-purple-600 dark:text-purple-400 border-purple-500/30",
-  Service: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30",
-  Skill: "bg-green-500/15 text-green-600 dark:text-green-400 border-green-500/30",
-  Journal: "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30",
-  Community: "bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border-indigo-500/30",
-  Experience: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border-cyan-500/30",
-  Certification: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
+  Page: "bg-[#0056D2]/10 text-[#0056D2] dark:bg-[#0056D2]/25 dark:text-[#F1F5F9] border-[#0056D2]/30",
+  Project: "bg-[#0056D2]/10 text-[#0056D2] dark:bg-[#0056D2]/25 dark:text-[#F1F5F9] border-[#0056D2]/30",
+  Service: "bg-[#0056D2]/10 text-[#0056D2] dark:bg-[#0056D2]/25 dark:text-[#F1F5F9] border-[#0056D2]/30",
+  Skill: "bg-[#0056D2]/10 text-[#0056D2] dark:bg-[#0056D2]/25 dark:text-[#F1F5F9] border-[#0056D2]/30",
+  Journal: "bg-[#0056D2]/10 text-[#0056D2] dark:bg-[#0056D2]/25 dark:text-[#F1F5F9] border-[#0056D2]/30",
+  Community: "bg-[#0056D2]/10 text-[#0056D2] dark:bg-[#0056D2]/25 dark:text-[#F1F5F9] border-[#0056D2]/30",
+  Experience: "bg-[#0056D2]/10 text-[#0056D2] dark:bg-[#0056D2]/25 dark:text-[#F1F5F9] border-[#0056D2]/30",
+  Certification: "bg-[#0056D2]/10 text-[#0056D2] dark:bg-[#0056D2]/25 dark:text-[#F1F5F9] border-[#0056D2]/30",
 }
 
 interface Props {
@@ -58,8 +58,8 @@ export default async function SearchPage({ searchParams }: Props) {
           <div className="space-y-8 max-w-5xl mx-auto">
             
             {/* Header */}
-            <div className="space-y-3 border-b-2 border-slate-900/20 dark:border-slate-800 pb-6">
-              <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-accent px-3 py-1 border border-accent/40 bg-accent/10">
+            <div className="space-y-3 border-b border-border pb-6">
+              <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-[#0056D2] dark:text-[#F1F5F9] px-3 py-1 rounded-2xl border border-[#0056D2]/40 bg-[#0056D2]/10 dark:bg-[#0056D2]/25">
                 <Search className="w-3.5 h-3.5" />
                 <span>LIVE SEARCH RESULTS</span>
               </div>
@@ -67,7 +67,7 @@ export default async function SearchPage({ searchParams }: Props) {
                 {query ? `Results for "${query}"` : "Search Site"}
               </h1>
               <p className="text-sm text-muted-foreground font-mono">
-                Found {results.length} matching {results.length === 1 ? "entry" : "entries"} across portfolio, journal, skills & community.
+                Found {results.length} matching {results.length === 1 ? "entry" : "entries"} across portfolio, journal, skills &amp; community.
               </p>
             </div>
 
@@ -78,13 +78,13 @@ export default async function SearchPage({ searchParams }: Props) {
                   <Link
                     key={item.id}
                     href={item.href}
-                    className="group border-2 border-slate-900/20 dark:border-slate-800 bg-card rounded-lg p-5 flex flex-col justify-between space-y-4 transition-all shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] hover:border-accent hover:-translate-y-1 cursor-pointer"
+                    className="group border border-border bg-card rounded-2xl p-5 flex flex-col justify-between space-y-4 transition-all shadow-sm hover:shadow-lg hover:border-[#0056D2] hover:-translate-y-1 cursor-pointer"
                   >
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <span
-                          className={`inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border ${
-                            categoryColors[item.category] || "bg-muted text-muted-foreground"
+                          className={`inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-2xl border ${
+                            categoryColors[item.category] || "bg-secondary text-muted-foreground border-border"
                           }`}
                         >
                           {categoryIcons[item.category]}
@@ -109,16 +109,16 @@ export default async function SearchPage({ searchParams }: Props) {
                 ))}
               </div>
             ) : (
-              <div className="py-20 border-2 border-dashed border-slate-900/20 dark:border-slate-800 text-center space-y-4 bg-card rounded-lg max-w-xl mx-auto p-8">
-                <Search className="w-10 h-10 text-muted-foreground/30 mx-auto" />
+              <div className="py-20 border-2 border-dashed border-border text-center space-y-4 bg-card rounded-2xl max-w-xl mx-auto p-8">
+                <Search className="w-10 h-10 text-muted-foreground/40 mx-auto" />
                 <h2 className="text-xl font-bold text-foreground">No matches found</h2>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  We couldn&apos;t find any content matching &quot;<span className="text-accent font-medium">{query}</span>&quot;. Try searching for terms like &quot;Portfolio&quot;, &quot;Next.js&quot;, &quot;GDG&quot;, &quot;Design&quot;, or &quot;Journal&quot;.
+                  We couldn&apos;t find any content matching &quot;<span className="text-[#0056D2] font-medium">{query}</span>&quot;. Try searching for terms like &quot;Portfolio&quot;, &quot;Next.js&quot;, &quot;GDG&quot;, &quot;Design&quot;, or &quot;Journal&quot;.
                 </p>
                 <div className="pt-2">
                   <Link
                     href="/"
-                    className="inline-block text-xs font-mono font-bold uppercase tracking-widest bg-slate-900 text-white dark:bg-white dark:text-slate-950 px-5 py-2.5 rounded-md hover:bg-accent transition-colors"
+                    className="inline-block text-xs font-mono font-bold uppercase tracking-widest bg-[#0056D2] text-white px-5 py-2.5 rounded-2xl hover:bg-[#0044a8] transition-colors"
                   >
                     Back to Home
                   </Link>

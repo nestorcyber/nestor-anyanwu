@@ -14,42 +14,42 @@ export default function PersonalPhilosophy() {
       title: "Technology Should Solve Real Problems",
       description: "I build software because I believe every line of code is a chance to make someone's life easier, faster, or more dignified. Not for the code, but for the human at the end of it.",
       number: "01",
-      color: "#0ea5e9",
+      color: "#0056D2",
     },
     {
       icon: Users,
       title: "The Next Generation Deserves Mentors",
       description: "I lead because when I was starting out, I needed someone to show me the way. I refuse to let the next generation figure it out alone. With every workshop and every talk, I'm paying it forward.",
       number: "02",
-      color: "#7c3aed",
+      color: "#0056D2",
     },
     {
       icon: Shield,
       title: "Trust Is the Foundation of Digital Growth",
       description: "I advocate for ethics and privacy because Africa's digital future cannot be built on exploitation. People deserve to know how their data is used, and I intend to make sure they do.",
       number: "03",
-      color: "#e11d48",
+      color: "#0056D2",
     },
     {
       icon: BookOpen,
       title: "Curiosity Is a Superpower",
       description: "I keep learning because the moment I stop, I stop growing, and so does everyone around me. I study, write, and teach not just to stay relevant, but to stay useful.",
       number: "04",
-      color: "#059669",
+      color: "#0056D2",
     },
     {
       icon: Globe,
       title: "Community Is Where Change Begins",
       description: "I invest in communities because the most powerful transformations don't start with governments or corporations; they start with people who care enough to show up for each other.",
       number: "05",
-      color: "#d97706",
+      color: "#0056D2",
     },
     {
       icon: Palette,
       title: "Great Ideas Deserve Great Presentation",
       description: "I design because I've seen brilliant ideas fail due to poor communication. When something looks credible, it gets taken seriously, and serious ideas deserve a serious visual voice.",
       number: "06",
-      color: "#db2777",
+      color: "#0056D2",
     },
   ]
 
@@ -105,7 +105,7 @@ export default function PersonalPhilosophy() {
                   fill={v.color}
                   fontSize="70"
                   fontWeight="900"
-                  fontFamily="sans-serif"
+                  fontFamily="var(--font-heading, inherit)"
                 >
                   {v.number}
                 </text>
@@ -113,7 +113,7 @@ export default function PersonalPhilosophy() {
 
               {/* Icon ring */}
               <div
-                className="relative mb-6 w-16 h-16 flex items-center justify-center transition-all duration-500"
+                className="relative mb-6 w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500"
                 style={{
                   border: `2px solid ${isHovered ? v.color : "rgba(148,163,184,0.2)"}`,
                   background: isHovered ? `${v.color}15` : "transparent",

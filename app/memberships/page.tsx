@@ -42,10 +42,10 @@ export default async function MembershipsPage() {
               {/* Left-Aligned Heading with Verified Checkmark Beside Text */}
               <div className="space-y-3">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight font-heading leading-[1.18]">
-                  Professional <span className="text-[#0075ff]">Memberships</span>{" "}
+                  Professional <span className="text-[#0056D2]">Memberships</span>{" "}
                   <span className="inline-flex items-center gap-2 sm:gap-3 whitespace-nowrap">
                     &amp; Affiliations
-                    <span className="inline-flex items-center justify-center text-[#0075ff] w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 shrink-0 drop-shadow-[0_4px_12px_rgba(0,117,255,0.3)] align-middle">
+                    <span className="inline-flex items-center justify-center text-[#0056D2] w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 shrink-0 drop-shadow-[0_4px_12px_rgba(0,86,210,0.3)] align-middle">
                       <svg
                         viewBox="0 0 24 24"
                         className="w-full h-full fill-current"
@@ -65,11 +65,16 @@ export default async function MembershipsPage() {
             </div>
           </div>
 
-          {/* Memberships 3-in-a-Row Grid Container */}
+          {/* Memberships Landscape Stack: One card per line, stacked vertically */}
           <div className="site-container py-10 sm:py-14">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+            <div className="flex flex-col gap-4 sm:gap-5 max-w-5xl mx-auto w-full">
               {membershipsList.map((membership, idx) => (
-                <MembershipCard key={membership.id || idx} membership={membership} index={idx} />
+                <MembershipCard
+                  key={membership.id || idx}
+                  membership={membership}
+                  index={idx}
+                  layout="landscape"
+                />
               ))}
             </div>
 

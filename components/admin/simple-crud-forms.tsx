@@ -4,7 +4,8 @@ import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { slugify } from '@/lib/utils/slug'
-import { revalidateGallery, revalidatePortfolio } from '@/app/actions/revalidate'
+import { revalidateGallery, revalidatePortfolio, revalidateSiteSettings } from '@/app/actions/revalidate'
+import { logAdminActivity } from '@/lib/admin-activity'
 import ImageUpload from '@/components/admin/image-upload'
 import {
   DangerButton,
@@ -112,6 +113,12 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
         setError(`Save error: ${res.error.message}`)
         return
       }
+      await logAdminActivity(
+        (isRealUuid && initialId) ? 'Updated Gallery Image' : 'Created Gallery Image',
+        'gallery_images',
+        initialId || imageUrl,
+        `Title: ${title || alt || 'Gallery Photo'}`
+      )
       await revalidateGallery()
       router.push('/admin/gallery')
       router.refresh()
@@ -149,6 +156,12 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
         }
       }
 
+      await logAdminActivity(
+        'Deleted Gallery Image',
+        'gallery_images',
+        initial.id || initial.image_url,
+        `Title: ${title || alt || 'Gallery Photo'}`
+      )
       await revalidateGallery()
       router.push('/admin/gallery')
       router.refresh()
@@ -172,7 +185,7 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
       <ImageUpload label="Gallery Image / Photo" value={imageUrl} onChange={handleImageChange} folder="gallery" />
 
       {width && height && (
-        <div className="flex items-center gap-3 p-3 rounded-lg bg-secondary/50 border border-border text-xs text-muted-foreground">
+        <div className="flex items-center gap-3 p-3 rounded-2xl bg-secondary/50 border border-border text-xs text-muted-foreground">
           <span className="font-mono font-semibold text-foreground">Natural Dimensions:</span>
           <span>{width}px × {height}px</span>
           <span className="text-border">|</span>
@@ -181,7 +194,7 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
       )}
 
       {/* Category & Section Checkboxes */}
-      <div className="space-y-4 p-4 rounded-xl bg-card border border-border/80 shadow-2xs">
+      <div className="space-y-4 p-4 rounded-2xl bg-card border border-border/80 shadow-2xs">
         <div>
           <label className="text-xs font-bold uppercase tracking-wider text-foreground">
             Image Categories
@@ -192,12 +205,12 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-          <label className="flex items-center gap-3 p-3 rounded-lg border border-border/70 bg-secondary/30 hover:bg-secondary/60 cursor-pointer transition-colors">
+          <label className="flex items-center gap-3 p-3 rounded-2xl border border-border/70 bg-secondary/30 hover:bg-secondary/60 cursor-pointer transition-colors">
             <input
               type="checkbox"
               checked={inGallery}
               onChange={(e) => setInGallery(e.target.checked)}
-              className="w-4 h-4 rounded border-border text-[#0056D2] focus:ring-[#0056D2]"
+              className="w-4 h-4 rounded-2xl border-border text-[#0056D2] focus:ring-[#0056D2]"
             />
             <div>
               <span className="text-xs font-semibold text-foreground">Gallery</span>
@@ -205,12 +218,12 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
             </div>
           </label>
 
-          <label className="flex items-center gap-3 p-3 rounded-lg border border-border/70 bg-secondary/30 hover:bg-secondary/60 cursor-pointer transition-colors">
+          <label className="flex items-center gap-3 p-3 rounded-2xl border border-border/70 bg-secondary/30 hover:bg-secondary/60 cursor-pointer transition-colors">
             <input
               type="checkbox"
               checked={inVolunteering}
               onChange={(e) => setInVolunteering(e.target.checked)}
-              className="w-4 h-4 rounded border-border text-[#0056D2] focus:ring-[#0056D2]"
+              className="w-4 h-4 rounded-2xl border-border text-[#0056D2] focus:ring-[#0056D2]"
             />
             <div>
               <span className="text-xs font-semibold text-foreground">Volunteering</span>
@@ -223,12 +236,12 @@ export function GalleryForm({ initial }: { initial?: Tables<'gallery_images'> | 
           <label className="text-xs font-bold uppercase tracking-wider text-foreground block mb-2">
             Other Properties
           </label>
-          <label className="flex items-center gap-3 p-3 rounded-lg border border-border/70 bg-secondary/30 hover:bg-secondary/60 cursor-pointer transition-colors">
+          <label className="flex items-center gap-3 p-3 rounded-2xl border border-border/70 bg-secondary/30 hover:bg-secondary/60 cursor-pointer transition-colors">
             <input
               type="checkbox"
               checked={featured}
               onChange={(e) => setFeatured(e.target.checked)}
-              className="w-4 h-4 rounded border-border text-[#0056D2] focus:ring-[#0056D2]"
+              className="w-4 h-4 rounded-2xl border-border text-[#0056D2] focus:ring-[#0056D2]"
             />
             <div>
               <span className="text-xs font-semibold text-foreground">Featured</span>
@@ -316,6 +329,13 @@ export function ServiceForm({ initial }: { initial?: Tables<'services'> | null }
         setError(res.error.message)
         return
       }
+      await logAdminActivity(
+        (isRealUuid && initialId) ? 'Updated Service' : 'Created Service',
+        'services',
+        initialId || slug || slugify(title),
+        `Title: ${title}`
+      )
+      await revalidatePortfolio()
       router.push('/admin/services')
       router.refresh()
     } catch (err: any) {
@@ -330,7 +350,18 @@ export function ServiceForm({ initial }: { initial?: Tables<'services'> | null }
     setSaving(true)
     try {
       const supabase = createClient()
-      await supabase.from('services').delete().eq('id', initial.id)
+      const res = await supabase.from('services').delete().eq('id', initial.id)
+      if (res.error) {
+        setError(res.error.message)
+        return
+      }
+      await logAdminActivity(
+        'Deleted Service',
+        'services',
+        initial.id,
+        `Title: ${title}`
+      )
+      await revalidatePortfolio()
       router.push('/admin/services')
       router.refresh()
     } catch (err: any) {
@@ -410,6 +441,13 @@ export function StatForm({ initial }: { initial?: Tables<'portfolio_stats'> | nu
         setError(res.error.message)
         return
       }
+      await logAdminActivity(
+        (isRealUuid && initialId) ? 'Updated Stat' : 'Created Stat',
+        'portfolio_stats',
+        initialId || label,
+        `${value} — ${label}`
+      )
+      await revalidatePortfolio()
       router.push('/admin/stats')
       router.refresh()
     } catch (err: any) {
@@ -424,7 +462,18 @@ export function StatForm({ initial }: { initial?: Tables<'portfolio_stats'> | nu
     setSaving(true)
     try {
       const supabase = createClient()
-      await supabase.from('portfolio_stats').delete().eq('id', initial.id)
+      const res = await supabase.from('portfolio_stats').delete().eq('id', initial.id)
+      if (res.error) {
+        setError(res.error.message)
+        return
+      }
+      await logAdminActivity(
+        'Deleted Stat',
+        'portfolio_stats',
+        initial.id,
+        `${value} — ${label}`
+      )
+      await revalidatePortfolio()
       router.push('/admin/stats')
       router.refresh()
     } catch (err: any) {
@@ -516,6 +565,12 @@ export function CertificationForm({ initial }: { initial?: any }) {
         return
       }
 
+      await logAdminActivity(
+        (isRealUuid && initialId) ? 'Updated Certification' : 'Created Certification',
+        'certifications',
+        initialId || slug || slugify(title),
+        `${title} (${provider})`
+      )
       await revalidatePortfolio()
       router.push('/admin/certifications')
       router.refresh()
@@ -551,6 +606,12 @@ export function CertificationForm({ initial }: { initial?: any }) {
           }
         }
       }
+      await logAdminActivity(
+        'Deleted Certification',
+        'certifications',
+        initial.id || initial.slug,
+        `${title} (${provider})`
+      )
       await revalidatePortfolio()
       router.push('/admin/certifications')
       router.refresh()
@@ -649,6 +710,8 @@ export function SettingsForm({ initial }: { initial: Tables<'site_settings'> }) 
       setSaving(false)
       return
     }
+    await logAdminActivity('Updated Site Settings', 'site_settings', id, `Site: ${form.site_name}`)
+    await revalidateSiteSettings()
     setOk(true)
     setSaving(false)
     router.refresh()
@@ -727,6 +790,13 @@ export function BrandForm({ initial }: { initial?: Tables<'brand_partners'> | nu
         }
         return
       }
+      await logAdminActivity(
+        (isRealUuid && initialId) ? 'Updated Brand Partner' : 'Created Brand Partner',
+        'brand_partners',
+        initialId || name,
+        `Brand: ${name}`
+      )
+      await revalidatePortfolio()
       router.push('/admin/brands')
       router.refresh()
     } catch (err: any) {
@@ -741,7 +811,18 @@ export function BrandForm({ initial }: { initial?: Tables<'brand_partners'> | nu
     setSaving(true)
     try {
       const supabase = createClient()
-      await supabase.from('brand_partners').delete().eq('id', initial.id)
+      const res = await supabase.from('brand_partners').delete().eq('id', initial.id)
+      if (res.error) {
+        setError(res.error.message)
+        return
+      }
+      await logAdminActivity(
+        'Deleted Brand Partner',
+        'brand_partners',
+        initial.id,
+        `Brand: ${name}`
+      )
+      await revalidatePortfolio()
       router.push('/admin/brands')
       router.refresh()
     } catch (err: any) {

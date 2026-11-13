@@ -35,6 +35,7 @@ export default function SortableList({
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null)
   const [saving, setSaving] = useState(false)
   const [justSaved, setJustSaved] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
 
   // Sync if initialItems change from server
   useEffect(() => {
@@ -45,6 +46,7 @@ export default function SortableList({
   const persistOrder = async (newItems: SortableItem[]) => {
     setSaving(true)
     setJustSaved(false)
+    setSaveError(null)
 
     const payload = newItems.map((item, idx) => ({
       id: item.id,
@@ -57,6 +59,8 @@ export default function SortableList({
     if (result.success) {
       setJustSaved(true)
       setTimeout(() => setJustSaved(false), 2500)
+    } else {
+      setSaveError(result.error || "Failed to save sort order.")
     }
   }
 
@@ -106,7 +110,7 @@ export default function SortableList({
 
   if (!items.length) {
     return (
-      <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-xl">
+      <div className="p-8 text-center text-xs text-muted-foreground bg-card border border-border/80 rounded-2xl">
         {emptyMessage}
       </div>
     )
@@ -132,6 +136,12 @@ export default function SortableList({
             <Check className="w-3.5 h-3.5" /> Order saved!
           </span>
         )}
+
+        {saveError && (
+          <span className="inline-flex items-center gap-1 text-red-500 font-bold">
+            {saveError}
+          </span>
+        )}
       </div>
 
       {/* Reorderable Items List */}
@@ -152,12 +162,12 @@ export default function SortableList({
                 setDragOverIndex(null)
               }}
               onDrop={() => handleDrop(idx)}
-              className={`group bg-white dark:bg-card border rounded-2xl p-3.5 sm:p-4 shadow-2xs transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 select-none ${
+              className={`group bg-card border rounded-2xl p-3.5 sm:p-4 shadow-2xs transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 select-none ${
                 isDragging
                   ? "opacity-40 scale-[0.99] border-dashed border-[#0056D2]"
                   : isOver
-                  ? "border-[#0056D2] bg-blue-50/50 dark:bg-blue-950/20 translate-y-0.5"
-                  : "border-slate-200 dark:border-border/80 hover:border-slate-300 dark:hover:border-border hover:shadow-xs"
+                  ? "border-[#0056D2] bg-[#0056D2]/10 dark:bg-[#0056D2]/15 translate-y-0.5"
+                  : "border-border/80 hover:border-border hover:shadow-xs"
               }`}
             >
               {/* Left Column: Drag Handle + Dynamic Sort Order Badge + Thumbnail + Details */}
@@ -166,7 +176,7 @@ export default function SortableList({
                 {/* Drag Handle & Up/Down Arrows */}
                 <div className="flex items-center gap-1 shrink-0">
                   <div
-                    className="p-1.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-[#0056D2] hover:bg-slate-100 dark:hover:bg-slate-800 cursor-grab active:cursor-grabbing transition-colors"
+                    className="p-1.5 rounded-2xl text-muted-foreground hover:text-[#0056D2] hover:bg-secondary cursor-grab active:cursor-grabbing transition-colors"
                     title="Drag to reorder"
                   >
                     <GripVertical className="w-4 h-4" />
@@ -177,7 +187,7 @@ export default function SortableList({
                       type="button"
                       disabled={idx === 0 || saving}
                       onClick={() => moveItem(idx, "up")}
-                      className="p-1 rounded text-slate-400 dark:text-slate-500 hover:text-[#0056D2] hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 disabled:hover:bg-transparent disabled:hover:text-slate-400 cursor-pointer transition-colors"
+                      className="p-1 rounded-2xl text-muted-foreground hover:text-[#0056D2] hover:bg-secondary disabled:opacity-20 disabled:hover:bg-transparent disabled:hover:text-muted-foreground cursor-pointer transition-colors"
                       title="Move Up"
                     >
                       <ArrowUp className="w-3 h-3" />
@@ -186,7 +196,7 @@ export default function SortableList({
                       type="button"
                       disabled={idx === items.length - 1 || saving}
                       onClick={() => moveItem(idx, "down")}
-                      className="p-1 rounded text-slate-400 dark:text-slate-500 hover:text-[#0056D2] hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 disabled:hover:bg-transparent disabled:hover:text-slate-400 cursor-pointer transition-colors"
+                      className="p-1 rounded-2xl text-muted-foreground hover:text-[#0056D2] hover:bg-secondary disabled:opacity-20 disabled:hover:bg-transparent disabled:hover:text-muted-foreground cursor-pointer transition-colors"
                       title="Move Down"
                     >
                       <ArrowDown className="w-3 h-3" />
@@ -196,7 +206,7 @@ export default function SortableList({
 
                 {/* Dynamic Sort Order Badge (Prominently Visible) */}
                 <div
-                  className="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 text-[11px] sm:text-xs font-mono font-bold text-slate-700 dark:text-slate-300 shrink-0 text-center min-w-[58px]"
+                  className="px-2.5 py-1 rounded-2xl bg-secondary border border-border text-[11px] sm:text-xs font-mono font-bold text-foreground shrink-0 text-center min-w-[58px]"
                   title={`Current position: #${orderNumber} (sort_order: ${idx})`}
                 >
                   <span className="text-[#0056D2] font-extrabold">#{orderNumber}</span>
@@ -204,7 +214,7 @@ export default function SortableList({
 
                 {/* Thumbnail Image if Available */}
                 {item.image && (
-                  <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/80 dark:border-slate-700 shadow-2xs">
+                  <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden bg-secondary shrink-0 border border-border shadow-2xs">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -220,27 +230,27 @@ export default function SortableList({
                   <div className="flex items-center gap-2 flex-wrap">
                     <Link
                       href={item.editUrl}
-                      className="text-sm sm:text-base font-bold text-slate-900 dark:text-foreground hover:text-[#0056D2] dark:hover:text-[#0056D2] transition-colors truncate block font-heading"
+                      className="text-sm sm:text-base font-bold text-foreground hover:text-[#0056D2] transition-colors truncate block font-heading"
                     >
                       {item.title}
                     </Link>
 
                     {item.badge && (
-                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-[#0056D2]/10 text-[#0056D2] border border-[#0056D2]/20">
+                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-2xl bg-[#0056D2]/10 text-[#0056D2] border border-[#0056D2]/20">
                         {item.badge}
                       </span>
                     )}
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                    {item.subtitle && <span className="font-medium text-slate-600 dark:text-slate-300">{item.subtitle}</span>}
-                    {item.subtitle && item.dateLabel && <span className="text-slate-300 dark:text-slate-600">•</span>}
-                    {item.dateLabel && <span className="font-mono text-slate-500 dark:text-slate-400">{item.dateLabel}</span>}
+                    {item.subtitle && <span className="font-medium text-foreground/80">{item.subtitle}</span>}
+                    {item.subtitle && item.dateLabel && <span className="text-border">•</span>}
+                    {item.dateLabel && <span className="font-mono text-muted-foreground">{item.dateLabel}</span>}
 
                     {item.tags && item.tags.length > 0 && (
                       <div className="hidden sm:flex items-center gap-1.5 ml-1">
                         {item.tags.slice(0, 3).map((t, i) => (
-                          <span key={i} className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[10px] text-slate-600 dark:text-slate-300">
+                          <span key={i} className="px-1.5 py-0.5 rounded-2xl bg-secondary text-[10px] text-muted-foreground">
                             {t}
                           </span>
                         ))}
@@ -252,12 +262,12 @@ export default function SortableList({
               </div>
 
               {/* Right Column: Actions */}
-              <div className="flex items-center justify-end gap-2.5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
+              <div className="flex items-center justify-end gap-2.5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border/80">
                 {item.viewUrl && (
                   <Link
                     href={item.viewUrl}
                     target="_blank"
-                    className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    className="p-2 rounded-2xl text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
                     title="View public page"
                   >
                     <ExternalLink className="w-4 h-4" />
@@ -266,7 +276,7 @@ export default function SortableList({
 
                 <Link
                   href={item.editUrl}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-[#0056D2] hover:text-white dark:hover:bg-[#0056D2] dark:hover:text-white transition-all shadow-2xs"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-2xl bg-secondary text-foreground hover:bg-[#0056D2] hover:text-white transition-all shadow-2xs"
                 >
                   <Edit className="w-3.5 h-3.5" />
                   <span>Edit</span>

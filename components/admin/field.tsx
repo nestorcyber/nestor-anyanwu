@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes, TextareaHTMLAttributes, SelectHTMLAttributes } from 'react'
 
 const inputClass =
-  'w-full border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-foreground/40'
+  'w-full rounded-2xl border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-foreground/40'
 
 export function Field({
   label,
@@ -56,11 +56,11 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
   return (
     <div className="space-y-1">
       {/* Markdown Formatter Toolbar */}
-      <div className="flex flex-wrap items-center gap-1 p-1 bg-muted/60 border border-border border-b-0 text-xs font-mono">
+      <div className="flex flex-wrap items-center gap-1 p-1.5 rounded-t-2xl bg-muted/60 border border-border border-b-0 text-xs font-mono">
         <button
           type="button"
           onClick={() => applyFormat('**', '**')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-extrabold cursor-pointer"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl font-extrabold cursor-pointer"
           title="Bold (**text**)"
         >
           B
@@ -68,7 +68,7 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         <button
           type="button"
           onClick={() => applyFormat('*', '*')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none italic font-bold cursor-pointer"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl italic font-bold cursor-pointer"
           title="Italic (*text*)"
         >
           I
@@ -76,7 +76,7 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         <button
           type="button"
           onClick={() => applyFormat('# ')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-bold cursor-pointer"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl font-bold cursor-pointer"
           title="Heading 1 (# Heading)"
         >
           H1
@@ -84,7 +84,7 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         <button
           type="button"
           onClick={() => applyFormat('## ')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-bold cursor-pointer"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl font-bold cursor-pointer"
           title="Heading 2 (## Heading)"
         >
           H2
@@ -92,7 +92,7 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         <button
           type="button"
           onClick={() => applyFormat('### ')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-bold cursor-pointer"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl font-bold cursor-pointer"
           title="Heading 3 (### Heading)"
         >
           H3
@@ -100,7 +100,7 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         <button
           type="button"
           onClick={() => applyFormat('> ')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl font-mono cursor-pointer"
           title="Blockquote (> Quote)"
         >
           &quot;
@@ -108,7 +108,7 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         <button
           type="button"
           onClick={() => applyFormat('`', '`')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl font-mono cursor-pointer"
           title="Inline Code (`code`)"
         >
           `code`
@@ -116,7 +116,7 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         <button
           type="button"
           onClick={() => applyFormat('\n```\n', '\n```\n')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl font-mono cursor-pointer"
           title="Code Block (``` code ```)"
         >
           ``` ```
@@ -124,7 +124,7 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         <button
           type="button"
           onClick={() => applyFormat('- ')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl font-mono cursor-pointer"
           title="Bullet List (- item)"
         >
           • List
@@ -132,7 +132,7 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         <button
           type="button"
           onClick={() => applyFormat('\n\n', '\n\n')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-bold cursor-pointer"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl font-bold cursor-pointer"
           title="Paragraph (<p>)"
         >
           P (Paragraph)
@@ -140,7 +140,7 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         <button
           type="button"
           onClick={() => applyFormat('<div align="left">\n', '\n</div>')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl font-mono cursor-pointer"
           title="Align Left (<div align='left'>)"
         >
           Left ⇇
@@ -148,7 +148,7 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         <button
           type="button"
           onClick={() => applyFormat('<div align="center">\n', '\n</div>')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl font-mono cursor-pointer"
           title="Align Center (<div align='center'>)"
         >
           Center ⇄
@@ -156,7 +156,7 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         <button
           type="button"
           onClick={() => applyFormat('<div align="right">\n', '\n</div>')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl font-mono cursor-pointer"
           title="Align Right (<div align='right'>)"
         >
           Right ⇉
@@ -164,7 +164,7 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         <button
           type="button"
           onClick={() => applyFormat('<div align="justify">\n', '\n</div>')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl font-mono cursor-pointer"
           title="Justify Text (<div align='justify'>)"
         >
           Justify ≡
@@ -172,7 +172,7 @@ export function TextTextarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>)
         <button
           type="button"
           onClick={() => applyFormat('[', '](https://example.com)')}
-          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-none font-mono cursor-pointer text-accent"
+          className="px-2 py-1 bg-background hover:bg-muted border border-border rounded-2xl font-mono cursor-pointer text-accent"
           title="Insert Link ([Text](URL))"
         >
           🔗 Link
@@ -214,7 +214,7 @@ export function PrimaryButton(props: React.ButtonHTMLAttributes<HTMLButtonElemen
   return (
     <button
       {...props}
-      className={`bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90 disabled:opacity-60 ${props.className || ''}`}
+      className={`rounded-2xl bg-[#0056D2] hover:bg-[#0044a8] px-4 py-2 text-sm font-medium text-white disabled:opacity-60 transition-colors ${props.className || ''}`}
     />
   )
 }
@@ -223,7 +223,7 @@ export function DangerButton(props: React.ButtonHTMLAttributes<HTMLButtonElement
   return (
     <button
       {...props}
-      className={`border border-red-500/50 px-4 py-2 text-sm text-red-500 hover:bg-red-500/10 disabled:opacity-60 ${props.className || ''}`}
+      className={`rounded-2xl border border-red-500/50 px-4 py-2 text-sm text-red-500 hover:bg-red-500/10 disabled:opacity-60 transition-colors ${props.className || ''}`}
     />
   )
 }

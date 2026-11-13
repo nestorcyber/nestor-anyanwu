@@ -15,7 +15,7 @@ export default function MembershipsSection({ membershipsList = [] }: Memberships
   return (
     <section
       id="memberships"
-      className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-slate-50/60 dark:bg-slate-900/30 flex flex-col justify-center relative overflow-hidden"
+      className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-slate-50/60 dark:bg-card/30 flex flex-col justify-center relative overflow-hidden"
     >
       {/* Background ambient lighting */}
       <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#0056D2]/5 dark:bg-[#0056D2]/10 rounded-full blur-3xl pointer-events-none" />
@@ -29,13 +29,13 @@ export default function MembershipsSection({ membershipsList = [] }: Memberships
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             Accredited memberships, industry councils, and professional associations contributing to national technology policy, AI research, and digital governance.
           </p>
-          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-2xl mt-2" />
         </div>
 
-        {/* Memberships Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+        {/* Memberships Landscape Stack (Taking up a full line, stacked vertically) */}
+        <div className="flex flex-col gap-4 sm:gap-5 max-w-5xl mx-auto w-full">
           {displayItems.map((item, idx) => (
-            <MembershipCard key={item.id || idx} membership={item} index={idx} />
+            <MembershipCard key={item.id || idx} membership={item} index={idx} layout="landscape" />
           ))}
         </div>
 
@@ -49,7 +49,7 @@ export default function MembershipsSection({ membershipsList = [] }: Memberships
         <div className="flex justify-center pt-4">
           <Link
             href="/memberships"
-            className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-6 rounded-xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 group cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-6 rounded-2xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 group cursor-pointer"
           >
             <span>View All Memberships</span>
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

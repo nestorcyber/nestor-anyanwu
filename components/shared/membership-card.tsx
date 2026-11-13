@@ -166,12 +166,12 @@ const GRAPHIC_COMPONENTS = [
 
 // Distinct brand palette for logo boxes & corner graphics
 const BRAND_PALETTES = [
-  { logoBg: "bg-[#0056D2] text-white", graphicColor: "text-[#0056D2]" },
-  { logoBg: "bg-[#8b5cf6] text-white", graphicColor: "text-[#8b5cf6]" },
-  { logoBg: "bg-[#eab308] text-slate-950", graphicColor: "text-[#eab308]" },
-  { logoBg: "bg-[#10b981] text-white", graphicColor: "text-[#10b981]" },
-  { logoBg: "bg-[#f97316] text-white", graphicColor: "text-[#f97316]" },
-  { logoBg: "bg-[#ef4444] text-white", graphicColor: "text-[#ef4444]" },
+  { logoBg: "bg-[#0056D2] text-white", graphicColor: "text-[#0056D2]", hoverBorder: "hover:border-[#0056D2]/80" },
+  { logoBg: "bg-[#8b5cf6] text-white", graphicColor: "text-[#8b5cf6]", hoverBorder: "hover:border-[#8b5cf6]/80" },
+  { logoBg: "bg-[#eab308] text-slate-950", graphicColor: "text-[#eab308]", hoverBorder: "hover:border-[#eab308]/80" },
+  { logoBg: "bg-[#10b981] text-white", graphicColor: "text-[#10b981]", hoverBorder: "hover:border-[#10b981]/80" },
+  { logoBg: "bg-[#f97316] text-white", graphicColor: "text-[#f97316]", hoverBorder: "hover:border-[#f97316]/80" },
+  { logoBg: "bg-[#ef4444] text-white", graphicColor: "text-[#ef4444]", hoverBorder: "hover:border-[#ef4444]/80" },
 ]
 
 function getMembershipVisuals(membership: MembershipCardItem, index: number) {
@@ -242,9 +242,11 @@ export function mapJourneyToMembership(item: JourneyItem): MembershipCardItem {
 export default function MembershipCard({
   membership,
   index = 0,
+  layout = "square",
 }: {
   membership: MembershipCardItem
   index?: number
+  layout?: "square" | "landscape"
 }) {
   const logoSrc = membership.logo || membership.image
   const hasValidLogo =
@@ -255,8 +257,85 @@ export default function MembershipCard({
   const { GraphicComp, palette, chapter } = getMembershipVisuals(membership, index)
   const FallbackIcon = getOrgFallbackIcon(membership.organization)
 
+  if (layout === "landscape") {
+    return (
+      <article
+        className={`group relative flex flex-col sm:flex-row sm:items-center justify-between gap-5 sm:gap-6 w-full bg-white dark:bg-card text-slate-900 dark:text-foreground border border-slate-200/90 dark:border-border ${palette.hoverBorder} rounded-2xl p-6 sm:p-7 md:p-8 min-h-[140px] sm:min-h-[160px] elevated-card-shadow hover:z-10 transform-gpu transition-all duration-300 ease-out hover:scale-[1.01] overflow-hidden select-none`}
+      >
+        {/* ─── Decorative Generative Pattern Graphic on the Right Edge ─── */}
+        <div className="absolute right-0 bottom-0 w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 pointer-events-none transition-transform duration-500 group-hover:scale-105 overflow-hidden">
+          <GraphicComp className={`w-full h-full ${palette.graphicColor} opacity-75 dark:opacity-85`} />
+        </div>
+
+        {/* ─── Left Side: Organization Logo Container ─── */}
+        <div className="relative z-10 flex items-center gap-4 sm:gap-6 shrink-0">
+          <div
+            className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl ${
+              hasValidLogo
+                ? "bg-white border border-slate-200/90 dark:border-border shadow-xs"
+                : palette.logoBg + " shadow-sm"
+            } flex items-center justify-center p-1.5 sm:p-2 overflow-hidden shrink-0 transition-transform duration-300 group-hover:scale-105`}
+          >
+            {hasValidLogo ? (
+              <div className="relative w-full h-full">
+                <Image
+                  src={logoSrc!}
+                  alt={membership.organization}
+                  fill
+                  sizes="80px"
+                  className="object-contain"
+                />
+              </div>
+            ) : (
+              <FallbackIcon className="w-8 h-8 sm:w-10 sm:h-10 stroke-[2.2] shrink-0" />
+            )}
+          </div>
+
+          {/* On mobile: compact date and role tag next to logo */}
+          <div className="sm:hidden space-y-0.5">
+            {membership.date && (
+              <span className="text-xs font-mono font-medium text-slate-500 dark:text-muted-foreground tracking-tight">
+                {membership.date}
+              </span>
+            )}
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-[#0056D2] font-mono">
+              {membership.role || "Member"}
+            </p>
+          </div>
+        </div>
+
+        {/* ─── Center / Body: Role, Organization Name & Chapter ─── */}
+        <div className="relative z-10 flex-1 min-w-0 space-y-1">
+          {/* Role Subtitle (Desktop) */}
+          <p className="hidden sm:block text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#0056D2] font-mono leading-none">
+            {membership.role || "Member"}
+          </p>
+
+          {/* Organization Name */}
+          <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-foreground tracking-tight font-heading leading-snug group-hover:text-[#0056D2] transition-colors">
+            {membership.organization}
+          </h3>
+
+          {/* Chapter / Location */}
+          <p className="text-xs sm:text-sm font-normal text-slate-500 dark:text-muted-foreground pt-0.5">
+            {membership.chapter || chapter}
+          </p>
+        </div>
+
+        {/* ─── Right Side: Date / Tenure Tag (Desktop) ─── */}
+        {membership.date && (
+          <div className="hidden sm:flex relative z-10 shrink-0 flex-col items-end justify-center pl-4 pr-2">
+            <span className="text-xs sm:text-sm font-mono font-medium text-slate-500 dark:text-muted-foreground tracking-tight">
+              {membership.date}
+            </span>
+          </div>
+        )}
+      </article>
+    )
+  }
+
   return (
-    <article className="group relative flex flex-col justify-between aspect-square w-full bg-white dark:bg-[#0E1724] text-slate-900 dark:text-white border border-slate-200/90 dark:border-slate-800/90 hover:border-[#0056D2]/80 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden select-none">
+    <article className={`group relative flex flex-col justify-between aspect-square w-full bg-white dark:bg-card text-slate-900 dark:text-foreground border border-slate-200/90 dark:border-border ${palette.hoverBorder} rounded-2xl p-6 sm:p-8 elevated-card-shadow hover:z-10 transform-gpu transition-all duration-300 ease-out hover:scale-[1.02] overflow-hidden select-none`}>
       
       {/* ─── Bottom-Right Decorative Generative Pattern Graphic (Matching Reference Image) ─── */}
       <div className="absolute right-0 bottom-0 w-36 h-36 sm:w-44 sm:h-44 pointer-events-none transition-transform duration-500 group-hover:scale-105 overflow-hidden">
@@ -270,7 +349,7 @@ export default function MembershipCard({
         <div
           className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl ${
             hasValidLogo
-              ? "bg-white border border-slate-200/90 dark:border-slate-700/80 shadow-xs"
+              ? "bg-white border border-slate-200/90 dark:border-border shadow-xs"
               : palette.logoBg + " shadow-sm"
           } flex items-center justify-center p-1.5 sm:p-2 overflow-hidden shrink-0 transition-transform duration-300 group-hover:scale-105`}
         >
@@ -291,7 +370,7 @@ export default function MembershipCard({
 
         {/* Date / Tenure Tag (Top-Right) */}
         {membership.date && (
-          <span className="text-xs sm:text-sm font-mono font-medium text-slate-500 dark:text-slate-400 tracking-tight pt-1">
+          <span className="text-xs sm:text-sm font-mono font-medium text-slate-500 dark:text-muted-foreground tracking-tight pt-1">
             {membership.date}
           </span>
         )}
@@ -300,19 +379,19 @@ export default function MembershipCard({
       {/* ─── Middle Section: Role & Organization Name (Full Names Across 2-3 Lines) ─── */}
       <div className="relative z-10 space-y-1.5 my-auto w-full pr-2 pt-3 sm:pt-4">
         {/* Role Subtitle */}
-        <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#0056D2] dark:text-sky-400 font-mono line-clamp-2 leading-snug">
+        <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#0056D2] font-mono line-clamp-2 leading-snug">
           {membership.role || "Member"}
         </p>
 
         {/* Organization Name */}
-        <h3 className="text-lg sm:text-xl md:text-[22px] font-bold text-slate-900 dark:text-white tracking-tight font-heading leading-snug group-hover:text-[#0056D2] dark:group-hover:text-sky-400 transition-colors line-clamp-3">
+        <h3 className="text-lg sm:text-xl md:text-[22px] font-bold text-slate-900 dark:text-foreground tracking-tight font-heading leading-snug group-hover:text-[#0056D2] transition-colors line-clamp-3">
           {membership.organization}
         </h3>
       </div>
 
       {/* ─── Bottom-Left: Chapter / Location (Matching Reference) ─── */}
       <div className="relative z-10 pt-2">
-        <p className="text-xs sm:text-sm font-normal text-slate-500 dark:text-slate-400">
+        <p className="text-xs sm:text-sm font-normal text-slate-500 dark:text-muted-foreground">
           {membership.chapter || chapter}
         </p>
       </div>

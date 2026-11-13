@@ -15,10 +15,10 @@ export default async function LatestJournal() {
   return (
     <section
       id="journal"
-      className="w-full py-12 md:py-16 border-b border-border/70 bg-gradient-to-b from-blue-50/60 via-slate-50/40 to-background dark:from-slate-950 dark:via-blue-950/20 dark:to-background relative overflow-hidden font-sans"
+      className="w-full py-12 md:py-16 border-b border-border/70 bg-gradient-to-b from-blue-50/60 via-slate-50/40 to-background dark:from-[#020617] dark:via-[#0F172A]/80 dark:to-[#020617] relative overflow-hidden font-sans"
     >
       {/* Soft Background Mesh Light Glow for Light and Dark Modes */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-sky-200/30 dark:bg-sky-500/10 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[#0056D2]/10 dark:bg-[#0056D2]/15 blur-[100px] rounded-full pointer-events-none" />
 
       <div className="site-container relative z-10 space-y-10">
         
@@ -26,7 +26,7 @@ export default async function LatestJournal() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
           <div className="text-left space-y-2 max-w-2xl">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading leading-tight">
-              Articles & News
+              Articles &amp; News
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed">
               Insights on software engineering, technology leadership, and design systems.
@@ -36,7 +36,7 @@ export default async function LatestJournal() {
           <div className="shrink-0 self-start sm:self-end">
             <Link
               href="/journal"
-              className="h-11 sm:h-12 inline-flex items-center gap-2 text-xs font-bold tracking-wider bg-slate-900 text-white dark:bg-white dark:text-slate-950 hover:bg-[#0056D2] dark:hover:bg-[#0056D2] dark:hover:text-white px-5 sm:px-6 rounded-xl transition-all cursor-pointer shadow-md hover:shadow-lg hover:-translate-y-0.5"
+              className="h-11 sm:h-12 inline-flex items-center gap-2 text-xs font-bold tracking-wider bg-slate-900 text-white dark:bg-[#0056D2] dark:text-white hover:bg-[#0056D2] dark:hover:bg-[#0044a8] px-5 sm:px-6 rounded-2xl transition-all cursor-pointer shadow-md hover:shadow-lg hover:-translate-y-0.5"
             >
               <span>View All Articles</span>
               <ArrowRight className="w-4 h-4" />

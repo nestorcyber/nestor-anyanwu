@@ -78,7 +78,7 @@ export default function CommunityHero({ photos = [], entries = [] }: CommunityHe
   const heroBgImage = pool[0]?.src || "https://res.cloudinary.com/z3wgqisj/image/upload/v1787285712/nestor/gallery/IMG_0452_a2kkcl.jpg"
 
   return (
-    <section className="relative w-full h-[70svh] min-h-[480px] sm:h-[78svh] md:h-[calc(100svh-4rem)] md:min-h-[620px] md:max-h-[740px] flex flex-col justify-between overflow-hidden bg-slate-950 text-white pt-14 sm:pt-16 md:pt-20 pb-0 border-b border-border/40">
+    <section className="relative w-full h-screen min-h-screen h-[100dvh] min-h-[100dvh] flex flex-col justify-between overflow-hidden bg-slate-950 text-white pt-24 sm:pt-28 md:pt-32 pb-0 border-b border-border/40">
       
       {/* 1. Full Hero Background Image (Edge-to-Edge) */}
       <Image
@@ -94,14 +94,17 @@ export default function CommunityHero({ photos = [], entries = [] }: CommunityHe
       {/* Background Overlays & Ambience Gradients */}
       <div className="absolute inset-0 bg-slate-950/70 via-slate-950/50 to-slate-950/90 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/60 pointer-events-none" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[650px] h-[350px] bg-[#0075ff]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[650px] h-[350px] bg-[#0056D2]/15 rounded-full blur-3xl pointer-events-none" />
 
       {/* 2. Top / Center Hero Headline & Content */}
       <div className="site-container relative z-20 text-center space-y-3 sm:space-y-5 max-w-4xl mx-auto pt-2 sm:pt-4">
         {/* Main Headline */}
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-heading tracking-tight leading-[1.12] text-white [text-shadow:_0_4px_24px_rgba(0,0,0,0.9)]">
-          Building Impact <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0075ff] via-sky-400 to-indigo-300">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-heading tracking-tight leading-[1.12] text-white">
+          <span className="[text-shadow:_0_4px_24px_rgba(0,0,0,0.9)]">
+            Building Impact
+          </span>{" "}
+          <br />
+          <span className="inline-block text-[#0056D2] dark:text-[#0056D2] [text-shadow:none]">
             Beyond the Screen
           </span>
         </h1>

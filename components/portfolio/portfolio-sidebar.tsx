@@ -121,7 +121,7 @@ export default function PortfolioSidebar({
           {/* Sidebar Top Header Logo / Branding */}
           <div className="flex items-center justify-between border-b border-border/60 pb-4">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-accent text-white flex items-center justify-center font-bold font-mono">
+              <div className="w-9 h-9 rounded-2xl bg-accent text-white flex items-center justify-center font-bold font-mono">
                 N
               </div>
               <div>
@@ -131,14 +131,14 @@ export default function PortfolioSidebar({
             </div>
             <button
               onClick={scrollToTop}
-              className="p-1.5 rounded-lg text-muted-foreground hover:text-accent hover:bg-secondary transition-colors"
+              className="p-1.5 rounded-2xl text-muted-foreground hover:text-accent hover:bg-secondary transition-colors"
               title="Scroll to top"
             >
               <ArrowUp className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Sidebar Nav List (Twitter / Modern App Sidebar Style) */}
+          {/* Sidebar Nav List */}
           <nav className="space-y-1">
             <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-muted-foreground px-3 block mb-2">
               Page Contents
@@ -150,7 +150,7 @@ export default function PortfolioSidebar({
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer text-left group ${
+                  className={`w-full flex items-center justify-between px-3.5 py-3 rounded-2xl text-sm font-semibold transition-all duration-200 cursor-pointer text-left group ${
                     isActive
                       ? "bg-accent text-white shadow-xs font-bold"
                       : "text-foreground hover:bg-secondary/80 hover:text-accent"
@@ -169,10 +169,10 @@ export default function PortfolioSidebar({
 
                   {item.count !== undefined && (
                     <span
-                      className={`ml-2 px-2.5 py-0.5 rounded-full text-xs font-mono font-bold shrink-0 transition-all ${
+                      className={`ml-2 px-2.5 py-0.5 rounded-2xl text-xs font-mono font-bold shrink-0 transition-all ${
                         isActive
-                          ? "bg-white text-accent"
-                          : "bg-secondary border border-border text-muted-foreground group-hover:border-accent/40 group-hover:text-accent"
+                          ? "bg-white text-[#0056D2]"
+                          : "bg-secondary border border-border text-muted-foreground group-hover:border-[#0056D2]/40 group-hover:text-[#0056D2]"
                       }`}
                     >
                       {item.count}

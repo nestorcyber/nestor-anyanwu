@@ -103,7 +103,7 @@ export default function AboutPage() {
       <main className="min-h-screen bg-background pt-0 overflow-x-hidden">
         
         {/* 1. About Hero Section */}
-        <section className="relative h-[62svh] min-h-[380px] sm:h-[75svh] md:h-[calc(100svh-4rem)] md:min-h-[640px] flex flex-col justify-end overflow-hidden bg-slate-950">
+        <section className="relative w-full h-screen min-h-screen h-[100dvh] min-h-[100dvh] flex flex-col justify-end overflow-hidden bg-slate-950">
           <Image
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/about-ItCmRGacGKzMpQbnPfGLfUfLEwWn3i.jpg"
             alt="Nestor Anyanwu speaking"
@@ -128,7 +128,7 @@ export default function AboutPage() {
 
         {/* 2. Core Philosophy Quote */}
         <section className="py-16 site-container">
-          <div className="bg-card border-2 border-slate-900/20 dark:border-slate-800 p-8 md:p-12 rounded-none shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] relative overflow-hidden">
+          <div className="bg-card border border-border p-8 md:p-12 rounded-2xl shadow-sm dark:shadow-lg relative overflow-hidden">
             <div className="max-w-4xl space-y-6">
               <span className="text-accent text-4xl font-sans font-bold">“</span>
               <blockquote className="text-lg md:text-2xl font-semibold text-foreground/90 italic leading-relaxed font-heading">
@@ -145,7 +145,7 @@ export default function AboutPage() {
         </section>
 
         {/* 3. Five Pillars Detailed Grid */}
-        <section className="py-20 bg-background border-y-2 border-slate-900/20 dark:border-slate-800">
+        <section className="py-20 bg-background border-y border-border">
           <div className="site-container">
             <div className="text-center max-w-3xl mx-auto mb-20 space-y-3">
               <p className="text-accent text-xs font-bold tracking-widest uppercase font-mono">
@@ -155,7 +155,7 @@ export default function AboutPage() {
                 Pillars of Leadership & Service
               </h2>
               <p className="text-sm md:text-base text-muted-foreground font-light">
-                A narrative walkthrough of Nestor's core disciplines, community footprint, and dedication to impact.
+                A narrative walkthrough of Nestor&apos;s core disciplines, community footprint, and dedication to impact.
               </p>
             </div>
 
@@ -176,11 +176,11 @@ export default function AboutPage() {
                         isEven ? "lg:order-1" : "lg:order-2"
                       }`}
                     >
-                      <div className="relative bg-card border-2 border-slate-900/20 dark:border-slate-800 p-8 rounded-none shadow-[3px_3px_0px_0px_rgba(15,23,42,0.85)] dark:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col justify-between aspect-video lg:aspect-square max-w-md mx-auto w-full">
+                      <div className="relative bg-card border border-border p-8 rounded-2xl shadow-sm dark:shadow-lg overflow-hidden flex flex-col justify-between aspect-video lg:aspect-square max-w-md mx-auto w-full">
                         <div className="absolute -top-10 -right-6 text-[150px] font-black text-foreground/5 select-none leading-none font-heading">
                           {p.num}
                         </div>
-                        <div className="p-3 bg-secondary rounded-none border border-border w-fit mb-6">
+                        <div className="p-3 bg-secondary rounded-2xl border border-border w-fit mb-6">
                           {p.icon}
                         </div>
                         <div className="space-y-2 z-10">
@@ -241,7 +241,7 @@ export default function AboutPage() {
                 By maintaining an active presence in student-led organizations, developer chapters, and professional networks like GOTNI (Guardians of the Nation International), IEEE, and NACOS, he helps secure growth pathways for computing talents.
               </p>
             </div>
-            <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg border border-border/80">
+            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-lg border border-border">
               <Image
                 src="https://res.cloudinary.com/z3wgqisj/image/upload/v1787837125/nestor/gallery/futo-1.jpg"
                 alt="Nestor Anyanwu volunteering"

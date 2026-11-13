@@ -57,7 +57,7 @@ export default async function PortfolioPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col w-full">
       {/* Main Full-Width Content Column */}
-      <main className="flex-1 w-full min-w-0 flex flex-col justify-between overflow-x-hidden">
+      <main className="flex-1 w-full min-w-0 flex flex-col justify-between overflow-x-clip">
         <div className="w-full">
           <PortfolioHero settings={siteSettings} stats={stats} />
           <PortfolioAboutSection settings={siteSettings} />

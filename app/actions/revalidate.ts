@@ -1,65 +1,91 @@
 'use server'
 
 import { revalidatePath, revalidateTag } from 'next/cache'
+import { requireAdmin } from '@/lib/supabase/admin'
+
+async function revalidateWithAdminAuth(
+  paths: string[],
+  tags: string[] = []
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const auth = await requireAdmin()
+    if (!auth.ok) {
+      return { success: false, error: 'Unauthorized: Admin authentication required.' }
+    }
+
+    for (const tag of tags) {
+      revalidateTag(tag)
+    }
+    for (const path of paths) {
+      revalidatePath(path)
+    }
+    return { success: true }
+  } catch (err) {
+    console.error('Error during authenticated cache revalidation:', err)
+    return { success: false, error: 'Failed to revalidate cache.' }
+  }
+}
 
 export async function revalidateJournal(slug?: string) {
-  try {
-    revalidatePath('/')
-    revalidatePath('/journal')
-    revalidateTag('search-index')
-    if (slug) {
-      revalidatePath(`/journal/${slug}`)
-    }
-  } catch (err) {
-    console.error('Error revalidating journal cache:', err)
+  const paths = ['/', '/journal', '/admin/journal', '/feed.xml']
+  if (slug) {
+    paths.push(`/journal/${slug}`)
   }
+  return revalidateWithAdminAuth(paths, ['search-index'])
 }
 
 export async function revalidatePortfolio(slug?: string) {
-  try {
-    revalidatePath('/')
-    revalidatePath('/portfolio')
-    revalidatePath('/certifications')
-    revalidatePath('/experience')
-    revalidatePath('/community')
-    revalidatePath('/admin/portfolio')
-    revalidatePath('/admin/certifications')
-    revalidatePath('/admin/journey')
-    revalidateTag('search-index')
-    if (slug) {
-      revalidatePath(`/portfolio/${slug}`)
-    }
-  } catch (err) {
-    console.error('Error revalidating portfolio cache:', err)
+  const paths = [
+    '/',
+    '/portfolio',
+    '/projects',
+    '/certifications',
+    '/experience',
+    '/memberships',
+    '/community',
+    '/admin/portfolio',
+    '/admin/certifications',
+    '/admin/journey',
+    '/admin/memberships',
+    '/admin/services',
+    '/admin/stats',
+    '/admin/skills',
+    '/admin/brands',
+  ]
+  if (slug) {
+    paths.push(`/portfolio/${slug}`)
   }
+  return revalidateWithAdminAuth(paths, ['search-index'])
 }
 
 export async function revalidateCommunity(slug?: string) {
-  try {
-    revalidatePath('/')
-    revalidatePath('/community')
-    revalidatePath('/community/roadmap')
-    revalidatePath('/community/gallery')
-    revalidatePath('/admin/community')
-    revalidatePath('/admin/journey')
-    revalidateTag('search-index')
-    if (slug) {
-      revalidatePath(`/community/${slug}`)
-    }
-  } catch (err) {
-    console.error('Error revalidating community cache:', err)
+  const paths = [
+    '/',
+    '/community',
+    '/community/roadmap',
+    '/community/gallery',
+    '/admin/community',
+    '/admin/journey',
+  ]
+  if (slug) {
+    paths.push(`/community/${slug}`)
   }
+  return revalidateWithAdminAuth(paths, ['search-index'])
 }
 
 export async function revalidateGallery() {
-  try {
-    revalidatePath('/')
-    revalidatePath('/gallery')
-    revalidatePath('/community')
-    revalidatePath('/community/gallery')
-    revalidatePath('/admin/gallery')
-  } catch (err) {
-    console.error('Error revalidating gallery cache:', err)
-  }
+  return revalidateWithAdminAuth([
+    '/',
+    '/gallery',
+    '/community',
+    '/community/gallery',
+    '/admin/gallery',
+  ])
 }
 
+export async function revalidateSiteSettings() {
+  return revalidateWithAdminAuth(
+    ['/', '/about', '/contact', '/portfolio', '/community', '/journal', '/admin/settings'],
+    ['search-index']
+  )
+}

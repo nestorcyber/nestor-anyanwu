@@ -139,13 +139,11 @@ export default function DribbbleCarousel({
     const dx = e.clientX - startX.current
     dragDistance.current = Math.abs(dx)
 
-    const containerWidth = containerRef.current?.offsetWidth || 1000
-    const dragFactor = isMobile ? 0.65 : isTablet ? 0.55 : 0.45
     // Spacing reference for dragging
     const dragSpacing = isMobile ? 260 : isTablet ? 320 : 410
     const dragOffset = -dx / dragSpacing
 
-    let newScroll = (startScroll.current + dragOffset + items.length * 4) % items.length
+    const newScroll = (startScroll.current + dragOffset + items.length * 4) % items.length
     setScrollPosition(newScroll)
   }
 
@@ -160,7 +158,7 @@ export default function DribbbleCarousel({
     // Snapping adjustment to align back to clean integers after releasing swipe
     const nearestIndex = Math.round(scrollPosition)
     let target = nearestIndex
-    let diff = target - scrollPosition
+    const diff = target - scrollPosition
     if (diff > items.length / 2) target -= items.length
     if (diff < -items.length / 2) target += items.length
 
@@ -261,7 +259,7 @@ export default function DribbbleCarousel({
                 filter: `blur(${blurVal}px)`,
                 zIndex: isActive ? 30 : 20,
               }}
-              className="absolute left-1/2 top-1/2 h-[220px] sm:h-[300px] md:h-[380px] rounded-xl overflow-hidden border border-border bg-card shadow-2xl transition-shadow duration-[600ms] group pointer-events-auto"
+              className="absolute left-1/2 top-1/2 h-[220px] sm:h-[300px] md:h-[380px] rounded-2xl overflow-hidden border border-border bg-card shadow-2xl transition-shadow duration-[600ms] group pointer-events-auto"
             >
               {/* Background Image */}
               <div className="absolute inset-0 w-full h-full pointer-events-none">
@@ -273,15 +271,15 @@ export default function DribbbleCarousel({
                   className="object-cover object-[50%_20%] transition-transform duration-700 ease-out group-hover:scale-105"
                   priority={isActive}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/85 via-[#020617]/30 to-transparent" />
               </div>
 
               {/* Badge Overlay (only when active) */}
               {item.badge && isActive && (
                 <div className="absolute top-6 left-6 z-10 pointer-events-none">
                   <span
-                    className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-none text-white backdrop-blur-md shadow-sm border border-white/20"
-                    style={{ backgroundColor: `${item.accentColor || "#3b82f6"}cc` }}
+                    className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-2xl text-white backdrop-blur-md shadow-sm border border-white/20"
+                    style={{ backgroundColor: `${item.accentColor || "#0056D2"}cc` }}
                   >
                     {item.badge}
                   </span>
@@ -295,11 +293,11 @@ export default function DribbbleCarousel({
                 }`}
               >
                 <div className="space-y-2 max-w-sm text-left">
-                  <h3 className="text-lg md:text-3xl font-bold font-sans text-white tracking-tight leading-tight">
+                  <h3 className="text-lg md:text-3xl font-bold font-heading text-white tracking-tight leading-tight">
                     {item.title}
                   </h3>
                   {item.subtitle && (
-                    <p className="text-white/65 text-[11px] md:text-sm font-medium leading-relaxed line-clamp-2">
+                    <p className="text-white/75 text-[11px] md:text-sm font-medium leading-relaxed line-clamp-2">
                       {item.subtitle}
                     </p>
                   )}
@@ -309,7 +307,7 @@ export default function DribbbleCarousel({
                         href={item.link}
                         onClick={(e) => e.stopPropagation()}
                         aria-label={`Explore details for ${item.title}`}
-                        className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-white border border-white/50 hover:border-white hover:bg-white/10 px-5 py-2.5 rounded-none transition-all cursor-pointer"
+                        className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-white border border-white/50 hover:border-white hover:bg-white/10 px-5 py-2.5 rounded-2xl transition-all cursor-pointer"
                       >
                         <span>Explore {item.title}</span>
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -331,7 +329,7 @@ export default function DribbbleCarousel({
             type="button"
             onClick={() => {
               let target = i
-              let diff = target - scrollPosition
+              const diff = target - scrollPosition
               if (diff > items.length / 2) target -= items.length
               if (diff < -items.length / 2) target += items.length
               targetPosition.current = target
@@ -340,10 +338,10 @@ export default function DribbbleCarousel({
             aria-label={`Go to slide ${i + 1}`}
           >
             <span
-              className={`h-2.5 rounded-full transition-all duration-300 ${
+              className={`h-2.5 rounded-2xl transition-all duration-300 ${
                 i === activeIndex
                   ? "w-8"
-                  : "w-2.5 bg-slate-400 dark:bg-slate-600 group-hover:bg-slate-600 dark:group-hover:bg-slate-400"
+                  : "w-2.5 bg-slate-400 dark:bg-[#1E293B] group-hover:bg-slate-600 dark:group-hover:bg-[#CBD5E1]"
               }`}
               style={{ backgroundColor: i === activeIndex ? activeItem?.accentColor : undefined }}
             />

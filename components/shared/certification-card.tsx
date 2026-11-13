@@ -153,7 +153,7 @@ const CERT_GRAPHICS = [
 const CERT_PALETTES = [
   {
     graphicColor: "text-[#0056D2]",
-    issuerColor: "text-[#0056D2] dark:text-[#38bdf8]",
+    issuerColor: "text-[#0056D2]",
     sealFill: "#0056D2",
     hoverBorder: "hover:border-[#0056D2]/80",
     glowColor: "bg-[#0056D2]/10",
@@ -253,7 +253,7 @@ export default function CertificationCard({ cert, index = 0 }: CertificationCard
   return (
     <CardWrapper
       {...wrapperProps}
-      className={`group relative flex flex-col justify-between aspect-square w-full bg-white dark:bg-[#0E1724] text-slate-900 dark:text-white border border-slate-200/90 dark:border-slate-800/90 ${palette.hoverBorder} rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden select-none block ${targetUrl ? "cursor-pointer" : "cursor-default"}`}
+      className={`group relative flex flex-col justify-between aspect-square w-full bg-white dark:bg-card text-slate-900 dark:text-foreground border border-slate-200/90 dark:border-border ${palette.hoverBorder} rounded-2xl elevated-card-shadow hover:z-10 transform-gpu transition-all duration-300 ease-out hover:scale-[1.02] overflow-hidden select-none block ${targetUrl ? "cursor-pointer" : "cursor-default"}`}
     >
       {/* ─── Bottom-Right Decorative Corner Illustration in Palette Color ─── */}
       <div className={`absolute right-0 bottom-0 w-36 h-36 sm:w-44 sm:h-44 pointer-events-none transition-transform duration-500 group-hover:scale-105 overflow-hidden ${palette.graphicColor} opacity-75 dark:opacity-85`}>
@@ -262,9 +262,9 @@ export default function CertificationCard({ cert, index = 0 }: CertificationCard
 
       {/* ─── Top-Right Flush 4:3 Landscape Certificate Compartment ─── */}
       <div className="absolute top-0 right-0 w-[46%] sm:w-[48%] max-w-[200px] z-10">
-        <div className="relative w-full rounded-bl-2xl bg-slate-900 dark:bg-slate-950 p-1.5 pb-2 pl-2 shadow-md border-b border-l border-border/60 overflow-hidden">
+        <div className="relative w-full rounded-bl-2xl bg-[#0F172A] dark:bg-background p-1.5 pb-2 pl-2 shadow-md border-b border-l border-border overflow-hidden">
           {/* 4:3 Landscape Ratio Certificate Container */}
-          <div className="relative w-full aspect-[4/3] rounded-bl-2xl rounded-tr-2xl overflow-hidden bg-slate-950 border border-slate-700/60 shadow-xs group-hover:brightness-105 transition-all">
+          <div className="relative w-full aspect-[4/3] rounded-bl-2xl rounded-tr-2xl overflow-hidden bg-[#020617] border border-border shadow-xs group-hover:brightness-105 transition-all">
             <Image
               src={certImg}
               alt={cert.title}
@@ -299,7 +299,7 @@ export default function CertificationCard({ cert, index = 0 }: CertificationCard
         {/* ─── Middle Section: Certificate Name First, Followed by Issuer in Title Case ─── */}
         <div className="space-y-1.5 my-auto w-full max-w-[82%] pt-2">
           {/* 1. Certificate Title */}
-          <h3 className="text-lg sm:text-xl md:text-[22px] font-bold text-slate-900 dark:text-white tracking-tight font-heading leading-tight group-hover:text-[#0056D2] dark:group-hover:text-sky-400 transition-colors line-clamp-3">
+          <h3 className="text-lg sm:text-xl md:text-[22px] font-bold text-slate-900 dark:text-foreground tracking-tight font-heading leading-tight group-hover:text-[#0056D2] transition-colors line-clamp-3">
             {cert.title}
           </h3>
 
@@ -310,8 +310,8 @@ export default function CertificationCard({ cert, index = 0 }: CertificationCard
         </div>
 
         {/* ─── Bottom Row: Recipient & Journal-Style Button Overlay (Right) ─── */}
-        <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
-          <p className="text-xs sm:text-sm font-normal text-slate-500 dark:text-slate-400">
+        <div className="pt-2 border-t border-slate-100 dark:border-border flex items-center justify-between">
+          <p className="text-xs sm:text-sm font-normal text-slate-500 dark:text-muted-foreground">
             Nestor Anyanwu
           </p>
 
@@ -320,8 +320,8 @@ export default function CertificationCard({ cert, index = 0 }: CertificationCard
             aria-hidden="true"
             className={`w-10 h-10 sm:w-11 sm:h-11 rounded-2xl border ${
               targetUrl
-                ? "border-slate-300 dark:border-slate-700 bg-slate-900 text-white dark:bg-white dark:text-slate-900 group-hover:bg-[#0056D2] group-hover:border-[#0056D2] group-hover:text-white dark:group-hover:bg-[#0056D2] dark:group-hover:border-[#0056D2] dark:group-hover:text-white shadow-md group-hover:scale-105"
-                : "border-slate-200 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/40 text-slate-400 dark:text-slate-600 opacity-40 pointer-events-none"
+                ? "border-slate-300 dark:border-border bg-slate-900 text-white dark:bg-[#1E293B] dark:text-[#F1F5F9] group-hover:bg-[#0056D2] group-hover:border-[#0056D2] group-hover:text-white dark:group-hover:bg-[#0056D2] dark:group-hover:border-[#0056D2] dark:group-hover:text-white shadow-md group-hover:scale-105"
+                : "border-slate-200 dark:border-border bg-slate-100/60 dark:bg-secondary/50 text-slate-400 dark:text-muted-foreground/50 opacity-50 pointer-events-none"
             } flex items-center justify-center shrink-0 transition-all duration-300`}
           >
             <ArrowUpRight className="w-5 h-5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

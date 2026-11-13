@@ -17,17 +17,17 @@ export default function TestimonialCard({
   type,
 }: TestimonialCardProps) {
   return (
-    <div className="p-6 md:p-8 border border-border/80 bg-card rounded-xl flex flex-col justify-between relative overflow-hidden space-y-6 shadow-2xs hover:border-[#0056D2] transition-all">
+    <div className="p-6 md:p-8 border border-border/80 bg-card rounded-2xl flex flex-col justify-between relative overflow-hidden space-y-6 shadow-2xs hover:border-[#0056D2] transition-all">
       <div className="space-y-4">
         <div className="flex items-center justify-between border-b border-border/40 pb-3">
-          <span className="text-xs font-bold text-[#0056D2] dark:text-sky-400 tracking-widest">
+          <span className="text-xs font-bold text-[#0056D2] tracking-widest">
             {type}
           </span>
           <Quote className="w-4 h-4 text-muted-foreground/50" />
         </div>
 
         <p className="text-xs md:text-sm text-foreground/90 font-light leading-relaxed italic">
-          "{quote}"
+          &ldquo;{quote}&rdquo;
         </p>
       </div>
 

@@ -105,7 +105,7 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
   }
 
   return (
-    <section id="services" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-slate-50/60 dark:bg-slate-900/30 flex flex-col justify-center">
+    <section id="services" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-slate-50/60 dark:bg-card/30 flex flex-col justify-center">
       <div className="container-webflow space-y-10">
         
         {/* Centered Section Header */}
@@ -116,21 +116,21 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             Comprehensive full-stack engineering, AI automation, visual design systems, IT consulting, and developer ecosystem leadership engineered for measurable impact.
           </p>
-          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-1" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-2xl mt-1" />
         </div>
 
         {/* 6 Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {CORE_SERVICES.map((service) => {
             const sublabel = getSublabel(service.id || "")
             return (
               <div
                 key={service.id}
-                className="p-7 sm:p-8 bg-card border border-border/70 rounded-3xl flex flex-col justify-between hover:border-[#0056D2] hover:shadow-xl transition-all duration-300 group shadow-xs min-h-[340px] sm:min-h-[360px]"
+                className="p-7 sm:p-8 bg-card border border-border/70 rounded-2xl flex flex-col justify-between hover:border-[#0056D2] elevated-card-shadow hover:scale-[1.02] hover:z-10 transform-gpu transition-all duration-300 ease-out group min-h-[340px] sm:min-h-[360px]"
               >
                 <div>
                   {/* Dark Rounded Squircle Icon Badge */}
-                  <div className="w-14 h-14 bg-slate-950 dark:bg-slate-800 text-white rounded-2xl flex items-center justify-center p-3.5 shadow-md border border-slate-800/80 mb-6 group-hover:scale-105 group-hover:bg-[#0056D2] transition-all duration-300">
+                  <div className="w-14 h-14 bg-[#020617] dark:bg-secondary text-white rounded-2xl flex items-center justify-center p-3.5 shadow-md border border-[#1E293B] mb-6 group-hover:scale-105 group-hover:bg-[#0056D2] transition-all duration-300">
                     {getIcon(service.iconName)}
                   </div>
 
@@ -140,7 +140,7 @@ export default function ServicesGrid({ services }: { services: ServiceItem[] }) 
                   </h3>
 
                   {/* Sub-label Tagline */}
-                  <p className="text-xs font-mono font-semibold text-slate-500 dark:text-slate-400 tracking-wider mb-4">
+                  <p className="text-xs font-mono font-semibold text-slate-500 dark:text-muted-foreground tracking-wider mb-4">
                     {sublabel}
                   </p>
 

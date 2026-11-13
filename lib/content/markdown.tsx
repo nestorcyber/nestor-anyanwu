@@ -1,13 +1,52 @@
+import DOMPurify from 'isomorphic-dompurify'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
+const SAFE_ARTICLE_HTML_CONFIG = {
+  ALLOWED_TAGS: [
+    'p',
+    'br',
+    'strong',
+    'b',
+    'em',
+    'i',
+    'u',
+    's',
+    'del',
+    'blockquote',
+    'code',
+    'pre',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'ul',
+    'ol',
+    'li',
+    'a',
+    'img',
+    'hr',
+    'span',
+    'div',
+    'figure',
+    'figcaption',
+    'table',
+    'thead',
+    'tbody',
+    'tr',
+    'th',
+    'td',
+  ],
+  ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'class', 'target', 'rel', 'width', 'height'],
+  ALLOW_DATA_ATTR: false,
+  ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto):|\/|#)/i,
+}
+
 function sanitizeArticleHtml(html: string): string {
   if (!html) return ''
-  return html
-    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-    .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
-    .replace(/\s*on\w+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, '')
-    .replace(/href\s*=\s*(?:"javascript:[^"]*"|'javascript:[^']*')/gi, 'href="#"')
+  return DOMPurify.sanitize(html, SAFE_ARTICLE_HTML_CONFIG)
 }
 
 function formatMarkdownSpacing(rawContent: string): string {
@@ -37,7 +76,7 @@ export function Markdown({ content }: { content: string }) {
   const formattedContent = formatMarkdownSpacing(content)
 
   return (
-    <div className="article-content prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-extrabold prose-headings:mt-10 prose-headings:mb-4 prose-p:my-6 prose-p:leading-relaxed md:prose-p:leading-loose prose-a:text-[#0056D2] prose-[#0056D2]">
+    <div className="article-content prose prose-slate dark:prose-invert max-w-none prose-headings:font-heading prose-headings:font-extrabold prose-headings:mt-10 prose-headings:mb-4 prose-p:my-6 prose-p:leading-relaxed md:prose-p:leading-loose prose-a:text-[#0056D2]">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
@@ -60,4 +99,3 @@ export function Markdown({ content }: { content: string }) {
     </div>
   )
 }
-

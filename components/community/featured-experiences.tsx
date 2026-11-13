@@ -44,16 +44,16 @@ export default function FeaturedExperiences({ experiences }: FeaturedExperiences
             Selected case studies where technical leadership, event production, and developer advocacy created measurable impact across student communities and tech summits.
           </p>
 
-          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-2xl mt-2" />
         </div>
 
         {/* 1. Lead Featured Case Study (Split Hero Card) */}
         {leadItem && (
-          <article className="rounded-2xl bg-slate-900 text-white overflow-hidden border border-slate-800 shadow-2xl transition-all duration-300 hover:border-[#0056D2]/60 group">
+          <article className="rounded-2xl bg-[#0F172A] text-[#F1F5F9] overflow-hidden border border-[#1E293B] shadow-2xl transition-all duration-300 hover:border-[#0056D2]/60 group">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
               
               {/* Left Media (7 cols) */}
-              <div className="lg:col-span-7 relative aspect-[16/10] lg:aspect-auto lg:min-h-[440px] overflow-hidden bg-slate-950">
+              <div className="lg:col-span-7 relative aspect-[16/10] lg:aspect-auto lg:min-h-[440px] overflow-hidden bg-[#020617]">
                 {leadItem.coverImage && (
                   <Image
                     src={leadItem.coverImage}
@@ -64,7 +64,7 @@ export default function FeaturedExperiences({ experiences }: FeaturedExperiences
                     sizes="(max-width: 1024px) 100vw, 60vw"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-slate-950 via-slate-950/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#020617] via-[#020617]/40 to-transparent" />
                 
                 {/* Badge Overlay */}
                 <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
@@ -78,7 +78,7 @@ export default function FeaturedExperiences({ experiences }: FeaturedExperiences
               <div className="lg:col-span-5 p-6 sm:p-8 md:p-10 flex flex-col justify-between space-y-6">
                 <div className="space-y-4">
                   <div className="space-y-1">
-                    <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-sky-400">
+                    <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[#0056D2]">
                       {leadItem.date && (
                         <span className="flex items-center gap-1">
                           <Calendar className="w-3.5 h-3.5 text-[#0056D2]" />
@@ -93,7 +93,7 @@ export default function FeaturedExperiences({ experiences }: FeaturedExperiences
                       )}
                     </div>
 
-                    <h3 className="text-2xl sm:text-3xl font-black font-heading tracking-tight text-white group-hover:text-sky-300 transition-colors">
+                    <h3 className="text-2xl sm:text-3xl font-black font-heading tracking-tight text-[#F1F5F9] group-hover:text-[#0056D2] transition-colors">
                       {leadItem.slug ? (
                         <Link href={`/community/${leadItem.slug}`} className="hover:underline">
                           {leadItem.title}
@@ -105,7 +105,7 @@ export default function FeaturedExperiences({ experiences }: FeaturedExperiences
 
                     {leadItem.role && (
                       <p className="text-xs sm:text-sm font-semibold text-slate-300">
-                        {leadItem.role} {leadItem.organization && <span>&bull; <span className="text-sky-400">{leadItem.organization}</span></span>}
+                        {leadItem.role} {leadItem.organization && <span>&bull; <span className="text-[#0056D2]">{leadItem.organization}</span></span>}
                       </p>
                     )}
                   </div>
@@ -141,7 +141,7 @@ export default function FeaturedExperiences({ experiences }: FeaturedExperiences
                       {leadItem.skills.map((skill, sIdx) => (
                         <span
                           key={sIdx}
-                          className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[11px] font-mono text-slate-300 font-medium"
+                          className="px-2.5 py-1 rounded-2xl bg-[#1E293B] border border-[#1E293B] text-[11px] font-mono text-[#CBD5E1] font-medium"
                         >
                           {skill}
                         </span>
@@ -153,7 +153,7 @@ export default function FeaturedExperiences({ experiences }: FeaturedExperiences
                     {leadItem.slug && (
                       <Link
                         href={`/community/${leadItem.slug}`}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0056D2] hover:text-sky-300 transition-colors cursor-pointer"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0056D2] hover:text-[#0044a8] transition-colors cursor-pointer"
                       >
                         <span>Read Case Study</span>
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -185,7 +185,7 @@ export default function FeaturedExperiences({ experiences }: FeaturedExperiences
             {supportingItems.map((item) => (
               <article
                 key={item.id}
-                className="group rounded-2xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0056D2] p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                className="group rounded-2xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0056D2] p-6 elevated-card-shadow transition-all duration-300 flex flex-col justify-between"
               >
                 <div className="space-y-4">
                   {/* Image */}
@@ -202,12 +202,12 @@ export default function FeaturedExperiences({ experiences }: FeaturedExperiences
                   )}
 
                   <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
+                    <div className="flex items-center justify-between text-xs font-mono text-muted-foreground">
                       {item.date && <span>{item.date}</span>}
                       {item.location && <span>{item.location}</span>}
                     </div>
 
-                    <h4 className="text-xl font-bold text-slate-900 dark:text-foreground font-heading tracking-tight group-hover:text-[#0056D2] transition-colors">
+                    <h4 className="text-xl font-bold text-foreground font-heading tracking-tight group-hover:text-[#0056D2] transition-colors">
                       {item.slug ? (
                         <Link href={`/community/${item.slug}`} className="hover:underline">
                           {item.title}
@@ -225,16 +225,16 @@ export default function FeaturedExperiences({ experiences }: FeaturedExperiences
                   </div>
 
                   {item.description && (
-                    <p className="text-xs sm:text-sm text-slate-600 dark:text-muted-foreground leading-relaxed font-normal">
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-normal">
                       {item.description}
                     </p>
                   )}
 
                   {/* Bullets */}
                   {item.contributions && item.contributions.length > 0 && (
-                    <div className="space-y-1 pt-2 border-t border-slate-200 dark:border-slate-800">
+                    <div className="space-y-1 pt-2 border-t border-border">
                       {item.contributions.slice(0, 2).map((c, cIdx) => (
-                        <div key={cIdx} className="flex items-start gap-1.5 text-xs text-slate-600 dark:text-slate-300">
+                        <div key={cIdx} className="flex items-start gap-1.5 text-xs text-muted-foreground">
                           <CheckCircle2 className="w-3.5 h-3.5 text-[#0056D2] shrink-0 mt-0.5" />
                           <span>{c}</span>
                         </div>
@@ -244,11 +244,11 @@ export default function FeaturedExperiences({ experiences }: FeaturedExperiences
                 </div>
 
                 {/* Skills & Action Link */}
-                <div className="space-y-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+                <div className="space-y-3 pt-4 border-t border-border">
                   {item.skills && item.skills.length > 0 && (
                     <div className="flex flex-wrap items-center gap-1.5">
                       {item.skills.map((s, sIdx) => (
-                        <span key={sIdx} className="px-2 py-0.5 rounded-md bg-[#0056D2]/10 text-[#0056D2] text-[11px] font-semibold">
+                        <span key={sIdx} className="px-2 py-0.5 rounded-2xl bg-[#0056D2]/10 text-[#0056D2] text-[11px] font-semibold">
                           {s}
                         </span>
                       ))}

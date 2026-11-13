@@ -32,8 +32,6 @@ export default async function VolunteeringGalleryPage() {
       initialImages={images}
       title="Volunteering Gallery"
       description="A visual archive documenting community group moments, event operations, technical workshops, hackathons, and on-ground volunteer impact."
-      backLink="/community"
-      backLabel="Back to Community"
     />
   )
 }

@@ -69,7 +69,7 @@ export default function CommunityStories({ stories = DEFAULT_STORIES }: Communit
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             First-hand reflections, operational breakdowns, and technical case studies written during my volunteer journey.
           </p>
-          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-2xl mt-2" />
         </div>
 
         {/* Stories Card Grid */}
@@ -79,11 +79,11 @@ export default function CommunityStories({ stories = DEFAULT_STORIES }: Communit
             return (
               <article
                 key={story.id}
-                className="group rounded-3xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0056D2] overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-xl transition-all duration-300"
+                className="group rounded-2xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0056D2] overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-xl transition-all duration-300"
               >
                 <div>
                   {/* Fixed Aspect Ratio Image Container */}
-                  <div className="relative aspect-[16/10] overflow-hidden bg-slate-900 border-b border-border/60">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-[#020617] border-b border-border/60">
                     <Image
                       src={story.coverImage}
                       alt={story.title}
@@ -92,7 +92,7 @@ export default function CommunityStories({ stories = DEFAULT_STORIES }: Communit
                       sizes="(max-width: 768px) 100vw, 400px"
                     />
                     {story.organization && (
-                      <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[11px] font-mono font-bold bg-[#0056D2] text-white shadow-xs">
+                      <div className="absolute top-3 left-3 px-2.5 py-1 rounded-2xl text-[11px] font-mono font-bold bg-[#0056D2] text-white shadow-xs">
                         {story.organization}
                       </div>
                     )}
@@ -100,7 +100,7 @@ export default function CommunityStories({ stories = DEFAULT_STORIES }: Communit
 
                   {/* Body Content */}
                   <div className="p-6 space-y-3">
-                    <div className="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
+                    <div className="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-muted-foreground">
                       <span className="inline-flex items-center gap-1">
                         <Calendar className="w-3.5 h-3.5 text-[#0056D2]" />
                         {story.date}

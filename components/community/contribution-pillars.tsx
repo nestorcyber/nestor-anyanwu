@@ -94,7 +94,7 @@ const VOLUNTEER_UNITS = [
 
 export default function ContributionPillars() {
   return (
-    <section id="contributions" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-slate-50/60 dark:bg-slate-900/30 flex flex-col justify-center">
+    <section id="contributions" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-slate-50/60 dark:bg-card/30 flex flex-col justify-center">
       <div className="site-container space-y-12">
         {/* Centered Section Header */}
         <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
@@ -104,11 +104,11 @@ export default function ContributionPillars() {
           <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
             The core functional units where I deploy hands-on execution during tech conferences, student computing leadership, hackathons, and community summits.
           </p>
-          <div className="w-14 h-1 bg-[#0056D2] rounded-full mt-2" />
+          <div className="w-14 h-1 bg-[#0056D2] rounded-2xl mt-2" />
         </div>
 
-        {/* 7 Volunteer Units Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+        {/* 6 Volunteer Units Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {VOLUNTEER_UNITS.map((unit, idx) => {
             const Icon = unit.icon
             const unitNumber = String(idx + 1).padStart(2, "0")
@@ -116,16 +116,16 @@ export default function ContributionPillars() {
             return (
               <div
                 key={unit.id}
-                className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-card border border-border/80 hover:border-[#0056D2] transition-all duration-300 group flex flex-col justify-between space-y-5 shadow-xs hover:shadow-xl"
+                className="relative p-6 sm:p-7 rounded-2xl bg-white dark:bg-card border border-border/80 hover:border-[#0056D2] hover:scale-[1.02] hover:z-10 transform-gpu transition-all duration-300 ease-out group flex flex-col justify-between space-y-5 elevated-card-shadow"
               >
                 <div className="space-y-4">
                   {/* Top Row: Icon and Unit Number */}
                   <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-xl bg-[#0B1C2C] text-[#0056D2] flex items-center justify-center shadow-md border border-[#0056D2]/30 transition-transform duration-300 group-hover:scale-105 group-hover:border-[#0056D2]">
+                    <div className="w-12 h-12 rounded-2xl bg-[#0B1C2C] dark:bg-secondary text-[#0056D2] flex items-center justify-center shadow-md border border-[#0056D2]/30 transition-transform duration-300 group-hover:scale-105 group-hover:border-[#0056D2]">
                       <Icon className="w-6 h-6 stroke-[2]" />
                     </div>
 
-                    <span className="font-mono text-xs font-bold text-slate-400 dark:text-slate-500 tracking-wider">
+                    <span className="font-mono text-xs font-bold text-slate-500 dark:text-muted-foreground tracking-wider">
                       UNIT {unitNumber}
                     </span>
                   </div>
@@ -144,9 +144,9 @@ export default function ContributionPillars() {
                   </p>
                 </div>
 
-                <div className="space-y-2 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <div className="space-y-2 pt-4 border-t border-border">
                   {unit.points.map((point, pIdx) => (
-                    <div key={pIdx} className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-300">
+                    <div key={pIdx} className="flex items-start gap-2 text-xs text-slate-600 dark:text-muted-foreground">
                       <CheckCircle2 className="w-3.5 h-3.5 text-[#0056D2] shrink-0 mt-0.5" />
                       <span>{point}</span>
                     </div>

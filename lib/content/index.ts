@@ -296,7 +296,7 @@ export async function getJournalArticles(): Promise<JournalArticle[]> {
     if (!error && data) {
       const nowIso = new Date().toISOString()
       dbArticles = data
-        .filter((row: any) => !row.scheduled_at || row.scheduled_at <= nowIso)
+        .filter((row: any) => !row.draft && (!row.scheduled_at || row.scheduled_at <= nowIso))
         .map(mapJournal)
     }
   }
@@ -437,7 +437,7 @@ export async function getCommunityEntryBySlug(slug: string): Promise<CommunityEn
       .eq('slug', slug)
       .maybeSingle()
 
-    if (!error && data) {
+    if (!error && data && !data.draft) {
       return mapCommunity(data)
     }
   }

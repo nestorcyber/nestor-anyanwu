@@ -15,7 +15,6 @@ import {
   MapPin,
   Calendar,
   ExternalLink,
-  Sparkles,
   ArrowLeft,
   Image as ImageIcon,
 } from "lucide-react"
@@ -137,36 +136,38 @@ export default function GalleryPageClient({
 
   return (
     <>
-      <main className="min-h-screen bg-background text-foreground pt-8 sm:pt-12 pb-24 font-sans">
+      <main className="min-h-screen min-h-[100dvh] bg-background text-foreground pt-0 pb-24 font-sans">
         {/* Centered Header Bar */}
-        <div className="site-container mb-10 sm:mb-12">
-          {backLink && (
-            <div className="mb-4">
-              <Link
-                href={backLink}
-                className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors group"
-              >
-                <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" />
-                <span>{backLabel || "Back"}</span>
-              </Link>
+        <section className="w-full pt-24 sm:pt-28 md:pt-32 pb-8 sm:pb-12 mb-8 sm:mb-10 bg-gradient-to-b from-[#0056D2]/[0.05] via-background to-background dark:from-[#0056D2]/10 dark:via-background dark:to-background border-b border-border/40">
+          <div className="site-container">
+            {backLink && (
+              <div className="mb-4">
+                <Link
+                  href={backLink}
+                  className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors group"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" />
+                  <span>{backLabel || "Back"}</span>
+                </Link>
+              </div>
+            )}
+            <div className="text-center flex flex-col items-center justify-center space-y-3 max-w-3xl mx-auto">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground font-heading">
+                {title}
+              </h1>
+              <p className="text-sm sm:text-base text-muted-foreground font-light max-w-2xl leading-relaxed text-center">
+                {description}
+              </p>
+              <div className="w-12 h-1 bg-[#0056D2] rounded-2xl mt-2" />
             </div>
-          )}
-          <div className="text-center flex flex-col items-center justify-center space-y-3 max-w-3xl mx-auto border-b border-border/40 pb-8 sm:pb-10">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground font-heading">
-              {title}
-            </h1>
-            <p className="text-sm sm:text-base text-muted-foreground font-light max-w-2xl leading-relaxed text-center">
-              {description}
-            </p>
-            <div className="w-12 h-1 bg-accent rounded-full mt-2" />
           </div>
-        </div>
+        </section>
 
-        {/* Stable 1:1 Square Grid Gallery Container */}
+        {/* Clean 3-Column Editorial Grid Gallery Container */}
         <div className="site-container w-full">
           {processedImages.length === 0 ? (
             <div className="text-center py-20 border border-dashed border-border/70 rounded-2xl bg-card/40 max-w-md mx-auto p-8 space-y-3">
-              <div className="w-12 h-12 rounded-full bg-muted/40 flex items-center justify-center mx-auto text-muted-foreground">
+              <div className="w-12 h-12 rounded-2xl bg-muted/40 flex items-center justify-center mx-auto text-muted-foreground">
                 <ImageIcon className="w-6 h-6" />
               </div>
               <h3 className="text-base font-semibold text-foreground">No photos found</h3>
@@ -175,8 +176,8 @@ export default function GalleryPageClient({
               </p>
             </div>
           ) : (
-            /* Responsive Square Grid: 2 cols Mobile, 3 cols Tablet, 4 cols Desktop */
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
+            /* Responsive 3-Column Uniform Grid with Tight Hairline Gaps */
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-1 sm:gap-1.5">
               {processedImages.map((item) => {
                 const hasVideo = Boolean(item.videoDuration || item.videoUrl)
 
@@ -193,45 +194,38 @@ export default function GalleryPageClient({
                         openLightbox(item)
                       }
                     }}
-                    className="group relative aspect-square w-full overflow-hidden rounded-lg bg-neutral-900 border border-border/40 hover:border-accent/50 transition-all duration-300 cursor-pointer select-none flex items-center justify-center shadow-xs"
+                    className="group relative aspect-[5/4] w-full overflow-hidden rounded-2xl bg-secondary dark:bg-card cursor-pointer select-none flex items-center justify-center"
                   >
-                    {/* The Image inside the square: object-cover dynamically fills the square container while maintaining aspect ratio */}
+                    {/* Edge-to-edge full-bleed photo */}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={item.imageUrl}
                       alt={item.altText || item.title || "Gallery moment"}
                       loading="lazy"
                       decoding="async"
-                      className="w-full h-full object-cover block group-hover:scale-105 transition-transform duration-500 ease-out"
+                      className="w-full h-full object-cover block group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                     />
 
-                    {/* Top-Left Video Duration Badge */}
+                    {/* Top-Left Video Duration Indicator */}
                     {hasVideo && (
-                      <div className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded bg-black/75 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white font-semibold flex items-center gap-1 shadow-sm pointer-events-none">
+                      <div className="absolute top-2.5 left-2.5 z-20 px-2 py-0.5 rounded-2xl bg-black/75 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono text-white font-semibold flex items-center gap-1 shadow-sm pointer-events-none">
                         <Play className="w-2.5 h-2.5 fill-white" />
                         <span>{item.videoDuration || "Video"}</span>
                       </div>
                     )}
 
-                    {/* Top-Right Featured Badge */}
-                    {item.featured && !hasVideo && (
-                      <div className="absolute top-2 right-2 z-20 w-6 h-6 rounded-full bg-amber-500/90 backdrop-blur-md flex items-center justify-center text-white shadow-xs pointer-events-none">
-                        <Sparkles className="w-3 h-3" />
-                      </div>
-                    )}
-
                     {/* Hover Quick Expand Button */}
-                    <div className="absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                      <div className="w-7 h-7 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-md">
+                    <div className="absolute top-2.5 right-2.5 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                      <div className="w-7 h-7 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-md">
                         <Maximize2 className="w-3.5 h-3.5" />
                       </div>
                     </div>
 
                     {/* Hover Scrim Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2.5 sm:p-3 text-white pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3 sm:p-4 text-white pointer-events-none">
                       <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 space-y-1">
                         {item.category && (
-                          <span className="text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-accent/90 text-white inline-block">
+                          <span className="text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-2xl bg-[#0056D2] text-white inline-block">
                             {item.category}
                           </span>
                         )}
@@ -275,7 +269,7 @@ export default function GalleryPageClient({
                 {lightboxIndex + 1} / {processedImages.length}
               </span>
               {currentItem.category && (
-                <span className="hidden sm:inline-block text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-accent text-white">
+                <span className="hidden sm:inline-block text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-2xl bg-[#0056D2] text-white">
                   {currentItem.category}
                 </span>
               )}
@@ -284,7 +278,7 @@ export default function GalleryPageClient({
             <div className="flex items-center gap-2">
               <button
                 onClick={toggleFullscreen}
-                className="hidden sm:flex w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 items-center justify-center text-white transition-all cursor-pointer"
+                className="hidden sm:flex w-9 h-9 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/10 items-center justify-center text-white transition-all cursor-pointer"
                 aria-label={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
                 title="Fullscreen (F)"
               >
@@ -293,7 +287,7 @@ export default function GalleryPageClient({
 
               <button
                 onClick={closeLightbox}
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer hover:rotate-90 duration-200"
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-all cursor-pointer hover:rotate-90 duration-200"
                 aria-label="Close viewer"
                 title="Close viewer (Esc)"
               >
@@ -307,7 +301,7 @@ export default function GalleryPageClient({
             {/* Previous Button */}
             <button
               onClick={navigatePrev}
-              className="absolute left-2 sm:left-4 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/90 border border-white/20 flex items-center justify-center text-white transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-lg"
+              className="absolute left-2 sm:left-4 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#020617]/80 hover:bg-[#0056D2] border border-[#1E293B] flex items-center justify-center text-white transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-lg"
               aria-label="Previous image"
               title="Previous (Left Arrow)"
             >
@@ -321,14 +315,14 @@ export default function GalleryPageClient({
                   src={currentItem.videoUrl}
                   controls
                   autoPlay
-                  className="max-h-[70vh] sm:max-h-[76vh] max-w-full rounded-lg object-contain shadow-2xl"
+                  className="max-h-[70vh] sm:max-h-[76vh] max-w-full rounded-2xl object-contain shadow-2xl"
                 />
               ) : (
                 /* eslint-disable-next-line @next/next/no-img-element */
                 <img
                   src={currentItem.imageUrl}
                   alt={currentItem.altText || currentItem.title || "Gallery view"}
-                  className="max-h-[70vh] sm:max-h-[76vh] max-w-full object-contain rounded-lg shadow-2xl transition-all duration-200"
+                  className="max-h-[70vh] sm:max-h-[76vh] max-w-full object-contain rounded-2xl shadow-2xl transition-all duration-200"
                 />
               )}
             </div>
@@ -336,7 +330,7 @@ export default function GalleryPageClient({
             {/* Next Button */}
             <button
               onClick={navigateNext}
-              className="absolute right-2 sm:right-4 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/90 border border-white/20 flex items-center justify-center text-white transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-lg"
+              className="absolute right-2 sm:right-4 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#020617]/80 hover:bg-[#0056D2] border border-[#1E293B] flex items-center justify-center text-white transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-lg"
               aria-label="Next image"
               title="Next (Right Arrow)"
             >
@@ -345,22 +339,22 @@ export default function GalleryPageClient({
           </div>
 
           {/* Lightbox Caption & Details Bar */}
-          <div className="max-w-4xl mx-auto w-full p-3 sm:p-4 rounded-xl bg-neutral-900/90 backdrop-blur-md border border-neutral-800 text-white z-50 mt-2">
+          <div className="max-w-4xl mx-auto w-full p-3 sm:p-4 rounded-2xl bg-[#0F172A]/95 backdrop-blur-md border border-[#1E293B] text-[#F1F5F9] z-50 mt-2">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div className="space-y-1">
                 {currentItem.title && (
-                  <h3 className="font-bold text-sm sm:text-base leading-snug">
+                  <h3 className="font-bold text-sm sm:text-base leading-snug text-[#F1F5F9]">
                     {currentItem.title}
                   </h3>
                 )}
                 {currentItem.caption && (
-                  <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed max-w-2xl">
+                  <p className="text-xs sm:text-sm text-[#CBD5E1] font-light leading-relaxed max-w-2xl">
                     {currentItem.caption}
                   </p>
                 )}
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-[11px] text-neutral-400 font-mono shrink-0 pt-1 sm:pt-0">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-[11px] text-[#CBD5E1] font-mono shrink-0 pt-1 sm:pt-0">
                 {currentItem.location && (
                   <span className="flex items-center gap-1">
                     <MapPin className="w-3 h-3 text-accent" />

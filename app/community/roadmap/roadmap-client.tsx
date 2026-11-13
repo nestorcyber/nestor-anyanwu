@@ -168,7 +168,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 text-xs font-semibold rounded-xl border transition-all cursor-pointer whitespace-nowrap ${
+                  className={`px-4 py-2 text-xs font-semibold rounded-2xl border transition-all cursor-pointer whitespace-nowrap ${
                     selectedCategory === cat
                       ? "bg-[#0056D2] text-white border-[#0056D2] shadow-xs font-bold"
                       : "bg-secondary/70 text-muted-foreground border-border/80 hover:bg-secondary hover:text-foreground"
@@ -187,7 +187,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search initiatives..."
-                className="w-full pl-10 pr-9 py-2 text-xs sm:text-sm bg-secondary/70 border border-border/80 rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#0056D2]"
+                className="w-full pl-10 pr-9 py-2 text-xs sm:text-sm bg-secondary/70 border border-border/80 rounded-2xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#0056D2]"
               />
               {searchQuery && (
                 <button
@@ -224,7 +224,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
             <div className="relative max-w-4xl mx-auto pt-4 pb-4">
               
               {/* Vertical Highway Road Track (Left Side) */}
-              <div className="absolute left-5 sm:left-7 md:left-9 top-4 bottom-8 w-6 sm:w-7 md:w-8 -translate-x-1/2 bg-slate-900 dark:bg-slate-950 border-x-2 border-slate-700/80 dark:border-slate-800 rounded-full shadow-inner flex items-center justify-center pointer-events-none overflow-hidden z-0">
+              <div className="absolute left-5 sm:left-7 md:left-9 top-4 bottom-8 w-6 sm:w-7 md:w-8 -translate-x-1/2 bg-[#0F172A] dark:bg-[#0F172A] border-x-2 border-[#1E293B] rounded-2xl shadow-inner flex items-center justify-center pointer-events-none overflow-hidden z-0">
                 {/* Center Road Dashed Lane Divider */}
                 <div className="w-[2px] h-full bg-[repeating-linear-gradient(to_bottom,#0056D2_0,#0056D2_14px,transparent_14px,transparent_28px)] opacity-80" />
               </div>
@@ -244,7 +244,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                     >
                       {/* Waypoint Node (Centered on Left Road Track) */}
                       <div className="absolute left-5 sm:left-7 md:left-9 -translate-x-1/2 top-4 z-20">
-                        <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#0B1C2C] text-[#0056D2] flex items-center justify-center shadow-[0_0_18px_rgba(0,86,210,0.45)] border-2 border-[#0056D2] transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#0056D2] group-hover:text-white">
+                        <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#020617] text-[#0056D2] flex items-center justify-center shadow-[0_0_18px_rgba(0,86,210,0.45)] border-2 border-[#0056D2] transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#0056D2] group-hover:text-white">
                           <InitiativeIcon className="w-5 h-5 stroke-[2]" />
                         </div>
                       </div>
@@ -254,7 +254,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
 
                       {/* Milestone Card Container */}
                       <div className="w-full pl-14 sm:pl-18 md:pl-22">
-                        <article className="bg-card border border-border/80 hover:border-[#0056D2] rounded-2xl p-5 sm:p-7 shadow-xs hover:shadow-xl transition-all duration-300 space-y-4 relative">
+                        <article className="bg-card border border-border hover:border-[#0056D2] rounded-2xl p-5 sm:p-7 elevated-card-shadow transition-all duration-300 space-y-4 relative">
                           {/* Pointer notch */}
                           <div className="hidden sm:block absolute -left-2 top-4 w-0 h-0 border-y-[6px] border-y-transparent border-r-[8px] border-r-border" />
 
@@ -265,7 +265,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                                 <span className="text-[11px] font-mono font-bold text-[#0056D2] uppercase tracking-wider">
                                   {item.organization}
                                 </span>
-                                <span className="px-2 py-0.5 rounded-md bg-secondary text-[10px] font-mono text-muted-foreground font-semibold">
+                                <span className="px-2 py-0.5 rounded-2xl bg-secondary text-[10px] font-mono text-muted-foreground font-semibold">
                                   {category}
                                 </span>
                               </div>
@@ -286,7 +286,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                             </div>
 
                             <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
-                              <span className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-[#0056D2] px-2.5 py-1 rounded-md bg-[#0056D2]/10 border border-[#0056D2]/20 whitespace-nowrap">
+                              <span className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-[#0056D2] px-2.5 py-1 rounded-2xl bg-[#0056D2]/10 border border-[#0056D2]/20 whitespace-nowrap">
                                 <Calendar className="w-3 h-3" />
                                 <span>{item.duration}</span>
                               </span>
@@ -297,7 +297,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                           {coverSrc && (
                             <div
                               onClick={() => setSelectedImage(coverSrc)}
-                              className="relative aspect-[16/9] w-full rounded-xl overflow-hidden bg-slate-900 border border-border/60 cursor-pointer group/img"
+                              className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-[#020617] border border-border cursor-pointer group/img"
                             >
                               <Image
                                 src={coverSrc}
@@ -339,7 +339,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                           {item.impactStats && item.impactStats.length > 0 && (
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2">
                               {item.impactStats.map((stat, sIdx) => (
-                                <div key={sIdx} className="p-2.5 rounded-xl bg-secondary/70 border border-border/50 text-center space-y-0.5">
+                                <div key={sIdx} className="p-2.5 rounded-2xl bg-secondary/70 border border-border/50 text-center space-y-0.5">
                                   <p className="text-sm font-black font-heading text-[#0056D2]">{stat.value}</p>
                                   <p className="text-[10px] font-mono text-muted-foreground">{stat.label}</p>
                                 </div>
@@ -354,7 +354,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
                                 {item.tags.map((tag, tIdx) => (
                                   <span
                                     key={tIdx}
-                                    className="px-2.5 py-0.5 rounded-md bg-secondary text-muted-foreground text-[11px] font-medium"
+                                    className="px-2.5 py-0.5 rounded-2xl bg-secondary text-muted-foreground text-[11px] font-medium"
                                   >
                                     {tag}
                                   </span>
@@ -412,7 +412,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
         >
           <button
             onClick={() => setSelectedImage(null)}
-            className="absolute top-5 right-5 z-50 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+            className="absolute top-5 right-5 z-50 w-11 h-11 rounded-2xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
             aria-label="Close Lightbox"
           >
             <X className="w-6 h-6" />
@@ -420,7 +420,7 @@ export default function RoadmapClient({ entries }: RoadmapClientProps) {
 
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-4xl w-full max-h-[85vh] h-[60vh] sm:h-[75vh] bg-slate-950 rounded-2xl overflow-hidden border border-white/15 shadow-2xl"
+            className="relative max-w-4xl w-full max-h-[85vh] h-[60vh] sm:h-[75vh] bg-[#0F172A] rounded-2xl overflow-hidden border border-[#1E293B] shadow-2xl"
           >
             <Image
               src={selectedImage}

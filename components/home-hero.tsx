@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function HomeHero() {
   return (
-    <section className="relative h-[62svh] min-h-[380px] sm:h-[75svh] md:h-[calc(100svh-4rem)] md:min-h-[640px] flex flex-col justify-end overflow-hidden bg-slate-950">
+    <section className="relative w-full h-screen min-h-screen h-[100dvh] min-h-[100dvh] flex flex-col justify-end overflow-hidden bg-slate-950">
       {/* Background image - edge to edge */}
       <Image
         src="https://res.cloudinary.com/z3wgqisj/image/upload/v1785966490/nestor/hero/Hero_dnkxet.jpg"

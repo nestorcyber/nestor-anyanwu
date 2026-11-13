@@ -1,11 +1,10 @@
-import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getPortfolioProjectBySlug, getPortfolioProjects } from '@/lib/content'
 import { Markdown } from '@/lib/content/markdown'
 import Footer from '@/components/footer'
 import SectionContainer from '@/components/shared/section-container'
-import { ArrowLeft, ExternalLink, Github, Calendar, Tag, CheckCircle2 } from 'lucide-react'
+import { ExternalLink, Github, Calendar } from 'lucide-react'
 import type { Metadata } from 'next'
 
 interface Props {
@@ -58,28 +57,10 @@ export default async function PortfolioDetailPage({ params }: Props) {
   }
 
   return (
-    <main className="min-h-screen bg-background text-foreground pt-8 pb-20">
-      <SectionContainer>
-        {/* Back Link */}
-        <Link
-          href="/portfolio"
-          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-accent mb-8 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to Portfolio</span>
-        </Link>
-
+    <main className="min-h-screen bg-background text-foreground pt-0 pb-16">
+      <SectionContainer className="py-4 sm:py-6 md:py-8">
         {/* Header */}
-        <div className="space-y-4 max-w-4xl mb-12">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 bg-accent/15 text-accent border border-accent/30">
-              {project.category}
-            </span>
-            <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-1">
-              <CheckCircle2 className="w-3.5 h-3.5 text-green-500" />
-              {project.status}
-            </span>
-          </div>
+        <div className="space-y-3 max-w-4xl mb-8">
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground">
             {project.title}
           </h1>
@@ -89,7 +70,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
         </div>
 
         {/* Project Cover */}
-        <div className="relative w-full h-[320px] md:h-[500px] mb-12 overflow-hidden border border-border">
+        <div className="relative w-full h-[300px] sm:h-[380px] md:h-[450px] mb-8 sm:mb-10 rounded-2xl overflow-hidden border border-border">
           <Image
             src={project.coverImage}
             alt={project.title}

@@ -124,28 +124,28 @@ export default function JournalClient({ articles }: JournalClientProps) {
     <div className="w-full space-y-12 pt-0 pb-20 md:pb-28 font-sans">
       
       {/* ─── WEBFLOW-INSPIRED HERO SECTION (FULL VIEWPORT HERO MATCHING HOME) ─── */}
-      <section className="w-full relative overflow-hidden bg-gradient-to-b from-blue-50/70 via-slate-50/40 to-background dark:from-[#060D17] dark:via-[#081525] dark:to-[#0A1D33] text-foreground dark:text-white min-h-[calc(100vh-4rem)] flex flex-col justify-center py-12 sm:py-16 md:py-20 border-b border-border/70 dark:border-white/[0.08] shadow-xs dark:shadow-2xl">
+      <section className="w-full relative overflow-hidden bg-gradient-to-b from-blue-50/70 via-slate-50/40 to-background dark:from-[#020617] dark:via-[#0F172A] dark:to-[#020617] text-foreground min-h-screen min-h-[100dvh] flex flex-col justify-center pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 border-b border-border shadow-xs dark:shadow-2xl">
         
-        {/* Radial Light Glow Illuminating from Center / Bottom (3x Boosted Intensity) */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full bg-[radial-gradient(ellipse_at_bottom_center,_rgba(0,86,210,0.45)_0%,_rgba(0,86,210,0.15)_45%,_transparent_80%)] dark:bg-[radial-gradient(ellipse_at_bottom_center,_rgba(0,86,210,0.85)_0%,_rgba(0,86,210,0.35)_45%,_transparent_80%)] pointer-events-none z-0 blur-2xl opacity-90" />
+        {/* Radial Light Glow Illuminating from Center / Bottom */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full bg-[radial-gradient(ellipse_at_bottom_center,_rgba(0,86,210,0.45)_0%,_rgba(0,86,210,0.15)_45%,_transparent_80%)] dark:bg-[radial-gradient(ellipse_at_bottom_center,_rgba(0,86,210,0.65)_0%,_rgba(0,86,210,0.25)_45%,_transparent_80%)] pointer-events-none z-0 blur-2xl opacity-90" />
 
-        {/* Soft Ambient Glow in Lower Center (3x Boosted Intensity) */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-sky-400/60 dark:bg-[#0056D2]/60 blur-[100px] rounded-full pointer-events-none z-0" />
+        {/* Soft Ambient Glow in Lower Center */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-[#0056D2]/25 dark:bg-[#0056D2]/35 blur-[100px] rounded-full pointer-events-none z-0" />
 
         <div className="relative z-10 site-container space-y-8 sm:space-y-10 my-auto">
           
           {/* Centered Large Display Title & Subtitle */}
           <div className="text-center space-y-3 sm:space-y-4 max-w-4xl mx-auto">
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground dark:text-white tracking-tight font-heading leading-[1.08]">
-              Ideas, Insights & Technical Writing
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground tracking-tight font-heading leading-[1.08]">
+              Ideas, Insights &amp; Technical Writing
             </h1>
             
-            <p className="text-xs sm:text-base md:text-lg text-muted-foreground dark:text-slate-300 font-normal leading-relaxed text-center max-w-2xl mx-auto">
+            <p className="text-xs sm:text-base md:text-lg text-muted-foreground font-normal leading-relaxed text-center max-w-2xl mx-auto">
               Explore software engineering case studies, design system notes, tech advocacy, and community leadership journals by Nestor Anyanwu.
             </p>
           </div>
 
-          {/* Featured Spotlight Cards (3 Card Row in Webflow Showcase Style) */}
+          {/* Featured Spotlight Cards */}
           {featuredArticles.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 max-w-6xl mx-auto">
               {featuredArticles.map((article, idx) => {
@@ -154,29 +154,29 @@ export default function JournalClient({ articles }: JournalClientProps) {
                   <Link
                     key={article.slug || idx}
                     href={`/journal/${article.slug}`}
-                    className="bg-white/90 dark:bg-[#0B1A2A]/85 hover:bg-white dark:hover:bg-[#0E2238]/95 backdrop-blur-xl border border-slate-200/80 dark:border-white/[0.08] hover:border-[#0056D2]/80 dark:hover:border-[#0056D2]/80 rounded-2xl p-4 sm:p-5 transition-all duration-300 flex flex-row items-center justify-between gap-3 sm:gap-4 group shadow-sm hover:shadow-xl dark:shadow-lg dark:hover:shadow-[0_10px_30px_rgba(0,86,210,0.2)] hover:-translate-y-1 cursor-pointer overflow-hidden min-h-[120px] sm:min-h-[135px]"
+                    className="bg-white/90 dark:bg-card/90 hover:bg-white dark:hover:bg-secondary/90 backdrop-blur-xl border border-slate-200/80 dark:border-border hover:border-[#0056D2]/80 dark:hover:border-[#0056D2] rounded-2xl p-4 sm:p-5 transition-all duration-300 flex flex-row items-center justify-between gap-3 sm:gap-4 group shadow-sm hover:shadow-xl dark:shadow-lg dark:hover:shadow-[0_10px_30px_rgba(0,86,210,0.2)] hover:-translate-y-1 cursor-pointer overflow-hidden min-h-[120px] sm:min-h-[135px]"
                   >
                     {/* Left Text Info */}
                     <div className="space-y-1.5 flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-foreground dark:text-white group-hover:text-[#0056D2] dark:group-hover:text-[#0056D2] transition-colors truncate font-heading">
+                        <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-foreground group-hover:text-[#0056D2] transition-colors truncate font-heading">
                           {article.title}
                         </h3>
                         {badgeLabel && (
-                          <span className="text-[9px] font-mono font-extrabold uppercase px-1.5 py-0.5 rounded bg-blue-50 text-[#0056D2] border border-blue-200 dark:bg-[#0056D2]/20 dark:text-[#0056D2] dark:border-[#0056D2]/40 shrink-0">
+                          <span className="text-[9px] font-mono font-extrabold uppercase px-2 py-0.5 rounded-2xl bg-[#0056D2]/10 text-[#0056D2] border border-[#0056D2]/30 dark:bg-[#0056D2] dark:text-white dark:border-[#0056D2] shrink-0">
                             {badgeLabel}
                           </span>
                         )}
                       </div>
 
-                      <p className="text-xs text-muted-foreground dark:text-slate-300 font-normal line-clamp-2 leading-relaxed">
+                      <p className="text-xs text-muted-foreground font-normal line-clamp-2 leading-relaxed">
                         {article.excerpt}
                       </p>
                     </div>
 
                     {/* Right Side Preview Image Thumbnail */}
                     {article.coverImage && (
-                      <div className="relative w-20 h-14 sm:w-24 sm:h-16 md:w-28 md:h-20 rounded-xl overflow-hidden border border-slate-200/80 dark:border-white/10 shrink-0 bg-slate-100 dark:bg-slate-900 shadow-xs">
+                      <div className="relative w-20 h-14 sm:w-24 sm:h-16 md:w-28 md:h-20 rounded-2xl overflow-hidden border border-border shrink-0 bg-secondary dark:bg-background shadow-xs">
                         <Image
                           src={article.coverImage}
                           alt={article.title}
@@ -194,12 +194,12 @@ export default function JournalClient({ articles }: JournalClientProps) {
 
           {/* Sub-text Link */}
           <div className="text-center pt-1 sm:pt-2">
-            <p className="text-xs sm:text-sm text-muted-foreground dark:text-slate-300 font-medium">
+            <p className="text-xs sm:text-sm text-muted-foreground font-medium">
               <span>Looking for specific technical articles? </span>
               {pinnedArticle && (
                 <Link
                   href={`/journal/${pinnedArticle.slug}`}
-                  className="font-bold text-foreground dark:text-white hover:text-[#0056D2] dark:hover:text-[#0056D2] underline underline-offset-4 inline-flex items-center gap-1 transition-colors"
+                  className="font-bold text-foreground hover:text-[#0056D2] underline underline-offset-4 inline-flex items-center gap-1 transition-colors"
                 >
                   <span>Read latest post</span>
                   <ArrowRight className="w-3.5 h-3.5 inline" />
@@ -212,7 +212,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
       </section>
 
       {/* ─── ALL JOURNAL ARTICLES SECTION WITH FILTERS & SEARCH ─── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 space-y-8">
+      <div className="site-container space-y-8">
         
         {/* Category Filters & Search Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/60 pb-6">
@@ -221,7 +221,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 text-xs font-semibold rounded-xl border transition-all cursor-pointer whitespace-nowrap ${
+                className={`px-4 py-2 text-xs font-semibold rounded-2xl border transition-all cursor-pointer whitespace-nowrap ${
                   selectedCategory === cat
                     ? "bg-[#0056D2] text-white border-[#0056D2] shadow-xs font-bold"
                     : "bg-secondary/70 text-muted-foreground border-border/80 hover:bg-secondary hover:text-foreground"
@@ -240,7 +240,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search articles..."
-              className="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-border/80 bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-[#0056D2] focus:ring-1 focus:ring-[#0056D2] transition-all"
+              className="w-full pl-9 pr-4 py-2 text-xs rounded-2xl border border-border/80 bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-[#0056D2] focus:ring-1 focus:ring-[#0056D2] transition-all"
             />
           </div>
         </div>
@@ -262,7 +262,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
             ))}
           </div>
         ) : (
-          <div className="py-20 border-2 border-dashed border-slate-900/20 dark:border-slate-800 text-center space-y-3 bg-card rounded-2xl">
+          <div className="py-20 border-2 border-dashed border-border text-center space-y-3 bg-card rounded-2xl">
             <Search className="w-8 h-8 text-muted-foreground/30 mx-auto" />
             <h3 className="text-lg font-bold text-foreground">No articles found</h3>
             <p className="text-xs text-muted-foreground max-w-sm mx-auto">
@@ -273,7 +273,7 @@ export default function JournalClient({ articles }: JournalClientProps) {
                 setSelectedCategory("All")
                 setSearchQuery("")
               }}
-              className="text-xs font-bold uppercase tracking-widest text-[#0056D2] dark:text-sky-400 hover:underline pt-2 cursor-pointer"
+              className="text-xs font-bold uppercase tracking-widest text-[#0056D2] hover:underline pt-2 cursor-pointer"
             >
               Reset Search
             </button>

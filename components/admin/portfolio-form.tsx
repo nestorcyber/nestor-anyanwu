@@ -141,7 +141,7 @@ export default function PortfolioForm({ initial }: Props) {
             <button
               type="button"
               onClick={onDelete}
-              className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-red-500/30 bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors cursor-pointer shadow-2xs"
+              className="px-3 py-1.5 text-xs font-semibold rounded-2xl border border-red-500/30 bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors cursor-pointer shadow-2xs"
             >
               Delete
             </button>

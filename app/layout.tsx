@@ -5,18 +5,19 @@ import { Plus_Jakarta_Sans, Inter } from "next/font/google"
 import SiteShell from "@/components/site-shell"
 import { ThemeProvider } from "@/components/theme-provider"
 import GoogleAnalytics from "@/components/analytics/google-analytics"
+import { safeJsonLd } from "@/lib/security"
 import "./globals.css"
 
 const headingFont = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-heading",
+  variable: "--font-heading-fallback",
   display: "swap",
   weight: ["400", "500", "600", "700", "800"],
 })
 
 const bodyFont = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-sans-fallback",
   display: "swap",
   weight: ["300", "400", "500", "600", "700"],
 })
@@ -196,23 +197,27 @@ export default function RootLayout({
   return (
     <html lang="en" className={`bg-background ${headingFont.variable} ${bodyFont.variable}`} suppressHydrationWarning>
       <head suppressHydrationWarning>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://db.onlinewebfonts.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+        <link rel="dns-prefetch" href="https://db.onlinewebfonts.com" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link rel="dns-prefetch" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
       </head>
-      <body className="font-sans antialiased overflow-x-hidden" suppressHydrationWarning>
+      <body className="font-sans antialiased overflow-x-clip" suppressHydrationWarning>
         <script
           id="schema-org-person"
           type="application/ld+json"
           suppressHydrationWarning
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLdPerson) }}
         />
         <script
           id="schema-org-website"
           type="application/ld+json"
           suppressHydrationWarning
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLdWebsite) }}
         />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <SiteShell>{children}</SiteShell>

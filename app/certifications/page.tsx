@@ -39,10 +39,10 @@ export default async function CertificationsPage() {
               {/* Left-Aligned Heading with Verified Checkmark Beside Text */}
               <div className="space-y-3">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight font-heading leading-[1.18]">
-                  Verified <span className="text-[#0075ff]">Licenses &amp;</span>{" "}
+                  Verified <span className="text-[#0056D2]">Licenses &amp;</span>{" "}
                   <span className="inline-flex items-center gap-2 sm:gap-3 whitespace-nowrap">
                     Certifications
-                    <span className="inline-flex items-center justify-center text-[#0075ff] w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 shrink-0 drop-shadow-[0_4px_12px_rgba(0,117,255,0.3)] align-middle">
+                    <span className="inline-flex items-center justify-center text-[#0056D2] w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 shrink-0 drop-shadow-[0_4px_12px_rgba(0,86,210,0.3)] align-middle">
                       <svg
                         viewBox="0 0 24 24"
                         className="w-full h-full fill-current"
@@ -65,7 +65,7 @@ export default async function CertificationsPage() {
 
           {/* All Certifications 3-in-a-Row Square Cards Grid Container */}
           <div className="site-container py-10 md:py-14">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {certificationsList.map((cert, idx) => (
                 <CertificationCard key={cert.id} cert={cert} index={idx} />
               ))}
