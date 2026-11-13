@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef, FormEvent } from 'react'
+import React, { useState, useEffect, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { logAdminActivity } from '@/lib/admin-activity'
@@ -62,7 +62,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
       try {
         const results = await searchIcons(query)
         setSearchResults(results)
-      } catch (err) {
+      } catch {
         setSearchError('Unable to load icons. Try another search.')
       } finally {
         setIsSearching(false)
@@ -85,7 +85,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
       try {
         const results = await searchIcons(query)
         setEditSearchResults(results)
-      } catch (err) {
+      } catch {
         // silent fallback
       } finally {
         setEditIsSearching(false)
@@ -228,7 +228,7 @@ export default function SkillsManager({ initialGroups }: { initialGroups: Group[
       icon: chosenUrl,
     }
 
-    const { data, error: err } = await supabase
+    const { error: err } = await supabase
       .from('skills')
       .update(payload)
       .eq('id', skillId)

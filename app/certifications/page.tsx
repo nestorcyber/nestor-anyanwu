@@ -1,5 +1,4 @@
 import { Metadata } from "next"
-import Link from "next/link"
 import Footer from "@/components/footer"
 import PortfolioCTA from "@/components/portfolio/portfolio-cta"
 import CertificationCard from "@/components/shared/certification-card"

@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, BookOpen, Calendar, Sparkles } from "lucide-react"
+import { ArrowRight, Calendar } from "lucide-react"
 
 export interface CommunityStoryItem {
   id: string

@@ -6,7 +6,6 @@ import matter from 'gray-matter'
 import {
   journeyTimeline,
   portfolioStats,
-  projects,
   servicesList,
   skillGroups,
   certificationsList,
@@ -26,15 +25,6 @@ if (!url || !key) {
 const supabase = createClient(url, key, {
   auth: { persistSession: false, autoRefreshToken: false },
 })
-
-function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-}
 
 function readMdxDir(dir: string) {
   const abs = path.join(process.cwd(), dir)
@@ -241,6 +231,7 @@ async function main() {
     credential_url: c.credentialUrl ?? null,
     sort_order: i,
   }))
+  await upsert('certifications', certRows, 'slug')
   const sampleGallery = [
     {
       title: 'DevFest Owerri 2025 Tech Summit',

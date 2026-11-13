@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import Image from 'next/image'
 import {
   Code,
   Globe,
@@ -161,7 +162,6 @@ export function SkillIcon({
   name,
   rawUrl,
   className = 'w-5 h-5 object-contain',
-  fallbackText = '⚡',
 }: {
   provider?: string
   name?: string
@@ -187,12 +187,14 @@ export function SkillIcon({
   }
 
   return (
-    <img
+    <Image
       src={url}
       alt={name || 'Skill Icon'}
+      width={20}
+      height={20}
+      unoptimized
       className={className}
       onError={() => setError(true)}
-      loading="lazy"
     />
   )
 }

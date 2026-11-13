@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useMemo } from "react"
 import {
   User,
   Star,
@@ -33,7 +33,7 @@ export default function PortfolioSidebar({
 }) {
   const [activeSection, setActiveSection] = useState<string>("about")
 
-  const navItems: PortfolioSidebarItem[] = [
+  const navItems = useMemo<PortfolioSidebarItem[]>(() => [
     {
       id: "about",
       label: "About Me",
@@ -79,7 +79,7 @@ export default function PortfolioSidebar({
       label: "Testimonials",
       icon: <MessageSquare className="w-5 h-5" />,
     },
-  ]
+  ], [skillGroupCount, expCount, certCount, projectCount])
 
   useEffect(() => {
     const handleScroll = () => {

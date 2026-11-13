@@ -3,7 +3,7 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { CheckCircle2, ArrowUpRight, Sparkles } from "lucide-react"
+import { CheckCircle2, ArrowUpRight } from "lucide-react"
 
 export interface ImpactSectionProps {
   category?: string
@@ -18,7 +18,6 @@ export interface ImpactSectionProps {
 }
 
 export default function ImpactSection({
-  category = "GET TO KNOW",
   title = "Engineering Progress, Strategic Leadership & Ecosystem Impact",
   description = "From architecting software systems and AI workflows to tech leadership, developer relations, product consulting, and volunteering: every role I take on is driven by one conviction: creating real impact and an inclusive, collaborative tech ecosystem where everyone can thrive.",
   ctaText = "Let's Collaborate",

@@ -24,13 +24,11 @@ import {
   AlignJustify,
   Link as LinkIcon,
   Unlink,
-  Image as ImageIcon,
   Upload,
   Undo,
   Redo,
   X,
   Loader2,
-  Sparkles,
   Heading1,
   Heading2,
   Heading3,
@@ -79,15 +77,10 @@ type Props = {
 export default function RichTextEditor({
   value,
   onChange,
-  height = 500,
-  placeholder = 'Write your article here… Press Enter for a new paragraph.',
   folder = 'journal',
 }: Props) {
-  const [showImageModal, setShowImageModal] = useState(false)
   const [showLinkModal, setShowLinkModal] = useState(false)
   const [linkUrl, setLinkUrl] = useState('')
-  const [uploadedUrl, setUploadedUrl] = useState('')
-  const [altText, setAltText] = useState('')
   const [isUploading, setIsUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
   const [uploadError, setUploadError] = useState('')

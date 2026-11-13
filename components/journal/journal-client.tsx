@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Search, ArrowRight, Sparkles } from "lucide-react"
+import { Search, ArrowRight } from "lucide-react"
 import ArticleCard from "@/components/shared/article-card"
 
 export interface JournalArticleItem {
@@ -21,21 +21,6 @@ export interface JournalArticleItem {
 
 interface JournalClientProps {
   articles: JournalArticleItem[]
-}
-
-function formatDate(dateStr?: string): string {
-  if (!dateStr) return "2026"
-  try {
-    const d = new Date(dateStr)
-    if (isNaN(d.getTime())) return String(dateStr)
-    return d.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    })
-  } catch {
-    return String(dateStr)
-  }
 }
 
 export default function JournalClient({ articles }: JournalClientProps) {

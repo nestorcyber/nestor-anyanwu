@@ -22,10 +22,8 @@ import {
   Menu,
   Moon,
   Sun,
-  X,
   LogOut,
   UserCheck,
-  Plus,
   PanelLeftClose,
   PanelLeftOpen,
 } from 'lucide-react'

@@ -10,7 +10,6 @@ import { logAdminActivity } from '@/lib/admin-activity'
 import { revalidateJournal } from '@/app/actions/revalidate'
 import {
   Checkbox,
-  DangerButton,
   Field,
   PrimaryButton,
   TextInput,

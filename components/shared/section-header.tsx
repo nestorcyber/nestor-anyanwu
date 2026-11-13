@@ -12,7 +12,6 @@ interface SectionHeaderProps {
 }
 
 export default function SectionHeader({
-  badge,
   title,
   subtitle,
   ctaText,

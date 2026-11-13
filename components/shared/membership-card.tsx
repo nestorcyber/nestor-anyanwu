@@ -1,6 +1,6 @@
 import React from "react"
 import Image from "next/image"
-import { Building2, ShieldCheck, Globe, Cpu, Network, Award } from "lucide-react"
+import { ShieldCheck, Globe, Cpu, Network, Award } from "lucide-react"
 import type { JourneyItem } from "@/lib/content"
 
 export interface MembershipCardItem {

@@ -6,7 +6,6 @@ import type { ImpactStat, Tables } from '@/lib/supabase/types'
 import {
   journeyTimeline,
   portfolioStats as fallbackPortfolioStats,
-  projects as fallbackProjects,
   servicesList as fallbackServicesList,
   skillGroups as fallbackSkillGroups,
   certificationsList as fallbackCertificationsList,
@@ -31,7 +30,7 @@ function readLocalMdxDir(dirPath: string) {
         const { data, content } = matter(raw)
         return { slug, data, content: content.trim() }
       })
-  } catch (err) {
+  } catch {
     return []
   }
 }

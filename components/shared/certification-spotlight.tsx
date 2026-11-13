@@ -1,7 +1,6 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowUpRight } from "lucide-react"
 import { getCertImage, type CertificationItem } from "@/lib/data"
 
 interface CertificationSpotlightProps {

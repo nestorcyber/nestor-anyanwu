@@ -3,7 +3,7 @@
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { MapPin, Calendar, ArrowRight, ExternalLink, CheckCircle2, Sparkles, Compass } from "lucide-react"
+import { MapPin, Calendar, ArrowRight, ExternalLink, CheckCircle2, Compass } from "lucide-react"
 
 export interface FeaturedExperienceItem {
   id: string

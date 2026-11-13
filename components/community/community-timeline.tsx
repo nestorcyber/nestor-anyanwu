@@ -7,7 +7,6 @@ import type { JourneyItem } from "@/lib/content"
 import {
   Calendar,
   HeartHandshake,
-  MapPin,
   Camera,
   Palette,
   Code2,

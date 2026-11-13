@@ -2,7 +2,7 @@
 
 import { useState, useRef, DragEvent, ChangeEvent } from 'react'
 import { validateImageFile, getOptimizedImageUrl } from '@/lib/cloudinary'
-import { Upload, X, RefreshCw, Image as ImageIcon, AlertCircle } from 'lucide-react'
+import { Upload, X, RefreshCw, AlertCircle } from 'lucide-react'
 
 type ImageUploaderProps = {
   label?: string
@@ -92,7 +92,7 @@ export default function ImageUpload({
               } else {
                 reject(new Error('Cloudinary response missing URL'))
               }
-            } catch (e) {
+            } catch {
               reject(new Error('Failed to parse Cloudinary response'))
             }
           } else {

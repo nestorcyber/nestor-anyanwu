@@ -1,7 +1,6 @@
 import { Metadata } from "next"
 import PortfolioHero from "@/components/portfolio/portfolio-hero"
 import PortfolioAboutSection from "@/components/portfolio/portfolio-about-section"
-import PortfolioStats from "@/components/portfolio/portfolio-stats"
 import ServicesGrid from "@/components/portfolio/services-grid"
 import FeaturedProjectsShowcase from "@/components/portfolio/featured-projects-showcase"
 import SkillsMatrix from "@/components/portfolio/skills-matrix"

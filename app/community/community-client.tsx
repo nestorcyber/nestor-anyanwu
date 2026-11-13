@@ -4,7 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import Footer from "@/components/footer"
-import { Calendar, Users, Heart, Award, ChevronLeft, ChevronRight, MapPin, ArrowUpRight, Mail } from "lucide-react"
+import { Calendar, Users, Award, ArrowUpRight, Mail } from "lucide-react"
 
 export type CommunityEvent = {
   id: string

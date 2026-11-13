@@ -5,8 +5,6 @@ import Image from "next/image"
 import Link from "next/link"
 import {
   Calendar,
-  HeartHandshake,
-  MapPin,
   Camera,
   Palette,
   Code2,

@@ -1,10 +1,10 @@
 "use client"
 
-import { useEffect, useState, useRef, useCallback } from "react"
+import { useEffect, useState, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 export interface CarouselItem {
   id: string | number
@@ -53,18 +53,6 @@ export default function DribbbleCarousel({
   // Calculate current active index based on closest distance to center
   const activeIndex = Math.round(scrollPosition + items.length * 4) % items.length
   const activeItem = items[activeIndex]
-
-  // Glide to next slide
-  const handleNext = useCallback(() => {
-    const currentTarget = targetPosition.current !== null ? targetPosition.current : scrollPosition
-    targetPosition.current = Math.round(currentTarget + 1)
-  }, [scrollPosition])
-
-  // Glide to previous slide
-  const handlePrev = useCallback(() => {
-    const currentTarget = targetPosition.current !== null ? targetPosition.current : scrollPosition
-    targetPosition.current = Math.round(currentTarget - 1)
-  }, [scrollPosition])
 
   // Click handler for peeking slides: navigates if active, snaps center if not
   const handleCardClick = (index: number, dist: number, item: CarouselItem, e: React.MouseEvent) => {

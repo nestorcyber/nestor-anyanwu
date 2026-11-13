@@ -1,14 +1,11 @@
 import React from "react"
 import {
-  Users,
   Compass,
   Megaphone,
   Palette,
   GraduationCap,
   Network,
-  Mic,
   ShieldAlert,
-  Sparkles,
 } from "lucide-react"
 
 const COMMUNITY_SKILLS = [

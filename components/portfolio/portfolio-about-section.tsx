@@ -2,7 +2,7 @@ import React from "react"
 import { Code2, Users, Cpu } from "lucide-react"
 import type { SiteSettings } from "@/lib/content"
 
-export default function PortfolioAboutSection({ settings }: { settings?: SiteSettings }) {
+export default function PortfolioAboutSection(_props?: { settings?: SiteSettings }) {
   const pillars = [
     {
       icon: Code2,

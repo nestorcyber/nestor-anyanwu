@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { Share2, MessageSquare, BarChart2, Sparkles, ExternalLink } from 'lucide-react'
+import { Share2, MessageSquare, BarChart2, ExternalLink } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
-import { PageHeader, PrimaryButton } from '@/components/admin/field'
+import { PageHeader } from '@/components/admin/field'
 import JournalForm from '@/components/admin/journal-form'
 import PortfolioForm from '@/components/admin/portfolio-form'
 import CommunityForm from '@/components/admin/community-form'
@@ -23,7 +23,6 @@ import {
   getCommunityEntries,
   getGalleryImages,
   getAllMediaImages,
-  getVolunteeringImages,
   isImageInCategory,
   getJournalArticles,
   getJourneyItems,
@@ -355,7 +354,6 @@ export default async function AdminCatchAllPage({ params }: Props) {
             {items.map((row: any) => {
               const isDraft = row.draft
               const title = row.title || '(Untitled)'
-              const initial = title.replace(/[^a-zA-Z0-9]/g, '')[0]?.toUpperCase() || 'U'
               const formattedDate = row.publishedDate ? formatDate(row.publishedDate) : 'Aug 13'
               const authorName = row.author || 'Nestor Cyber'
               const tagList = Array.isArray(row.tags) && row.tags.length > 0 ? row.tags : [row.category || 'Technology']

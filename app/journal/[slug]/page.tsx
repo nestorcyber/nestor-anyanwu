@@ -61,11 +61,6 @@ export default async function JournalDetailPage({ params }: Props) {
     notFound()
   }
 
-  // Calculate article index for next / previous pagination
-  const currentIndex = allArticles.findIndex((a) => a.slug === slug)
-  const prevArticle = currentIndex > 0 ? allArticles[currentIndex - 1] : null
-  const nextArticle = currentIndex < allArticles.length - 1 ? allArticles[currentIndex + 1] : null
-
   // Calculate related articles matching category or tags
   const relatedArticles = allArticles
     .filter((a) => a.slug !== slug && (a.category === article.category || a.tags.some((t) => article.tags.includes(t))))

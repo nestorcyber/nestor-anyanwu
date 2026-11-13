@@ -108,7 +108,7 @@ export function extractPublicId(url: string | null | undefined): string | null {
     const fullPath = pathParts.join('/')
     const lastDotIndex = fullPath.lastIndexOf('.')
     return lastDotIndex > -1 ? fullPath.substring(0, lastDotIndex) : fullPath
-  } catch (err) {
+  } catch {
     return null
   }
 }

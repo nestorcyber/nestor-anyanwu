@@ -1,5 +1,4 @@
 import { Metadata } from "next"
-import Link from "next/link"
 import Footer from "@/components/footer"
 import PortfolioCTA from "@/components/portfolio/portfolio-cta"
 import MembershipCard, { mapJourneyToMembership, type MembershipCardItem } from "@/components/shared/membership-card"

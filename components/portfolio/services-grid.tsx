@@ -2,7 +2,7 @@ import React from "react"
 import type { ServiceItem } from "@/lib/content"
 import { Code, Globe, Layout, Palette, Briefcase, Zap, Shield, Users, Sparkles } from "lucide-react"
 
-export default function ServicesGrid({ services }: { services: ServiceItem[] }) {
+export default function ServicesGrid(_props?: { services?: ServiceItem[] }) {
   const getIcon = (iconName?: string) => {
     const iconClass = "w-7 h-7 text-white transition-transform group-hover:scale-110"
     switch (iconName) {
