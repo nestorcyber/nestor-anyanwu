@@ -17,9 +17,18 @@ import { getOptimizedImageUrl } from '@/lib/cloudinary'
 
 const PLACEHOLDER = '/placeholder.svg'
 
-function readLocalMdxDir(dirPath: string) {
+function readLocalMdxDir(folder: 'journal' | 'portfolio' | 'community') {
   try {
-    const abs = path.join(process.cwd(), dirPath)
+    let abs = ''
+    if (folder === 'journal') {
+      abs = path.join(process.cwd(), 'content', 'journal')
+    } else if (folder === 'portfolio') {
+      abs = path.join(process.cwd(), 'content', 'portfolio')
+    } else if (folder === 'community') {
+      abs = path.join(process.cwd(), 'content', 'community')
+    } else {
+      return []
+    }
     if (!fs.existsSync(abs)) return []
     return fs
       .readdirSync(abs)
@@ -263,7 +272,7 @@ function db() {
 }
 
 export async function getJournalArticles(): Promise<JournalArticle[]> {
-  const localFiles = readLocalMdxDir('content/journal')
+  const localFiles = readLocalMdxDir('journal')
   const localArticles: JournalArticle[] = localFiles
     .map(({ slug, data, content }) => ({
       id: slug,
@@ -336,7 +345,7 @@ export async function getPortfolioProjects(): Promise<PortfolioProject[]> {
   }
 
   // Fallback to local MDX files
-  const localFiles = readLocalMdxDir('content/portfolio')
+  const localFiles = readLocalMdxDir('portfolio')
   const localProjects: PortfolioProject[] = localFiles
     .filter(({ data }) => !data.draft)
     .map(({ slug, data, content }) => ({
@@ -408,7 +417,7 @@ export async function getCommunityEntries(): Promise<CommunityEntry[]> {
   }
 
   // Fallback to local MDX only when database has 0 records or is unreachable
-  const localFiles = readLocalMdxDir('content/community')
+  const localFiles = readLocalMdxDir('community')
   return localFiles
     .filter(({ data }) => !data.draft)
     .map(({ slug, data, content }) => ({

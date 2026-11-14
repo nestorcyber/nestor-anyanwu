@@ -17,9 +17,14 @@ const contentSecurityPolicy = [
 
 const nextConfig = {
   compress: true,
+  outputFileTracingRoot: process.cwd(),
   serverExternalPackages: ["cloudinary", "isomorphic-dompurify", "jsdom"],
   outputFileTracingExcludes: {
-    "*": ["node_modules/cloudinary/**/*"],
+    "*": [
+      "node_modules/cloudinary/**/*",
+      ".git/**/*",
+      ".next/cache/**/*",
+    ],
   },
   experimental: {
     optimizePackageImports: [
