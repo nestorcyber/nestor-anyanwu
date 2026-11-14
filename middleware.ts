@@ -22,7 +22,7 @@ export async function middleware(request: NextRequest) {
 
   const { supabaseResponse, user } = await updateSession(request)
   const email = user?.email?.toLowerCase()
-  const isAllowed = !!user && email === ADMIN_EMAIL
+  const isAllowed = !!user && email === ADMIN_EMAIL.toLowerCase()
 
   if (isLogin) {
     if (isAllowed) {
