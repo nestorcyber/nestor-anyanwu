@@ -1,3 +1,4 @@
+import { unstable_cache } from 'next/cache'
 import {
   getCertifications,
   getCommunityEntries,
@@ -91,8 +92,6 @@ const pageEntries: SearchResult[] = [
     keywords: ["contact", "hire", "collaborate", "email", "reach", "message", "consulting"],
   },
 ]
-
-import { unstable_cache } from 'next/cache'
 
 export async function getSearchIndex(): Promise<SearchResult[]> {
   const [projects, services, skillGroups, journeyTimeline, certifications, articles, communityEntriesList] =
