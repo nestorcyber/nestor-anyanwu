@@ -53,6 +53,9 @@ export default async function CommunityPage() {
     contributions: e.achievements && e.achievements.length > 0 ? e.achievements : (e.description ? [e.description] : []),
     skills: e.tags && e.tags.length > 0 ? e.tags : [],
     slug: e.slug,
+    featured: e.featured,
+    impactStats: e.impactStats,
+    gallery: e.gallery,
   }))
 
   // Map gallery photos from gallery table where Volunteering = true

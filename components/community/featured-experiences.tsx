@@ -3,7 +3,7 @@
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { MapPin, Calendar, ArrowRight, ExternalLink, CheckCircle2, Compass } from "lucide-react"
+import { ArrowRight, ArrowUpRight, Sparkles, Layers } from "lucide-react"
 
 export interface FeaturedExperienceItem {
   id: string
@@ -18,267 +18,123 @@ export interface FeaturedExperienceItem {
   skills: string[]
   externalUrl?: string
   slug?: string
+  featured?: boolean
+  impactStats?: Array<{ value: string; label: string }>
+  gallery?: string[]
 }
 
-interface FeaturedExperiencesProps {
+export interface FeaturedExperiencesProps {
   experiences?: FeaturedExperienceItem[]
+}
+
+function extractYear(dateStr?: string): string {
+  if (!dateStr) return "2026"
+  const match = dateStr.match(/\b(20\d{2})\b/)
+  if (match) return match[1]
+  return dateStr.trim()
 }
 
 export default function FeaturedExperiences({ experiences }: FeaturedExperiencesProps) {
   const displayItems = experiences ?? []
   if (displayItems.length === 0) return null
 
-  const [leadItem, ...supportingItems] = displayItems
-
   return (
-    <section id="experiences" className="w-full min-h-[calc(100svh-4rem)] md:min-h-[640px] h-auto py-16 md:py-24 border-b border-border/70 bg-white dark:bg-background flex flex-col justify-center">
+    <section
+      id="experiences"
+      className="w-full py-16 md:py-24 border-b border-border/70 bg-white dark:bg-background flex flex-col justify-center transition-colors"
+      aria-label="Volunteer Experiences Portfolio"
+    >
       <div className="site-container space-y-12 sm:space-y-16">
         
-        {/* Section Header */}
-        <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-foreground tracking-tight font-heading">
+        {/* Editorial Section Header */}
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-2xl bg-[#0056D2]/10 border border-[#0056D2]/20 text-[#0056D2] text-xs font-mono font-bold tracking-wider uppercase">
+            <Layers className="w-3.5 h-3.5 text-[#0056D2]" />
+            <span>Curated Volunteer Archive</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-foreground tracking-tight font-heading leading-tight">
             Featured Volunteer <span className="text-[#0056D2]">Experiences</span>
           </h2>
 
           <p className="text-sm sm:text-base text-slate-600 dark:text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            Selected case studies where technical leadership, event production, and developer advocacy created measurable impact across student communities and tech summits.
+            A curated portfolio of grassroots leadership, developer advocacy, and technical event production across universities, developer ecosystems, and tech summits.
           </p>
 
-          <div className="w-14 h-1 bg-[#0056D2] rounded-2xl mt-2" />
+          <div className="w-16 h-1 bg-[#0056D2] rounded-2xl" />
         </div>
 
-        {/* 1. Lead Featured Case Study (Split Hero Card) */}
-        {leadItem && (
-          <article className="rounded-2xl bg-[#0F172A] text-[#F1F5F9] overflow-hidden border border-[#1E293B] shadow-2xl transition-all duration-300 hover:border-[#0056D2]/60 group">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-              
-              {/* Left Media (7 cols) */}
-              <div className="lg:col-span-7 relative aspect-[16/10] lg:aspect-auto lg:min-h-[440px] overflow-hidden bg-[#020617]">
-                {leadItem.coverImage && (
-                  <Image
-                    src={leadItem.coverImage}
-                    alt={leadItem.title}
-                    fill
-                    priority
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#020617] via-[#020617]/40 to-transparent" />
-                
-                {/* Badge Overlay */}
-                <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-2xl bg-[#0056D2] text-white text-xs font-bold font-mono tracking-wider shadow-md">
-                    FEATURED CASE STUDY
-                  </span>
-                </div>
-              </div>
-
-              {/* Right Content (5 cols) */}
-              <div className="lg:col-span-5 p-6 sm:p-8 md:p-10 flex flex-col justify-between space-y-6">
-                <div className="space-y-4">
-                  <div className="space-y-1">
-                    <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-[#0056D2]">
-                      {leadItem.date && (
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3.5 h-3.5 text-[#0056D2]" />
-                          {leadItem.date}
-                        </span>
-                      )}
-                      {leadItem.location && (
-                        <span className="flex items-center gap-1">
-                          <MapPin className="w-3.5 h-3.5 text-[#0056D2]" />
-                          {leadItem.location}
-                        </span>
-                      )}
-                    </div>
-
-                    <h3 className="text-2xl sm:text-3xl font-black font-heading tracking-tight text-[#F1F5F9] group-hover:text-[#0056D2] transition-colors">
-                      {leadItem.slug ? (
-                        <Link href={`/community/${leadItem.slug}`} className="hover:underline">
-                          {leadItem.title}
-                        </Link>
-                      ) : (
-                        leadItem.title
-                      )}
-                    </h3>
-
-                    {leadItem.role && (
-                      <p className="text-xs sm:text-sm font-semibold text-slate-300">
-                        {leadItem.role} {leadItem.organization && <span>&bull; <span className="text-[#0056D2]">{leadItem.organization}</span></span>}
-                      </p>
-                    )}
-                  </div>
-
-                  {leadItem.description && (
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
-                      {leadItem.description}
-                    </p>
-                  )}
-
-                  {/* Bullet Contributions */}
-                  {leadItem.contributions && leadItem.contributions.length > 0 && (
-                    <div className="space-y-2 pt-2">
-                      <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">
-                        Key Impact Deliverables
-                      </h4>
-                      <ul className="space-y-1.5">
-                        {leadItem.contributions.map((c, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-200">
-                            <CheckCircle2 className="w-4 h-4 text-[#0056D2] shrink-0 mt-0.5" />
-                            <span>{c}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-
-                {/* Footer Tag list & Link */}
-                <div className="space-y-4 pt-4 border-t border-slate-800">
-                  {leadItem.skills && leadItem.skills.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5">
-                      {leadItem.skills.map((skill, sIdx) => (
-                        <span
-                          key={sIdx}
-                          className="px-2.5 py-1 rounded-2xl bg-[#1E293B] border border-[#1E293B] text-[11px] font-mono text-[#CBD5E1] font-medium"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className="flex flex-wrap items-center gap-4 pt-1">
-                    {leadItem.slug && (
-                      <Link
-                        href={`/community/${leadItem.slug}`}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0056D2] hover:text-[#0044a8] transition-colors cursor-pointer"
-                      >
-                        <span>Read Case Study</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                    )}
-
-                    {leadItem.externalUrl && (
-                      <a
-                        href={leadItem.externalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-white transition-colors cursor-pointer"
-                      >
-                        <span>View Portal</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </article>
-        )}
-
-        {/* 2. Supporting Case Study Grid */}
-        {supportingItems.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {supportingItems.map((item) => (
-              <article
-                key={item.id}
-                className="group rounded-2xl bg-slate-50 dark:bg-card border border-border/80 hover:border-[#0056D2] p-6 elevated-card-shadow transition-all duration-300 flex flex-col justify-between"
+        {/* Uniform Landscape Card Grid (Responsive 1/2/3 Columns) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-8">
+          {displayItems.map((item, idx) => (
+            <article key={item.id || idx} className="group flex flex-col">
+              <Link
+                href={item.slug ? `/community/${item.slug}` : "#"}
+                className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0056D2] rounded-2xl"
+                aria-label={`View ${item.organization || item.title}`}
               >
-                <div className="space-y-4">
-                  {/* Image */}
-                  {item.coverImage && (
-                    <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-slate-900 border border-border/60">
-                      <Image
-                        src={item.coverImage}
-                        alt={item.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 400px"
-                      />
+                {/* Media Frame in Uniform Landscape Ratio (16:10) with Universal rounded-2xl Radius */}
+                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-slate-900 border border-border/60 transition-all duration-300 group-hover:border-[#0056D2]/60 group-hover:shadow-lg">
+                  {item.coverImage ? (
+                    <Image
+                      src={item.coverImage}
+                      alt={item.organization || item.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+                      priority={idx < 3}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-slate-900 text-slate-500">
+                      <Sparkles className="w-8 h-8" />
                     </div>
                   )}
 
-                  <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-xs font-mono text-muted-foreground">
-                      {item.date && <span>{item.date}</span>}
-                      {item.location && <span>{item.location}</span>}
-                    </div>
+                  {/* Subtle Overlay & Floating Hover Cue */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                    <h4 className="text-xl font-bold text-foreground font-heading tracking-tight group-hover:text-[#0056D2] transition-colors">
-                      {item.slug ? (
-                        <Link href={`/community/${item.slug}`} className="hover:underline">
-                          {item.title}
-                        </Link>
-                      ) : (
-                        item.title
-                      )}
-                    </h4>
+                  <div className="absolute bottom-3 right-3 w-8 h-8 rounded-2xl bg-black/75 backdrop-blur-sm border border-white/20 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0">
+                    <ArrowUpRight className="w-4 h-4 text-white" />
+                  </div>
+                </div>
 
-                    {item.role && (
-                      <p className="text-xs font-semibold text-[#0056D2]">
-                        {item.role} {item.organization && <span>&bull; {item.organization}</span>}
-                      </p>
-                    )}
+                {/* Clean Bottom Metadata Line (Title on Left, Year on Right) */}
+                <div className="mt-3 sm:mt-4 space-y-1">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="font-heading font-extrabold text-base sm:text-lg text-foreground tracking-tight group-hover:text-[#0056D2] transition-colors truncate">
+                      {item.organization || item.title}
+                    </h3>
+                    <span className="font-mono text-xs sm:text-sm font-semibold text-muted-foreground shrink-0">
+                      {extractYear(item.date)}
+                    </span>
                   </div>
 
-                  {item.description && (
-                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-normal">
-                      {item.description}
+                  {item.role && (
+                    <p className="text-xs font-medium text-muted-foreground truncate group-hover:text-foreground/90 transition-colors">
+                      {item.role}
                     </p>
                   )}
-
-                  {/* Bullets */}
-                  {item.contributions && item.contributions.length > 0 && (
-                    <div className="space-y-1 pt-2 border-t border-border">
-                      {item.contributions.slice(0, 2).map((c, cIdx) => (
-                        <div key={cIdx} className="flex items-start gap-1.5 text-xs text-muted-foreground">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#0056D2] shrink-0 mt-0.5" />
-                          <span>{c}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
                 </div>
+              </Link>
+            </article>
+          ))}
+        </div>
 
-                {/* Skills & Action Link */}
-                <div className="space-y-3 pt-4 border-t border-border">
-                  {item.skills && item.skills.length > 0 && (
-                    <div className="flex flex-wrap items-center gap-1.5">
-                      {item.skills.map((s, sIdx) => (
-                        <span key={sIdx} className="px-2 py-0.5 rounded-2xl bg-[#0056D2]/10 text-[#0056D2] text-[11px] font-semibold">
-                          {s}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  {item.slug && (
-                    <Link
-                      href={`/community/${item.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0056D2] hover:underline pt-1 cursor-pointer"
-                    >
-                      <span>Explore Case Study</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
-        )}
-
-        {/* 3. Action Button: View Full Experience Roadmap */}
-        <div className="flex items-center justify-center pt-4 sm:pt-6">
+        {/* Bottom CTA Actions */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 sm:pt-10">
           <Link
             href="/community/roadmap"
             className="h-11 sm:h-12 w-full sm:w-auto px-7 sm:px-9 rounded-2xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 inline-flex items-center justify-center gap-2.5 cursor-pointer group"
           >
-            <Compass className="w-4 h-4" />
             <span>View Full Community Roadmap</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+          </Link>
+
+          <Link
+            href="/contact"
+            className="h-11 sm:h-12 w-full sm:w-auto px-6 rounded-2xl bg-secondary hover:bg-slate-200 dark:hover:bg-slate-800 text-foreground font-bold text-xs sm:text-sm border border-border transition-all duration-200 inline-flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span>Propose Collaboration</span>
           </Link>
         </div>
 

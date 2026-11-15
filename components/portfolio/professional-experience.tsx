@@ -1,14 +1,17 @@
+"use client"
+
 import React from "react"
 import Link from "next/link"
 import type { JourneyItem } from "@/lib/content"
-import { ArrowRight } from "lucide-react"
-import ExperienceSplitCard from "@/components/shared/experience-card"
+import { ArrowUpRight } from "lucide-react"
+
+export interface ProfessionalExperienceProps {
+  journeyTimeline?: JourneyItem[]
+}
 
 export default function ProfessionalExperience({
   journeyTimeline,
-}: {
-  journeyTimeline?: JourneyItem[]
-} = {}) {
+}: ProfessionalExperienceProps = {}) {
   const coreExperiences: JourneyItem[] = [
     {
       id: "1",
@@ -16,10 +19,8 @@ export default function ProfessionalExperience({
       organization: "Software Engineering & Digital Platforms",
       role: "Lead Full-Stack Engineer",
       date: "2025 - Present",
-      description:
-        "Architecting resilient full-stack web applications, scalable backend API systems, and AI automation pipelines with a focus on type safety, high throughput, and enterprise-grade performance.",
+      description: "",
       type: "work",
-      details: ["Software Engineering", "Web Development", "AI Workflows", "API Architecture"],
     },
     {
       id: "2",
@@ -27,10 +28,8 @@ export default function ProfessionalExperience({
       organization: "Nigeria Association of Computing Students (NACOS)",
       role: "Director of ICT",
       date: "Dec 2025 - Present",
-      description:
-        "Directing national and chapter digital infrastructure, technical workshops, and engineering initiatives serving over 5,000 computing students across South-East Nigeria.",
+      description: "",
       type: "work",
-      details: ["ICT Directorship", "Tech Leadership", "Ecosystem Strategy", "Developer Programs"],
     },
     {
       id: "3",
@@ -38,10 +37,8 @@ export default function ProfessionalExperience({
       organization: "Nobelton Consults",
       role: "IT Consultant",
       date: "May 2024 - Present",
-      description:
-        "Providing strategic IT consulting, enterprise technology audits, web systems delivery, and digital transformation advisory for high-growth ventures and commercial clients.",
+      description: "",
       type: "work",
-      details: ["IT Consulting", "Infrastructure Audits", "Systems Strategy", "Corporate Training"],
     },
     {
       id: "4",
@@ -49,10 +46,8 @@ export default function ProfessionalExperience({
       organization: "Google Developer Groups (GDG) Owerri",
       role: "Lead Designer & Events Support",
       date: "Sep 2024 - Present",
-      description:
-        "Leading brand systems, keynote visual assets, developer relations, and stage production graphics for 1,500+ engineers at South-East Nigeria's largest developer conferences.",
+      description: "",
       type: "work",
-      details: ["Developer Relations", "Visual Systems", "Community Advocacy", "Event Staging"],
     },
   ]
 
@@ -62,64 +57,63 @@ export default function ProfessionalExperience({
       : coreExperiences
 
   return (
-    <section id="experience" className="w-full py-16 md:py-24 border-b border-border/70 bg-card/20 relative">
-      {/* Contained ambient glow layer (isolated from section so sticky lapping works) */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-[#0056D2]/5 dark:bg-[#0056D2]/10 rounded-full blur-3xl" />
-      </div>
-
-      <div className="site-container relative z-10 space-y-12 md:space-y-14">
+    <section id="experience" className="w-full py-16 md:py-24 border-b border-border/70 bg-background transition-colors">
+      <div className="site-container max-w-5xl space-y-10 sm:space-y-12">
         {/* Section Header */}
-        <div className="text-center flex flex-col items-center justify-center space-y-3 mx-auto max-w-3xl pb-2">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
-            Experience
-          </h2>
-          <p className="text-sm sm:text-base text-muted-foreground font-normal leading-relaxed text-center max-w-2xl">
-            Verified engineering track record, technical directorship, and full-stack software delivery.
-          </p>
-          <div className="w-14 h-1 bg-[#0056D2] rounded-2xl mt-2" />
-        </div>
-
-        {/* Lapped Visible Card Stack (Stepped Sticky Deck) */}
-        <div className="relative max-w-5xl mx-auto flex flex-col gap-12 sm:gap-16 lg:gap-20 pb-8 lg:pb-10">
-          {displayItems.map((item, idx) => {
-            const total = displayItems.length
-            const stepPx = 24
-            const bottomStepCount = total - 1 - idx
-            const deckScale = 1 - bottomStepCount * 0.015
-
-            return (
-              <div
-                key={item.id || idx}
-                style={{
-                  zIndex: idx + 1,
-                  top: `calc(5.5rem + ${idx * stepPx}px)`,
-                  paddingBottom: `${bottomStepCount * stepPx}px`,
-                  marginBottom: `-${bottomStepCount * stepPx}px`,
-                }}
-                className="sticky pointer-events-none"
-              >
-                <ExperienceSplitCard
-                  item={item}
-                  index={idx}
-                  scale={deckScale}
-                  elevatedStackShadow
-                />
-              </div>
-            )
-          })}
-        </div>
-
-        {/* View All Experience Button */}
-        <div className="flex justify-center pt-2">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-slate-400 dark:border-slate-600">
+          <div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-heading">
+              Experience
+            </h2>
+            <p className="text-sm sm:text-base text-muted-foreground font-normal pt-2">
+              Verified career roadmap and engineering positions.
+            </p>
+          </div>
           <Link
             href="/experience"
-            className="inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-6 rounded-2xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 h-10 sm:h-11 px-5 rounded-2xl bg-[#0056D2] hover:bg-[#0044a8] text-white font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer shrink-0 group"
           >
             <span>View All Experience</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </div>
+
+        {/* Minimal Linear Rows with Distinct, Visible Divider Lines */}
+        <div className="flex flex-col">
+          {displayItems.map((item, idx) => (
+            <Link
+              key={item.id || idx}
+              href="/experience"
+              className="group py-5 sm:py-7 flex items-baseline justify-between gap-4 px-2 -mx-2 rounded-2xl hover:bg-slate-500/5 transition-all cursor-pointer border-b border-slate-400 dark:border-slate-600"
+            >
+              {/* Left Column: Number + Position at Top & Company Under */}
+              <div className="flex items-start gap-3 sm:gap-6 md:gap-8 min-w-0">
+                <span className="font-heading font-medium text-base sm:text-xl md:text-2xl text-muted-foreground/60 group-hover:text-foreground transition-colors w-7 sm:w-9 shrink-0 pt-0.5 select-none">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+
+                <div className="space-y-0.5 min-w-0">
+                  <h3 className="font-heading font-extrabold text-base sm:text-xl md:text-2xl text-foreground tracking-tight group-hover:text-[#0056D2] transition-colors leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground font-medium">
+                    {item.organization}
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Column: Date/Year exactly as typed/stored */}
+              <div className="shrink-0 pl-3 sm:pl-6 flex items-center gap-2 text-right">
+                <span className="font-heading font-semibold text-xs sm:text-sm md:text-base text-foreground group-hover:text-[#0056D2] transition-colors select-none whitespace-nowrap">
+                  {item.date}
+                </span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground/40 group-hover:text-[#0056D2] opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0 hidden sm:block shrink-0" />
+              </div>
+            </Link>
+          ))}
+        </div>
+
+
       </div>
     </section>
   )
